@@ -257,19 +257,19 @@ export function Navbar() {
         </nav>
       </Container>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu — z-[45] sits above header bg (z-40) but below toggle button (z-50) */}
       <div
         id="mobile-menu"
         ref={mobileMenuRef}
         className={cn(
-          "fixed inset-0 z-40 lg:hidden transition-all duration-300",
+          "fixed inset-0 z-[45] lg:hidden transition-all duration-300",
           isOpen ? "visible" : "invisible"
         )}
         aria-hidden={!isOpen}
       >
         <div
           className={cn(
-            "absolute inset-0 bg-black/20 backdrop-blur-sm transition-opacity",
+            "absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity",
             isOpen ? "opacity-100" : "opacity-0"
           )}
           onClick={() => setIsOpen(false)}
