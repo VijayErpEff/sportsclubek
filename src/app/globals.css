@@ -1,26 +1,126 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --color-primary: #1A3B8F;
+    --color-accent: #1B7D3A;
+    --color-secondary: #2BA84A;
+    --background: #FFFFFF;
+    --foreground: #1A1A2E;
+    --muted: #F5F5FA;
+    --muted-foreground: #8A8A9A;
+  }
+
+  .dark {
+    --background: #0D0D1A;
+    --foreground: #F0F0F5;
+    --muted: #1A1A2E;
+    --muted-foreground: #B0B0C0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  body {
+    @apply bg-white text-neutral-900 font-body;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    @apply bg-accent/20 text-neutral-900;
+  }
+
+  /* Global focus-visible styles for all interactive elements */
+  a:focus-visible,
+  button:focus-visible,
+  [role="button"]:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  [tabindex]:focus-visible {
+    @apply outline-none ring-2 ring-accent ring-offset-2 rounded-sm;
+  }
+
+  /* Remove default outline only when focus-visible is supported */
+  a:focus:not(:focus-visible),
+  button:focus:not(:focus-visible),
+  [tabindex]:focus:not(:focus-visible) {
+    outline: none;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .skip-link {
+    @apply absolute -top-10 left-0 bg-accent text-white px-4 py-2 z-[100] font-semibold text-sm rounded-br-lg;
+    transition: top 0.2s;
+  }
+  .skip-link:focus {
+    @apply top-0;
+  }
+
+  /* Shadcn/UI compatibility layer for CSS variables used in pages */
+  .text-muted-foreground {
+    color: var(--muted-foreground);
+  }
+  .bg-muted {
+    background-color: var(--muted);
+  }
+  .bg-background {
+    background-color: var(--background);
+  }
+  .text-foreground {
+    color: var(--foreground);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Radix Accordion Animation */
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+[data-state="open"] > [data-radix-accordion-content] {
+  animation: accordion-down 200ms ease-out;
+}
+
+[data-state="closed"] > [data-radix-accordion-content] {
+  animation: accordion-up 200ms ease-out;
 }
