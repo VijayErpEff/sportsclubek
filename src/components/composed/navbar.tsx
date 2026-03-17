@@ -34,7 +34,6 @@ export function Navbar() {
     };
   }, [isOpen]);
 
-  // Close on Escape key
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -51,21 +50,17 @@ export function Navbar() {
     return () => document.removeEventListener("keydown", handleEscape);
   }, [isOpen, openDropdown]);
 
-  // Focus trap for mobile menu
   useEffect(() => {
     if (!isOpen || !mobileMenuRef.current) return;
-
     const menu = mobileMenuRef.current;
     const focusableSelector =
       'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
-
     const handleTab = (e: KeyboardEvent) => {
       if (e.key !== "Tab") return;
       const focusable = menu.querySelectorAll<HTMLElement>(focusableSelector);
       if (focusable.length === 0) return;
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
-
       if (e.shiftKey && document.activeElement === first) {
         e.preventDefault();
         last.focus();
@@ -74,13 +69,9 @@ export function Navbar() {
         first.focus();
       }
     };
-
     menu.addEventListener("keydown", handleTab);
-    // Focus first focusable element
-    const firstFocusable =
-      menu.querySelector<HTMLElement>(focusableSelector);
+    const firstFocusable = menu.querySelector<HTMLElement>(focusableSelector);
     firstFocusable?.focus();
-
     return () => menu.removeEventListener("keydown", handleTab);
   }, [isOpen]);
 
@@ -98,183 +89,189 @@ export function Navbar() {
   );
 
   return (
-    <header
-      className={cn(
-        "fixed top-0 left-0 right-0 z-40 transition-all duration-300",
-        isScrolled
-          ? "bg-white/95 backdrop-blur-md shadow-nav"
-          : "bg-transparent"
-      )}
-    >
-      <Container>
-        <nav
-          className="flex items-center justify-between h-[72px]"
-          aria-label="Main navigation"
-        >
-          {/* Logo */}
-          <Link
-            href="/"
-            className={cn(
-              "relative z-50 flex items-center",
-              !isScrolled && !isOpen && "brightness-0 invert"
-            )}
+    <>
+      {/* Header Bar */}
+      <header
+        className={cn(
+          "fixed top-0 left-0 right-0 z-40 transition-all duration-300",
+          isScrolled
+            ? "bg-white/95 backdrop-blur-md shadow-nav"
+            : "bg-transparent",
+          isOpen && "!bg-white shadow-nav"
+        )}
+      >
+        <Container>
+          <nav
+            className="flex items-center justify-between h-[72px]"
+            aria-label="Main navigation"
           >
-            <Image
-              src="/images/logo.png"
-              alt="LevelUP Sports"
-              width={160}
-              height={40}
-              className="h-9 w-auto"
-              priority
-            />
-          </Link>
+            {/* Logo */}
+            <Link
+              href="/"
+              className={cn(
+                "relative z-50 flex items-center",
+                !isScrolled && !isOpen && "brightness-0 invert"
+              )}
+            >
+              <Image
+                src="/images/logo.png"
+                alt="LevelUP Sports"
+                width={160}
+                height={40}
+                className="h-9 w-auto"
+                priority
+              />
+            </Link>
 
-          {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-1">
-            {NAV_LINKS.map((link) =>
-              "children" in link && link.children ? (
-                <div
-                  key={link.label}
-                  className="relative group"
-                  onMouseEnter={() => setOpenDropdown(link.label)}
-                  onMouseLeave={() => setOpenDropdown(null)}
-                >
-                  <button
+            {/* Desktop Nav */}
+            <div className="hidden lg:flex items-center gap-1">
+              {NAV_LINKS.map((link) =>
+                "children" in link && link.children ? (
+                  <div
+                    key={link.label}
+                    className="relative group"
+                    onMouseEnter={() => setOpenDropdown(link.label)}
+                    onMouseLeave={() => setOpenDropdown(null)}
+                  >
+                    <button
+                      className={cn(
+                        "flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg transition-colors",
+                        isScrolled
+                          ? "text-neutral-700 hover:text-primary hover:bg-neutral-100"
+                          : "text-white/90 hover:text-white hover:bg-white/10"
+                      )}
+                      aria-expanded={openDropdown === link.label}
+                      aria-haspopup="true"
+                      aria-controls={`dropdown-${link.label.toLowerCase()}`}
+                      onKeyDown={(e) => handleDropdownKeyDown(e, link.label)}
+                      onFocus={() => setOpenDropdown(link.label)}
+                    >
+                      {link.label}
+                      <ChevronDown
+                        className={cn(
+                          "h-4 w-4 transition-transform",
+                          openDropdown === link.label && "rotate-180"
+                        )}
+                      />
+                    </button>
+
+                    <div
+                      id={`dropdown-${link.label.toLowerCase()}`}
+                      role="menu"
+                      className={cn(
+                        "absolute top-full left-1/2 -translate-x-1/2 pt-2 transition-all duration-200",
+                        openDropdown === link.label
+                          ? "opacity-100 visible translate-y-0"
+                          : "opacity-0 invisible -translate-y-2"
+                      )}
+                      onMouseLeave={() => setOpenDropdown(null)}
+                    >
+                      <div className="bg-white rounded-xl shadow-xl border border-neutral-200 p-4 min-w-[280px]">
+                        <div className="grid grid-cols-2 gap-1">
+                          {link.children.map((child) => (
+                            <Link
+                              key={child.href}
+                              href={child.href}
+                              role="menuitem"
+                              className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-neutral-700 hover:bg-neutral-50 hover:text-primary transition-colors"
+                              onClick={() => setOpenDropdown(null)}
+                              onBlur={(e) => {
+                                const parent =
+                                  e.currentTarget.closest("[role=menu]");
+                                if (
+                                  parent &&
+                                  !parent.contains(e.relatedTarget as Node)
+                                ) {
+                                  setOpenDropdown(null);
+                                }
+                              }}
+                            >
+                              {child.label}
+                            </Link>
+                          ))}
+                        </div>
+                        <div className="mt-3 pt-3 border-t border-neutral-100 col-span-2">
+                          <Link
+                            href="/schedule"
+                            role="menuitem"
+                            className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-accent hover:text-accent-hover transition-colors"
+                            onClick={() => setOpenDropdown(null)}
+                          >
+                            View Full Schedule &rarr;
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <Link
+                    key={link.label}
+                    href={link.href}
                     className={cn(
-                      "flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg transition-colors",
+                      "px-3 py-2 text-sm font-medium rounded-lg transition-colors",
                       isScrolled
                         ? "text-neutral-700 hover:text-primary hover:bg-neutral-100"
                         : "text-white/90 hover:text-white hover:bg-white/10"
                     )}
-                    aria-expanded={openDropdown === link.label}
-                    aria-haspopup="true"
-                    aria-controls={`dropdown-${link.label.toLowerCase()}`}
-                    onKeyDown={(e) => handleDropdownKeyDown(e, link.label)}
-                    onFocus={() => setOpenDropdown(link.label)}
                   >
                     {link.label}
-                    <ChevronDown
-                      className={cn(
-                        "h-4 w-4 transition-transform",
-                        openDropdown === link.label && "rotate-180"
-                      )}
-                    />
-                  </button>
+                  </Link>
+                )
+              )}
+            </div>
 
-                  {/* Mega Menu */}
-                  <div
-                    id={`dropdown-${link.label.toLowerCase()}`}
-                    role="menu"
-                    className={cn(
-                      "absolute top-full left-1/2 -translate-x-1/2 pt-2 transition-all duration-200",
-                      openDropdown === link.label
-                        ? "opacity-100 visible translate-y-0"
-                        : "opacity-0 invisible -translate-y-2"
-                    )}
-                    onMouseLeave={() => setOpenDropdown(null)}
-                  >
-                    <div className="bg-white rounded-xl shadow-xl border border-neutral-200 p-4 min-w-[280px]">
-                      <div className="grid grid-cols-2 gap-1">
-                        {link.children.map((child) => (
-                          <Link
-                            key={child.href}
-                            href={child.href}
-                            role="menuitem"
-                            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-neutral-700 hover:bg-neutral-50 hover:text-primary transition-colors"
-                            onClick={() => setOpenDropdown(null)}
-                            onBlur={(e) => {
-                              // Close dropdown when focus leaves the menu
-                              const parent = e.currentTarget.closest("[role=menu]");
-                              if (
-                                parent &&
-                                !parent.contains(e.relatedTarget as Node)
-                              ) {
-                                setOpenDropdown(null);
-                              }
-                            }}
-                          >
-                            {child.label}
-                          </Link>
-                        ))}
-                      </div>
-                      <div className="mt-3 pt-3 border-t border-neutral-100 col-span-2">
-                        <Link
-                          href="/schedule"
-                          role="menuitem"
-                          className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-accent hover:text-accent-hover transition-colors"
-                          onClick={() => setOpenDropdown(null)}
-                        >
-                          View Full Schedule &rarr;
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            {/* Desktop CTA */}
+            <div className="hidden lg:flex items-center gap-3">
+              <Button size="md" asChild>
+                <Link href="/schedule">Book Now</Link>
+              </Button>
+            </div>
+
+            {/* Mobile Menu Toggle */}
+            <button
+              ref={menuToggleRef}
+              className={cn(
+                "relative z-50 lg:hidden p-2.5 rounded-lg transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center",
+                isScrolled || isOpen
+                  ? "text-neutral-900 hover:bg-neutral-100"
+                  : "text-white hover:bg-white/10"
+              )}
+              onClick={() => setIsOpen(!isOpen)}
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+            >
+              {isOpen ? (
+                <X className="h-6 w-6" />
               ) : (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  className={cn(
-                    "px-3 py-2 text-sm font-medium rounded-lg transition-colors",
-                    isScrolled
-                      ? "text-neutral-700 hover:text-primary hover:bg-neutral-100"
-                      : "text-white/90 hover:text-white hover:bg-white/10"
-                  )}
-                >
-                  {link.label}
-                </Link>
-              )
-            )}
-          </div>
+                <Menu className="h-6 w-6" />
+              )}
+            </button>
+          </nav>
+        </Container>
+      </header>
 
-          {/* Desktop CTA */}
-          <div className="hidden lg:flex items-center gap-3">
-            <Button size="md" asChild>
-              <Link href="/schedule">Book Now</Link>
-            </Button>
-          </div>
-
-          {/* Mobile Menu Toggle */}
-          <button
-            ref={menuToggleRef}
-            className={cn(
-              "relative z-50 lg:hidden p-2.5 rounded-lg transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center",
-              isScrolled || isOpen
-                ? "text-neutral-900 hover:bg-neutral-100"
-                : "text-white hover:bg-white/10"
-            )}
-            onClick={() => setIsOpen(!isOpen)}
-            aria-expanded={isOpen}
-            aria-controls="mobile-menu"
-            aria-label={isOpen ? "Close menu" : "Open menu"}
-          >
-            {isOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
-          </button>
-        </nav>
-      </Container>
-
-      {/* Mobile Menu — z-[45] sits above header bg (z-40) but below toggle button (z-50) */}
+      {/* Mobile Menu — OUTSIDE header so header bg can't cover it */}
       <div
         id="mobile-menu"
         ref={mobileMenuRef}
         className={cn(
           "fixed inset-0 z-[45] lg:hidden transition-all duration-300",
-          isOpen ? "visible" : "invisible"
+          isOpen ? "visible" : "invisible pointer-events-none"
         )}
         aria-hidden={!isOpen}
       >
+        {/* Backdrop */}
         <div
           className={cn(
-            "absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity",
+            "absolute inset-0 bg-black/40 transition-opacity",
             isOpen ? "opacity-100" : "opacity-0"
           )}
           onClick={() => setIsOpen(false)}
           aria-hidden="true"
         />
+
+        {/* Drawer */}
         <div
           className={cn(
             "absolute right-0 top-0 h-full w-full max-w-sm bg-white shadow-2xl transition-transform duration-300",
@@ -284,8 +281,32 @@ export function Navbar() {
           aria-modal="true"
           aria-label="Navigation menu"
         >
-          <div className="pt-24 px-6 pb-6 h-full overflow-y-auto">
-            <div className="space-y-1">
+          {/* Close button inside drawer */}
+          <div className="flex items-center justify-between px-6 pt-5 pb-2">
+            <Link
+              href="/"
+              className="flex items-center"
+              onClick={() => setIsOpen(false)}
+            >
+              <Image
+                src="/images/logo.png"
+                alt="LevelUP Sports"
+                width={130}
+                height={32}
+                className="h-7 w-auto"
+              />
+            </Link>
+            <button
+              className="p-2 rounded-lg text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900 min-w-[44px] min-h-[44px] flex items-center justify-center"
+              onClick={() => setIsOpen(false)}
+              aria-label="Close menu"
+            >
+              <X className="h-5 w-5" />
+            </button>
+          </div>
+
+          <div className="px-6 pb-6 h-[calc(100%-60px)] overflow-y-auto">
+            <div className="space-y-1 pt-4">
               {NAV_LINKS.map((link) =>
                 "children" in link && link.children ? (
                   <div key={link.label}>
@@ -319,7 +340,7 @@ export function Navbar() {
                           <Link
                             key={child.href}
                             href={child.href}
-                            className="block px-3 py-2.5 text-sm text-neutral-600 rounded-lg hover:bg-neutral-50 hover:text-primary min-h-[44px] flex items-center"
+                            className="flex items-center px-3 py-2.5 text-sm text-neutral-600 rounded-lg hover:bg-neutral-50 hover:text-primary min-h-[44px]"
                             onClick={() => setIsOpen(false)}
                           >
                             {child.label}
@@ -332,7 +353,7 @@ export function Navbar() {
                   <Link
                     key={link.label}
                     href={link.href}
-                    className="block px-3 py-3 text-base font-medium text-neutral-900 rounded-lg hover:bg-neutral-50 min-h-[44px]"
+                    className="flex items-center px-3 py-3 text-base font-medium text-neutral-900 rounded-lg hover:bg-neutral-50 min-h-[44px]"
                     onClick={() => setIsOpen(false)}
                   >
                     {link.label}
@@ -359,6 +380,6 @@ export function Navbar() {
           </div>
         </div>
       </div>
-    </header>
+    </>
   );
 }
