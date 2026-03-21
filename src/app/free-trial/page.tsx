@@ -11,34 +11,43 @@ import { StaggerContainer, StaggerItem } from "@/components/ui/stagger";
 import { FAQAccordion } from "@/components/composed/faq-accordion";
 import { CTABanner } from "@/components/composed/cta-banner";
 import { SPORTS } from "@/lib/constants/site";
-import { CheckCircle, ArrowRight, Calendar, Users, Star } from "lucide-react";
+import {
+  CheckCircle,
+  ArrowRight,
+  Calendar,
+  Users,
+  Star,
+  Dumbbell,
+} from "lucide-react";
 
 export const metadata: Metadata = generateSEOMetadata({
   title: "Try a Free Session",
   description:
-    "Try any sport free at LevelUP Sports in Elkton, MD. Batting cages, cricket nets, badminton and pickleball. No commitment, no card required. Book your free session.",
+    "Try any sport free at LevelUP Sports in Elkton, MD — 15 min from Middletown & Newark, DE. Batting cages, cricket nets, badminton & pickleball. No commitment, no card required.",
   path: "/free-trial",
 });
 
-const STEPS = [
-  { number: "1", title: "Choose Your Sport", description: "Baseball, cricket, badminton, or pickleball — pick the one that excites you most.", icon: Star },
-  { number: "2", title: "Book a Time", description: "Select a session from our schedule that fits your week. Evenings and weekends available.", icon: Calendar },
-  { number: "3", title: "Come Play", description: "Show up, grab the equipment we provide, and enjoy 60 minutes of coached play. No strings attached.", icon: Users },
-];
-
-const INCLUDED = [
-  "60-minute coached session with a certified instructor",
-  "All equipment provided — bats, rackets, balls, shuttlecocks",
-  "Personalized skill assessment and next-step recommendations",
-  "Zero obligation — no membership pressure, no follow-up sales pitch",
-  "Open to ages 5 and up, all skill levels welcome",
-];
-
 const FAQ_ITEMS = [
-  { question: "Do I need to bring any equipment?", answer: "No. We provide everything you need — bats, rackets, balls, shuttlecocks, and protective gear. Just wear comfortable athletic clothing and sneakers." },
-  { question: "Is there really no catch?", answer: "None. No credit card is required and there is no auto-enrollment. We believe once you experience our facility and coaching, you will want to come back on your own terms." },
-  { question: "What ages are eligible for the free trial?", answer: "Ages 5 and up. Kids under 12 must have a parent or guardian on site. We also welcome adults — our pickleball and badminton sessions are popular with players of all ages." },
-  { question: "Can I try more than one sport?", answer: "Your first free session covers one sport. If you love it and want to explore another, ask about our multi-sport intro package at the front desk." },
+  {
+    question: "Do I need to bring any equipment?",
+    answer:
+      "No. We provide everything — bats, rackets, balls, shuttlecocks, helmets, and protective gear. Just wear comfortable athletic clothing and clean indoor shoes.",
+  },
+  {
+    question: "Is there really no catch?",
+    answer:
+      "None. No credit card required. No auto-enrollment. We believe once you experience the facility and coaching, you'll want to come back — on your own terms.",
+  },
+  {
+    question: "What ages are eligible?",
+    answer:
+      "Ages 5 and up. Kids under 12 need a parent or guardian on site. Adults are very welcome — pickleball and badminton open play sessions are popular with all ages.",
+  },
+  {
+    question: "Can I try more than one sport?",
+    answer:
+      "Yes! You can book a free trial in each of our four sports. Many families try two or three before deciding on their favorite.",
+  },
 ];
 
 export default function FreeTrialPage() {
@@ -50,110 +59,169 @@ export default function FreeTrialPage() {
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLD) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLD) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLD) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLD) }}
+      />
 
-      <Hero variant="page" title="Your First Session Is On Us" subtitle="Pick any sport. Try it free. No commitment, no credit card, no catch." primaryCTA={{ label: "Book My Free Session", href: "/schedule" }} />
+      {/* Hero */}
+      <Hero
+        variant="page"
+        title="Your First Session Is On Us"
+        subtitle="Pick any sport. Try it free. No commitment, no credit card, no catch."
+        primaryCTA={{ label: "Book My Free Session", href: "/schedule" }}
+      />
 
-      <Section className="py-4">
+      {/* How It Works + What's Included — combined into one tight section */}
+      <Section size="sm">
         <Container>
-          <nav aria-label="Breadcrumb" className="text-sm text-neutral-500">
-            <ol className="flex items-center gap-2">
-              <li><Link href="/" className="hover:text-primary transition-colors">Home</Link></li>
-              <li>/</li>
-              <li aria-current="page" className="text-neutral-900 font-medium">Free Trial</li>
-            </ol>
-          </nav>
-        </Container>
-      </Section>
-
-      <Section>
-        <Container>
-          <Reveal>
-            <div className="text-center mb-12">
-              <h2 className="font-display text-section text-neutral-900 mb-3">How It Works</h2>
-              <p className="text-neutral-500 max-w-xl mx-auto">Three simple steps. No paperwork, no commitment, no surprises.</p>
-            </div>
-          </Reveal>
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {STEPS.map((step) => (
-              <StaggerItem key={step.number}>
-                <div className="text-center p-8 rounded-2xl bg-neutral-50 border border-neutral-100">
-                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-accent/10 text-accent mb-5"><step.icon className="h-6 w-6" /></div>
-                  <div className="text-xs font-bold text-accent uppercase tracking-widest mb-2">Step {step.number}</div>
-                  <h3 className="font-display text-lg font-semibold text-neutral-900 mb-2">{step.title}</h3>
-                  <p className="text-neutral-500 text-sm leading-relaxed">{step.description}</p>
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
+            {/* Left — Steps */}
+            <div>
+              <Reveal>
+                <h2 className="font-display text-section text-neutral-900 mb-6">
+                  Three Steps. Zero Risk.
+                </h2>
+              </Reveal>
+              <Reveal delay={0.05}>
+                <div className="space-y-5">
+                  {[
+                    {
+                      icon: Dumbbell,
+                      step: "1",
+                      title: "Choose Your Sport",
+                      desc: "Baseball, cricket, badminton, or pickleball. Not sure? We'll help you pick.",
+                    },
+                    {
+                      icon: Calendar,
+                      step: "2",
+                      title: "Book a Time",
+                      desc: "Pick a slot from the schedule. Evenings and weekends available. Walk-ins welcome too.",
+                    },
+                    {
+                      icon: Users,
+                      step: "3",
+                      title: "Show Up and Play",
+                      desc: "Equipment provided. Coach included. 60 minutes of real training. No strings.",
+                    },
+                  ].map((s) => (
+                    <div key={s.step} className="flex gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center shrink-0">
+                        <s.icon className="h-4.5 w-4.5 text-accent" />
+                      </div>
+                      <div>
+                        <div className="text-[10px] font-bold text-accent uppercase tracking-widest mb-0.5">
+                          Step {s.step}
+                        </div>
+                        <h3 className="font-semibold text-neutral-900 text-sm">
+                          {s.title}
+                        </h3>
+                        <p className="text-neutral-500 text-sm mt-0.5">
+                          {s.desc}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-        </Container>
-      </Section>
-
-      <Section variant="alternate">
-        <Container>
-          <Reveal>
-            <div className="max-w-2xl mx-auto">
-              <h2 className="font-display text-section text-neutral-900 mb-8 text-center">What&apos;s Included</h2>
-              <ul className="space-y-4">
-                {INCLUDED.map((item) => (
-                  <li key={item} className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                    <span className="text-neutral-700">{item}</span>
-                  </li>
-                ))}
-              </ul>
+              </Reveal>
             </div>
-          </Reveal>
-        </Container>
-      </Section>
 
-      <Section>
-        <Container>
-          <Reveal>
-            <div className="text-center mb-12">
-              <h2 className="font-display text-section text-neutral-900 mb-3">Pick Your Sport</h2>
-              <p className="text-neutral-500 max-w-xl mx-auto">Every sport. Every skill level. Your first session is free.</p>
-            </div>
-          </Reveal>
-          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {SPORTS.map((sport) => (
-              <StaggerItem key={sport.slug}>
-                <div className="group relative rounded-2xl border border-neutral-200 bg-white p-6 hover:shadow-lg hover:border-accent/30 transition-all">
-                  <h3 className="font-display text-lg font-semibold text-neutral-900 mb-2">{sport.name}</h3>
-                  <p className="text-neutral-500 text-sm mb-6 leading-relaxed">{sport.description}</p>
-                  <Button variant="outline" size="sm" asChild>
-                    <Link href="/schedule">Book Free Trial <ArrowRight className="ml-1.5 h-3.5 w-3.5" /></Link>
+            {/* Right — What's Included card */}
+            <Reveal variant="fade-left" delay={0.1}>
+              <div className="bg-neutral-50 border border-neutral-100 rounded-2xl p-6 lg:p-8">
+                <h2 className="font-display text-lg font-semibold text-neutral-900 mb-5">
+                  What&apos;s Included — Free
+                </h2>
+                <ul className="space-y-3">
+                  {[
+                    "60-minute coached session",
+                    "All equipment provided (bats, rackets, helmets, etc.)",
+                    "Personalized skill assessment",
+                    "No obligation to sign up for anything",
+                    "Ages 5+ and adults welcome",
+                    "Valid for all four sports",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-2.5">
+                      <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                      <span className="text-sm text-neutral-700">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-6 pt-5 border-t border-neutral-200">
+                  <p className="text-xs text-neutral-500 mb-3">
+                    <span className="font-semibold text-accent">87%</span> of
+                    families who try a session become regular members
+                  </p>
+                  <Button className="w-full" asChild>
+                    <Link href="/schedule">
+                      Book My Free Session{" "}
+                      <ArrowRight className="h-4 w-4 ml-1.5" />
+                    </Link>
                   </Button>
                 </div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
+              </div>
+            </Reveal>
+          </div>
         </Container>
       </Section>
 
+      {/* Pick Your Sport — compact cards */}
       <Section variant="alternate" size="sm">
         <Container>
           <Reveal>
-            <p className="text-center text-lg font-medium text-neutral-700">
-              <span className="text-accent font-bold">87%</span> of families who try a session become regular members
-            </p>
+            <h2 className="font-display text-section text-neutral-900 mb-6 text-center">
+              Pick Your Sport
+            </h2>
           </Reveal>
+          <StaggerContainer className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {SPORTS.map((sport) => (
+              <StaggerItem key={sport.slug}>
+                <Link
+                  href="/schedule"
+                  className="group block rounded-xl border border-neutral-200 bg-white p-5 hover:shadow-card-hover hover:border-accent/30 transition-all"
+                >
+                  <h3 className="font-display font-semibold text-neutral-900 mb-1.5">
+                    {sport.name}
+                  </h3>
+                  <p className="text-neutral-500 text-xs leading-relaxed mb-3 line-clamp-2">
+                    {sport.description}
+                  </p>
+                  <span className="inline-flex items-center gap-1 text-xs font-semibold text-accent group-hover:gap-2 transition-all">
+                    Book Free Trial
+                    <ArrowRight className="h-3 w-3" />
+                  </span>
+                </Link>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
         </Container>
       </Section>
 
-      <Section>
-        <Container>
+      {/* FAQ — tight */}
+      <Section size="sm">
+        <Container className="max-w-2xl">
           <Reveal>
-            <div className="max-w-2xl mx-auto">
-              <h2 className="font-display text-section text-neutral-900 mb-8 text-center">Frequently Asked Questions</h2>
-              <FAQAccordion items={FAQ_ITEMS} />
-            </div>
+            <h2 className="font-display text-subsection text-neutral-900 mb-6 text-center">
+              Common Questions
+            </h2>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <FAQAccordion items={FAQ_ITEMS} />
           </Reveal>
         </Container>
       </Section>
 
-      <CTABanner title="Ready?" description="Pick your sport and book your free session in under 60 seconds." primaryCTA={{ label: "Book My Free Session", href: "/schedule" }} />
+      {/* Final CTA */}
+      <CTABanner
+        title="Ready to Try?"
+        description="Pick your sport. Book a time. Show up and play — free."
+        primaryCTA={{ label: "Book My Free Session", href: "/schedule" }}
+        secondaryCTA={{ label: "View All Programs", href: "/#sports" }}
+      />
     </>
   );
 }
