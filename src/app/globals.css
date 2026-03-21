@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --color-primary: #1A3B8F;
+    --color-primary: #1B3A5C;
     --color-accent: #1B7D3A;
     --color-secondary: #2BA84A;
     --background: #FFFFFF;
@@ -96,6 +96,34 @@
   .text-balance {
     text-wrap: balance;
   }
+
+}
+
+/* Animated link underline */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: currentColor;
+  transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.link-underline:hover::after {
+  width: 100%;
+}
+
+
+/* Prevent FOIC (flash of invisible content) during hydration */
+@media (scripting: none) {
+  [style] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 /* Radix Accordion Animation */
@@ -123,4 +151,89 @@
 
 [data-state="closed"] > [data-radix-accordion-content] {
   animation: accordion-up 200ms ease-out;
+}
+
+/* Shimmer effect for skeleton loading */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    theme('colors.neutral.100') 0%,
+    theme('colors.neutral.50') 40%,
+    theme('colors.neutral.100') 80%
+  );
+  background-size: 200% 100%;
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Glass morphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.glass-dark {
+  background: rgba(15, 36, 64, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Custom scrollbar for carousels */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Scroll snap for carousels */
+.snap-x-mandatory {
+  scroll-snap-type: x mandatory;
+}
+.snap-start {
+  scroll-snap-align: start;
+}
+
+/* Perspective utility for 3D transforms */
+.perspective-1000 {
+  perspective: 1000px;
+}
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+/* Command palette backdrop */
+.command-backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Pulse dot for live indicators */
+@keyframes livePulse {
+  0% { box-shadow: 0 0 0 0 rgba(27, 125, 58, 0.7); }
+  70% { box-shadow: 0 0 0 6px rgba(27, 125, 58, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(27, 125, 58, 0); }
+}
+.live-pulse {
+  animation: livePulse 2s infinite;
+}
+
+/* Smooth image zoom on hover for cards */
+.img-zoom {
+  overflow: hidden;
+}
+.img-zoom img {
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.img-zoom:hover img {
+  transform: scale(1.05);
 }

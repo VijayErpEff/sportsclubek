@@ -1,11 +1,19 @@
 import { Metadata } from "next";
+import Link from "next/link";
+import Image from "next/image";
 import { StatCounter } from "@/components/composed/stat-counter";
 import { CTABanner } from "@/components/composed/cta-banner";
 import { Section } from "@/components/layout/section";
 import { Container } from "@/components/layout/container";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Reveal } from "@/components/ui/reveal";
+import { StaggerContainer, StaggerItem } from "@/components/ui/stagger";
 import { generateSEOMetadata } from "@/lib/seo/metadata";
 import { generateBreadcrumbLD } from "@/lib/seo/json-ld";
-import { Target, Heart, Users, Zap } from "lucide-react";
+import {
+  Target, Heart, Users, Zap, MapPin, Trophy, Calendar, Shield,
+} from "lucide-react";
 
 export const metadata: Metadata = generateSEOMetadata({
   title: "About Us",
@@ -14,30 +22,57 @@ export const metadata: Metadata = generateSEOMetadata({
   path: "/about",
 });
 
-const values = [
+const milestones = [
   {
-    icon: Target,
-    title: "Excellence",
-    description:
-      "We hold ourselves to the highest standard in coaching, facilities, and athlete experience. Good enough never is.",
+    year: "2023",
+    title: "The idea takes shape",
+    desc: "Families across the MD/DE/PA tri-state area were driving 45+ minutes for quality indoor sports training. We set out to change that.",
   },
   {
-    icon: Heart,
-    title: "Community",
-    description:
-      "We're more than a sports facility — we're a family. Every athlete belongs, every achievement is celebrated.",
+    year: "2024",
+    title: "Broke ground in Elkton",
+    desc: "Construction began on our 20,000+ sq ft multi-sport facility at the crossroads of three states.",
   },
   {
-    icon: Users,
-    title: "Inclusivity",
-    description:
-      "Every age, every skill level, every background. Premium training should be accessible to all.",
+    year: "2024",
+    title: "Doors open",
+    desc: "First members walk through the doors. Four sports — baseball, cricket, badminton, and pickleball — under one roof from day one.",
   },
   {
-    icon: Zap,
-    title: "Growth",
-    description:
-      "We believe in continuous improvement — for our athletes, our coaches, and our programs.",
+    year: "2025",
+    title: "500+ athletes and growing",
+    desc: "A thriving community of athletes, families, and coaches pushing each other to new levels every day.",
+  },
+];
+
+const coaches = [
+  {
+    name: "Coach Rivera",
+    role: "Baseball Director",
+    cred: "15+ years coaching experience. Former collegiate player at University of Maryland.",
+    image: "/images/sports/baseball.jpg",
+    sport: "Baseball",
+  },
+  {
+    name: "Coach Sharma",
+    role: "Cricket Director",
+    cred: "Former first-class cricketer. Certified coach with 12+ years developing youth talent.",
+    image: "/images/sports/cricket.png",
+    sport: "Cricket",
+  },
+  {
+    name: "Coach Lee",
+    role: "Badminton Director",
+    cred: "BWF-certified coach. 10+ years competitive experience and tournament coaching.",
+    image: "/images/sports/badminton.jpg",
+    sport: "Badminton",
+  },
+  {
+    name: "Coach Williams",
+    role: "Youth Fitness",
+    cred: "Certified youth fitness specialist. Builds athletic foundations for young athletes ages 5–12.",
+    image: "/images/sports/kids-agility.jpg",
+    sport: "Agility",
   },
 ];
 
@@ -54,79 +89,208 @@ export default function AboutPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLD) }}
       />
 
-      {/* Slim Header */}
-      <div className="bg-gradient-to-r from-primary-dark via-primary to-primary-light pt-[76px] pb-5">
-        <Container>
-          <nav aria-label="Breadcrumb" className="text-xs text-white/40 mb-2">
+      {/* Hero — Split layout: text left, image right */}
+      <section className="pt-32 pb-20 md:pt-40 md:pb-28 relative overflow-hidden bg-neutral-50">
+        <Container className="relative">
+          <nav aria-label="Breadcrumb" className="text-xs text-neutral-400 mb-8">
             <ol className="flex items-center gap-1.5">
-              <li><a href="/" className="hover:text-white/70 transition-colors">Home</a></li>
-              <li>/</li>
-              <li aria-current="page" className="text-white/60">About</li>
+              <li>
+                <Link href="/" className="hover:text-primary transition-colors">
+                  Home
+                </Link>
+              </li>
+              <li className="text-neutral-300">/</li>
+              <li className="text-neutral-600 font-medium">About</li>
             </ol>
           </nav>
-          <h1 className="font-display text-page-title text-white">
-            About LevelUP Sports
-          </h1>
-          <p className="text-white/60 mt-1 text-sm max-w-xl">
-            Built by athletes, for athletes. Making world-class sports training accessible to every family in the tri-state area.
-          </p>
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <Reveal variant="fade-right">
+              <div>
+                <h1 className="font-display text-hero text-neutral-900 mb-6 text-balance">
+                  Where every athlete finds their edge.
+                </h1>
+                <p className="text-body-lg text-neutral-500 leading-relaxed max-w-lg">
+                  LevelUP Sports &amp; Athletics Club was founded with a simple
+                  belief: premium coaching and world-class facilities should be
+                  accessible to every family — not just the privileged few.
+                </p>
+                <div className="flex flex-wrap gap-4 mt-8">
+                  <Button asChild>
+                    <Link href="/facilities">Tour Our Facility</Link>
+                  </Button>
+                  <Button variant="outline" asChild>
+                    <Link href="/schedule">View Schedule</Link>
+                  </Button>
+                </div>
+              </div>
+            </Reveal>
+            <Reveal variant="fade-left" delay={0.15}>
+              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-card-elevated">
+                <Image
+                  src="/images/sports/facility.jpg"
+                  alt="Inside LevelUP Sports — modern indoor facility in Elkton, MD"
+                  fill
+                  className="object-cover"
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+            </Reveal>
+          </div>
         </Container>
-      </div>
+      </section>
 
-      {/* Mission */}
+      {/* Story — Two-column narrative with quick stats */}
       <Section>
         <Container>
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="font-display text-section text-neutral-900 mb-6">
-              Empowering Every Athlete to Rise
+          <div className="grid lg:grid-cols-2 gap-16 items-start">
+            <Reveal>
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-4">
+                  Our Story
+                </p>
+                <h2 className="font-display text-section text-neutral-900 mb-8 text-balance">
+                  Built at the crossroads of three states.
+                </h2>
+                <div className="space-y-5 text-neutral-600 leading-relaxed">
+                  <p>
+                    Elkton, Maryland sits where Maryland, Delaware, and
+                    Pennsylvania converge. Families from across this tri-state
+                    area were driving 45+ minutes for quality indoor sports
+                    training. We changed that.
+                  </p>
+                  <p>
+                    Our facility brings professional-grade batting cages,
+                    competition courts, cricket nets, and agility training under
+                    one climate-controlled roof — staffed by coaches who&apos;ve
+                    competed at the highest levels.
+                  </p>
+                  <p>
+                    From a 6-year-old swinging a bat for the first time to a
+                    17-year-old preparing for college recruitment, we meet every
+                    athlete where they are and push them to where they want to
+                    be.
+                  </p>
+                </div>
+              </div>
+            </Reveal>
+            <Reveal delay={0.15}>
+              <StaggerContainer className="grid grid-cols-2 gap-4">
+                {[
+                  { icon: MapPin, label: "Elkton, MD", sub: "Tri-state area" },
+                  { icon: Trophy, label: "4 Sports", sub: "Under one roof" },
+                  {
+                    icon: Calendar,
+                    label: "7 Days",
+                    sub: "Year-round training",
+                  },
+                  { icon: Shield, label: "All Ages", sub: "Youth to adult" },
+                ].map((item) => (
+                  <StaggerItem key={item.label}>
+                    <div className="bg-white rounded-2xl shadow-card p-6 text-center hover:shadow-card-hover transition-shadow">
+                      <div className="w-12 h-12 rounded-xl bg-neutral-100 flex items-center justify-center mx-auto mb-3">
+                        <item.icon className="h-5 w-5 text-primary" />
+                      </div>
+                      <p className="font-semibold text-neutral-900 text-sm">
+                        {item.label}
+                      </p>
+                      <p className="text-caption text-neutral-400 mt-0.5">
+                        {item.sub}
+                      </p>
+                    </div>
+                  </StaggerItem>
+                ))}
+              </StaggerContainer>
+            </Reveal>
+          </div>
+        </Container>
+      </Section>
+
+      {/* Timeline / Milestones */}
+      <Section variant="alternate">
+        <Container>
+          <Reveal>
+            <h2 className="font-display text-section text-neutral-900 text-center mb-16 text-balance">
+              Our journey so far.
             </h2>
-            <p className="text-lg text-neutral-600 leading-relaxed mb-6">
-              LevelUP Sports & Athletics Club was founded with a simple belief:
-              every athlete deserves access to quality coaching and professional
-              facilities, regardless of their zip code or budget.
-            </p>
-            <p className="text-neutral-600 leading-relaxed mb-6">
-              Located in Elkton, MD — at the crossroads of Maryland, Delaware, and
-              Pennsylvania — we serve a tri-state community of families who want
-              more for their young athletes. Our indoor facility offers year-round
-              training in baseball, cricket, badminton, and pickleball, led by
-              coaches who have competed at the highest levels.
-            </p>
-            <p className="text-neutral-600 leading-relaxed">
-              Whether your child is picking up a bat for the first time or
-              preparing for competitive play, LevelUP is where the journey happens.
-              We build skill, confidence, and character — one session at a time.
-            </p>
+          </Reveal>
+          <div className="max-w-2xl mx-auto">
+            {milestones.map((m, i) => (
+              <Reveal key={`${m.year}-${m.title}`} delay={i * 0.1}>
+                <div className="flex gap-6 md:gap-8">
+                  <div className="flex flex-col items-center">
+                    <div className="w-3 h-3 rounded-full bg-accent shrink-0 mt-1.5" />
+                    {i < milestones.length - 1 && (
+                      <div className="w-px flex-1 bg-neutral-200" />
+                    )}
+                  </div>
+                  <div className="pb-10">
+                    <p className="text-caption font-bold text-accent">
+                      {m.year}
+                    </p>
+                    <p className="font-display font-bold text-neutral-900 mt-1">
+                      {m.title}
+                    </p>
+                    <p className="text-sm text-neutral-500 mt-1 leading-relaxed">
+                      {m.desc}
+                    </p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
           </div>
         </Container>
       </Section>
 
       {/* Values */}
-      <Section variant="alternate">
+      <Section>
         <Container>
-          <div className="text-center mb-12">
-            <h2 className="font-display text-section text-neutral-900 mb-4">
-              What We Stand For
-            </h2>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {values.map((value) => (
-              <div
-                key={value.title}
-                className="text-center p-6 rounded-2xl bg-white border border-neutral-200"
-              >
-                <div className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center mx-auto mb-4">
-                  <value.icon className="h-7 w-7 text-accent" />
+          <Reveal>
+            <div className="text-center mb-16">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-4">
+                Our Values
+              </p>
+              <h2 className="font-display text-section text-neutral-900 text-balance">
+                What drives everything we do.
+              </h2>
+            </div>
+          </Reveal>
+          <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
+            {[
+              {
+                icon: Target,
+                title: "Excellence",
+                desc: "Professional-grade coaching, facilities, and athlete experience — always raising the bar.",
+              },
+              {
+                icon: Heart,
+                title: "Community",
+                desc: "More than a facility. A family where every achievement is celebrated together.",
+              },
+              {
+                icon: Users,
+                title: "Inclusivity",
+                desc: "Every age, every skill level, every background. Premium training accessible to all.",
+              },
+              {
+                icon: Zap,
+                title: "Growth",
+                desc: "Continuous improvement for our athletes, coaches, and programs. Never standing still.",
+              },
+            ].map((value) => (
+              <StaggerItem key={value.title} className="text-center">
+                <div className="w-14 h-14 rounded-2xl bg-neutral-100 flex items-center justify-center mx-auto mb-5">
+                  <value.icon className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className="font-display text-lg font-semibold text-neutral-900 mb-2">
+                <h3 className="font-display text-lg font-bold text-neutral-900 mb-2">
                   {value.title}
                 </h3>
-                <p className="text-sm text-neutral-600 leading-relaxed">
-                  {value.description}
+                <p className="text-sm text-neutral-500 leading-relaxed">
+                  {value.desc}
                 </p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </Container>
       </Section>
 
@@ -142,43 +306,81 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      {/* Team Preview */}
+      {/* Coaching Team — Cards with sport imagery banners */}
       <Section>
         <Container>
-          <div className="text-center mb-12">
-            <h2 className="font-display text-section text-neutral-900 mb-4">
-              Meet Our Coaching Team
-            </h2>
-            <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-              Our coaches bring decades of competitive experience and a passion for
-              developing the next generation of athletes.
-            </p>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { name: "Coach Rivera", role: "Baseball Director", initials: "CR" },
-              { name: "Coach Sharma", role: "Cricket Director", initials: "CS" },
-              { name: "Coach Lee", role: "Badminton Director", initials: "CL" },
-              { name: "Coach Williams", role: "Fitness & Agility", initials: "CW" },
-            ].map((coach) => (
-              <div
-                key={coach.name}
-                className="text-center p-6 rounded-2xl bg-white border border-neutral-200 shadow-card"
-              >
-                <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                  <span className="text-xl font-bold text-primary">
-                    {coach.initials}
-                  </span>
+          <Reveal>
+            <div className="text-center mb-16">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-4">
+                Our Team
+              </p>
+              <h2 className="font-display text-section text-neutral-900 text-balance">
+                Coaches who&apos;ve been where you want to go.
+              </h2>
+              <p className="text-neutral-500 mt-4 max-w-2xl mx-auto">
+                Every coach on our staff brings competitive experience and a
+                genuine passion for developing the next generation of athletes.
+              </p>
+            </div>
+          </Reveal>
+          <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+            {coaches.map((coach) => (
+              <StaggerItem key={coach.name}>
+                <div className="bg-white rounded-2xl shadow-card overflow-hidden group hover:shadow-card-hover transition-all">
+                  <div className="relative h-36 overflow-hidden">
+                    <Image
+                      src={coach.image}
+                      alt={`${coach.sport} training at LevelUP Sports`}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    />
+                    <div
+                      className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"
+                      aria-hidden="true"
+                    />
+                    <Badge className="absolute bottom-2.5 left-3 bg-white/90 text-neutral-900 text-xs backdrop-blur-sm">
+                      {coach.sport}
+                    </Badge>
+                  </div>
+                  <div className="p-5">
+                    <h3 className="font-display font-bold text-neutral-900">
+                      {coach.name}
+                    </h3>
+                    <p className="text-sm font-medium text-accent mt-1">
+                      {coach.role}
+                    </p>
+                    <p className="text-caption text-neutral-500 mt-2 leading-relaxed">
+                      {coach.cred}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="font-display font-semibold text-neutral-900">
-                  {coach.name}
-                </h3>
-                <p className="text-sm text-neutral-500 mt-1">{coach.role}</p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </Container>
       </Section>
+
+      {/* Testimonial */}
+      <section className="border-t border-neutral-100">
+        <Container>
+          <Reveal>
+            <blockquote className="py-16 md:py-24 max-w-3xl mx-auto text-center">
+              <p className="font-display text-subsection text-neutral-900 leading-relaxed text-balance">
+                &ldquo;My daughter started in the agility program at age 7. Two
+                years later she&apos;s competing in badminton tournaments. The
+                coaches here don&apos;t just teach sports — they build
+                confidence.&rdquo;
+              </p>
+              <footer className="mt-6">
+                <p className="text-sm font-semibold text-neutral-900">
+                  — Parent of a youth athlete, Wilmington DE
+                </p>
+              </footer>
+            </blockquote>
+          </Reveal>
+        </Container>
+      </section>
 
       <CTABanner
         title="Come See Us in Person"

@@ -5,19 +5,19 @@ export const SITE_CONFIG = {
   description:
     "Premier multi-sport facility in Elkton, MD offering expert coaching, modern courts, and programs in baseball, cricket, badminton, and pickleball for all ages and skill levels.",
   url: "https://levelupsports.us",
-  phone: "(410) 555-0123",
+  phone: "(443) 406-6494",
   email: "info@levelupsports.us",
   address: {
-    street: "123 Sports Way",
+    street: "701 E Pulaski Hwy",
     city: "Elkton",
     state: "MD",
     zip: "21921",
     country: "US",
-    full: "123 Sports Way, Elkton, MD 21921",
+    full: "701 E Pulaski Hwy, Elkton, MD 21921",
   },
   geo: {
-    latitude: 39.6065,
-    longitude: -75.8313,
+    latitude: 39.6068,
+    longitude: -75.8130,
   },
   social: {
     facebook: "https://www.facebook.com/people/LevelUp-Sports-Athletics-Club/61579103465434/",
@@ -26,10 +26,28 @@ export const SITE_CONFIG = {
     youtube: "https://youtube.com/@levelupsports",
   },
   hours: {
-    weekday: "6:00 AM - 10:00 PM",
-    saturday: "7:00 AM - 9:00 PM",
-    sunday: "8:00 AM - 8:00 PM",
+    weekday: "6:00 AM - 11:00 PM",
+    saturday: "6:00 AM - 11:00 PM",
+    sunday: "6:00 AM - 9:00 PM",
   },
+  /** Nearby cities and areas served — used for local SEO */
+  serviceAreas: [
+    "Elkton, MD",
+    "Middletown, DE",
+    "Newark, DE",
+    "Wilmington, DE",
+    "Bear, DE",
+    "Glasgow, DE",
+    "New Castle, DE",
+    "North East, MD",
+    "Rising Sun, MD",
+    "Perryville, MD",
+    "Cecil County, MD",
+    "New Castle County, DE",
+    "Chester County, PA",
+    "Kennett Square, PA",
+    "Oxford, PA",
+  ],
 } as const;
 
 export const SPORTS = [
@@ -37,7 +55,7 @@ export const SPORTS = [
     name: "Baseball",
     slug: "baseball",
     icon: "baseball",
-    color: "#1A3B8F",
+    color: "#1B3A5C",
     image: "/images/sports/baseball.jpg",
     description:
       "Indoor batting cages and expert coaching for players of all levels.",
@@ -57,7 +75,7 @@ export const SPORTS = [
     name: "Badminton",
     slug: "badminton",
     icon: "badminton",
-    color: "#2B52B0",
+    color: "#2A5A8C",
     image: "/images/sports/badminton.jpg",
     description:
       "Competition-grade courts with coaching from certified professionals.",

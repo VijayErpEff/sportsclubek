@@ -17,14 +17,14 @@ export function FeatureCard({
   return (
     <div
       className={cn(
-        "group p-6 rounded-2xl bg-white border border-neutral-200 hover:border-accent/20 shadow-card hover:shadow-card-hover transition-all duration-300",
+        "group p-8 rounded-2xl bg-white shadow-card hover:shadow-lg transition-all duration-500",
         className
       )}
     >
-      <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
-        <Icon className="h-6 w-6 text-accent" />
+      <div className="w-12 h-12 rounded-xl bg-neutral-100 flex items-center justify-center mb-4 group-hover:bg-primary/10 group-hover:scale-110 transition-all duration-300">
+        <Icon className="h-6 w-6 text-primary" />
       </div>
-      <h3 className="font-display text-lg font-semibold text-neutral-900 mb-2">
+      <h3 className="font-display text-xl font-semibold text-neutral-900 mb-2">
         {title}
       </h3>
       <p className="text-sm text-neutral-600 leading-relaxed">{description}</p>

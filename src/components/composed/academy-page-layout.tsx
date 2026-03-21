@@ -5,6 +5,8 @@ import { Section } from "@/components/layout/section";
 import { FAQAccordion } from "@/components/composed/faq-accordion";
 import { CTABanner } from "@/components/composed/cta-banner";
 import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/ui/reveal";
+import { StaggerContainer, StaggerItem } from "@/components/ui/stagger";
 import { generateBreadcrumbLD, generateFAQLD, generateCourseLD } from "@/lib/seo/json-ld";
 import { Check, GraduationCap, Users, Clock, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
@@ -45,64 +47,53 @@ export function AcademyPageLayout({ data }: { data: AcademyPageData }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(courseLD) }}
       />
 
-      {/* Hero Header */}
-      <div className="relative bg-neutral-900 pt-[72px]">
-        <div className="absolute inset-0">
-          <Image
-            src={data.image}
-            alt={data.name}
-            fill
-            className="object-cover opacity-30"
-            priority
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-neutral-900/95 via-neutral-900/80 to-neutral-900/60" />
-        </div>
-        <Container className="relative py-8 md:py-12">
+      {/* Page Header — clean, light */}
+      <div className="pt-28 pb-12 md:pt-36 md:pb-16">
+        <Container>
           {/* Breadcrumb */}
-          <nav aria-label="Breadcrumb" className="text-xs text-white/40 mb-4">
+          <nav aria-label="Breadcrumb" className="text-xs text-neutral-400 mb-6">
             <ol className="flex items-center gap-1.5">
               {breadcrumbs.map((crumb, i) => (
                 <li key={crumb.url} className="flex items-center gap-1.5">
-                  {i > 0 && <span>/</span>}
+                  {i > 0 && <span className="text-neutral-300">/</span>}
                   {i < breadcrumbs.length - 1 ? (
-                    <Link href={crumb.url} className="hover:text-white/70 transition-colors">
+                    <Link href={crumb.url} className="hover:text-primary transition-colors">
                       {crumb.name}
                     </Link>
                   ) : (
-                    <span aria-current="page" className="text-white/60">{crumb.name}</span>
+                    <span aria-current="page" className="text-neutral-600 font-medium">{crumb.name}</span>
                   )}
                 </li>
               ))}
             </ol>
           </nav>
 
-          <div className="flex items-center gap-2 mb-3">
+          <div className="flex items-center gap-2 mb-4">
             <GraduationCap className="h-5 w-5" style={{ color: data.color }} />
             <span
-              className="text-xs font-bold uppercase tracking-wider"
+              className="text-[11px] font-bold uppercase tracking-[0.15em]"
               style={{ color: data.color }}
             >
               Academy Program
             </span>
           </div>
 
-          <h1 className="font-display text-hero text-white mb-3 max-w-2xl">
+          <h1 className="font-display text-page-title text-neutral-900 mb-4 max-w-2xl text-balance">
             {data.tagline}
           </h1>
-          <p className="text-white/60 text-lg max-w-xl mb-6">
+          <p className="text-neutral-500 text-lg max-w-xl mb-8">
             {data.description}
           </p>
 
           {/* Stats row */}
-          <div className="flex flex-wrap gap-3 mb-6">
+          <div className="flex flex-wrap gap-3 mb-8">
             {data.stats.map((stat) => (
               <div
                 key={stat.label}
-                className="bg-white/10 backdrop-blur-sm border border-white/10 rounded-lg px-4 py-2"
+                className="bg-white rounded-xl shadow-card border border-neutral-100 px-5 py-3"
               >
-                <span className="text-white font-bold text-sm">{stat.value}</span>
-                <span className="text-white/40 text-xs ml-1.5">{stat.label}</span>
+                <span className="text-neutral-900 font-bold text-sm">{stat.value}</span>
+                <span className="text-neutral-400 text-xs ml-1.5">{stat.label}</span>
               </div>
             ))}
           </div>
@@ -111,7 +102,7 @@ export function AcademyPageLayout({ data }: { data: AcademyPageData }) {
             <Button size="lg" asChild>
               <Link href="/schedule">Enroll Now</Link>
             </Button>
-            <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white hover:text-neutral-900" asChild>
+            <Button size="lg" variant="outline" asChild>
               <Link href="/schedule">View Schedule</Link>
             </Button>
           </div>
@@ -122,15 +113,15 @@ export function AcademyPageLayout({ data }: { data: AcademyPageData }) {
       <Section>
         <Container>
           <div className="grid lg:grid-cols-5 gap-12">
-            <div className="lg:col-span-3">
-              <h2 className="font-display text-section text-neutral-900 mb-6">
+            <Reveal variant="fade-right" className="lg:col-span-3">
+              <h2 className="font-display text-section text-neutral-900 mb-6 text-balance">
                 Program Overview
               </h2>
               {data.overview.map((p, i) => (
                 <p key={i} className="text-neutral-600 leading-relaxed mb-4">{p}</p>
               ))}
-            </div>
-            <div className="lg:col-span-2">
+            </Reveal>
+            <Reveal variant="fade-left" delay={0.15} className="lg:col-span-2">
               <div className="bg-neutral-50 rounded-2xl p-6 border border-neutral-200 sticky top-24">
                 <h3 className="font-display font-bold text-neutral-900 mb-4">
                   What You Get
@@ -149,7 +140,7 @@ export function AcademyPageLayout({ data }: { data: AcademyPageData }) {
                   </Button>
                 </div>
               </div>
-            </div>
+            </Reveal>
           </div>
         </Container>
       </Section>
@@ -157,19 +148,21 @@ export function AcademyPageLayout({ data }: { data: AcademyPageData }) {
       {/* Curriculum */}
       <Section variant="alternate">
         <Container>
-          <div className="text-center mb-10">
-            <h2 className="font-display text-section text-neutral-900 mb-3">
-              Curriculum
-            </h2>
-            <p className="text-neutral-500 max-w-xl mx-auto">
-              Progressive skill development tailored to each level.
-            </p>
-          </div>
+          <Reveal>
+            <div className="text-center mb-10">
+              <h2 className="font-display text-section text-neutral-900 mb-3 text-balance">
+                Curriculum
+              </h2>
+              <p className="text-neutral-500 max-w-xl mx-auto">
+                Progressive skill development tailored to each level.
+              </p>
+            </div>
+          </Reveal>
 
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <StaggerContainer className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {data.curriculum.map((tier, index) => (
+              <StaggerItem key={tier.label}>
               <div
-                key={tier.label}
                 className="bg-white rounded-2xl border border-neutral-200 overflow-hidden shadow-card hover:shadow-card-hover transition-shadow"
               >
                 {/* Tier header with color */}
@@ -206,46 +199,48 @@ export function AcademyPageLayout({ data }: { data: AcademyPageData }) {
                   ))}
                 </ul>
               </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </Container>
       </Section>
 
       {/* Coaches */}
       <Section variant="alternate">
         <Container>
-          <div className="text-center mb-10">
-            <h2 className="font-display text-section text-neutral-900 mb-3">
-              Your Coaching Team
-            </h2>
-          </div>
-          <div className={cn(
+          <Reveal>
+            <div className="text-center mb-10">
+              <h2 className="font-display text-section text-neutral-900 mb-3 text-balance">
+                Your Coaching Team
+              </h2>
+            </div>
+          </Reveal>
+          <StaggerContainer className={cn(
             "grid gap-6 max-w-3xl mx-auto",
             data.coaches.length === 1 ? "grid-cols-1 max-w-md" : "sm:grid-cols-2"
           )}>
             {data.coaches.map((coach) => (
-              <div
-                key={coach.name}
-                className="bg-white rounded-2xl border border-neutral-200 p-6 shadow-card"
-              >
-                <div className="flex items-start gap-4">
-                  <div
-                    className="w-14 h-14 rounded-full flex items-center justify-center shrink-0"
-                    style={{ backgroundColor: `${data.color}15` }}
-                  >
-                    <span className="text-lg font-bold" style={{ color: data.color }}>
-                      {coach.initials}
-                    </span>
+              <StaggerItem key={coach.name}>
+                <div className="bg-white rounded-2xl border border-neutral-200 p-6 shadow-card">
+                  <div className="flex items-start gap-4">
+                    <div
+                      className="w-14 h-14 rounded-full flex items-center justify-center shrink-0"
+                      style={{ backgroundColor: `${data.color}15` }}
+                    >
+                      <span className="text-lg font-bold" style={{ color: data.color }}>
+                        {coach.initials}
+                      </span>
+                    </div>
+                    <div>
+                      <h3 className="font-display font-bold text-neutral-900">{coach.name}</h3>
+                      <p className="text-sm font-medium" style={{ color: data.color }}>{coach.role}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-display font-bold text-neutral-900">{coach.name}</h3>
-                    <p className="text-sm font-medium" style={{ color: data.color }}>{coach.role}</p>
-                  </div>
+                  <p className="text-sm text-neutral-500 mt-4 leading-relaxed">{coach.bio}</p>
                 </div>
-                <p className="text-sm text-neutral-500 mt-4 leading-relaxed">{coach.bio}</p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </Container>
       </Section>
 
@@ -253,12 +248,16 @@ export function AcademyPageLayout({ data }: { data: AcademyPageData }) {
       <Section>
         <Container>
           <div className="max-w-3xl mx-auto">
-            <div className="text-center mb-8">
-              <h2 className="font-display text-section text-neutral-900 mb-3">
-                Frequently Asked Questions
-              </h2>
-            </div>
-            <FAQAccordion items={data.faqs} />
+            <Reveal>
+              <div className="text-center mb-8">
+                <h2 className="font-display text-section text-neutral-900 mb-3 text-balance">
+                  Frequently Asked Questions
+                </h2>
+              </div>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <FAQAccordion items={data.faqs} />
+            </Reveal>
           </div>
         </Container>
       </Section>

@@ -2,22 +2,46 @@
 
 import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
+import { CheckCircle } from "lucide-react";
 
 export function NewsletterSignup() {
   const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (email) {
-      setSubmitted(true);
+    if (!email) return;
+
+    setStatus("loading");
+    setErrorMessage("");
+
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      if (res.ok) {
+        setStatus("success");
+        setEmail("");
+      } else {
+        const data = await res.json();
+        setErrorMessage(data.error || "Something went wrong.");
+        setStatus("error");
+      }
+    } catch {
+      setErrorMessage("Network error. Please try again.");
+      setStatus("error");
     }
   };
 
-  if (submitted) {
+  if (status === "success") {
     return (
-      <div aria-live="polite" className="text-center">
-        <p className="text-accent font-semibold">
+      <div aria-live="polite" className="text-center flex items-center justify-center gap-2">
+        <CheckCircle className="h-5 w-5 text-secondary" aria-hidden="true" />
+        <p className="text-secondary font-semibold">
           Thanks for signing up! We&apos;ll be in touch.
         </p>
       </div>
@@ -38,12 +62,20 @@ export function NewsletterSignup() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Enter your email"
-        aria-required="true"
         required
         className="flex-1 h-11 px-4 rounded-lg border border-neutral-300 bg-white text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
       />
-      <Button type="submit">Subscribe</Button>
-      <div aria-live="polite" className="sr-only" />
+      <Button type="submit" disabled={status === "loading"}>
+        {status === "loading" ? "Subscribing..." : "Subscribe"}
+      </Button>
+      <div aria-live="polite" className="sr-only">
+        {status === "error" && errorMessage}
+      </div>
+      {status === "error" && (
+        <p className="text-error text-sm sm:absolute sm:bottom-0 sm:translate-y-full">
+          {errorMessage}
+        </p>
+      )}
     </form>
   );
 }

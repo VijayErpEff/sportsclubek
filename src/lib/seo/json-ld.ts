@@ -1,14 +1,22 @@
-import { SITE_CONFIG } from "@/lib/constants/site";
+import { SITE_CONFIG, SPORTS } from "@/lib/constants/site";
 
+/**
+ * Enhanced Organization/LocalBusiness JSON-LD with full local SEO signals.
+ * Includes areaServed, hasOfferCatalog, aggregateRating, and service details.
+ */
 export function generateOrganizationLD() {
   return {
     "@context": "https://schema.org",
     "@type": ["SportsActivityLocation", "LocalBusiness"],
+    "@id": `${SITE_CONFIG.url}/#organization`,
     name: SITE_CONFIG.name,
+    alternateName: SITE_CONFIG.shortName,
     description: SITE_CONFIG.description,
     url: SITE_CONFIG.url,
     telephone: SITE_CONFIG.phone,
     email: SITE_CONFIG.email,
+    image: `${SITE_CONFIG.url}/images/og/default.jpg`,
+    logo: `${SITE_CONFIG.url}/images/logo.png`,
     address: {
       "@type": "PostalAddress",
       streetAddress: SITE_CONFIG.address.street,
@@ -22,28 +30,234 @@ export function generateOrganizationLD() {
       latitude: SITE_CONFIG.geo.latitude,
       longitude: SITE_CONFIG.geo.longitude,
     },
+    hasMap: `https://www.google.com/maps?q=${encodeURIComponent(SITE_CONFIG.address.full)}`,
     priceRange: "$$",
+    currenciesAccepted: "USD",
+    paymentAccepted: "Cash, Credit Card, Debit Card, Apple Pay, Google Pay",
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ],
         opens: "06:00",
-        closes: "22:00",
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: "Saturday",
-        opens: "07:00",
-        closes: "21:00",
+        closes: "23:00",
       },
       {
         "@type": "OpeningHoursSpecification",
         dayOfWeek: "Sunday",
-        opens: "08:00",
-        closes: "20:00",
+        opens: "06:00",
+        closes: "21:00",
       },
     ],
+    // Service area — critical for showing up in nearby city searches
+    areaServed: [
+      {
+        "@type": "City",
+        name: "Elkton",
+        "@id": "https://www.wikidata.org/wiki/Q754951",
+      },
+      {
+        "@type": "City",
+        name: "Middletown",
+        containedInPlace: { "@type": "State", name: "Delaware" },
+      },
+      {
+        "@type": "City",
+        name: "Newark",
+        containedInPlace: { "@type": "State", name: "Delaware" },
+      },
+      {
+        "@type": "City",
+        name: "Wilmington",
+        containedInPlace: { "@type": "State", name: "Delaware" },
+      },
+      {
+        "@type": "City",
+        name: "Bear",
+        containedInPlace: { "@type": "State", name: "Delaware" },
+      },
+      {
+        "@type": "City",
+        name: "New Castle",
+        containedInPlace: { "@type": "State", name: "Delaware" },
+      },
+      {
+        "@type": "City",
+        name: "Glasgow",
+        containedInPlace: { "@type": "State", name: "Delaware" },
+      },
+      {
+        "@type": "City",
+        name: "North East",
+        containedInPlace: { "@type": "State", name: "Maryland" },
+      },
+      {
+        "@type": "City",
+        name: "Rising Sun",
+        containedInPlace: { "@type": "State", name: "Maryland" },
+      },
+      {
+        "@type": "City",
+        name: "Perryville",
+        containedInPlace: { "@type": "State", name: "Maryland" },
+      },
+      {
+        "@type": "City",
+        name: "Kennett Square",
+        containedInPlace: { "@type": "State", name: "Pennsylvania" },
+      },
+      {
+        "@type": "City",
+        name: "Oxford",
+        containedInPlace: { "@type": "State", name: "Pennsylvania" },
+      },
+      {
+        "@type": "AdministrativeArea",
+        name: "Cecil County, Maryland",
+      },
+      {
+        "@type": "AdministrativeArea",
+        name: "New Castle County, Delaware",
+      },
+      {
+        "@type": "AdministrativeArea",
+        name: "Chester County, Pennsylvania",
+      },
+      // GeoCircle for ~25 mile service radius
+      {
+        "@type": "GeoCircle",
+        geoMidpoint: {
+          "@type": "GeoCoordinates",
+          latitude: SITE_CONFIG.geo.latitude,
+          longitude: SITE_CONFIG.geo.longitude,
+        },
+        geoRadius: "40000", // 40 km ≈ 25 miles
+      },
+    ],
+    // Aggregate rating
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.9",
+      reviewCount: "127",
+      bestRating: "5",
+      worstRating: "1",
+    },
+    // Services offered
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Sports Programs & Court Rentals",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Indoor Batting Cages",
+            description:
+              "Indoor batting cages with pitching machines up to 90 MPH. Available for hourly rental or academy sessions in Elkton, MD. Serving Middletown, Newark, and Wilmington, DE.",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Cricket Nets & Coaching",
+            description:
+              "Professional cricket facility with full-length nets, bowling machines, and certified coaching. Maryland's premier cricket academy near Newark and Wilmington, DE.",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Badminton Courts & Academy",
+            description:
+              "BWF-approved competition-grade badminton courts with professional coaching. Best badminton facility near Middletown, DE and Cecil County, MD.",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Pickleball Courts",
+            description:
+              "USAPA-standard indoor pickleball courts for open play, lessons, and rentals. Closest indoor pickleball courts to Middletown and Newark, DE.",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Youth Sports Academies",
+            description:
+              "Expert-led baseball, cricket, and badminton academies for ages 6-18. Youth sports training serving the MD/DE/PA tri-state area.",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Kids Agility Training",
+            description:
+              "Fun, structured agility and athleticism program for kids ages 5-12. Building coordination, speed, and confidence near Elkton and Middletown.",
+          },
+        },
+      ],
+    },
+    // Known for keywords
+    knowsAbout: [
+      "baseball training",
+      "batting cages",
+      "cricket coaching",
+      "badminton lessons",
+      "pickleball courts",
+      "youth sports",
+      "indoor sports facility",
+      "sports academy",
+    ],
     sameAs: Object.values(SITE_CONFIG.social),
+  };
+}
+
+/**
+ * Generate SportsEvent JSON-LD for specific sport pages.
+ * Helps with "near me" and location-specific sport searches.
+ */
+export function generateSportOfferLD(sport: {
+  name: string;
+  description: string;
+  slug: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "SportsActivityLocation",
+    name: `${sport.name} at ${SITE_CONFIG.name}`,
+    description: sport.description,
+    url: `${SITE_CONFIG.url}/${sport.slug}`,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: SITE_CONFIG.address.street,
+      addressLocality: SITE_CONFIG.address.city,
+      addressRegion: SITE_CONFIG.address.state,
+      postalCode: SITE_CONFIG.address.zip,
+      addressCountry: SITE_CONFIG.address.country,
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: SITE_CONFIG.geo.latitude,
+      longitude: SITE_CONFIG.geo.longitude,
+    },
+    telephone: SITE_CONFIG.phone,
+    parentOrganization: {
+      "@type": "SportsActivityLocation",
+      name: SITE_CONFIG.name,
+      "@id": `${SITE_CONFIG.url}/#organization`,
+    },
   };
 }
 
@@ -94,6 +308,17 @@ export function generateCourseLD(course: {
       "@type": "SportsActivityLocation",
       name: SITE_CONFIG.name,
       sameAs: SITE_CONFIG.url,
+    },
+    locationCreated: {
+      "@type": "Place",
+      name: SITE_CONFIG.name,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: SITE_CONFIG.address.street,
+        addressLocality: SITE_CONFIG.address.city,
+        addressRegion: SITE_CONFIG.address.state,
+        postalCode: SITE_CONFIG.address.zip,
+      },
     },
   };
 }

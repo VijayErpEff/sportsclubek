@@ -48,9 +48,9 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
     tagline: "Where Ballplayers Are Built",
     description: "Our 12-week academy develops mechanics, game IQ, and the competitive edge that separates good players from great ones.",
     image: "/images/sports/baseball.jpg",
-    color: "#1A3B8F",
-    metaTitle: "Youth Baseball Academy",
-    metaDescription: "Intensive youth baseball academy in Elkton, MD. Expert coaches, skill development, game IQ training. Ages 8-18, all skill levels. Enroll today.",
+    color: "#1B3A5C",
+    metaTitle: "Youth Baseball Academy — Elkton, MD | Serving Middletown, Newark & Cecil County",
+    metaDescription: "Youth baseball academy in Elkton, MD — near Middletown & Newark, DE. Expert coaches, batting cages, skill development for ages 8-18. Enroll today.",
     overview: [
       "The LevelUP Baseball Academy is a comprehensive 12-week training program designed to develop well-rounded ballplayers. Our curriculum covers every aspect of the game — from hitting mechanics and pitching fundamentals to base running, defensive positioning, and game IQ.",
       "Every session is structured to maximize development with a balance of individual skill work, live reps, and competitive scenarios. Players leave the program with measurable improvement and the confidence to compete at the next level.",
@@ -66,7 +66,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
         label: "Ages 8–12",
         title: "Foundations",
         description: "Build a love for the game while developing core fundamentals that last a lifetime.",
-        color: "#2BA84A",
+        color: "#1B7D3A",
         skills: [
           "Throwing mechanics and accuracy",
           "Hitting fundamentals and tee work",
@@ -79,7 +79,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
         label: "Ages 13–15",
         title: "Development",
         description: "Refine mechanics, build strength, and master the mental side of the game.",
-        color: "#1A3B8F",
+        color: "#1B3A5C",
         skills: [
           "Advanced hitting — approach and pitch recognition",
           "Pitching development and arm care",
@@ -92,7 +92,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
         label: "Ages 16–18",
         title: "Advanced / Pre-Collegiate",
         description: "High-level training for varsity and travel players preparing for the next stage.",
-        color: "#0E2260",
+        color: "#0F2440",
         skills: [
           "Elite hitting — live at-bats and advanced approach",
           "Pitching velocity and movement development",
@@ -132,8 +132,8 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
     description: "Master every aspect of the game with coaches who've played at the highest level. Structured programs for all skill levels.",
     image: "/images/sports/cricket.png",
     color: "#1B7D3A",
-    metaTitle: "Cricket Coaching Academy",
-    metaDescription: "Structured cricket academy in Maryland. Professional coaching, technique development, and match preparation for youth and adult players.",
+    metaTitle: "Cricket Academy Maryland — Elkton, MD | Near Newark, Wilmington & Middletown, DE",
+    metaDescription: "Maryland's premier cricket academy in Elkton — serving Newark, Wilmington & Middletown, DE. Professional nets, certified coaching, youth & adult programs. Enroll today.",
     overview: [
       "The LevelUP Cricket Academy offers professional coaching in all aspects of the game. Whether you're learning your first forward defense or perfecting your cover drive, our coaches bring competitive experience and a structured approach to player development.",
       "With programs for youth and adults, beginners and advanced players, we're building the strongest cricket community in the Mid-Atlantic region.",
@@ -162,7 +162,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
         label: "Bowling",
         title: "Bowling Development",
         description: "Build a repeatable action, develop control, and add variations to your arsenal.",
-        color: "#15662F",
+        color: "#1B7D3A",
         skills: [
           "Bowling action mechanics and consistency",
           "Line and length control",
@@ -175,7 +175,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
         label: "Fielding",
         title: "Fielding & Wicket-Keeping",
         description: "Sharpen reflexes, improve ground fielding, and develop safe catching technique.",
-        color: "#0D4A23",
+        color: "#15662F",
         skills: [
           "Ground fielding — pick up and throw",
           "Catching — high, low, and slip catching",
@@ -214,9 +214,9 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
     tagline: "Train Your Reflexes. Sharpen Your Game.",
     description: "Certified coaches develop speed, technique, and tactical awareness through structured training at every level.",
     image: "/images/sports/badminton.jpg",
-    color: "#2B52B0",
-    metaTitle: "Badminton Training Academy",
-    metaDescription: "Professional badminton academy in Elkton, MD. Certified coaches, structured training, and tournament preparation for all levels.",
+    color: "#2A5A8C",
+    metaTitle: "Badminton Academy — Elkton, MD | Near Middletown, Newark & Wilmington, DE",
+    metaDescription: "Professional badminton academy in Elkton, MD — serving Middletown, Newark & Wilmington, DE. Certified coaches, BWF courts, tournament prep. All levels welcome.",
     overview: [
       "The LevelUP Badminton Academy develops complete players through a focus on three pillars: footwork, stroke technique, and match strategy. Our BWF-certified coaching staff brings competitive experience and a proven training methodology.",
       "Whether you're just picking up a racket or preparing for tournament competition, our structured programs will elevate your game in a supportive, challenging environment.",
@@ -232,7 +232,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
         label: "Footwork",
         title: "Court Movement",
         description: "Speed and agility are everything in badminton. Master the movement patterns that create winning positions.",
-        color: "#2B52B0",
+        color: "#2A5A8C",
         skills: [
           "Six-corner footwork patterns",
           "Split step and recovery timing",
@@ -245,7 +245,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
         label: "Strokes",
         title: "Stroke Technique",
         description: "Develop a complete shot repertoire — from powerful smashes to deceptive drop shots.",
-        color: "#1A3B8F",
+        color: "#1B3A5C",
         skills: [
           "Overhead clear, drop, and smash",
           "Net shots — kill, tumble, and lift",
@@ -258,7 +258,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
         label: "Match Play",
         title: "Tactics & Strategy",
         description: "Learn to think like a competitor — reading opponents, controlling rallies, and winning points.",
-        color: "#0E2260",
+        color: "#0F2440",
         skills: [
           "Singles and doubles strategy",
           "Rally patterns and point construction",
@@ -297,9 +297,9 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
     tagline: "Watch Them Discover What They Can Do",
     description: "Fun, engaging agility training that builds coordination, speed, confidence, and a lifelong love of movement. Ages 5–12.",
     image: "/images/sports/kids-agility.jpg",
-    color: "#E67E22",
-    metaTitle: "Kids Agility & Fitness Training",
-    metaDescription: "Fun, engaging agility training for kids ages 5-12 in Elkton, MD. Build coordination, speed, and confidence through age-appropriate athletic development.",
+    color: "#2BA84A",
+    metaTitle: "Kids Agility Training — Elkton, MD | Ages 5-12 | Near Middletown & Newark, DE",
+    metaDescription: "Kids agility & fitness program in Elkton, MD for ages 5-12 — near Middletown & Newark, DE. Build speed, coordination & confidence. Fun, structured sessions.",
     overview: [
       "Our Kids Agility program is designed to build the athletic foundation every young person needs — regardless of what sport they play. Through fun, structured exercises, kids develop coordination, balance, speed, and the confidence that comes from discovering what their bodies can do.",
       "This isn't gym class. It's purposeful movement training led by certified coaches who know how to keep kids engaged, challenged, and excited to come back. Every session is age-appropriate, safe, and designed to build a love for active living.",
@@ -315,7 +315,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
         label: "Ages 5–7",
         title: "Explorers",
         description: "Playful introduction to movement through games, obstacle courses, and fundamental motor skills.",
-        color: "#E67E22",
+        color: "#2BA84A",
         skills: [
           "Running, jumping, and landing technique",
           "Balance and coordination games",
@@ -328,7 +328,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
         label: "Ages 8–10",
         title: "Builders",
         description: "Developing agility, speed, and body awareness through structured drills and fun competitions.",
-        color: "#D35400",
+        color: "#1B7D3A",
         skills: [
           "Ladder and cone agility drills",
           "Sprint mechanics and acceleration",
@@ -341,7 +341,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
         label: "Ages 11–12",
         title: "Competitors",
         description: "Building athletic confidence with performance training that bridges to competitive sport.",
-        color: "#A04000",
+        color: "#15662F",
         skills: [
           "Advanced agility and change of direction",
           "Speed and power development",

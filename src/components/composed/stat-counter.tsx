@@ -20,6 +20,7 @@ export function StatCounter({
 }: StatCounterProps) {
   const [count, setCount] = useState(0);
   const [hasAnimated, setHasAnimated] = useState(false);
+  const [glowing, setGlowing] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -45,7 +46,12 @@ export function StatCounter({
             const progress = Math.min(elapsed / duration, 1);
             const eased = 1 - Math.pow(1 - progress, 3);
             setCount(Math.floor(eased * value));
-            if (progress < 1) requestAnimationFrame(animate);
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+            } else {
+              setGlowing(true);
+              setTimeout(() => setGlowing(false), 600);
+            }
           };
 
           requestAnimationFrame(animate);
@@ -60,12 +66,12 @@ export function StatCounter({
 
   return (
     <div ref={ref} className={cn("text-center", className)}>
-      <div className="font-mono text-section text-accent font-bold">
+      <div className={cn("font-mono text-section text-white font-bold transition-all duration-500", glowing && "drop-shadow-[0_0_15px_rgba(255,255,255,0.5)] scale-105")}>
         {prefix}
         {count.toLocaleString()}
         {suffix}
       </div>
-      <div className="text-sm text-neutral-600 mt-1 font-medium">{label}</div>
+      <div className="text-sm text-white/70 mt-1 font-medium">{label}</div>
     </div>
   );
 }

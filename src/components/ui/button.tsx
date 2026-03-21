@@ -4,13 +4,13 @@ import { cn } from "@/lib/utils/cn";
 
 const variantStyles = {
   primary:
-    "bg-accent text-white hover:bg-accent-hover active:bg-accent-hover shadow-sm hover:shadow-md",
+    "bg-accent text-white hover:bg-accent-hover active:bg-accent-hover shadow-sm hover:shadow-md hover:-translate-y-px active:translate-y-0",
   secondary:
-    "bg-primary text-white hover:bg-primary-light active:bg-primary-dark shadow-sm hover:shadow-md",
+    "bg-primary text-white hover:bg-primary-light active:bg-primary-dark shadow-sm hover:shadow-md hover:-translate-y-px active:translate-y-0",
   outline:
-    "border-2 border-primary text-primary hover:bg-primary hover:text-white",
+    "border-2 border-primary text-primary hover:bg-primary hover:text-white hover:-translate-y-px",
   ghost: "text-primary hover:bg-neutral-100 active:bg-neutral-200",
-  danger: "bg-error text-white hover:bg-red-700 active:bg-red-800",
+  danger: "bg-error text-white hover:bg-red-700 active:bg-red-800 hover:-translate-y-px",
 } as const;
 
 const sizeStyles = {

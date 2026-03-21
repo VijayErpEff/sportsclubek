@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Trophy, Calendar, BookOpen, Info } from "lucide-react";
+import { Home, Trophy, Calendar, Phone, Info } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 
 const NAV_ITEMS = [
   { label: "Home", href: "/", icon: Home },
-  { label: "Sports", href: "#sports", icon: Trophy },
+  { label: "Sports", href: "/baseball", icon: Trophy },
   { label: "Schedule", href: "/schedule", icon: Calendar },
-  { label: "Book", href: "/schedule", icon: BookOpen },
+  { label: "Contact", href: "/contact", icon: Phone },
   { label: "About", href: "/about", icon: Info },
 ] as const;
 
@@ -19,7 +19,7 @@ export function MobileBottomNav() {
   return (
     <nav
       aria-label="Quick navigation"
-      className="fixed bottom-0 left-0 right-0 z-50 border-t border-neutral-200 bg-white md:hidden"
+      className="fixed bottom-0 left-0 right-0 z-50 border-t border-neutral-200/30 bg-white/80 backdrop-blur-xl md:hidden"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
       <ul className="flex h-14 items-center justify-around">
@@ -27,9 +27,7 @@ export function MobileBottomNav() {
           const isActive =
             href === "/"
               ? pathname === "/"
-              : href.startsWith("#")
-                ? false
-                : pathname.startsWith(href);
+              : pathname.startsWith(href);
 
           return (
             <li key={label} className="flex-1">

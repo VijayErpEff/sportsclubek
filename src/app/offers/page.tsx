@@ -5,6 +5,8 @@ import { CTABanner } from "@/components/composed/cta-banner";
 import { Section } from "@/components/layout/section";
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/ui/reveal";
+import { StaggerContainer, StaggerItem } from "@/components/ui/stagger";
 import { generateSEOMetadata } from "@/lib/seo/metadata";
 import { generateBreadcrumbLD } from "@/lib/seo/json-ld";
 
@@ -53,8 +55,9 @@ export default function OffersPage() {
       {/* Offer Cards */}
       <Section>
         <Container>
-          <div className="grid gap-8 md:grid-cols-3">
+          <StaggerContainer className="grid gap-8 md:grid-cols-3">
             {/* First Session 50% Off */}
+            <StaggerItem>
             <div className="rounded-xl border bg-background shadow-sm overflow-hidden">
               <div className="bg-primary p-6 text-primary-foreground text-center">
                 <p className="text-sm font-medium uppercase tracking-wider mb-1">
@@ -91,8 +94,10 @@ export default function OffersPage() {
                 </Button>
               </div>
             </div>
+            </StaggerItem>
 
             {/* Family Membership Special */}
+            <StaggerItem>
             <div className="rounded-xl border bg-background shadow-sm overflow-hidden">
               <div className="bg-primary p-6 text-primary-foreground text-center">
                 <p className="text-sm font-medium uppercase tracking-wider mb-1">
@@ -129,8 +134,10 @@ export default function OffersPage() {
                 </Button>
               </div>
             </div>
+            </StaggerItem>
 
             {/* Refer a Friend */}
+            <StaggerItem>
             <div className="rounded-xl border bg-background shadow-sm overflow-hidden">
               <div className="bg-primary p-6 text-primary-foreground text-center">
                 <p className="text-sm font-medium uppercase tracking-wider mb-1">
@@ -167,21 +174,24 @@ export default function OffersPage() {
                 </Button>
               </div>
             </div>
-          </div>
+            </StaggerItem>
+          </StaggerContainer>
         </Container>
       </Section>
 
       {/* Terms Section */}
       <Section className="bg-muted/50">
         <Container>
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-2xl font-bold tracking-tight mb-4">Offer Terms</h2>
-            <p className="text-muted-foreground text-sm">
-              All offers are subject to availability and may be withdrawn at any time. Offers
-              cannot be combined unless explicitly stated. Valid at the LevelUP Sports Elkton
-              location only. Contact us for full terms and conditions.
-            </p>
-          </div>
+          <Reveal>
+            <div className="max-w-2xl mx-auto text-center">
+              <h2 className="text-2xl font-bold tracking-tight mb-4 text-balance">Offer Terms</h2>
+              <p className="text-muted-foreground text-sm">
+                All offers are subject to availability and may be withdrawn at any time. Offers
+                cannot be combined unless explicitly stated. Valid at the LevelUP Sports Elkton
+                location only. Contact us for full terms and conditions.
+              </p>
+            </div>
+          </Reveal>
         </Container>
       </Section>
 

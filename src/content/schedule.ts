@@ -31,12 +31,12 @@ export interface DaySchedule {
 }
 
 export const SPORT_COLORS: Record<SportType, { bg: string; text: string; dot: string; border: string }> = {
-  baseball:   { bg: "bg-blue-50",    text: "text-blue-700",    dot: "bg-blue-500",    border: "border-blue-200" },
-  cricket:    { bg: "bg-green-50",   text: "text-green-700",   dot: "bg-green-500",   border: "border-green-200" },
-  badminton:  { bg: "bg-indigo-50",  text: "text-indigo-700",  dot: "bg-indigo-500",  border: "border-indigo-200" },
-  pickleball: { bg: "bg-emerald-50", text: "text-emerald-700", dot: "bg-emerald-500", border: "border-emerald-200" },
-  agility:    { bg: "bg-amber-50",   text: "text-amber-700",   dot: "bg-amber-500",   border: "border-amber-200" },
-  open:       { bg: "bg-neutral-50", text: "text-neutral-600", dot: "bg-neutral-400",  border: "border-neutral-200" },
+  baseball:   { bg: "bg-primary/5",    text: "text-primary-dark",  dot: "bg-primary",     border: "border-primary/15" },
+  cricket:    { bg: "bg-accent/5",     text: "text-accent-hover",  dot: "bg-accent",      border: "border-accent/15" },
+  badminton:  { bg: "bg-info/5",       text: "text-primary-light", dot: "bg-info",        border: "border-info/15" },
+  pickleball: { bg: "bg-secondary/10", text: "text-accent",        dot: "bg-secondary",   border: "border-secondary/20" },
+  agility:    { bg: "bg-warning/10",   text: "text-neutral-700",   dot: "bg-warning",     border: "border-warning/20" },
+  open:       { bg: "bg-neutral-50",   text: "text-neutral-600",   dot: "bg-neutral-400", border: "border-neutral-200" },
 };
 
 export const SPORT_LABELS: Record<SportType, string> = {

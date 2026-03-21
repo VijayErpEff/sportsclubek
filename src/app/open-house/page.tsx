@@ -5,6 +5,8 @@ import { CTABanner } from "@/components/composed/cta-banner";
 import { Section } from "@/components/layout/section";
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/ui/reveal";
+import { StaggerContainer, StaggerItem } from "@/components/ui/stagger";
 import { generateSEOMetadata } from "@/lib/seo/metadata";
 import { generateBreadcrumbLD } from "@/lib/seo/json-ld";
 
@@ -54,8 +56,9 @@ export default function OpenHousePage() {
       <Section>
         <Container>
           <div className="grid gap-12 lg:grid-cols-2">
+            <Reveal variant="fade-right">
             <div>
-              <h2 className="text-3xl font-bold tracking-tight mb-6">Event Details</h2>
+              <h2 className="text-3xl font-bold tracking-tight mb-6 text-balance">Event Details</h2>
               <p className="text-lg text-muted-foreground mb-6">
                 Our Open House is your chance to experience everything LevelUP Sports has to
                 offer — completely free and with no commitment. Bring the whole family, explore
@@ -97,9 +100,11 @@ export default function OpenHousePage() {
                 </div>
               </div>
             </div>
+            </Reveal>
 
+            <Reveal variant="fade-left" delay={0.15}>
             <div>
-              <h2 className="text-3xl font-bold tracking-tight mb-6">What to Expect</h2>
+              <h2 className="text-3xl font-bold tracking-tight mb-6 text-balance">What to Expect</h2>
               <div className="space-y-4">
                 <div className="rounded-xl border bg-background p-6 shadow-sm">
                   <h3 className="font-bold mb-2">Facility Tour</h3>
@@ -132,6 +137,7 @@ export default function OpenHousePage() {
                 </div>
               </div>
             </div>
+            </Reveal>
           </div>
         </Container>
       </Section>
@@ -139,35 +145,45 @@ export default function OpenHousePage() {
       {/* Who Should Attend */}
       <Section className="bg-muted/50">
         <Container>
-          <h2 className="text-3xl font-bold tracking-tight mb-10 text-center">
-            Who Should Attend?
-          </h2>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto">
-            <div className="rounded-xl border bg-background p-6 shadow-sm text-center">
-              <h3 className="font-bold mb-2">Parents</h3>
-              <p className="text-sm text-muted-foreground">
-                See where your child will train and meet the people who will coach them.
-              </p>
-            </div>
-            <div className="rounded-xl border bg-background p-6 shadow-sm text-center">
-              <h3 className="font-bold mb-2">Young Athletes</h3>
-              <p className="text-sm text-muted-foreground">
-                Try out the equipment, meet other players, and find a sport you love.
-              </p>
-            </div>
-            <div className="rounded-xl border bg-background p-6 shadow-sm text-center">
-              <h3 className="font-bold mb-2">Adult Players</h3>
-              <p className="text-sm text-muted-foreground">
-                Check out our adult programs, open play sessions, and league opportunities.
-              </p>
-            </div>
-            <div className="rounded-xl border bg-background p-6 shadow-sm text-center">
-              <h3 className="font-bold mb-2">Anyone Curious</h3>
-              <p className="text-sm text-muted-foreground">
-                Never played before? No problem. This is the perfect low-pressure introduction.
-              </p>
-            </div>
-          </div>
+          <Reveal>
+            <h2 className="text-3xl font-bold tracking-tight mb-10 text-center text-balance">
+              Who Should Attend?
+            </h2>
+          </Reveal>
+          <StaggerContainer className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto">
+            <StaggerItem>
+              <div className="rounded-xl border bg-background p-6 shadow-sm text-center">
+                <h3 className="font-bold mb-2">Parents</h3>
+                <p className="text-sm text-muted-foreground">
+                  See where your child will train and meet the people who will coach them.
+                </p>
+              </div>
+            </StaggerItem>
+            <StaggerItem>
+              <div className="rounded-xl border bg-background p-6 shadow-sm text-center">
+                <h3 className="font-bold mb-2">Young Athletes</h3>
+                <p className="text-sm text-muted-foreground">
+                  Try out the equipment, meet other players, and find a sport you love.
+                </p>
+              </div>
+            </StaggerItem>
+            <StaggerItem>
+              <div className="rounded-xl border bg-background p-6 shadow-sm text-center">
+                <h3 className="font-bold mb-2">Adult Players</h3>
+                <p className="text-sm text-muted-foreground">
+                  Check out our adult programs, open play sessions, and league opportunities.
+                </p>
+              </div>
+            </StaggerItem>
+            <StaggerItem>
+              <div className="rounded-xl border bg-background p-6 shadow-sm text-center">
+                <h3 className="font-bold mb-2">Anyone Curious</h3>
+                <p className="text-sm text-muted-foreground">
+                  Never played before? No problem. This is the perfect low-pressure introduction.
+                </p>
+              </div>
+            </StaggerItem>
+          </StaggerContainer>
         </Container>
       </Section>
 

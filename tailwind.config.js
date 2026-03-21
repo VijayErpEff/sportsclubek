@@ -10,9 +10,9 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: "#1A3B8F",
-          light: "#2B52B0",
-          dark: "#0E2260",
+          DEFAULT: "#1B3A5C",
+          light: "#2A5A8C",
+          dark: "#0F2440",
         },
         accent: {
           DEFAULT: "#1B7D3A",
@@ -80,15 +80,24 @@ module.exports = {
         wide: "1440px",
       },
       boxShadow: {
-        card: "0 2px 8px rgba(26, 59, 143, 0.08), 0 1px 2px rgba(26, 59, 143, 0.04)",
+        card: "0 2px 8px rgba(27, 58, 92, 0.08), 0 1px 2px rgba(27, 58, 92, 0.04)",
         "card-hover":
-          "0 8px 24px rgba(26, 59, 143, 0.12), 0 2px 4px rgba(26, 59, 143, 0.06)",
+          "0 8px 24px rgba(27, 58, 92, 0.12), 0 2px 4px rgba(27, 58, 92, 0.06)",
+        "card-elevated":
+          "0 12px 40px rgba(27, 58, 92, 0.10), 0 4px 12px rgba(27, 58, 92, 0.05)",
         nav: "0 1px 3px rgba(0, 0, 0, 0.08)",
       },
       animation: {
         "fade-up": "fadeUp 0.5s ease-out forwards",
         "fade-in": "fadeIn 0.4s ease-out forwards",
         "slide-in-right": "slideInRight 0.3s ease-out forwards",
+        shimmer: "shimmer 1.5s ease-in-out infinite",
+        "pulse-subtle": "pulseSubtle 2s ease-in-out infinite",
+        "gradient-shift": "gradientShift 8s ease infinite",
+        "ken-burns": "kenBurns 20s ease-in-out infinite alternate",
+        float: "float 6s ease-in-out infinite",
+        "bounce-subtle": "bounceSubtle 2s ease-in-out infinite",
+        "scroll-hint": "scrollHint 1.5s ease-in-out infinite",
       },
       keyframes: {
         fadeUp: {
@@ -103,6 +112,42 @@ module.exports = {
           "0%": { opacity: "0", transform: "translateX(20px)" },
           "100%": { opacity: "1", transform: "translateX(0)" },
         },
+        shimmer: {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
+        },
+        pulseSubtle: {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.7" },
+        },
+        gradientShift: {
+          "0%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+          "100%": { backgroundPosition: "0% 50%" },
+        },
+        kenBurns: {
+          "0%": { transform: "scale(1)" },
+          "100%": { transform: "scale(1.08)" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
+        bounceSubtle: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-4px)" },
+        },
+        scrollHint: {
+          "0%": { opacity: "1", transform: "translateY(0)" },
+          "50%": { opacity: "0.5", transform: "translateY(8px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+      },
+      transitionTimingFunction: {
+        apple: "cubic-bezier(0.22, 1, 0.36, 1)",
+      },
+      backdropBlur: {
+        xs: "2px",
       },
     },
   },

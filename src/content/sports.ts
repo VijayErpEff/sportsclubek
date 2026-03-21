@@ -51,10 +51,10 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     description:
       "Professional indoor batting cages and expert coaching for players of every level — from first swings to competitive training.",
     image: "/images/sports/baseball.jpg",
-    color: "#1A3B8F",
-    metaTitle: "Baseball Training & Batting Cages",
+    color: "#1B3A5C",
+    metaTitle: "Indoor Batting Cages & Baseball Training — Elkton, MD | Near Middletown & Newark, DE",
     metaDescription:
-      "Indoor batting cages and expert baseball coaching in Elkton, MD. Youth and adult programs, academy training, and cage rentals. Book now.",
+      "Indoor batting cages & expert baseball coaching in Elkton, MD — 15 min from Middletown & Newark, DE. Youth academy, private lessons, cage rentals. Pitching machines up to 90 MPH. Book now.",
     overview: [
       "Our indoor baseball facility gives players a place to train year-round, rain or shine. Whether you're a youth player picking up the bat for the first time or a seasoned competitor looking to sharpen your swing, we have the equipment, space, and coaching to help you improve.",
       "With four professional-grade batting cages, adjustable pitching machines, and experienced coaches on staff, LevelUP Sports is Elkton's home for baseball training.",
@@ -132,9 +132,9 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       "Maryland's premier indoor cricket facility — professional nets, expert coaching, and structured programs from beginner to competitive.",
     image: "/images/sports/cricket.png",
     color: "#1B7D3A",
-    metaTitle: "Indoor Cricket Facility & Training",
+    metaTitle: "Indoor Cricket Facility & Academy — Elkton, MD | Serving Newark, Wilmington & Middletown, DE",
     metaDescription:
-      "Professional indoor cricket facility in Maryland. Cricket nets, bowling machines, coaching programs, and academy for all levels. Train year-round.",
+      "Maryland's premier indoor cricket facility in Elkton, MD — serving Newark, Wilmington & Middletown, DE. Professional nets, bowling machines, youth & adult academy. Book cricket nets today.",
     overview: [
       "LevelUP Sports is home to the region's premier indoor cricket facility. Whether you're perfecting your cover drive or learning to bowl your first delivery, our professional setup and experienced coaches create the ideal training environment.",
       "With full-length indoor nets, professional bowling machines, and coaches with competitive experience, we serve the growing cricket community across Maryland, Delaware, and Pennsylvania.",
@@ -211,10 +211,10 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     description:
       "Competition-grade indoor badminton courts with professional coaching — from casual rallies to tournament preparation.",
     image: "/images/sports/badminton.jpg",
-    color: "#2B52B0",
-    metaTitle: "Badminton Courts & Lessons",
+    color: "#2A5A8C",
+    metaTitle: "Indoor Badminton Courts & Academy — Elkton, MD | Near Middletown, Newark & Wilmington, DE",
     metaDescription:
-      "Competition-grade indoor badminton courts in Elkton, MD. Court rentals, lessons, academy programs, and open play for all skill levels.",
+      "BWF-approved indoor badminton courts in Elkton, MD — closest to Middletown, Newark & Wilmington, DE. Court rentals, academy, certified coaching. Book your court today.",
     overview: [
       "Our competition-grade badminton courts are built for players who take their game seriously. With professional-quality nets, LED lighting, and cushioned flooring, every session feels like match day.",
       "Whether you're looking for casual rallies, structured coaching, or tournament preparation, our certified coaches and modern facility deliver the training environment you need.",
@@ -292,9 +292,9 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       "Indoor pickleball courts for open play, lessons, and court rentals — the fastest-growing sport in America, played at the best facility in the region.",
     image: "/images/sports/pickleball.png",
     color: "#2BA84A",
-    metaTitle: "Indoor Pickleball Courts",
+    metaTitle: "Indoor Pickleball Courts — Elkton, MD | Near Middletown, Bear & Newark, DE",
     metaDescription:
-      "Indoor pickleball courts in Elkton, MD. Open play, lessons, court rentals, and events. The fastest-growing sport — play at Cecil County's best facility.",
+      "Indoor pickleball courts in Elkton, MD — 15 min from Middletown & Bear, DE. Open play, beginner lessons, court rentals. Cecil County's best pickleball facility. Book today.",
     overview: [
       "Pickleball is the fastest-growing sport in America, and we have the best indoor courts in Cecil County. Our dedicated pickleball courts feature professional nets, proper court markings, and the welcoming community atmosphere that makes this sport special.",
       "Whether you've never held a paddle or you're a seasoned competitor, LevelUP Sports is your home court. Open play, structured lessons, and court rentals are available seven days a week.",

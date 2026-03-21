@@ -19,7 +19,7 @@ export function TestimonialCard({
   return (
     <article
       className={cn(
-        "p-6 rounded-2xl bg-white border border-neutral-200 shadow-card",
+        "p-6 rounded-2xl bg-neutral-50 shadow-sm",
         className
       )}
       aria-label={`Testimonial from ${name}`}
@@ -32,7 +32,7 @@ export function TestimonialCard({
             className={cn(
               "h-4 w-4",
               i < rating
-                ? "fill-warning text-warning"
+                ? "fill-accent text-accent"
                 : "fill-neutral-200 text-neutral-200"
             )}
           />
@@ -46,8 +46,8 @@ export function TestimonialCard({
 
       {/* Author */}
       <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-          <span className="text-sm font-bold text-primary">
+        <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
+          <span className="text-sm font-bold text-accent">
             {name.charAt(0)}
           </span>
         </div>

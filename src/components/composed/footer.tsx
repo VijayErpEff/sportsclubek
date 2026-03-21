@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Facebook, Instagram, Twitter, Youtube, MapPin, Phone, Mail } from "lucide-react";
+import { Facebook, Instagram, Twitter, Youtube, MapPin, Phone, Mail, FileText } from "lucide-react";
 import { Container } from "@/components/layout/container";
+import { NewsletterSignup } from "./newsletter-signup";
 import { SITE_CONFIG, SPORTS } from "@/lib/constants/site";
 
 const footerSports = SPORTS.map((s) => ({
@@ -15,7 +16,7 @@ const footerCompany = [
   { label: "Memberships", href: "/memberships" },
   { label: "Schedule", href: "/schedule" },
   { label: "Careers", href: "/careers" },
-  { label: "Offers", href: "/offers" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const footerPrograms = [
@@ -36,29 +37,43 @@ export function Footer() {
   return (
     <footer className="bg-primary-dark text-white" role="contentinfo">
       <Container>
+        {/* Newsletter Row */}
+        <div className="py-12 border-b border-white/10">
+          <div className="max-w-xl mx-auto text-center">
+            <h3 className="font-display text-lg font-semibold text-white mb-2 inline-flex items-center gap-2">
+              <FileText className="h-5 w-5 text-accent" aria-hidden="true" />
+              Get Our Free Training Guide
+            </h3>
+            <p className="text-white/50 text-sm mb-5">
+              Download &ldquo;10 Drills Every Young Athlete Should Know&rdquo; + weekly training tips and schedule updates.
+            </p>
+            <NewsletterSignup />
+          </div>
+        </div>
+
         {/* Main Footer */}
-        <div className="py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
+        <div className="py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
           {/* Brand Column */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <Link href="/" className="inline-block mb-4 brightness-0 invert">
+            <Link href="/" className="inline-block mb-4 bg-white rounded-xl p-2.5">
               <Image
                 src="/images/logo.png"
-                alt="LevelUP Sports"
-                width={160}
-                height={40}
-                className="h-8 w-auto"
+                alt={SITE_CONFIG.shortName}
+                width={140}
+                height={35}
+                className="h-7 w-auto"
               />
             </Link>
-            <p className="text-white/60 text-sm leading-relaxed mb-6">
+            <p className="text-white/50 text-sm leading-relaxed mb-6">
               Elkton&apos;s premier multi-sport facility. Expert coaching, modern
               courts, and programs for every skill level.
             </p>
-            <div className="space-y-3 text-sm">
-              <div className="flex items-start gap-2.5 text-white/70">
+            <div className="space-y-2.5 text-sm">
+              <div className="flex items-start gap-2.5 text-white/60">
                 <MapPin className="h-4 w-4 mt-0.5 shrink-0 text-accent" />
                 <span>{SITE_CONFIG.address.full}</span>
               </div>
-              <div className="flex items-center gap-2.5 text-white/70">
+              <div className="flex items-center gap-2.5 text-white/60">
                 <Phone className="h-4 w-4 shrink-0 text-accent" />
                 <a
                   href={`tel:${SITE_CONFIG.phone}`}
@@ -67,7 +82,7 @@ export function Footer() {
                   {SITE_CONFIG.phone}
                 </a>
               </div>
-              <div className="flex items-center gap-2.5 text-white/70">
+              <div className="flex items-center gap-2.5 text-white/60">
                 <Mail className="h-4 w-4 shrink-0 text-accent" />
                 <a
                   href={`mailto:${SITE_CONFIG.email}`}
@@ -81,7 +96,7 @@ export function Footer() {
 
           {/* Sports Column */}
           <div>
-            <h3 className="font-display font-semibold text-sm uppercase tracking-wider text-white/60 mb-4">
+            <h3 className="font-display font-semibold text-xs uppercase tracking-widest text-white/40 mb-4">
               Sports
             </h3>
             <ul className="space-y-2.5">
@@ -89,7 +104,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-white/70 hover:text-white transition-colors"
+                    className="text-sm text-white/60 hover:text-white transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -100,7 +115,7 @@ export function Footer() {
 
           {/* Programs Column */}
           <div>
-            <h3 className="font-display font-semibold text-sm uppercase tracking-wider text-white/60 mb-4">
+            <h3 className="font-display font-semibold text-xs uppercase tracking-widest text-white/40 mb-4">
               Programs
             </h3>
             <ul className="space-y-2.5">
@@ -108,7 +123,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-white/70 hover:text-white transition-colors"
+                    className="text-sm text-white/60 hover:text-white transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -119,7 +134,7 @@ export function Footer() {
 
           {/* Company Column */}
           <div>
-            <h3 className="font-display font-semibold text-sm uppercase tracking-wider text-white/60 mb-4">
+            <h3 className="font-display font-semibold text-xs uppercase tracking-widest text-white/40 mb-4">
               Company
             </h3>
             <ul className="space-y-2.5">
@@ -127,7 +142,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-white/70 hover:text-white transition-colors"
+                    className="text-sm text-white/60 hover:text-white transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -139,7 +154,7 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="border-t border-white/10 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-white/60">
+          <p className="text-xs text-white/40">
             &copy; {new Date().getFullYear()} {SITE_CONFIG.name}. All rights
             reserved.
           </p>
@@ -151,10 +166,10 @@ export function Footer() {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white/60 hover:text-accent transition-colors"
+                className="text-white/40 hover:text-accent transition-colors"
                 aria-label={`Follow us on ${social.label}`}
               >
-                <social.icon className="h-5 w-5" />
+                <social.icon className="h-4 w-4" />
               </a>
             ))}
           </div>

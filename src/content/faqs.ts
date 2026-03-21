@@ -22,12 +22,22 @@ export const HOMEPAGE_FAQS = [
   {
     question: "How do I book a session or court?",
     answer:
-      "You can book online through our Schedule page, call us directly, or walk in (subject to availability). We recommend booking in advance, especially for peak hours and weekend sessions.",
+      "You can book online through our Schedule page, call us at (443) 406-6494, or walk in (subject to availability). We recommend booking in advance, especially for peak hours and weekend sessions.",
+  },
+  {
+    question: "What are your hours of operation?",
+    answer:
+      "We're open Monday through Saturday 6:00 AM to 11:00 PM and Sunday 6:00 AM to 9:00 PM. Holiday hours may vary — check our social media or call ahead for holiday schedules.",
   },
   {
     question: "Where are you located?",
     answer:
-      "We're located in Elkton, MD, conveniently situated at the crossroads of Maryland, Delaware, and Pennsylvania. We serve families from across Cecil County, Newark/Wilmington DE, and the surrounding tri-state area.",
+      "We're located at 701 E Pulaski Hwy, Elkton, MD 21921 — conveniently situated at the crossroads of Maryland, Delaware, and Pennsylvania. Just 15 minutes from Middletown and Newark, DE, 25 minutes from Wilmington, DE, and 30 minutes from Kennett Square, PA. We serve families from across Cecil County, New Castle County, Chester County, and the entire MD/DE/PA tri-state area. Free parking is available on-site.",
+  },
+  {
+    question: "What is your cancellation and refund policy?",
+    answer:
+      "Sessions and court rentals can be cancelled up to 24 hours in advance for a full refund. Cancellations within 24 hours may be rescheduled but are not refundable. Membership cancellations require 30 days notice with no cancellation fees.",
   },
 ];
 
@@ -51,5 +61,10 @@ export const MEMBERSHIP_FAQS = [
     question: "Is there a student or military discount?",
     answer:
       "Yes! We offer 15% off for students with a valid student ID and 20% off for active military and veterans. These discounts can be applied to any membership tier.",
+  },
+  {
+    question: "What payment methods do you accept?",
+    answer:
+      "We accept all major credit and debit cards, Apple Pay, Google Pay, and cash for in-person payments. Memberships are billed monthly to your card on file.",
   },
 ];

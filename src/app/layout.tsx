@@ -5,6 +5,10 @@ import { Footer } from "@/components/composed/footer";
 import { BackToTop } from "@/components/composed/back-to-top";
 import { CookieConsent } from "@/components/composed/cookie-consent";
 import { MobileBottomNav } from "@/components/composed/mobile-bottom-nav";
+import { ScrollProgressBar } from "@/components/ui/progress-bar";
+import { CommandPalette } from "@/components/composed/command-palette";
+import { SportPreference } from "@/components/composed/sport-preference";
+import { ReturningVisitor } from "@/components/composed/returning-visitor";
 import { generateOrganizationLD } from "@/lib/seo/json-ld";
 import { SITE_CONFIG } from "@/lib/constants/site";
 import "./globals.css";
@@ -19,7 +23,7 @@ export const metadata: Metadata = {
     template: `%s | ${SITE_CONFIG.shortName}`,
   },
   description:
-    "Sports facility in Elkton, MD. Baseball, cricket, badminton & pickleball. Expert coaching, modern courts, and youth programs. Book today.",
+    "Premier indoor sports facility in Elkton, MD — 15 min from Middletown & Newark, DE. Batting cages, cricket nets, badminton & pickleball courts. Youth academies, expert coaching, court rentals. Open 7 days.",
   keywords: [
     "sports facility Elkton MD",
     "batting cages Elkton",
@@ -29,6 +33,21 @@ export const metadata: Metadata = {
     "badminton lessons Delaware",
     "indoor sports facility",
     "LevelUP Sports",
+    "indoor sports Middletown DE",
+    "batting cages near Middletown Delaware",
+    "cricket facility Newark DE",
+    "pickleball courts near me",
+    "badminton courts Wilmington DE",
+    "youth baseball near Middletown DE",
+    "indoor sports facility near Newark Delaware",
+    "sports facility near Wilmington DE",
+    "batting cages Cecil County MD",
+    "cricket academy near me",
+    "indoor batting cages Delaware",
+    "kids sports programs Elkton",
+    "pickleball near Middletown DE",
+    "sports near Bear DE",
+    "sports training tri-state area MD DE PA",
   ],
   authors: [{ name: SITE_CONFIG.name }],
   creator: SITE_CONFIG.name,
@@ -39,7 +58,7 @@ export const metadata: Metadata = {
     siteName: SITE_CONFIG.name,
     title: `${SITE_CONFIG.shortName} — Premier Sports Facility in Elkton, MD`,
     description:
-      "Sports facility in Elkton, MD. Baseball, cricket, badminton & pickleball. Expert coaching, modern courts, and youth programs. Book today.",
+      "Premier indoor sports facility in Elkton, MD — 15 min from Middletown & Newark, DE. Batting cages, cricket nets, badminton & pickleball courts. Youth academies & court rentals. Open 7 days.",
     images: [
       {
         url: `${SITE_CONFIG.url}/images/og/default.jpg`,
@@ -53,7 +72,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${SITE_CONFIG.shortName} — Premier Sports Facility in Elkton, MD`,
     description:
-      "Sports facility in Elkton, MD. Baseball, cricket, badminton & pickleball. Expert coaching, modern courts, and youth programs. Book today.",
+      "Premier indoor sports facility in Elkton, MD — 15 min from Middletown & Newark, DE. Batting cages, cricket nets, badminton & pickleball courts. Youth academies & court rentals. Open 7 days.",
     images: [`${SITE_CONFIG.url}/images/og/default.jpg`],
   },
   robots: {
@@ -91,17 +110,29 @@ export default function RootLayout({
             __html: JSON.stringify(organizationLD),
           }}
         />
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <>
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`} />
+            <script dangerouslySetInnerHTML={{
+              __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${process.env.NEXT_PUBLIC_GA_ID}');`
+            }} />
+          </>
+        )}
       </head>
       <body className="antialiased">
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
+        <ScrollProgressBar />
         <Navbar />
         <main id="main-content">{children}</main>
         <Footer />
         <BackToTop />
         <CookieConsent />
         <MobileBottomNav />
+        <CommandPalette />
+        <SportPreference />
+        <ReturningVisitor />
       </body>
     </html>
   );

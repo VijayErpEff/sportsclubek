@@ -1,19 +1,16 @@
 import { Metadata } from "next";
-import { FeatureCard } from "@/components/composed/feature-card";
+import Link from "next/link";
+import Image from "next/image";
 import { CTABanner } from "@/components/composed/cta-banner";
 import { Section } from "@/components/layout/section";
 import { Container } from "@/components/layout/container";
+import { Reveal } from "@/components/ui/reveal";
+import { StaggerContainer, StaggerItem } from "@/components/ui/stagger";
 import { generateSEOMetadata } from "@/lib/seo/metadata";
 import { generateBreadcrumbLD } from "@/lib/seo/json-ld";
 import {
-  Thermometer,
-  ParkingCircle,
-  Wifi,
-  ShieldCheck,
-  Sparkles,
-  Accessibility,
-  Store,
-  Clock,
+  Thermometer, ParkingCircle, Wifi, ShieldCheck,
+  Sparkles, Accessibility, Store, Clock, ArrowRight,
 } from "lucide-react";
 
 export const metadata: Metadata = generateSEOMetadata({
@@ -23,74 +20,58 @@ export const metadata: Metadata = generateSEOMetadata({
   path: "/facilities",
 });
 
-const amenities = [
-  {
-    icon: Thermometer,
-    title: "Climate Controlled",
-    description: "Train in comfort year-round with our fully climate-controlled indoor facility.",
-  },
-  {
-    icon: ParkingCircle,
-    title: "Free Parking",
-    description: "Spacious parking lot with plenty of spots for all visitors.",
-  },
-  {
-    icon: Wifi,
-    title: "Free Wi-Fi",
-    description: "Stay connected while your athletes train. Free high-speed Wi-Fi throughout.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Safety First",
-    description: "Professional-grade safety equipment, first-aid trained staff, and secure facility.",
-  },
-  {
-    icon: Sparkles,
-    title: "Well Maintained",
-    description: "Daily cleaning and regular equipment maintenance for the best experience.",
-  },
-  {
-    icon: Accessibility,
-    title: "Accessible",
-    description: "Wheelchair accessible facility with accommodations for all abilities.",
-  },
-  {
-    icon: Store,
-    title: "Pro Shop",
-    description: "Essential equipment, gear, and accessories for all four sports on-site.",
-  },
-  {
-    icon: Clock,
-    title: "Extended Hours",
-    description: "Open early, close late. Weekdays 6 AM-10 PM, weekends from 7 AM.",
-  },
-];
-
 const facilityAreas = [
   {
     title: "Batting Cages",
+    stat: "4 Cages",
     description:
-      "Four professional-grade indoor batting cages with adjustable pitching machines. Speed settings from 30-80 MPH to accommodate all ages and skill levels. Helmets provided.",
-    features: ["4 cages", "Adjustable speed", "Helmets included", "All ages welcome"],
+      "Professional-grade indoor cages with adjustable pitching machines (30–80 MPH). Helmets provided. All ages welcome.",
+    features: ["Adjustable speed", "Helmets included", "Video analysis available"],
+    link: "/baseball",
+    image: "/images/sports/baseball.jpg",
+    alt: "Indoor batting cages with professional pitching machines at LevelUP Sports",
   },
   {
     title: "Multi-Sport Courts",
+    stat: "Competition Grade",
     description:
-      "Competition-grade courts marked for badminton and pickleball. Professional-quality nets, LED lighting, and shock-absorbing flooring for player comfort and safety.",
-    features: ["Competition-grade", "LED lighting", "Professional nets", "Cushioned flooring"],
+      "Courts marked for badminton and pickleball with professional nets, LED lighting, and shock-absorbing flooring.",
+    features: ["LED lighting", "Professional nets", "Cushioned flooring"],
+    link: "/badminton",
+    image: "/images/sports/badminton.jpg",
+    alt: "Competition-grade badminton and pickleball courts at LevelUP Sports",
   },
   {
     title: "Cricket Nets",
+    stat: "Full-Length",
     description:
-      "Indoor cricket practice nets with bowling machines and coaching technology. Suitable for batting, bowling, and fielding practice in a controlled environment.",
-    features: ["Bowling machines", "Full-length nets", "Video analysis", "All skill levels"],
+      "Indoor practice nets with bowling machines and coaching technology. Batting, bowling, and fielding practice year-round.",
+    features: ["Bowling machines", "Video analysis", "All skill levels"],
+    link: "/cricket",
+    image: "/images/sports/cricket.png",
+    alt: "Full-length indoor cricket nets with bowling machines at LevelUP Sports",
   },
   {
     title: "Training Area",
+    stat: "Multi-Purpose",
     description:
-      "Dedicated space for agility training, warm-ups, and fitness conditioning. Equipped with cones, ladders, medicine balls, and other training essentials.",
-    features: ["Agility equipment", "Warm-up space", "Conditioning gear", "Kids-friendly"],
+      "Dedicated space for agility training, warm-ups, and conditioning. Cones, ladders, medicine balls, and more.",
+    features: ["Agility equipment", "Conditioning gear", "Kids-friendly"],
+    link: "/kids-agility",
+    image: "/images/sports/kids-agility.jpg",
+    alt: "Multi-purpose training area for youth agility and conditioning at LevelUP Sports",
   },
+];
+
+const amenities = [
+  { icon: Thermometer, title: "Climate Controlled", desc: "Year-round comfort" },
+  { icon: ParkingCircle, title: "Free Parking", desc: "Spacious lot" },
+  { icon: Wifi, title: "Free Wi-Fi", desc: "Stay connected" },
+  { icon: ShieldCheck, title: "Safety First", desc: "First-aid trained staff" },
+  { icon: Sparkles, title: "Well Maintained", desc: "Daily cleaning" },
+  { icon: Accessibility, title: "Accessible", desc: "All abilities welcome" },
+  { icon: Store, title: "Pro Shop", desc: "Gear & equipment" },
+  { icon: Clock, title: "Extended Hours", desc: "6AM–10PM weekdays" },
 ];
 
 export default function FacilitiesPage() {
@@ -106,92 +87,195 @@ export default function FacilitiesPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLD) }}
       />
 
-      {/* Slim Header */}
-      <div className="bg-gradient-to-r from-primary-dark via-primary to-primary-light pt-[76px] pb-5">
-        <Container>
-          <nav aria-label="Breadcrumb" className="text-xs text-white/40 mb-2">
+      {/* Hero — Full-bleed facility image */}
+      <section className="relative min-h-[60vh] flex items-end overflow-hidden">
+        <Image
+          src="/images/sports/facility.jpg"
+          alt="Inside LevelUP Sports facility — modern indoor courts and training areas in Elkton, MD"
+          fill
+          className="object-cover"
+          priority
+          sizes="100vw"
+        />
+        <div
+          className="absolute inset-0 bg-gradient-to-t from-neutral-900/90 via-neutral-900/50 to-neutral-900/20"
+          aria-hidden="true"
+        />
+        <Container className="relative z-10 pb-16 md:pb-20">
+          <nav aria-label="Breadcrumb" className="text-xs text-white/60 mb-6">
             <ol className="flex items-center gap-1.5">
-              <li><a href="/" className="hover:text-white/70 transition-colors">Home</a></li>
-              <li>/</li>
-              <li aria-current="page" className="text-white/60">Facilities</li>
+              <li>
+                <Link href="/" className="hover:text-white transition-colors">
+                  Home
+                </Link>
+              </li>
+              <li className="text-white/40">/</li>
+              <li className="text-white font-medium">Facilities</li>
             </ol>
           </nav>
-          <h1 className="font-display text-page-title text-white">
-            Indoor Sports Facility in Elkton, MD
-          </h1>
-          <p className="text-white/60 mt-1 text-sm max-w-xl">
-            Modern, indoor, climate-controlled — built for athletes who take their game seriously.
-          </p>
-        </Container>
-      </div>
-
-      {/* Facility Areas */}
-      <Section>
-        <Container>
-          <div className="text-center mb-12">
-            <h2 className="font-display text-section text-neutral-900 mb-4">
-              Explore Our Facility
-            </h2>
-            <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-              Every area of our facility is designed for peak performance and comfort.
+          <div className="max-w-2xl">
+            <h1 className="font-display text-hero text-white mb-4 text-balance">
+              Built for athletes who mean business.
+            </h1>
+            <p className="text-lg text-white/80 leading-relaxed max-w-xl">
+              Every square foot designed for peak performance — professional
+              batting cages, competition-grade courts, and climate-controlled
+              comfort year-round.
             </p>
           </div>
-          <div className="grid md:grid-cols-2 gap-8">
-            {facilityAreas.map((area) => (
-              <div
+        </Container>
+      </section>
+
+      {/* Facility Areas — Alternating image + text */}
+      <Section size="lg">
+        <Container>
+          <Reveal>
+            <div className="text-center mb-16 md:mb-20">
+              <h2 className="font-display text-section text-neutral-900 text-balance">
+                Four world-class training zones, one roof.
+              </h2>
+            </div>
+          </Reveal>
+
+          <div className="space-y-24 md:space-y-32">
+            {facilityAreas.map((area, i) => (
+              <Reveal
                 key={area.title}
-                className="rounded-2xl border border-neutral-200 bg-white overflow-hidden shadow-card"
+                variant={i % 2 === 0 ? "fade-right" : "fade-left"}
+                delay={0.1}
               >
-                <div className="h-48 bg-gradient-to-br from-primary/10 to-accent/5 flex items-center justify-center">
-                  <span className="text-6xl font-display font-bold text-primary/10">
-                    {area.title.split(" ")[0]}
-                  </span>
-                </div>
-                <div className="p-6">
-                  <h3 className="font-display text-subsection text-neutral-900 mb-3">
-                    {area.title}
-                  </h3>
-                  <p className="text-neutral-600 leading-relaxed mb-4">
-                    {area.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {area.features.map((feature) => (
-                      <span
-                        key={feature}
-                        className="text-xs font-medium bg-primary/5 text-primary px-3 py-1 rounded-full"
-                      >
-                        {feature}
+                <Link href={area.link} className="group block">
+                  <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+                    {/* Image */}
+                    <div
+                      className={`relative aspect-[4/3] rounded-2xl overflow-hidden shadow-card-elevated ${
+                        i % 2 === 1 ? "lg:order-2" : ""
+                      }`}
+                    >
+                      <Image
+                        src={area.image}
+                        alt={area.alt}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                      />
+                    </div>
+
+                    {/* Content */}
+                    <div className={i % 2 === 1 ? "lg:order-1" : ""}>
+                      <div className="flex items-center gap-3 mb-4">
+                        <h3 className="font-display text-subsection text-neutral-900 group-hover:text-primary transition-colors">
+                          {area.title}
+                        </h3>
+                        <span className="text-caption font-semibold px-3 py-1 rounded-full bg-accent/10 text-accent">
+                          {area.stat}
+                        </span>
+                      </div>
+                      <p className="text-body-lg text-neutral-500 leading-relaxed mb-6">
+                        {area.description}
+                      </p>
+                      <div className="flex flex-wrap gap-2 mb-8">
+                        {area.features.map((f) => (
+                          <span
+                            key={f}
+                            className="text-caption text-neutral-500 bg-neutral-100 px-3 py-1.5 rounded-full"
+                          >
+                            {f}
+                          </span>
+                        ))}
+                      </div>
+                      <span className="inline-flex items-center text-sm font-semibold text-accent gap-2 group-hover:gap-3 transition-all">
+                        Explore {area.title}
+                        <ArrowRight className="h-4 w-4" />
                       </span>
-                    ))}
+                    </div>
                   </div>
-                </div>
-              </div>
+                </Link>
+              </Reveal>
             ))}
           </div>
+        </Container>
+      </Section>
+
+      {/* Social Proof Stats Bar */}
+      <Section variant="primary" size="sm">
+        <Container>
+          <Reveal variant="fade-up">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+              {[
+                { value: "20,000+", label: "Sq Ft of Space" },
+                { value: "500+", label: "Athletes Trained" },
+                { value: "7", label: "Days a Week" },
+                { value: "4.9★", label: "Google Rating" },
+              ].map((stat) => (
+                <div key={stat.label}>
+                  <div className="font-mono text-section text-white font-bold">
+                    {stat.value}
+                  </div>
+                  <div className="text-sm text-white/70 mt-1 font-medium">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Reveal>
         </Container>
       </Section>
 
       {/* Amenities */}
-      <Section variant="alternate">
+      <Section>
         <Container>
-          <div className="text-center mb-12">
-            <h2 className="font-display text-section text-neutral-900 mb-4">
-              Amenities
-            </h2>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {amenities.map((amenity) => (
-              <FeatureCard key={amenity.title} {...amenity} />
+          <Reveal>
+            <div className="text-center mb-14">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-4">
+                Amenities
+              </p>
+              <h2 className="font-display text-section text-neutral-900 text-balance">
+                Everything you need, nothing you don&apos;t.
+              </h2>
+            </div>
+          </Reveal>
+          <StaggerContainer className="grid grid-cols-2 sm:grid-cols-4 gap-8 max-w-4xl mx-auto">
+            {amenities.map((a) => (
+              <StaggerItem key={a.title} className="text-center group">
+                <div className="w-14 h-14 rounded-2xl bg-neutral-100 group-hover:bg-accent/10 flex items-center justify-center mx-auto mb-4 transition-colors">
+                  <a.icon className="h-6 w-6 text-primary group-hover:text-accent transition-colors" />
+                </div>
+                <p className="text-sm font-semibold text-neutral-900">
+                  {a.title}
+                </p>
+                <p className="text-caption text-neutral-400 mt-0.5">{a.desc}</p>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </Container>
       </Section>
+
+      {/* Testimonial Pull Quote */}
+      <section className="border-t border-neutral-100">
+        <Container>
+          <Reveal>
+            <blockquote className="py-16 md:py-24 max-w-3xl mx-auto text-center">
+              <p className="font-display text-subsection text-neutral-900 leading-relaxed text-balance">
+                &ldquo;The facility is world-class. My kids train baseball and
+                cricket here, and the quality of coaching and equipment is better
+                than anything within an hour&apos;s drive.&rdquo;
+              </p>
+              <footer className="mt-6">
+                <p className="text-sm font-semibold text-neutral-900">
+                  — Parent of two athletes, Elkton MD
+                </p>
+              </footer>
+            </blockquote>
+          </Reveal>
+        </Container>
+      </section>
 
       <CTABanner
         title="See It For Yourself"
         description="Schedule a facility tour or book your first session today."
         primaryCTA={{ label: "Book a Session", href: "/schedule" }}
-        secondaryCTA={{ label: "View Schedule", href: "/schedule" }}
+        secondaryCTA={{ label: "Schedule a Tour", href: "/open-house" }}
       />
     </>
   );

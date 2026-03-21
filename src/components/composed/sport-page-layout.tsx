@@ -1,10 +1,11 @@
 import Link from "next/link";
-import Image from "next/image";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import { FAQAccordion } from "@/components/composed/faq-accordion";
 import { CTABanner } from "@/components/composed/cta-banner";
 import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/ui/reveal";
+import { StaggerContainer, StaggerItem } from "@/components/ui/stagger";
 import { generateBreadcrumbLD, generateFAQLD } from "@/lib/seo/json-ld";
 import { ArrowRight, Check, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
@@ -28,49 +29,33 @@ export function SportPageLayout({ data }: { data: SportPageData }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLD) }}
       />
 
-      {/* Hero Header */}
-      <div className="relative bg-neutral-900 pt-[72px]">
-        {/* Background Image — only if valid */}
-        <div className="absolute inset-0">
-          <Image
-            src={data.image}
-            alt={`${data.name} at LevelUP Sports`}
-            fill
-            className="object-cover opacity-30"
-            priority
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-neutral-900/90 via-neutral-900/70 to-neutral-900/50" />
-        </div>
-        <Container className="relative py-8 md:py-12">
+      {/* Page Header — clean, light, premium */}
+      <div className="pt-28 pb-12 md:pt-36 md:pb-16">
+        <Container>
           {/* Breadcrumb */}
-          <nav aria-label="Breadcrumb" className="text-xs text-white/40 mb-4">
+          <nav aria-label="Breadcrumb" className="text-xs text-neutral-400 mb-6">
             <ol className="flex items-center gap-1.5">
               <li>
-                <Link href="/" className="hover:text-white/70 transition-colors">Home</Link>
+                <Link href="/" className="hover:text-primary transition-colors">Home</Link>
               </li>
-              <li>/</li>
-              <li>
-                <Link href="/#sports" className="hover:text-white/70 transition-colors">Sports</Link>
-              </li>
-              <li>/</li>
-              <li aria-current="page" className="text-white/60">{data.name}</li>
+              <li className="text-neutral-300">/</li>
+              <li aria-current="page" className="text-neutral-600 font-medium">{data.name}</li>
             </ol>
           </nav>
 
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
             {/* Text Content */}
             <div>
               <div
-                className="inline-block px-3 py-1 rounded-full text-xs font-semibold mb-4"
-                style={{ backgroundColor: `${data.color}30`, color: data.color }}
+                className="inline-block px-3 py-1 rounded-full text-[11px] font-semibold mb-5 uppercase tracking-wider"
+                style={{ backgroundColor: `${data.color}12`, color: data.color }}
               >
                 {data.name} Program
               </div>
-              <h1 className="font-display text-hero text-white mb-4">
+              <h1 className="font-display text-page-title text-neutral-900 mb-4 text-balance">
                 {data.tagline}
               </h1>
-              <p className="text-white/70 text-lg leading-relaxed mb-6 max-w-lg">
+              <p className="text-neutral-500 text-lg leading-relaxed mb-8 max-w-lg">
                 {data.description}
               </p>
               <div className="flex flex-wrap gap-3">
@@ -78,7 +63,7 @@ export function SportPageLayout({ data }: { data: SportPageData }) {
                   <Link href={data.ctaPrimary.href}>{data.ctaPrimary.label}</Link>
                 </Button>
                 {data.ctaSecondary && (
-                  <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white hover:text-neutral-900" asChild>
+                  <Button size="lg" variant="outline" asChild>
                     <Link href={data.ctaSecondary.href}>{data.ctaSecondary.label}</Link>
                   </Button>
                 )}
@@ -86,30 +71,17 @@ export function SportPageLayout({ data }: { data: SportPageData }) {
             </div>
 
             {/* Highlight Stats */}
-            <div className="hidden lg:grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-3">
               {data.highlights.map((h) => (
                 <div
                   key={h.label}
-                  className="bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/10"
+                  className="bg-white rounded-xl p-5 shadow-card border border-neutral-100"
                 >
-                  <p className="text-2xl font-bold text-white">{h.value}</p>
-                  <p className="text-sm text-white/50 mt-0.5">{h.label}</p>
+                  <p className="text-2xl font-bold text-neutral-900">{h.value}</p>
+                  <p className="text-sm text-neutral-400 mt-0.5">{h.label}</p>
                 </div>
               ))}
             </div>
-          </div>
-
-          {/* Mobile Highlights */}
-          <div className="flex gap-3 mt-6 lg:hidden overflow-x-auto pb-2">
-            {data.highlights.map((h) => (
-              <div
-                key={h.label}
-                className="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2.5 border border-white/10 flex-shrink-0"
-              >
-                <span className="text-white font-bold text-sm">{h.value}</span>
-                <span className="text-white/40 text-xs ml-1.5">{h.label}</span>
-              </div>
-            ))}
           </div>
         </Container>
       </div>
@@ -118,8 +90,8 @@ export function SportPageLayout({ data }: { data: SportPageData }) {
       <Section>
         <Container>
           <div className="grid lg:grid-cols-5 gap-12">
-            <div className="lg:col-span-3">
-              <h2 className="font-display text-section text-neutral-900 mb-6">
+            <Reveal variant="fade-right" className="lg:col-span-3">
+              <h2 className="font-display text-section text-neutral-900 mb-6 text-balance">
                 About Our {data.name} Program
               </h2>
               {data.overview.map((paragraph, i) => (
@@ -127,8 +99,8 @@ export function SportPageLayout({ data }: { data: SportPageData }) {
                   {paragraph}
                 </p>
               ))}
-            </div>
-            <div className="lg:col-span-2">
+            </Reveal>
+            <Reveal variant="fade-left" delay={0.15} className="lg:col-span-2">
               <div className="bg-neutral-50 rounded-2xl p-6 border border-neutral-200 sticky top-24">
                 <h3 className="font-display font-bold text-neutral-900 mb-4">
                   Facility Features
@@ -142,7 +114,7 @@ export function SportPageLayout({ data }: { data: SportPageData }) {
                   ))}
                 </ul>
               </div>
-            </div>
+            </Reveal>
           </div>
         </Container>
       </Section>
@@ -150,83 +122,87 @@ export function SportPageLayout({ data }: { data: SportPageData }) {
       {/* Programs */}
       <Section variant="alternate">
         <Container>
-          <div className="text-center mb-10">
-            <h2 className="font-display text-section text-neutral-900 mb-3">
-              Programs & Sessions
-            </h2>
-            <p className="text-neutral-500 max-w-xl mx-auto">
-              Choose the format that fits your goals and schedule.
-            </p>
-          </div>
+          <Reveal>
+            <div className="text-center mb-10">
+              <h2 className="font-display text-section text-neutral-900 mb-3 text-balance">
+                Programs & Sessions
+              </h2>
+              <p className="text-neutral-500 max-w-xl mx-auto">
+                Choose the format that fits your goals and schedule.
+              </p>
+            </div>
+          </Reveal>
 
-          <div className="grid sm:grid-cols-2 gap-5 max-w-4xl mx-auto">
+          <StaggerContainer className="grid sm:grid-cols-2 gap-5 max-w-4xl mx-auto">
             {data.programs.map((program) => (
-              <Link
-                key={program.title}
-                href={program.href}
-                className="group bg-white rounded-2xl border border-neutral-200 p-6 shadow-card hover:shadow-card-hover hover:-translate-y-0.5 transition-all"
-              >
-                <div className="flex items-start justify-between mb-3">
-                  <h3 className="font-display text-lg font-bold text-neutral-900 group-hover:text-primary transition-colors">
-                    {program.title}
-                  </h3>
-                  {program.tag && (
-                    <span
-                      className="text-[11px] font-semibold px-2 py-0.5 rounded-full shrink-0 ml-2"
-                      style={{ backgroundColor: `${data.color}15`, color: data.color }}
-                    >
-                      {program.tag}
-                    </span>
-                  )}
-                </div>
-                <p className="text-sm text-neutral-500 leading-relaxed mb-4">
-                  {program.description}
-                </p>
-                <span className="inline-flex items-center gap-1 text-sm font-semibold text-accent group-hover:gap-2 transition-all">
-                  Learn More
-                  <ArrowRight className="h-3.5 w-3.5" />
-                </span>
-              </Link>
+              <StaggerItem key={program.title}>
+                <Link
+                  href={program.href}
+                  className="group bg-white rounded-2xl border border-neutral-200 p-6 shadow-card hover:shadow-card-hover hover:-translate-y-0.5 transition-all block"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h3 className="font-display text-lg font-bold text-neutral-900 group-hover:text-primary transition-colors">
+                      {program.title}
+                    </h3>
+                    {program.tag && (
+                      <span
+                        className="text-[11px] font-semibold px-2 py-0.5 rounded-full shrink-0 ml-2"
+                        style={{ backgroundColor: `${data.color}15`, color: data.color }}
+                      >
+                        {program.tag}
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-sm text-neutral-500 leading-relaxed mb-4">
+                    {program.description}
+                  </p>
+                  <span className="inline-flex items-center gap-1 text-sm font-semibold text-accent group-hover:gap-2 transition-all">
+                    Learn More
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </span>
+                </Link>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </Container>
       </Section>
 
       {/* Coaches */}
       <Section variant="alternate">
         <Container>
-          <div className="text-center mb-10">
-            <h2 className="font-display text-section text-neutral-900 mb-3">
-              Meet Your Coaches
-            </h2>
-          </div>
-          <div className={cn(
+          <Reveal>
+            <div className="text-center mb-10">
+              <h2 className="font-display text-section text-neutral-900 mb-3 text-balance">
+                Meet Your Coaches
+              </h2>
+            </div>
+          </Reveal>
+          <StaggerContainer className={cn(
             "grid gap-6 max-w-3xl mx-auto",
             data.coaches.length === 1 ? "grid-cols-1 max-w-sm" : "sm:grid-cols-2"
           )}>
             {data.coaches.map((coach) => (
-              <div
-                key={coach.name}
-                className="flex items-start gap-4 bg-white rounded-2xl border border-neutral-200 p-6 shadow-card"
-              >
-                <div
-                  className="w-14 h-14 rounded-full flex items-center justify-center shrink-0"
-                  style={{ backgroundColor: `${data.color}15` }}
-                >
-                  <span className="text-lg font-bold" style={{ color: data.color }}>
-                    {coach.initials}
-                  </span>
+              <StaggerItem key={coach.name}>
+                <div className="flex items-start gap-4 bg-white rounded-2xl border border-neutral-200 p-6 shadow-card">
+                  <div
+                    className="w-14 h-14 rounded-full flex items-center justify-center shrink-0"
+                    style={{ backgroundColor: `${data.color}15` }}
+                  >
+                    <span className="text-lg font-bold" style={{ color: data.color }}>
+                      {coach.initials}
+                    </span>
+                  </div>
+                  <div>
+                    <h3 className="font-display font-bold text-neutral-900">
+                      {coach.name}
+                    </h3>
+                    <p className="text-sm font-medium text-accent">{coach.role}</p>
+                    <p className="text-xs text-neutral-500 mt-1">{coach.credentials}</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-display font-bold text-neutral-900">
-                    {coach.name}
-                  </h3>
-                  <p className="text-sm font-medium text-accent">{coach.role}</p>
-                  <p className="text-xs text-neutral-500 mt-1">{coach.credentials}</p>
-                </div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </Container>
       </Section>
 
@@ -234,12 +210,16 @@ export function SportPageLayout({ data }: { data: SportPageData }) {
       <Section>
         <Container>
           <div className="max-w-3xl mx-auto">
-            <div className="text-center mb-8">
-              <h2 className="font-display text-section text-neutral-900 mb-3">
-                Frequently Asked Questions
-              </h2>
-            </div>
-            <FAQAccordion items={data.faqs} />
+            <Reveal>
+              <div className="text-center mb-8">
+                <h2 className="font-display text-section text-neutral-900 mb-3 text-balance">
+                  Frequently Asked Questions
+                </h2>
+              </div>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <FAQAccordion items={data.faqs} />
+            </Reveal>
           </div>
         </Container>
       </Section>

@@ -11,6 +11,7 @@ import {
   type SportType,
   type Session,
 } from "@/content/schedule";
+import { SITE_CONFIG } from "@/lib/constants/site";
 
 const ALL_SPORTS = Object.keys(SPORT_LABELS) as SportType[];
 
@@ -77,6 +78,7 @@ export function ScheduleCalendar() {
         <div className="flex flex-wrap gap-2">
           <button
             onClick={() => setActiveSport("all")}
+            aria-pressed={activeSport === "all"}
             className={cn(
               "px-3.5 py-1.5 rounded-full text-sm font-medium transition-all",
               activeSport === "all"
@@ -92,6 +94,7 @@ export function ScheduleCalendar() {
               <button
                 key={sport}
                 onClick={() => setActiveSport(sport)}
+                aria-pressed={activeSport === sport}
                 className={cn(
                   "px-3.5 py-1.5 rounded-full text-sm font-medium transition-all flex items-center gap-1.5",
                   activeSport === sport
@@ -118,6 +121,8 @@ export function ScheduleCalendar() {
             <button
               key={day.day}
               onClick={() => setActiveDay(index)}
+              aria-pressed={activeDay === index}
+              aria-label={`${day.day} — ${sessionCount} ${sessionCount === 1 ? "session" : "sessions"}`}
               className={cn(
                 "flex-shrink-0 flex flex-col items-center px-4 py-2.5 rounded-xl text-sm font-medium transition-all min-w-[72px]",
                 activeDay === index
@@ -143,8 +148,8 @@ export function ScheduleCalendar() {
       <div className="lg:hidden">
         <div className="space-y-2.5">
           {filteredSchedule[activeDay].sessions.length > 0 ? (
-            filteredSchedule[activeDay].sessions.map((session, i) => (
-              <SessionCard key={i} session={session} />
+            filteredSchedule[activeDay].sessions.map((session) => (
+              <SessionCard key={`${session.sport}-${session.time}`} session={session} />
             ))
           ) : (
             <div className="text-center py-12 text-neutral-400">
@@ -191,11 +196,11 @@ export function ScheduleCalendar() {
               {/* Sessions */}
               <div className="p-2 space-y-2">
                 {day.sessions.length > 0 ? (
-                  day.sessions.map((session, i) => {
+                  day.sessions.map((session) => {
                     const colors = SPORT_COLORS[session.sport];
                     return (
                       <div
-                        key={i}
+                        key={`${session.sport}-${session.time}`}
                         className={cn(
                           "rounded-lg border p-2 text-xs transition-all hover:shadow-sm",
                           colors.bg,
@@ -249,7 +254,7 @@ export function ScheduleCalendar() {
         </p>
         <div className="flex flex-wrap justify-center gap-3">
           <Link
-            href="tel:+14105550123"
+            href={`tel:${SITE_CONFIG.phone}`}
             className="inline-flex items-center gap-2 bg-accent text-white font-semibold px-5 py-2.5 rounded-lg hover:bg-accent-hover transition-colors text-sm"
           >
             Call to Book

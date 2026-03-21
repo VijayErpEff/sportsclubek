@@ -23,21 +23,16 @@ export function CTABanner({
   return (
     <section
       className={cn(
-        "relative overflow-hidden py-16 md:py-20",
+        "relative overflow-hidden py-20 md:py-28",
         variant === "primary"
-          ? "bg-gradient-to-r from-primary-dark via-primary to-primary-light"
-          : "bg-gradient-to-r from-accent-hover via-accent to-accent-light",
+          ? "bg-gradient-to-r from-primary-dark to-primary"
+          : "bg-gradient-to-r from-secondary-dark via-secondary to-secondary-light",
         className
       )}
     >
-      {/* Decorative */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute -top-24 -right-24 w-96 h-96 bg-white rounded-full blur-3xl" />
-        <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-white rounded-full blur-3xl" />
-      </div>
 
-      <Container className="relative text-center">
-        <h2 className="font-display text-section text-white mb-4">{title}</h2>
+      <Container className="relative z-10 text-center">
+        <h2 className="font-display text-section text-white mb-4 text-balance">{title}</h2>
         {description && (
           <p className="text-lg text-white/80 mb-8 max-w-2xl mx-auto">
             {description}
@@ -50,7 +45,7 @@ export function CTABanner({
             className={
               variant === "primary"
                 ? ""
-                : "bg-white text-accent hover:bg-neutral-100"
+                : "bg-white text-secondary hover:bg-neutral-100"
             }
             asChild
           >

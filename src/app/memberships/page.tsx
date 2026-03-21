@@ -1,16 +1,15 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import { PricingSection } from "@/components/composed/pricing-section";
 import { FAQAccordion } from "@/components/composed/faq-accordion";
 import { CTABanner } from "@/components/composed/cta-banner";
 import { Section } from "@/components/layout/section";
 import { Container } from "@/components/layout/container";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Reveal } from "@/components/ui/reveal";
 import { generateSEOMetadata } from "@/lib/seo/metadata";
-import { generateBreadcrumbLD } from "@/lib/seo/json-ld";
+import { generateBreadcrumbLD, generateFAQLD } from "@/lib/seo/json-ld";
 import { MEMBERSHIP_FAQS } from "@/content/faqs";
-import { Check, X } from "lucide-react";
-import { cn } from "@/lib/utils/cn";
+import { Check, X, GraduationCap, Shield, Users } from "lucide-react";
 
 export const metadata: Metadata = generateSEOMetadata({
   title: "Memberships & Pricing",
@@ -19,55 +18,14 @@ export const metadata: Metadata = generateSEOMetadata({
   path: "/memberships",
 });
 
-const plans = [
-  {
-    name: "Basic",
-    price: 49,
-    period: "month",
-    description: "Perfect for casual players who want regular access.",
-    features: [
-      { text: "Open play hours access", included: true },
-      { text: "2 court/cage bookings per week", included: true },
-      { text: "Member pricing on extras", included: true },
-      { text: "Online booking", included: true },
-      { text: "Academy program access", included: false },
-      { text: "Guest passes", included: false },
-      { text: "Priority booking", included: false },
-    ],
-    recommended: false,
-  },
-  {
-    name: "Pro",
-    price: 89,
-    period: "month",
-    description: "Our most popular plan for dedicated athletes and families.",
-    features: [
-      { text: "Unlimited open play access", included: true },
-      { text: "Unlimited court/cage bookings", included: true },
-      { text: "Member pricing on extras", included: true },
-      { text: "Online booking", included: true },
-      { text: "1 academy program included", included: true },
-      { text: "2 guest passes per month", included: true },
-      { text: "Priority booking", included: false },
-    ],
-    recommended: true,
-  },
-  {
-    name: "Elite",
-    price: 149,
-    period: "month",
-    description: "Full access for serious athletes and competitive families.",
-    features: [
-      { text: "Unlimited open play access", included: true },
-      { text: "Unlimited court/cage bookings", included: true },
-      { text: "Member pricing on extras", included: true },
-      { text: "Online booking", included: true },
-      { text: "All academy programs included", included: true },
-      { text: "4 guest passes per month", included: true },
-      { text: "Priority booking", included: true },
-    ],
-    recommended: false,
-  },
+const comparisonFeatures = [
+  { name: "Open play access", basic: "Open hours", pro: "Unlimited", elite: "Unlimited" },
+  { name: "Court/cage bookings per week", basic: "2", pro: "Unlimited", elite: "Unlimited" },
+  { name: "Member pricing on extras", basic: true, pro: true, elite: true },
+  { name: "Online booking", basic: true, pro: true, elite: true },
+  { name: "Academy programs", basic: false, pro: "1 included", elite: "All included" },
+  { name: "Guest passes per month", basic: false, pro: "2", elite: "4" },
+  { name: "Priority booking", basic: false, pro: false, elite: true },
 ];
 
 export default function MembershipsPage() {
@@ -76,124 +34,193 @@ export default function MembershipsPage() {
     { name: "Memberships", url: "/memberships" },
   ]);
 
+  const faqLD = generateFAQLD(MEMBERSHIP_FAQS);
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLD) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLD) }}
+      />
 
-      {/* Slim Header */}
-      <div className="bg-gradient-to-r from-primary-dark via-primary to-primary-light pt-[76px] pb-5">
-        <Container>
-          <nav aria-label="Breadcrumb" className="text-xs text-white/40 mb-2">
+      {/* Hero — Tight, flows directly into pricing */}
+      <section className="pt-28 md:pt-32 pb-6 md:pb-8 relative overflow-hidden">
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-primary/[0.03] to-white"
+          aria-hidden="true"
+        />
+        <Container className="relative">
+          <nav aria-label="Breadcrumb" className="text-xs text-neutral-400 mb-4">
             <ol className="flex items-center gap-1.5">
-              <li><a href="/" className="hover:text-white/70 transition-colors">Home</a></li>
-              <li>/</li>
-              <li aria-current="page" className="text-white/60">Memberships</li>
+              <li>
+                <Link href="/" className="hover:text-primary transition-colors">
+                  Home
+                </Link>
+              </li>
+              <li className="text-neutral-300">/</li>
+              <li className="text-neutral-600 font-medium">Memberships</li>
             </ol>
           </nav>
-          <h1 className="font-display text-page-title text-white">
-            Sports Memberships & Pricing
-          </h1>
-          <p className="text-white/60 mt-1 text-sm max-w-xl">
-            Flexible plans for individuals and families. Access batting cages, courts, coaching, and more.
+          <div className="max-w-2xl mx-auto text-center">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-3">
+              Join 500+ Athletes &amp; Families
+            </p>
+            <h1 className="font-display text-page-title text-neutral-900 mb-2 text-balance">
+              Simple plans. Serious training.
+            </h1>
+            <p className="text-neutral-500">
+              No contracts. No hidden fees. Cancel anytime.
+            </p>
+          </div>
+        </Container>
+      </section>
+
+      {/* Pricing — Flows directly from hero, no Section wrapper */}
+      <div className="pb-12 md:pb-16">
+        <Container>
+          <PricingSection />
+          <p className="text-center text-sm text-neutral-400 mt-6">
+            All plans include 30-day cancellation. No long-term contracts.
           </p>
         </Container>
       </div>
 
-      {/* Pricing Cards */}
-      <Section>
+      {/* Discount Bar — Compact inline */}
+      <div className="bg-neutral-50 border-y border-neutral-100 py-5">
         <Container>
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {plans.map((plan) => (
-              <div
-                key={plan.name}
-                className={cn(
-                  "relative rounded-2xl border bg-white p-8 flex flex-col",
-                  plan.recommended
-                    ? "border-accent shadow-xl ring-2 ring-accent/20 scale-[1.02]"
-                    : "border-neutral-200 shadow-card"
-                )}
-              >
-                {plan.recommended && (
-                  <Badge
-                    variant="accent"
-                    className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1"
-                  >
-                    Most Popular
-                  </Badge>
-                )}
-
-                <div className="text-center mb-6">
-                  <h3 className="font-display text-xl font-bold text-neutral-900 mb-2">
-                    {plan.name}
-                  </h3>
-                  <div className="flex items-baseline justify-center gap-1">
-                    <span className="font-mono text-4xl font-bold text-neutral-900">
-                      ${plan.price}
-                    </span>
-                    <span className="text-neutral-500">/{plan.period}</span>
-                  </div>
-                  <p className="text-sm text-neutral-500 mt-2">
-                    {plan.description}
-                  </p>
-                </div>
-
-                <div className="flex-1 space-y-3 mb-8">
-                  {plan.features.map((feature) => (
-                    <div
-                      key={feature.text}
-                      className="flex items-center gap-3 text-sm"
-                    >
-                      {feature.included ? (
-                        <Check className="h-4 w-4 text-secondary shrink-0" />
-                      ) : (
-                        <X className="h-4 w-4 text-neutral-300 shrink-0" />
-                      )}
-                      <span
-                        className={
-                          feature.included
-                            ? "text-neutral-700"
-                            : "text-neutral-400"
-                        }
-                      >
-                        {feature.text}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-
-                <Button
-                  variant={plan.recommended ? "primary" : "outline"}
-                  size="lg"
-                  className="w-full"
-                  asChild
-                >
-                  <Link href="/schedule">
-                    {plan.recommended ? "Get Started" : "Choose Plan"}
-                  </Link>
-                </Button>
-              </div>
-            ))}
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+            <div className="flex items-center gap-2 text-sm">
+              <GraduationCap className="h-4 w-4 text-accent" />
+              <span className="text-neutral-700">
+                <span className="font-semibold">Student</span> 15% off
+              </span>
+            </div>
+            <div className="flex items-center gap-2 text-sm">
+              <Shield className="h-4 w-4 text-accent" />
+              <span className="text-neutral-700">
+                <span className="font-semibold">Military</span> 20% off
+              </span>
+            </div>
+            <div className="flex items-center gap-2 text-sm">
+              <Users className="h-4 w-4 text-accent" />
+              <span className="text-neutral-700">
+                <span className="font-semibold">Family plans</span> available
+              </span>
+            </div>
           </div>
+        </Container>
+      </div>
 
-          <p className="text-center text-sm text-neutral-500 mt-8">
-            All plans include 30-day cancellation. No long-term contracts.
-            Family plans available — contact us for details.
-          </p>
+      {/* Feature Comparison Table */}
+      <Section size="sm">
+        <Container>
+          <Reveal>
+            <div className="text-center mb-10">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-3">
+                Compare
+              </p>
+              <h2 className="font-display text-section text-neutral-900 text-balance">
+                See what&apos;s included in each plan.
+              </h2>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <div className="max-w-4xl mx-auto overflow-x-auto">
+              <table className="w-full text-left">
+                <thead>
+                  <tr className="border-b-2 border-neutral-200">
+                    <th className="py-3 pr-4 text-sm font-semibold text-neutral-500 min-w-[160px]">
+                      Feature
+                    </th>
+                    <th className="py-3 px-4 text-center text-sm font-semibold text-neutral-900 min-w-[90px]">
+                      Basic
+                    </th>
+                    <th className="py-3 px-4 text-center text-sm font-bold text-accent min-w-[90px]">
+                      Pro
+                    </th>
+                    <th className="py-3 px-4 text-center text-sm font-semibold text-neutral-900 min-w-[90px]">
+                      Elite
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {comparisonFeatures.map((feature) => (
+                    <tr
+                      key={feature.name}
+                      className="border-b border-neutral-100"
+                    >
+                      <td className="py-3 pr-4 text-sm text-neutral-700">
+                        {feature.name}
+                      </td>
+                      {(["basic", "pro", "elite"] as const).map((tier) => {
+                        const val = feature[tier];
+                        return (
+                          <td
+                            key={tier}
+                            className="py-3 px-4 text-center text-sm"
+                          >
+                            {typeof val === "boolean" ? (
+                              val ? (
+                                <Check className="h-4 w-4 text-accent mx-auto" />
+                              ) : (
+                                <X className="h-4 w-4 text-neutral-200 mx-auto" />
+                              )
+                            ) : (
+                              <span className="font-medium text-neutral-900">
+                                {val}
+                              </span>
+                            )}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Reveal>
         </Container>
       </Section>
 
+      {/* Testimonial — Compact */}
+      <section className="border-t border-neutral-100">
+        <Container>
+          <Reveal>
+            <blockquote className="py-10 md:py-14 max-w-3xl mx-auto text-center">
+              <p className="font-display text-subsection text-neutral-900 leading-relaxed text-balance">
+                &ldquo;The Pro membership has been worth every penny. My son does
+                baseball academy and I play pickleball — one membership, two
+                sports, zero hassle.&rdquo;
+              </p>
+              <footer className="mt-4">
+                <p className="text-sm font-semibold text-neutral-900">
+                  — Pro Member since 2024, Newark DE
+                </p>
+              </footer>
+            </blockquote>
+          </Reveal>
+        </Container>
+      </section>
+
       {/* FAQ */}
-      <Section variant="alternate">
+      <Section variant="alternate" size="sm">
         <Container>
           <div className="max-w-3xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="font-display text-section text-neutral-900 mb-4">
-                Membership FAQ
-              </h2>
-            </div>
+            <Reveal>
+              <div className="text-center mb-10">
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-3">
+                  FAQ
+                </p>
+                <h2 className="font-display text-section text-neutral-900 text-balance">
+                  Common questions about membership.
+                </h2>
+              </div>
+            </Reveal>
             <FAQAccordion items={MEMBERSHIP_FAQS} />
           </div>
         </Container>

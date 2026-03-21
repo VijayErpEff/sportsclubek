@@ -21,14 +21,14 @@ export function Section({
         "w-full",
         {
           "bg-white": variant === "default",
-          "bg-neutral-50": variant === "alternate",
+          "bg-white border-t border-neutral-100": variant === "alternate",
           "bg-primary-dark text-white": variant === "dark",
           "bg-primary text-white": variant === "primary",
         },
         {
-          "py-12 md:py-16": size === "sm",
-          "py-16 md:py-24": size === "md",
-          "py-20 md:py-32": size === "lg",
+          "py-10 md:py-14": size === "sm",
+          "py-14 md:py-20": size === "md",
+          "py-16 md:py-24": size === "lg",
         },
         className
       )}
