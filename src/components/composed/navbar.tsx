@@ -22,6 +22,7 @@ const NAV_ITEMS = [
   { label: "Memberships", href: "/memberships" },
   { label: "Schedule", href: "/schedule" },
   { label: "About", href: "/about" },
+  { label: "Free Trial", href: "/free-trial" },
 ];
 
 export function Navbar() {
@@ -154,7 +155,7 @@ export function Navbar() {
             <div className="hidden lg:flex items-center gap-3 ml-auto pl-4">
               <a href={`tel:${SITE_CONFIG.phone}`} className="text-xs text-neutral-400 hover:text-primary transition-colors hidden xl:block">{SITE_CONFIG.phone}</a>
               <Button size="sm" className="rounded-full px-5" asChild>
-                <Link href="/schedule">Book Now</Link>
+                <Link href="/free-trial">Free Trial</Link>
               </Button>
               <span className="hidden xl:inline-flex items-center gap-1 text-[10px] text-neutral-300 font-mono">
                 <kbd className="px-1.5 py-0.5 bg-neutral-100 rounded text-[10px] text-neutral-400 border border-neutral-200">&#8984;K</kbd>
@@ -211,7 +212,7 @@ export function Navbar() {
             </div>
             <div className="mt-auto px-6 pt-8 space-y-3">
               <Button size="lg" className="w-full rounded-full" asChild>
-                <Link href="/schedule" onClick={() => setMobileOpen(false)}>Book Now</Link>
+                <Link href="/free-trial" onClick={() => setMobileOpen(false)}>Free Trial</Link>
               </Button>
               <p className="text-center text-sm text-neutral-400">
                 <a href={`tel:${SITE_CONFIG.phone}`} className="hover:text-primary">{SITE_CONFIG.phone}</a>

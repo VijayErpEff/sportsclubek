@@ -66,17 +66,24 @@ export function CookieConsent() {
           role="dialog"
           aria-label="Cookie consent"
           aria-describedby="cookie-description"
-          className="fixed bottom-0 left-0 right-0 z-50 border-t border-neutral-200 bg-white p-4 shadow-lg md:p-6"
+          className="fixed bottom-0 left-0 right-0 z-[90] border-t border-neutral-200 bg-white p-4 pb-20 shadow-lg md:p-6 md:pb-6 lg:pb-6"
         >
-          <div className="mx-auto flex max-w-5xl flex-col items-center gap-4 sm:flex-row sm:justify-between">
-            <p id="cookie-description" className="text-sm text-neutral-600 text-center sm:text-left">
-              We use cookies to improve your experience. You can accept all
-              cookies, reject non-essential cookies, or customize your
-              preferences.
-            </p>
-            <div className="flex flex-wrap gap-2 shrink-0">
+          <div className="mx-auto max-w-5xl">
+            <div className="flex items-start justify-between gap-2 mb-3 sm:mb-0">
+              <p id="cookie-description" className="text-sm text-neutral-600 flex-1">
+                We use cookies to improve your experience.
+              </p>
+              <button
+                onClick={handleRejectAll}
+                className="p-1.5 rounded-lg text-neutral-400 hover:text-neutral-700 hover:bg-neutral-100 min-w-[36px] min-h-[36px] flex items-center justify-center shrink-0 sm:hidden"
+                aria-label="Dismiss cookie banner"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+            <div className="flex flex-wrap gap-2">
               <Button variant="ghost" size="sm" onClick={() => setShowPreferences(true)}>
-                Manage Preferences
+                Preferences
               </Button>
               <Button variant="outline" size="sm" onClick={handleRejectAll}>
                 Reject All

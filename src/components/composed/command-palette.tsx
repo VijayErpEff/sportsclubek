@@ -47,6 +47,9 @@ const SEARCH_ITEMS: SearchItem[] = [
   { label: "View Memberships", href: "/memberships", category: "Actions" },
   { label: "Open House", href: "/open-house", category: "Actions" },
   { label: "Careers", href: "/careers", category: "Actions" },
+  { label: "Free Trial", href: "/free-trial", category: "Actions" },
+  { label: "Birthday Parties", href: "/birthday-parties", category: "Pages" },
+  { label: "Summer Camps", href: "/summer-camps", category: "Programs" },
 ];
 
 const CATEGORY_ICONS: Record<string, typeof FileText> = {

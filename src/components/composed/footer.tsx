@@ -17,6 +17,9 @@ const footerCompany = [
   { label: "Schedule", href: "/schedule" },
   { label: "Careers", href: "/careers" },
   { label: "Contact", href: "/contact" },
+  { label: "Free Trial", href: "/free-trial" },
+  { label: "Birthday Parties", href: "/birthday-parties" },
+  { label: "Summer Camps", href: "/summer-camps" },
 ];
 
 const footerPrograms = [

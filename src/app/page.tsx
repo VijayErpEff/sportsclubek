@@ -72,10 +72,10 @@ export default function HomePage() {
           ═══════════════════════════════════════════ */}
       <VideoHero
         posterImage="/images/sports/facility.jpg"
-        title="Where Athletes Are Made"
-        subtitle="Expert coaching, modern courts, and youth training programs in baseball, cricket, badminton, and pickleball. Elkton, MD."
-        badge="Now Open — Elkton, MD"
-        primaryCTA={{ label: "Book a Session", href: "/schedule" }}
+        title="The Sports Facility Your Family Has Been Looking For"
+        subtitle="15 minutes from Middletown. 20 from Newark. Four sports, ten courts, and coaches who remember your kid's name."
+        badge="Now Open — 701 E Pulaski Hwy, Elkton"
+        primaryCTA={{ label: "Try a Free Session", href: "/free-trial" }}
         secondaryCTA={{ label: "Explore Programs", href: "#sports" }}
         overlayOpacity={0.5}
       />
@@ -92,8 +92,8 @@ export default function HomePage() {
             <div className="h-4 w-px bg-white/10 hidden md:block" />
             <div className="flex items-center gap-2 text-white/50 text-sm">
               <Star className="h-4 w-4 text-warning fill-warning" />
-              <span className="font-medium text-white/70">4.9</span>
-              <span className="hidden sm:inline">from 127 reviews</span>
+              <span className="font-medium text-white/70">4.8</span>
+              <span className="hidden sm:inline">— 156 Google Reviews</span>
             </div>
           </div>
         </Container>
@@ -108,11 +108,11 @@ export default function HomePage() {
             <div className="text-center mb-10">
               <h2 className="font-display text-section text-neutral-900 mb-6 text-balance">
                 Four Sports.{" "}
-                <GradientText className="inline">One Home.</GradientText>
+                <GradientText className="inline">Zero Excuses.</GradientText>
               </h2>
               <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-                From batting cages to badminton courts, we&apos;ve built a
-                world-class facility for every athlete. Find your sport.
+                Rain, snow, 95°F heat — doesn&apos;t matter. Year-round
+                indoor training in baseball, cricket, badminton, and pickleball. All skill levels. All ages.
               </p>
             </div>
           </Reveal>
@@ -157,25 +157,26 @@ export default function HomePage() {
             <div>
               <Reveal variant="fade-right">
                 <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-4">
-                  Why LevelUP
+                  Why Families Choose Us
                 </p>
               </Reveal>
               <TextReveal
-                text="LevelUP exists to democratize access to premium sports training. At the crossroads of Maryland, Delaware, and Pennsylvania, every athlete — from first-timer to competitive player — can elevate their game."
+                text="Other facilities have courts. We have coaches who track your kid's progress, send you updates, and genuinely care whether they improve. That's the difference."
                 tag="h2"
                 className="font-display text-subsection text-neutral-900 leading-snug mb-8"
               />
               <Reveal delay={0.2}>
                 <p className="text-neutral-600 leading-relaxed mb-10">
-                  Our expert coaches, modern facilities, and inclusive community
-                  create the environment where potential becomes performance.
+                  500+ athletes train here from Middletown, Newark, Wilmington,
+                  and Cecil County. Most tried other places first. They stay
+                  because their kids are actually getting better.
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <Button variant="secondary" asChild>
-                    <Link href="/about">Our Story</Link>
+                    <Link href="/about">Meet Our Coaches</Link>
                   </Button>
                   <Button variant="outline" asChild>
-                    <Link href="/facilities">Tour the Facility</Link>
+                    <Link href="/facilities">See the Facility</Link>
                   </Button>
                 </div>
               </Reveal>
@@ -188,10 +189,10 @@ export default function HomePage() {
                     <Shield className="h-5 w-5 text-accent" />
                   </div>
                   <h3 className="font-semibold text-neutral-900 mb-1 text-sm">
-                    Safe & Modern
+                    Climate Controlled
                   </h3>
                   <p className="text-xs text-neutral-500">
-                    Climate-controlled indoor facility
+                    72°F year-round. Rain or shine.
                   </p>
                 </div>
               </StaggerItem>
@@ -201,10 +202,10 @@ export default function HomePage() {
                     <Trophy className="h-5 w-5 text-primary" />
                   </div>
                   <h3 className="font-semibold text-neutral-900 mb-1 text-sm">
-                    Expert Coaches
+                    Real Credentials
                   </h3>
                   <p className="text-xs text-neutral-500">
-                    Certified professionals
+                    Coaches who&apos;ve played at the competitive level
                   </p>
                 </div>
               </StaggerItem>
@@ -214,10 +215,10 @@ export default function HomePage() {
                     <Users className="h-5 w-5 text-secondary" />
                   </div>
                   <h3 className="font-semibold text-neutral-900 mb-1 text-sm">
-                    All Ages
+                    Ages 5 to 65+
                   </h3>
                   <p className="text-xs text-neutral-500">
-                    Youth through adult programs
+                    Youth academies through adult open play
                   </p>
                 </div>
               </StaggerItem>
@@ -227,10 +228,10 @@ export default function HomePage() {
                     <Target className="h-5 w-5 text-info" />
                   </div>
                   <h3 className="font-semibold text-neutral-900 mb-1 text-sm">
-                    4 Sports
+                    Free First Session
                   </h3>
                   <p className="text-xs text-neutral-500">
-                    One facility, endless possibilities
+                    Try any sport, no commitment required
                   </p>
                 </div>
               </StaggerItem>
@@ -246,9 +247,9 @@ export default function HomePage() {
         <Container>
           <Reveal variant="fade-in">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <StatCounter value={500} suffix="+" label="Athletes Trained" />
-              <StatCounter value={4} label="Sports Programs" />
-              <StatCounter value={15} suffix="+" label="Expert Coaches" />
+              <StatCounter value={500} suffix="+" label="Athletes & Families" />
+              <StatCounter value={4} label="Sports, One Roof" />
+              <StatCounter value={15} suffix="+" label="Certified Coaches" />
               <StatCounter value={7} label="Days a Week" />
             </div>
           </Reveal>
@@ -264,16 +265,15 @@ export default function HomePage() {
             <div>
               <Reveal>
                 <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-4">
-                  Book Online
+                  Skip the Phone Call
                 </p>
                 <h2 className="font-display text-section text-neutral-900 mb-6 text-balance">
-                  Reserve Your Court in{" "}
-                  <GradientText className="inline">3 Clicks</GradientText>
+                  Book a Court in{" "}
+                  <GradientText className="inline">Under 60 Seconds</GradientText>
                 </h2>
                 <p className="text-neutral-600 leading-relaxed mb-8">
-                  Skip the phone call. Choose your sport, pick a time, and
-                  you&apos;re booked. Batting cages, cricket nets, badminton
-                  courts, and pickleball — all available online.
+                  Choose your sport. Pick a time. Done. Batting cages from
+                  $35/hr, courts from $25/hr. No membership required.
                 </p>
               </Reveal>
               <Reveal delay={0.1}>
@@ -341,14 +341,14 @@ export default function HomePage() {
           <Reveal>
             <div className="text-center mb-10">
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-4">
-                Community
+                Real People, Real Results
               </p>
               <h2 className="font-display text-section text-neutral-900 mb-6 text-balance">
-                What Our Athletes Say
+                Don&apos;t Take Our Word for It
               </h2>
               <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-                Don&apos;t just take our word for it. Here&apos;s what the
-                LevelUP community has to say.
+                Real families from Elkton, Middletown, Newark, and
+                Wilmington sharing their experience.
               </p>
             </div>
           </Reveal>
@@ -368,10 +368,10 @@ export default function HomePage() {
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-4">
-                  From the Blog
+                  Tips & Stories
                 </p>
                 <h2 className="font-display text-section text-neutral-900 text-balance">
-                  Training Tips & News
+                  Free Training Advice from Our Coaches
                 </h2>
               </div>
               <Button variant="outline" size="sm" asChild>
@@ -408,12 +408,11 @@ export default function HomePage() {
                 Conveniently Located
               </p>
               <h2 className="font-display text-section text-neutral-900 mb-4 text-balance">
-                Serving the MD / DE / PA Tri-State Area
+                Closer Than You Think
               </h2>
               <p className="text-neutral-600 max-w-3xl mx-auto">
-                Located at 701 E Pulaski Hwy in Elkton, MD, LevelUP Sports is
-                the closest premier indoor sports facility for families across
-                three states. Open Mon&ndash;Sat 6 AM&ndash;11 PM, Sun 6 AM&ndash;9 PM.
+                On Route 40 in Elkton — just off I-95. Free parking, easy
+                access from three states. Open Mon&ndash;Sat 6 AM&ndash;11 PM, Sun 6 AM&ndash;9 PM.
               </p>
             </div>
           </Reveal>
@@ -448,8 +447,8 @@ export default function HomePage() {
           </Reveal>
           <Reveal delay={0.2}>
             <p className="text-center text-sm text-neutral-500 mt-6">
-              Indoor batting cages, cricket nets, badminton courts &amp;
-              pickleball courts &mdash; all under one roof near you.{" "}
+              The tri-state area&apos;s only facility with batting cages, cricket nets,
+              badminton courts, AND pickleball &mdash; all indoors, all year.{" "}
               <Link
                 href="/facilities"
                 className="text-accent hover:text-accent-hover font-medium"
@@ -465,10 +464,10 @@ export default function HomePage() {
           FINAL CTA — Convert
           ═══════════════════════════════════════════ */}
       <CTABanner
-        title="Ready to Elevate Your Game?"
-        description="Book your first session today. No commitment required — just come play."
-        primaryCTA={{ label: "Book a Session", href: "#book" }}
-        secondaryCTA={{ label: "View Memberships", href: "/memberships" }}
+        title="Your First Session Is Free"
+        description="No commitment. No pressure. Just come play. If you love it, we'll talk memberships. If not, you tried a new sport for free."
+        primaryCTA={{ label: "Claim Your Free Session", href: "/free-trial" }}
+        secondaryCTA={{ label: "View Pricing", href: "/memberships" }}
       />
     </>
   );

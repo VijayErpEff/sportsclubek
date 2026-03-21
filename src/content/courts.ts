@@ -14,9 +14,9 @@ export const COURTS: Court[] = [
   { id: "bc-3", name: "Batting Cage 3", sport: "baseball", type: "cage", capacity: 2, pricePerHour: 45, features: ["Pro pitching machine", "90 MPH max", "Video analysis"] },
   { id: "cn-1", name: "Cricket Net 1", sport: "cricket", type: "net", capacity: 4, pricePerHour: 40, features: ["Bowling machine", "Full-length pitch", "Side netting"] },
   { id: "cn-2", name: "Cricket Net 2", sport: "cricket", type: "net", capacity: 4, pricePerHour: 40, features: ["Bowling machine", "Full-length pitch", "Side netting"] },
-  { id: "bd-1", name: "Badminton Court 1", sport: "badminton", type: "court", capacity: 4, pricePerHour: 30, features: ["BWF-approved", "Wooden flooring", "Rackets available"] },
-  { id: "bd-2", name: "Badminton Court 2", sport: "badminton", type: "court", capacity: 4, pricePerHour: 30, features: ["BWF-approved", "Wooden flooring", "Rackets available"] },
-  { id: "bd-3", name: "Badminton Court 3", sport: "badminton", type: "court", capacity: 4, pricePerHour: 30, features: ["BWF-approved", "Wooden flooring", "Rackets available"] },
+  { id: "bd-1", name: "Badminton Court 1", sport: "badminton", type: "court", capacity: 4, pricePerHour: 30, features: ["BWF-approved", "Synthetic flooring", "Rackets available"] },
+  { id: "bd-2", name: "Badminton Court 2", sport: "badminton", type: "court", capacity: 4, pricePerHour: 30, features: ["BWF-approved", "Synthetic flooring", "Rackets available"] },
+  { id: "bd-3", name: "Badminton Court 3", sport: "badminton", type: "court", capacity: 4, pricePerHour: 30, features: ["BWF-approved", "Synthetic flooring", "Rackets available"] },
   { id: "pk-1", name: "Pickleball Court 1", sport: "pickleball", type: "court", capacity: 4, pricePerHour: 25, features: ["USAPA-standard", "Paddle rental available"] },
   { id: "pk-2", name: "Pickleball Court 2", sport: "pickleball", type: "court", capacity: 4, pricePerHour: 25, features: ["USAPA-standard", "Paddle rental available"] },
 ];

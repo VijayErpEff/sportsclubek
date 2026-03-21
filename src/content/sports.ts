@@ -47,21 +47,21 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
   baseball: {
     slug: "baseball",
     name: "Baseball",
-    tagline: "Step Into the Cage. Elevate Your Swing.",
+    tagline: "They Don't Need More Reps. They Need the Right Ones.",
     description:
-      "Professional indoor batting cages and expert coaching for players of every level — from first swings to competitive training.",
+      "Indoor batting cages with machines up to 90 MPH and coaches who track your kid's progress. From first swings to varsity prep.",
     image: "/images/sports/baseball.jpg",
     color: "#1B3A5C",
     metaTitle: "Indoor Batting Cages & Baseball Training — Elkton, MD | Near Middletown & Newark, DE",
     metaDescription:
       "Indoor batting cages & expert baseball coaching in Elkton, MD — 15 min from Middletown & Newark, DE. Youth academy, private lessons, cage rentals. Pitching machines up to 90 MPH. Book now.",
     overview: [
-      "Our indoor baseball facility gives players a place to train year-round, rain or shine. Whether you're a youth player picking up the bat for the first time or a seasoned competitor looking to sharpen your swing, we have the equipment, space, and coaching to help you improve.",
-      "With four professional-grade batting cages, adjustable pitching machines, and experienced coaches on staff, LevelUP Sports is Elkton's home for baseball training.",
+      "You've watched your kid struggle at the plate. The frustration after an 0-for-3 game. The slump that drags into a second week. That's exactly why we built this — and why Coach Rivera has spent 15 years perfecting a development system that turns struggling hitters into confident ones. Our cages run from 30 to 90 MPH, and every session starts with a coach who knows your kid's name, their swing, and what they need to work on next.",
+      "Parents: you can watch every session from our viewing area. You'll see the difference in their mechanics within weeks — not months. Academy players get a written progress report every four weeks. This isn't daycare with batting helmets. It's real development.",
     ],
     highlights: [
       { label: "Cages", value: "4" },
-      { label: "Speed Range", value: "30–80 MPH" },
+      { label: "Speed Range", value: "30–90 MPH" },
       { label: "Age Groups", value: "6–Adult" },
       { label: "Open", value: "7 Days" },
     ],
@@ -114,30 +114,30 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       },
     ],
     faqs: [
-      { question: "Do I need to bring my own bat and helmet?", answer: "Helmets are provided. You're welcome to bring your own bat, or use one of ours." },
-      { question: "What age is appropriate for batting cages?", answer: "Our cages are suitable for ages 6 and up. We adjust the machine speed to match the player's skill level." },
-      { question: "Can I book a cage for a birthday party or group?", answer: "Yes! We offer group bookings for parties and team events. Contact us for group rates." },
+      { question: "How much do batting cages cost at LevelUP?", answer: "Cages are $35-45/hour depending on the cage. Our pro cage with video analysis is $45/hour. Helmets and bats are provided. You can also try a free session first — no charge, no commitment." },
+      { question: "What age can my child start using batting cages?", answer: "Ages 6 and up. We start younger kids at 30 MPH and work up from there. A coach helps them find the right speed and stance for their skill level." },
+      { question: "Do you provide helmets and bats?", answer: "Yes — helmets are required and always provided. We have bats available for every age and size. You're welcome to bring your own bat too." },
     ],
     academySlug: "baseball-academy",
-    ctaTitle: "Ready to Train?",
-    ctaPrimary: { label: "Book a Cage", href: "/schedule" },
+    ctaTitle: "See the Difference in One Session",
+    ctaPrimary: { label: "Try a Free Session", href: "/free-trial" },
     ctaSecondary: { label: "View Academy", href: "/baseball-academy" },
   },
 
   cricket: {
     slug: "cricket",
     name: "Cricket",
-    tagline: "Master the Gentleman's Game.",
+    tagline: "A Proper Facility. Finally.",
     description:
-      "Maryland's premier indoor cricket facility — professional nets, expert coaching, and structured programs from beginner to competitive.",
+      "The only dedicated indoor cricket center between Philadelphia and Baltimore. Full-length nets, pro bowling machines, and a coach who played first-class cricket.",
     image: "/images/sports/cricket.png",
     color: "#1B7D3A",
     metaTitle: "Indoor Cricket Facility & Academy — Elkton, MD | Serving Newark, Wilmington & Middletown, DE",
     metaDescription:
       "Maryland's premier indoor cricket facility in Elkton, MD — serving Newark, Wilmington & Middletown, DE. Professional nets, bowling machines, youth & adult academy. Book cricket nets today.",
     overview: [
-      "LevelUP Sports is home to the region's premier indoor cricket facility. Whether you're perfecting your cover drive or learning to bowl your first delivery, our professional setup and experienced coaches create the ideal training environment.",
-      "With full-length indoor nets, professional bowling machines, and coaches with competitive experience, we serve the growing cricket community across Maryland, Delaware, and Pennsylvania.",
+      "You've been searching for proper cricket infrastructure in the tri-state area. Not a converted warehouse with a bowling machine in the corner — an actual facility with full-length nets, professional-grade bowling machines, and a coach who played first-class cricket. LevelUP is the only dedicated indoor cricket center between Philadelphia and Baltimore, and it was built for this community.",
+      "Whether your family has played cricket for generations or you're curious about the sport your neighbors love, Coach Sharma meets you where you are. Many of our members drove 45+ minutes each way before we opened. Now they're 15 minutes away. We serve families from Newark, Wilmington, Middletown, and across the tri-state area.",
     ],
     highlights: [
       { label: "Nets", value: "Full-Length" },
@@ -199,25 +199,25 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       { question: "What cricket equipment is provided?", answer: "We provide bats, pads, gloves, and helmets for beginners. Regular players are encouraged to bring their own gear." },
     ],
     academySlug: "cricket-academy",
-    ctaTitle: "Ready to Play?",
-    ctaPrimary: { label: "Book a Net Session", href: "/schedule" },
+    ctaTitle: "Finally, a Proper Facility",
+    ctaPrimary: { label: "Try a Free Session", href: "/free-trial" },
     ctaSecondary: { label: "View Academy", href: "/cricket-academy" },
   },
 
   badminton: {
     slug: "badminton",
     name: "Badminton",
-    tagline: "Speed. Precision. Power.",
+    tagline: "Courts That Match Your Ambition.",
     description:
-      "Competition-grade indoor badminton courts with professional coaching — from casual rallies to tournament preparation.",
+      "3 BWF-standard courts with synthetic sprung flooring, tournament LED lighting, and a BWF-certified coach. Not a gym with lines on the floor.",
     image: "/images/sports/badminton.jpg",
     color: "#2A5A8C",
     metaTitle: "Indoor Badminton Courts & Academy — Elkton, MD | Near Middletown, Newark & Wilmington, DE",
     metaDescription:
       "BWF-approved indoor badminton courts in Elkton, MD — closest to Middletown, Newark & Wilmington, DE. Court rentals, academy, certified coaching. Book your court today.",
     overview: [
-      "Our competition-grade badminton courts are built for players who take their game seriously. With professional-quality nets, LED lighting, and cushioned flooring, every session feels like match day.",
-      "Whether you're looking for casual rallies, structured coaching, or tournament preparation, our certified coaches and modern facility deliver the training environment you need.",
+      "Your kid doesn't just want to rally — they want to compete. And they need courts and coaching that match their ambition. Our three BWF-standard courts feature synthetic sprung flooring (the same synthetic surface used in national competitions), tournament-calibrated LED lighting, and professional nets. This isn't a gym with lines painted on the floor.",
+      "Coach Lee is BWF-certified with over a decade of competitive coaching, and he's guided players from casual rallies to county championships. Whether you're picking up a racket for the first time or training for tournament play, the facility and coaching here will push you to the next level. Parents — you'll see measurable progress in footwork, reaction time, and match confidence within weeks.",
     ],
     highlights: [
       { label: "Courts", value: "Pro-Grade" },
@@ -279,25 +279,25 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       { question: "Do you host badminton tournaments?", answer: "We host regular in-house tournaments and can help prepare players for external competitions." },
     ],
     academySlug: "badminton-academy",
-    ctaTitle: "Ready to Play?",
-    ctaPrimary: { label: "Book a Court", href: "/schedule" },
+    ctaTitle: "Step On Court and Feel the Difference",
+    ctaPrimary: { label: "Try a Free Session", href: "/free-trial" },
     ctaSecondary: { label: "View Academy", href: "/badminton-academy" },
   },
 
   pickleball: {
     slug: "pickleball",
     name: "Pickleball",
-    tagline: "Game On. Cecil County's Best Courts.",
+    tagline: "Come for the Game. Stay for the People.",
     description:
-      "Indoor pickleball courts for open play, lessons, and court rentals — the fastest-growing sport in America, played at the best facility in the region.",
+      "Indoor pickleball with 50+ regular players, beginner clinics, and the most welcoming community in the building. You'll make friends here.",
     image: "/images/sports/pickleball.png",
     color: "#2BA84A",
     metaTitle: "Indoor Pickleball Courts — Elkton, MD | Near Middletown, Bear & Newark, DE",
     metaDescription:
       "Indoor pickleball courts in Elkton, MD — 15 min from Middletown & Bear, DE. Open play, beginner lessons, court rentals. Cecil County's best pickleball facility. Book today.",
     overview: [
-      "Pickleball is the fastest-growing sport in America, and we have the best indoor courts in Cecil County. Our dedicated pickleball courts feature professional nets, proper court markings, and the welcoming community atmosphere that makes this sport special.",
-      "Whether you've never held a paddle or you're a seasoned competitor, LevelUP Sports is your home court. Open play, structured lessons, and court rentals are available seven days a week.",
+      "You'll come for the exercise. You'll stay for the people. Our Tuesday and Thursday open play sessions have become the highlight of the week for 50+ regulars — and most of them started as complete beginners. Pickleball is the most social sport we offer, and our community proves it every session.",
+      "If you've heard about pickleball from friends, seen it on the news, or you're looking for exercise that's fun and gentle on your joints — this is your place. Our PPR-certified instructor runs beginner clinics weekly, and our regulars are the friendliest group in the building. Couples, friends, solo players — everyone finds their people here.",
     ],
     highlights: [
       { label: "Courts", value: "Dedicated" },
@@ -352,8 +352,8 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       { question: "Do I need my own paddle?", answer: "Not at all! We provide paddles and balls for all open play and lesson sessions. Bring your own if you prefer." },
       { question: "Is pickleball good exercise?", answer: "Absolutely! It provides great cardio, improves agility and reflexes, and burns 400-600 calories per hour — all while having fun." },
     ],
-    ctaTitle: "Ready to Play?",
-    ctaPrimary: { label: "Book a Court", href: "/schedule" },
+    ctaTitle: "Find Your People on the Court",
+    ctaPrimary: { label: "Try a Free Session", href: "/free-trial" },
     ctaSecondary: { label: "View Memberships", href: "/memberships" },
   },
 };
