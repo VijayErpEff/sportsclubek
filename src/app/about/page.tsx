@@ -25,23 +25,23 @@ export const metadata: Metadata = generateSEOMetadata({
 const milestones = [
   {
     year: "2023",
-    title: "The idea takes shape",
-    desc: "Families across the MD/DE/PA tri-state area were driving 45+ minutes for quality indoor sports training. We set out to change that.",
+    title: "The 45-minute problem",
+    desc: "Parents across Cecil County, Newark, and Middletown were driving 45+ minutes for decent indoor sports facilities. Baseball families drove to Baltimore. Cricket families drove to Philly. Enough was enough.",
   },
   {
     year: "2024",
-    title: "Broke ground in Elkton",
-    desc: "Construction began on our 20,000+ sq ft multi-sport facility at the crossroads of three states.",
+    title: "701 E Pulaski Hwy",
+    desc: "We found the perfect spot — on Route 40 in Elkton, right off I-95, accessible from Maryland, Delaware, and Pennsylvania. Construction began on a 20,000+ sq ft multi-sport facility.",
   },
   {
     year: "2024",
-    title: "Doors open",
-    desc: "First members walk through the doors. Four sports — baseball, cricket, badminton, and pickleball — under one roof from day one.",
+    title: "Opening day",
+    desc: "First families walk through the doors. Four sports — baseball, cricket, badminton, and pickleball — under one roof. Within a month, members are coming from three states.",
   },
   {
     year: "2025",
-    title: "500+ athletes and growing",
-    desc: "A thriving community of athletes, families, and coaches pushing each other to new levels every day.",
+    title: "500+ athletes. 3 states. 1 building.",
+    desc: "Families from Middletown, Newark, Wilmington, and across Cecil County train here weekly. Most tried other places first. They stay because their kids are getting better.",
   },
 ];
 
@@ -107,16 +107,16 @@ export default function AboutPage() {
             <Reveal variant="fade-right">
               <div>
                 <h1 className="font-display text-hero text-neutral-900 mb-6 text-balance">
-                  Where every athlete finds their edge.
+                  Built by Parents. Run by Coaches. Made for Athletes.
                 </h1>
                 <p className="text-body-lg text-neutral-500 leading-relaxed max-w-lg">
-                  LevelUP Sports &amp; Athletics Club was founded with a simple
-                  belief: premium coaching and world-class facilities should be
-                  accessible to every family — not just the privileged few.
+                  We&apos;re not a franchise. We&apos;re coaches, parents, and athletes
+                  who got tired of driving 45 minutes for decent facilities.
+                  So we built one.
                 </p>
                 <div className="flex flex-wrap gap-4 mt-8">
                   <Button asChild>
-                    <Link href="/facilities">Tour Our Facility</Link>
+                    <Link href="/free-trial">Try a Free Session</Link>
                   </Button>
                   <Button variant="outline" asChild>
                     <Link href="/schedule">View Schedule</Link>

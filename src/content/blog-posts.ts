@@ -147,6 +147,138 @@ export const BLOG_POSTS: BlogPost[] = [
     sport: "Pickleball",
     image: "/images/blog/pickleball-tips.jpg",
   },
+  {
+    slug: "best-indoor-sports-facilities-near-middletown-de",
+    title: "Best Indoor Sports Facilities Near Middletown, DE — A Local's Guide",
+    excerpt: "Looking for indoor sports near Middletown, Delaware? Here's what's available in the tri-state area and what to look for.",
+    content: `<p>If you live in Middletown, Delaware, finding quality indoor sports facilities used to mean driving to Wilmington, Newark, or even across state lines. That's changing. Here's a practical guide to what's available within a 30-minute drive.</p>
+    <h2>What to Look for in an Indoor Facility</h2>
+    <p>Not all indoor sports centers are created equal. Here's what separates a good facility from a great one: dedicated courts (not multi-purpose gym floors), climate control, professional-grade equipment, and actual coaching staff — not just court monitors.</p>
+    <h2>Indoor Options Near Middletown</h2>
+    <p>The closest dedicated indoor multi-sport facility to Middletown is LevelUP Sports & Athletics Club in Elkton, MD — just 15 minutes south on Route 40. It offers batting cages (30-90 MPH), cricket nets with bowling machines, BWF-standard badminton courts, and indoor pickleball courts, all under one roof.</p>
+    <p>Other options in the area include community recreation centers in Newark and Bear, though these tend to offer general gym access rather than sport-specific courts and coaching.</p>
+    <h2>Why Indoor Matters</h2>
+    <p>Delaware weather is unpredictable. Between rain, heat, and cold, outdoor training gets cancelled constantly. Indoor facilities eliminate that problem entirely — 72°F year-round, no cancellations, no rescheduling. For families with kids in competitive programs, consistency is everything.</p>
+    <h2>The Bottom Line</h2>
+    <p>If you're in Middletown, Bear, Glasgow, or southern New Castle County, you have more options than you think. LevelUP Sports is 15 minutes away and offers free trial sessions in all four sports — it's worth the drive to see the facility before committing.</p>`,
+    author: "LevelUP Sports",
+    date: "2025-01-20",
+    readTime: 4,
+    category: "news",
+    image: "/images/blog/middletown-facilities.jpg",
+    featured: true,
+  },
+  {
+    slug: "indoor-batting-cages-near-newark-delaware",
+    title: "Indoor Batting Cages Near Newark, Delaware — What Parents Should Know",
+    excerpt: "Thinking about batting cages for your kid? Here's what to look for, what to expect, and where to find the best cages near Newark, DE.",
+    content: `<p>If your child plays baseball or softball in the Newark, Delaware area, chances are you've thought about supplemental training at a batting cage facility. Here's what parents need to know before booking.</p>
+    <h2>What Age Is Right for Batting Cages?</h2>
+    <p>Most kids can start using batting cages around age 6-7, with machine speeds set to 30-40 MPH. By age 10-12, most players are comfortable at 50-60 MPH. High school players typically train at 70-85 MPH. The key is finding a facility that offers adjustable speeds so your child can progress at their own pace.</p>
+    <h2>Machine Speed vs. Real Pitching</h2>
+    <p>A 60 MPH machine feels different from a 60 MPH pitcher — the ball comes out of a machine differently than from a human arm. But cage work is invaluable for building timing, hand-eye coordination, and swing mechanics. It's supplemental training, not a replacement for live pitching.</p>
+    <h2>What to Look For</h2>
+    <p>Helmets should be provided and required. Machines should be well-maintained with consistent speed. Ideally, the facility has a coach on staff who can offer quick tips — a small adjustment to stance or timing can make a huge difference. LevelUP Sports in Elkton, MD (20 minutes from Newark) offers all of this, with 4 cages ranging from 30 to 90 MPH and coaching available.</p>
+    <h2>Cost Expectations</h2>
+    <p>Cage rental typically runs $35-45 per hour. Some facilities offer memberships that bring the per-visit cost down significantly. At LevelUP, a Pro membership gives unlimited cage access for $89/month — if you're going more than twice a week, the math works out quickly.</p>
+    <h2>Free Trial Option</h2>
+    <p>Not sure if your kid will like it? LevelUP offers a free trial session with coaching included. It's the best way to see if cage work is right for your child's development without committing upfront.</p>`,
+    author: "Coach Rivera",
+    date: "2025-02-05",
+    readTime: 5,
+    category: "training-tips",
+    sport: "Baseball",
+    image: "/images/blog/batting-cages-newark.jpg",
+  },
+  {
+    slug: "parents-guide-youth-sports-academies-cecil-county",
+    title: "A Parent's Guide to Youth Sports Academies in Cecil County",
+    excerpt: "How to choose the right sports academy for your child. What to look for, what to avoid, and what questions to ask.",
+    content: `<p>Enrolling your child in a sports academy is a significant decision — both financially and in terms of their development. Here's an honest guide from coaches who've worked with hundreds of families in Cecil County.</p>
+    <h2>What Makes a Good Academy?</h2>
+    <p>Look for three things: qualified coaches with real playing experience (not just certifications), small class sizes (ideally 8:1 or better player-to-coach ratio), and a structured curriculum with measurable progress tracking. If the academy can't tell you specifically how they'll measure your child's improvement, that's a red flag.</p>
+    <h2>Red Flags to Watch For</h2>
+    <p>Be cautious of programs that: promise unrealistic results ("guarantee" college scholarships), have very large class sizes (20+ kids per coach), don't offer trial sessions, or can't explain their curriculum in concrete terms. Good academies are transparent about what they do and how they do it.</p>
+    <h2>Age-Appropriate Development</h2>
+    <p>Ages 5-7: focus should be on fun, coordination, and basic motor skills — not sport-specific drilling. Ages 8-12: introduce sport fundamentals with an emphasis on proper technique. Ages 13+: increase intensity, add tactical training, and begin competition preparation. Any academy pushing intense specialization before age 12 is working against current sports science.</p>
+    <h2>Questions to Ask Before Enrolling</h2>
+    <ul><li>What are your coaches' playing and coaching backgrounds?</li><li>What is the player-to-coach ratio?</li><li>How do you track and communicate progress?</li><li>Can we observe a session before committing?</li><li>What's the cancellation policy?</li></ul>
+    <h2>Local Options</h2>
+    <p>In Cecil County, LevelUP Sports offers academies in baseball, cricket, and badminton with class sizes capped at 8-12 players, written progress reports every 4 weeks, and a free trial session for every program. It's worth visiting the facility and watching a session before deciding.</p>`,
+    author: "LevelUP Sports",
+    date: "2025-01-10",
+    readTime: 6,
+    category: "training-tips",
+    image: "/images/blog/parents-guide-academy.jpg",
+    featured: true,
+  },
+  {
+    slug: "adults-over-50-choosing-pickleball-wilmington",
+    title: "Why Adults Over 50 Are Choosing Pickleball (And Where to Play Near Wilmington)",
+    excerpt: "Pickleball is booming among adults 50+. Here's why — and where to play if you're in the Wilmington, DE area.",
+    content: `<p>Pickleball participation among adults over 50 has grown 150% in the last three years. If you're in the Wilmington, Delaware area and haven't tried it yet, here's why your friends are obsessed — and where to get started.</p>
+    <h2>Why Pickleball Resonates with the 50+ Crowd</h2>
+    <p>It's the rare sport that checks every box: it's social (doubles is the default), it's easy to learn (most people are playing rallies in 15 minutes), it's great exercise (400-600 calories per hour), and it's genuinely gentle on joints compared to tennis, running, or basketball. The court is smaller, the ball is slower, and the movement is less jarring.</p>
+    <h2>The Social Factor</h2>
+    <p>Ask any regular pickleball player what keeps them coming back and they'll say the people before they say the sport. Open play sessions naturally create community — you rotate partners, meet new people, and build friendships that extend beyond the court. Many facilities report that their pickleball groups are the most social community in the building.</p>
+    <h2>Getting Started</h2>
+    <p>You don't need equipment — any decent facility provides paddles and balls for beginners. Wear athletic shoes with good lateral support (running shoes aren't ideal). Take a beginner lesson or clinic before jumping into open play — learning proper technique from the start prevents bad habits and injury.</p>
+    <h2>Where to Play Near Wilmington</h2>
+    <p>The closest dedicated indoor pickleball courts to Wilmington are at LevelUP Sports in Elkton, MD — about 30 minutes south. They offer weekly beginner clinics, regular open play sessions (Tuesday and Thursday evenings are the most popular), and all equipment is provided. Indoor courts mean no weather cancellations, which matters when you're building a consistent routine.</p>
+    <p>They also offer a free first session, so you can try it before committing to anything.</p>`,
+    author: "LevelUP Sports",
+    date: "2025-02-15",
+    readTime: 5,
+    category: "training-tips",
+    sport: "Pickleball",
+    image: "/images/blog/pickleball-over-50.jpg",
+  },
+  {
+    slug: "cricket-in-delaware-maryland-where-to-play",
+    title: "Cricket in Delaware & Maryland: Where to Play, Practice, and Learn",
+    excerpt: "The cricket scene in the MD/DE/PA tri-state area is growing fast. Here's where to find facilities, leagues, and coaching.",
+    content: `<p>The cricket community in the Maryland, Delaware, and Pennsylvania tri-state area has grown significantly in recent years, driven by immigration from South Asia and the Caribbean, and increasing interest from the broader community. But finding proper facilities has always been the challenge.</p>
+    <h2>The Infrastructure Problem</h2>
+    <p>Most cricket in the region happens on converted soccer fields, public parks, or improvised setups. While the passion is there, the infrastructure hasn't kept up. Finding indoor nets for winter training, bowling machines for batting practice, or professional coaching has historically meant driving to major metro areas.</p>
+    <h2>What's Available Now</h2>
+    <p>The landscape is improving. LevelUP Sports in Elkton, MD opened a dedicated indoor cricket facility with full-length nets, professional bowling machines, and coaching from Coach Sharma, a former first-class cricketer. It's the only facility of its kind between Philadelphia and Baltimore, serving players from Newark, Wilmington, Middletown, and across the tri-state area.</p>
+    <h2>Youth Development</h2>
+    <p>The cricket academy at LevelUP runs structured programs for youth and adults, covering batting, bowling, and fielding. Ananya Sharma, one of their youth players, was selected for the Maryland State U-17 team after training there — a sign that proper infrastructure produces real results.</p>
+    <h2>Getting Involved</h2>
+    <p>Whether you're an experienced cricketer looking for net sessions, a parent wanting proper coaching for your child, or a complete beginner curious about the sport, the options are better than they've ever been. LevelUP offers free trial sessions for newcomers — it's the easiest way to experience a proper indoor cricket setup.</p>
+    <h2>Summer Leagues</h2>
+    <p>LevelUP is launching a summer cricket league in 2025 with youth (U-15) and adult divisions. T20 format, Saturday matches, June through August. Registration is open now at levelupsports.us.</p>`,
+    author: "Coach Sharma",
+    date: "2025-01-28",
+    readTime: 5,
+    category: "news",
+    sport: "Cricket",
+    image: "/images/blog/cricket-delaware-maryland.jpg",
+  },
+  {
+    slug: "what-age-should-child-start-organized-sports",
+    title: "What Age Should Your Child Start Organized Sports? A Coach's Perspective",
+    excerpt: "Parents often wonder if they're starting too early or too late. Here's what the research says and what coaches actually see.",
+    content: `<p>It's one of the most common questions parents ask: "Is my child ready for organized sports?" The answer depends on the child, but here's what research and 15+ years of coaching experience have taught us.</p>
+    <h2>Ages 3-5: Free Play, Not Organized Sports</h2>
+    <p>At this age, children benefit most from unstructured play — running, climbing, throwing, catching. Their attention spans and motor development aren't ready for structured coaching. Programs at this age should be play-based, not drill-based. If a "coach" is asking a 4-year-old to stand in a batting stance for 10 minutes, find a different program.</p>
+    <h2>Ages 5-7: Introduction to Movement</h2>
+    <p>This is the ideal age to introduce structured athletic activity — but keep it sport-general, not sport-specific. Programs like our Kids Agility training focus on coordination, balance, and basic motor patterns through games and obstacle courses. The goal is building a love of movement, not creating a specialist.</p>
+    <h2>Ages 8-12: Sport Sampling Is Key</h2>
+    <p>Research consistently shows that early sport specialization (focusing on one sport before age 12) increases injury risk and burnout rates without improving long-term performance. The best approach at this age is trying multiple sports. This is why we offer four different sports under one roof — baseball, cricket, badminton, and pickleball. Let your child explore.</p>
+    <h2>Ages 13+: Specialization Can Begin</h2>
+    <p>By 13-14, many young athletes naturally gravitate toward a primary sport. This is when more intensive, sport-specific academy training becomes appropriate. The key is that it should be the child's choice, not the parent's projection.</p>
+    <h2>Signs Your Child Is Ready</h2>
+    <ul><li>They can follow multi-step instructions</li><li>They show interest in a sport (watching it, asking about it)</li><li>They can handle winning AND losing without major meltdowns</li><li>They want to go — you're not dragging them</li></ul>
+    <h2>The Most Important Thing</h2>
+    <p>At every age, the number one priority is that your child enjoys the experience. A child who has fun will keep playing. A child who's pressured will quit. Every program at LevelUP — from Kids Agility to our sport academies — is designed to make kids want to come back. That's the real measure of success.</p>`,
+    author: "Coach Williams",
+    date: "2025-03-01",
+    readTime: 6,
+    category: "training-tips",
+    image: "/images/blog/what-age-start-sports.jpg",
+    featured: true,
+  },
 ];
 
 export const BLOG_CATEGORIES = [

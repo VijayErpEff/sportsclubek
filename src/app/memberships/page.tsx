@@ -70,10 +70,10 @@ export default function MembershipsPage() {
               Join 500+ Athletes &amp; Families
             </p>
             <h1 className="font-display text-page-title text-neutral-900 mb-2 text-balance">
-              Simple plans. Serious training.
+              Simple Plans. No Contracts. Cancel Anytime.
             </h1>
             <p className="text-neutral-500">
-              No contracts. No hidden fees. Cancel anytime.
+              Not sure? Try a free session first — no card required. A single cage rental is $35. With a membership, unlimited access is less than $3/visit.
             </p>
           </div>
         </Container>
@@ -227,10 +227,10 @@ export default function MembershipsPage() {
       </Section>
 
       <CTABanner
-        title="Not Sure Which Plan Is Right?"
+        title="Try Before You Buy"
         description="Contact us or visit for a free tour. We'll help you find the perfect fit."
-        primaryCTA={{ label: "Schedule a Tour", href: "/open-house" }}
-        secondaryCTA={{ label: "Contact Us", href: "/about" }}
+        primaryCTA={{ label: "Try a Free Session", href: "/free-trial" }}
+        secondaryCTA={{ label: "Contact Us", href: "/contact" }}
       />
     </>
   );

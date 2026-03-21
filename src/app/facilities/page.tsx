@@ -25,7 +25,7 @@ const facilityAreas = [
     title: "Batting Cages",
     stat: "4 Cages",
     description:
-      "Professional-grade indoor cages with adjustable pitching machines (30–80 MPH). Helmets provided. All ages welcome.",
+      "Four professional cages with machines from 30 to 90 MPH. Helmets provided. Your kid can work at their pace — or push their limits.",
     features: ["Adjustable speed", "Helmets included", "Video analysis available"],
     link: "/baseball",
     image: "/images/sports/baseball.jpg",
@@ -35,7 +35,7 @@ const facilityAreas = [
     title: "Multi-Sport Courts",
     stat: "Competition Grade",
     description:
-      "Courts marked for badminton and pickleball with professional nets, LED lighting, and shock-absorbing flooring.",
+      "BWF-standard badminton and USAPA pickleball courts with synthetic sprung flooring, tournament LED lighting, and professional nets. Not converted tennis courts — purpose-built.",
     features: ["LED lighting", "Professional nets", "Cushioned flooring"],
     link: "/badminton",
     image: "/images/sports/badminton.jpg",
@@ -45,7 +45,7 @@ const facilityAreas = [
     title: "Cricket Nets",
     stat: "Full-Length",
     description:
-      "Indoor practice nets with bowling machines and coaching technology. Batting, bowling, and fielding practice year-round.",
+      "Full-length nets with professional bowling machines. If you've been making do with tennis balls in the garage, this will feel like coming home.",
     features: ["Bowling machines", "Video analysis", "All skill levels"],
     link: "/cricket",
     image: "/images/sports/cricket.png",
@@ -115,12 +115,11 @@ export default function FacilitiesPage() {
           </nav>
           <div className="max-w-2xl">
             <h1 className="font-display text-hero text-white mb-4 text-balance">
-              Built for athletes who mean business.
+              See What&apos;s Inside.
             </h1>
             <p className="text-lg text-white/80 leading-relaxed max-w-xl">
-              Every square foot designed for peak performance — professional
-              batting cages, competition-grade courts, and climate-controlled
-              comfort year-round.
+              10 courts and cages. 4 sports. 72°F year-round. Here&apos;s what
+              you&apos;ll find at 701 E Pulaski Hwy.
             </p>
           </div>
         </Container>
@@ -274,8 +273,8 @@ export default function FacilitiesPage() {
       <CTABanner
         title="See It For Yourself"
         description="Schedule a facility tour or book your first session today."
-        primaryCTA={{ label: "Book a Session", href: "/schedule" }}
-        secondaryCTA={{ label: "Schedule a Tour", href: "/open-house" }}
+        primaryCTA={{ label: "Try a Free Session", href: "/free-trial" }}
+        secondaryCTA={{ label: "View Schedule", href: "/schedule" }}
       />
     </>
   );
