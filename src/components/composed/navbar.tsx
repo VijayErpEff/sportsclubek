@@ -19,6 +19,7 @@ const SPORT_ITEMS = [
 
 const NAV_ITEMS = [
   { label: "Facilities", href: "/facilities" },
+  { label: "Court Status", href: "/court-status" },
   { label: "Memberships", href: "/memberships" },
   { label: "Schedule", href: "/schedule" },
   { label: "About", href: "/about" },
