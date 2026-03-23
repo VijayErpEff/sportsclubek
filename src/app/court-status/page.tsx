@@ -2,7 +2,6 @@ import { Metadata } from "next";
 import { Suspense } from "react";
 import { generateSEOMetadata } from "@/lib/seo/metadata";
 import { generateBreadcrumbLD } from "@/lib/seo/json-ld";
-import { Container } from "@/components/layout/container";
 import { CourtStatusBoard } from "./court-status-board";
 
 export const metadata: Metadata = generateSEOMetadata({
@@ -24,21 +23,13 @@ export default function CourtStatusPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLD) }}
       />
-      <section className="pt-20 pb-6 md:pt-24 md:pb-8">
-        <Container>
-          <Suspense fallback={
-            <div className="animate-pulse space-y-4">
-              <div className="h-8 w-48 bg-neutral-100 rounded-lg" />
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-                {[...Array(4)].map((_, i) => <div key={i} className="h-24 bg-neutral-100 rounded-xl" />)}
-              </div>
-              <div className="h-40 bg-neutral-100 rounded-xl" />
-            </div>
-          }>
-            <CourtStatusBoard />
-          </Suspense>
-        </Container>
-      </section>
+      <Suspense fallback={
+        <div className="min-h-[calc(100vh-64px)] flex items-center justify-center">
+          <div className="animate-pulse text-neutral-300 text-lg font-medium">Loading&hellip;</div>
+        </div>
+      }>
+        <CourtStatusBoard />
+      </Suspense>
     </>
   );
 }

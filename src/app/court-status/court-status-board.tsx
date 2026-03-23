@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useSearchParams } from "next/navigation";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils/cn";
 
 /* ── Types ── */
@@ -10,21 +11,10 @@ interface CageItem {
   sport: string | null;
   note: string;
 }
-
-interface SlotItem {
-  state: string;
-  note: string;
-}
-
+interface SlotItem { state: string; note: string; }
 interface CourtState {
-  cages: {
-    merges: [boolean, boolean, boolean];
-    items: CageItem[];
-  };
-  mp: {
-    layout: string;
-    slots: SlotItem[];
-  };
+  cages: { merges: [boolean, boolean, boolean]; items: CageItem[] };
+  mp: { layout: string; slots: SlotItem[] };
   updated: number;
 }
 
@@ -32,6 +22,7 @@ interface CourtState {
 const STORAGE_KEY = "levelup_court_v5";
 const POLL_MS = 2000;
 const ADMIN_PIN = "1234";
+const EASE = [0.22, 1, 0.36, 1] as const;
 
 const CAGE_STATES: { status: CageItem["status"]; sport: string | null }[] = [
   { status: "available", sport: null },
@@ -150,15 +141,15 @@ function slotVariant(ly: string, i: number, st: string): string {
 }
 
 /* ── Variant styles ── */
-const V: Record<string, { cell: string; sport: string; status: string; dot: string }> = {
-  available:     { cell: "bg-white border-accent/25 shadow-[inset_0_-3px_0_0_rgba(27,125,58,0.15)]",            sport: "text-accent",     status: "text-accent/70",     dot: "bg-accent" },
-  reserved:      { cell: "bg-white border-warning/30 shadow-[inset_0_-3px_0_0_rgba(243,156,18,0.15)]",          sport: "text-warning",    status: "text-warning/70",    dot: "bg-warning" },
-  pickleball:    { cell: "bg-white border-orange-400/30 shadow-[inset_0_-3px_0_0_rgba(251,146,60,0.15)]",       sport: "text-orange-600", status: "text-orange-500/70", dot: "bg-orange-400" },
-  badminton:     { cell: "bg-white border-info/30 shadow-[inset_0_-3px_0_0_rgba(52,152,219,0.15)]",             sport: "text-info",       status: "text-info/70",       dot: "bg-info" },
-  "box-cricket": { cell: "bg-white border-error/25 shadow-[inset_0_-3px_0_0_rgba(231,76,60,0.15)]",             sport: "text-error",      status: "text-error/70",      dot: "bg-error" },
-  volleyball:    { cell: "bg-white border-violet-400/30 shadow-[inset_0_-3px_0_0_rgba(167,139,250,0.15)]",      sport: "text-violet-600", status: "text-violet-500/70", dot: "bg-violet-400" },
-  cricket:       { cell: "bg-white border-error/25 shadow-[inset_0_-3px_0_0_rgba(231,76,60,0.15)]",             sport: "text-error",      status: "text-error/70",      dot: "bg-error" },
-  training:      { cell: "bg-white border-teal-400/30 shadow-[inset_0_-3px_0_0_rgba(94,234,212,0.2)]",          sport: "text-teal-600",   status: "text-teal-500/70",   dot: "bg-teal-400" },
+const V: Record<string, { cell: string; glow: string; sport: string; status: string; dot: string }> = {
+  available:     { cell: "border-accent/30",     glow: "shadow-[0_0_20px_-4px_rgba(27,125,58,0.15)]",  sport: "text-accent",     status: "text-accent/60",     dot: "bg-accent" },
+  reserved:      { cell: "border-warning/35",    glow: "shadow-[0_0_20px_-4px_rgba(243,156,18,0.15)]", sport: "text-warning",    status: "text-warning/60",    dot: "bg-warning" },
+  pickleball:    { cell: "border-orange-400/35", glow: "shadow-[0_0_20px_-4px_rgba(251,146,60,0.15)]", sport: "text-orange-600", status: "text-orange-500/60", dot: "bg-orange-400" },
+  badminton:     { cell: "border-info/35",       glow: "shadow-[0_0_20px_-4px_rgba(52,152,219,0.15)]", sport: "text-info",       status: "text-info/60",       dot: "bg-info" },
+  "box-cricket": { cell: "border-error/30",      glow: "shadow-[0_0_20px_-4px_rgba(231,76,60,0.15)]",  sport: "text-error",      status: "text-error/60",      dot: "bg-error" },
+  volleyball:    { cell: "border-violet-400/35", glow: "shadow-[0_0_20px_-4px_rgba(167,139,250,0.15)]",sport: "text-violet-600", status: "text-violet-500/60", dot: "bg-violet-400" },
+  cricket:       { cell: "border-error/30",      glow: "shadow-[0_0_20px_-4px_rgba(231,76,60,0.15)]",  sport: "text-error",      status: "text-error/60",      dot: "bg-error" },
+  training:      { cell: "border-teal-400/35",   glow: "shadow-[0_0_20px_-4px_rgba(94,234,212,0.2)]",  sport: "text-teal-600",   status: "text-teal-500/60",   dot: "bg-teal-400" },
 };
 
 const LEGEND_ITEMS = [
@@ -172,59 +163,65 @@ const LEGEND_ITEMS = [
 ];
 
 const GRID_CLASSES: Record<string, string> = {
-  "courts-6":  "grid-cols-3",
-  "vb-courts": "grid-cols-3",
-  "courts-vb": "grid-cols-3",
-  "vb-2":      "grid-cols-2",
-  "bc-1":      "grid-cols-3",
-  "bc-2":      "grid-cols-2",
-  "bc-full":   "grid-cols-1",
+  "courts-6": "grid-cols-3", "vb-courts": "grid-cols-3", "courts-vb": "grid-cols-3",
+  "vb-2": "grid-cols-2", "bc-1": "grid-cols-3", "bc-2": "grid-cols-2", "bc-full": "grid-cols-1",
 };
 
-/* ── Court Cell ── */
+/* ── Animated Court Cell ── */
 function CourtCell({
   variant, label, sportLabel, statusLabel, note,
-  adminMode, onClick, onNoteClick, className,
+  adminMode, onClick, onNoteClick, className, index, reduced,
 }: {
   variant: string; label: string; sportLabel: string; statusLabel: string;
   note: string; adminMode: boolean; onClick: () => void; onNoteClick: () => void;
-  className?: string;
+  className?: string; index: number; reduced: boolean;
 }) {
   const vs = V[variant] || V.available;
   return (
-    <div
+    <motion.div
+      layout
+      initial={reduced ? false : { opacity: 0, y: 12, scale: 0.97 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ duration: 0.4, delay: index * 0.05, ease: EASE }}
       onClick={onClick}
       className={cn(
-        "relative rounded-xl border-2 flex flex-col items-center justify-center p-3 transition-all select-none shadow-card",
-        vs.cell,
-        adminMode && "cursor-pointer hover:shadow-card-hover hover:scale-[1.02]",
+        "relative rounded-2xl border-2 bg-white flex flex-col items-center justify-center p-4 select-none transition-shadow duration-300",
+        vs.cell, vs.glow,
+        adminMode && "cursor-pointer hover:shadow-card-hover hover:scale-[1.03]",
+        !adminMode && "hover:shadow-card-hover",
         className
       )}
     >
       {adminMode && (
         <button
           onClick={(e) => { e.stopPropagation(); onNoteClick(); }}
-          className="absolute top-1.5 right-1.5 w-6 h-6 rounded-md border border-neutral-200 bg-neutral-50 flex items-center justify-center text-[0.7rem] text-neutral-400 hover:bg-white hover:shadow-card z-10 transition-all"
+          className="absolute top-2 right-2 w-6 h-6 rounded-lg border border-neutral-200 bg-neutral-50 flex items-center justify-center text-[0.7rem] text-neutral-400 hover:bg-white hover:shadow-card z-10 transition-all"
           title="Edit note"
         >
           &#9998;
         </button>
       )}
-      <span className="text-[0.625rem] font-semibold uppercase tracking-[0.1em] text-neutral-400">
+      <span className="text-[0.6rem] font-bold uppercase tracking-[0.12em] text-neutral-400">
         {label}
       </span>
-      <span className={cn("font-display text-lg font-bold leading-tight mt-0.5", vs.sport)}>
+      <motion.span
+        key={sportLabel}
+        initial={reduced ? false : { opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.25, ease: EASE }}
+        className={cn("font-display text-xl font-extrabold leading-none mt-1.5 tracking-tight", vs.sport)}
+      >
         {sportLabel}
-      </span>
-      <span className={cn("text-[0.6rem] font-bold uppercase tracking-widest", vs.status)}>
+      </motion.span>
+      <span className={cn("text-[0.55rem] font-bold uppercase tracking-[0.15em] mt-1", vs.status)}>
         {statusLabel}
       </span>
       {note && (
-        <span className="text-[0.7rem] text-neutral-400 mt-1 text-center truncate max-w-full">
+        <span className="text-[0.65rem] text-neutral-400 mt-1.5 text-center truncate max-w-full leading-tight">
           {note}
         </span>
       )}
-    </div>
+    </motion.div>
   );
 }
 
@@ -239,6 +236,7 @@ export function CourtStatusBoard() {
     open: boolean; type: "cage" | "slot"; index: number; title: string; value: string;
   }>({ open: false, type: "cage", index: 0, title: "", value: "" });
   const [mounted, setMounted] = useState(false);
+  const reduced = useReducedMotion() ?? false;
 
   const searchParams = useSearchParams();
   const pinInputRef = useRef<HTMLInputElement>(null);
@@ -246,18 +244,11 @@ export function CourtStatusBoard() {
   const stateRef = useRef(state);
   stateRef.current = state;
 
-  useEffect(() => {
-    const saved = loadState();
-    if (saved) setState(saved);
-    setMounted(true);
-  }, []);
+  useEffect(() => { const saved = loadState(); if (saved) setState(saved); setMounted(true); }, []);
 
-  // Auto-open PIN modal when ?admin is in the URL
   useEffect(() => {
     if (mounted && searchParams.has("admin") && !adminMode) {
-      setPinModalOpen(true);
-      setPinValue("");
-      setPinError(false);
+      setPinModalOpen(true); setPinValue(""); setPinError(false);
       setTimeout(() => pinInputRef.current?.focus(), 100);
     }
   }, [mounted, searchParams, adminMode]);
@@ -270,12 +261,8 @@ export function CourtStatusBoard() {
     return () => clearInterval(id);
   }, []);
 
-  const persist = useCallback((next: CourtState) => {
-    setState(next);
-    saveState(next);
-  }, []);
+  const persist = useCallback((next: CourtState) => { setState(next); saveState(next); }, []);
 
-  /* ── Admin ── */
   const handleAdminToggle = () => {
     if (adminMode) { setAdminMode(false); return; }
     setPinModalOpen(true); setPinValue(""); setPinError(false);
@@ -287,7 +274,6 @@ export function CourtStatusBoard() {
     else { setPinError(true); setPinValue(""); pinInputRef.current?.focus(); }
   };
 
-  /* ── Cage actions ── */
   const toggleMerge = (idx: number) => {
     const next = structuredClone(state);
     next.cages.merges[idx] = !next.cages.merges[idx];
@@ -299,34 +285,29 @@ export function CourtStatusBoard() {
     if (!adminMode) return;
     const next = structuredClone(state);
     const groups = computeGroups(next.cages.merges);
-    const g = groups[gi];
-    const c = next.cages.items[g[0]];
+    const g = groups[gi]; const c = next.cages.items[g[0]];
     const idx = CAGE_STATES.findIndex((x) => x.status === c.status && x.sport === c.sport);
-    const nextState = CAGE_STATES[(Math.max(idx, 0) + 1) % CAGE_STATES.length];
-    c.status = nextState.status; c.sport = nextState.sport;
+    const ns = CAGE_STATES[(Math.max(idx, 0) + 1) % CAGE_STATES.length];
+    c.status = ns.status; c.sport = ns.sport;
     persist(next);
   };
 
   const openCageNote = (gi: number) => {
-    const groups = computeGroups(state.cages.merges);
-    const g = groups[gi];
+    const groups = computeGroups(state.cages.merges); const g = groups[gi];
     setNoteModal({ open: true, type: "cage", index: g[0], title: groupLabel(g), value: state.cages.items[g[0]].note });
     setTimeout(() => noteInputRef.current?.focus(), 100);
   };
 
-  /* ── MP actions ── */
   const setLayout = (ly: string) => {
     if (state.mp.layout === ly) return;
     const next = structuredClone(state);
-    next.mp.layout = ly;
-    next.mp.slots = seq(LAYOUTS[ly].slots, makeSlot);
+    next.mp.layout = ly; next.mp.slots = seq(LAYOUTS[ly].slots, makeSlot);
     persist(next);
   };
 
   const clickSlot = (i: number) => {
     if (!adminMode) return;
-    const next = structuredClone(state);
-    const s = next.mp.slots[i];
+    const next = structuredClone(state); const s = next.mp.slots[i];
     const t = slotType(next.mp.layout, i);
     const cycle = t === "court" ? COURT_CYCLE : BIG_CYCLE;
     const idx = cycle.indexOf(s.state);
@@ -340,92 +321,84 @@ export function CourtStatusBoard() {
   };
 
   const saveNote = () => {
-    const next = structuredClone(state);
-    const v = noteModal.value.trim();
+    const next = structuredClone(state); const v = noteModal.value.trim();
     if (noteModal.type === "cage") next.cages.items[noteModal.index].note = v;
     else next.mp.slots[noteModal.index].note = v;
-    persist(next);
-    setNoteModal((m) => ({ ...m, open: false }));
+    persist(next); setNoteModal((m) => ({ ...m, open: false }));
   };
 
-  /* ── Derived ── */
   const groups = computeGroups(state.cages.merges);
   const cageAvail = groups.filter((g) => state.cages.items[g[0]].status === "available").length;
   const ly = state.mp.layout;
   const cfg = LAYOUTS[ly];
   const mpAvail = state.mp.slots.filter((s) => s.state === "available").length;
-  const updatedTime = mounted
-    ? new Date(state.updated).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
-    : "";
+  const updatedTime = mounted ? new Date(state.updated).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "";
 
-  if (!mounted) {
-    return (
-      <div className="animate-pulse space-y-4">
-        <div className="h-8 w-48 bg-neutral-100 rounded-lg" />
-        <div className="grid grid-cols-4 gap-3">
-          {[...Array(4)].map((_, i) => <div key={i} className="h-24 bg-neutral-100 rounded-xl" />)}
-        </div>
-        <div className="h-40 bg-neutral-100 rounded-xl" />
-      </div>
-    );
-  }
+  if (!mounted) return (
+    <div className="min-h-[calc(100vh-64px)] flex items-center justify-center">
+      <div className="animate-pulse text-neutral-300 text-lg font-medium">Loading&hellip;</div>
+    </div>
+  );
 
   return (
-    <div>
+    <div className="min-h-[calc(100vh-64px)] flex flex-col px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto pt-20 md:pt-24 pb-6">
       {/* Title row */}
-      <div className="flex items-center justify-between mb-5">
+      <motion.div
+        initial={reduced ? false : { opacity: 0, y: -8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: EASE }}
+        className="flex items-center justify-between mb-5 shrink-0"
+      >
         <div className="flex items-center gap-2.5">
           <h1 className="font-display text-section text-neutral-900">Court Status</h1>
-          <span className="flex items-center gap-1.5 text-[0.65rem] font-bold uppercase tracking-wider text-accent bg-accent/8 px-2 py-0.5 rounded-full">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+          <span className="flex items-center gap-1.5 text-[0.6rem] font-bold uppercase tracking-widest text-accent bg-accent/8 px-2.5 py-0.5 rounded-full">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-50" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
+            </span>
             Live
           </span>
         </div>
         <div className="flex items-center gap-4">
-          <div className="hidden sm:flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-3">
             {LEGEND_ITEMS.map((item) => (
-              <span key={item.key} className="flex items-center gap-1 text-[0.65rem] font-medium text-neutral-400">
+              <span key={item.key} className="flex items-center gap-1.5 text-[0.6rem] font-semibold text-neutral-400">
                 <span className={cn("w-2 h-2 rounded-full", item.dot)} />
                 {item.label}
               </span>
             ))}
           </div>
-          <span className="text-[0.65rem] text-neutral-400 tabular-nums">
-            {updatedTime}
-          </span>
+          <span className="text-[0.6rem] text-neutral-300 tabular-nums font-medium">{updatedTime}</span>
         </div>
-      </div>
+      </motion.div>
 
-      {/* Two-column layout: Cages left, Courts right */}
-      <div className="grid lg:grid-cols-[280px_1fr] gap-5">
-        {/* Cages column */}
-        <div>
-          <div className="flex items-center justify-between mb-2.5">
-            <h2 className="text-[0.8rem] font-bold uppercase tracking-[0.1em] text-neutral-500">Cages</h2>
-            <span className="text-[0.7rem] font-bold text-accent">{cageAvail}/{groups.length} open</span>
+      {/* Main grid — equal halves, fills viewport */}
+      <div className="grid lg:grid-cols-2 gap-5 flex-1 min-h-0">
+        {/* Cages */}
+        <motion.div
+          initial={reduced ? false : { opacity: 0, x: -16 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
+          className="flex flex-col"
+        >
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-[0.75rem] font-bold uppercase tracking-[0.12em] text-neutral-400">Batting Cages</h2>
+            <span className="text-[0.65rem] font-bold text-accent">{cageAvail}/{groups.length} open</span>
           </div>
 
           {adminMode && (
             <div className="flex items-center gap-1.5 mb-2 flex-wrap">
-              <span className="text-[0.7rem] font-semibold text-neutral-500">Merge:</span>
+              <span className="text-[0.65rem] font-semibold text-neutral-500">Merge:</span>
               {[0, 1, 2].map((m) => (
-                <button
-                  key={m}
-                  onClick={() => toggleMerge(m)}
-                  className={cn(
-                    "px-2 py-0.5 rounded text-[0.7rem] font-medium border transition-all",
-                    state.cages.merges[m]
-                      ? "bg-primary text-white border-primary"
-                      : "bg-white border-neutral-200 text-neutral-600 hover:border-primary/40"
-                  )}
-                >
-                  {m + 1}+{m + 2}
-                </button>
+                <button key={m} onClick={() => toggleMerge(m)}
+                  className={cn("px-2 py-0.5 rounded text-[0.65rem] font-medium border transition-all",
+                    state.cages.merges[m] ? "bg-primary text-white border-primary" : "bg-white border-neutral-200 text-neutral-600 hover:border-primary/40"
+                  )}>{m + 1}+{m + 2}</button>
               ))}
             </div>
           )}
 
-          <div className="grid grid-cols-2 gap-2.5">
+          <div className="grid grid-cols-2 gap-3 flex-1">
             {groups.map((g, gi) => {
               const c = state.cages.items[g[0]];
               const v = cageCssVariant(c);
@@ -433,152 +406,150 @@ export function CourtStatusBoard() {
               return (
                 <div key={gi} style={{ gridColumn: g.length > 1 ? "span 2" : undefined }}>
                   <CourtCell
-                    variant={v}
-                    label={groupLabel(g)}
-                    sportLabel={label}
-                    statusLabel={slotStatusLabel(c.status)}
-                    note={c.note}
-                    adminMode={adminMode}
-                    onClick={() => clickCageGroup(gi)}
+                    variant={v} label={groupLabel(g)} sportLabel={label}
+                    statusLabel={slotStatusLabel(c.status)} note={c.note}
+                    adminMode={adminMode} onClick={() => clickCageGroup(gi)}
                     onNoteClick={() => openCageNote(gi)}
-                    className="min-h-[100px] h-full"
+                    className="h-full" index={gi} reduced={reduced}
                   />
                 </div>
               );
             })}
           </div>
-        </div>
+        </motion.div>
 
-        {/* Multipurpose Courts column */}
-        <div>
-          <div className="flex items-center justify-between mb-2.5">
+        {/* Courts */}
+        <motion.div
+          initial={reduced ? false : { opacity: 0, x: 16 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.15, ease: EASE }}
+          className="flex flex-col"
+        >
+          <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
-              <h2 className="text-[0.8rem] font-bold uppercase tracking-[0.1em] text-neutral-500">Courts</h2>
-              <span className="text-[0.65rem] font-medium text-neutral-400">{cfg.label}</span>
+              <h2 className="text-[0.75rem] font-bold uppercase tracking-[0.12em] text-neutral-400">Courts</h2>
+              <span className="text-[0.6rem] font-medium text-neutral-300">{cfg.label}</span>
             </div>
-            <span className="text-[0.7rem] font-bold text-accent">{mpAvail}/{cfg.slots} open</span>
+            <span className="text-[0.65rem] font-bold text-accent">{mpAvail}/{cfg.slots} open</span>
           </div>
 
           {adminMode && (
             <div className="flex gap-1 mb-2 flex-wrap">
               {LAYOUT_ORDER.map((key) => (
-                <button
-                  key={key}
-                  onClick={() => setLayout(key)}
-                  className={cn(
-                    "px-2 py-0.5 rounded text-[0.7rem] font-medium border transition-all",
-                    key === ly
-                      ? "bg-primary text-white border-primary"
-                      : "bg-white border-neutral-200 text-neutral-600 hover:border-primary/40"
-                  )}
-                >
-                  {LAYOUTS[key].btnLabel}
-                </button>
+                <button key={key} onClick={() => setLayout(key)}
+                  className={cn("px-2 py-0.5 rounded text-[0.65rem] font-medium border transition-all",
+                    key === ly ? "bg-primary text-white border-primary" : "bg-white border-neutral-200 text-neutral-600 hover:border-primary/40"
+                  )}>{LAYOUTS[key].btnLabel}</button>
               ))}
             </div>
           )}
 
-          <div className={cn("grid gap-2.5", GRID_CLASSES[ly])}>
+          <div className={cn("grid gap-3 flex-1", GRID_CLASSES[ly])}>
             {state.mp.slots.map((s, i) => {
               const variant = slotVariant(ly, i, s.state);
               const isFullWidth =
-                (ly === "vb-courts" && i === 0) ||
-                (ly === "courts-vb" && i === 3) ||
-                (ly === "bc-1" && i === 0);
-
+                (ly === "vb-courts" && i === 0) || (ly === "courts-vb" && i === 3) || (ly === "bc-1" && i === 0);
               return (
                 <CourtCell
-                  key={i}
-                  variant={variant}
-                  label={slotName(ly, i)}
-                  sportLabel={slotSportLabel(ly, i, s.state)}
-                  statusLabel={slotStatusLabel(s.state)}
-                  note={s.note}
-                  adminMode={adminMode}
-                  onClick={() => clickSlot(i)}
-                  onNoteClick={() => openSlotNote(i)}
+                  key={i} variant={variant} label={slotName(ly, i)}
+                  sportLabel={slotSportLabel(ly, i, s.state)} statusLabel={slotStatusLabel(s.state)}
+                  note={s.note} adminMode={adminMode} onClick={() => clickSlot(i)}
+                  onNoteClick={() => openSlotNote(i)} index={i + groups.length} reduced={reduced}
                   className={cn(
-                    "min-h-[90px]",
-                    isFullWidth && ly === "bc-1" && "row-span-2 min-h-[90px]",
+                    isFullWidth && ly === "bc-1" && "row-span-2",
                     isFullWidth && (ly === "vb-courts" || ly === "courts-vb") && "col-span-full",
-                    ly === "bc-full" && "min-h-[120px]",
                   )}
                 />
               );
             })}
           </div>
-        </div>
+        </motion.div>
       </div>
 
-      {/* Mobile-only legend */}
-      <div className="flex sm:hidden gap-3 flex-wrap justify-center mt-4">
+      {/* Mobile legend */}
+      <div className="flex md:hidden gap-3 flex-wrap justify-center mt-4 shrink-0">
         {LEGEND_ITEMS.map((item) => (
-          <span key={item.key} className="flex items-center gap-1 text-[0.65rem] font-medium text-neutral-400">
-            <span className={cn("w-2 h-2 rounded-full", item.dot)} />
-            {item.label}
+          <span key={item.key} className="flex items-center gap-1 text-[0.6rem] font-semibold text-neutral-400">
+            <span className={cn("w-2 h-2 rounded-full", item.dot)} />{item.label}
           </span>
         ))}
       </div>
 
-      {/* Admin exit — only visible when in admin mode */}
+      {/* Admin exit */}
       {adminMode && (
-        <div className="flex justify-end mt-3">
-          <button
-            onClick={handleAdminToggle}
-            className="text-[0.6rem] font-medium text-error hover:text-error/80 transition-colors"
-          >
+        <div className="flex justify-end mt-2 shrink-0">
+          <button onClick={handleAdminToggle}
+            className="text-[0.55rem] font-medium text-error hover:text-error/80 transition-colors">
             Exit Admin
           </button>
         </div>
       )}
 
       {/* PIN Modal */}
-      {pinModalOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-primary-dark/60 backdrop-blur-sm"
-          onClick={() => setPinModalOpen(false)}
-        >
-          <div className="bg-white rounded-2xl p-8 w-[90%] max-w-sm text-center shadow-card-elevated" onClick={(e) => e.stopPropagation()}>
-            <h3 className="font-display text-card-title text-neutral-900 mb-5">Enter Admin PIN</h3>
-            <input
-              ref={pinInputRef} type="password" maxLength={6} value={pinValue}
-              onChange={(e) => { setPinValue(e.target.value); setPinError(false); }}
-              onKeyDown={(e) => { if (e.key === "Enter") submitPin(); if (e.key === "Escape") setPinModalOpen(false); }}
-              placeholder="PIN"
-              className="w-full px-4 py-3 border-2 border-neutral-200 rounded-xl text-center font-mono text-lg tracking-[0.2em] outline-none transition-colors focus:border-primary"
-            />
-            {pinError && <p className="text-error text-caption mt-2">Incorrect PIN</p>}
-            <div className="flex gap-3 mt-5">
-              <button onClick={() => setPinModalOpen(false)} className="flex-1 py-2.5 rounded-xl border border-neutral-200 text-neutral-700 font-semibold text-caption hover:bg-neutral-50 transition-colors">Cancel</button>
-              <button onClick={submitPin} className="flex-1 py-2.5 rounded-xl bg-primary text-white font-semibold text-caption hover:bg-primary-light transition-colors">Enter</button>
-            </div>
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {pinModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-primary-dark/60 backdrop-blur-sm"
+            onClick={() => setPinModalOpen(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 10 }}
+              transition={{ duration: 0.25, ease: EASE }}
+              className="bg-white rounded-2xl p-8 w-[90%] max-w-sm text-center shadow-card-elevated"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h3 className="font-display text-card-title text-neutral-900 mb-5">Enter Admin PIN</h3>
+              <input ref={pinInputRef} type="password" maxLength={6} value={pinValue}
+                onChange={(e) => { setPinValue(e.target.value); setPinError(false); }}
+                onKeyDown={(e) => { if (e.key === "Enter") submitPin(); if (e.key === "Escape") setPinModalOpen(false); }}
+                placeholder="PIN"
+                className="w-full px-4 py-3 border-2 border-neutral-200 rounded-xl text-center font-mono text-lg tracking-[0.2em] outline-none transition-colors focus:border-primary" />
+              {pinError && <p className="text-error text-caption mt-2">Incorrect PIN</p>}
+              <div className="flex gap-3 mt-5">
+                <button onClick={() => setPinModalOpen(false)} className="flex-1 py-2.5 rounded-xl border border-neutral-200 text-neutral-700 font-semibold text-caption hover:bg-neutral-50 transition-colors">Cancel</button>
+                <button onClick={submitPin} className="flex-1 py-2.5 rounded-xl bg-primary text-white font-semibold text-caption hover:bg-primary-light transition-colors">Enter</button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Note Modal */}
-      {noteModal.open && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-primary-dark/60 backdrop-blur-sm"
-          onClick={() => setNoteModal((m) => ({ ...m, open: false }))}
-        >
-          <div className="bg-white rounded-2xl p-8 w-[90%] max-w-sm text-center shadow-card-elevated" onClick={(e) => e.stopPropagation()}>
-            <h3 className="font-display text-card-title text-neutral-900 mb-5">{noteModal.title}</h3>
-            <input
-              ref={noteInputRef} type="text" maxLength={60} value={noteModal.value}
-              onChange={(e) => setNoteModal((m) => ({ ...m, value: e.target.value }))}
-              onKeyDown={(e) => { if (e.key === "Enter") saveNote(); if (e.key === "Escape") setNoteModal((m) => ({ ...m, open: false })); }}
-              placeholder="e.g., League game 4-6pm"
-              className="w-full px-4 py-3 border-2 border-neutral-200 rounded-xl text-body outline-none transition-colors focus:border-primary"
-            />
-            <div className="flex gap-3 mt-5">
-              <button onClick={() => setNoteModal((m) => ({ ...m, value: "" }))} className="flex-1 py-2.5 rounded-xl border border-error/40 bg-error/5 text-error font-semibold text-caption hover:bg-error/10 transition-colors">Clear</button>
-              <button onClick={() => setNoteModal((m) => ({ ...m, open: false }))} className="flex-1 py-2.5 rounded-xl border border-neutral-200 text-neutral-700 font-semibold text-caption hover:bg-neutral-50 transition-colors">Cancel</button>
-              <button onClick={saveNote} className="flex-1 py-2.5 rounded-xl bg-primary text-white font-semibold text-caption hover:bg-primary-light transition-colors">Save</button>
-            </div>
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {noteModal.open && (
+          <motion.div
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-primary-dark/60 backdrop-blur-sm"
+            onClick={() => setNoteModal((m) => ({ ...m, open: false }))}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 10 }}
+              transition={{ duration: 0.25, ease: EASE }}
+              className="bg-white rounded-2xl p-8 w-[90%] max-w-sm text-center shadow-card-elevated"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h3 className="font-display text-card-title text-neutral-900 mb-5">{noteModal.title}</h3>
+              <input ref={noteInputRef} type="text" maxLength={60} value={noteModal.value}
+                onChange={(e) => setNoteModal((m) => ({ ...m, value: e.target.value }))}
+                onKeyDown={(e) => { if (e.key === "Enter") saveNote(); if (e.key === "Escape") setNoteModal((m) => ({ ...m, open: false })); }}
+                placeholder="e.g., League game 4-6pm"
+                className="w-full px-4 py-3 border-2 border-neutral-200 rounded-xl text-body outline-none transition-colors focus:border-primary" />
+              <div className="flex gap-3 mt-5">
+                <button onClick={() => setNoteModal((m) => ({ ...m, value: "" }))} className="flex-1 py-2.5 rounded-xl border border-error/40 bg-error/5 text-error font-semibold text-caption hover:bg-error/10 transition-colors">Clear</button>
+                <button onClick={() => setNoteModal((m) => ({ ...m, open: false }))} className="flex-1 py-2.5 rounded-xl border border-neutral-200 text-neutral-700 font-semibold text-caption hover:bg-neutral-50 transition-colors">Cancel</button>
+                <button onClick={saveNote} className="flex-1 py-2.5 rounded-xl bg-primary text-white font-semibold text-caption hover:bg-primary-light transition-colors">Save</button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
