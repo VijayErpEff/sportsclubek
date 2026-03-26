@@ -46,7 +46,7 @@ const FAQ_ITEMS = [
   {
     question: "Can I try more than one sport?",
     answer:
-      "Yes! You can book a free trial in each of our four sports. Many families try two or three before deciding on their favorite.",
+      "Yes! You can book a free trial in each of our six sports. Many families try two or three before deciding on their favorite.",
   },
 ];
 
@@ -143,7 +143,7 @@ export default function FreeTrialPage() {
                     "Personalized skill assessment",
                     "No obligation to sign up for anything",
                     "Ages 5+ and adults welcome",
-                    "Valid for all four sports",
+                    "Valid for all six sports",
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-2.5">
                       <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />

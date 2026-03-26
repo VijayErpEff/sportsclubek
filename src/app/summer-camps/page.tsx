@@ -69,7 +69,7 @@ const CAMPS = [
     ages: "Ages 6-12",
     schedule: "Full day, Mon-Fri, 9AM-3PM",
     highlights: [
-      "Rotate through all four sports",
+      "Rotate through all our sports",
       "Two sports per day",
       "Focus on fundamentals and fun",
       "Team games and challenges",

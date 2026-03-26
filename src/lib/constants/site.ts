@@ -3,7 +3,7 @@ export const SITE_CONFIG = {
   shortName: "LevelUP Sports",
   tagline: "Elevate Your Game",
   description:
-    "Premier multi-sport facility in Elkton, MD offering expert coaching, modern courts, and programs in baseball, cricket, badminton, and pickleball for all ages and skill levels.",
+    "Premier multi-sport facility in Elkton, MD offering expert coaching, modern courts, and programs in baseball, cricket, badminton, pickleball, volleyball, and soccer for all ages and skill levels.",
   url: "https://levelupsports.us",
   phone: "(443) 406-6494",
   email: "info@levelupsports.us",
@@ -91,6 +91,26 @@ export const SPORTS = [
       "Indoor pickleball courts for open play, lessons, and court rentals.",
     hasAcademy: false,
   },
+  {
+    name: "Volleyball",
+    slug: "volleyball",
+    icon: "volleyball",
+    color: "#D97706",
+    image: "/images/sports/volleyball.jpg",
+    description:
+      "Indoor volleyball courts with coaching, leagues, and open play for all levels.",
+    hasAcademy: true,
+  },
+  {
+    name: "Soccer",
+    slug: "soccer",
+    icon: "soccer",
+    color: "#B83A2F",
+    image: "/images/sports/soccer.jpg",
+    description:
+      "Year-round indoor soccer and futsal on professional turf. Youth academies through adult leagues.",
+    hasAcademy: true,
+  },
 ] as const;
 
 export const NAV_LINKS = [
@@ -105,6 +125,10 @@ export const NAV_LINKS = [
       { label: "Badminton", href: "/badminton" },
       { label: "Badminton Academy", href: "/badminton-academy" },
       { label: "Pickleball", href: "/pickleball" },
+      { label: "Volleyball", href: "/volleyball" },
+      { label: "Volleyball Academy", href: "/volleyball-academy" },
+      { label: "Soccer", href: "/soccer" },
+      { label: "Soccer Academy", href: "/soccer-academy" },
       { label: "Kids Agility", href: "/kids-agility" },
     ],
   },

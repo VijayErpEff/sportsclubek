@@ -36,7 +36,7 @@ const milestones = [
   {
     year: "2024",
     title: "Opening day",
-    desc: "First families walk through the doors. Four sports — baseball, cricket, badminton, and pickleball — under one roof. Within a month, members are coming from three states.",
+    desc: "First families walk through the doors. Six sports — baseball, cricket, badminton, pickleball, volleyball, and soccer — under one roof. Within a month, members are coming from three states.",
   },
   {
     year: "2025",
@@ -178,7 +178,7 @@ export default function AboutPage() {
               <StaggerContainer className="grid grid-cols-2 gap-4">
                 {[
                   { icon: MapPin, label: "Elkton, MD", sub: "Tri-state area" },
-                  { icon: Trophy, label: "4 Sports", sub: "Under one roof" },
+                  { icon: Trophy, label: "6 Sports", sub: "Under one roof" },
                   {
                     icon: Calendar,
                     label: "7 Days",
@@ -299,7 +299,7 @@ export default function AboutPage() {
         <Container>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <StatCounter value={500} suffix="+" label="Athletes Trained" />
-            <StatCounter value={4} label="Sports Offered" />
+            <StatCounter value={6} label="Sports Offered" />
             <StatCounter value={15} suffix="+" label="Expert Coaches" />
             <StatCounter value={3} label="States Served" />
           </div>

@@ -95,7 +95,7 @@ export default function HomePage() {
       <VideoHero
         images={facilityImages}
         title="The Sports Facility Your Family Has Been Looking For"
-        subtitle="15 minutes from Middletown. 20 from Newark. Four sports, ten courts, and coaches who remember your kid's name."
+        subtitle="15 minutes from Middletown. 20 from Newark. Every sport you love, coaches who remember your kid's name."
         badge="Now Open — 701 E Pulaski Hwy, Elkton"
         primaryCTA={{ label: "Try a Free Session", href: "/free-trial" }}
         secondaryCTA={{ label: "Explore Programs", href: "#sports" }}
@@ -122,24 +122,24 @@ export default function HomePage() {
       </div>
 
       {/* ═══════════════════════════════════════════
-          SPORTS — Four sports with 3D tilt cards
+          SPORTS — Sport cards with 3D tilt
           ═══════════════════════════════════════════ */}
       <Section id="sports">
         <Container>
           <Reveal>
             <div className="text-center mb-10">
               <h2 className="font-display text-section text-neutral-900 mb-6 text-balance">
-                Four Sports.{" "}
-                <GradientText className="inline">Zero Excuses.</GradientText>
+                Every Sport.{" "}
+                <GradientText className="inline">One Home.</GradientText>
               </h2>
               <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
                 Rain, snow, 95°F heat — doesn&apos;t matter. Year-round
-                indoor training in baseball, cricket, badminton, and pickleball. All skill levels. All ages.
+                indoor training across baseball, cricket, badminton, pickleball, volleyball, and soccer. All skill levels. All ages.
               </p>
             </div>
           </Reveal>
 
-          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {SPORTS.map((sport) => (
               <StaggerItem key={sport.slug}>
                 <SportCard {...sport} />
@@ -270,7 +270,7 @@ export default function HomePage() {
           <Reveal variant="fade-in">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               <StatCounter value={500} suffix="+" label="Athletes & Families" />
-              <StatCounter value={4} label="Sports, One Roof" />
+              <StatCounter value={6} label="Sports, One Roof" />
               <StatCounter value={15} suffix="+" label="Certified Coaches" />
               <StatCounter value={7} label="Days a Week" />
             </div>

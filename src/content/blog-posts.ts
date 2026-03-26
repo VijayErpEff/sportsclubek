@@ -109,7 +109,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "Join us for our biggest open house yet! Free facility tours, sport demos, giveaways, and special membership offers.",
     content: `<p>Mark your calendars! LevelUP Sports is hosting our Spring Open House on Saturday, April 12 from 10 AM to 4 PM. Bring the whole family for a day of free sports, tours, and fun.</p>
     <h2>What to Expect</h2>
-    <ul><li>Free facility tours every 30 minutes</li><li>Try-it-free demos in all four sports</li><li>Meet our coaching staff</li><li>Free batting cage sessions for kids</li><li>Food trucks and refreshments</li><li>Raffle prizes including free memberships</li></ul>
+    <ul><li>Free facility tours every 30 minutes</li><li>Try-it-free demos in all six sports</li><li>Meet our coaching staff</li><li>Free batting cage sessions for kids</li><li>Food trucks and refreshments</li><li>Raffle prizes including free memberships</li></ul>
     <h2>Special Offers</h2>
     <p>Sign up for a membership at the Open House and get your first month FREE plus a LevelUP welcome kit. Existing members who bring a friend get a $25 credit.</p>
     <p>No registration required &mdash; just show up and have fun! Parking is free and plentiful.</p>`,
@@ -160,7 +160,7 @@ export const BLOG_POSTS: BlogPost[] = [
     <h2>Why Indoor Matters</h2>
     <p>Delaware weather is unpredictable. Between rain, heat, and cold, outdoor training gets cancelled constantly. Indoor facilities eliminate that problem entirely — 72°F year-round, no cancellations, no rescheduling. For families with kids in competitive programs, consistency is everything.</p>
     <h2>The Bottom Line</h2>
-    <p>If you're in Middletown, Bear, Glasgow, or southern New Castle County, you have more options than you think. LevelUP Sports is 15 minutes away and offers free trial sessions in all four sports — it's worth the drive to see the facility before committing.</p>`,
+    <p>If you're in Middletown, Bear, Glasgow, or southern New Castle County, you have more options than you think. LevelUP Sports is 15 minutes away and offers free trial sessions in all six sports — it's worth the drive to see the facility before committing.</p>`,
     author: "LevelUP Sports",
     date: "2025-01-20",
     readTime: 4,
@@ -265,7 +265,7 @@ export const BLOG_POSTS: BlogPost[] = [
     <h2>Ages 5-7: Introduction to Movement</h2>
     <p>This is the ideal age to introduce structured athletic activity — but keep it sport-general, not sport-specific. Programs like our Kids Agility training focus on coordination, balance, and basic motor patterns through games and obstacle courses. The goal is building a love of movement, not creating a specialist.</p>
     <h2>Ages 8-12: Sport Sampling Is Key</h2>
-    <p>Research consistently shows that early sport specialization (focusing on one sport before age 12) increases injury risk and burnout rates without improving long-term performance. The best approach at this age is trying multiple sports. This is why we offer four different sports under one roof — baseball, cricket, badminton, and pickleball. Let your child explore.</p>
+    <p>Research consistently shows that early sport specialization (focusing on one sport before age 12) increases injury risk and burnout rates without improving long-term performance. The best approach at this age is trying multiple sports. This is why we offer six different sports under one roof — baseball, cricket, badminton, pickleball, volleyball, and soccer. Let your child explore.</p>
     <h2>Ages 13+: Specialization Can Begin</h2>
     <p>By 13-14, many young athletes naturally gravitate toward a primary sport. This is when more intensive, sport-specific academy training becomes appropriate. The key is that it should be the child's choice, not the parent's projection.</p>
     <h2>Signs Your Child Is Ready</h2>

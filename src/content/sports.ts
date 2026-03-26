@@ -356,4 +356,164 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     ctaPrimary: { label: "Try a Free Session", href: "/free-trial" },
     ctaSecondary: { label: "View Memberships", href: "/memberships" },
   },
+
+  volleyball: {
+    slug: "volleyball",
+    name: "Volleyball",
+    tagline: "Set. Spike. Repeat.",
+    description:
+      "Indoor volleyball with regulation courts, expert coaching, and a community that cheers as loud as you play. Open play, clinics, and youth development.",
+    image: "/images/sports/volleyball.jpg",
+    color: "#D97706",
+    metaTitle: "Indoor Volleyball Courts & Training — Elkton, MD | Near Middletown & Newark, DE",
+    metaDescription:
+      "Indoor volleyball courts in Elkton, MD — 15 min from Middletown & Newark, DE. Youth academy, adult leagues, open play, and expert coaching. Book today.",
+    overview: [
+      "Whether your kid is learning to pass for the first time or your adult rec team needs a reliable indoor home, LevelUP has you covered. Our regulation-height nets, proper court lines, and professional flooring give you the real volleyball experience — not a makeshift setup in a church gym. Coach Torres has coached club and high school volleyball for over a decade, and she builds players who are fundamentally sound and mentally tough.",
+      "Parents: this is the sport that teaches teamwork better than any other. Every point requires communication, trust, and coordination. Our youth programs focus on passing, serving, and court awareness — the skills that separate good players from great ones. And our adult open play nights? They've become the most fun evening of the week for 30+ regulars.",
+    ],
+    highlights: [
+      { label: "Courts", value: "Regulation" },
+      { label: "Nets", value: "Adjustable" },
+      { label: "Levels", value: "All" },
+      { label: "Open", value: "7 Days" },
+    ],
+    programs: [
+      {
+        title: "Court Rentals",
+        description: "Reserve a full volleyball court for team practice, scrimmages, or private training sessions.",
+        href: "/schedule",
+        tag: "Rental",
+      },
+      {
+        title: "Volleyball Academy",
+        description: "Structured youth development programs building passing, setting, hitting, and game IQ with expert coaches.",
+        href: "/volleyball-academy",
+        tag: "Academy",
+      },
+      {
+        title: "Open Play",
+        description: "Drop in for pickup games. All skill levels welcome — we rotate teams so everyone plays.",
+        href: "/schedule",
+        tag: "Drop-In",
+      },
+      {
+        title: "Adult Leagues",
+        description: "Recreational and competitive leagues for adult teams. Season play with playoffs and awards.",
+        href: "/schedule",
+        tag: "League",
+      },
+    ],
+    features: [
+      "Regulation indoor volleyball courts",
+      "Adjustable net heights for all age groups",
+      "Professional court flooring for safe play",
+      "Expert coaching staff with club experience",
+      "All equipment provided for open play",
+      "Year-round climate-controlled facility",
+    ],
+    coaches: [
+      {
+        name: "Coach Torres",
+        role: "Head Volleyball Coach",
+        credentials: "12+ years club & high school coaching, USAV certified",
+        initials: "CT",
+      },
+      {
+        name: "Coach Nguyen",
+        role: "Youth Development Coach",
+        credentials: "Former D2 college player, specializes in fundamentals",
+        initials: "CN",
+      },
+    ],
+    faqs: [
+      { question: "What ages can play volleyball at LevelUP?", answer: "We offer programs for ages 8 and up, plus adult open play and leagues. Net heights are adjusted for younger age groups." },
+      { question: "Do I need to bring my own volleyball?", answer: "No — we provide game balls for all sessions, open play, and rentals. You're welcome to bring your own if you prefer." },
+      { question: "Can my team rent a court for practice?", answer: "Absolutely. Courts can be reserved by the hour for team practices, scrimmages, or private training. Contact us for team rates." },
+    ],
+    academySlug: "volleyball-academy",
+    ctaTitle: "Get on the Court",
+    ctaPrimary: { label: "Try a Free Session", href: "/free-trial" },
+    ctaSecondary: { label: "View Academy", href: "/volleyball-academy" },
+  },
+
+  soccer: {
+    slug: "soccer",
+    name: "Soccer",
+    tagline: "Year-Round Soccer. Rain or Shine.",
+    description:
+      "Professional indoor turf, futsal programs, and coaching that develops technical skill — not just fitness. Youth academies through adult open play.",
+    image: "/images/sports/soccer.jpg",
+    color: "#B83A2F",
+    metaTitle: "Indoor Soccer & Futsal — Elkton, MD | Near Middletown, Newark & Wilmington, DE",
+    metaDescription:
+      "Indoor soccer & futsal in Elkton, MD — 15 min from Middletown & Newark, DE. Professional turf, youth academy, adult leagues, open play. Year-round. Book today.",
+    overview: [
+      "When fall leagues end and spring tryouts are months away, your kid's development doesn't have to stop. Our professional indoor turf gives players a year-round training ground — and Coach Martinez's futsal-first approach builds the close-control skills and quick decision-making that make the difference at outdoor tryouts. There's a reason the best soccer nations in the world train on small-sided indoor pitches.",
+      "We run youth academies for ages 6 and up, adult open play multiple nights a week, and seasonal leagues for teams looking for competitive indoor games. The turf is FIFA-quality, the goals are regulation, and the coaching focuses on technical excellence — first touch, passing under pressure, and vision. Parents: you'll see your kid's confidence with the ball transform within weeks.",
+    ],
+    highlights: [
+      { label: "Surface", value: "Pro Turf" },
+      { label: "Format", value: "Futsal & 5v5" },
+      { label: "Ages", value: "6–Adult" },
+      { label: "Open", value: "7 Days" },
+    ],
+    programs: [
+      {
+        title: "Field Rentals",
+        description: "Reserve the turf field for team training, scrimmages, or private sessions. Full field or half-field available.",
+        href: "/schedule",
+        tag: "Rental",
+      },
+      {
+        title: "Soccer Academy",
+        description: "Structured youth development with a futsal-first methodology. Build technical skill, game IQ, and love for the game.",
+        href: "/soccer-academy",
+        tag: "Academy",
+      },
+      {
+        title: "Open Play",
+        description: "Drop-in pickup games on the turf. All levels welcome — teams are balanced so everyone gets a competitive game.",
+        href: "/schedule",
+        tag: "Drop-In",
+      },
+      {
+        title: "Indoor Leagues",
+        description: "5v5 and futsal leagues for youth and adult teams. Season play with standings, playoffs, and championship night.",
+        href: "/schedule",
+        tag: "League",
+      },
+    ],
+    features: [
+      "Professional-grade indoor turf field",
+      "Regulation futsal and small-sided goals",
+      "Year-round climate-controlled training",
+      "Licensed coaching staff with club experience",
+      "All equipment provided for open play",
+      "Video analysis available for academy members",
+    ],
+    coaches: [
+      {
+        name: "Coach Martinez",
+        role: "Head Soccer Coach",
+        credentials: "USSF B-licensed, 10+ years youth development, former semi-pro",
+        initials: "CM",
+      },
+      {
+        name: "Coach Okafor",
+        role: "Futsal & Technical Coach",
+        credentials: "US Futsal certified, specializes in close control and creativity",
+        initials: "CO",
+      },
+    ],
+    faqs: [
+      { question: "What's the difference between futsal and indoor soccer?", answer: "Futsal uses a smaller, low-bounce ball and emphasizes close control and quick passing. It's the best way to develop technical skill. We offer both futsal and traditional indoor 5v5." },
+      { question: "Do you offer soccer for younger kids?", answer: "Yes! Our academy starts at age 6 with age-appropriate training that focuses on fun, coordination, and basic ball skills." },
+      { question: "Can my outdoor team train here in winter?", answer: "Absolutely. Many local outdoor clubs use our turf for winter training. We offer team rates and can coordinate with your coaching staff." },
+    ],
+    academySlug: "soccer-academy",
+    ctaTitle: "Keep Playing. Keep Improving.",
+    ctaPrimary: { label: "Try a Free Session", href: "/free-trial" },
+    ctaSecondary: { label: "View Academy", href: "/soccer-academy" },
+  },
 };

@@ -2,7 +2,7 @@ export const HOMEPAGE_FAQS = [
   {
     question: "What sports can I play at LevelUP Sports in Elkton, MD?",
     answer:
-      "LevelUP offers four sports under one roof: baseball (4 indoor batting cages with machines up to 90 MPH), cricket (full-length nets with professional bowling machines), badminton (3 BWF-standard competition courts), and pickleball (2 dedicated indoor courts). We also run a Kids Agility program for ages 5-12 that builds coordination, speed, and confidence through structured athletic training.",
+      "LevelUP offers six sports under one roof: baseball (4 indoor batting cages with machines up to 90 MPH), cricket (full-length nets with professional bowling machines), badminton (3 BWF-standard competition courts), pickleball (2 dedicated indoor courts), volleyball, and soccer. We also run a Kids Agility program for ages 5-12 that builds coordination, speed, and confidence through structured athletic training.",
   },
   {
     question: "Do I need a membership to use LevelUP Sports?",

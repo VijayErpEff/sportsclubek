@@ -118,7 +118,7 @@ export default function FacilitiesPage() {
               See What&apos;s Inside.
             </h1>
             <p className="text-lg text-white/80 leading-relaxed max-w-xl">
-              10 courts and cages. 4 sports. 72°F year-round. Here&apos;s what
+              10 courts and cages. 6 sports. 72°F year-round. Here&apos;s what
               you&apos;ll find at 701 E Pulaski Hwy.
             </p>
           </div>
