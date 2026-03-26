@@ -19,13 +19,15 @@ export const metadata: Metadata = generateSEOMetadata({
 });
 
 const comparisonFeatures = [
-  { name: "Open play access", basic: "Open hours", pro: "Unlimited", elite: "Unlimited" },
-  { name: "Court/cage bookings per week", basic: "2", pro: "Unlimited", elite: "Unlimited" },
-  { name: "Member pricing on extras", basic: true, pro: true, elite: true },
-  { name: "Online booking", basic: true, pro: true, elite: true },
-  { name: "Academy programs", basic: false, pro: "1 included", elite: "All included" },
-  { name: "Guest passes per month", basic: false, pro: "2", elite: "4" },
-  { name: "Priority booking", basic: false, pro: false, elite: true },
+  { name: "Open Play Sessions/month", core: "8", momentum: "14", ultimate: "24" },
+  { name: "Sports included", core: "1 sport", momentum: "All sports", ultimate: "All sports" },
+  { name: "All indoor courts", core: true, momentum: true, ultimate: true },
+  { name: "Community events access", core: true, momentum: true, ultimate: true },
+  { name: "Booking priority", core: "Basic", momentum: "Priority", ultimate: "Highest" },
+  { name: "Program discounts", core: false, momentum: true, ultimate: true },
+  { name: "Equipment rental discounts", core: false, momentum: true, ultimate: true },
+  { name: "Pro shop discounts", core: false, momentum: false, ultimate: true },
+  { name: "Add extra sessions", core: true, momentum: true, ultimate: true },
 ];
 
 export default function MembershipsPage() {
@@ -138,13 +140,13 @@ export default function MembershipsPage() {
                       Feature
                     </th>
                     <th className="py-3 px-4 text-center text-sm font-semibold text-neutral-900 min-w-[90px]">
-                      Basic
+                      Core
                     </th>
                     <th className="py-3 px-4 text-center text-sm font-bold text-accent min-w-[90px]">
-                      Pro
+                      Momentum
                     </th>
                     <th className="py-3 px-4 text-center text-sm font-semibold text-neutral-900 min-w-[90px]">
-                      Elite
+                      Ultimate
                     </th>
                   </tr>
                 </thead>
@@ -157,7 +159,7 @@ export default function MembershipsPage() {
                       <td className="py-3 pr-4 text-sm text-neutral-700">
                         {feature.name}
                       </td>
-                      {(["basic", "pro", "elite"] as const).map((tier) => {
+                      {(["core", "momentum", "ultimate"] as const).map((tier) => {
                         const val = feature[tier];
                         return (
                           <td

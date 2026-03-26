@@ -19,51 +19,75 @@ export const metadata: Metadata = generateSEOMetadata({
 
 const openPositions = [
   {
-    title: "Head Baseball Coach",
+    title: "Pickleball Coach",
     type: "Full-Time",
     description:
-      "Lead our baseball academy program. Develop curriculum, manage coaching staff, and drive player development across all age groups. Requires collegiate playing experience and 3+ years coaching.",
+      "Lead recreational and competitive pickleball training programs for all ages. Build a thriving pickleball community through open play sessions, clinics, and structured coaching.",
     responsibilities: [
-      "Design and deliver 12-week academy curriculum",
-      "Evaluate and develop players ages 8–18",
-      "Mentor and coordinate assistant coaches",
-      "Communicate progress to parents and guardians",
+      "Design and run beginner, intermediate, and competitive programs",
+      "Lead open play sessions and coordinate round-robin play",
+      "Develop player skills in serving, dinking, and strategy",
+      "Build and grow the LevelUP pickleball community",
     ],
   },
   {
-    title: "Cricket Coach",
-    type: "Part-Time",
+    title: "Youth Fitness Trainer",
+    type: "Full-Time",
     description:
-      "Coach batting, bowling, and fielding sessions for youth and adult players. Must have competitive playing experience and a passion for growing the sport in the U.S.",
+      "Conduct agility, coordination, and fitness sessions for children aged 4–12. Create fun, structured programs that build athletic confidence and foundational movement skills.",
     responsibilities: [
-      "Lead structured cricket coaching sessions",
-      "Develop drills for batting, bowling, and fielding",
-      "Prepare players for match play and league competition",
-      "Support cricket academy growth and community engagement",
+      "Lead age-appropriate fitness and agility sessions",
+      "Design progressive training programs for ages 4–12",
+      "Track and report on each child's development",
+      "Create a positive, encouraging training environment",
     ],
   },
   {
-    title: "Front Desk Coordinator",
+    title: "Badminton Coach",
     type: "Full-Time",
     description:
-      "Be the first face visitors see at LevelUP Sports. Manage bookings, answer inquiries, handle payments, and keep our daily operations running smoothly.",
+      "Train beginner to intermediate players in individual and group settings. Help develop footwork, stroke technique, and match strategy on our professional courts.",
     responsibilities: [
-      "Greet visitors and manage check-in process",
+      "Coach individual and group badminton sessions",
+      "Develop structured curriculum for all skill levels",
+      "Prepare players for tournament and competitive play",
+      "Maintain coaching standards aligned with BWF methodology",
+    ],
+  },
+  {
+    title: "Volleyball Coach",
+    type: "Full-Time",
+    description:
+      "Develop skills and strategies for youth and adult volleyball teams. Lead academy sessions, coordinate leagues, and build a competitive volleyball program.",
+    responsibilities: [
+      "Run youth volleyball academy sessions and clinics",
+      "Coach passing, setting, hitting, and defensive skills",
+      "Organize and manage adult leagues and open play",
+      "Recruit and develop players for competitive teams",
+    ],
+  },
+  {
+    title: "Club Manager",
+    type: "Full-Time",
+    description:
+      "Oversee daily operations, staff management, and member services. Ensure the facility runs smoothly and every member has a premium experience.",
+    responsibilities: [
+      "Manage daily facility operations and staff scheduling",
+      "Oversee member services, retention, and satisfaction",
+      "Coordinate with coaching staff on program delivery",
+      "Handle vendor relationships and facility maintenance",
+    ],
+  },
+  {
+    title: "Front Desk Staff",
+    type: "Full-Time",
+    description:
+      "Provide excellent customer service and manage facility bookings. Be the welcoming first impression for every athlete and family who walks through our doors.",
+    responsibilities: [
+      "Greet visitors and manage member check-in",
       "Handle booking, scheduling, and payment processing",
-      "Answer phone and email inquiries",
-      "Maintain front desk area and supply inventory",
-    ],
-  },
-  {
-    title: "Program Assistant",
-    type: "Part-Time",
-    description:
-      "Support our coaching staff across multiple programs. Set up training areas, assist with drills, and help maintain a safe, organized environment for athletes.",
-    responsibilities: [
-      "Assist coaches during training sessions",
-      "Set up and break down equipment and training areas",
-      "Supervise athletes during transitions and breaks",
-      "Support facility cleanliness and organization",
+      "Answer phone and email inquiries promptly",
+      "Maintain front desk area and coordinate with staff",
     ],
   },
 ];
@@ -166,7 +190,7 @@ export default function CareersPage() {
         <Container>
           <Reveal>
             <h2 className="text-3xl font-bold tracking-tight mb-10 text-center text-balance">
-              Open Positions
+              Current Openings
             </h2>
           </Reveal>
           <StaggerContainer className="space-y-6 max-w-4xl mx-auto">
@@ -192,7 +216,9 @@ export default function CareersPage() {
                     </ul>
                   </div>
                   <Button asChild>
-                    <Link href="/contact">Apply for This Position</Link>
+                    <a href={`mailto:info@levelupsports.us?subject=Application: ${position.title}&body=Hi LevelUP Sports,%0D%0A%0D%0AI am interested in the ${position.title} position. Please find my resume attached.%0D%0A%0D%0AThank you.`}>
+                      Apply for This Position
+                    </a>
                   </Button>
                 </div>
               </StaggerItem>

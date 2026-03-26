@@ -5,64 +5,69 @@ import Link from "next/link";
 import { cn } from "@/lib/utils/cn";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Check, X, Zap, Trophy, Crown } from "lucide-react";
+import { Check, Zap, Trophy, Crown, Sparkles } from "lucide-react";
 
 const plans = [
   {
-    name: "Basic",
+    name: "LevelUp Core",
     icon: Zap,
-    monthly: 49,
-    annual: 39,
-    description: "Regular access for casual players.",
+    regular: 69.99,
+    earlyBird: 59.99,
+    savings: 10,
+    tagline: "Your game, your way.",
+    description:
+      "Perfect for players who love to focus on just one sport. Whether it's Pickleball, Badminton, Volleyball, or Cricket — full access to your game of choice.",
     features: [
-      { text: "Open play hours access", included: true },
-      { text: "2 court/cage bookings per week", included: true },
-      { text: "Member pricing on extras", included: true },
-      { text: "Online booking", included: true },
-      { text: "Academy program access", included: false },
-      { text: "Guest passes", included: false },
-      { text: "Priority booking", included: false },
+      "8 Open Play Sessions/month",
+      "All indoor courts",
+      "Basic booking priority",
+      "Community events access",
+      "Add more sports anytime",
     ],
     recommended: false,
   },
   {
-    name: "Pro",
+    name: "LevelUp Momentum",
     icon: Trophy,
-    monthly: 89,
-    annual: 69,
-    description: "Unlimited access for dedicated athletes.",
+    regular: 109.99,
+    earlyBird: 89.99,
+    savings: 20,
+    tagline: "Can't choose just one?",
+    description:
+      "Access to all sports — play what you want, when you want. Switch between games based on your mood, and keep every workout exciting.",
     features: [
-      { text: "Unlimited open play access", included: true },
-      { text: "Unlimited court/cage bookings", included: true },
-      { text: "Member pricing on extras", included: true },
-      { text: "Online booking", included: true },
-      { text: "1 academy program included", included: true },
-      { text: "2 guest passes per month", included: true },
-      { text: "Priority booking", included: false },
+      "14 Open Play Sessions/month",
+      "All sports included",
+      "Priority booking",
+      "Program discounts",
+      "Equipment rental discounts",
+      "Add more sessions anytime",
     ],
     recommended: true,
   },
   {
-    name: "Elite",
+    name: "LevelUp Ultimate",
     icon: Crown,
-    monthly: 149,
-    annual: 119,
-    description: "Full access for serious competitors.",
+    regular: 149.99,
+    earlyBird: 119.99,
+    savings: 30,
+    tagline: "The ultimate all-access pass.",
+    description:
+      "Play any sport, anytime — with the freedom to add extra sessions whenever you want. Nonstop action, total flexibility, and maximum value.",
     features: [
-      { text: "Unlimited open play access", included: true },
-      { text: "Unlimited court/cage bookings", included: true },
-      { text: "Member pricing on extras", included: true },
-      { text: "Online booking", included: true },
-      { text: "All academy programs included", included: true },
-      { text: "4 guest passes per month", included: true },
-      { text: "Priority booking & early access", included: true },
+      "24 Open Play Sessions/month",
+      "All sports included",
+      "Highest booking priority",
+      "Program discounts",
+      "Equipment rental & pro shop discounts",
+      "Add more sessions anytime",
     ],
     recommended: false,
   },
 ];
 
 export function PricingSection() {
-  const [billing, setBilling] = useState<"monthly" | "annual">("monthly");
+  const [billing, setBilling] = useState<"regular" | "earlyBird">("earlyBird");
 
   return (
     <div>
@@ -70,27 +75,27 @@ export function PricingSection() {
       <div className="flex items-center justify-center mb-8">
         <div className="inline-flex items-center bg-neutral-100 rounded-full p-1">
           <button
-            onClick={() => setBilling("monthly")}
+            onClick={() => setBilling("regular")}
             className={cn(
               "px-4 py-1.5 rounded-full text-sm font-semibold transition-all",
-              billing === "monthly"
+              billing === "regular"
                 ? "bg-white text-neutral-900 shadow-sm"
                 : "text-neutral-500 hover:text-neutral-700"
             )}
           >
-            Monthly
+            Regular
           </button>
           <button
-            onClick={() => setBilling("annual")}
+            onClick={() => setBilling("earlyBird")}
             className={cn(
               "px-4 py-1.5 rounded-full text-sm font-semibold transition-all flex items-center gap-1.5",
-              billing === "annual"
+              billing === "earlyBird"
                 ? "bg-white text-neutral-900 shadow-sm"
                 : "text-neutral-500 hover:text-neutral-700"
             )}
           >
-            Annual
-            <span className="text-xs font-bold text-accent">-20%</span>
+            <Sparkles className="h-3.5 w-3.5 text-accent" />
+            Early Bird
           </button>
         </div>
       </div>
@@ -98,7 +103,8 @@ export function PricingSection() {
       {/* Pricing Cards */}
       <div className="grid md:grid-cols-3 gap-5 lg:gap-6 max-w-5xl mx-auto items-start">
         {plans.map((plan) => {
-          const price = billing === "monthly" ? plan.monthly : plan.annual;
+          const price =
+            billing === "earlyBird" ? plan.earlyBird : plan.regular;
           const Icon = plan.icon;
 
           return (
@@ -120,9 +126,9 @@ export function PricingSection() {
                 </Badge>
               )}
 
-              {/* Header: icon + name inline, then price */}
+              {/* Header */}
               <div className="mb-5">
-                <div className="flex items-center gap-2.5 mb-3">
+                <div className="flex items-center gap-2.5 mb-1">
                   <div
                     className={cn(
                       "w-8 h-8 rounded-lg flex items-center justify-center shrink-0",
@@ -140,16 +146,24 @@ export function PricingSection() {
                     {plan.name}
                   </h3>
                 </div>
+                <p className="text-xs font-semibold text-accent mb-3 ml-[42px]">
+                  {plan.tagline}
+                </p>
+
+                {billing === "earlyBird" && (
+                  <p className="text-sm text-neutral-400 line-through mb-0.5">
+                    ${plan.regular.toFixed(2)}/month
+                  </p>
+                )}
                 <div className="flex items-baseline gap-1">
                   <span className="font-mono text-4xl font-bold text-neutral-900">
-                    ${price}
+                    ${price.toFixed(2)}
                   </span>
-                  <span className="text-neutral-400 text-sm">/mo</span>
+                  <span className="text-neutral-400 text-sm">/month</span>
                 </div>
-                {billing === "annual" && (
+                {billing === "earlyBird" && (
                   <p className="text-xs text-accent font-semibold mt-1">
-                    ${price * 12}/yr &mdash; save $
-                    {(plan.monthly - plan.annual) * 12}
+                    *Early Bird Preview: Save ${plan.savings.toFixed(2)}/month
                   </p>
                 )}
                 <p className="text-sm text-neutral-500 mt-2">
@@ -161,26 +175,22 @@ export function PricingSection() {
               <div className="flex-1 space-y-2 mb-5 border-t border-neutral-100 pt-4">
                 {plan.features.map((feature) => (
                   <div
-                    key={feature.text}
+                    key={feature}
                     className="flex items-center gap-2.5 text-sm"
                   >
-                    {feature.included ? (
-                      <Check className="h-3.5 w-3.5 text-accent shrink-0" />
-                    ) : (
-                      <X className="h-3.5 w-3.5 text-neutral-200 shrink-0" />
-                    )}
-                    <span
-                      className={
-                        feature.included
-                          ? "text-neutral-700"
-                          : "text-neutral-300"
-                      }
-                    >
-                      {feature.text}
-                    </span>
+                    <Check className="h-3.5 w-3.5 text-accent shrink-0" />
+                    <span className="text-neutral-700">{feature}</span>
                   </div>
                 ))}
               </div>
+
+              {billing === "earlyBird" && (
+                <div className="mb-4 rounded-lg bg-accent/5 border border-accent/10 px-3 py-2 text-center">
+                  <span className="text-xs font-bold text-accent uppercase tracking-wide">
+                    Early Bird
+                  </span>
+                </div>
+              )}
 
               <Button
                 variant={plan.recommended ? "primary" : "outline"}
@@ -188,7 +198,7 @@ export function PricingSection() {
                 className="w-full"
                 asChild
               >
-                <Link href="/schedule">
+                <Link href="/free-trial">
                   {plan.recommended ? "Get Started" : "Choose Plan"}
                 </Link>
               </Button>
