@@ -18,8 +18,6 @@ import { SportCard } from "@/components/composed/sport-card";
 import { StatCounter } from "@/components/composed/stat-counter";
 import { TestimonialCarousel } from "@/components/composed/testimonial-carousel";
 import { CTABanner } from "@/components/composed/cta-banner";
-import { BookingWidget } from "@/components/composed/booking-widget";
-import { CourtAvailability } from "@/components/composed/court-availability";
 import { GoogleReviews } from "@/components/composed/google-reviews";
 import { AthleteSpotlight } from "@/components/composed/athlete-spotlight";
 import { LiveActivityBadge, NextSessionCountdown } from "@/components/composed/live-indicator";
@@ -266,66 +264,6 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      {/* ═══════════════════════════════════════════
-          BOOKING — Inline booking widget
-          ═══════════════════════════════════════════ */}
-      <Section id="book">
-        <Container>
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-            <div>
-              <Reveal>
-                <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-4">
-                  Skip the Phone Call
-                </p>
-                <h2 className="font-display text-section text-neutral-900 mb-6 text-balance">
-                  Book a Court in{" "}
-                  <GradientText className="inline">Under 60 Seconds</GradientText>
-                </h2>
-                <p className="text-neutral-600 leading-relaxed mb-8">
-                  Choose your sport. Pick a time. Done. Batting cages from
-                  $35/hr, courts from $25/hr. No membership required.
-                </p>
-              </Reveal>
-              <Reveal delay={0.1}>
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3 text-sm text-neutral-600">
-                    <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
-                      <span className="text-accent font-bold text-xs">1</span>
-                    </div>
-                    Choose your sport and court
-                  </div>
-                  <div className="flex items-center gap-3 text-sm text-neutral-600">
-                    <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
-                      <span className="text-accent font-bold text-xs">2</span>
-                    </div>
-                    Pick your date and time slot
-                  </div>
-                  <div className="flex items-center gap-3 text-sm text-neutral-600">
-                    <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
-                      <span className="text-accent font-bold text-xs">3</span>
-                    </div>
-                    Confirm and you&apos;re all set
-                  </div>
-                </div>
-              </Reveal>
-            </div>
-            <Reveal variant="fade-left" delay={0.1}>
-              <BookingWidget />
-            </Reveal>
-          </div>
-        </Container>
-      </Section>
-
-      {/* ═══════════════════════════════════════════
-          COURT AVAILABILITY — Live status grid
-          ═══════════════════════════════════════════ */}
-      <Section variant="alternate" size="sm">
-        <Container>
-          <Reveal>
-            <CourtAvailability />
-          </Reveal>
-        </Container>
-      </Section>
 
       {/* ═══════════════════════════════════════════
           GOOGLE REVIEWS — Social proof
