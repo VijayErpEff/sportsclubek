@@ -239,29 +239,31 @@ export function VideoHero({
         )}
 
         {/* ── Gradient overlays ────────────────────── */}
-        {/* Bottom-up gradient — stronger on mobile for text readability */}
+        {/* Localized scrim — dark only where text sits (bottom-left) */}
         <div
-          className="absolute inset-0 z-[3] bg-gradient-to-t from-primary-dark via-primary-dark/70 via-40% to-primary-dark/20"
-          style={{ opacity: overlayOpacity + 0.25 }}
+          className="absolute inset-0 z-[3]"
+          style={{
+            background:
+              "linear-gradient(to top right, rgba(15,36,64,0.8) 0%, rgba(15,36,64,0.25) 45%, transparent 70%)",
+          }}
         />
-        {/* Left directional gradient */}
-        <div
-          className="absolute inset-0 z-[3] bg-gradient-to-r from-primary-dark/90 via-primary-dark/40 to-transparent"
-          style={{ opacity: overlayOpacity }}
-        />
-        {/* Cinematic vignette — subtle radial darkening at edges */}
-        <div className="absolute inset-0 z-[3] bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(15,36,64,0.4)_100%)]" />
+        {/* Light bottom anchor — grounds the image without flattening it */}
+        <div className="absolute inset-0 z-[3] bg-gradient-to-t from-primary-dark/50 to-transparent to-30%" />
+        {/* Feather-light vignette for cinematic framing */}
+        <div className="absolute inset-0 z-[3] bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(15,36,64,0.15)_100%)]" />
       </div>
 
       {/* ── Content ──────────────────────────────────── */}
       <Container className="relative z-10 py-20 md:py-0">
         <motion.div
           className="max-w-3xl"
-          style={
-            shouldAnimate
+          style={{
+            textShadow:
+              "0 2px 24px rgba(0,0,0,0.4), 0 1px 4px rgba(0,0,0,0.3)",
+            ...(shouldAnimate
               ? { opacity: contentOpacity, y: contentY }
-              : undefined
-          }
+              : undefined),
+          }}
         >
           {/* Badge */}
           {badge && (
