@@ -16,14 +16,14 @@ import { Container } from "@/components/layout/container";
 
 const APPLE_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
-/** How long each slide stays fully visible (ms) */
-const SLIDE_INTERVAL = 7000;
+/** How long each slide holds before the next crossfade begins (ms) */
+const SLIDE_INTERVAL = 5000;
 
-/** Crossfade transition duration (ms) */
-const CROSSFADE_MS = 2500;
+/** Crossfade blend duration — long enough to feel like a dissolve, not a cut (ms) */
+const CROSSFADE_MS = 3500;
 
-/** Ken Burns animation duration (ms) */
-const ZOOM_DURATION = 8000;
+/** Ken Burns pan/zoom duration — spans the full visible window (ms) */
+const ZOOM_DURATION = 9000;
 
 /**
  * Varied Ken Burns directions — each slide gets a unique
@@ -76,7 +76,6 @@ export function VideoHero({
   const [mounted, setMounted] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
   const slideKeyRef = useRef(0);
   const [slideKey, setSlideKey] = useState(0);
 
@@ -90,12 +89,12 @@ export function VideoHero({
 
   // ── Slideshow auto-advance ──────────────────────────
   useEffect(() => {
-    if (!hasSlideshow || isPaused || prefersReduced) return;
+    if (!hasSlideshow || prefersReduced) return;
     const id = setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % images.length);
     }, SLIDE_INTERVAL);
     return () => clearInterval(id);
-  }, [hasSlideshow, images?.length, isPaused, prefersReduced]);
+  }, [hasSlideshow, images?.length, prefersReduced]);
 
   // Increment slideKey when active slide changes (for Ken Burns restart)
   useEffect(() => {
@@ -128,8 +127,6 @@ export function VideoHero({
   const TITLE_DELAY = 0.4;
   const SUBTITLE_DELAY = 0.6;
   const CTA_DELAY = 0.8;
-  const INDICATOR_DELAY = 1.0;
-
   const shouldAnimate = mounted && !prefersReduced;
 
   return (
@@ -141,8 +138,6 @@ export function VideoHero({
         "min-h-screen min-h-[100dvh]",
         className
       )}
-      onMouseEnter={hasSlideshow ? () => setIsPaused(true) : undefined}
-      onMouseLeave={hasSlideshow ? () => setIsPaused(false) : undefined}
     >
       {/* ── Background media ─────────────────────────── */}
       <div className="absolute inset-0" aria-hidden="true">
@@ -398,53 +393,6 @@ export function VideoHero({
         </motion.div>
       </Container>
 
-      {/* ── Slide indicators (progress-bar style) ────── */}
-      {hasSlideshow && mounted && (
-        <motion.div
-          className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5 sm:gap-2"
-          initial={shouldAnimate ? { opacity: 0 } : undefined}
-          animate={shouldAnimate ? { opacity: 1 } : undefined}
-          transition={
-            shouldAnimate
-              ? { delay: INDICATOR_DELAY, duration: 0.5 }
-              : undefined
-          }
-        >
-          {images.map((_, index) => {
-            const isActive = index === activeSlide;
-            return (
-              <button
-                key={index}
-                onClick={() => setActiveSlide(index)}
-                className={cn(
-                  "relative h-[2px] rounded-full overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]",
-                  isActive
-                    ? "w-10 sm:w-12 bg-white/20"
-                    : "w-2.5 sm:w-3 bg-white/25 hover:bg-white/40"
-                )}
-                aria-label={`View slide ${index + 1} of ${images.length}`}
-                aria-current={isActive ? "true" : undefined}
-              >
-                {isActive && shouldAnimate && (
-                  <motion.span
-                    key={slideKey}
-                    className="absolute inset-y-0 left-0 bg-white rounded-full"
-                    initial={{ width: "0%" }}
-                    animate={{ width: "100%" }}
-                    transition={{
-                      duration: SLIDE_INTERVAL / 1000,
-                      ease: "linear",
-                    }}
-                  />
-                )}
-                {isActive && !shouldAnimate && (
-                  <span className="absolute inset-y-0 left-0 w-full bg-white rounded-full" />
-                )}
-              </button>
-            );
-          })}
-        </motion.div>
-      )}
     </div>
   );
 }
