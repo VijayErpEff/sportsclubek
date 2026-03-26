@@ -134,9 +134,12 @@ export function VideoHero({
     <div
       ref={containerRef}
       className={cn(
-        "relative flex items-center overflow-hidden",
+        "relative flex overflow-hidden",
         // Full viewport with dvh fallback for mobile address-bar handling
         "min-h-screen min-h-[100dvh]",
+        // Mobile: text anchored to bottom, images fill upper screen
+        // Desktop: text vertically centered
+        "items-end pb-20 md:items-center md:pb-0",
         className
       )}
     >
@@ -239,27 +242,27 @@ export function VideoHero({
         )}
 
         {/* ── Gradient overlays ────────────────────── */}
-        {/* Localized scrim — dark only where text sits (bottom-left) */}
+        {/* Mobile: clean bottom gradient — images bright on top ~60% */}
+        <div className="absolute inset-0 z-[3] md:hidden bg-gradient-to-t from-primary-dark/90 via-primary-dark/40 via-45% to-transparent" />
+        {/* Desktop: localized bottom-left scrim — images visible on right */}
         <div
-          className="absolute inset-0 z-[3]"
+          className="absolute inset-0 z-[3] hidden md:block"
           style={{
             background:
-              "linear-gradient(to top right, rgba(15,36,64,0.8) 0%, rgba(15,36,64,0.25) 45%, transparent 70%)",
+              "linear-gradient(to top right, rgba(15,36,64,0.75) 0%, rgba(15,36,64,0.2) 45%, transparent 65%)",
           }}
         />
-        {/* Light bottom anchor — grounds the image without flattening it */}
-        <div className="absolute inset-0 z-[3] bg-gradient-to-t from-primary-dark/50 to-transparent to-30%" />
-        {/* Feather-light vignette for cinematic framing */}
-        <div className="absolute inset-0 z-[3] bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(15,36,64,0.15)_100%)]" />
+        {/* Light bottom anchor (desktop only) */}
+        <div className="absolute inset-0 z-[3] hidden md:block bg-gradient-to-t from-primary-dark/40 to-transparent to-25%" />
       </div>
 
       {/* ── Content ──────────────────────────────────── */}
-      <Container className="relative z-10 py-20 md:py-0">
+      <Container className="relative z-10">
         <motion.div
           className="max-w-3xl"
           style={{
             textShadow:
-              "0 2px 24px rgba(0,0,0,0.4), 0 1px 4px rgba(0,0,0,0.3)",
+              "0 2px 30px rgba(0,0,0,0.5), 0 1px 6px rgba(0,0,0,0.4)",
             ...(shouldAnimate
               ? { opacity: contentOpacity, y: contentY }
               : undefined),
