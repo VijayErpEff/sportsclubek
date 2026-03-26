@@ -46,6 +46,16 @@ import {
   ArrowRight,
 } from "lucide-react";
 
+const FACILITY_IMAGES = [
+  { src: "/images/sports/LevelUp/Main-Area-1.png", alt: "LevelUP Sports main courts with professional-grade flooring and nets" },
+  { src: "/images/sports/LevelUp/Main-Area-2.png", alt: "LevelUP Sports multi-court facility wide angle view" },
+  { src: "/images/sports/LevelUp/Training-Area.png", alt: "LevelUP Sports turf training zone with batting cages and goal nets" },
+  { src: "/images/sports/LevelUp/Cricket-Nets.png", alt: "LevelUP Sports professional cricket practice nets and bowling lanes" },
+  { src: "/images/sports/LevelUp/Cricket-Machine.png", alt: "LevelUP branded cricket bowling machine in practice cage" },
+  { src: "/images/sports/LevelUp/Badminton.png", alt: "LevelUP Sports regulation badminton court with professional lighting" },
+  { src: "/images/sports/LevelUp/Lounge.png", alt: "LevelUP Sports athlete lounge and family seating area" },
+];
+
 export const metadata: Metadata = {
   title:
     "LevelUP Sports & Athletics Club | Batting Cages, Cricket, Badminton & Pickleball in Elkton, MD — Near Middletown & Newark, DE",
@@ -71,7 +81,7 @@ export default function HomePage() {
           HERO — Cinematic video hero with scroll fade
           ═══════════════════════════════════════════ */}
       <VideoHero
-        posterImage="/images/sports/facility.jpg"
+        images={FACILITY_IMAGES}
         title="The Sports Facility Your Family Has Been Looking For"
         subtitle="15 minutes from Middletown. 20 from Newark. Four sports, ten courts, and coaches who remember your kid's name."
         badge="Now Open — 701 E Pulaski Hwy, Elkton"
