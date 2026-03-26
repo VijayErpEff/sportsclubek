@@ -9,6 +9,7 @@ import {
   useTransform,
   useReducedMotion,
 } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -393,6 +394,35 @@ export function VideoHero({
         </motion.div>
       </Container>
 
+      {/* ── Scroll indicator ───────────────────────── */}
+      {shouldAnimate && (
+        <motion.div
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2, duration: 0.5 }}
+        >
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="flex flex-col items-center gap-1"
+          >
+            <span className="text-[11px] uppercase tracking-widest text-white/50 font-medium">
+              Scroll
+            </span>
+            <ChevronDown className="h-5 w-5 text-white/50" />
+          </motion.div>
+        </motion.div>
+      )}
+
+      {!shouldAnimate && mounted && (
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1">
+          <span className="text-[11px] uppercase tracking-widest text-white/50 font-medium">
+            Scroll
+          </span>
+          <ChevronDown className="h-5 w-5 text-white/50" />
+        </div>
+      )}
     </div>
   );
 }
