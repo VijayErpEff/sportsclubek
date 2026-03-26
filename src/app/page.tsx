@@ -1,3 +1,5 @@
+import fs from "fs";
+import path from "path";
 import { Metadata } from "next";
 import Link from "next/link";
 
@@ -44,15 +46,26 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-const FACILITY_IMAGES = [
-  { src: "/images/sports/LevelUp/Main-Area-1.png", alt: "LevelUP Sports main courts with professional-grade flooring and nets" },
-  { src: "/images/sports/LevelUp/Main-Area-2.png", alt: "LevelUP Sports multi-court facility wide angle view" },
-  { src: "/images/sports/LevelUp/Training-Area.png", alt: "LevelUP Sports turf training zone with batting cages and goal nets" },
-  { src: "/images/sports/LevelUp/Cricket-Nets.png", alt: "LevelUP Sports professional cricket practice nets and bowling lanes" },
-  { src: "/images/sports/LevelUp/Cricket-Machine.png", alt: "LevelUP branded cricket bowling machine in practice cage" },
-  { src: "/images/sports/LevelUp/Badminton.png", alt: "LevelUP Sports regulation badminton court with professional lighting" },
-  { src: "/images/sports/LevelUp/Lounge.png", alt: "LevelUP Sports athlete lounge and family seating area" },
-];
+/**
+ * Auto-discovers hero images from public/images/sports/LevelUp/.
+ * Just add or remove image files in that folder — no code changes needed.
+ * Files are sorted alphabetically; prefix with numbers (01-, 02-) to control order.
+ */
+function getFacilityImages(): Array<{ src: string; alt: string }> {
+  const dir = path.join(process.cwd(), "public/images/sports/LevelUp");
+  try {
+    return fs
+      .readdirSync(dir)
+      .filter((f) => /\.(png|jpe?g|webp|avif)$/i.test(f))
+      .sort()
+      .map((f) => ({
+        src: `/images/sports/LevelUp/${f}`,
+        alt: `LevelUP Sports — ${f.replace(/\.[^.]+$/, "").replace(/^\d+-/, "").replace(/-/g, " ")}`,
+      }));
+  } catch {
+    return [];
+  }
+}
 
 export const metadata: Metadata = {
   title:
@@ -65,6 +78,7 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
+  const facilityImages = getFacilityImages();
   const faqLD = generateFAQLD(HOMEPAGE_FAQS);
   const latestPosts = BLOG_POSTS.slice(0, 3);
 
@@ -79,7 +93,7 @@ export default function HomePage() {
           HERO — Cinematic video hero with scroll fade
           ═══════════════════════════════════════════ */}
       <VideoHero
-        images={FACILITY_IMAGES}
+        images={facilityImages}
         title="The Sports Facility Your Family Has Been Looking For"
         subtitle="15 minutes from Middletown. 20 from Newark. Four sports, ten courts, and coaches who remember your kid's name."
         badge="Now Open — 701 E Pulaski Hwy, Elkton"
