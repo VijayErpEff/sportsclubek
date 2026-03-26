@@ -242,8 +242,8 @@ export function VideoHero({
         )}
 
         {/* ── Gradient overlays ────────────────────── */}
-        {/* Mobile: clean bottom gradient — images bright on top ~60% */}
-        <div className="absolute inset-0 z-[3] md:hidden bg-gradient-to-t from-primary-dark/90 via-primary-dark/40 via-45% to-transparent" />
+        {/* Mobile: minimal bottom gradient — images dominate viewport */}
+        <div className="absolute inset-0 z-[3] md:hidden bg-gradient-to-t from-primary-dark/80 via-primary-dark/25 via-35% to-transparent" />
         {/* Desktop: localized bottom-left scrim — images visible on right */}
         <div
           className="absolute inset-0 z-[3] hidden md:block"
@@ -302,7 +302,7 @@ export function VideoHero({
           {/* Title */}
           {shouldAnimate ? (
             <motion.h1
-              className="font-display text-hero text-white mb-6"
+              className="font-display text-hero text-white mb-4 md:mb-6"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
@@ -314,15 +314,15 @@ export function VideoHero({
               {title}
             </motion.h1>
           ) : (
-            <h1 className="font-display text-hero text-white mb-6">{title}</h1>
+            <h1 className="font-display text-hero text-white mb-4 md:mb-6">{title}</h1>
           )}
 
-          {/* Subtitle */}
+          {/* Subtitle — hidden on mobile to let images dominate */}
           {subtitle && (
             <>
               {shouldAnimate ? (
                 <motion.p
-                  className="text-lg md:text-xl text-white/80 mb-8 max-w-2xl leading-relaxed"
+                  className="hidden md:block text-lg md:text-xl text-white/80 mb-8 max-w-2xl leading-relaxed"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{
@@ -334,7 +334,7 @@ export function VideoHero({
                   {subtitle}
                 </motion.p>
               ) : (
-                <p className="text-lg md:text-xl text-white/80 mb-8 max-w-2xl leading-relaxed">
+                <p className="hidden md:block text-lg md:text-xl text-white/80 mb-8 max-w-2xl leading-relaxed">
                   {subtitle}
                 </p>
               )}
@@ -364,7 +364,7 @@ export function VideoHero({
                     <Button
                       size="xl"
                       variant="outline"
-                      className="border-white text-white hover:bg-white hover:text-primary"
+                      className="hidden md:inline-flex border-white text-white hover:bg-white hover:text-primary"
                       asChild
                     >
                       <Link href={secondaryCTA.href}>
@@ -384,7 +384,7 @@ export function VideoHero({
                     <Button
                       size="xl"
                       variant="outline"
-                      className="border-white text-white hover:bg-white hover:text-primary"
+                      className="hidden md:inline-flex border-white text-white hover:bg-white hover:text-primary"
                       asChild
                     >
                       <Link href={secondaryCTA.href}>
