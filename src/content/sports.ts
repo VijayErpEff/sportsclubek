@@ -68,13 +68,13 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     programs: [
       {
         title: "Batting Cage Rentals",
-        description: "Reserve a professional batting cage for individual or group sessions. Adjustable pitching machines for every skill level.",
+        description: "Reserve a professional batting cage for individual or group sessions at $40/hour. Adjustable pitching machines for every skill level.",
         href: "/schedule",
         tag: "Drop-In",
       },
       {
         title: "Baseball Academy",
-        description: "Structured 12-week programs for youth players. Develop hitting, fielding, and game IQ with expert coaches.",
+        description: "Structured coaching for youth players. Package 1: $140 (4 sessions) | Package 2: $250 (8 sessions). Develop hitting, fielding, and game IQ with expert coaches. Saturdays for kids/teens; Monday evenings available.",
         href: "/baseball-academy",
         tag: "Academy",
       },
@@ -114,7 +114,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       },
     ],
     faqs: [
-      { question: "How much do batting cages cost at LevelUP?", answer: "Cages are $35-45/hour depending on the cage. Our pro cage with video analysis is $45/hour. Helmets and bats are provided. You can also try a free session first — no charge, no commitment." },
+      { question: "How much do batting cages cost at LevelUP?", answer: "Private cage rental is $40/hour. Helmets and bats are provided. Members get Open Play access from just $8/hour (non-members $15/hour). Academy training packages start at $140 for 4 sessions. You can also try a free session first — no charge, no commitment." },
       { question: "What age can my child start using batting cages?", answer: "Ages 6 and up. We start younger kids at 30 MPH and work up from there. A coach helps them find the right speed and stance for their skill level." },
       { question: "Do you provide helmets and bats?", answer: "Yes — helmets are required and always provided. We have bats available for every age and size. You're welcome to bring your own bat too." },
     ],
@@ -148,13 +148,13 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     programs: [
       {
         title: "Net Sessions",
-        description: "Book indoor net time for batting and bowling practice. Bowling machines available for solo training.",
+        description: "Book indoor net time for batting and bowling practice. Full pitch $180/hr, half pitch $90/hr, or single cage $40/hr. Bowling machines available for solo training.",
         href: "/schedule",
         tag: "Drop-In",
       },
       {
         title: "Cricket Academy",
-        description: "Structured coaching programs covering batting technique, bowling action, and fielding skills for youth and adults.",
+        description: "Structured coaching programs covering batting technique, bowling action, and fielding skills. Package 1: $119 (4 sessions) | Package 2: $200 (8 sessions). Wed & Fri evenings, youth and adults.",
         href: "/cricket-academy",
         tag: "Academy",
       },
@@ -195,7 +195,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     ],
     faqs: [
       { question: "Do you offer cricket coaching for complete beginners?", answer: "Absolutely! Our junior development and beginner programs are designed for players with zero experience." },
-      { question: "Can I just book a net without coaching?", answer: "Yes, net sessions can be booked independently. Bowling machines are available for self-practice." },
+      { question: "Can I just book a net without coaching?", answer: "Yes, net sessions can be booked independently. Full pitch rental is $180/hour, half pitch $90/hour, or a single cage for $40/hour. Bowling machines are available for self-practice." },
       { question: "What cricket equipment is provided?", answer: "We provide bats, pads, gloves, and helmets for beginners. Regular players are encouraged to bring their own gear." },
     ],
     academySlug: "cricket-academy",
@@ -228,13 +228,13 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     programs: [
       {
         title: "Court Rentals",
-        description: "Book a court for singles or doubles play. Perfect for practice sessions or friendly matches.",
+        description: "Book a court for singles or doubles play at $40/hour. Perfect for practice sessions or friendly matches.",
         href: "/schedule",
         tag: "Drop-In",
       },
       {
         title: "Badminton Academy",
-        description: "Structured training programs developing footwork, technique, and match strategy with certified coaches.",
+        description: "Structured training programs developing footwork, technique, and match strategy with certified coaches. Package 1: $140 (4 hrs coaching) | Package 2: $250 (8 hrs coaching + 4 hrs practice). Saturdays & Tuesday evenings.",
         href: "/badminton-academy",
         tag: "Academy",
       },
@@ -274,7 +274,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       },
     ],
     faqs: [
-      { question: "Do you provide badminton rackets?", answer: "We have rackets available for rental. For regular players, we recommend investing in your own racket for the best experience." },
+      { question: "Do you provide badminton rackets?", answer: "We have rackets available for rental. Court rental is $40/hour. For regular players, we recommend investing in your own racket for the best experience. Academy packages start at $140 for 4 hours of coaching." },
       { question: "Is badminton suitable for younger children?", answer: "Yes! We offer junior programs for children as young as 7. It's a great sport for developing coordination and reflexes." },
       { question: "Do you host badminton tournaments?", answer: "We host regular in-house tournaments and can help prepare players for external competitions." },
     ],
@@ -381,13 +381,13 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     programs: [
       {
         title: "Court Rentals",
-        description: "Reserve a full volleyball court for team practice, scrimmages, or private training sessions.",
+        description: "Reserve a full volleyball court for team practice, scrimmages, or private training sessions at $120/hour.",
         href: "/schedule",
         tag: "Rental",
       },
       {
         title: "Volleyball Academy",
-        description: "Structured youth development programs building passing, setting, hitting, and game IQ with expert coaches.",
+        description: "Structured youth development programs building passing, setting, hitting, and game IQ with expert coaches. Package 1: $149 (4 sessions/month, 90 min each) | Package 2: $249 (8 sessions/month, 90 min each). Sundays & Wednesday evenings.",
         href: "/volleyball-academy",
         tag: "Academy",
       },
@@ -429,7 +429,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     faqs: [
       { question: "What ages can play volleyball at LevelUP?", answer: "We offer programs for ages 8 and up, plus adult open play and leagues. Net heights are adjusted for younger age groups." },
       { question: "Do I need to bring my own volleyball?", answer: "No — we provide game balls for all sessions, open play, and rentals. You're welcome to bring your own if you prefer." },
-      { question: "Can my team rent a court for practice?", answer: "Absolutely. Courts can be reserved by the hour for team practices, scrimmages, or private training. Contact us for team rates." },
+      { question: "Can my team rent a court for practice?", answer: "Absolutely. Private court rental is $120/hour for team practices, scrimmages, or private training. Training packages start at $149/month for 4 sessions." },
     ],
     academySlug: "volleyball-academy",
     ctaTitle: "Get on the Court",

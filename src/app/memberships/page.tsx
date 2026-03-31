@@ -75,7 +75,7 @@ export default function MembershipsPage() {
               Simple Plans. No Contracts. Cancel Anytime.
             </h1>
             <p className="text-neutral-500">
-              Not sure? Try a free session first — no card required. A single cage rental is $35. With a membership, unlimited access is less than $3/visit.
+              Not sure? Try a free session first — no card required. Open Play is $15/hour without a membership — with one, it drops to just $8/hour (50% off).
             </p>
           </div>
         </Container>

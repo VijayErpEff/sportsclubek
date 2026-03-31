@@ -1,24 +1,23 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils/cn";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Check, Zap, Trophy, Crown, Sparkles } from "lucide-react";
+import { Check, Zap, Trophy, Crown } from "lucide-react";
 
 const plans = [
   {
     name: "LevelUp Core",
     icon: Zap,
-    regular: 69.99,
-    earlyBird: 59.99,
-    savings: 10,
+    price: 59.99,
     tagline: "Your game, your way.",
+    sport: "1 Sport",
+    sessions: "8 Open Plays",
     description:
       "Perfect for players who love to focus on just one sport. Whether it's Pickleball, Badminton, Volleyball, or Cricket — full access to your game of choice.",
     features: [
-      "8 Open Play Sessions/month",
+      "8 Open Play sessions/month",
       "All indoor courts",
       "Basic booking priority",
       "Community events access",
@@ -29,14 +28,14 @@ const plans = [
   {
     name: "LevelUp Momentum",
     icon: Trophy,
-    regular: 109.99,
-    earlyBird: 89.99,
-    savings: 20,
+    price: 89.99,
     tagline: "Can't choose just one?",
+    sport: "All Sports",
+    sessions: "14 Open Plays",
     description:
       "Access to all sports — play what you want, when you want. Switch between games based on your mood, and keep every workout exciting.",
     features: [
-      "14 Open Play Sessions/month",
+      "14 Open Play sessions/month",
       "All sports included",
       "Priority booking",
       "Program discounts",
@@ -48,14 +47,14 @@ const plans = [
   {
     name: "LevelUp Ultimate",
     icon: Crown,
-    regular: 149.99,
-    earlyBird: 119.99,
-    savings: 30,
+    price: 119.99,
     tagline: "The ultimate all-access pass.",
+    sport: "All Sports",
+    sessions: "24 Open Plays",
     description:
       "Play any sport, anytime — with the freedom to add extra sessions whenever you want. Nonstop action, total flexibility, and maximum value.",
     features: [
-      "24 Open Play Sessions/month",
+      "24 Open Play sessions/month",
       "All sports included",
       "Highest booking priority",
       "Program discounts",
@@ -67,44 +66,29 @@ const plans = [
 ];
 
 export function PricingSection() {
-  const [billing, setBilling] = useState<"regular" | "earlyBird">("earlyBird");
-
   return (
     <div>
-      {/* Billing Toggle */}
-      <div className="flex items-center justify-center mb-8">
-        <div className="inline-flex items-center bg-neutral-100 rounded-full p-1">
-          <button
-            onClick={() => setBilling("regular")}
-            className={cn(
-              "px-4 py-1.5 rounded-full text-sm font-semibold transition-all",
-              billing === "regular"
-                ? "bg-white text-neutral-900 shadow-sm"
-                : "text-neutral-500 hover:text-neutral-700"
-            )}
-          >
-            Regular
-          </button>
-          <button
-            onClick={() => setBilling("earlyBird")}
-            className={cn(
-              "px-4 py-1.5 rounded-full text-sm font-semibold transition-all flex items-center gap-1.5",
-              billing === "earlyBird"
-                ? "bg-white text-neutral-900 shadow-sm"
-                : "text-neutral-500 hover:text-neutral-700"
-            )}
-          >
-            <Sparkles className="h-3.5 w-3.5 text-accent" />
-            Early Bird
-          </button>
+      {/* Open Play Pricing Bar */}
+      <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 mb-8 text-sm">
+        <div className="flex items-center gap-2">
+          <span className="font-semibold text-neutral-900">Open Play</span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <Badge variant="accent" className="text-xs px-2 py-0.5">Members</Badge>
+          <span className="font-mono font-bold text-neutral-900">$8</span>
+          <span className="text-neutral-500">/hour</span>
+          <span className="text-xs text-accent font-medium">(50% off)</span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <Badge variant="outline" className="text-xs px-2 py-0.5">Non-Members</Badge>
+          <span className="font-mono font-bold text-neutral-900">$15</span>
+          <span className="text-neutral-500">/hour</span>
         </div>
       </div>
 
       {/* Pricing Cards */}
       <div className="grid md:grid-cols-3 gap-5 lg:gap-6 max-w-5xl mx-auto items-start">
         {plans.map((plan) => {
-          const price =
-            billing === "earlyBird" ? plan.earlyBird : plan.regular;
           const Icon = plan.icon;
 
           return (
@@ -150,23 +134,21 @@ export function PricingSection() {
                   {plan.tagline}
                 </p>
 
-                {billing === "earlyBird" && (
-                  <p className="text-sm text-neutral-400 line-through mb-0.5">
-                    ${plan.regular.toFixed(2)}/month
-                  </p>
-                )}
                 <div className="flex items-baseline gap-1">
                   <span className="font-mono text-4xl font-bold text-neutral-900">
-                    ${price.toFixed(2)}
+                    ${plan.price.toFixed(2)}
                   </span>
                   <span className="text-neutral-400 text-sm">/month</span>
                 </div>
-                {billing === "earlyBird" && (
-                  <p className="text-xs text-accent font-semibold mt-1">
-                    *Early Bird Preview: Save ${plan.savings.toFixed(2)}/month
-                  </p>
-                )}
-                <p className="text-sm text-neutral-500 mt-2">
+                <div className="flex items-center gap-3 mt-2">
+                  <span className="text-xs font-medium bg-primary/10 text-primary rounded-full px-2 py-0.5">
+                    {plan.sport}
+                  </span>
+                  <span className="text-xs font-medium bg-neutral-100 text-neutral-600 rounded-full px-2 py-0.5">
+                    {plan.sessions}
+                  </span>
+                </div>
+                <p className="text-sm text-neutral-500 mt-3">
                   {plan.description}
                 </p>
               </div>
@@ -183,14 +165,6 @@ export function PricingSection() {
                   </div>
                 ))}
               </div>
-
-              {billing === "earlyBird" && (
-                <div className="mb-4 rounded-lg bg-accent/5 border border-accent/10 px-3 py-2 text-center">
-                  <span className="text-xs font-bold text-accent uppercase tracking-wide">
-                    Early Bird
-                  </span>
-                </div>
-              )}
 
               <Button
                 variant={plan.recommended ? "primary" : "outline"}

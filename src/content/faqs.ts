@@ -7,7 +7,7 @@ export const HOMEPAGE_FAQS = [
   {
     question: "Do I need a membership to use LevelUP Sports?",
     answer:
-      "No — drop-ins are welcome! You can rent a batting cage or court on a per-session basis without any membership. Cages start at $35/hour and courts start at $25/hour. That said, memberships save you significant money if you come regularly. Our Basic plan is $49/month for unlimited court access.",
+      "No — drop-ins are welcome! You can rent a batting cage or court on a per-session basis without any membership. Open Play is $15/hour for non-members ($8/hour for members — a 50% discount). Private rentals range from $40/hour for a batting cage, badminton court, or cricket cage, up to $120/hour for a volleyball court. That said, memberships save you significant money if you come regularly. Our Core plan starts at $59.99/month.",
   },
   {
     question: "Can my child try a free session before signing up?",
@@ -17,7 +17,7 @@ export const HOMEPAGE_FAQS = [
   {
     question: "How much does it cost to rent a batting cage or court at LevelUP?",
     answer:
-      "Batting cages range from $35-45/hour depending on the cage (our pro cage with video analysis is $45). Cricket net sessions are $40/hour. Badminton courts are $30/hour. Pickleball courts are $25/hour. All prices are per court/cage, not per person — so you can split the cost with friends or family. Memberships offer unlimited access starting at $49/month.",
+      "Baseball cage rental is $40/hour. Cricket rentals range from $40/hour (single cage) to $90/hour (half pitch) to $180/hour (full pitch). Badminton courts are $40/hour. Volleyball court rental is $120/hour. Open Play is $15/hour for non-members or just $8/hour for members (50% off). All prices are per court/cage, not per person — so you can split the cost with friends or family. Memberships start at $59.99/month (Core), $89.99/month (Momentum), or $119.99/month (Ultimate).",
   },
   {
     question: "What ages are your youth sports programs for?",
@@ -80,6 +80,6 @@ export const MEMBERSHIP_FAQS = [
   {
     question: "Is a LevelUP membership worth it?",
     answer:
-      "If you visit 3+ times per week, membership pays for itself in the first month. A single batting cage rental is $35. A single court booking is $25-30. With a Pro membership at $89/month, unlimited access works out to less than $3 per visit. Plus you get priority booking, guest passes, and academy discounts. Most members tell us they wish they'd signed up sooner.",
+      "If you visit 3+ times per week, membership pays for itself in the first month. Open Play without a membership is $15/hour — with a membership, it drops to just $8/hour (50% off). Private cage and court rentals run $40-$120/hour. With a Momentum membership at $89.99/month, you get 14 Open Play sessions, all sports included, and priority booking. Most members tell us they wish they'd signed up sooner.",
   },
 ];
