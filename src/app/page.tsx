@@ -114,8 +114,8 @@ export default function HomePage() {
             <div className="h-4 w-px bg-white/10 hidden md:block" />
             <div className="flex items-center gap-2 text-white/50 text-sm">
               <Star className="h-4 w-4 text-warning fill-warning" />
-              <span className="font-medium text-white/70">4.8</span>
-              <span className="hidden sm:inline">— 156 Google Reviews</span>
+              <span className="font-medium text-white/70">5.0</span>
+              <span className="hidden sm:inline">— 13 Google Reviews</span>
             </div>
           </div>
         </Container>
