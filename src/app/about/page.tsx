@@ -24,24 +24,24 @@ export const metadata: Metadata = generateSEOMetadata({
 
 const milestones = [
   {
-    year: "2023",
+    year: "2024",
     title: "The 45-minute problem",
     desc: "Parents across Cecil County, Newark, and Middletown were driving 45+ minutes for decent indoor sports facilities. Baseball families drove to Baltimore. Cricket families drove to Philly. Enough was enough.",
   },
   {
-    year: "2024",
+    year: "2025",
     title: "701 E Pulaski Hwy",
     desc: "We found the perfect spot — on Route 40 in Elkton, right off I-95, accessible from Maryland, Delaware, and Pennsylvania. Construction began on a 20,000+ sq ft multi-sport facility.",
   },
   {
-    year: "2024",
+    year: "Jan 2026",
     title: "Opening day",
-    desc: "First families walk through the doors. Six sports — baseball, cricket, badminton, pickleball, volleyball, and soccer — under one roof. Within a month, members are coming from three states.",
+    desc: "First families walk through the doors. Six sports — baseball, cricket, badminton, pickleball, volleyball, and soccer — under one roof. Within weeks, members are coming from three states.",
   },
   {
-    year: "2025",
-    title: "500+ athletes. 3 states. 1 building.",
-    desc: "Families from Middletown, Newark, Wilmington, and across Cecil County train here weekly. Most tried other places first. They stay because their kids are getting better.",
+    year: "2026",
+    title: "Growing fast. 3 states. 1 building.",
+    desc: "Families from Middletown, Newark, Wilmington, and across Cecil County train here weekly. 200+ player events, Little League rain-out saves, bachelorette parties — the community showed up.",
   },
 ];
 

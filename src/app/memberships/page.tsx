@@ -201,7 +201,7 @@ export default function MembershipsPage() {
               </p>
               <footer className="mt-4">
                 <p className="text-sm font-semibold text-neutral-900">
-                  — Pro Member since 2024, Newark DE
+                  — Momentum Member since 2026, Newark DE
                 </p>
               </footer>
             </blockquote>
