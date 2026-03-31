@@ -63,9 +63,9 @@ export function NewsletterSignup() {
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Enter your email"
         required
-        className="flex-1 h-11 px-4 rounded-lg border border-neutral-300 bg-white text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+        className="flex-1 h-11 min-h-[44px] px-4 rounded-lg border border-neutral-300 bg-white text-neutral-900 text-base placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
       />
-      <Button type="submit" disabled={status === "loading"}>
+      <Button type="submit" size="md" className="h-11 min-h-[44px]" disabled={status === "loading"}>
         {status === "loading" ? "Subscribing..." : "Subscribe"}
       </Button>
       <div aria-live="polite" className="sr-only">
