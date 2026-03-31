@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import { FAQAccordion } from "@/components/composed/faq-accordion";
@@ -178,20 +179,32 @@ export function SportPageLayout({ data }: { data: SportPageData }) {
             </div>
           </Reveal>
           <StaggerContainer className={cn(
-            "grid gap-6 max-w-3xl mx-auto",
-            data.coaches.length === 1 ? "grid-cols-1 max-w-sm" : "sm:grid-cols-2"
+            "grid gap-6 mx-auto",
+            data.coaches.length === 1 ? "grid-cols-1 max-w-sm" :
+            data.coaches.length <= 2 ? "sm:grid-cols-2 max-w-3xl" :
+            "sm:grid-cols-2 max-w-4xl"
           )}>
             {data.coaches.map((coach) => (
               <StaggerItem key={coach.name}>
                 <div className="flex items-start gap-4 bg-white rounded-2xl border border-neutral-200 p-6 shadow-card">
-                  <div
-                    className="w-14 h-14 rounded-full flex items-center justify-center shrink-0"
-                    style={{ backgroundColor: `${data.color}15` }}
-                  >
-                    <span className="text-lg font-bold" style={{ color: data.color }}>
-                      {coach.initials}
-                    </span>
-                  </div>
+                  {coach.image ? (
+                    <Image
+                      src={coach.image}
+                      alt={coach.name}
+                      width={56}
+                      height={56}
+                      className="w-14 h-14 rounded-full object-cover shrink-0"
+                    />
+                  ) : (
+                    <div
+                      className="w-14 h-14 rounded-full flex items-center justify-center shrink-0"
+                      style={{ backgroundColor: `${data.color}15` }}
+                    >
+                      <span className="text-lg font-bold" style={{ color: data.color }}>
+                        {coach.initials}
+                      </span>
+                    </div>
+                  )}
                   <div>
                     <h3 className="font-display font-bold text-neutral-900">
                       {coach.name}

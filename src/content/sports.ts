@@ -15,6 +15,7 @@ export interface Coach {
   role: string;
   credentials: string;
   initials: string;
+  image?: string;
 }
 
 export interface FAQ {
@@ -127,23 +128,23 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
   cricket: {
     slug: "cricket",
     name: "Cricket",
-    tagline: "A Proper Facility. Finally.",
+    tagline: "IPL Coaches. World-Class Facility. Right Here in Elkton.",
     description:
-      "The only dedicated indoor cricket center between Philadelphia and Baltimore. Full-length nets, pro bowling machines, and a coach who played first-class cricket.",
+      "Proud partners of BRSS Cricket Academy — North America's largest cricket academy. Train under IPL veterans, international cricketers, and first-class players at the only dedicated indoor cricket center between Philadelphia and Baltimore.",
     image: "/images/sports/cricket.png",
     color: "#1B7D3A",
-    metaTitle: "Indoor Cricket Facility & Academy — Elkton, MD | Serving Newark, Wilmington & Middletown, DE",
+    metaTitle: "Indoor Cricket Facility & BRSS Academy Partner — Elkton, MD | Serving Newark, Wilmington & Middletown, DE",
     metaDescription:
-      "Maryland's premier indoor cricket facility in Elkton, MD — serving Newark, Wilmington & Middletown, DE. Professional nets, bowling machines, youth & adult academy. Book cricket nets today.",
+      "Train with IPL & international cricket coaches at Maryland's premier indoor facility in Elkton, MD. Proud BRSS Cricket Academy partner. Professional nets, bowling machines, youth & adult programs. Book today.",
     overview: [
-      "You've been searching for proper cricket infrastructure in the tri-state area. Not a converted warehouse with a bowling machine in the corner — an actual facility with full-length nets, professional-grade bowling machines, and a coach who played first-class cricket. LevelUP is the only dedicated indoor cricket center between Philadelphia and Baltimore, and it was built for this community.",
-      "Whether your family has played cricket for generations or you're curious about the sport your neighbors love, Coach Sharma meets you where you are. Many of our members drove 45+ minutes each way before we opened. Now they're 15 minutes away. We serve families from Newark, Wilmington, Middletown, and across the tri-state area.",
+      "LevelUP Sports is a proud partner of BRSS Cricket Academy (Baltimore Royals Sunny Sohal Cricket) — the largest cricket academy in North America. Formed through the merger of the Baltimore Royals and the Sunny Sohal Cricket Academy (SSCA), BRSS brings international-caliber coaching to Elkton. Our coaching staff includes an IPL veteran, a former Pakistan international fast bowler, and first-class cricketers from India. You won't find this level of coaching anywhere between Philadelphia and Baltimore.",
+      "Whether your family has played cricket for generations or you're curious about the sport, our world-class coaching team meets you where you are. Many of our members drove 45+ minutes each way before we opened. Now they're 15 minutes away, training under coaches who've competed at the highest levels of world cricket. We serve families from Newark, Wilmington, Middletown, and across the tri-state area.",
     ],
     highlights: [
       { label: "Nets", value: "Full-Length" },
       { label: "Machines", value: "Pro-Grade" },
-      { label: "Levels", value: "All" },
-      { label: "Coaching", value: "Expert" },
+      { label: "Partner", value: "BRSS Academy" },
+      { label: "Coaching", value: "International" },
     ],
     programs: [
       {
@@ -154,19 +155,19 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       },
       {
         title: "Cricket Academy",
-        description: "Structured coaching programs covering batting technique, bowling action, and fielding skills. Package 1: $119 (4 sessions) | Package 2: $200 (8 sessions). Wed & Fri evenings, youth and adults.",
+        description: "Structured coaching powered by BRSS Cricket Academy — batting technique, bowling action, and fielding skills. Package 1: $119 (4 sessions) | Package 2: $200 (8 sessions). Wed & Fri evenings, youth and adults.",
         href: "/cricket-academy",
         tag: "Academy",
       },
       {
         title: "Match Preparation",
-        description: "Intensive sessions focused on match scenarios, game strategy, and competitive readiness.",
+        description: "Intensive sessions focused on match scenarios, game strategy, and competitive readiness — led by coaches with international match experience.",
         href: "/schedule",
         tag: "Advanced",
       },
       {
         title: "Junior Development",
-        description: "Age-appropriate training introducing cricket fundamentals in a fun, supportive environment.",
+        description: "Age-appropriate training introducing cricket fundamentals in a fun, supportive environment with a clear pathway to competitive cricket.",
         href: "/cricket-academy",
         tag: "Youth",
       },
@@ -175,31 +176,47 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       "Full-length indoor cricket nets",
       "Professional-grade bowling machines",
       "Video analysis technology",
-      "Coaches with competitive playing experience",
+      "IPL & international-level coaching staff",
+      "BRSS Cricket Academy partnership — professional pathway for young cricketers",
       "All equipment available for beginners",
       "Year-round climate-controlled facility",
     ],
     coaches: [
       {
-        name: "Coach Sharma",
-        role: "Head Cricket Coach",
-        credentials: "Former first-class cricketer, 12+ years coaching",
-        initials: "CS",
+        name: "Sarbjeet Ladda",
+        role: "Chief Bowling Coach",
+        credentials: "17-year pro career — IPL (KKR, Gujarat Lions, Delhi Daredevils), MLC Champion, 100+ Minor League wickets",
+        initials: "SL",
+        image: "/images/Coaches/Sarabjit.jpeg",
       },
       {
-        name: "Coach Ahmed",
-        role: "Bowling Coach",
-        credentials: "Specialist in pace and spin bowling development",
-        initials: "CA",
+        name: "Muhammad Asif",
+        role: "Fast Bowling Coach",
+        credentials: "Former Pakistan international — one of the finest fast bowlers in world cricket",
+        initials: "MA",
+      },
+      {
+        name: "Ravi Inder Singh Mehra",
+        role: "Batting Coach",
+        credentials: "First-class cricketer (India), NKP Salve Trophy representative, BRSS Academy batting coach",
+        initials: "RM",
+      },
+      {
+        name: "Rajit Passey",
+        role: "Academy Director",
+        credentials: "Punjab U19 captain, Baltimore Royals owner, BRSS Cricket Academy co-founder",
+        initials: "RP",
       },
     ],
     faqs: [
-      { question: "Do you offer cricket coaching for complete beginners?", answer: "Absolutely! Our junior development and beginner programs are designed for players with zero experience." },
+      { question: "What is BRSS Cricket Academy?", answer: "BRSS (Baltimore Royals Sunny Sohal Cricket) is the largest cricket academy in North America, formed through the merger of the Baltimore Royals and the Sunny Sohal Cricket Academy (SSCA). LevelUP is a proud partner facility, bringing BRSS's world-class coaching to the Elkton/tri-state area." },
+      { question: "Do you offer cricket coaching for complete beginners?", answer: "Absolutely! Our junior development and beginner programs are designed for players with zero experience. Our coaches work with all skill levels — from first-timers to competitive players." },
       { question: "Can I just book a net without coaching?", answer: "Yes, net sessions can be booked independently. Full pitch rental is $180/hour, half pitch $90/hour, or a single cage for $40/hour. Bowling machines are available for self-practice." },
       { question: "What cricket equipment is provided?", answer: "We provide bats, pads, gloves, and helmets for beginners. Regular players are encouraged to bring their own gear." },
+      { question: "Is there a pathway to competitive cricket?", answer: "Yes. Through our BRSS partnership, players have access to professional pathways including Major League Cricket (MLC), Minor League Cricket (MiLC), and international tournament exposure." },
     ],
     academySlug: "cricket-academy",
-    ctaTitle: "Finally, a Proper Facility",
+    ctaTitle: "Train Under International Coaches",
     ctaPrimary: { label: "Try a Free Session", href: "/free-trial" },
     ctaSecondary: { label: "View Academy", href: "/cricket-academy" },
   },

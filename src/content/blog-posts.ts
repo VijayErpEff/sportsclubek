@@ -241,14 +241,14 @@ export const BLOG_POSTS: BlogPost[] = [
     <h2>The Infrastructure Problem</h2>
     <p>Most cricket in the region happens on converted soccer fields, public parks, or improvised setups. While the passion is there, the infrastructure hasn't kept up. Finding indoor nets for winter training, bowling machines for batting practice, or professional coaching has historically meant driving to major metro areas.</p>
     <h2>What's Available Now</h2>
-    <p>The landscape is improving. LevelUP Sports in Elkton, MD opened a dedicated indoor cricket facility with full-length nets, professional bowling machines, and coaching from Coach Sharma, a former first-class cricketer. It's the only facility of its kind between Philadelphia and Baltimore, serving players from Newark, Wilmington, Middletown, and across the tri-state area.</p>
+    <p>The landscape is improving. LevelUP Sports in Elkton, MD — a proud partner of BRSS Cricket Academy, North America's largest cricket academy — opened a dedicated indoor cricket facility with full-length nets, professional bowling machines, and coaching from IPL veterans and international cricketers. It's the only facility of its kind between Philadelphia and Baltimore, serving players from Newark, Wilmington, Middletown, and across the tri-state area.</p>
     <h2>Youth Development</h2>
     <p>The cricket academy at LevelUP runs structured programs for youth and adults, covering batting, bowling, and fielding. Ananya Sharma, one of their youth players, was selected for the Maryland State U-17 team after training there — a sign that proper infrastructure produces real results.</p>
     <h2>Getting Involved</h2>
     <p>Whether you're an experienced cricketer looking for net sessions, a parent wanting proper coaching for your child, or a complete beginner curious about the sport, the options are better than they've ever been. LevelUP offers free trial sessions for newcomers — it's the easiest way to experience a proper indoor cricket setup.</p>
     <h2>Summer Leagues</h2>
     <p>LevelUP is launching a summer cricket league in 2025 with youth (U-15) and adult divisions. T20 format, Saturday matches, June through August. Registration is open now at levelupsports.us.</p>`,
-    author: "Coach Sharma",
+    author: "Rajit Passey",
     date: "2025-01-28",
     readTime: 5,
     category: "news",

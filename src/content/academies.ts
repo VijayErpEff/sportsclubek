@@ -16,6 +16,7 @@ export interface AcademyCoach {
   role: string;
   bio: string;
   initials: string;
+  image?: string;
 }
 
 export interface AcademyPageData {
@@ -128,15 +129,15 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
     name: "Cricket Academy",
     sport: "Cricket",
     sportSlug: "cricket",
-    tagline: "The Coaching You've Been Driving 45 Minutes For",
-    description: "Coach Sharma played first-class cricket. Now he coaches here — 15 minutes from Middletown, not 45 minutes to Philly.",
+    tagline: "Powered by BRSS — North America's Largest Cricket Academy",
+    description: "IPL veterans, international fast bowlers, and first-class cricketers coaching right here in Elkton — 15 minutes from Middletown, not 45 minutes to Philly.",
     image: "/images/sports/cricket.png",
     color: "#1B7D3A",
-    metaTitle: "Cricket Academy Maryland — Elkton, MD | Near Newark, Wilmington & Middletown, DE",
-    metaDescription: "Maryland's premier cricket academy in Elkton — serving Newark, Wilmington & Middletown, DE. Professional nets, certified coaching, youth & adult programs. Enroll today.",
+    metaTitle: "Cricket Academy Maryland — BRSS Partner | Elkton, MD | Near Newark, Wilmington & Middletown, DE",
+    metaDescription: "Train with IPL & Pakistan international coaches at Maryland's premier cricket academy in Elkton. BRSS Cricket Academy partner. Professional pathway for young cricketers. Enroll today.",
     overview: [
-      "Before LevelUP, families in this area had two options for proper cricket coaching: drive 45+ minutes to Philadelphia or make do with informal setups. Ananya Sharma trained here for 8 months and was selected for the Maryland State U-17 team. That's what happens when you combine first-class coaching with proper infrastructure.",
-      "Coach Sharma played first-class cricket before spending 12+ years developing players of all levels. Whether your family has played cricket for generations or your kid is picking up a bat for the first time, the academy covers batting, bowling, and fielding with structured progression and real accountability.",
+      "LevelUP's Cricket Academy is powered by our partnership with BRSS Cricket Academy (Baltimore Royals Sunny Sohal Cricket) — the largest cricket academy in North America. BRSS was formed through the merger of the Baltimore Royals and the Sunny Sohal Cricket Academy (SSCA), bringing a proven professional pathway for young cricketers through connections to Major League Cricket (MLC), Minor League Cricket (MiLC), and international opportunities.",
+      "Our coaching staff includes Sarbjeet Ladda — an IPL veteran and the leading wicket-taker in Minor League Cricket — Muhammad Asif, a former Pakistan international regarded as one of the finest fast bowlers in world cricket, and Ravi Inder Singh Mehra, a first-class batsman who represented India in the NKP Salve Trophy. Whether your family has played cricket for generations or your kid is picking up a bat for the first time, this academy covers batting, bowling, and fielding with structured progression and world-class mentorship.",
     ],
     stats: [
       { label: "Disciplines", value: "Bat/Bowl/Field" },
@@ -148,7 +149,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
       {
         label: "Batting",
         title: "Batting Technique",
-        description: "Develop a complete batting game — from defensive technique to aggressive shot-making.",
+        description: "Develop a complete batting game under Ravi Mehra — from defensive technique to aggressive shot-making.",
         color: "#1B7D3A",
         skills: [
           "Stance, grip, and backlift fundamentals",
@@ -161,7 +162,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
       {
         label: "Bowling",
         title: "Bowling Development",
-        description: "Build a repeatable action, develop control, and add variations to your arsenal.",
+        description: "Learn from IPL veteran Sarbjeet Ladda and Pakistan international Muhammad Asif — build a repeatable action, develop control, and add variations.",
         color: "#1B7D3A",
         skills: [
           "Bowling action mechanics and consistency",
@@ -186,24 +187,51 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
       },
     ],
     coaches: [
-      { name: "Coach Sharma", role: "Head Cricket Coach", bio: "Former first-class cricketer with 12+ years of coaching experience. Specializes in batting development and match strategy.", initials: "CS" },
-      { name: "Coach Ahmed", role: "Bowling Coach", bio: "Specialist in pace and spin bowling development with a focus on sustainable action mechanics and match performance.", initials: "CA" },
+      {
+        name: "Sarbjeet Ladda",
+        role: "Chief Bowling Coach",
+        bio: "\"Ladda\" has played professional cricket for almost 17 years. A mercurial leg spinner, he played IPL for Kolkata Knight Riders, Gujarat Lions, and Delhi Daredevils. In 2023, his team Mumbai Indians NY won the Major League Championship. He also played Legends League for Gujarat Giants. Ladda is currently the leading wicket-taker in Minor League Cricket with over 100 wickets.",
+        initials: "SL",
+        image: "/images/Coaches/Sarabjit.jpeg",
+      },
+      {
+        name: "Muhammad Asif",
+        role: "Fast Bowling Coach",
+        bio: "One of the best fast bowlers the world has seen, Asif played for the Pakistan National team. He is currently settled in the US and fully devoted to developing the next generation of fast bowlers.",
+        initials: "MA",
+      },
+      {
+        name: "Ravi Inder Singh Mehra",
+        role: "Batting Coach",
+        bio: "A brilliant left-handed batsman, Ravi played First Class Cricket in India and represented the India Green and Blue teams in the NKP Salve Trophy. A keen student of the game, Ravi has immersed himself in the world of coaching and serves as the batting coach at the BRSS Academy.",
+        initials: "RM",
+      },
+      {
+        name: "Rajit Passey",
+        role: "Academy Director",
+        bio: "Rajit has been around cricket all his life — captaining the Punjab U19 state team, representing his college and university in India, and continuing the passion after moving to the US in 1992. He owns the Baltimore Royals (Minor League Cricket) and co-founded BRSS Cricket Academy. His vision is to see cricket flourish at the youth level and provide professional pathways to succeed at the highest level.",
+        initials: "RP",
+      },
     ],
     whatYouGet: [
+      "Coaching from IPL veterans and international cricketers",
+      "BRSS Academy professional pathway to MLC, MiLC, and international opportunities",
       "Structured curriculum covering batting, bowling, and fielding",
       "Professional bowling machine sessions included",
       "Video analysis of technique",
       "Small group sizes for personalized attention",
-      "Match-simulation sessions",
+      "Match-simulation sessions and tournament exposure",
       "Access to open net sessions during enrollment",
     ],
     faqs: [
-      { question: "Do I need prior cricket experience?", answer: "Not at all. We have beginner groups that start from scratch. Our coaches are experienced at introducing the sport to new players." },
+      { question: "What is BRSS Cricket Academy?", answer: "BRSS (Baltimore Royals Sunny Sohal Cricket) is the largest cricket academy in North America, formed through the merger of the Baltimore Royals and the Sunny Sohal Cricket Academy. LevelUP is a proud partner, bringing BRSS's international-caliber coaching to the tri-state area." },
+      { question: "Do I need prior cricket experience?", answer: "Not at all. We have beginner groups that start from scratch. Our coaches — including IPL and international veterans — are experienced at working with all skill levels." },
       { question: "What equipment do I need?", answer: "Beginners can use our equipment (bats, pads, gloves, helmets). Regular players should invest in their own gear — we can recommend options." },
       { question: "Are there adult programs?", answer: "Yes! We have separate sessions for adults, including weekday evening and weekend programs." },
+      { question: "Is there a pathway to professional cricket?", answer: "Yes. Through our BRSS partnership, players have pathways to Major League Cricket (MLC), Minor League Cricket (MiLC), and international tournament exposure — including trips to India for turf-wicket experience." },
     ],
-    ctaTitle: "Proper Coaching. 15 Minutes Away.",
-    ctaDescription: "Book a free trial session. Meet Coach Sharma, hit the nets, and see why families drive here from three states.",
+    ctaTitle: "Train Under International Coaches",
+    ctaDescription: "Book a free trial session. Meet our IPL and international coaching staff, hit the nets, and see why families drive here from three states.",
   },
 
   "badminton-academy": {

@@ -54,10 +54,10 @@ const coaches = [
     sport: "Baseball",
   },
   {
-    name: "Coach Sharma",
-    role: "Cricket Director",
-    cred: "Former first-class cricketer. Certified coach with 12+ years developing youth talent.",
-    image: "/images/sports/cricket.png",
+    name: "Sarbjeet Ladda",
+    role: "Chief Bowling Coach — Cricket",
+    cred: "IPL veteran (KKR, Gujarat Lions, Delhi Daredevils). MLC Champion. 100+ Minor League wickets. BRSS Academy partner.",
+    image: "/images/Coaches/Sarabjit.jpeg",
     sport: "Cricket",
   },
   {
