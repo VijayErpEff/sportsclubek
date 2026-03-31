@@ -68,6 +68,13 @@ const coaches = [
     sport: "Badminton",
   },
   {
+    name: "Coach Viktor",
+    role: "Volleyball Director",
+    cred: "20+ years competitive playing. Ukrainian league medalist. 6+ years coaching youth and university teams.",
+    image: "/images/sports/volleyball.jpg",
+    sport: "Volleyball",
+  },
+  {
     name: "Coach Williams",
     role: "Youth Fitness",
     cred: "Certified youth fitness specialist. Builds athletic foundations for young athletes ages 5–12.",

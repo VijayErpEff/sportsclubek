@@ -369,7 +369,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     metaDescription:
       "Indoor volleyball courts in Elkton, MD — 15 min from Middletown & Newark, DE. Youth academy, adult leagues, open play, and expert coaching. Book today.",
     overview: [
-      "Whether your kid is learning to pass for the first time or your adult rec team needs a reliable indoor home, LevelUP has you covered. Our regulation-height nets, proper court lines, and professional flooring give you the real volleyball experience — not a makeshift setup in a church gym. Coach Torres has coached club and high school volleyball for over a decade, and she builds players who are fundamentally sound and mentally tough.",
+      "Whether your kid is learning to pass for the first time or your adult rec team needs a reliable indoor home, LevelUP has you covered. Our regulation-height nets, proper court lines, and professional flooring give you the real volleyball experience — not a makeshift setup in a church gym. Coach Viktor brings 20+ years of competitive playing experience and 6+ years coaching youth, university, and adult teams — he builds players who are fundamentally sound and mentally tough.",
       "Parents: this is the sport that teaches teamwork better than any other. Every point requires communication, trust, and coordination. Our youth programs focus on passing, serving, and court awareness — the skills that separate good players from great ones. And our adult open play nights? They've become the most fun evening of the week for 30+ regulars.",
     ],
     highlights: [
@@ -414,16 +414,10 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     ],
     coaches: [
       {
-        name: "Coach Torres",
+        name: "Coach Viktor",
         role: "Head Volleyball Coach",
-        credentials: "12+ years club & high school coaching, USAV certified",
-        initials: "CT",
-      },
-      {
-        name: "Coach Nguyen",
-        role: "Youth Development Coach",
-        credentials: "Former D2 college player, specializes in fundamentals",
-        initials: "CN",
+        credentials: "20+ years competitive playing, 6+ years coaching youth & university teams, Ukrainian league medalist",
+        initials: "VK",
       },
     ],
     faqs: [

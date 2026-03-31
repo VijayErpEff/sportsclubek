@@ -383,7 +383,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
     metaTitle: "Youth Volleyball Academy — Elkton, MD | Near Middletown, Newark & Wilmington, DE",
     metaDescription: "Youth volleyball academy in Elkton, MD — near Middletown & Newark, DE. USAV-certified coaches, skill development for ages 8-18. Passing, setting, hitting. Enroll today.",
     overview: [
-      "Club volleyball tryouts are brutally competitive. The kids who make the team aren't necessarily the tallest or most athletic — they're the ones with clean passing technique, consistent serving, and court awareness that comes from structured training. That's exactly what Coach Torres builds in this academy. Last year, 8 of our academy players made club teams on their first tryout.",
+      "Club volleyball tryouts are brutally competitive. The kids who make the team aren't necessarily the tallest or most athletic — they're the ones with clean passing technique, consistent serving, and court awareness that comes from structured training. That's exactly what Coach Viktor builds in this academy — drawing on 20+ years of competitive playing and championship-level coaching experience.",
       "The program runs in 10-week sessions, meeting twice a week. Class sizes max at 12 with a 6:1 player-to-coach ratio. Every session includes video review so players can see their progress. Parents: you'll watch from the viewing area and notice the difference in their movement and confidence within the first month.",
     ],
     stats: [
@@ -434,8 +434,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
       },
     ],
     coaches: [
-      { name: "Coach Torres", role: "Academy Director", bio: "USAV-certified with 12+ years of club and high school coaching experience. Her development pipeline has produced dozens of club-level players and multiple college prospects.", initials: "CT" },
-      { name: "Coach Nguyen", role: "Youth Development Coach", bio: "Former Division II college player who specializes in building fundamentals from scratch. Known for making beginners feel confident from day one.", initials: "CN" },
+      { name: "Coach Viktor", role: "Head Volleyball Coach", bio: "Viktor Khudyaev brings 20+ years of competitive volleyball and 6+ years coaching youth, university, and adult teams. A Ukrainian First League bronze medalist and multiple-time regional champion, he develops fundamentals, coordination, and game intelligence for athletes ages 10–18. His structured, disciplined approach turns raw potential into confident, court-smart players.", initials: "VK" },
     ],
     whatYouGet: [
       "10-week structured curriculum with measurable skill progression",
@@ -451,7 +450,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
       { question: "What should my child bring?", answer: "Athletic wear, clean court shoes (no marking soles), knee pads (optional but recommended), and a water bottle. We provide all balls and equipment." },
     ],
     ctaTitle: "See the Improvement in One Session",
-    ctaDescription: "Book a free trial session. Watch your kid pass, serve, and hit — then talk to Coach Torres about the right program for them.",
+    ctaDescription: "Book a free trial session. Watch your kid pass, serve, and hit — then talk to Coach Viktor about the right program for them.",
   },
 
   "soccer-academy": {
