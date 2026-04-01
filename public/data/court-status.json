@@ -1,0 +1,23 @@
+{
+  "cages": {
+    "merges": [false, false, false],
+    "items": [
+      { "status": "available", "sport": null, "note": "" },
+      { "status": "available", "sport": null, "note": "" },
+      { "status": "available", "sport": null, "note": "" },
+      { "status": "available", "sport": null, "note": "" }
+    ]
+  },
+  "mp": {
+    "layout": "courts-6",
+    "slots": [
+      { "state": "available", "note": "" },
+      { "state": "available", "note": "" },
+      { "state": "available", "note": "" },
+      { "state": "available", "note": "" },
+      { "state": "available", "note": "" },
+      { "state": "available", "note": "" }
+    ]
+  },
+  "updated": 0
+}

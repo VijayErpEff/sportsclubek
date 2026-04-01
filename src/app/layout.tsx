@@ -9,6 +9,8 @@ import { ScrollProgressBar } from "@/components/ui/progress-bar";
 import { CommandPalette } from "@/components/composed/command-palette";
 import { SportPreference } from "@/components/composed/sport-preference";
 import { ReturningVisitor } from "@/components/composed/returning-visitor";
+import { AnnouncementBanner } from "@/components/composed/announcement-banner";
+import { Suspense } from "react";
 import { generateOrganizationLD } from "@/lib/seo/json-ld";
 import { SITE_CONFIG } from "@/lib/constants/site";
 import "./globals.css";
@@ -124,6 +126,7 @@ export default function RootLayout({
           Skip to main content
         </a>
         <ScrollProgressBar />
+        <Suspense><AnnouncementBanner /></Suspense>
         <Navbar />
         <main id="main-content">{children}</main>
         <Footer />

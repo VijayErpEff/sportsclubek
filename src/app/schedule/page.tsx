@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { Suspense } from "react";
 import Link from "next/link";
 import { Container } from "@/components/layout/container";
 import { CTABanner } from "@/components/composed/cta-banner";
@@ -85,7 +86,7 @@ export default function SchedulePage() {
       {/* Schedule Calendar */}
       <div className="pb-20 md:pb-28">
         <Container>
-          <ScheduleCalendar />
+          <Suspense><ScheduleCalendar /></Suspense>
         </Container>
       </div>
 

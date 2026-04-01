@@ -376,7 +376,29 @@ export function CourtStatusBoard() {
   const stateRef = useRef(state);
   stateRef.current = state;
 
-  useEffect(() => { const saved = loadState(); if (saved) setState(saved); setMounted(true); }, []);
+  useEffect(() => {
+    async function init() {
+      // 1. Try localStorage (admin edits)
+      const saved = loadState();
+      if (saved) { setState(saved); setMounted(true); return; }
+      // 2. Try config file defaults
+      try {
+        const res = await fetch("/data/court-status.json");
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.cages && data.mp) {
+            data.updated = Date.now();
+            setState(data);
+            setMounted(true);
+            return;
+          }
+        }
+      } catch {}
+      // 3. Fallback to hardcoded defaults
+      setMounted(true);
+    }
+    init();
+  }, []);
 
   useEffect(() => {
     if (mounted && searchParams.has("admin") && !adminMode) {
@@ -616,13 +638,32 @@ export function CourtStatusBoard() {
         ))}
       </div>
 
-      {/* Admin exit */}
+      {/* Admin controls */}
       {adminMode && (
-        <div className="flex justify-end mt-2 shrink-0 max-w-7xl mx-auto w-full">
-          <button onClick={handleAdminToggle}
-            className="text-[0.55rem] font-medium text-error/60 hover:text-error transition-colors">
-            Exit Admin
-          </button>
+        <div className="flex items-center justify-between mt-2 shrink-0 max-w-7xl mx-auto w-full">
+          <span className="text-[0.5rem] text-white/20">Changes are local to this device</span>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={async () => {
+                try {
+                  const res = await fetch("/data/court-status.json");
+                  if (res.ok) {
+                    const data = await res.json();
+                    data.updated = Date.now();
+                    setState(data);
+                    saveState(data);
+                  }
+                } catch {}
+              }}
+              className="text-[0.55rem] font-medium text-info/60 hover:text-info transition-colors"
+            >
+              Reset to Defaults
+            </button>
+            <button onClick={handleAdminToggle}
+              className="text-[0.55rem] font-medium text-error/60 hover:text-error transition-colors">
+              Exit Admin
+            </button>
+          </div>
         </div>
       )}
 

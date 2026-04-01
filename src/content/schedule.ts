@@ -4,7 +4,7 @@
 // Each session needs: time, activity, sport (for color coding),
 // and optionally a level and spotsLeft.
 //
-// Sport options: "baseball" | "cricket" | "badminton" | "pickleball" | "agility" | "open"
+// Sport options: "baseball" | "cricket" | "badminton" | "pickleball" | "volleyball" | "soccer" | "agility" | "open"
 // ============================================================
 
 export type SportType =
@@ -12,6 +12,8 @@ export type SportType =
   | "cricket"
   | "badminton"
   | "pickleball"
+  | "volleyball"
+  | "soccer"
   | "agility"
   | "open";
 
@@ -35,6 +37,8 @@ export const SPORT_COLORS: Record<SportType, { bg: string; text: string; dot: st
   cricket:    { bg: "bg-accent/5",     text: "text-accent-hover",  dot: "bg-accent",      border: "border-accent/15" },
   badminton:  { bg: "bg-info/5",       text: "text-primary-light", dot: "bg-info",        border: "border-info/15" },
   pickleball: { bg: "bg-secondary/10", text: "text-accent",        dot: "bg-secondary",   border: "border-secondary/20" },
+  volleyball: { bg: "bg-amber-500/10", text: "text-amber-700",     dot: "bg-amber-500",   border: "border-amber-500/20" },
+  soccer:     { bg: "bg-red-500/10",   text: "text-red-700",       dot: "bg-red-500",     border: "border-red-500/20" },
   agility:    { bg: "bg-warning/10",   text: "text-neutral-700",   dot: "bg-warning",     border: "border-warning/20" },
   open:       { bg: "bg-neutral-50",   text: "text-neutral-600",   dot: "bg-neutral-400", border: "border-neutral-200" },
 };
@@ -44,6 +48,8 @@ export const SPORT_LABELS: Record<SportType, string> = {
   cricket: "Cricket",
   badminton: "Badminton",
   pickleball: "Pickleball",
+  volleyball: "Volleyball",
+  soccer: "Soccer",
   agility: "Kids Agility",
   open: "Open Play",
 };

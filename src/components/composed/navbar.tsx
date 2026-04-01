@@ -11,10 +11,12 @@ import { Container } from "@/components/layout/container";
 import { SITE_CONFIG } from "@/lib/constants/site";
 
 const SPORT_ITEMS = [
-  { name: "Baseball", href: "/baseball", academy: "/baseball-academy", emoji: "\u26be", desc: "Batting cages & coaching" },
+  { name: "Volleyball", href: "/volleyball", academy: "/volleyball-academy" as string | null, emoji: "\ud83c\udfd0", desc: "Leagues, coaching & open play" },
   { name: "Cricket", href: "/cricket", academy: "/cricket-academy", emoji: "\ud83c\udfcf", desc: "Nets & bowling machines" },
   { name: "Badminton", href: "/badminton", academy: "/badminton-academy", emoji: "\ud83c\udff8", desc: "Competition-grade courts" },
   { name: "Pickleball", href: "/pickleball", academy: null as string | null, emoji: "\ud83c\udfd3", desc: "Open play & rentals" },
+  { name: "Soccer", href: "/soccer", academy: "/soccer-academy", emoji: "\u26bd", desc: "Indoor futsal & training" },
+  { name: "Baseball", href: "/baseball", academy: "/baseball-academy", emoji: "\u26be", desc: "Batting cages & coaching" },
 ];
 
 const NAV_ITEMS = [
@@ -23,7 +25,6 @@ const NAV_ITEMS = [
   { label: "Memberships", href: "/memberships" },
   { label: "Schedule", href: "/schedule" },
   { label: "About", href: "/about" },
-  { label: "Free Trial", href: "/free-trial" },
 ];
 
 export function Navbar() {
@@ -76,11 +77,11 @@ export function Navbar() {
     setMobileOpen(false);
   }, [pathname]);
 
-  const isSportsPage = /baseball|cricket|badminton|pickleball|kids-agility/.test(pathname);
+  const isSportsPage = /volleyball|cricket|badminton|pickleball|soccer|baseball|kids-agility/.test(pathname);
 
   return (
     <>
-      <header className={cn("fixed top-0 inset-x-0 z-[100] transition-all duration-300", scrolled ? "shadow-md bg-white/80 backdrop-blur-lg" : "shadow-sm bg-white")}>
+      <header className={cn("fixed inset-x-0 z-[100] transition-all duration-300", scrolled ? "shadow-md bg-white/80 backdrop-blur-lg" : "shadow-sm bg-white")} style={{ top: "var(--banner-height, 0px)" }}>
         <Container>
           <nav className="flex items-center justify-between h-16" aria-label="Main navigation">
             <Link href="/" className="shrink-0">
