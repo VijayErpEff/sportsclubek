@@ -90,7 +90,7 @@ export default function FacilitiesPage() {
       {/* Hero — Full-bleed facility image */}
       <section className="relative min-h-[60vh] flex items-end overflow-hidden">
         <Image
-          src="/images/sports/facility.jpg"
+          src="/images/sports/LevelUp/01-Main-Area-1.png"
           alt="Inside LevelUP Sports facility — modern indoor courts and training areas in Elkton, MD"
           fill
           className="object-cover"
