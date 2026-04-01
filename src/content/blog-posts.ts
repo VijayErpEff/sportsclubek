@@ -99,7 +99,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 4,
     category: "athlete-spotlight",
     sport: "Baseball",
-    image: "/images/blog/marcus-spotlight.jpg",
+    image: "/images/sports/baseball.jpg",
     featured: true,
   },
   {
@@ -117,7 +117,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "2025-03-18",
     readTime: 2,
     category: "events",
-    image: "/images/blog/open-house.jpg",
+    image: "/images/sports/LevelUp/01-Main-Area-1.png",
   },
   {
     slug: "pickleball-beginner-mistakes",
@@ -145,7 +145,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 5,
     category: "training-tips",
     sport: "Pickleball",
-    image: "/images/blog/pickleball-tips.jpg",
+    image: "/images/sports/pickleball.png",
   },
   {
     slug: "best-indoor-sports-facilities-near-middletown-de",
@@ -165,7 +165,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "2025-01-20",
     readTime: 4,
     category: "news",
-    image: "/images/blog/middletown-facilities.jpg",
+    image: "/images/sports/LevelUp/02-Main-Area-2.png",
     featured: true,
   },
   {
@@ -188,7 +188,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 5,
     category: "training-tips",
     sport: "Baseball",
-    image: "/images/blog/batting-cages-newark.jpg",
+    image: "/images/sports/LevelUp/04-Training-Area.png",
   },
   {
     slug: "parents-guide-youth-sports-academies-cecil-county",
@@ -209,7 +209,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "2025-01-10",
     readTime: 6,
     category: "training-tips",
-    image: "/images/blog/parents-guide-academy.jpg",
+    image: "/images/sports/kids-agility.jpg",
     featured: true,
   },
   {
@@ -231,7 +231,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 5,
     category: "training-tips",
     sport: "Pickleball",
-    image: "/images/blog/pickleball-over-50.jpg",
+    image: "/images/sports/pickleball.png",
   },
   {
     slug: "cricket-in-delaware-maryland-where-to-play",
@@ -253,7 +253,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 5,
     category: "news",
     sport: "Cricket",
-    image: "/images/blog/cricket-delaware-maryland.jpg",
+    image: "/images/sports/LevelUp/05-Cricket-Nets.png",
   },
   {
     slug: "what-age-should-child-start-organized-sports",
@@ -276,7 +276,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "2025-03-01",
     readTime: 6,
     category: "training-tips",
-    image: "/images/blog/what-age-start-sports.jpg",
+    image: "/images/sports/facility.jpg",
     featured: true,
   },
 ];
