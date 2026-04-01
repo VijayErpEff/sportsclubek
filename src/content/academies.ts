@@ -3,6 +3,8 @@
 // Edit this file to update all academy/program page content.
 // ============================================================
 
+import { BOOKING_URLS } from "@/lib/constants/booking";
+
 export interface CurriculumTier {
   label: string;
   title: string;
@@ -38,6 +40,7 @@ export interface AcademyPageData {
   faqs: { question: string; answer: string }[];
   ctaTitle: string;
   ctaDescription: string;
+  enrollUrl: string;
 }
 
 export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
@@ -122,6 +125,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
     ],
     ctaTitle: "See the Improvement in One Session",
     ctaDescription: "Book a free trial session — no commitment. Watch your kid swing, talk to Coach Rivera, and decide if it's right for them.",
+    enrollUrl: BOOKING_URLS.baseballLittleSluggersL,
   },
 
   "cricket-academy": {
@@ -232,6 +236,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
     ],
     ctaTitle: "Train Under International Coaches",
     ctaDescription: "Book a free trial session. Meet our IPL and international coaching staff, hit the nets, and see why families drive here from three states.",
+    enrollUrl: BOOKING_URLS.cricketAcademy,
   },
 
   "badminton-academy": {
@@ -315,6 +320,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
     ],
     ctaTitle: "See What Proper Coaching Looks Like",
     ctaDescription: "Book a free trial session on our BWF-standard courts. Watch your kid move, meet Coach Lee, and decide.",
+    enrollUrl: BOOKING_URLS.badmintonAcademy,
   },
 
   "kids-agility": {
@@ -397,6 +403,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
     ],
     ctaTitle: "Watch Their Confidence Grow",
     ctaDescription: "Book a free trial session. Your kid will run, jump, laugh, and leave wanting to come back. That's how we know it's working.",
+    enrollUrl: BOOKING_URLS.kidsAgilityAcademy,
   },
 
   "volleyball-academy": {
@@ -479,6 +486,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
     ],
     ctaTitle: "See the Improvement in One Session",
     ctaDescription: "Book a free trial session. Watch your kid pass, serve, and hit — then talk to Coach Viktor about the right program for them.",
+    enrollUrl: BOOKING_URLS.volleyballAcademy,
   },
 
   "soccer-academy": {
@@ -562,5 +570,6 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
     ],
     ctaTitle: "Better Touch. Better Player.",
     ctaDescription: "Book a free trial session on the turf. Watch your kid's feet move, meet Coach Martinez, and see the futsal difference.",
+    enrollUrl: BOOKING_URLS.offerings,
   },
 };

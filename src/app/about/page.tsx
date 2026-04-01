@@ -11,6 +11,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { StaggerContainer, StaggerItem } from "@/components/ui/stagger";
 import { generateSEOMetadata } from "@/lib/seo/metadata";
 import { generateBreadcrumbLD } from "@/lib/seo/json-ld";
+import { BOOKING_URLS } from "@/lib/constants/booking";
 import {
   Target, Heart, Users, Zap, MapPin, Trophy, Calendar, Shield,
 } from "lucide-react";
@@ -393,7 +394,7 @@ export default function AboutPage() {
         title="Come See Us in Person"
         description="Schedule a facility tour or attend our next Open House event."
         primaryCTA={{ label: "Schedule a Tour", href: "/open-house" }}
-        secondaryCTA={{ label: "Book a Session", href: "/schedule" }}
+        secondaryCTA={{ label: "Book a Session", href: BOOKING_URLS.offerings }}
       />
     </>
   );

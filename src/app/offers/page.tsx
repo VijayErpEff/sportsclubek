@@ -9,6 +9,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { StaggerContainer, StaggerItem } from "@/components/ui/stagger";
 import { generateSEOMetadata } from "@/lib/seo/metadata";
 import { generateBreadcrumbLD } from "@/lib/seo/json-ld";
+import { BOOKING_URLS } from "@/lib/constants/booking";
 
 export const metadata: Metadata = generateSEOMetadata({
   title: "Current Offers & Promotions",
@@ -56,81 +57,79 @@ export default function OffersPage() {
       <Section>
         <Container>
           <StaggerContainer className="grid gap-8 md:grid-cols-3">
-            {/* First Session 50% Off */}
+            {/* Spring Offer - Game Pass */}
             <StaggerItem>
             <div className="rounded-xl border bg-background shadow-sm overflow-hidden">
-              <div className="bg-primary p-6 text-primary-foreground text-center">
+              <div className="bg-accent p-6 text-white text-center">
                 <p className="text-sm font-medium uppercase tracking-wider mb-1">
-                  New Members
+                  Spring Special
                 </p>
-                <p className="text-4xl font-bold">50% Off</p>
-                <p className="text-sm opacity-90 mt-1">Your First Session</p>
+                <p className="text-4xl font-bold">$10<span className="text-lg font-normal">/mo</span></p>
+                <p className="text-sm opacity-90 mt-1">Game Pass — Open Play Access</p>
               </div>
               <div className="p-8">
-                <h3 className="text-xl font-bold mb-3">First Session 50% Off</h3>
+                <h3 className="text-xl font-bold mb-3">Spring Offer — Game Pass</h3>
                 <p className="text-muted-foreground mb-4">
-                  New to LevelUP Sports? Try any session — batting cages, court rental, or
-                  academy class — at half price. No commitment, no strings attached.
+                  Pay $10/month and get access to Open Play for just $10! Enjoy badminton, pickleball, and volleyball with a 3-month commitment.
                 </p>
                 <ul className="space-y-2 text-sm text-muted-foreground mb-6">
                   <li className="flex items-start gap-2">
-                    <span className="mt-1 h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
-                    Valid for any single session or rental
+                    <span className="mt-1 h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
+                    Badminton, pickleball, and volleyball included
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="mt-1 h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
-                    First-time visitors only
+                    <span className="mt-1 h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
+                    3-month commitment required
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="mt-1 h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
-                    Cannot be combined with other offers
+                    <span className="mt-1 h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
+                    No join fee
                   </li>
                 </ul>
                 <p className="text-xs text-muted-foreground border-t pt-4">
-                  Valid through June 30, 2026. One per athlete.
+                  Plus taxes &amp; fees. Limited time offer.
                 </p>
                 <Button className="w-full mt-4" asChild>
-                  <Link href="/contact">Claim This Offer</Link>
+                  <Link href={BOOKING_URLS.springOffer}>Claim This Offer</Link>
                 </Button>
               </div>
             </div>
             </StaggerItem>
 
-            {/* Family Membership Special */}
+            {/* Pickleball Golden Hour */}
             <StaggerItem>
             <div className="rounded-xl border bg-background shadow-sm overflow-hidden">
               <div className="bg-primary p-6 text-primary-foreground text-center">
                 <p className="text-sm font-medium uppercase tracking-wider mb-1">
-                  Families
+                  Pickleball
                 </p>
-                <p className="text-4xl font-bold">25% Off</p>
-                <p className="text-sm opacity-90 mt-1">Family Memberships</p>
+                <p className="text-4xl font-bold">Golden Hour</p>
+                <p className="text-sm opacity-90 mt-1">Special Pickleball Package</p>
               </div>
               <div className="p-8">
-                <h3 className="text-xl font-bold mb-3">Family Membership Special</h3>
+                <h3 className="text-xl font-bold mb-3">Pickleball Golden Hour</h3>
                 <p className="text-muted-foreground mb-4">
-                  Sign up the whole family and save. Get 25% off when two or more family
-                  members enroll in any academy program or purchase a facility membership.
+                  An exclusive pickleball membership package with premium court access and dedicated play time. Perfect for serious pickleball players.
                 </p>
                 <ul className="space-y-2 text-sm text-muted-foreground mb-6">
                   <li className="flex items-start gap-2">
                     <span className="mt-1 h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
-                    Minimum 2 family members required
+                    Dedicated pickleball court time
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="mt-1 h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
-                    Applies to academy enrollment and memberships
+                    Premium membership perks
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="mt-1 h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
-                    Discount applied to total family enrollment cost
+                    All equipment included
                   </li>
                 </ul>
                 <p className="text-xs text-muted-foreground border-t pt-4">
-                  Valid through August 31, 2026. Must enroll simultaneously.
+                  Limited availability. Sign up today.
                 </p>
                 <Button className="w-full mt-4" asChild>
-                  <Link href="/contact">Claim This Offer</Link>
+                  <Link href={BOOKING_URLS.pickleballGoldenHour}>Claim This Offer</Link>
                 </Button>
               </div>
             </div>
@@ -200,7 +199,7 @@ export default function OffersPage() {
         title="Questions About Our Offers?"
         description="Our team is happy to help you find the best deal for your situation. Get in touch today."
         primaryCTA={{ label: "Contact Us", href: "/contact" }}
-        secondaryCTA={{ label: "View Schedule", href: "/schedule" }}
+        secondaryCTA={{ label: "View All Programs", href: BOOKING_URLS.offerings }}
       />
     </>
   );

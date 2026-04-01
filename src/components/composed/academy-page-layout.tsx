@@ -100,7 +100,7 @@ export function AcademyPageLayout({ data }: { data: AcademyPageData }) {
 
           <div className="flex flex-wrap gap-3">
             <Button size="lg" asChild>
-              <Link href="/schedule">Enroll Now</Link>
+              <Link href={data.enrollUrl}>Enroll Now</Link>
             </Button>
             <Button size="lg" variant="outline" asChild>
               <Link href="/schedule">View Schedule</Link>
@@ -136,7 +136,7 @@ export function AcademyPageLayout({ data }: { data: AcademyPageData }) {
                 </ul>
                 <div className="mt-6 pt-4 border-t border-neutral-200">
                   <Button className="w-full" asChild>
-                    <Link href="/schedule">Enroll Now</Link>
+                    <Link href={data.enrollUrl}>Enroll Now</Link>
                   </Button>
                 </div>
               </div>
@@ -278,7 +278,7 @@ export function AcademyPageLayout({ data }: { data: AcademyPageData }) {
       <CTABanner
         title={data.ctaTitle}
         description={data.ctaDescription}
-        primaryCTA={{ label: "Enroll Now", href: "/schedule" }}
+        primaryCTA={{ label: "Enroll Now", href: data.enrollUrl }}
         secondaryCTA={{ label: "Contact Us", href: "/about" }}
       />
     </>

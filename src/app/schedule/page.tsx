@@ -7,6 +7,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { generateSEOMetadata } from "@/lib/seo/metadata";
 import { generateBreadcrumbLD } from "@/lib/seo/json-ld";
 import { SITE_CONFIG } from "@/lib/constants/site";
+import { BOOKING_URLS } from "@/lib/constants/booking";
 import { Phone, Clock } from "lucide-react";
 
 export const metadata: Metadata = generateSEOMetadata({
@@ -91,7 +92,7 @@ export default function SchedulePage() {
       <CTABanner
         title="Ready to Train?"
         description="Become a member for unlimited access, or book a single session to get started."
-        primaryCTA={{ label: "View Memberships", href: "/memberships" }}
+        primaryCTA={{ label: "View Memberships", href: BOOKING_URLS.memberships }}
         secondaryCTA={{ label: "Schedule a Tour", href: "/open-house" }}
       />
     </>

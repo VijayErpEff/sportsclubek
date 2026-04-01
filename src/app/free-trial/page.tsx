@@ -19,6 +19,7 @@ import {
   Star,
   Dumbbell,
 } from "lucide-react";
+import { BOOKING_URLS } from "@/lib/constants/booking";
 
 export const metadata: Metadata = generateSEOMetadata({
   title: "Try a Free Session",
@@ -73,7 +74,7 @@ export default function FreeTrialPage() {
         variant="page"
         title="Your First Session Is On Us"
         subtitle="Pick any sport. Try it free. No commitment, no credit card, no catch."
-        primaryCTA={{ label: "Book My Free Session", href: "/schedule" }}
+        primaryCTA={{ label: "Book My Free Session", href: BOOKING_URLS.offerings }}
       />
 
       {/* How It Works + What's Included — combined into one tight section */}
@@ -157,7 +158,7 @@ export default function FreeTrialPage() {
                     families who try a session become regular members
                   </p>
                   <Button className="w-full" asChild>
-                    <Link href="/schedule">
+                    <Link href={BOOKING_URLS.offerings}>
                       Book My Free Session{" "}
                       <ArrowRight className="h-4 w-4 ml-1.5" />
                     </Link>
@@ -181,7 +182,7 @@ export default function FreeTrialPage() {
             {SPORTS.map((sport) => (
               <StaggerItem key={sport.slug}>
                 <Link
-                  href="/schedule"
+                  href={BOOKING_URLS.offerings}
                   className="group block rounded-xl border border-neutral-200 bg-white p-5 hover:shadow-card-hover hover:border-accent/30 transition-all"
                 >
                   <h3 className="font-display font-semibold text-neutral-900 mb-1.5">
@@ -219,7 +220,7 @@ export default function FreeTrialPage() {
       <CTABanner
         title="Ready to Try?"
         description="Pick your sport. Book a time. Show up and play — free."
-        primaryCTA={{ label: "Book My Free Session", href: "/schedule" }}
+        primaryCTA={{ label: "Book My Free Session", href: BOOKING_URLS.offerings }}
         secondaryCTA={{ label: "View All Programs", href: "/#sports" }}
       />
     </>

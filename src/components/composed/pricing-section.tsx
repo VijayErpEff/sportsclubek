@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils/cn";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check, Zap, Trophy, Crown } from "lucide-react";
+import { BOOKING_URLS } from "@/lib/constants/booking";
 
 const plans = [
   {
@@ -172,7 +173,7 @@ export function PricingSection() {
                 className="w-full"
                 asChild
               >
-                <Link href="/free-trial">
+                <Link href={BOOKING_URLS.memberships}>
                   {plan.recommended ? "Get Started" : "Choose Plan"}
                 </Link>
               </Button>

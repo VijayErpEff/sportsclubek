@@ -3,6 +3,8 @@
 // Edit this file to update all sport and academy page content.
 // ============================================================
 
+import { BOOKING_URLS } from "@/lib/constants/booking";
+
 export interface Program {
   title: string;
   description: string;
@@ -70,7 +72,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       {
         title: "Batting Cage Rentals",
         description: "Reserve a professional batting cage for individual or group sessions at $40/hour. Adjustable pitching machines for every skill level.",
-        href: "/schedule",
+        href: BOOKING_URLS.offerings,
         tag: "Drop-In",
       },
       {
@@ -82,13 +84,13 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       {
         title: "Private Lessons",
         description: "One-on-one coaching tailored to your goals. Refine mechanics, build confidence, and see real improvement.",
-        href: "/schedule",
+        href: BOOKING_URLS.offerings,
         tag: "1-on-1",
       },
       {
         title: "Open Practice",
         description: "Drop in during open hours for casual hitting sessions. Stay sharp between games or just have fun.",
-        href: "/schedule",
+        href: BOOKING_URLS.baseballLittleSluggersL,
         tag: "Open Play",
       },
     ],
@@ -150,7 +152,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       {
         title: "Net Sessions",
         description: "Book indoor net time for batting and bowling practice. Full pitch $180/hr, half pitch $90/hr, or single cage $40/hr. Bowling machines available for solo training.",
-        href: "/schedule",
+        href: BOOKING_URLS.cricketCageRentals,
         tag: "Drop-In",
       },
       {
@@ -162,7 +164,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       {
         title: "Match Preparation",
         description: "Intensive sessions focused on match scenarios, game strategy, and competitive readiness — led by coaches with international match experience.",
-        href: "/schedule",
+        href: BOOKING_URLS.offerings,
         tag: "Advanced",
       },
       {
@@ -246,7 +248,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       {
         title: "Court Rentals",
         description: "Book a court for singles or doubles play at $40/hour. Perfect for practice sessions or friendly matches.",
-        href: "/schedule",
+        href: BOOKING_URLS.offerings,
         tag: "Drop-In",
       },
       {
@@ -258,13 +260,13 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       {
         title: "Group Lessons",
         description: "Small-group coaching sessions for beginners and intermediate players. Learn proper technique from day one.",
-        href: "/schedule",
+        href: BOOKING_URLS.offerings,
         tag: "Group",
       },
       {
         title: "Open Play",
         description: "Join our open play sessions to meet other players, get games in, and enjoy the sport in a social setting.",
-        href: "/schedule",
+        href: BOOKING_URLS.badmintonOpenPlay,
         tag: "Open Play",
       },
     ],
@@ -326,25 +328,25 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       {
         title: "Court Rentals",
         description: "Reserve a court for private play. Great for regular groups, practice sessions, or friendly tournaments.",
-        href: "/schedule",
+        href: BOOKING_URLS.offerings,
         tag: "Rental",
       },
       {
         title: "Open Play",
         description: "Drop in for round-robin play. All skill levels welcome — we'll match you with players at your level.",
-        href: "/schedule",
+        href: BOOKING_URLS.pickleballOpenPlay,
         tag: "Drop-In",
       },
       {
         title: "Beginner Lessons",
         description: "Learn the basics — rules, grip, serves, dinks, and strategy. Small group format for maximum learning.",
-        href: "/schedule",
+        href: BOOKING_URLS.offerings,
         tag: "Beginner",
       },
       {
         title: "Competitive Play",
         description: "Advanced sessions for experienced players. Focus on strategy, tournament play, and competitive drilling.",
-        href: "/schedule",
+        href: BOOKING_URLS.offerings,
         tag: "Advanced",
       },
     ],
@@ -371,7 +373,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     ],
     ctaTitle: "Find Your People on the Court",
     ctaPrimary: { label: "Try a Free Session", href: "/free-trial" },
-    ctaSecondary: { label: "View Memberships", href: "/memberships" },
+    ctaSecondary: { label: "View Memberships", href: BOOKING_URLS.memberships },
   },
 
   volleyball: {
@@ -399,7 +401,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       {
         title: "Court Rentals",
         description: "Reserve a full volleyball court for team practice, scrimmages, or private training sessions at $120/hour.",
-        href: "/schedule",
+        href: BOOKING_URLS.offerings,
         tag: "Rental",
       },
       {
@@ -411,13 +413,13 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       {
         title: "Open Play",
         description: "Drop in for pickup games. All skill levels welcome — we rotate teams so everyone plays.",
-        href: "/schedule",
+        href: BOOKING_URLS.offerings,
         tag: "Drop-In",
       },
       {
         title: "Adult Leagues",
         description: "Recreational and competitive leagues for adult teams. Season play with playoffs and awards.",
-        href: "/schedule",
+        href: BOOKING_URLS.offerings,
         tag: "League",
       },
     ],
@@ -473,7 +475,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       {
         title: "Field Rentals",
         description: "Reserve the turf field for team training, scrimmages, or private sessions. Full field or half-field available.",
-        href: "/schedule",
+        href: BOOKING_URLS.offerings,
         tag: "Rental",
       },
       {
@@ -485,13 +487,13 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       {
         title: "Open Play",
         description: "Drop-in pickup games on the turf. All levels welcome — teams are balanced so everyone gets a competitive game.",
-        href: "/schedule",
+        href: BOOKING_URLS.offerings,
         tag: "Drop-In",
       },
       {
         title: "Indoor Leagues",
         description: "5v5 and futsal leagues for youth and adult teams. Season play with standings, playoffs, and championship night.",
-        href: "/schedule",
+        href: BOOKING_URLS.offerings,
         tag: "League",
       },
     ],

@@ -6,6 +6,7 @@ import { ArrowLeft, Clock, User, Facebook, Twitter, Linkedin } from "lucide-reac
 import { generateSEOMetadata } from "@/lib/seo/metadata";
 import { generateBreadcrumbLD } from "@/lib/seo/json-ld";
 import { SITE_CONFIG } from "@/lib/constants/site";
+import { BOOKING_URLS } from "@/lib/constants/booking";
 import { Section } from "@/components/layout/section";
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
@@ -287,7 +288,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   asChild
                   className="bg-white text-primary hover:bg-neutral-100"
                 >
-                  <Link href="/schedule">Book a Session</Link>
+                  <Link href={BOOKING_URLS.offerings}>Book a Session</Link>
                 </Button>
                 <Button
                   variant="outline"
