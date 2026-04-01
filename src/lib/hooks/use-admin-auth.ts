@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useSearchParams } from "next/navigation";
 
-const DEFAULT_PIN = "1234";
+const DEFAULT_PIN = "6886";
 
 export interface AdminAuth {
   adminMode: boolean;

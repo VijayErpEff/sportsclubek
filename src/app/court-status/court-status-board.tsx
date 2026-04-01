@@ -21,7 +21,7 @@ interface CourtState {
 /* ── Constants ── */
 const STORAGE_KEY = "levelup_court_v5";
 const POLL_MS = 2000;
-const ADMIN_PIN = "1234";
+const ADMIN_PIN = "6886";
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 const CAGE_STATES: { status: CageItem["status"]; sport: string | null }[] = [
