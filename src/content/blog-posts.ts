@@ -35,7 +35,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 4,
     category: "training-tips",
     sport: "Baseball",
-    image: "/images/blog/batting-drills.jpg",
+    image: "/images/Content/Blog1.jpeg",
     featured: true,
   },
   {
@@ -56,7 +56,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 3,
     category: "news",
     sport: "Cricket",
-    image: "/images/blog/cricket-league.jpg",
+    image: "/images/Content/Blog2.jpeg",
   },
   {
     slug: "improve-badminton-footwork",
@@ -78,7 +78,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 5,
     category: "training-tips",
     sport: "Badminton",
-    image: "/images/blog/badminton-footwork.jpg",
+    image: "/images/sports/badminton.jpg",
   },
   {
     slug: "athlete-spotlight-marcus-rivera",
