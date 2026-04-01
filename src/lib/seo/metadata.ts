@@ -6,6 +6,7 @@ interface SEOMetadataProps {
   description: string;
   path?: string;
   ogImage?: string;
+  ogType?: "website" | "article";
   noIndex?: boolean;
 }
 
@@ -14,12 +15,10 @@ export function generateSEOMetadata({
   description,
   path = "",
   ogImage = "/images/og/default.jpg",
+  ogType = "website",
   noIndex = false,
 }: SEOMetadataProps): Metadata {
-  const fullTitle =
-    path === ""
-      ? `${SITE_CONFIG.shortName} — ${title}`
-      : `${title} | ${SITE_CONFIG.shortName}`;
+  const fullTitle = `${title} | ${SITE_CONFIG.shortName}`;
   const url = `${SITE_CONFIG.url}${path}`;
   const absoluteOgImage = ogImage.startsWith("http")
     ? ogImage
@@ -46,7 +45,7 @@ export function generateSEOMetadata({
         },
       ],
       locale: "en_US",
-      type: path === "" ? "website" : "article",
+      type: ogType,
     },
     twitter: {
       card: "summary_large_image",

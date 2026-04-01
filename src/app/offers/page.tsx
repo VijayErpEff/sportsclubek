@@ -12,9 +12,9 @@ import { generateBreadcrumbLD } from "@/lib/seo/json-ld";
 import { BOOKING_URLS } from "@/lib/constants/booking";
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: "Current Offers & Promotions",
+  title: "Current Offers & Promotions — Elkton, MD",
   description:
-    "Special deals and promotions at LevelUP Sports Elkton. First-time discounts, seasonal offers, and membership specials.",
+    "Special deals and promotions at LevelUP Sports in Elkton, MD. First-time discounts, seasonal offers, membership specials, and referral rewards.",
   path: "/offers",
 });
 

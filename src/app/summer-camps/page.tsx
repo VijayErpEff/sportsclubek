@@ -13,9 +13,9 @@ import { SITE_CONFIG } from "@/lib/constants/site";
 import { CheckCircle, Calendar, Clock, Shield, Sun, Users, MapPin } from "lucide-react";
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: "Summer Sports Camps 2025",
+  title: "Summer Sports Camps — Elkton, MD | Ages 6–16",
   description:
-    "Summer sports camps for ages 6-16 at LevelUP Sports in Elkton, MD. Baseball, cricket, badminton, and multi-sport options. Full and half day. Near Middletown and Newark, DE.",
+    "Summer sports camps at LevelUP Sports in Elkton, MD. Baseball, cricket, badminton & multi-sport for ages 6-16. Full and half day. Near Middletown & Newark, DE.",
   path: "/summer-camps",
 });
 

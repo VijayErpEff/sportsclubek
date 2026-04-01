@@ -78,9 +78,12 @@ export function AcademyPageLayout({ data }: { data: AcademyPageData }) {
             </span>
           </div>
 
-          <h1 className="font-display text-page-title text-neutral-900 mb-4 max-w-2xl text-balance">
-            {data.tagline}
+          <h1 className="font-display text-page-title text-neutral-900 mb-3 max-w-2xl text-balance">
+            {data.name} — Elkton, MD
           </h1>
+          <p className="font-display text-subsection text-neutral-700 mb-4 max-w-xl text-balance">
+            {data.tagline}
+          </p>
           <p className="text-neutral-500 text-lg max-w-xl mb-8">
             {data.description}
           </p>
@@ -205,56 +208,58 @@ export function AcademyPageLayout({ data }: { data: AcademyPageData }) {
         </Container>
       </Section>
 
-      {/* Coaches */}
-      <Section variant="alternate">
-        <Container>
-          <Reveal>
-            <div className="text-center mb-10">
-              <h2 className="font-display text-section text-neutral-900 mb-3 text-balance">
-                Your Coaching Team
-              </h2>
-            </div>
-          </Reveal>
-          <StaggerContainer className={cn(
-            "grid gap-6 mx-auto",
-            data.coaches.length === 1 ? "grid-cols-1 max-w-md" :
-            data.coaches.length <= 2 ? "sm:grid-cols-2 max-w-3xl" :
-            "sm:grid-cols-2 max-w-4xl"
-          )}>
-            {data.coaches.map((coach) => (
-              <StaggerItem key={coach.name}>
-                <div className="bg-white rounded-2xl border border-neutral-200 p-6 shadow-card">
-                  <div className="flex items-start gap-4">
-                    {coach.image ? (
-                      <Image
-                        src={coach.image}
-                        alt={coach.name}
-                        width={56}
-                        height={56}
-                        className="w-14 h-14 rounded-full object-cover shrink-0"
-                      />
-                    ) : (
-                      <div
-                        className="w-14 h-14 rounded-full flex items-center justify-center shrink-0"
-                        style={{ backgroundColor: `${data.color}15` }}
-                      >
-                        <span className="text-lg font-bold" style={{ color: data.color }}>
-                          {coach.initials}
-                        </span>
+      {/* Coaches — only shown when coach data exists */}
+      {data.coaches.length > 0 && (
+        <Section variant="alternate">
+          <Container>
+            <Reveal>
+              <div className="text-center mb-10">
+                <h2 className="font-display text-section text-neutral-900 mb-3 text-balance">
+                  Your Coaching Team
+                </h2>
+              </div>
+            </Reveal>
+            <StaggerContainer className={cn(
+              "grid gap-6 mx-auto",
+              data.coaches.length === 1 ? "grid-cols-1 max-w-md" :
+              data.coaches.length <= 2 ? "sm:grid-cols-2 max-w-3xl" :
+              "sm:grid-cols-2 max-w-4xl"
+            )}>
+              {data.coaches.map((coach) => (
+                <StaggerItem key={coach.name}>
+                  <div className="bg-white rounded-2xl border border-neutral-200 p-6 shadow-card">
+                    <div className="flex items-start gap-4">
+                      {coach.image ? (
+                        <Image
+                          src={coach.image}
+                          alt={coach.name}
+                          width={56}
+                          height={56}
+                          className="w-14 h-14 rounded-full object-cover shrink-0"
+                        />
+                      ) : (
+                        <div
+                          className="w-14 h-14 rounded-full flex items-center justify-center shrink-0"
+                          style={{ backgroundColor: `${data.color}15` }}
+                        >
+                          <span className="text-lg font-bold" style={{ color: data.color }}>
+                            {coach.initials}
+                          </span>
+                        </div>
+                      )}
+                      <div>
+                        <h3 className="font-display font-bold text-neutral-900">{coach.name}</h3>
+                        <p className="text-sm font-medium" style={{ color: data.color }}>{coach.role}</p>
                       </div>
-                    )}
-                    <div>
-                      <h3 className="font-display font-bold text-neutral-900">{coach.name}</h3>
-                      <p className="text-sm font-medium" style={{ color: data.color }}>{coach.role}</p>
                     </div>
+                    <p className="text-sm text-neutral-500 mt-4 leading-relaxed">{coach.bio}</p>
                   </div>
-                  <p className="text-sm text-neutral-500 mt-4 leading-relaxed">{coach.bio}</p>
-                </div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-        </Container>
-      </Section>
+                </StaggerItem>
+              ))}
+            </StaggerContainer>
+          </Container>
+        </Section>
+      )}
 
       {/* FAQ */}
       <Section>

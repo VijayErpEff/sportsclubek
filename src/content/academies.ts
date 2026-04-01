@@ -56,8 +56,8 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
     metaTitle: "Youth Baseball Academy — Elkton, MD | Serving Middletown, Newark & Cecil County",
     metaDescription: "Youth baseball academy in Elkton, MD — near Middletown & Newark, DE. Expert coaches, batting cages, skill development for ages 8-18. Enroll today.",
     overview: [
-      "In the last year, academy players improved their batting averages by an average of .095 points. Marcus Rivera went from .220 to .380 in six months. That's not a fluke — it's Coach Rivera's development system working the way it's designed to. The 12-week program covers hitting mechanics, pitching fundamentals, fielding, base running, and game IQ — with a focus on measurable improvement, not just reps.",
-      "Parents: you'll receive a written progress report every four weeks. Our max class size is 12, with a 6:1 player-to-coach ratio so your kid gets real attention. You can watch every session from our parent viewing area. If they're not improving, you'll know — and so will we.",
+      "Led by Joe Vanaskey — \"Joltin' Joe\" — a former professional baseball player and scout with decades of experience running his Field of Dreams Academy in Cecil County. The 12-week program covers hitting mechanics, pitching fundamentals, fielding, base running, and game IQ — with a focus on the fundamentals that build confident, capable ballplayers.",
+      "Parents: our max class size is 12, with a 6:1 player-to-coach ratio so your kid gets real attention. You can watch every session from our parent viewing area. Coach Joe's approach is built on the same principles he learned at the professional level — proper technique, repetition with purpose, and a love for the game.",
     ],
     stats: [
       { label: "Program Length", value: "12 Weeks" },
@@ -107,8 +107,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
       },
     ],
     coaches: [
-      { name: "Coach Rivera", role: "Academy Director", bio: "Played college baseball at Salisbury University. 15+ years coaching, 200+ youth players developed, 14 academy graduates playing varsity. His swing mechanics system is the backbone of our program.", initials: "CR" },
-      { name: "Coach Davis", role: "Pitching & Arm Care Specialist", bio: "Certified pitching development specialist. Focuses on sustainable velocity gains and healthy mechanics — because arm health matters more than a radar gun number.", initials: "CD" },
+      { name: "Joe Vanaskey", role: "Head Baseball Coach", bio: "\"Joltin' Joe\" is a former professional baseball player and scout with decades of experience training youth. He runs Joltin' Joe's Field of Dreams Academy in Cecil County, Maryland, focusing on fundamentals like batting, fielding, and technique. His professional-level insight and passion for developing young players are the backbone of our baseball program.", initials: "JV", image: "/images/Coaches/Joe.jpg" },
     ],
     whatYouGet: [
       "12-week structured curriculum with progressive skill building",
@@ -124,7 +123,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
       { question: "What should my child bring?", answer: "Athletic wear, cleats or turf shoes, a glove, and a water bottle. We provide bats, helmets, and other equipment." },
     ],
     ctaTitle: "See the Improvement in One Session",
-    ctaDescription: "Book a free trial session — no commitment. Watch your kid swing, talk to Coach Rivera, and decide if it's right for them.",
+    ctaDescription: "Book a free trial session — no commitment. Watch your kid swing, talk to Coach Joe, and decide if it's right for them.",
     enrollUrl: BOOKING_URLS.baseballLittleSluggersL,
   },
 
@@ -244,15 +243,15 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
     name: "Badminton Academy",
     sport: "Badminton",
     sportSlug: "badminton",
-    tagline: "From Casual Rallies to County Championships",
-    description: "Emily Chen won the Cecil County Junior Championship after training here. BWF-certified coaching on proper synthetic courts.",
+    tagline: "Expert Coaching That Turns Potential Into Results",
+    description: "BWF & USA Badminton Level-1 certified coaching from a PA State Champion and Swarthmore College Varsity Head Coach — on proper synthetic courts.",
     image: "/images/sports/badminton.jpg",
     color: "#2A5A8C",
     metaTitle: "Badminton Academy — Elkton, MD | Near Middletown, Newark & Wilmington, DE",
-    metaDescription: "Professional badminton academy in Elkton, MD — serving Middletown, Newark & Wilmington, DE. Certified coaches, BWF courts, tournament prep. All levels welcome.",
+    metaDescription: "Professional badminton academy in Elkton, MD — serving Middletown, Newark & Wilmington, DE. BWF-certified coaches, competition-grade courts, tournament prep. All levels welcome.",
     overview: [
-      "Emily Chen walked into this academy as a casual player. Eight months later, she won the Cecil County Junior Championship. That's what BWF-certified coaching on proper courts does — it turns potential into results. Coach Lee's program focuses on three pillars: footwork speed, stroke technique, and match IQ.",
-      "Whether your kid is picking up a racket for the first time or preparing for tournament competition, the academy has a structured pathway. Class sizes max out at 8 players, so every athlete gets direct coaching attention. Parents see measurable progress in footwork, reaction time, and match confidence within the first month.",
+      "Head Coach Nabeel Adeel brings over 25 years of competitive and coaching experience to our academy. A BWF and USA Badminton Level-1 certified coach, multiple-time Pennsylvania State Champion, and current Head Coach of the Swarthmore College Varsity Badminton Team, Nabeel combines elite match experience with structured training methodologies and a proven record of developing junior and collegiate athletes. His coaching philosophy emphasizes strong fundamentals, tactical awareness, and long-term player growth.",
+      "The academy is further strengthened by advisory board member Syam Prasad Anand — a BWF Level-1 certified coach and founding leader of multiple successful badminton organizations who has helped build world-class training facilities across the U.S. — and Nick, a decades-long competitive player and Dilwyne Badminton Club (Wilmington, DE) leader since 1996, who serves as a mentor and technical advisor. Whether your kid is picking up a racket for the first time or preparing for tournament competition, class sizes max out at 8 players so every athlete gets direct coaching attention.",
     ],
     stats: [
       { label: "Coaching", value: "BWF-Certified" },
@@ -302,8 +301,9 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
       },
     ],
     coaches: [
-      { name: "Coach Lee", role: "Head Badminton Coach", bio: "BWF-certified with 10+ years of competitive coaching. Specializes in developing junior players for national-level competition.", initials: "CL" },
-      { name: "Coach Park", role: "Doubles & Strategy Coach", bio: "Former national-level doubles player. Expert in doubles formations, rotations, and competitive match strategy.", initials: "CP" },
+      { name: "Nabeel Adeel", role: "Head Badminton Coach", bio: "BWF and USA Badminton Level-1 certified coach with over 25 years of competitive and coaching experience. A multiple-time Pennsylvania State Champion and current Head Coach of the Swarthmore College Varsity Badminton Team. His coaching philosophy emphasizes strong fundamentals, tactical awareness, and long-term player growth.", initials: "NA" },
+      { name: "Syam Prasad Anand", role: "Advisory Board", bio: "BWF Level-1 certified coach and founding leader of multiple successful badminton organizations. Has helped build world-class training facilities and scale grassroots and collegiate programs across the U.S. His guidance strengthens LevelUP's mission to combine high-quality coaching, innovation, and community impact.", initials: "SA", image: "/images/Coaches/Syam Prasad.jpg" },
+      { name: "Nick", role: "Mentor & Technical Advisor", bio: "Decades of competitive playing experience and a passion for continuous learning. Dilwyne Badminton Club (Wilmington, DE) management and Treasurer since 1996. His emphasis on fundamentals, thoughtful progression, and understanding why techniques work aligns with LevelUP's athlete-first philosophy.", initials: "N", image: "/images/Coaches/Nick.jpg" },
     ],
     whatYouGet: [
       "Structured program with progressive skill development",
@@ -319,7 +319,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
       { question: "Can adults join the academy?", answer: "Absolutely. We have dedicated adult sessions for beginners, intermediate, and advanced players." },
     ],
     ctaTitle: "See What Proper Coaching Looks Like",
-    ctaDescription: "Book a free trial session on our BWF-standard courts. Watch your kid move, meet Coach Lee, and decide.",
+    ctaDescription: "Book a free trial session on our BWF-standard courts. Watch your kid move, meet Coach Nabeel, and decide.",
     enrollUrl: BOOKING_URLS.badmintonAcademy,
   },
 
@@ -336,7 +336,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
     metaDescription: "Kids agility & fitness program in Elkton, MD for ages 5-12 — near Middletown & Newark, DE. Build speed, coordination & confidence. Fun, structured sessions.",
     overview: [
       "One parent told us her son was the kid who sat out at recess. Uncoordinated, self-conscious, didn't want to try anything. After two months of Kids Agility, he asked to sign up for the school baseball team. That's not unusual — it's what happens when kids discover what their bodies can actually do, in an environment where trying is celebrated and nobody gets picked last.",
-      "This isn't gym class. It's structured athletic development led by a certified youth fitness specialist. Every session is age-appropriate, progression-based, and designed to build coordination, speed, balance, and — most importantly — confidence. The skills transfer to any sport they choose to play. Or just to being a more active, capable kid.",
+      "This isn't gym class. It's structured athletic development designed for young bodies and growing confidence. Every session is age-appropriate, progression-based, and designed to build coordination, speed, balance, and — most importantly — confidence. The skills transfer to any sport they choose to play. Or just to being a more active, capable kid.",
     ],
     stats: [
       { label: "Ages", value: "5–12" },
@@ -385,9 +385,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
         ],
       },
     ],
-    coaches: [
-      { name: "Coach Williams", role: "Youth Fitness Director", bio: "Certified youth fitness specialist with a passion for helping kids discover their athletic potential through fun, structured training.", initials: "CW" },
-    ],
+    coaches: [],
     whatYouGet: [
       "Age-appropriate programming designed by certified youth fitness specialists",
       "Fun, high-energy sessions that kids actually look forward to",
@@ -501,7 +499,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
     metaTitle: "Youth Soccer & Futsal Academy — Elkton, MD | Near Middletown, Newark & Wilmington, DE",
     metaDescription: "Indoor soccer & futsal academy in Elkton, MD — near Middletown & Newark, DE. USSF-licensed coaches, technical development for ages 6-18. Enroll today.",
     overview: [
-      "The best soccer players in the world — Messi, Neymar, Ronaldinho — all grew up playing futsal. The smaller court, heavier ball, and constant pressure force players to develop close control, quick decision-making, and creativity that you simply can't build on a full-size outdoor pitch. Coach Martinez brings that methodology here, and the results show up at spring tryouts when our academy kids consistently outperform in technical assessments.",
+      "The best soccer players in the world — Messi, Neymar, Ronaldinho — all grew up playing futsal. The smaller court, heavier ball, and constant pressure force players to develop close control, quick decision-making, and creativity that you simply can't build on a full-size outdoor pitch. We bring that methodology here, and the results show up at spring tryouts when academy players consistently outperform in technical assessments.",
       "The academy runs year-round in 10-week sessions. We train on professional indoor turf with futsal balls and regulation goals. Sessions are high-touch — every player gets hundreds of ball contacts per training. Parents: the difference in your kid's first touch and confidence on the ball will be obvious within weeks.",
     ],
     stats: [
@@ -551,10 +549,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
         ],
       },
     ],
-    coaches: [
-      { name: "Coach Martinez", role: "Academy Director", bio: "USSF B-licensed coach and former semi-professional player. 10+ years developing youth players through futsal-first methodology. His graduates consistently excel at club and high school tryouts.", initials: "CM" },
-      { name: "Coach Okafor", role: "Technical & Futsal Coach", bio: "US Futsal certified coach who specializes in close control, creativity, and developing players who are comfortable under pressure. Known for making training sessions intense and fun.", initials: "CO" },
-    ],
+    coaches: [],
     whatYouGet: [
       "Year-round training on professional indoor turf",
       "Futsal-first methodology for accelerated technical development",
@@ -569,7 +564,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
       { question: "Do you work with outdoor club coaches?", answer: "Yes — many local clubs send players to us for supplemental technical training, especially in the off-season. We can coordinate with your child's outdoor coach." },
     ],
     ctaTitle: "Better Touch. Better Player.",
-    ctaDescription: "Book a free trial session on the turf. Watch your kid's feet move, meet Coach Martinez, and see the futsal difference.",
+    ctaDescription: "Book a free trial session on the turf. Watch your kid's feet move and see the futsal difference for yourself.",
     enrollUrl: BOOKING_URLS.offerings,
   },
 };

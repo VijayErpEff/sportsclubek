@@ -17,9 +17,9 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: "About Us",
+  title: "About Us — Our Mission, Coaches & Story",
   description:
-    "Learn about LevelUP Sports & Athletics Club — Elkton, MD's premier multi-sport facility. Our mission, story, coaching team, and commitment to athlete development.",
+    "Meet the team behind LevelUP Sports in Elkton, MD. Our mission, coaching staff, and commitment to developing athletes of all ages in the tri-state area.",
   path: "/about",
 });
 

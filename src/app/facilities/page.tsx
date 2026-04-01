@@ -14,9 +14,9 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: "Facilities",
+  title: "Indoor Sports Facility Tour — Elkton, MD",
   description:
-    "Tour LevelUP Sports' modern indoor facility in Elkton, MD. Professional batting cages, multi-sport courts, training areas, pro shop, and climate-controlled comfort.",
+    "Tour LevelUP Sports' modern indoor facility in Elkton, MD. Batting cages, multi-sport courts, training areas, and climate-controlled comfort. Open 7 days.",
   path: "/facilities",
 });
 

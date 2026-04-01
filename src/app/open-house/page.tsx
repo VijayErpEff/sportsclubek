@@ -11,9 +11,9 @@ import { generateSEOMetadata } from "@/lib/seo/metadata";
 import { generateBreadcrumbLD } from "@/lib/seo/json-ld";
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: "Open House Event",
+  title: "Open House — Tour Our Facility in Elkton, MD",
   description:
-    "Visit LevelUP Sports for our Open House event. Tour the facility, meet coaches, try a free session. No commitment required.",
+    "Visit LevelUP Sports for our Open House in Elkton, MD. Tour the facility, meet coaches, try a free session. No commitment. Open to all ages.",
   path: "/open-house",
 });
 

@@ -12,9 +12,9 @@ import { MEMBERSHIP_FAQS } from "@/content/faqs";
 import { Check, X, GraduationCap, Shield, Users } from "lucide-react";
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: "Memberships & Pricing",
+  title: "Memberships & Pricing — Plans from $49/mo",
   description:
-    "Flexible membership plans for individuals and families at LevelUP Sports. Access batting cages, courts, coaching programs, and more. Compare plans and pricing.",
+    "Flexible membership plans at LevelUP Sports in Elkton, MD. Access batting cages, courts, and coaching. Individual, family, and elite tiers. Compare plans.",
   path: "/memberships",
 });
 

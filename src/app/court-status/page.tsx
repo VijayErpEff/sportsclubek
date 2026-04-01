@@ -5,9 +5,9 @@ import { generateBreadcrumbLD } from "@/lib/seo/json-ld";
 import { CourtStatusBoard } from "./court-status-board";
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: "Live Court Status",
+  title: "Live Court & Cage Availability — Elkton, MD",
   description:
-    "Check real-time court and cage availability at LevelUP Sports in Elkton, MD. See which courts are open for pickleball, badminton, box cricket, volleyball, and batting cages.",
+    "Check real-time court and cage availability at LevelUP Sports in Elkton, MD. See open courts for pickleball, badminton, cricket, volleyball, and batting cages.",
   path: "/court-status",
 });
 

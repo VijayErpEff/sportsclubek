@@ -46,6 +46,20 @@ import {
   ArrowRight,
 } from "lucide-react";
 
+/** Descriptive alt text keyed by filename for SEO and accessibility */
+const FACILITY_ALT_TEXT: Record<string, string> = {
+  "01-Main-Area-1.png":
+    "Indoor multi-sport facility main court area at LevelUP Sports in Elkton, MD",
+  "02-Main-Area-2.png":
+    "Wide view of indoor courts for badminton, pickleball, and volleyball at LevelUP Sports",
+  "04-Training-Area.png":
+    "Youth sports training area with batting cages and agility equipment at LevelUP Sports",
+  "05-Cricket-Nets.png":
+    "Professional indoor cricket nets and bowling machine setup at LevelUP Sports Elkton",
+  "06-Lounge.png":
+    "Player lounge and viewing area for families at LevelUP Sports & Athletics Club",
+};
+
 /**
  * Auto-discovers hero images from public/images/sports/LevelUp/.
  * Just add or remove image files in that folder — no code changes needed.
@@ -60,7 +74,9 @@ function getFacilityImages(): Array<{ src: string; alt: string }> {
       .sort()
       .map((f) => ({
         src: `/images/sports/LevelUp/${f}`,
-        alt: `LevelUP Sports — ${f.replace(/\.[^.]+$/, "").replace(/^\d+-/, "").replace(/-/g, " ")}`,
+        alt:
+          FACILITY_ALT_TEXT[f] ??
+          `LevelUP Sports indoor facility — ${f.replace(/\.[^.]+$/, "").replace(/^\d+-/, "").replace(/-/g, " ")}`,
       }));
   } catch {
     return [];
@@ -69,9 +85,9 @@ function getFacilityImages(): Array<{ src: string; alt: string }> {
 
 export const metadata: Metadata = {
   title:
-    "LevelUP Sports & Athletics Club | Batting Cages, Cricket, Badminton & Pickleball in Elkton, MD — Near Middletown & Newark, DE",
+    "LevelUP Sports — Indoor Sports Facility in Elkton, MD",
   description:
-    "Indoor batting cages, cricket nets, badminton & pickleball courts in Elkton, MD — just 15 min from Middletown, Newark & Wilmington, DE. Expert youth academies, court rentals, open 7 days. Book online today.",
+    "Indoor batting cages, cricket nets, badminton & pickleball courts in Elkton, MD — 15 min from Middletown & Newark, DE. Youth academies, court rentals. Book today.",
   alternates: {
     canonical: "https://levelupsports.us",
   },

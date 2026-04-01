@@ -59,8 +59,8 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     metaDescription:
       "Indoor batting cages & expert baseball coaching in Elkton, MD — 15 min from Middletown & Newark, DE. Youth academy, private lessons, cage rentals. Pitching machines up to 90 MPH. Book now.",
     overview: [
-      "You've watched your kid struggle at the plate. The frustration after an 0-for-3 game. The slump that drags into a second week. That's exactly why we built this — and why Coach Rivera has spent 15 years perfecting a development system that turns struggling hitters into confident ones. Our cages run from 30 to 90 MPH, and every session starts with a coach who knows your kid's name, their swing, and what they need to work on next.",
-      "Parents: you can watch every session from our viewing area. You'll see the difference in their mechanics within weeks — not months. Academy players get a written progress report every four weeks. This isn't daycare with batting helmets. It's real development.",
+      "You've watched your kid struggle at the plate. The frustration after an 0-for-3 game. The slump that drags into a second week. That's exactly why we partnered with Joe Vanaskey — \"Joltin' Joe\" — a former professional baseball player and scout with decades of experience training youth at his Field of Dreams Academy right here in Cecil County. Our cages run from 30 to 90 MPH, and every session starts with a coach who focuses on the fundamentals: batting, fielding, and technique.",
+      "Parents: you can watch every session from our viewing area. You'll see the difference in their mechanics within weeks — not months. Academy players get structured instruction focused on measurable improvement. This isn't daycare with batting helmets. It's real development from a coach who played and scouted at the professional level.",
     ],
     highlights: [
       { label: "Cages", value: "4" },
@@ -104,16 +104,11 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     ],
     coaches: [
       {
-        name: "Coach Rivera",
+        name: "Joe Vanaskey",
         role: "Head Baseball Coach",
-        credentials: "15+ years coaching experience, former college player",
-        initials: "CR",
-      },
-      {
-        name: "Coach Davis",
-        role: "Pitching Coach",
-        credentials: "10+ years specializing in youth pitching development",
-        initials: "CD",
+        credentials: "Former professional baseball player & scout, decades of youth training experience, Joltin' Joe's Field of Dreams Academy (Cecil County, MD)",
+        initials: "JV",
+        image: "/images/Coaches/Joe.jpg",
       },
     ],
     faqs: [
@@ -236,7 +231,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       "BWF-approved indoor badminton courts in Elkton, MD — closest to Middletown, Newark & Wilmington, DE. Court rentals, academy, certified coaching. Book your court today.",
     overview: [
       "Your kid doesn't just want to rally — they want to compete. And they need courts and coaching that match their ambition. Our three BWF-standard courts feature synthetic sprung flooring (the same synthetic surface used in national competitions), tournament-calibrated LED lighting, and professional nets. This isn't a gym with lines painted on the floor.",
-      "Coach Lee is BWF-certified with over a decade of competitive coaching, and he's guided players from casual rallies to county championships. Whether you're picking up a racket for the first time or training for tournament play, the facility and coaching here will push you to the next level. Parents — you'll see measurable progress in footwork, reaction time, and match confidence within weeks.",
+      "Head Coach Nabeel Adeel is a BWF and USA Badminton Level-1 certified coach with over 25 years of competitive and coaching experience — a multiple-time Pennsylvania State Champion and Head Coach of the Swarthmore College Varsity Badminton Team. He's joined by advisory board member Syam Prasad Anand, a BWF Level-1 certified coach who has helped build world-class training facilities across the U.S., and Nick, a decades-long competitive player and Dilwyne Badminton Club leader in Wilmington, DE. Whether you're picking up a racket for the first time or training for tournament play, the facility and coaching here will push you to the next level.",
     ],
     highlights: [
       { label: "Courts", value: "Pro-Grade" },
@@ -280,16 +275,24 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     ],
     coaches: [
       {
-        name: "Coach Lee",
+        name: "Nabeel Adeel",
         role: "Head Badminton Coach",
-        credentials: "BWF-certified, 10+ years competitive coaching",
-        initials: "CL",
+        credentials: "BWF & USA Badminton Level-1 certified, 25+ years competitive & coaching experience, PA State Champion, Swarthmore College Varsity Head Coach",
+        initials: "NA",
       },
       {
-        name: "Coach Park",
-        role: "Assistant Coach",
-        credentials: "Former national-level player, specializes in doubles",
-        initials: "CP",
+        name: "Syam Prasad Anand",
+        role: "Advisory Board",
+        credentials: "BWF Level-1 certified coach, founding leader of multiple badminton organizations, strategic advisor",
+        initials: "SA",
+        image: "/images/Coaches/Syam Prasad.jpg",
+      },
+      {
+        name: "Nick",
+        role: "Mentor & Technical Advisor",
+        credentials: "Dilwyne Badminton Club (Wilmington, DE) management & Treasurer since 1996, decades of competitive playing experience",
+        initials: "N",
+        image: "/images/Coaches/Nick.jpg",
       },
     ],
     faqs: [
@@ -316,7 +319,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       "Indoor pickleball courts in Elkton, MD — 15 min from Middletown & Bear, DE. Open play, beginner lessons, court rentals. Cecil County's best pickleball facility. Book today.",
     overview: [
       "You'll come for the exercise. You'll stay for the people. Our Tuesday and Thursday open play sessions have become the highlight of the week for 50+ regulars — and most of them started as complete beginners. Pickleball is the most social sport we offer, and our community proves it every session.",
-      "If you've heard about pickleball from friends, seen it on the news, or you're looking for exercise that's fun and gentle on your joints — this is your place. Our PPR-certified instructor runs beginner clinics weekly, and our regulars are the friendliest group in the building. Couples, friends, solo players — everyone finds their people here.",
+      "If you've heard about pickleball from friends, seen it on the news, or you're looking for exercise that's fun and gentle on your joints — this is your place. We run beginner clinics weekly, and our regulars are the friendliest group in the building. Couples, friends, solo players — everyone finds their people here.",
     ],
     highlights: [
       { label: "Courts", value: "Dedicated" },
@@ -358,14 +361,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       "All equipment provided for beginners",
       "Climate-controlled year-round play",
     ],
-    coaches: [
-      {
-        name: "Coach Williams",
-        role: "Pickleball Director",
-        credentials: "PPR-certified instructor, tournament player",
-        initials: "CW",
-      },
-    ],
+    coaches: [],
     faqs: [
       { question: "What's the difference between pickleball and tennis?", answer: "Pickleball uses a smaller court, solid paddles, and a perforated ball. It's easier to learn, gentler on joints, and incredibly social." },
       { question: "Do I need my own paddle?", answer: "Not at all! We provide paddles and balls for all open play and lesson sessions. Bring your own if you prefer." },
@@ -462,8 +458,8 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     metaDescription:
       "Indoor soccer & futsal in Elkton, MD — 15 min from Middletown & Newark, DE. Professional turf, youth academy, adult leagues, open play. Year-round. Book today.",
     overview: [
-      "When fall leagues end and spring tryouts are months away, your kid's development doesn't have to stop. Our professional indoor turf gives players a year-round training ground — and Coach Martinez's futsal-first approach builds the close-control skills and quick decision-making that make the difference at outdoor tryouts. There's a reason the best soccer nations in the world train on small-sided indoor pitches.",
-      "We run youth academies for ages 6 and up, adult open play multiple nights a week, and seasonal leagues for teams looking for competitive indoor games. The turf is FIFA-quality, the goals are regulation, and the coaching focuses on technical excellence — first touch, passing under pressure, and vision. Parents: you'll see your kid's confidence with the ball transform within weeks.",
+      "When fall leagues end and spring tryouts are months away, your kid's development doesn't have to stop. Our professional indoor turf gives players a year-round training ground — and a futsal-first approach that builds the close-control skills and quick decision-making that make the difference at outdoor tryouts. There's a reason the best soccer nations in the world train on small-sided indoor pitches.",
+      "We run youth programs for ages 6 and up, adult open play multiple nights a week, and seasonal leagues for teams looking for competitive indoor games. The turf is professional-quality, the goals are regulation, and the focus is on technical excellence — first touch, passing under pressure, and vision. Parents: you'll see your kid's confidence with the ball transform within weeks.",
     ],
     highlights: [
       { label: "Surface", value: "Pro Turf" },
@@ -505,20 +501,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       "All equipment provided for open play",
       "Video analysis available for academy members",
     ],
-    coaches: [
-      {
-        name: "Coach Martinez",
-        role: "Head Soccer Coach",
-        credentials: "USSF B-licensed, 10+ years youth development, former semi-pro",
-        initials: "CM",
-      },
-      {
-        name: "Coach Okafor",
-        role: "Futsal & Technical Coach",
-        credentials: "US Futsal certified, specializes in close control and creativity",
-        initials: "CO",
-      },
-    ],
+    coaches: [],
     faqs: [
       { question: "What's the difference between futsal and indoor soccer?", answer: "Futsal uses a smaller, low-bounce ball and emphasizes close control and quick passing. It's the best way to develop technical skill. We offer both futsal and traditional indoor 5v5." },
       { question: "Do you offer soccer for younger kids?", answer: "Yes! Our academy starts at age 6 with age-appropriate training that focuses on fun, coordination, and basic ball skills." },

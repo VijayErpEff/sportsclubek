@@ -12,9 +12,9 @@ import { BOOKING_URLS } from "@/lib/constants/booking";
 import { Phone, Clock } from "lucide-react";
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: "Schedule & Booking",
+  title: "Schedule & Book Sessions — Elkton, MD",
   description:
-    "View the LevelUP Sports weekly schedule. Batting cages, court rentals, academy classes, and open play times in Elkton, MD. Book your session today.",
+    "View the LevelUP Sports weekly schedule. Batting cages, court rentals, academy classes, and open play in Elkton, MD. Book your session online today.",
   path: "/schedule",
 });
 

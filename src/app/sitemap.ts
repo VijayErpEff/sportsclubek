@@ -1,7 +1,8 @@
 import { MetadataRoute } from "next";
 import { BLOG_POSTS } from "@/content/blog-posts";
+import { SITE_CONFIG } from "@/lib/constants/site";
 
-const BASE_URL = "https://levelupsports.us";
+const BASE_URL = SITE_CONFIG.url;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const blogEntries: MetadataRoute.Sitemap = [
@@ -68,6 +69,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.5,
     },
+    // Sport pages
     {
       url: `${BASE_URL}/baseball`,
       lastModified: new Date(),
@@ -111,11 +113,36 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: `${BASE_URL}/volleyball`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/volleyball-academy`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/soccer`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/soccer-academy`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
       url: `${BASE_URL}/kids-agility`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    // Other pages
     {
       url: `${BASE_URL}/contact`,
       lastModified: new Date(),

@@ -11,9 +11,9 @@ import { generateBreadcrumbLD } from "@/lib/seo/json-ld";
 import { Heart, TrendingUp, Users, Dumbbell, Briefcase, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: "Careers at LevelUP Sports",
+  title: "Careers — Join Our Team in Elkton, MD",
   description:
-    "Join the LevelUP Sports team. Coaching positions, facility operations, and more. Build the future of youth athletics.",
+    "Join the LevelUP Sports team in Elkton, MD. Coaching, facility operations, and front desk positions. Build the future of youth athletics in the tri-state area.",
   path: "/careers",
 });
 

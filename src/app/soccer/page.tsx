@@ -9,6 +9,7 @@ export const metadata: Metadata = generateSEOMetadata({
   title: data.metaTitle,
   description: data.metaDescription,
   path: `/${data.slug}`,
+  ogImage: data.image,
 });
 
 export default function SoccerPage() {

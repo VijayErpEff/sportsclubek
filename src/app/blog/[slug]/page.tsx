@@ -71,6 +71,7 @@ export async function generateMetadata({
     description: post.excerpt,
     path: `/blog/${post.slug}`,
     ogImage: post.image,
+    ogType: "article",
   });
 }
 

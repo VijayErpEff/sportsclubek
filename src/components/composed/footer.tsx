@@ -26,6 +26,8 @@ const footerPrograms = [
   { label: "Baseball Academy", href: "/baseball-academy" },
   { label: "Cricket Academy", href: "/cricket-academy" },
   { label: "Badminton Academy", href: "/badminton-academy" },
+  { label: "Volleyball Academy", href: "/volleyball-academy" },
+  { label: "Soccer Academy", href: "/soccer-academy" },
   { label: "Kids Agility", href: "/kids-agility" },
 ];
 
@@ -157,10 +159,19 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="border-t border-white/10 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-white/40">
-            &copy; {new Date().getFullYear()} {SITE_CONFIG.name}. All rights
-            reserved.
-          </p>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+            <p className="text-xs text-white/40">
+              &copy; {new Date().getFullYear()} {SITE_CONFIG.name}. All rights
+              reserved.
+            </p>
+            <span className="hidden sm:inline text-white/20">|</span>
+            <Link href="/privacy" className="text-xs text-white/40 hover:text-white/60 transition-colors">
+              Privacy Policy
+            </Link>
+            <Link href="/terms" className="text-xs text-white/40 hover:text-white/60 transition-colors">
+              Terms of Service
+            </Link>
+          </div>
 
           <div className="flex items-center gap-4">
             {socialLinks.map((social) => (

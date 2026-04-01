@@ -1,4 +1,5 @@
 import { SITE_CONFIG, SPORTS } from "@/lib/constants/site";
+import { AGGREGATE_RATING } from "@/content/reviews";
 
 /**
  * Enhanced Organization/LocalBusiness JSON-LD with full local SEO signals.
@@ -140,12 +141,12 @@ export function generateOrganizationLD() {
         geoRadius: "40000", // 40 km ≈ 25 miles
       },
     ],
-    // Aggregate rating
+    // Aggregate rating — sourced from reviews.ts to stay in sync with visible UI
     aggregateRating: {
       "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "127",
-      bestRating: "5",
+      ratingValue: String(AGGREGATE_RATING.ratingValue),
+      reviewCount: String(AGGREGATE_RATING.reviewCount),
+      bestRating: String(AGGREGATE_RATING.bestRating),
       worstRating: "1",
     },
     // Services offered

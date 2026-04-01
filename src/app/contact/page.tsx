@@ -11,9 +11,9 @@ import { SITE_CONFIG } from "@/lib/constants/site";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: "Contact Us",
+  title: "Contact Us — Sports Facility in Elkton, MD",
   description:
-    "Get in touch with LevelUP Sports & Athletics Club in Elkton, MD. Call, email, or visit us. We're here to help with bookings, questions, and more.",
+    "Get in touch with LevelUP Sports in Elkton, MD. Call (443) 406-6494, email, or visit us at 701 E Pulaski Hwy. Bookings, questions, and directions.",
   path: "/contact",
 });
 

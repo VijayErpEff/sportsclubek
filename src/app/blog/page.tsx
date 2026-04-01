@@ -10,9 +10,9 @@ import { BLOG_POSTS, BLOG_CATEGORIES } from "@/content/blog-posts";
 import { cn } from "@/lib/utils/cn";
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: "Blog",
+  title: "Training Tips & Sports Blog — Elkton, MD",
   description:
-    "Training tips, athlete spotlights, event news, and stories from LevelUP Sports & Athletics Club in Elkton, MD. Expert advice for baseball, cricket, badminton, and pickleball players.",
+    "Training tips, athlete spotlights, and news from LevelUP Sports in Elkton, MD. Expert advice for baseball, cricket, badminton, and pickleball players.",
   path: "/blog",
 });
 
