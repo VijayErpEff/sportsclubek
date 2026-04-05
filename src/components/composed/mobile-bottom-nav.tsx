@@ -15,11 +15,11 @@ const LINK_ITEMS = [
 ] as const;
 
 const SPORT_LINKS = [
-  { name: "Baseball", href: "/baseball", emoji: "\u26be" },
-  { name: "Cricket", href: "/cricket", emoji: "\ud83c\udfcf" },
   { name: "Badminton", href: "/badminton", emoji: "\ud83c\udff8" },
-  { name: "Pickleball", href: "/pickleball", emoji: "\ud83c\udfd3" },
+  { name: "Cricket", href: "/cricket", emoji: "\ud83c\udfcf" },
   { name: "Volleyball", href: "/volleyball", emoji: "\ud83c\udfd0" },
+  { name: "Pickleball", href: "/pickleball", emoji: "\ud83c\udfd3" },
+  { name: "Baseball", href: "/baseball", emoji: "\u26be" },
   { name: "Soccer", href: "/soccer", emoji: "\u26bd" },
   { name: "Kids Agility", href: "/kids-agility", emoji: "\u26a1" },
 ];

@@ -26,10 +26,10 @@ const footerCompany = [
 ];
 
 const footerPrograms = [
-  { label: "Baseball Academy", href: "/baseball-academy" },
-  { label: "Cricket Academy", href: "/cricket-academy" },
   { label: "Badminton Academy", href: "/badminton-academy" },
+  { label: "Cricket Academy", href: "/cricket-academy" },
   { label: "Volleyball Academy", href: "/volleyball-academy" },
+  { label: "Baseball Academy", href: "/baseball-academy" },
   { label: "Soccer Academy", href: "/soccer-academy" },
   { label: "Kids Agility", href: "/kids-agility" },
 ];
