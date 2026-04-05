@@ -661,17 +661,21 @@ export function ScheduleCalendar() {
     : WEEKLY_SCHEDULE;
 
   // ---- Day / sport filter state (always Eastern time for Elkton, MD) ----
-  const [activeDay, setActiveDay] = useState(0);
-  useEffect(() => {
-    const estDay = new Intl.DateTimeFormat("en-US", {
-      timeZone: "America/New_York",
-      weekday: "short",
-    }).format(new Date());
-    const map: Record<string, number> = {
-      Mon: 0, Tue: 1, Wed: 2, Thu: 3, Fri: 4, Sat: 5, Sun: 6,
-    };
-    setActiveDay(map[estDay] ?? 0);
-  }, []);
+  const [activeDay, setActiveDay] = useState(() => {
+    try {
+      const estDay = new Intl.DateTimeFormat("en-US", {
+        timeZone: "America/New_York",
+        weekday: "short",
+      }).format(new Date());
+      const map: Record<string, number> = {
+        Mon: 0, Tue: 1, Wed: 2, Thu: 3, Fri: 4, Sat: 5, Sun: 6,
+      };
+      return map[estDay] ?? 0;
+    } catch {
+      const today = new Date().getDay();
+      return today === 0 ? 6 : today - 1;
+    }
+  });
   const [activeSport, setActiveSport] = useState<SportType | "all">("all");
 
   const filteredSchedule = mergedSchedule.map((day) => ({
