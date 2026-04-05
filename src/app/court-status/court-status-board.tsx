@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils/cn";
-import { Phone, ChevronRight } from "lucide-react";
+import { Phone, ChevronRight, Pencil } from "lucide-react";
 import { useAdmin } from "@/lib/context/admin-context";
 import { BOOKING_URLS } from "@/lib/constants/booking";
 
@@ -98,11 +98,6 @@ function groupLabel(indices: number[]): string {
   return `Cages ${indices[0] + 1}\u2013${indices[indices.length - 1] + 1}`;
 }
 
-function groupNumber(indices: number[]): string {
-  if (indices.length === 1) return `0${indices[0] + 1}`;
-  return indices.map((i) => `0${i + 1}`).join(" + ");
-}
-
 function cageCssVariant(c: CageItem) {
   if (c.status === "available") return "available";
   if (c.status === "reserved") return "reserved";
@@ -132,15 +127,6 @@ function slotName(ly: string, i: number): string {
   return `Court ${i + 1}`;
 }
 
-function slotId(ly: string, i: number): string {
-  const row = i < 3 ? "A" : "B";
-  const col = (i % 3) + 1;
-  if (ly === "courts-6") return `${row}${col}`;
-  if (ly === "vb-2") return `V${i + 1}`;
-  if (ly === "bc-2" || ly === "bc-full") return `BC${i + 1}`;
-  return `${row}${col}`;
-}
-
 function slotSportLabel(ly: string, i: number, st: string): string {
   const t = slotType(ly, i);
   if (st === "available") return "Available";
@@ -164,74 +150,52 @@ function slotVariant(ly: string, i: number, st: string): string {
   return t;
 }
 
-/* ── Brand dark theme variant styles ──
-   Page bg:    #0F2440 (primary-dark)
-   Card bg:    #1B3A5C (primary)
-   Card hover: #2A5A8C (primary-light)
-   Accent:     #2BA84A / #1B7D3A
-   Info:       #3498DB
-   Error:      #E74C3C
-   Warning:    #F39C12
-*/
-const V: Record<string, {
-  border: string; badge: string; badgeText: string;
-  dot: string; sport: string; status: string; glow: string;
+/* ── Light theme status styles ── */
+const STATUS: Record<string, {
+  border: string; bg: string; badge: string; badgeText: string; dot: string; text: string;
 }> = {
   available: {
-    border: "border-[#2BA84A]/35", badge: "bg-[#2BA84A]/15", badgeText: "text-[#2BA84A]",
-    dot: "bg-[#2BA84A]", sport: "text-[#2BA84A]", status: "text-[#2BA84A]/70",
-    glow: "shadow-[0_0_24px_-6px_rgba(43,168,74,0.2)]",
+    border: "border-green-200", bg: "bg-green-50/50", badge: "bg-green-100", badgeText: "text-green-700",
+    dot: "bg-green-500", text: "text-green-700",
   },
   reserved: {
-    border: "border-[#F39C12]/35", badge: "bg-[#F39C12]/15", badgeText: "text-[#F39C12]",
-    dot: "bg-[#F39C12]", sport: "text-[#F39C12]", status: "text-[#F39C12]/70",
-    glow: "shadow-[0_0_24px_-6px_rgba(243,156,18,0.2)]",
+    border: "border-amber-200", bg: "bg-amber-50/50", badge: "bg-amber-100", badgeText: "text-amber-700",
+    dot: "bg-amber-500", text: "text-amber-700",
   },
   pickleball: {
-    border: "border-orange-400/35", badge: "bg-orange-400/15", badgeText: "text-orange-400",
-    dot: "bg-orange-400", sport: "text-orange-400", status: "text-orange-400/70",
-    glow: "shadow-[0_0_24px_-6px_rgba(251,146,60,0.2)]",
+    border: "border-teal-200", bg: "bg-teal-50/50", badge: "bg-teal-100", badgeText: "text-teal-700",
+    dot: "bg-teal-500", text: "text-teal-700",
   },
   badminton: {
-    border: "border-[#3498DB]/35", badge: "bg-[#3498DB]/15", badgeText: "text-[#3498DB]",
-    dot: "bg-[#3498DB]", sport: "text-[#3498DB]", status: "text-[#3498DB]/70",
-    glow: "shadow-[0_0_24px_-6px_rgba(52,152,219,0.2)]",
+    border: "border-blue-200", bg: "bg-blue-50/50", badge: "bg-blue-100", badgeText: "text-blue-700",
+    dot: "bg-blue-500", text: "text-blue-700",
   },
   "box-cricket": {
-    border: "border-[#E74C3C]/30", badge: "bg-[#E74C3C]/15", badgeText: "text-[#E74C3C]",
-    dot: "bg-[#E74C3C]", sport: "text-[#E74C3C]", status: "text-[#E74C3C]/70",
-    glow: "shadow-[0_0_24px_-6px_rgba(231,76,60,0.2)]",
+    border: "border-red-200", bg: "bg-red-50/50", badge: "bg-red-100", badgeText: "text-red-700",
+    dot: "bg-red-500", text: "text-red-700",
   },
   volleyball: {
-    border: "border-violet-400/35", badge: "bg-violet-400/15", badgeText: "text-violet-400",
-    dot: "bg-violet-400", sport: "text-violet-400", status: "text-violet-400/70",
-    glow: "shadow-[0_0_24px_-6px_rgba(167,139,250,0.2)]",
+    border: "border-violet-200", bg: "bg-violet-50/50", badge: "bg-violet-100", badgeText: "text-violet-700",
+    dot: "bg-violet-500", text: "text-violet-700",
   },
   cricket: {
-    border: "border-[#E74C3C]/30", badge: "bg-[#E74C3C]/15", badgeText: "text-[#E74C3C]",
-    dot: "bg-[#E74C3C]", sport: "text-[#E74C3C]", status: "text-[#E74C3C]/70",
-    glow: "shadow-[0_0_24px_-6px_rgba(231,76,60,0.2)]",
+    border: "border-red-200", bg: "bg-red-50/50", badge: "bg-red-100", badgeText: "text-red-700",
+    dot: "bg-red-500", text: "text-red-700",
   },
   training: {
-    border: "border-teal-400/35", badge: "bg-teal-400/15", badgeText: "text-teal-400",
-    dot: "bg-teal-400", sport: "text-teal-400", status: "text-teal-400/70",
-    glow: "shadow-[0_0_24px_-6px_rgba(20,184,166,0.2)]",
+    border: "border-cyan-200", bg: "bg-cyan-50/50", badge: "bg-cyan-100", badgeText: "text-cyan-700",
+    dot: "bg-cyan-500", text: "text-cyan-700",
   },
 };
 
-const SPORT_ICONS: Record<string, string> = {
-  Cricket: "\uD83C\uDFCF", Badminton: "\uD83C\uDFF8", Training: "\uD83C\uDFCB\uFE0F",
-  Pickleball: "\uD83C\uDFD3", "Box Cricket": "\uD83C\uDFCF", Volleyball: "\uD83C\uDFD0",
-};
-
-const LEGEND_ITEMS = [
-  { key: "available",   label: "Open",        ...V.available },
-  { key: "pickleball",  label: "Pickleball",  ...V.pickleball },
-  { key: "badminton",   label: "Badminton",   ...V.badminton },
-  { key: "box-cricket", label: "Box Cricket", ...V["box-cricket"] },
-  { key: "volleyball",  label: "Volleyball",  ...V.volleyball },
-  { key: "training",    label: "Training",    ...V.training },
-  { key: "reserved",    label: "Reserved",    ...V.reserved },
+const LEGEND = [
+  { key: "available",   label: "Open",        dot: "bg-green-500" },
+  { key: "pickleball",  label: "Pickleball",  dot: "bg-teal-500" },
+  { key: "badminton",   label: "Badminton",   dot: "bg-blue-500" },
+  { key: "cricket",     label: "Cricket",     dot: "bg-red-500" },
+  { key: "volleyball",  label: "Volleyball",  dot: "bg-violet-500" },
+  { key: "training",    label: "Training",    dot: "bg-cyan-500" },
+  { key: "reserved",    label: "Reserved",    dot: "bg-amber-500" },
 ];
 
 const GRID_CLASSES: Record<string, string> = {
@@ -239,140 +203,54 @@ const GRID_CLASSES: Record<string, string> = {
   "vb-2": "grid-cols-2", "bc-1": "grid-cols-3", "bc-2": "grid-cols-2", "bc-full": "grid-cols-1",
 };
 
-/* ── Cage Card (dark) ── */
+/* ── Cage Card (light) ── */
 function CageCard({
-  variant, number, sportLabel, statusLabel, note, isMerged,
+  variant, label, sportLabel, statusLabel, note, isMerged,
   adminMode, onClick, onNoteClick, className, index, reduced,
 }: {
-  variant: string; number: string; sportLabel: string; statusLabel: string;
+  variant: string; label: string; sportLabel: string; statusLabel: string;
   note: string; isMerged: boolean; adminMode: boolean; onClick: () => void;
   onNoteClick: () => void; className?: string; index: number; reduced: boolean;
 }) {
-  const vs = V[variant] || V.available;
+  const s = STATUS[variant] || STATUS.available;
   return (
     <motion.div
       layout
-      initial={reduced ? false : { opacity: 0, y: 16, scale: 0.96 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.45, delay: index * 0.07, ease: EASE }}
+      initial={reduced ? false : { opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, delay: index * 0.06, ease: EASE }}
       onClick={onClick}
       className={cn(
-        "relative rounded-2xl border bg-primary flex flex-col justify-between p-4 select-none transition-all duration-300",
-        vs.border, vs.glow,
-        adminMode && "cursor-pointer hover:bg-primary-light hover:scale-[1.02]",
-        !adminMode && "hover:bg-primary-light",
+        "relative rounded-xl border-l-4 bg-white border border-neutral-100 p-4 transition-all duration-200",
+        s.border,
+        adminMode && "cursor-pointer hover:shadow-md hover:-translate-y-0.5",
+        !adminMode && "hover:shadow-sm",
         className
       )}
     >
       {adminMode && (
         <button
           onClick={(e) => { e.stopPropagation(); onNoteClick(); }}
-          className="absolute top-3 right-3 w-6 h-6 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-[0.65rem] text-white/30 hover:bg-white/10 hover:text-white/50 z-10 transition-all"
+          className="absolute top-3 right-3 w-7 h-7 rounded-lg bg-neutral-50 border border-neutral-200 flex items-center justify-center text-neutral-400 hover:text-neutral-600 hover:bg-neutral-100 transition-colors"
           title="Edit note"
         >
-          &#9998;
+          <Pencil className="h-3 w-3" />
         </button>
       )}
-      {/* Top: number + badge */}
-      <div className="flex items-start justify-between mb-3">
-        <span className="font-mono text-2xl font-bold text-white/80 tracking-tight leading-none">
-          {number}
-        </span>
-        <span className={cn("text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full", vs.badge, vs.badgeText)}>
+      <div className="flex items-center justify-between mb-2">
+        <span className="text-sm font-bold text-neutral-900">{label}</span>
+        <span className={cn("text-[11px] font-semibold px-2 py-0.5 rounded-full", s.badge, s.badgeText)}>
           {statusLabel}
         </span>
       </div>
-      {/* Bottom: icon + sport + note */}
-      <div>
-        {sportLabel !== "Available" && (
-          <span className="text-lg mr-1.5">{SPORT_ICONS[sportLabel] || ""}</span>
-        )}
-        {sportLabel === "Available" && (
-          <span className="text-lg mr-1.5 opacity-60">&#10003;</span>
-        )}
-        <motion.span
-          key={sportLabel}
-          initial={reduced ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.2 }}
-          className={cn("font-display text-base font-bold", sportLabel === "Available" ? "text-white" : vs.sport)}
-        >
-          {isMerged && sportLabel === "Available" ? "Combined Arena" : sportLabel}
-        </motion.span>
-        {note && (
-          <p className="text-[0.65rem] text-white/30 mt-1 truncate">{note}</p>
-        )}
-        {isMerged && sportLabel === "Available" && !note && (
-          <p className="text-[0.65rem] text-white/25 mt-1">Double space configured for team drills.</p>
-        )}
-        {!adminMode && sportLabel === "Available" && (
-          <a
-            href={BOOKING_URLS.offerings}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
-            className="inline-block mt-2 text-[0.65rem] font-bold text-[#2BA84A] hover:text-[#2BA84A]/80 transition-colors"
-          >
-            Book Now &rarr;
-          </a>
-        )}
+      <div className="flex items-center gap-2">
+        <span className={cn("w-2 h-2 rounded-full shrink-0", s.dot)} />
+        <span className={cn("text-sm font-medium", s.text)}>
+          {isMerged && sportLabel === "Available" ? "Combined — Open" : sportLabel}
+        </span>
       </div>
-    </motion.div>
-  );
-}
-
-/* ── Court Card (dark) ── */
-function CourtCard({
-  variant, id, name, sportLabel, statusLabel, note,
-  adminMode, onClick, onNoteClick, className, index, reduced,
-}: {
-  variant: string; id: string; name: string; sportLabel: string; statusLabel: string;
-  note: string; adminMode: boolean; onClick: () => void; onNoteClick: () => void;
-  className?: string; index: number; reduced: boolean;
-}) {
-  const vs = V[variant] || V.available;
-  return (
-    <motion.div
-      layout
-      initial={reduced ? false : { opacity: 0, y: 12, scale: 0.97 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.4, delay: index * 0.05, ease: EASE }}
-      onClick={onClick}
-      className={cn(
-        "relative rounded-xl border bg-primary p-3.5 select-none transition-all duration-300",
-        vs.border, vs.glow,
-        adminMode && "cursor-pointer hover:bg-primary-light hover:scale-[1.03]",
-        !adminMode && "hover:bg-primary-light",
-        className
-      )}
-    >
-      {adminMode && (
-        <button
-          onClick={(e) => { e.stopPropagation(); onNoteClick(); }}
-          className="absolute top-2 right-2 w-5 h-5 rounded-md bg-white/5 border border-white/10 flex items-center justify-center text-[0.6rem] text-white/30 hover:bg-white/10 hover:text-white/50 z-10 transition-all"
-          title="Edit note"
-        >
-          &#9998;
-        </button>
-      )}
-      <span className="text-[0.6rem] font-mono font-bold text-white/25 tracking-wider">{id}</span>
-      <div className="flex items-center gap-1.5 mt-1.5">
-        <span className={cn("w-2 h-2 rounded-full shrink-0", vs.dot)} />
-        <motion.span
-          key={sportLabel}
-          initial={reduced ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.2 }}
-          className="font-display text-sm font-bold text-white truncate"
-        >
-          {name}
-        </motion.span>
-      </div>
-      <span className={cn("text-[0.6rem] font-bold uppercase tracking-widest mt-0.5 block", vs.status)}>
-        {sportLabel === "Available" ? "Open" : sportLabel}
-      </span>
       {note && (
-        <span className="text-[0.6rem] text-white/25 mt-1 block truncate">{note}</span>
+        <p className="text-xs text-neutral-400 mt-1.5 truncate">{note}</p>
       )}
       {!adminMode && sportLabel === "Available" && (
         <a
@@ -380,7 +258,71 @@ function CourtCard({
           target="_blank"
           rel="noopener noreferrer"
           onClick={(e) => e.stopPropagation()}
-          className="inline-block mt-1.5 text-[0.6rem] font-bold text-[#2BA84A] hover:text-[#2BA84A]/80 transition-colors"
+          className="inline-block mt-2 text-xs font-semibold text-accent hover:text-accent-hover transition-colors"
+        >
+          Book Now &rarr;
+        </a>
+      )}
+    </motion.div>
+  );
+}
+
+/* ── Court Card (light) ── */
+function CourtCard({
+  variant, name, sportLabel, statusLabel, note,
+  adminMode, onClick, onNoteClick, className, index, reduced,
+}: {
+  variant: string; name: string; sportLabel: string; statusLabel: string;
+  note: string; adminMode: boolean; onClick: () => void; onNoteClick: () => void;
+  className?: string; index: number; reduced: boolean;
+}) {
+  const s = STATUS[variant] || STATUS.available;
+  return (
+    <motion.div
+      layout
+      initial={reduced ? false : { opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.35, delay: index * 0.05, ease: EASE }}
+      onClick={onClick}
+      className={cn(
+        "relative rounded-xl border-l-4 bg-white border border-neutral-100 p-3.5 transition-all duration-200",
+        s.border,
+        adminMode && "cursor-pointer hover:shadow-md hover:-translate-y-0.5",
+        !adminMode && "hover:shadow-sm",
+        className
+      )}
+    >
+      {adminMode && (
+        <button
+          onClick={(e) => { e.stopPropagation(); onNoteClick(); }}
+          className="absolute top-2.5 right-2.5 w-6 h-6 rounded-md bg-neutral-50 border border-neutral-200 flex items-center justify-center text-neutral-400 hover:text-neutral-600 hover:bg-neutral-100 transition-colors"
+          title="Edit note"
+        >
+          <Pencil className="h-2.5 w-2.5" />
+        </button>
+      )}
+      <div className="flex items-center justify-between mb-1.5">
+        <span className="text-sm font-bold text-neutral-900">{name}</span>
+        <span className={cn("text-[10px] font-semibold px-2 py-0.5 rounded-full", s.badge, s.badgeText)}>
+          {statusLabel}
+        </span>
+      </div>
+      <div className="flex items-center gap-1.5">
+        <span className={cn("w-1.5 h-1.5 rounded-full shrink-0", s.dot)} />
+        <span className={cn("text-xs font-medium", s.text)}>
+          {sportLabel === "Available" ? "Open" : sportLabel}
+        </span>
+      </div>
+      {note && (
+        <p className="text-[11px] text-neutral-400 mt-1 truncate">{note}</p>
+      )}
+      {!adminMode && sportLabel === "Available" && (
+        <a
+          href={BOOKING_URLS.offerings}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          className="inline-block mt-1.5 text-[11px] font-semibold text-accent hover:text-accent-hover transition-colors"
         >
           Book &rarr;
         </a>
@@ -406,10 +348,8 @@ export function CourtStatusBoard() {
 
   useEffect(() => {
     async function init() {
-      // 1. Try Redis (server-side state)
       const saved = await fetchCourtState();
       if (saved) { setState(saved); setMounted(true); return; }
-      // 2. Try config file defaults
       try {
         const res = await fetch("/data/court-status.json");
         if (res.ok) {
@@ -422,13 +362,11 @@ export function CourtStatusBoard() {
           }
         }
       } catch {}
-      // 3. Fallback to hardcoded defaults
       setMounted(true);
     }
     init();
   }, []);
 
-  // Poll server for live updates from other devices
   useEffect(() => {
     const id = setInterval(async () => {
       const saved = await fetchCourtState();
@@ -506,69 +444,112 @@ export function CourtStatusBoard() {
   const ly = state.mp.layout;
   const cfg = LAYOUTS[ly];
   const mpAvail = state.mp.slots.filter((s) => s.state === "available").length;
-  const updatedTime = mounted ? new Date(state.updated).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "";
+  const updatedTime = mounted
+    ? new Intl.DateTimeFormat("en-US", { timeZone: "America/New_York", hour: "numeric", minute: "2-digit", hour12: true }).format(new Date(state.updated))
+    : "";
 
   if (!mounted) return (
-    <div className="min-h-[calc(100vh-64px)] bg-primary-dark flex items-center justify-center">
-      <div className="animate-pulse text-white/20 text-lg font-medium">Loading&hellip;</div>
+    <div className="min-h-[calc(100vh-64px)] flex items-center justify-center">
+      <div className="animate-pulse text-neutral-300 text-lg font-medium">Loading&hellip;</div>
     </div>
   );
 
   return (
-    <div className="min-h-[calc(100vh-64px)] bg-primary-dark -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 pt-20 md:pt-24 pb-6 flex flex-col">
-      {/* Title row */}
-      <motion.div
-        initial={reduced ? false : { opacity: 0, y: -8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: EASE }}
-        className="flex items-center justify-between mb-6 shrink-0 max-w-7xl mx-auto w-full"
-      >
-        <div className="flex items-center gap-3">
-          <h1 className="font-display text-2xl md:text-3xl font-bold text-white tracking-tight">Court Status</h1>
-          <span className="flex items-center gap-1.5 text-[0.55rem] font-bold uppercase tracking-widest text-secondary bg-secondary/10 px-2.5 py-1 rounded-full border border-accent/20">
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-50" />
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-secondary" />
-            </span>
-            Live
-          </span>
-        </div>
-        <div className="flex items-center gap-4">
-          <div className="hidden lg:flex items-center gap-3">
-            {LEGEND_ITEMS.map((item) => (
-              <span key={item.key} className="flex items-center gap-1.5 text-[0.55rem] font-semibold text-white/30">
-                <span className={cn("w-1.5 h-1.5 rounded-full", item.dot)} />{item.label}
+    <div className="pt-20 md:pt-24 pb-24 lg:pb-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* Header */}
+        <motion.div
+          initial={reduced ? false : { opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: EASE }}
+          className="mb-8"
+        >
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="flex items-center gap-3 mb-1">
+                <h1 className="font-display text-2xl md:text-3xl font-bold text-neutral-900 tracking-tight">
+                  Court Status
+                </h1>
+                <span className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-green-700 bg-green-50 px-2.5 py-1 rounded-full border border-green-200">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-60" />
+                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500" />
+                  </span>
+                  Live
+                </span>
+              </div>
+              <p className="text-sm text-neutral-500">
+                Real-time availability &middot; Updated {updatedTime} ET
+              </p>
+            </div>
+          </div>
+
+          {/* Legend */}
+          <div className="flex flex-wrap gap-3 mt-4">
+            {LEGEND.map((item) => (
+              <span key={item.key} className="flex items-center gap-1.5 text-xs text-neutral-500">
+                <span className={cn("w-2 h-2 rounded-full", item.dot)} />
+                {item.label}
               </span>
             ))}
           </div>
-          <span className="text-[0.6rem] text-white/20 tabular-nums font-mono">{updatedTime}</span>
-        </div>
-      </motion.div>
+        </motion.div>
 
-      {/* Main grid */}
-      <div className="grid lg:grid-cols-2 gap-6 flex-1 min-h-0 max-w-7xl mx-auto w-full">
-        {/* Cages */}
-        <motion.div
-          initial={reduced ? false : { opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
-          className="flex flex-col"
-        >
-          <div className="flex items-center justify-between mb-3">
-            <div>
-              <span className="text-[0.55rem] font-bold uppercase tracking-[0.2em] text-secondary/80">Zone Alpha</span>
-              <h2 className="font-display text-lg font-bold text-white -mt-0.5">The Cages</h2>
+        {/* Admin banner */}
+        {adminMode && (
+          <div className="mb-6 flex flex-wrap items-center gap-3 p-3 bg-green-50 border border-green-200 rounded-xl">
+            <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-green-700">
+              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+              Admin Mode — tap cards to change status
+            </span>
+            <div className="flex items-center gap-3 ml-auto">
+              <button
+                onClick={async () => {
+                  try {
+                    const res = await fetch("/data/court-status.json");
+                    if (res.ok) {
+                      const data = await res.json();
+                      data.updated = Date.now();
+                      setState(data);
+                      saveCourtState(data, admin.adminPin);
+                    }
+                  } catch {}
+                }}
+                className="text-xs font-medium text-neutral-500 hover:text-red-600 transition-colors underline underline-offset-2"
+              >
+                Reset
+              </button>
+              <button onClick={handleAdminToggle}
+                className="text-xs font-medium text-neutral-500 hover:text-primary transition-colors underline underline-offset-2">
+                Exit Admin
+              </button>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="text-[0.6rem] font-bold text-white/30">{cageAvail}/{groups.length} open</span>
+          </div>
+        )}
+
+        {/* Main grid */}
+        <div className="grid lg:grid-cols-2 gap-8">
+
+          {/* Cages */}
+          <motion.div
+            initial={reduced ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <h2 className="font-display text-lg font-bold text-neutral-900">Batting Cages</h2>
+                <p className="text-xs text-neutral-400 mt-0.5">{cageAvail} of {groups.length} available</p>
+              </div>
               {adminMode && (
                 <div className="flex gap-1">
                   {[0, 1, 2].map((m) => (
                     <button key={m} onClick={() => toggleMerge(m)}
-                      className={cn("w-7 h-7 rounded-lg text-[0.6rem] font-bold border transition-all flex items-center justify-center",
+                      className={cn("w-8 h-8 rounded-lg text-xs font-bold border transition-all flex items-center justify-center",
                         state.cages.merges[m]
-                          ? "bg-accent/20 text-secondary border-accent/30"
-                          : "bg-white/5 text-white/30 border-white/10 hover:border-white/20"
+                          ? "bg-accent/10 text-accent border-accent/30"
+                          : "bg-neutral-50 text-neutral-400 border-neutral-200 hover:border-neutral-300"
                       )}
                       title={`Merge ${m + 1}+${m + 2}`}
                     >{m + 1}{m + 2}</button>
@@ -576,148 +557,85 @@ export function CourtStatusBoard() {
                 </div>
               )}
             </div>
-          </div>
 
-          <div className="grid grid-cols-2 gap-3 flex-1">
-            {groups.map((g, gi) => {
-              const c = state.cages.items[g[0]];
-              const v = cageCssVariant(c);
-              const label = c.sport || (c.status === "reserved" ? "Private" : "Available");
-              return (
-                <div key={gi} style={{ gridColumn: g.length > 1 ? "span 2" : undefined }}>
-                  <CageCard
-                    variant={v} number={groupNumber(g)} sportLabel={label}
-                    statusLabel={slotStatusLabel(c.status)} note={c.note}
-                    isMerged={g.length > 1} adminMode={adminMode}
-                    onClick={() => clickCageGroup(gi)} onNoteClick={() => openCageNote(gi)}
-                    className="h-full" index={gi} reduced={reduced}
-                  />
-                </div>
-              );
-            })}
-          </div>
-        </motion.div>
-
-        {/* Courts */}
-        <motion.div
-          initial={reduced ? false : { opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.15, ease: EASE }}
-          className="flex flex-col"
-        >
-          <div className="flex items-center justify-between mb-3">
-            <div>
-              <span className="text-[0.55rem] font-bold uppercase tracking-[0.2em] text-info/80">Zone Bravo</span>
-              <h2 className="font-display text-lg font-bold text-white -mt-0.5">Multipurpose Floor</h2>
+            <div className="grid grid-cols-2 gap-3">
+              {groups.map((g, gi) => {
+                const c = state.cages.items[g[0]];
+                const v = cageCssVariant(c);
+                const sportLbl = c.sport || (c.status === "reserved" ? "Reserved" : "Available");
+                return (
+                  <div key={gi} style={{ gridColumn: g.length > 1 ? "span 2" : undefined }}>
+                    <CageCard
+                      variant={v} label={groupLabel(g)} sportLabel={sportLbl}
+                      statusLabel={slotStatusLabel(c.status)} note={c.note}
+                      isMerged={g.length > 1} adminMode={adminMode}
+                      onClick={() => clickCageGroup(gi)} onNoteClick={() => openCageNote(gi)}
+                      className="h-full" index={gi} reduced={reduced}
+                    />
+                  </div>
+                );
+              })}
             </div>
-            <div className="flex items-center gap-2">
-              <span className="text-[0.6rem] font-bold text-white/30">{mpAvail}/{cfg.slots} open</span>
+          </motion.div>
+
+          {/* Courts */}
+          <motion.div
+            initial={reduced ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.15, ease: EASE }}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <h2 className="font-display text-lg font-bold text-neutral-900">Multipurpose Courts</h2>
+                <p className="text-xs text-neutral-400 mt-0.5">
+                  {mpAvail} of {cfg.slots} available &middot; {LAYOUTS[ly].label}
+                </p>
+              </div>
               {adminMode && (
                 <div className="flex gap-1 flex-wrap">
                   {LAYOUT_ORDER.map((key) => (
                     <button key={key} onClick={() => setLayout(key)}
-                      className={cn("px-1.5 py-0.5 rounded text-[0.55rem] font-bold border transition-all",
+                      className={cn("px-2 py-1 rounded-lg text-[11px] font-semibold border transition-all",
                         key === ly
-                          ? "bg-info/20 text-info border-info/30"
-                          : "bg-white/5 text-white/30 border-white/10 hover:border-white/20"
+                          ? "bg-primary/10 text-primary border-primary/20"
+                          : "bg-neutral-50 text-neutral-400 border-neutral-200 hover:border-neutral-300"
                       )}>{LAYOUTS[key].btnLabel}</button>
                   ))}
                 </div>
               )}
             </div>
-          </div>
 
-          <div className={cn("grid gap-3 flex-1", GRID_CLASSES[ly])}>
-            {state.mp.slots.map((s, i) => {
-              const variant = slotVariant(ly, i, s.state);
-              const isFullWidth =
-                (ly === "vb-courts" && i === 0) || (ly === "courts-vb" && i === 3) || (ly === "bc-1" && i === 0);
-              return (
-                <CourtCard
-                  key={i} variant={variant} id={slotId(ly, i)} name={slotName(ly, i)}
-                  sportLabel={slotSportLabel(ly, i, s.state)} statusLabel={slotStatusLabel(s.state)}
-                  note={s.note} adminMode={adminMode} onClick={() => clickSlot(i)}
-                  onNoteClick={() => openSlotNote(i)} index={i + groups.length} reduced={reduced}
-                  className={cn(
-                    isFullWidth && ly === "bc-1" && "row-span-2",
-                    isFullWidth && (ly === "vb-courts" || ly === "courts-vb") && "col-span-full",
-                  )}
-                />
-              );
-            })}
-          </div>
-        </motion.div>
-      </div>
-
-      {/* Mobile legend */}
-      <div className="flex lg:hidden gap-3 flex-wrap justify-center mt-5 shrink-0">
-        {LEGEND_ITEMS.map((item) => (
-          <span key={item.key} className="flex items-center gap-1.5 text-[0.55rem] font-semibold text-white/30">
-            <span className={cn("w-1.5 h-1.5 rounded-full", item.dot)} />{item.label}
-          </span>
-        ))}
-      </div>
-
-      {/* Admin controls */}
-      {adminMode && (
-        <div className="flex items-center justify-between mt-2 shrink-0 max-w-7xl mx-auto w-full">
-          <span className="text-[0.5rem] text-white/20">Changes sync across all devices</span>
-          <div className="flex items-center gap-4">
-            <button
-              onClick={async () => {
-                try {
-                  const res = await fetch("/data/court-status.json");
-                  if (res.ok) {
-                    const data = await res.json();
-                    data.updated = Date.now();
-                    setState(data);
-                    saveCourtState(data, admin.adminPin);
-                  }
-                } catch {}
-              }}
-              className="text-[0.55rem] font-medium text-info/60 hover:text-info transition-colors"
-            >
-              Reset to Defaults
-            </button>
-            <button onClick={handleAdminToggle}
-              className="text-[0.55rem] font-medium text-error/60 hover:text-error transition-colors">
-              Exit Admin
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Note Modal */}
-      <AnimatePresence>
-        {noteModal.open && (
-          <motion.div
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md"
-            onClick={() => setNoteModal((m) => ({ ...m, open: false }))}
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 10 }} transition={{ duration: 0.25, ease: EASE }}
-              className="bg-primary border border-white/10 rounded-2xl p-8 w-[90%] max-w-sm text-center shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <h3 className="font-display text-lg font-bold text-white mb-5">{noteModal.title}</h3>
-              <input ref={noteInputRef} type="text" maxLength={60} value={noteModal.value}
-                onChange={(e) => setNoteModal((m) => ({ ...m, value: e.target.value }))}
-                onKeyDown={(e) => { if (e.key === "Enter") saveNote(); if (e.key === "Escape") setNoteModal((m) => ({ ...m, open: false })); }}
-                placeholder="e.g., League game 4-6pm"
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white text-[0.9rem] outline-none transition-colors focus:border-info/50 placeholder:text-white/20" />
-              <div className="flex gap-3 mt-5">
-                <button onClick={() => setNoteModal((m) => ({ ...m, value: "" }))} className="flex-1 py-2.5 rounded-xl border border-error/30 bg-error/10 text-error font-semibold text-[0.8rem] hover:bg-error/20 transition-colors">Clear</button>
-                <button onClick={() => setNoteModal((m) => ({ ...m, open: false }))} className="flex-1 py-2.5 rounded-xl border border-white/10 text-white/50 font-semibold text-[0.8rem] hover:bg-white/5 transition-colors">Cancel</button>
-                <button onClick={saveNote} className="flex-1 py-2.5 rounded-xl bg-info/20 border border-info/30 text-info font-semibold text-[0.8rem] hover:bg-info/30 transition-colors">Save</button>
-              </div>
-            </motion.div>
+            <div className={cn("grid gap-3", GRID_CLASSES[ly])}>
+              {state.mp.slots.map((slot, i) => {
+                const variant = slotVariant(ly, i, slot.state);
+                const isFullWidth =
+                  (ly === "vb-courts" && i === 0) || (ly === "courts-vb" && i === 3) || (ly === "bc-1" && i === 0);
+                return (
+                  <CourtCard
+                    key={i} variant={variant} name={slotName(ly, i)}
+                    sportLabel={slotSportLabel(ly, i, slot.state)} statusLabel={slotStatusLabel(slot.state)}
+                    note={slot.note} adminMode={adminMode} onClick={() => clickSlot(i)}
+                    onNoteClick={() => openSlotNote(i)} index={i + groups.length} reduced={reduced}
+                    className={cn(
+                      isFullWidth && ly === "bc-1" && "row-span-2",
+                      isFullWidth && (ly === "vb-courts" || ly === "courts-vb") && "col-span-full",
+                    )}
+                  />
+                );
+              })}
+            </div>
           </motion.div>
-        )}
-      </AnimatePresence>
+        </div>
 
-      {/* Mobile sticky Call to Book bar — matches schedule style */}
+        {/* Admin controls */}
+        {adminMode && (
+          <div className="mt-6 text-center">
+            <p className="text-xs text-neutral-400">Changes sync across all devices</p>
+          </div>
+        )}
+      </div>
+
+      {/* Mobile sticky Call to Book bar */}
       {!adminMode && (
         <div className="fixed bottom-14 inset-x-0 z-40 lg:hidden" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
           <div className="mx-3 flex gap-2">
@@ -740,6 +658,36 @@ export function CourtStatusBoard() {
           </div>
         </div>
       )}
+
+      {/* Note Modal */}
+      <AnimatePresence>
+        {noteModal.open && (
+          <motion.div
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+            onClick={() => setNoteModal((m) => ({ ...m, open: false }))}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 10 }} transition={{ duration: 0.25, ease: EASE }}
+              className="bg-white border border-neutral-200 rounded-2xl p-6 w-full max-w-sm shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h3 className="font-display text-lg font-bold text-neutral-900 mb-4">{noteModal.title}</h3>
+              <input ref={noteInputRef} type="text" maxLength={60} value={noteModal.value}
+                onChange={(e) => setNoteModal((m) => ({ ...m, value: e.target.value }))}
+                onKeyDown={(e) => { if (e.key === "Enter") saveNote(); if (e.key === "Escape") setNoteModal((m) => ({ ...m, open: false })); }}
+                placeholder="e.g., League game 4–6pm"
+                className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl text-neutral-900 text-sm outline-none transition-colors focus:border-accent/50 focus:ring-2 focus:ring-accent/20 placeholder:text-neutral-400" />
+              <div className="flex gap-3 mt-5">
+                <button onClick={() => setNoteModal((m) => ({ ...m, value: "" }))} className="flex-1 py-2.5 rounded-xl border border-red-200 text-red-600 font-semibold text-sm hover:bg-red-50 transition-colors">Clear</button>
+                <button onClick={() => setNoteModal((m) => ({ ...m, open: false }))} className="flex-1 py-2.5 rounded-xl border border-neutral-200 text-neutral-500 font-semibold text-sm hover:bg-neutral-50 transition-colors">Cancel</button>
+                <button onClick={saveNote} className="flex-1 py-2.5 rounded-xl bg-accent text-white font-semibold text-sm hover:bg-accent-hover transition-colors">Save</button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
