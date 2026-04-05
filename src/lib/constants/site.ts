@@ -56,13 +56,13 @@ export const SITE_CONFIG = {
 
 export const SPORTS = [
   {
-    name: "Baseball",
-    slug: "baseball",
-    icon: "baseball",
-    color: "#1B3A5C",
-    image: "/images/sports/baseball.jpg",
+    name: "Badminton",
+    slug: "badminton",
+    icon: "badminton",
+    color: "#2A5A8C",
+    image: "/images/sports/badminton.jpg",
     description:
-      "Indoor batting cages and expert coaching for players of all levels.",
+      "Competition-grade courts with coaching from certified professionals.",
     hasAcademy: true,
   },
   {
@@ -96,13 +96,13 @@ export const SPORTS = [
     hasAcademy: false,
   },
   {
-    name: "Badminton",
-    slug: "badminton",
-    icon: "badminton",
-    color: "#2A5A8C",
-    image: "/images/sports/badminton.jpg",
+    name: "Baseball",
+    slug: "baseball",
+    icon: "baseball",
+    color: "#1B3A5C",
+    image: "/images/sports/baseball.jpg",
     description:
-      "Competition-grade courts with coaching from certified professionals.",
+      "Indoor batting cages and expert coaching for players of all levels.",
     hasAcademy: true,
   },
   {
@@ -122,15 +122,15 @@ export const NAV_LINKS = [
     label: "Sports",
     href: "#",
     children: [
-      { label: "Baseball", href: "/baseball" },
-      { label: "Baseball Academy", href: "/baseball-academy" },
+      { label: "Badminton", href: "/badminton" },
+      { label: "Badminton Academy", href: "/badminton-academy" },
       { label: "Cricket", href: "/cricket" },
       { label: "Cricket Academy", href: "/cricket-academy" },
       { label: "Volleyball", href: "/volleyball" },
       { label: "Volleyball Academy", href: "/volleyball-academy" },
       { label: "Pickleball", href: "/pickleball" },
-      { label: "Badminton", href: "/badminton" },
-      { label: "Badminton Academy", href: "/badminton-academy" },
+      { label: "Baseball", href: "/baseball" },
+      { label: "Baseball Academy", href: "/baseball-academy" },
       { label: "Soccer", href: "/soccer" },
       { label: "Soccer Academy", href: "/soccer-academy" },
       { label: "Kids Agility", href: "/kids-agility" },
