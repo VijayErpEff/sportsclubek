@@ -3,16 +3,9 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Trophy, Calendar, Phone, Info, X } from "lucide-react";
+import { Home, Trophy, Calendar, Phone, Activity, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils/cn";
-
-const LINK_ITEMS = [
-  { label: "Home", href: "/", icon: Home },
-  { label: "Free Trial", href: "/free-trial", icon: Calendar },
-  { label: "Contact", href: "/contact", icon: Phone },
-  { label: "About", href: "/about", icon: Info },
-] as const;
 
 const SPORT_LINKS = [
   { name: "Badminton", href: "/badminton", emoji: "\ud83c\udff8" },
@@ -31,6 +24,14 @@ export function MobileBottomNav() {
   const [sportsOpen, setSportsOpen] = useState(false);
 
   const isSportsPage = /volleyball|cricket|badminton|pickleball|soccer|baseball|kids-agility/.test(pathname);
+
+  const navItems = [
+    { label: "Home", href: "/", icon: Home },
+    { label: "Sports", href: "#sports", icon: Trophy, isSheet: true },
+    { label: "Schedule", href: "/schedule", icon: Calendar },
+    { label: "Courts", href: "/court-status", icon: Activity },
+    { label: "Contact", href: "/contact", icon: Phone },
+  ];
 
   return (
     <>
@@ -96,40 +97,32 @@ export function MobileBottomNav() {
         style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
       >
         <ul className="flex h-14 items-center justify-around">
-          {/* Home */}
-          <li className="flex-1">
-            <Link
-              href="/"
-              className={cn(
-                "flex flex-col items-center justify-center gap-0.5 py-1 text-[10px] font-medium transition-colors",
-                pathname === "/" ? "text-accent" : "text-neutral-500 hover:text-neutral-900"
-              )}
-              aria-current={pathname === "/" ? "page" : undefined}
-            >
-              <Home className="h-5 w-5" aria-hidden="true" />
-              <span>Home</span>
-            </Link>
-          </li>
+          {navItems.map(({ label, href, icon: Icon, isSheet }) => {
+            const isActive = isSheet
+              ? sportsOpen || isSportsPage
+              : href === "/"
+                ? pathname === "/"
+                : pathname.startsWith(href);
 
-          {/* Sports — opens sheet instead of navigating */}
-          <li className="flex-1">
-            <button
-              onClick={() => setSportsOpen((p) => !p)}
-              className={cn(
-                "flex flex-col items-center justify-center gap-0.5 py-1 text-[10px] font-medium transition-colors w-full",
-                sportsOpen || isSportsPage ? "text-accent" : "text-neutral-500 hover:text-neutral-900"
-              )}
-              aria-expanded={sportsOpen}
-              aria-label="Open sports menu"
-            >
-              <Trophy className="h-5 w-5" aria-hidden="true" />
-              <span>Sports</span>
-            </button>
-          </li>
+            if (isSheet) {
+              return (
+                <li key={label} className="flex-1">
+                  <button
+                    onClick={() => setSportsOpen((p) => !p)}
+                    className={cn(
+                      "flex flex-col items-center justify-center gap-0.5 py-1 text-[10px] font-medium transition-colors w-full",
+                      isActive ? "text-accent" : "text-neutral-500 hover:text-neutral-900"
+                    )}
+                    aria-expanded={sportsOpen}
+                    aria-label="Open sports menu"
+                  >
+                    <Icon className="h-5 w-5" aria-hidden="true" />
+                    <span>{label}</span>
+                  </button>
+                </li>
+              );
+            }
 
-          {/* Remaining links */}
-          {LINK_ITEMS.slice(1).map(({ label, href, icon: Icon }) => {
-            const isActive = pathname.startsWith(href);
             return (
               <li key={label} className="flex-1">
                 <Link

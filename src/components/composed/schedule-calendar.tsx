@@ -786,8 +786,8 @@ export function ScheduleCalendar() {
         </div>
       </div>
 
-      {/* Day Tabs — Mobile: horizontal scroll / Desktop: row */}
-      <div className="flex gap-1.5 overflow-x-auto pb-2 mb-4 -mx-1 px-1 scrollbar-none">
+      {/* Day Tabs — fits all 7 days without scrolling */}
+      <div className="grid grid-cols-7 gap-1 mb-4">
         {mergedSchedule.map((day, index) => {
           const sessionCount =
             activeSport === "all"
@@ -800,20 +800,20 @@ export function ScheduleCalendar() {
               aria-pressed={activeDay === index}
               aria-label={`${day.day} — ${sessionCount} ${sessionCount === 1 ? "session" : "sessions"}`}
               className={cn(
-                "flex-shrink-0 flex flex-col items-center px-4 py-2.5 rounded-xl text-sm font-medium transition-all min-w-[72px]",
+                "flex flex-col items-center py-2 rounded-lg text-xs font-medium transition-all",
                 activeDay === index
                   ? "bg-primary text-white shadow-md shadow-primary/20"
                   : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
               )}
             >
-              <span className="font-bold">{day.shortDay}</span>
+              <span className="font-bold text-sm">{day.shortDay}</span>
               <span
                 className={cn(
-                  "text-[10px] mt-0.5",
+                  "text-[9px] mt-0.5",
                   activeDay === index ? "text-white/70" : "text-neutral-400"
                 )}
               >
-                {sessionCount} {sessionCount === 1 ? "session" : "sessions"}
+                {sessionCount}
               </span>
             </button>
           );

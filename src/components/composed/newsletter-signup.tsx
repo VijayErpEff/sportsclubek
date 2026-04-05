@@ -4,6 +4,7 @@ import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
 import { trackNewsletterSignup } from "@/lib/analytics";
+import { sendSubscription } from "@/lib/emailjs";
 
 export function NewsletterSignup() {
   const [email, setEmail] = useState("");
@@ -18,23 +19,12 @@ export function NewsletterSignup() {
     setErrorMessage("");
 
     try {
-      const res = await fetch("/api/newsletter", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-
-      if (res.ok) {
-        trackNewsletterSignup();
-        setStatus("success");
-        setEmail("");
-      } else {
-        const data = await res.json();
-        setErrorMessage(data.error || "Something went wrong.");
-        setStatus("error");
-      }
+      await sendSubscription(email);
+      trackNewsletterSignup();
+      setStatus("success");
+      setEmail("");
     } catch {
-      setErrorMessage("Network error. Please try again.");
+      setErrorMessage("Something went wrong. Please try again.");
       setStatus("error");
     }
   };
@@ -44,7 +34,7 @@ export function NewsletterSignup() {
       <div aria-live="polite" className="text-center flex items-center justify-center gap-2">
         <CheckCircle className="h-5 w-5 text-secondary" aria-hidden="true" />
         <p className="text-secondary font-semibold">
-          Thanks for signing up! We&apos;ll be in touch.
+          Thanks for signing up! Check your inbox for a welcome email.
         </p>
       </div>
     );
