@@ -29,7 +29,7 @@ export default function SchedulePage() {
       />
 
       {/* Compact header — minimal on mobile so schedule is visible immediately */}
-      <section className="pt-20 pb-2 md:pt-32 md:pb-8">
+      <section className="pt-24 pb-2 md:pt-32 md:pb-8">
         <Container>
           <nav aria-label="Breadcrumb" className="text-xs text-neutral-400 mb-2 md:mb-4">
             <ol className="flex items-center gap-1.5">

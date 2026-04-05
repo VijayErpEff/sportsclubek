@@ -455,7 +455,7 @@ export function CourtStatusBoard() {
   );
 
   return (
-    <div className="pt-20 md:pt-24 pb-24 lg:pb-12">
+    <div className="pt-28 md:pt-32 pb-24 lg:pb-12">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
