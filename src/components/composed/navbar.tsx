@@ -12,9 +12,9 @@ import { SITE_CONFIG } from "@/lib/constants/site";
 import { trackPhoneCall, trackCTAClick } from "@/lib/analytics";
 
 const SPORT_ITEMS = [
-  { name: "Volleyball", href: "/volleyball", academy: "/volleyball-academy" as string | null, emoji: "\ud83c\udfd0", desc: "Leagues, coaching & open play" },
+  { name: "Badminton", href: "/badminton", academy: "/badminton-academy" as string | null, emoji: "\ud83c\udff8", desc: "Competition-grade courts" },
   { name: "Cricket", href: "/cricket", academy: "/cricket-academy", emoji: "\ud83c\udfcf", desc: "Nets & bowling machines" },
-  { name: "Badminton", href: "/badminton", academy: "/badminton-academy", emoji: "\ud83c\udff8", desc: "Competition-grade courts" },
+  { name: "Volleyball", href: "/volleyball", academy: "/volleyball-academy", emoji: "\ud83c\udfd0", desc: "Leagues, coaching & open play" },
   { name: "Pickleball", href: "/pickleball", academy: null as string | null, emoji: "\ud83c\udfd3", desc: "Open play & rentals" },
   { name: "Soccer", href: "/soccer", academy: "/soccer-academy", emoji: "\u26bd", desc: "Indoor futsal & training" },
   { name: "Baseball", href: "/baseball", academy: "/baseball-academy", emoji: "\u26be", desc: "Batting cages & coaching" },
