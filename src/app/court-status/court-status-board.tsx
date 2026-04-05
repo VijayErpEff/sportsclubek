@@ -715,6 +715,29 @@ export function CourtStatusBoard() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Mobile sticky Call to Book bar */}
+      {!adminMode && (
+        <div className="fixed bottom-14 inset-x-0 z-40 md:hidden" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
+          <div className="mx-3 flex gap-2">
+            <a
+              href="tel:4434066494"
+              className="flex-1 flex items-center justify-center gap-2 py-3 bg-[#2BA84A] text-white font-bold text-sm rounded-xl shadow-lg shadow-[#2BA84A]/25"
+            >
+              <span className="text-base">&#9742;</span>
+              Call to Book
+            </a>
+            <a
+              href={BOOKING_URLS.offerings}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 flex items-center justify-center gap-2 py-3 bg-white text-primary-dark font-bold text-sm rounded-xl shadow-lg border border-white/20"
+            >
+              Book Online &rarr;
+            </a>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

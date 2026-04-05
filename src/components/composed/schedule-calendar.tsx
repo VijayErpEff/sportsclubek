@@ -4,7 +4,7 @@ import { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils/cn";
-import { ChevronRight, Clock, Filter, Plus, X, Pencil, Trash2, Check, Loader2 } from "lucide-react";
+import { ChevronRight, ChevronDown, Clock, Filter, Plus, X, Pencil, Trash2, Check, Loader2, Phone } from "lucide-react";
 import {
   WEEKLY_SCHEDULE,
   SPORT_COLORS,
@@ -729,6 +729,7 @@ export function ScheduleCalendar() {
     }
   });
   const [activeSport, setActiveSport] = useState<SportType | "all">("all");
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   const filteredSchedule = mergedSchedule.map((day) => ({
     ...day,
@@ -805,46 +806,98 @@ export function ScheduleCalendar() {
         </div>
       )}
 
-      {/* Sport Filter Pills */}
-      <div className="mb-6">
-        <div className="flex items-center gap-2 mb-3">
-          <Filter className="h-4 w-4 text-neutral-400" />
-          <span className="text-xs font-semibold text-neutral-500 uppercase tracking-wider">
-            Filter by Sport
-          </span>
-        </div>
-        <div className="flex flex-wrap gap-2">
+      {/* Sport Filter — collapsible on mobile, always visible on desktop */}
+      <div className="mb-4 lg:mb-6">
+        {/* Mobile: collapsible */}
+        <div className="lg:hidden">
           <button
-            onClick={() => setActiveSport("all")}
-            aria-pressed={activeSport === "all"}
-            className={cn(
-              "px-3.5 py-1.5 rounded-full text-sm font-medium transition-all",
-              activeSport === "all"
-                ? "bg-primary text-white shadow-sm"
-                : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
-            )}
+            onClick={() => setFiltersOpen((p) => !p)}
+            className="flex items-center justify-between w-full py-2 text-sm"
           >
-            All Programs
+            <div className="flex items-center gap-2">
+              <Filter className="h-3.5 w-3.5 text-neutral-400" />
+              <span className="font-semibold text-neutral-700">
+                {activeSport === "all" ? "All Sports" : SPORT_LABELS[activeSport]}
+              </span>
+            </div>
+            <ChevronDown className={cn("h-4 w-4 text-neutral-400 transition-transform", filtersOpen && "rotate-180")} />
           </button>
-          {ALL_SPORTS.map((sport) => {
-            const colors = SPORT_COLORS[sport];
-            return (
+          {filtersOpen && (
+            <div className="flex flex-wrap gap-1.5 pt-2 pb-1">
               <button
-                key={sport}
-                onClick={() => setActiveSport(sport)}
-                aria-pressed={activeSport === sport}
+                onClick={() => { setActiveSport("all"); setFiltersOpen(false); }}
                 className={cn(
-                  "px-3.5 py-1.5 rounded-full text-sm font-medium transition-all flex items-center gap-1.5",
-                  activeSport === sport
-                    ? cn(colors.bg, colors.text, "ring-1", colors.border)
-                    : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
+                  "px-3 py-1 rounded-full text-xs font-medium transition-all",
+                  activeSport === "all"
+                    ? "bg-primary text-white"
+                    : "bg-neutral-100 text-neutral-600"
                 )}
               >
-                <span className={cn("w-2 h-2 rounded-full", colors.dot)} />
-                {SPORT_LABELS[sport]}
+                All
               </button>
-            );
-          })}
+              {ALL_SPORTS.map((sport) => {
+                const colors = SPORT_COLORS[sport];
+                return (
+                  <button
+                    key={sport}
+                    onClick={() => { setActiveSport(sport); setFiltersOpen(false); }}
+                    className={cn(
+                      "px-3 py-1 rounded-full text-xs font-medium transition-all flex items-center gap-1",
+                      activeSport === sport
+                        ? cn(colors.bg, colors.text, "ring-1", colors.border)
+                        : "bg-neutral-100 text-neutral-600"
+                    )}
+                  >
+                    <span className={cn("w-1.5 h-1.5 rounded-full", colors.dot)} />
+                    {SPORT_LABELS[sport]}
+                  </button>
+                );
+              })}
+            </div>
+          )}
+        </div>
+
+        {/* Desktop: always visible */}
+        <div className="hidden lg:block">
+          <div className="flex items-center gap-2 mb-3">
+            <Filter className="h-4 w-4 text-neutral-400" />
+            <span className="text-xs font-semibold text-neutral-500 uppercase tracking-wider">
+              Filter by Sport
+            </span>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={() => setActiveSport("all")}
+              aria-pressed={activeSport === "all"}
+              className={cn(
+                "px-3.5 py-1.5 rounded-full text-sm font-medium transition-all",
+                activeSport === "all"
+                  ? "bg-primary text-white shadow-sm"
+                  : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
+              )}
+            >
+              All Programs
+            </button>
+            {ALL_SPORTS.map((sport) => {
+              const colors = SPORT_COLORS[sport];
+              return (
+                <button
+                  key={sport}
+                  onClick={() => setActiveSport(sport)}
+                  aria-pressed={activeSport === sport}
+                  className={cn(
+                    "px-3.5 py-1.5 rounded-full text-sm font-medium transition-all flex items-center gap-1.5",
+                    activeSport === sport
+                      ? cn(colors.bg, colors.text, "ring-1", colors.border)
+                      : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
+                  )}
+                >
+                  <span className={cn("w-2 h-2 rounded-full", colors.dot)} />
+                  {SPORT_LABELS[sport]}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
 
@@ -1082,8 +1135,8 @@ export function ScheduleCalendar() {
         </div>
       </div>
 
-      {/* Book CTA */}
-      <div className="mt-8 text-center bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5 rounded-2xl p-6">
+      {/* Book CTA — desktop only (mobile uses sticky bar) */}
+      <div className="hidden lg:block mt-8 text-center bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5 rounded-2xl p-6">
         <p className="font-display font-bold text-neutral-900 mb-1">
           Want to reserve a spot?
         </p>
@@ -1104,6 +1157,28 @@ export function ScheduleCalendar() {
           >
             View Memberships
           </Link>
+        </div>
+      </div>
+
+      {/* Mobile sticky Call to Book bar */}
+      <div className="fixed bottom-14 inset-x-0 z-40 lg:hidden" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
+        <div className="mx-3 flex gap-2">
+          <a
+            href={`tel:${SITE_CONFIG.phone}`}
+            className="flex-1 flex items-center justify-center gap-2 py-3 bg-accent text-white font-bold text-sm rounded-xl shadow-lg shadow-accent/25"
+          >
+            <Phone className="h-4 w-4" />
+            Call to Book
+          </a>
+          <a
+            href={BOOKING_URLS.offerings}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 flex items-center justify-center gap-2 py-3 bg-primary text-white font-bold text-sm rounded-xl shadow-lg shadow-primary/25"
+          >
+            Book Online
+            <ChevronRight className="h-4 w-4" />
+          </a>
         </div>
       </div>
     </div>

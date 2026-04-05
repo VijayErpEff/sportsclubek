@@ -4,12 +4,9 @@ import Link from "next/link";
 import { Container } from "@/components/layout/container";
 import { CTABanner } from "@/components/composed/cta-banner";
 import { ScheduleCalendar } from "@/components/composed/schedule-calendar";
-import { Reveal } from "@/components/ui/reveal";
 import { generateSEOMetadata } from "@/lib/seo/metadata";
 import { generateBreadcrumbLD } from "@/lib/seo/json-ld";
-import { SITE_CONFIG } from "@/lib/constants/site";
 import { BOOKING_URLS } from "@/lib/constants/booking";
-import { Phone, Clock } from "lucide-react";
 
 export const metadata: Metadata = generateSEOMetadata({
   title: "Schedule & Book Sessions — Elkton, MD",
@@ -31,55 +28,24 @@ export default function SchedulePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLD) }}
       />
 
-      {/* Hero — Compact, utilitarian */}
-      <section className="pt-32 pb-12 md:pt-40 md:pb-16 relative overflow-hidden">
-        <div
-          className="absolute inset-0 bg-gradient-to-b from-neutral-50 to-white"
-          aria-hidden="true"
-        />
-        <div
-          className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-primary"
-          aria-hidden="true"
-        />
-        <Container className="relative">
-          <nav aria-label="Breadcrumb" className="text-xs text-neutral-400 mb-8">
+      {/* Compact header — minimal on mobile so schedule is visible immediately */}
+      <section className="pt-20 pb-2 md:pt-32 md:pb-8">
+        <Container>
+          <nav aria-label="Breadcrumb" className="text-xs text-neutral-400 mb-2 md:mb-4">
             <ol className="flex items-center gap-1.5">
               <li>
-                <Link href="/" className="hover:text-primary transition-colors">
-                  Home
-                </Link>
+                <Link href="/" className="hover:text-primary transition-colors">Home</Link>
               </li>
               <li className="text-neutral-300">/</li>
               <li className="text-neutral-600 font-medium">Schedule</li>
             </ol>
           </nav>
-          <Reveal>
-            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
-              <div>
-                <h1 className="font-display text-page-title text-neutral-900 mb-3 text-balance">
-                  Weekly Schedule
-                </h1>
-                <p className="text-body-lg text-neutral-500 max-w-lg">
-                  Filter by sport, pick your day, and find the perfect session.
-                </p>
-              </div>
-              <div className="flex items-center gap-6 text-sm text-neutral-500">
-                <div className="flex items-center gap-2">
-                  <Clock className="h-4 w-4 text-primary" />
-                  <span>
-                    Mon–Fri 6AM–10PM &bull; Sat 7AM–9PM &bull; Sun 8AM–8PM
-                  </span>
-                </div>
-                <a
-                  href={`tel:${SITE_CONFIG.phone}`}
-                  className="flex items-center gap-2 text-accent hover:text-accent-hover transition-colors font-medium"
-                >
-                  <Phone className="h-4 w-4" />
-                  Call to Book
-                </a>
-              </div>
-            </div>
-          </Reveal>
+          <h1 className="font-display text-xl md:text-4xl font-bold tracking-tight text-neutral-900">
+            Weekly Schedule
+          </h1>
+          <p className="hidden md:block mt-2 text-neutral-500 max-w-lg">
+            Filter by sport, pick your day, and find the perfect session.
+          </p>
         </Container>
       </section>
 
