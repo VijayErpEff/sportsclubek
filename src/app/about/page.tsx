@@ -48,39 +48,32 @@ const milestones = [
 
 const coaches = [
   {
-    name: "Coach Rivera",
-    role: "Baseball Director",
-    cred: "15+ years coaching experience. Former collegiate player at University of Maryland.",
-    image: "/images/sports/baseball.jpg",
+    name: "Joe Vanaskey",
+    role: "Head Baseball Coach",
+    cred: "\"Joltin' Joe\" — former professional baseball player & scout. Decades of youth training experience. Runs Joltin' Joe's Field of Dreams Academy in Cecil County.",
+    image: "/images/Coaches/Joe.jpg",
     sport: "Baseball",
   },
   {
     name: "Sarbjeet Ladda",
-    role: "Chief Bowling Coach — Cricket",
+    role: "Head Cricket Coach",
     cred: "IPL veteran (KKR, Gujarat Lions, Delhi Daredevils). MLC Champion. 100+ Minor League wickets. BRSS Academy partner.",
     image: "/images/Coaches/Sarabjit.jpeg",
     sport: "Cricket",
   },
   {
-    name: "Coach Lee",
-    role: "Badminton Director",
-    cred: "BWF-certified coach. 10+ years competitive experience and tournament coaching.",
+    name: "Nabeel Adeel",
+    role: "Head Badminton Coach",
+    cred: "BWF & USA Badminton Level-1 certified. PA State Champion. Swarthmore College Varsity Head Coach. 25+ years experience.",
     image: "/images/sports/badminton.jpg",
     sport: "Badminton",
   },
   {
     name: "Coach Viktor",
-    role: "Volleyball Director",
-    cred: "20+ years competitive playing. Ukrainian league medalist. 6+ years coaching youth and university teams.",
+    role: "Head Volleyball Coach",
+    cred: "20+ years competitive playing. Ukrainian First League medalist. 6+ years coaching youth, university, and adult teams.",
     image: "/images/sports/volleyball.jpg",
     sport: "Volleyball",
-  },
-  {
-    name: "Coach Williams",
-    role: "Youth Fitness",
-    cred: "Certified youth fitness specialist. Builds athletic foundations for young athletes ages 5–12.",
-    image: "/images/sports/kids-agility.jpg",
-    sport: "Agility",
   },
 ];
 
@@ -135,8 +128,8 @@ export default function AboutPage() {
             <Reveal variant="fade-left" delay={0.15}>
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-card-elevated">
                 <Image
-                  src="/images/sports/facility.jpg"
-                  alt="Inside LevelUP Sports — modern indoor facility in Elkton, MD"
+                  src="/images/sports/LevelUp/01-Main-Area-1.png"
+                  alt="Inside LevelUP Sports — modern indoor multi-sport facility in Elkton, MD"
                   fill
                   className="object-cover"
                   priority
@@ -331,16 +324,16 @@ export default function AboutPage() {
               </p>
             </div>
           </Reveal>
-          <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+          <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto">
             {coaches.map((coach) => (
               <StaggerItem key={coach.name}>
                 <div className="bg-white rounded-2xl shadow-card overflow-hidden group hover:shadow-card-hover transition-all">
                   <div className="relative h-36 overflow-hidden">
                     <Image
                       src={coach.image}
-                      alt={`${coach.sport} training at LevelUP Sports`}
+                      alt={`${coach.name} — ${coach.role} at LevelUP Sports`}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                     />
                     <div
