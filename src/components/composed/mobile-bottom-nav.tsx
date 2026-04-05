@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Trophy, Calendar, Phone, Activity, X } from "lucide-react";
+import { Home, Trophy, Calendar, Phone, LayoutGrid, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils/cn";
 
@@ -29,7 +29,7 @@ export function MobileBottomNav() {
     { label: "Home", href: "/", icon: Home },
     { label: "Sports", href: "#sports", icon: Trophy, isSheet: true },
     { label: "Schedule", href: "/schedule", icon: Calendar },
-    { label: "Courts", href: "/court-status", icon: Activity },
+    { label: "Courts", href: "/court-status", icon: LayoutGrid, isLive: true },
     { label: "Contact", href: "/contact", icon: Phone },
   ];
 
@@ -97,7 +97,7 @@ export function MobileBottomNav() {
         style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
       >
         <ul className="flex h-14 items-center justify-around">
-          {navItems.map(({ label, href, icon: Icon, isSheet }) => {
+          {navItems.map(({ label, href, icon: Icon, isSheet, isLive }) => {
             const isActive = isSheet
               ? sportsOpen || isSportsPage
               : href === "/"
@@ -133,7 +133,15 @@ export function MobileBottomNav() {
                   )}
                   aria-current={isActive ? "page" : undefined}
                 >
-                  <Icon className="h-5 w-5" aria-hidden="true" />
+                  <span className="relative">
+                    <Icon className="h-5 w-5" aria-hidden="true" />
+                    {isLive && (
+                      <span className="absolute -top-0.5 -right-1 flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
+                      </span>
+                    )}
+                  </span>
                   <span>{label}</span>
                 </Link>
               </li>
