@@ -160,9 +160,6 @@ export function Navbar() {
               <Button size="sm" className="rounded-full px-5" asChild>
                 <Link href="/free-trial" onClick={() => trackCTAClick("Free Trial", "/free-trial")}>Free Trial</Link>
               </Button>
-              <span className="hidden xl:inline-flex items-center gap-1 text-[10px] text-neutral-300 font-mono">
-                <kbd className="px-1.5 py-0.5 bg-neutral-100 rounded text-[10px] text-neutral-400 border border-neutral-200">&#8984;K</kbd>
-              </span>
             </div>
 
             {/* Mobile toggle */}

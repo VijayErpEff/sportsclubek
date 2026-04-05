@@ -6,7 +6,6 @@ import { BackToTop } from "@/components/composed/back-to-top";
 import { CookieConsent } from "@/components/composed/cookie-consent";
 import { MobileBottomNav } from "@/components/composed/mobile-bottom-nav";
 import { ScrollProgressBar } from "@/components/ui/progress-bar";
-import { CommandPalette } from "@/components/composed/command-palette";
 import { AnnouncementBanner } from "@/components/composed/announcement-banner";
 import { Suspense } from "react";
 import { generateOrganizationLD } from "@/lib/seo/json-ld";
@@ -139,7 +138,6 @@ export default function RootLayout({
             <BackToTop />
             <CookieConsent />
             <MobileBottomNav />
-            <CommandPalette />
           </AdminProvider>
         </Suspense>
       </body>
