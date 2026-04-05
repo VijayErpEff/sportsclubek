@@ -11,6 +11,7 @@ import { Section } from "@/components/layout/section";
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
 import { BlogCard } from "@/components/composed/blog-card";
+import { BlogInlineSignup } from "@/components/composed/blog-inline-signup";
 import {
   BLOG_POSTS,
   BLOG_CATEGORIES,
@@ -232,6 +233,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               className="prose prose-neutral prose-lg max-w-3xl prose-headings:font-display prose-headings:text-neutral-900 prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl"
               dangerouslySetInnerHTML={{ __html: post.content }}
             />
+
+            {/* Inline signup */}
+            <div className="max-w-3xl">
+              <BlogInlineSignup postSlug={post.slug} />
+            </div>
 
             {/* Share bar */}
             <div className="max-w-3xl mt-12 pt-8 border-t border-neutral-200">

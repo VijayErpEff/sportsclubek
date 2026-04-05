@@ -2,13 +2,15 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { X, Check } from "lucide-react";
+import { X, Check, ArrowRight, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 import { Button } from "@/components/ui/button";
 import { SPORTS } from "@/lib/constants/site";
+import { captureLead } from "@/lib/leads";
 
 const STORAGE_KEY = "lus_sport_pref";
 const DISMISSED_KEY = "lus_sport_pref_dismissed";
+const EMAIL_CAPTURED_KEY = "lus_sport_pref_email_captured";
 const APPLE_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 const sportIcons: Record<string, string> = {
@@ -20,14 +22,18 @@ const sportIcons: Record<string, string> = {
   soccer: "\u26bd",
 };
 
+type Step = "sports" | "email" | "done";
+
 export function SportPreference() {
   const prefersReduced = useReducedMotion();
   const [visible, setVisible] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
-  const [confirmed, setConfirmed] = useState(false);
+  const [step, setStep] = useState<Step>("sports");
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    // Small delay so it doesn't compete with initial page load
     const timer = setTimeout(() => {
       try {
         const existingPref = localStorage.getItem(STORAGE_KEY);
@@ -35,11 +41,8 @@ export function SportPreference() {
         if (!existingPref && !dismissed) {
           setVisible(true);
         }
-      } catch {
-        // localStorage unavailable
-      }
+      } catch {}
     }, 1500);
-
     return () => clearTimeout(timer);
   }, []);
 
@@ -49,29 +52,48 @@ export function SportPreference() {
     );
   }, []);
 
-  const handleSave = useCallback(() => {
+  const saveSportsAndContinue = useCallback(() => {
     try {
       if (selected.length > 0) {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(selected));
       }
-      localStorage.setItem(DISMISSED_KEY, "true");
-    } catch {
-      // localStorage unavailable
-    }
-
-    setConfirmed(true);
-    setTimeout(() => {
-      setVisible(false);
-      setConfirmed(false);
-    }, 1200);
+    } catch {}
+    setStep("email");
   }, [selected]);
+
+  const handleSubmitEmail = useCallback(async () => {
+    if (!email.trim()) return;
+    setSubmitting(true);
+    const sportNames = selected.map(
+      (s) => SPORTS.find((sp) => sp.slug === s)?.name ?? s
+    );
+    await captureLead({
+      email: email.trim(),
+      name: name.trim(),
+      source: "sport_preference",
+      context: `Interested in: ${sportNames.join(", ")}`,
+    });
+    try {
+      localStorage.setItem(EMAIL_CAPTURED_KEY, "true");
+      localStorage.setItem(DISMISSED_KEY, "true");
+    } catch {}
+    setSubmitting(false);
+    setStep("done");
+    setTimeout(() => setVisible(false), 1500);
+  }, [email, name, selected]);
+
+  const handleSkip = useCallback(() => {
+    try {
+      localStorage.setItem(DISMISSED_KEY, "true");
+    } catch {}
+    setStep("done");
+    setTimeout(() => setVisible(false), 1200);
+  }, []);
 
   const handleDismiss = useCallback(() => {
     try {
       localStorage.setItem(DISMISSED_KEY, "true");
-    } catch {
-      // localStorage unavailable
-    }
+    } catch {}
     setVisible(false);
   }, []);
 
@@ -88,7 +110,6 @@ export function SportPreference() {
     <AnimatePresence>
       {visible && (
         <>
-          {/* Backdrop */}
           <motion.div
             initial={prefersReduced ? undefined : { opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -98,7 +119,6 @@ export function SportPreference() {
             aria-hidden="true"
           />
 
-          {/* Bottom sheet */}
           <motion.div
             role="dialog"
             aria-label="Sport preference selection"
@@ -107,13 +127,8 @@ export function SportPreference() {
             {...motionProps}
           >
             <div className="p-6 pb-8 max-w-lg mx-auto">
-              {/* Handle bar */}
-              <div
-                className="w-10 h-1 rounded-full bg-neutral-200 mx-auto mb-6"
-                aria-hidden="true"
-              />
+              <div className="w-10 h-1 rounded-full bg-neutral-200 mx-auto mb-6" aria-hidden="true" />
 
-              {/* Close button */}
               <button
                 onClick={handleDismiss}
                 className="absolute top-4 right-4 p-2 rounded-lg text-neutral-400 hover:text-neutral-900 hover:bg-neutral-100 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
@@ -122,42 +137,36 @@ export function SportPreference() {
                 <X className="h-5 w-5" />
               </button>
 
-              {confirmed ? (
-                /* Confirmation state */
+              {step === "done" && (
                 <div className="text-center py-8">
                   <motion.div
                     initial={prefersReduced ? undefined : { scale: 0 }}
                     animate={{ scale: 1 }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 200,
-                      damping: 15,
-                    }}
+                    transition={{ type: "spring", stiffness: 200, damping: 15 }}
                     className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4"
                   >
                     <Check className="h-8 w-8 text-accent" />
                   </motion.div>
                   <p className="font-display text-lg font-bold text-neutral-900">
-                    Got it!
+                    You&apos;re all set!
                   </p>
                   <p className="text-sm text-neutral-500 mt-1">
                     We&apos;ll personalize your experience.
                   </p>
                 </div>
-              ) : (
-                /* Selection state */
+              )}
+
+              {step === "sports" && (
                 <>
                   <div className="text-center mb-6">
                     <h2 className="font-display text-subsection font-bold text-neutral-900">
                       What brings you to LevelUP?
                     </h2>
                     <p className="text-sm text-neutral-500 mt-2">
-                      Select your sports to personalize your experience. Pick
-                      one or more.
+                      Select your sports to personalize your experience.
                     </p>
                   </div>
 
-                  {/* Sport tiles */}
                   <div className="grid grid-cols-2 gap-3 mb-4">
                     {SPORTS.map((sport) => {
                       const isSelected = selected.includes(sport.slug);
@@ -173,21 +182,10 @@ export function SportPreference() {
                           )}
                           aria-pressed={isSelected}
                         >
-                          <span
-                            className="text-2xl"
-                            role="img"
-                            aria-hidden="true"
-                          >
+                          <span className="text-2xl" role="img" aria-hidden="true">
                             {sportIcons[sport.slug] ?? "\u26bd"}
                           </span>
-                          <span
-                            className={cn(
-                              "text-sm font-semibold",
-                              isSelected
-                                ? "text-accent"
-                                : "text-neutral-700"
-                            )}
-                          >
+                          <span className={cn("text-sm font-semibold", isSelected ? "text-accent" : "text-neutral-700")}>
                             {sport.name}
                           </span>
                           {isSelected && (
@@ -200,7 +198,6 @@ export function SportPreference() {
                     })}
                   </div>
 
-                  {/* Just browsing */}
                   <button
                     onClick={handleDismiss}
                     className="w-full text-center text-sm text-neutral-500 hover:text-neutral-700 py-2 transition-colors min-h-[44px]"
@@ -208,9 +205,8 @@ export function SportPreference() {
                     Just browsing
                   </button>
 
-                  {/* Continue */}
                   <Button
-                    onClick={handleSave}
+                    onClick={saveSportsAndContinue}
                     className="w-full mt-3"
                     size="lg"
                     disabled={selected.length === 0}
@@ -218,12 +214,66 @@ export function SportPreference() {
                     Continue
                     {selected.length > 0 && (
                       <span className="ml-1 text-white/70">
-                        ({selected.length}{" "}
-                        {selected.length === 1 ? "sport" : "sports"})
+                        ({selected.length} {selected.length === 1 ? "sport" : "sports"})
                       </span>
                     )}
                   </Button>
                 </>
+              )}
+
+              {step === "email" && (
+                <motion.div
+                  initial={prefersReduced ? undefined : { opacity: 0, x: 30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3, ease: APPLE_EASE }}
+                >
+                  <div className="text-center mb-6">
+                    <h2 className="font-display text-subsection font-bold text-neutral-900">
+                      Get your personalized schedule
+                    </h2>
+                    <p className="text-sm text-neutral-500 mt-2">
+                      We&apos;ll send you {selected.map((s) => SPORTS.find((sp) => sp.slug === s)?.name).filter(Boolean).join(" & ")} updates and session times. No spam.
+                    </p>
+                  </div>
+
+                  <div className="space-y-3">
+                    <input
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="Your name"
+                      className="w-full h-12 px-4 rounded-xl border border-neutral-200 bg-neutral-50 text-neutral-900 text-sm placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent/50"
+                    />
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="Your email"
+                      required
+                      className="w-full h-12 px-4 rounded-xl border border-neutral-200 bg-neutral-50 text-neutral-900 text-sm placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent/50"
+                    />
+                  </div>
+
+                  <Button
+                    onClick={handleSubmitEmail}
+                    className="w-full mt-4"
+                    size="lg"
+                    disabled={!email.trim() || submitting}
+                  >
+                    {submitting ? (
+                      <><Loader2 className="h-4 w-4 animate-spin mr-2" /> Saving...</>
+                    ) : (
+                      <>Send My Schedule <ArrowRight className="h-4 w-4 ml-1" /></>
+                    )}
+                  </Button>
+
+                  <button
+                    onClick={handleSkip}
+                    className="w-full text-center text-sm text-neutral-400 hover:text-neutral-600 py-3 transition-colors min-h-[44px]"
+                  >
+                    Skip for now
+                  </button>
+                </motion.div>
               )}
             </div>
           </motion.div>

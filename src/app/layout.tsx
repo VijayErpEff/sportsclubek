@@ -5,6 +5,8 @@ import { Footer } from "@/components/composed/footer";
 import { BackToTop } from "@/components/composed/back-to-top";
 import { CookieConsent } from "@/components/composed/cookie-consent";
 import { MobileBottomNav } from "@/components/composed/mobile-bottom-nav";
+import { SportPreference } from "@/components/composed/sport-preference";
+import { ReturningVisitor } from "@/components/composed/returning-visitor";
 import { ScrollProgressBar } from "@/components/ui/progress-bar";
 import { AnnouncementBanner } from "@/components/composed/announcement-banner";
 import { Suspense } from "react";
@@ -138,6 +140,8 @@ export default function RootLayout({
             <BackToTop />
             <CookieConsent />
             <MobileBottomNav />
+            <SportPreference />
+            <ReturningVisitor />
           </AdminProvider>
         </Suspense>
       </body>

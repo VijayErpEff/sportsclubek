@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { CTABanner } from "@/components/composed/cta-banner";
+import { TourRequestForm } from "@/components/composed/tour-request-form";
 import { Section } from "@/components/layout/section";
 import { Container } from "@/components/layout/container";
 import { Reveal } from "@/components/ui/reveal";
@@ -430,6 +431,15 @@ export default function FacilitiesPage() {
                 Contact us &rarr;
               </Link>
             </p>
+          </Reveal>
+        </Container>
+      </Section>
+
+      {/* Tour Request */}
+      <Section size="sm">
+        <Container>
+          <Reveal>
+            <TourRequestForm />
           </Reveal>
         </Container>
       </Section>
