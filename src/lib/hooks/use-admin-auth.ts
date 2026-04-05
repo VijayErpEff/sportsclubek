@@ -7,6 +7,7 @@ const DEFAULT_PIN = "6886";
 
 export interface AdminAuth {
   adminMode: boolean;
+  adminPin: string;
   pinModalOpen: boolean;
   pinValue: string;
   pinError: boolean;
@@ -66,6 +67,7 @@ export function useAdminAuth(pin = DEFAULT_PIN): AdminAuth {
 
   return {
     adminMode,
+    adminPin: adminMode ? pin : "",
     pinModalOpen,
     pinValue,
     pinError,

@@ -4,7 +4,7 @@ import { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils/cn";
-import { ChevronRight, Clock, Filter, Plus, X, Pencil } from "lucide-react";
+import { ChevronRight, Clock, Filter, Plus, X, Pencil, Trash2, Check, Loader2 } from "lucide-react";
 import {
   WEEKLY_SCHEDULE,
   SPORT_COLORS,
@@ -34,11 +34,10 @@ interface FormState {
   mode: "add" | "edit";
   day: string;
   activity: string;
-  time: string;
-  endTime: string;
+  time: string; // stored in 24h "HH:MM" for <input type="time">
+  endTime: string; // stored in 24h "HH:MM" for <input type="time">
   sport: SportType;
   level: string;
-  /** When editing, the key of the original session so we can remove it */
   originalKey?: string;
   originalDay?: string;
 }
@@ -54,13 +53,35 @@ const EMPTY_FORM: FormState = {
   level: "",
 };
 
-const STORAGE_KEY = "levelup_schedule_overrides";
 const ALL_SPORTS = Object.keys(SPORT_LABELS) as SportType[];
 const DAYS = WEEKLY_SCHEDULE.map((d) => d.day);
 
 // ---------------------------------------------------------------------------
-// Helpers
+// Time Helpers
 // ---------------------------------------------------------------------------
+
+/** "9:00 AM" → "09:00" */
+function to24h(time12: string): string {
+  const match = time12.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
+  if (!match) return "";
+  let hours = parseInt(match[1], 10);
+  const minutes = match[2];
+  const period = match[3].toUpperCase();
+  if (period === "PM" && hours !== 12) hours += 12;
+  if (period === "AM" && hours === 12) hours = 0;
+  return `${hours.toString().padStart(2, "0")}:${minutes}`;
+}
+
+/** "09:00" → "9:00 AM" */
+function to12h(time24: string): string {
+  const parts = time24.split(":");
+  if (parts.length !== 2) return "";
+  const h = parseInt(parts[0], 10);
+  const m = parts[1];
+  const period = h >= 12 ? "PM" : "AM";
+  const hours = h % 12 || 12;
+  return `${hours}:${m} ${period}`;
+}
 
 function generateId(): string {
   return `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
@@ -82,20 +103,31 @@ function parseTimeForSort(t: string): number {
   return hours * 60 + minutes;
 }
 
-function loadOverrides(): ScheduleOverride[] {
-  if (typeof window === "undefined") return [];
+async function fetchOverrides(): Promise<ScheduleOverride[]> {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return [];
-    return JSON.parse(raw) as ScheduleOverride[];
+    const res = await fetch("/api/schedule", { cache: "no-store" });
+    if (!res.ok) return [];
+    const data = await res.json();
+    return Array.isArray(data) ? data : [];
   } catch {
     return [];
   }
 }
 
-function saveOverrides(overrides: ScheduleOverride[]): void {
-  if (typeof window === "undefined") return;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(overrides));
+async function saveOverrides(
+  overrides: ScheduleOverride[],
+  pin: string
+): Promise<boolean> {
+  try {
+    const res = await fetch("/api/schedule", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ overrides, pin }),
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
 }
 
 function applyOverrides(
@@ -103,10 +135,9 @@ function applyOverrides(
   overrides: ScheduleOverride[]
 ): DaySchedule[] {
   return base.map((daySchedule) => {
-    // Start with original sessions for this day
     let sessions = [...daySchedule.sessions];
 
-    // Apply removes
+    // Apply removes (only affects base sessions)
     const removes = overrides.filter(
       (o) => o.type === "remove" && o.day === daySchedule.day
     );
@@ -124,7 +155,6 @@ function applyOverrides(
       }
     }
 
-    // Sort by time
     sessions.sort((a, b) => parseTimeForSort(a.time) - parseTimeForSort(b.time));
 
     return { ...daySchedule, sessions };
@@ -182,44 +212,75 @@ function AdminSessionCard({
   onDelete: () => void;
 }) {
   const colors = SPORT_COLORS[session.sport];
+  const [confirmDelete, setConfirmDelete] = useState(false);
+
   return (
     <div
-      onClick={onEdit}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          onEdit();
-        }
-      }}
       className={cn(
-        "rounded-xl border-2 border-dashed p-3.5 transition-all hover:shadow-md cursor-pointer relative group",
+        "rounded-xl border-2 border-dashed p-3.5 transition-all hover:shadow-md relative group",
         colors.bg,
         colors.border
       )}
     >
-      {/* Delete button */}
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          onDelete();
-        }}
-        aria-label={`Delete ${session.activity}`}
-        className="absolute top-1.5 right-1.5 w-5 h-5 rounded-full bg-red-500/80 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600"
-      >
-        <X className="h-3 w-3" />
-      </button>
+      {/* Action buttons */}
+      <div className="absolute top-2 right-2 flex items-center gap-1">
+        {confirmDelete ? (
+          <div className="flex items-center gap-1 bg-white rounded-lg shadow-md border border-red-200 px-2 py-1">
+            <span className="text-[11px] text-red-600 font-medium mr-1">Delete?</span>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onDelete();
+                setConfirmDelete(false);
+              }}
+              className="w-6 h-6 rounded-md bg-red-500 text-white flex items-center justify-center hover:bg-red-600 transition-colors"
+              aria-label="Confirm delete"
+            >
+              <Check className="h-3 w-3" />
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setConfirmDelete(false);
+              }}
+              className="w-6 h-6 rounded-md bg-neutral-100 text-neutral-500 flex items-center justify-center hover:bg-neutral-200 transition-colors"
+              aria-label="Cancel delete"
+            >
+              <X className="h-3 w-3" />
+            </button>
+          </div>
+        ) : (
+          <>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onEdit();
+              }}
+              aria-label={`Edit ${session.activity}`}
+              className="w-7 h-7 rounded-lg bg-white/80 border border-neutral-200 text-neutral-400 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:text-primary hover:border-primary/30"
+            >
+              <Pencil className="h-3 w-3" />
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setConfirmDelete(true);
+              }}
+              aria-label={`Delete ${session.activity}`}
+              className="w-7 h-7 rounded-lg bg-white/80 border border-neutral-200 text-neutral-400 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:text-red-500 hover:border-red-300"
+            >
+              <Trash2 className="h-3 w-3" />
+            </button>
+          </>
+        )}
+      </div>
 
       <div className="flex items-start gap-2.5">
         <div className={cn("w-2 h-2 rounded-full mt-1.5 shrink-0", colors.dot)} />
-        <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-1.5">
-            <p className={cn("font-semibold text-sm leading-tight", colors.text)}>
-              {session.activity}
-            </p>
-            <Pencil className="h-3 w-3 text-neutral-400 opacity-0 group-hover:opacity-100 transition-opacity" />
-          </div>
+        <div className="min-w-0 flex-1 pr-16">
+          <p className={cn("font-semibold text-sm leading-tight", colors.text)}>
+            {session.activity}
+          </p>
           <div className="flex items-center gap-1.5 mt-1">
             <Clock className="h-3 w-3 text-neutral-400" />
             <span className="text-xs text-neutral-500">
@@ -256,11 +317,11 @@ function AdminFormModal({
 
   const labelCn = "block text-sm font-medium text-neutral-700 mb-1";
   const inputCn =
-    "w-full px-3 py-2 rounded-lg border border-neutral-200 bg-white text-neutral-900 text-sm outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-colors";
+    "w-full px-3 py-2.5 rounded-lg border border-neutral-200 bg-white text-neutral-900 text-sm outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-colors";
   const selectCn =
-    "w-full px-3 py-2 rounded-lg border border-neutral-200 bg-white text-neutral-900 text-sm outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-colors";
+    "w-full px-3 py-2.5 rounded-lg border border-neutral-200 bg-white text-neutral-900 text-sm outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-colors";
 
-  const isValid = form.activity.trim() !== "" && form.time.trim() !== "" && form.endTime.trim() !== "";
+  const isValid = form.activity.trim() !== "" && form.time !== "" && form.endTime !== "";
 
   return (
     <AnimatePresence>
@@ -269,7 +330,7 @@ function AdminFormModal({
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.2 }}
-        className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 backdrop-blur-sm"
+        className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
         onClick={onClose}
       >
         <motion.div
@@ -277,34 +338,41 @@ function AdminFormModal({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 10 }}
           transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-          className="rounded-2xl p-6 w-[92%] max-w-md bg-white border border-neutral-200 shadow-2xl"
+          className="rounded-2xl p-6 w-full max-w-md bg-white border border-neutral-200 shadow-2xl"
           onClick={(e) => e.stopPropagation()}
         >
-          <h3 className="font-display text-lg font-bold text-neutral-900 mb-5">
-            {form.mode === "add" ? "Add Session" : "Edit Session"}
-          </h3>
+          <div className="flex items-center justify-between mb-5">
+            <h3 className="font-display text-lg font-bold text-neutral-900">
+              {form.mode === "add" ? "Add Session" : "Edit Session"}
+            </h3>
+            <button
+              onClick={onClose}
+              className="w-8 h-8 rounded-lg flex items-center justify-center text-neutral-400 hover:bg-neutral-100 hover:text-neutral-600 transition-colors"
+              aria-label="Close"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          </div>
 
           <div className="space-y-4">
-            {/* Day (only for new sessions) */}
-            {form.mode === "add" && (
-              <div>
-                <label htmlFor="admin-day" className={labelCn}>
-                  Day
-                </label>
-                <select
-                  id="admin-day"
-                  value={form.day}
-                  onChange={(e) => onChange({ day: e.target.value })}
-                  className={selectCn}
-                >
-                  {DAYS.map((d) => (
-                    <option key={d} value={d}>
-                      {d}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            )}
+            {/* Day */}
+            <div>
+              <label htmlFor="admin-day" className={labelCn}>
+                Day
+              </label>
+              <select
+                id="admin-day"
+                value={form.day}
+                onChange={(e) => onChange({ day: e.target.value })}
+                className={selectCn}
+              >
+                {DAYS.map((d) => (
+                  <option key={d} value={d}>
+                    {d}
+                  </option>
+                ))}
+              </select>
+            </div>
 
             {/* Activity */}
             <div>
@@ -318,6 +386,7 @@ function AdminFormModal({
                 onChange={(e) => onChange({ activity: e.target.value })}
                 placeholder="e.g. Baseball Academy"
                 className={inputCn}
+                autoFocus
               />
             </div>
 
@@ -329,10 +398,9 @@ function AdminFormModal({
                 </label>
                 <input
                   id="admin-time"
-                  type="text"
+                  type="time"
                   value={form.time}
                   onChange={(e) => onChange({ time: e.target.value })}
-                  placeholder="9:00 AM"
                   className={inputCn}
                 />
               </div>
@@ -342,10 +410,9 @@ function AdminFormModal({
                 </label>
                 <input
                   id="admin-endtime"
-                  type="text"
+                  type="time"
                   value={form.endTime}
                   onChange={(e) => onChange({ endTime: e.target.value })}
-                  placeholder="11:00 AM"
                   className={inputCn}
                 />
               </div>
@@ -401,7 +468,7 @@ function AdminFormModal({
               className={cn(
                 "flex-1 py-2.5 rounded-xl font-semibold text-sm border transition-colors",
                 isValid
-                  ? "bg-accent/10 border-accent/30 text-accent hover:bg-accent/20"
+                  ? "bg-accent text-white border-accent hover:bg-accent-hover"
                   : "bg-neutral-50 border-neutral-200 text-neutral-300 cursor-not-allowed"
               )}
             >
@@ -424,16 +491,38 @@ export function ScheduleCalendar() {
   // ---- Schedule state ----
   const [overrides, setOverrides] = useState<ScheduleOverride[]>([]);
   const [mounted, setMounted] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [toast, setToast] = useState<string | null>(null);
 
+  // Fetch overrides from server on mount
   useEffect(() => {
     setMounted(true);
-    setOverrides(loadOverrides());
+    fetchOverrides().then((data) => {
+      setOverrides(data);
+      setLoading(false);
+    });
   }, []);
 
-  const persistOverrides = useCallback((next: ScheduleOverride[]) => {
-    setOverrides(next);
-    saveOverrides(next);
-  }, []);
+  // Auto-dismiss toast
+  useEffect(() => {
+    if (!toast) return;
+    const timer = setTimeout(() => setToast(null), 2500);
+    return () => clearTimeout(timer);
+  }, [toast]);
+
+  const persistOverrides = useCallback(
+    async (next: ScheduleOverride[]) => {
+      setOverrides(next);
+      setSaving(true);
+      const ok = await saveOverrides(next, auth.adminPin);
+      setSaving(false);
+      if (!ok) {
+        setToast("Failed to save — check connection");
+      }
+    },
+    [auth.adminPin]
+  );
 
   // ---- Form state ----
   const [form, setForm] = useState<FormState>(EMPTY_FORM);
@@ -449,8 +538,8 @@ export function ScheduleCalendar() {
         mode: "edit",
         day,
         activity: session.activity,
-        time: session.time,
-        endTime: session.endTime,
+        time: to24h(session.time),
+        endTime: to24h(session.endTime),
         sport: session.sport,
         level: session.level ?? "",
         originalKey: sessionKey(session),
@@ -468,10 +557,10 @@ export function ScheduleCalendar() {
     setForm((prev) => ({ ...prev, ...patch }));
   }, []);
 
-  const handleSave = useCallback(() => {
+  const handleSave = useCallback(async () => {
     const newSession: Session = {
-      time: form.time.trim(),
-      endTime: form.endTime.trim(),
+      time: to12h(form.time),
+      endTime: to12h(form.endTime),
       activity: form.activity.trim(),
       sport: form.sport,
       ...(form.level.trim() ? { level: form.level.trim() } : {}),
@@ -479,47 +568,88 @@ export function ScheduleCalendar() {
 
     let next = [...overrides];
 
-    // If editing, remove the old session first
     if (form.mode === "edit" && form.originalKey && form.originalDay) {
+      // Check if we're editing a session that was added via override
+      const addIndex = next.findIndex(
+        (o) =>
+          o.type === "add" &&
+          o.day === form.originalDay &&
+          o.session &&
+          sessionKey(o.session) === form.originalKey
+      );
+
+      if (addIndex !== -1) {
+        // Update the existing add override
+        next[addIndex] = { ...next[addIndex], day: form.day, session: newSession };
+      } else {
+        // Editing a base session — remove old, add new
+        next.push({
+          id: generateId(),
+          type: "remove",
+          day: form.originalDay,
+          sessionKey: form.originalKey,
+        });
+        next.push({
+          id: generateId(),
+          type: "add",
+          day: form.day,
+          session: newSession,
+        });
+      }
+    } else {
+      // Adding new session
       next.push({
         id: generateId(),
-        type: "remove",
-        day: form.originalDay,
-        sessionKey: form.originalKey,
+        type: "add",
+        day: form.day,
+        session: newSession,
       });
     }
 
-    // Add the new session
-    const targetDay = form.mode === "edit" ? (form.originalDay ?? form.day) : form.day;
-    next.push({
-      id: generateId(),
-      type: "add",
-      day: targetDay,
-      session: newSession,
-    });
-
-    persistOverrides(next);
+    await persistOverrides(next);
     closeForm();
+    setToast(form.mode === "add" ? "Session added" : "Session updated");
   }, [form, overrides, persistOverrides, closeForm]);
 
   const handleDelete = useCallback(
-    (day: string, session: Session) => {
-      const next = [
-        ...overrides,
-        {
-          id: generateId(),
-          type: "remove" as const,
-          day,
-          sessionKey: sessionKey(session),
-        },
-      ];
-      persistOverrides(next);
+    async (day: string, session: Session) => {
+      const key = sessionKey(session);
+
+      // Check if this session was added via an override
+      const addIndex = overrides.findIndex(
+        (o) =>
+          o.type === "add" &&
+          o.day === day &&
+          o.session &&
+          sessionKey(o.session) === key
+      );
+
+      let next: ScheduleOverride[];
+      if (addIndex !== -1) {
+        // Remove the add override entirely
+        next = overrides.filter((_, i) => i !== addIndex);
+      } else {
+        // Base session — add a remove override
+        next = [
+          ...overrides,
+          {
+            id: generateId(),
+            type: "remove" as const,
+            day,
+            sessionKey: key,
+          },
+        ];
+      }
+
+      await persistOverrides(next);
+      setToast("Session removed");
     },
     [overrides, persistOverrides]
   );
 
-  const handleReset = useCallback(() => {
-    persistOverrides([]);
+  const handleReset = useCallback(async () => {
+    await persistOverrides([]);
+    setToast("Schedule reset to default");
   }, [persistOverrides]);
 
   // ---- Derived schedule ----
@@ -530,7 +660,6 @@ export function ScheduleCalendar() {
   // ---- Day / sport filter state ----
   const [activeDay, setActiveDay] = useState(() => {
     const today = new Date().getDay();
-    // getDay: 0=Sun, 1=Mon... map to our array (0=Mon)
     const mapped = today === 0 ? 6 : today - 1;
     return mapped;
   });
@@ -548,6 +677,31 @@ export function ScheduleCalendar() {
 
   return (
     <div>
+      {/* Toast / saving indicator */}
+      <AnimatePresence>
+        {(toast || saving) && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.2 }}
+            className="fixed top-20 left-1/2 -translate-x-1/2 z-[300] bg-neutral-900 text-white text-sm font-medium px-4 py-2.5 rounded-xl shadow-lg flex items-center gap-2"
+          >
+            {saving ? (
+              <>
+                <Loader2 className="h-4 w-4 animate-spin" />
+                Saving...
+              </>
+            ) : (
+              <>
+                <Check className="h-4 w-4 text-green-400" />
+                {toast}
+              </>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Admin Form Modal */}
       <AdminFormModal
         form={form}
@@ -575,6 +729,14 @@ export function ScheduleCalendar() {
           >
             Exit Admin
           </button>
+        </div>
+      )}
+
+      {/* Loading state */}
+      {loading && (
+        <div className="flex items-center justify-center py-12 text-neutral-400 gap-2">
+          <Loader2 className="h-5 w-5 animate-spin" />
+          <span className="text-sm">Loading schedule...</span>
         </div>
       )}
 
@@ -662,7 +824,7 @@ export function ScheduleCalendar() {
             filteredSchedule[activeDay].sessions.map((session) =>
               isAdmin ? (
                 <AdminSessionCard
-                  key={`${session.sport}-${session.time}`}
+                  key={`${session.sport}-${session.time}-${session.activity}`}
                   session={session}
                   onEdit={() =>
                     openEditForm(filteredSchedule[activeDay].day, session)
@@ -673,7 +835,7 @@ export function ScheduleCalendar() {
                 />
               ) : (
                 <SessionCard
-                  key={`${session.sport}-${session.time}`}
+                  key={`${session.sport}-${session.time}-${session.activity}`}
                   session={session}
                 />
               )
@@ -689,7 +851,7 @@ export function ScheduleCalendar() {
           {isAdmin && (
             <button
               onClick={() => openAddForm(filteredSchedule[activeDay].day)}
-              className="w-full flex items-center justify-center gap-2 py-3 rounded-xl border-2 border-dashed border-neutral-300 text-neutral-400 hover:border-accent hover:text-accent transition-colors text-sm font-medium"
+              className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl border-2 border-dashed border-neutral-300 text-neutral-400 hover:border-accent hover:text-accent transition-colors text-sm font-medium"
             >
               <Plus className="h-4 w-4" />
               Add Session
@@ -740,35 +902,32 @@ export function ScheduleCalendar() {
                     if (isAdmin) {
                       return (
                         <div
-                          key={`${session.sport}-${session.time}`}
-                          role="button"
-                          tabIndex={0}
-                          onClick={() => openEditForm(day.day, session)}
-                          onKeyDown={(e) => {
-                            if (e.key === "Enter" || e.key === " ") {
-                              e.preventDefault();
-                              openEditForm(day.day, session);
-                            }
-                          }}
+                          key={`${session.sport}-${session.time}-${session.activity}`}
                           className={cn(
-                            "rounded-lg border-2 border-dashed p-2 text-xs transition-all hover:shadow-sm cursor-pointer relative group",
+                            "rounded-lg border-2 border-dashed p-2 text-xs transition-all hover:shadow-sm relative group",
                             colors.bg,
                             colors.border
                           )}
                         >
-                          {/* Delete button */}
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleDelete(day.day, session);
-                            }}
-                            aria-label={`Delete ${session.activity}`}
-                            className="absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full bg-red-500/80 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600"
-                          >
-                            <X className="h-2.5 w-2.5" />
-                          </button>
+                          {/* Action buttons */}
+                          <div className="absolute top-1 right-1 flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <button
+                              onClick={() => openEditForm(day.day, session)}
+                              aria-label={`Edit ${session.activity}`}
+                              className="w-5 h-5 rounded bg-white/90 border border-neutral-200 text-neutral-400 flex items-center justify-center hover:text-primary hover:border-primary/30 transition-colors"
+                            >
+                              <Pencil className="h-2.5 w-2.5" />
+                            </button>
+                            <button
+                              onClick={() => handleDelete(day.day, session)}
+                              aria-label={`Delete ${session.activity}`}
+                              className="w-5 h-5 rounded bg-white/90 border border-neutral-200 text-neutral-400 flex items-center justify-center hover:text-red-500 hover:border-red-300 transition-colors"
+                            >
+                              <Trash2 className="h-2.5 w-2.5" />
+                            </button>
+                          </div>
 
-                          <p className={cn("font-semibold leading-tight", colors.text)}>
+                          <p className={cn("font-semibold leading-tight pr-12", colors.text)}>
                             {session.activity}
                           </p>
                           <p className="text-neutral-500 mt-0.5">
@@ -785,7 +944,7 @@ export function ScheduleCalendar() {
 
                     return (
                       <div
-                        key={`${session.sport}-${session.time}`}
+                        key={`${session.sport}-${session.time}-${session.activity}`}
                         className={cn(
                           "rounded-lg border p-2 text-xs transition-all hover:shadow-sm",
                           colors.bg,

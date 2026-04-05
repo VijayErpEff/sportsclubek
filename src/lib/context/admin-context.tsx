@@ -15,6 +15,7 @@ const AdminContext = createContext<AdminAuth | null>(null);
  */
 export function AdminProvider({ children }: { children: ReactNode }) {
   const [adminMode, setAdminMode] = useState(false);
+  const [adminPin, setAdminPin] = useState("");
   const [pinModalOpen, setPinModalOpen] = useState(false);
   const [pinValue, setPinValue] = useState("");
   const [pinError, setPinError] = useState(false);
@@ -36,6 +37,7 @@ export function AdminProvider({ children }: { children: ReactNode }) {
   const submitPin = useCallback(() => {
     if (pinValue === DEFAULT_PIN) {
       setAdminMode(true);
+      setAdminPin(pinValue);
       setPinModalOpen(false);
     } else {
       setPinError(true);
@@ -57,10 +59,11 @@ export function AdminProvider({ children }: { children: ReactNode }) {
     setTimeout(() => pinInputRef.current?.focus(), 100);
   }, []);
 
-  const exitAdmin = useCallback(() => setAdminMode(false), []);
+  const exitAdmin = useCallback(() => { setAdminMode(false); setAdminPin(""); }, []);
 
   const auth: AdminAuth = {
     adminMode,
+    adminPin,
     pinModalOpen,
     pinValue,
     pinError,
