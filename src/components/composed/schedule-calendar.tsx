@@ -83,6 +83,52 @@ function to12h(time24: string): string {
   return `${hours}:${m} ${period}`;
 }
 
+/** Get current Eastern time in minutes since midnight. */
+function getEasternMinutes(): number {
+  const now = new Date();
+  const eastern = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+    hour: "numeric",
+    minute: "numeric",
+    hour12: false,
+  }).format(now);
+  const [h, m] = eastern.split(":").map(Number);
+  return h * 60 + m;
+}
+
+/** Get current Eastern day as index (0=Mon, 6=Sun). */
+function getEasternDayIndex(): number {
+  const estDay = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+    weekday: "short",
+  }).format(new Date());
+  const map: Record<string, number> = {
+    Mon: 0, Tue: 1, Wed: 2, Thu: 3, Fri: 4, Sat: 5, Sun: 6,
+  };
+  return map[estDay] ?? 0;
+}
+
+/** Check if a session is happening right now in Eastern time. */
+function isSessionNow(session: Session, dayIndex: number): boolean {
+  if (dayIndex !== getEasternDayIndex()) return false;
+  const now = getEasternMinutes();
+  const start = parseTimeForSort(session.time);
+  const end = parseTimeForSort(session.endTime);
+  return now >= start && now < end;
+}
+
+function NowBadge() {
+  return (
+    <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-green-500/15 border border-green-500/25 text-[10px] font-bold uppercase tracking-wider text-green-600">
+      <span className="relative flex h-1.5 w-1.5">
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75" />
+        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500" />
+      </span>
+      Now
+    </span>
+  );
+}
+
 function generateId(): string {
   return `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
 }
@@ -165,22 +211,26 @@ function applyOverrides(
 // Session Card (non-admin)
 // ---------------------------------------------------------------------------
 
-function SessionCard({ session }: { session: Session }) {
+function SessionCard({ session, isNow }: { session: Session; isNow: boolean }) {
   const colors = SPORT_COLORS[session.sport];
   return (
     <div
       className={cn(
         "rounded-xl border p-3.5 transition-all hover:shadow-md cursor-default",
         colors.bg,
-        colors.border
+        colors.border,
+        isNow && "ring-2 ring-green-500/30 shadow-[0_0_12px_-3px_rgba(34,197,94,0.2)]"
       )}
     >
       <div className="flex items-start gap-2.5">
         <div className={cn("w-2 h-2 rounded-full mt-1.5 shrink-0", colors.dot)} />
         <div className="min-w-0 flex-1">
-          <p className={cn("font-semibold text-sm leading-tight", colors.text)}>
-            {session.activity}
-          </p>
+          <div className="flex items-center gap-2">
+            <p className={cn("font-semibold text-sm leading-tight", colors.text)}>
+              {session.activity}
+            </p>
+            {isNow && <NowBadge />}
+          </div>
           <div className="flex items-center gap-1.5 mt-1">
             <Clock className="h-3 w-3 text-neutral-400" />
             <span className="text-xs text-neutral-500">
@@ -663,14 +713,7 @@ export function ScheduleCalendar() {
   // ---- Day / sport filter state (always Eastern time for Elkton, MD) ----
   const [activeDay, setActiveDay] = useState(() => {
     try {
-      const estDay = new Intl.DateTimeFormat("en-US", {
-        timeZone: "America/New_York",
-        weekday: "short",
-      }).format(new Date());
-      const map: Record<string, number> = {
-        Mon: 0, Tue: 1, Wed: 2, Thu: 3, Fri: 4, Sat: 5, Sun: 6,
-      };
-      return map[estDay] ?? 0;
+      return getEasternDayIndex();
     } catch {
       const today = new Date().getDay();
       return today === 0 ? 6 : today - 1;
@@ -850,6 +893,7 @@ export function ScheduleCalendar() {
                 <SessionCard
                   key={`${session.sport}-${session.time}-${session.activity}`}
                   session={session}
+                  isNow={isSessionNow(session, activeDay)}
                 />
               )
             )
@@ -955,18 +999,28 @@ export function ScheduleCalendar() {
                       );
                     }
 
+                    const nowActive = isSessionNow(session, dayIndex);
                     return (
                       <div
                         key={`${session.sport}-${session.time}-${session.activity}`}
                         className={cn(
                           "rounded-lg border p-2 text-xs transition-all hover:shadow-sm",
                           colors.bg,
-                          colors.border
+                          colors.border,
+                          nowActive && "ring-2 ring-green-500/30"
                         )}
                       >
-                        <p className={cn("font-semibold leading-tight", colors.text)}>
-                          {session.activity}
-                        </p>
+                        <div className="flex items-center justify-between gap-1">
+                          <p className={cn("font-semibold leading-tight", colors.text)}>
+                            {session.activity}
+                          </p>
+                          {nowActive && (
+                            <span className="flex h-1.5 w-1.5 shrink-0">
+                              <span className="animate-ping absolute inline-flex h-1.5 w-1.5 rounded-full bg-green-500 opacity-75" />
+                              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500" />
+                            </span>
+                          )}
+                        </div>
                         <p className="text-neutral-500 mt-0.5">
                           {session.time}
                         </p>
