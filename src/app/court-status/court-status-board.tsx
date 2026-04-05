@@ -19,8 +19,7 @@ interface CourtState {
 }
 
 /* ── Constants ── */
-const STORAGE_KEY = "levelup_court_v5";
-const POLL_MS = 2000;
+const POLL_MS = 5000;
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 const CAGE_STATES: { status: CageItem["status"]; sport: string | null }[] = [
@@ -58,19 +57,29 @@ function defaultState(): CourtState {
   };
 }
 
-function loadState(): CourtState | null {
+async function fetchCourtState(): Promise<CourtState | null> {
   try {
-    const d = localStorage.getItem(STORAGE_KEY);
-    if (!d) return null;
-    const parsed = JSON.parse(d);
-    if (Array.isArray(parsed.cages)) return null;
-    return parsed as CourtState;
-  } catch { return null; }
+    const res = await fetch("/api/court-status", { cache: "no-store" });
+    if (!res.ok) return null;
+    const data = await res.json();
+    if (!data || !data.cages || !data.mp) return null;
+    return data as CourtState;
+  } catch {
+    return null;
+  }
 }
 
-function saveState(state: CourtState) {
-  state.updated = Date.now();
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+async function saveCourtState(state: CourtState, pin: string): Promise<boolean> {
+  try {
+    const res = await fetch("/api/court-status", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ state, pin }),
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
 }
 
 function computeGroups(merges: boolean[]): number[][] {
@@ -373,8 +382,8 @@ export function CourtStatusBoard() {
 
   useEffect(() => {
     async function init() {
-      // 1. Try localStorage (admin edits)
-      const saved = loadState();
+      // 1. Try Redis (server-side state)
+      const saved = await fetchCourtState();
       if (saved) { setState(saved); setMounted(true); return; }
       // 2. Try config file defaults
       try {
@@ -395,15 +404,20 @@ export function CourtStatusBoard() {
     init();
   }, []);
 
+  // Poll server for live updates from other devices
   useEffect(() => {
-    const id = setInterval(() => {
-      const saved = loadState();
+    const id = setInterval(async () => {
+      const saved = await fetchCourtState();
       if (saved && saved.updated !== stateRef.current.updated) setState(saved);
     }, POLL_MS);
     return () => clearInterval(id);
   }, []);
 
-  const persist = useCallback((next: CourtState) => { setState(next); saveState(next); }, []);
+  const persist = useCallback((next: CourtState) => {
+    next.updated = Date.now();
+    setState(next);
+    saveCourtState(next, admin.adminPin);
+  }, [admin.adminPin]);
 
   const handleAdminToggle = () => {
     if (adminMode) { admin.exitAdmin(); return; }
@@ -623,7 +637,7 @@ export function CourtStatusBoard() {
       {/* Admin controls */}
       {adminMode && (
         <div className="flex items-center justify-between mt-2 shrink-0 max-w-7xl mx-auto w-full">
-          <span className="text-[0.5rem] text-white/20">Changes are local to this device</span>
+          <span className="text-[0.5rem] text-white/20">Changes sync across all devices</span>
           <div className="flex items-center gap-4">
             <button
               onClick={async () => {
@@ -633,7 +647,7 @@ export function CourtStatusBoard() {
                     const data = await res.json();
                     data.updated = Date.now();
                     setState(data);
-                    saveState(data);
+                    saveCourtState(data, admin.adminPin);
                   }
                 } catch {}
               }}
