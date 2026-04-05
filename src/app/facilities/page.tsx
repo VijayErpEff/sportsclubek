@@ -10,13 +10,13 @@ import { generateSEOMetadata } from "@/lib/seo/metadata";
 import { generateBreadcrumbLD } from "@/lib/seo/json-ld";
 import {
   Thermometer, ParkingCircle, Wifi, ShieldCheck,
-  Sparkles, Accessibility, Store, Clock, ArrowRight,
+  Sparkles, Accessibility, Store, Clock, ArrowRight, MapPin,
 } from "lucide-react";
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: "Indoor Sports Facility Tour — Elkton, MD",
+  title: "Indoor Sports Facility Tour — Elkton, MD | Serving Middletown, Newark & Wilmington, DE",
   description:
-    "Tour LevelUP Sports' modern indoor facility in Elkton, MD. Batting cages, multi-sport courts, training areas, and climate-controlled comfort. Open 7 days.",
+    "Tour LevelUP Sports' 20,000 sq ft indoor facility in Elkton, MD — 15 min from Middletown, 20 from Newark, 30 from Wilmington. Batting cages, cricket nets, badminton & pickleball courts, volleyball courts, and soccer turf. Open 7 days.",
   path: "/facilities",
 });
 
@@ -269,6 +269,140 @@ export default function FacilitiesPage() {
           </Reveal>
         </Container>
       </section>
+
+      {/* Service Area — Tri-State Coverage */}
+      <Section variant="alternate">
+        <Container>
+          <Reveal>
+            <div className="text-center mb-12">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-4">
+                Serving the Tri-State Area
+              </p>
+              <h2 className="font-display text-section text-neutral-900 mb-4 text-balance">
+                Athletes From Three States Train Here
+              </h2>
+              <p className="text-neutral-600 max-w-3xl mx-auto">
+                Located at 701 E Pulaski Hwy, Elkton, MD — right off I-95
+                exit 109A, at the crossroads of Maryland, Delaware, and
+                Pennsylvania. Free parking and easy highway access from every
+                direction.
+              </p>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+              {/* Delaware */}
+              <div className="bg-white rounded-2xl p-6 shadow-card">
+                <h3 className="font-display text-card-title text-neutral-900 mb-4 flex items-center gap-2">
+                  <MapPin className="h-4 w-4 text-accent" />
+                  Delaware
+                </h3>
+                <ul className="space-y-2.5">
+                  {[
+                    { city: "Middletown", time: "15 min" },
+                    { city: "Glasgow", time: "20 min" },
+                    { city: "Newark", time: "20 min" },
+                    { city: "Bear", time: "25 min" },
+                    { city: "New Castle", time: "25 min" },
+                    { city: "Christiana", time: "25 min" },
+                    { city: "Hockessin", time: "25 min" },
+                    { city: "Wilmington", time: "30 min" },
+                  ].map((loc) => (
+                    <li
+                      key={loc.city}
+                      className="flex items-center justify-between text-sm"
+                    >
+                      <span className="text-neutral-700 font-medium">
+                        {loc.city}
+                      </span>
+                      <span className="text-neutral-400 text-xs">
+                        {loc.time}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Maryland */}
+              <div className="bg-white rounded-2xl p-6 shadow-card">
+                <h3 className="font-display text-card-title text-neutral-900 mb-4 flex items-center gap-2">
+                  <MapPin className="h-4 w-4 text-accent" />
+                  Maryland
+                </h3>
+                <ul className="space-y-2.5">
+                  {[
+                    { city: "Elkton", time: "5 min" },
+                    { city: "North East", time: "10 min" },
+                    { city: "Rising Sun", time: "15 min" },
+                    { city: "Perryville", time: "15 min" },
+                    { city: "Chesapeake City", time: "20 min" },
+                    { city: "Havre de Grace", time: "25 min" },
+                  ].map((loc) => (
+                    <li
+                      key={loc.city}
+                      className="flex items-center justify-between text-sm"
+                    >
+                      <span className="text-neutral-700 font-medium">
+                        {loc.city}
+                      </span>
+                      <span className="text-neutral-400 text-xs">
+                        {loc.time}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-xs text-neutral-400 mt-3 pt-3 border-t border-neutral-100">
+                  Serving all of Cecil County
+                </p>
+              </div>
+
+              {/* Pennsylvania */}
+              <div className="bg-white rounded-2xl p-6 shadow-card">
+                <h3 className="font-display text-card-title text-neutral-900 mb-4 flex items-center gap-2">
+                  <MapPin className="h-4 w-4 text-accent" />
+                  Pennsylvania
+                </h3>
+                <ul className="space-y-2.5">
+                  {[
+                    { city: "Kennett Square", time: "25 min" },
+                    { city: "Oxford", time: "30 min" },
+                  ].map((loc) => (
+                    <li
+                      key={loc.city}
+                      className="flex items-center justify-between text-sm"
+                    >
+                      <span className="text-neutral-700 font-medium">
+                        {loc.city}
+                      </span>
+                      <span className="text-neutral-400 text-xs">
+                        {loc.time}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-xs text-neutral-400 mt-3 pt-3 border-t border-neutral-100">
+                  Serving Chester County
+                </p>
+              </div>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.2}>
+            <p className="text-center text-sm text-neutral-500 mt-8">
+              Can&apos;t find your town? If you&apos;re within 30 minutes of
+              Elkton, MD, we&apos;re likely your closest indoor multi-sport
+              facility.{" "}
+              <Link
+                href="/contact"
+                className="text-accent hover:text-accent-hover font-medium"
+              >
+                Contact us &rarr;
+              </Link>
+            </p>
+          </Reveal>
+        </Container>
+      </Section>
 
       <CTABanner
         title="See It For Yourself"

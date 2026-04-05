@@ -11,6 +11,7 @@ import { generateBreadcrumbLD, generateFAQLD } from "@/lib/seo/json-ld";
 import { ArrowRight, Check, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 import type { SportPageData } from "@/content/sports";
+import { TrackEvent } from "@/components/ui/track-event";
 
 export function SportPageLayout({ data }: { data: SportPageData }) {
   const breadcrumbLD = generateBreadcrumbLD([
@@ -21,6 +22,7 @@ export function SportPageLayout({ data }: { data: SportPageData }) {
 
   return (
     <>
+      <TrackEvent action="sport_view" params={{ sport_name: data.name }} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLD) }}

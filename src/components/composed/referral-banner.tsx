@@ -1,38 +1,23 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Gift, Copy, Check, X, Users } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 import { Button } from "@/components/ui/button";
+import { trackReferralCopy } from "@/lib/analytics";
 
 const APPLE_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
-const DISMISSED_KEY = "levelup-referral-dismissed";
 const REFERRAL_URL = "https://levelupsports.us/refer?code=FRIEND10";
 
 export function ReferralBanner({ className }: { className?: string }) {
   const prefersReduced = useReducedMotion();
-  const [isDismissed, setIsDismissed] = useState(true); // Start hidden to avoid flash
+  const [isDismissed, setIsDismissed] = useState(false);
   const [showLink, setShowLink] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  // Check localStorage on mount
-  useEffect(() => {
-    try {
-      const dismissed = localStorage.getItem(DISMISSED_KEY);
-      setIsDismissed(dismissed === "true");
-    } catch {
-      setIsDismissed(false);
-    }
-  }, []);
-
   const handleDismiss = useCallback(() => {
     setIsDismissed(true);
-    try {
-      localStorage.setItem(DISMISSED_KEY, "true");
-    } catch {
-      // Silently fail
-    }
   }, []);
 
   const handleCopy = useCallback(async () => {
@@ -46,6 +31,7 @@ export function ReferralBanner({ className }: { className?: string }) {
       document.execCommand("copy");
       document.body.removeChild(input);
     }
+    trackReferralCopy();
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   }, []);

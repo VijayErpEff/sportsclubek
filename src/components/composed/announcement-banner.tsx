@@ -90,7 +90,7 @@ export function AnnouncementBanner() {
   useEffect(() => {
     if (!config) return;
     try {
-      const saved = localStorage.getItem(DISMISS_KEY);
+      const saved = sessionStorage.getItem(DISMISS_KEY);
       if (saved === hashText(config.text)) {
         setDismissed(true);
       }
@@ -139,7 +139,7 @@ export function AnnouncementBanner() {
     if (!config) return;
     setDismissed(true);
     try {
-      localStorage.setItem(DISMISS_KEY, hashText(config.text));
+      sessionStorage.setItem(DISMISS_KEY, hashText(config.text));
     } catch {
       // storage full — still dismiss in-memory
     }
@@ -161,7 +161,7 @@ export function AnnouncementBanner() {
     setConfig(draft);
     setDismissed(false);
     try {
-      localStorage.removeItem(DISMISS_KEY);
+      sessionStorage.removeItem(DISMISS_KEY);
     } catch {
       // ignore
     }
@@ -171,7 +171,7 @@ export function AnnouncementBanner() {
   const resetToDefault = useCallback(() => {
     try {
       localStorage.removeItem(STORAGE_KEY);
-      localStorage.removeItem(DISMISS_KEY);
+      sessionStorage.removeItem(DISMISS_KEY);
     } catch {
       // ignore
     }

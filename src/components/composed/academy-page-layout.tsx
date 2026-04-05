@@ -11,6 +11,7 @@ import { generateBreadcrumbLD, generateFAQLD, generateCourseLD } from "@/lib/seo
 import { Check, GraduationCap, Users, Clock, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 import type { AcademyPageData } from "@/content/academies";
+import { TrackEvent } from "@/components/ui/track-event";
 
 export function AcademyPageLayout({ data }: { data: AcademyPageData }) {
   const breadcrumbs = data.sportSlug
@@ -34,6 +35,7 @@ export function AcademyPageLayout({ data }: { data: AcademyPageData }) {
 
   return (
     <>
+      <TrackEvent action="academy_view" params={{ academy_name: data.name }} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLD) }}

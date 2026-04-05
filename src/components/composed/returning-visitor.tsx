@@ -121,9 +121,10 @@ export function ReturningVisitor() {
           }
           transition={{ duration: 0.35, ease: APPLE_EASE }}
           className={cn(
-            "fixed left-0 right-0 z-40 top-16",
+            "fixed left-0 right-0 z-[101]",
             "bg-gradient-to-r from-primary to-primary-light text-white shadow-lg"
           )}
+          style={{ top: "calc(var(--banner-height, 0px) + 4rem)" }}
         >
           <div className="mx-auto max-w-container px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between gap-4 py-3">

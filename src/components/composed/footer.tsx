@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { Facebook, Instagram, Twitter, Youtube, MapPin, Phone, Mail, FileText } from "lucide-react";
+import { trackPhoneCall, trackSocialClick } from "@/lib/analytics";
 import { Container } from "@/components/layout/container";
 import { NewsletterSignup } from "./newsletter-signup";
 import { SITE_CONFIG, SPORTS } from "@/lib/constants/site";
@@ -82,6 +85,7 @@ export function Footer() {
                 <Phone className="h-4 w-4 shrink-0 text-accent" />
                 <a
                   href={`tel:${SITE_CONFIG.phone}`}
+                  onClick={trackPhoneCall}
                   className="hover:text-white transition-colors"
                 >
                   {SITE_CONFIG.phone}
@@ -182,6 +186,7 @@ export function Footer() {
                 rel="noopener noreferrer"
                 className="text-white/40 hover:text-accent transition-colors"
                 aria-label={`Follow us on ${social.label}`}
+                onClick={() => trackSocialClick(social.label)}
               >
                 <social.icon className="h-4 w-4" />
               </a>

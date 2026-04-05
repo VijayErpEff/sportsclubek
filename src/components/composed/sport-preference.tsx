@@ -13,9 +13,11 @@ const APPLE_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 const sportIcons: Record<string, string> = {
   baseball: "\u26be",
-  cricket: "\ud83c\udfd0",
+  cricket: "\ud83c\udfcf",
   badminton: "\ud83c\udff8",
   pickleball: "\ud83c\udfd3",
+  volleyball: "\ud83c\udfd0",
+  soccer: "\u26bd",
 };
 
 export function SportPreference() {

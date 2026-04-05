@@ -7,8 +7,6 @@ import { CookieConsent } from "@/components/composed/cookie-consent";
 import { MobileBottomNav } from "@/components/composed/mobile-bottom-nav";
 import { ScrollProgressBar } from "@/components/ui/progress-bar";
 import { CommandPalette } from "@/components/composed/command-palette";
-import { SportPreference } from "@/components/composed/sport-preference";
-import { ReturningVisitor } from "@/components/composed/returning-visitor";
 import { AnnouncementBanner } from "@/components/composed/announcement-banner";
 import { Suspense } from "react";
 import { generateOrganizationLD } from "@/lib/seo/json-ld";
@@ -134,8 +132,6 @@ export default function RootLayout({
         <CookieConsent />
         <MobileBottomNav />
         <CommandPalette />
-        <SportPreference />
-        <ReturningVisitor />
       </body>
     </html>
   );

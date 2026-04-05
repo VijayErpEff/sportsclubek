@@ -395,16 +395,20 @@ export default function HomePage() {
             </div>
           </Reveal>
           <Reveal delay={0.1}>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 max-w-4xl mx-auto">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 max-w-6xl mx-auto">
               {[
                 { city: "Middletown, DE", time: "15 min" },
+                { city: "Glasgow, DE", time: "20 min" },
                 { city: "Newark, DE", time: "20 min" },
                 { city: "Bear, DE", time: "25 min" },
-                { city: "Wilmington, DE", time: "30 min" },
                 { city: "New Castle, DE", time: "25 min" },
-                { city: "Glasgow, DE", time: "20 min" },
+                { city: "Christiana, DE", time: "25 min" },
+                { city: "Hockessin, DE", time: "25 min" },
+                { city: "Wilmington, DE", time: "30 min" },
                 { city: "North East, MD", time: "10 min" },
                 { city: "Rising Sun, MD", time: "15 min" },
+                { city: "Chesapeake City, MD", time: "20 min" },
+                { city: "Havre de Grace, MD", time: "25 min" },
                 { city: "Kennett Square, PA", time: "25 min" },
                 { city: "Oxford, PA", time: "30 min" },
               ].map((area) => (
@@ -426,7 +430,7 @@ export default function HomePage() {
           <Reveal delay={0.2}>
             <p className="text-center text-sm text-neutral-500 mt-6">
               The tri-state area&apos;s only facility with batting cages, cricket nets,
-              badminton courts, AND pickleball &mdash; all indoors, all year.{" "}
+              badminton courts, pickleball, volleyball, AND soccer &mdash; all indoors, all year.{" "}
               <Link
                 href="/facilities"
                 className="text-accent hover:text-accent-hover font-medium"

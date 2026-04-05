@@ -119,6 +119,26 @@ export function generateOrganizationLD() {
         containedInPlace: { "@type": "State", name: "Pennsylvania" },
       },
       {
+        "@type": "City",
+        name: "Christiana",
+        containedInPlace: { "@type": "State", name: "Delaware" },
+      },
+      {
+        "@type": "City",
+        name: "Hockessin",
+        containedInPlace: { "@type": "State", name: "Delaware" },
+      },
+      {
+        "@type": "City",
+        name: "Chesapeake City",
+        containedInPlace: { "@type": "State", name: "Maryland" },
+      },
+      {
+        "@type": "City",
+        name: "Havre de Grace",
+        containedInPlace: { "@type": "State", name: "Maryland" },
+      },
+      {
         "@type": "AdministrativeArea",
         name: "Cecil County, Maryland",
       },
@@ -203,6 +223,24 @@ export function generateOrganizationLD() {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
+            name: "Volleyball Courts & Academy",
+            description:
+              "Indoor volleyball courts with regulation nets and expert coaching. Youth academy, adult leagues, open play, and court rentals serving Newark, Middletown, and Wilmington, DE.",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Indoor Soccer & Futsal",
+            description:
+              "Year-round indoor soccer and futsal on professional turf. Youth academy, adult leagues, and field rentals near Middletown, Newark, and Wilmington, DE.",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
             name: "Kids Agility Training",
             description:
               "Fun, structured agility and athleticism program for kids ages 5-12. Building coordination, speed, and confidence near Elkton and Middletown.",
@@ -215,11 +253,20 @@ export function generateOrganizationLD() {
       "baseball training",
       "batting cages",
       "cricket coaching",
+      "indoor cricket nets",
       "badminton lessons",
+      "badminton court rental",
       "pickleball courts",
+      "volleyball courts",
+      "volleyball academy",
+      "indoor soccer",
+      "futsal training",
       "youth sports",
+      "adult sports leagues",
       "indoor sports facility",
       "sports academy",
+      "kids agility training",
+      "court rentals Elkton MD",
     ],
     sameAs: Object.values(SITE_CONFIG.social),
   };

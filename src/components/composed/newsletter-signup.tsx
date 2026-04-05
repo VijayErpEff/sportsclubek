@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
+import { trackNewsletterSignup } from "@/lib/analytics";
 
 export function NewsletterSignup() {
   const [email, setEmail] = useState("");
@@ -24,6 +25,7 @@ export function NewsletterSignup() {
       });
 
       if (res.ok) {
+        trackNewsletterSignup();
         setStatus("success");
         setEmail("");
       } else {

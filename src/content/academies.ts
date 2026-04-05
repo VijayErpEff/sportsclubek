@@ -141,6 +141,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
     overview: [
       "LevelUP's Cricket Academy is powered by our partnership with BRSS Cricket Academy (Baltimore Royals Sunny Sohal Cricket) — the largest cricket academy in North America. BRSS was formed through the merger of the Baltimore Royals and the Sunny Sohal Cricket Academy (SSCA), bringing a proven professional pathway for young cricketers through connections to Major League Cricket (MLC), Minor League Cricket (MiLC), and international opportunities.",
       "Our coaching staff includes Sarbjeet Ladda — an IPL veteran and the leading wicket-taker in Minor League Cricket — Muhammad Asif, a former Pakistan international regarded as one of the finest fast bowlers in world cricket, and Ravi Inder Singh Mehra, a first-class batsman who represented India in the NKP Salve Trophy. Whether your family has played cricket for generations or your kid is picking up a bat for the first time, this academy covers batting, bowling, and fielding with structured progression and world-class mentorship.",
+      "Our academy serves both youth and adult players — with separate sessions tailored to each group. Youth players (ages 8+) follow a structured development pathway with age-appropriate coaching, while adult sessions focus on league preparation, technique refinement, and match simulation. Families and players drive here from Newark, Wilmington, Middletown, Hockessin, and across the tri-state area because there's simply nothing comparable within an hour's drive.",
     ],
     stats: [
       { label: "Disciplines", value: "Bat/Bowl/Field" },
@@ -208,12 +209,14 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
         role: "Batting Coach",
         bio: "A brilliant left-handed batsman, Ravi played First Class Cricket in India and represented the India Green and Blue teams in the NKP Salve Trophy. A keen student of the game, Ravi has immersed himself in the world of coaching and serves as the batting coach at the BRSS Academy.",
         initials: "RM",
+        image: "/images/Coaches/Ravi Inder Singh Mehra.jpeg",
       },
       {
         name: "Rajit Passey",
         role: "Academy Director",
         bio: "Rajit has been around cricket all his life — captaining the Punjab U19 state team, representing his college and university in India, and continuing the passion after moving to the US in 1992. He owns the Baltimore Royals (Minor League Cricket) and co-founded BRSS Cricket Academy. His vision is to see cricket flourish at the youth level and provide professional pathways to succeed at the highest level.",
         initials: "RP",
+        image: "/images/Coaches/Rajit.jpeg",
       },
     ],
     whatYouGet: [
@@ -232,6 +235,8 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
       { question: "What equipment do I need?", answer: "Beginners can use our equipment (bats, pads, gloves, helmets). Regular players should invest in their own gear — we can recommend options." },
       { question: "Are there adult programs?", answer: "Yes! We have separate sessions for adults, including weekday evening and weekend programs." },
       { question: "Is there a pathway to professional cricket?", answer: "Yes. Through our BRSS partnership, players have pathways to Major League Cricket (MLC), Minor League Cricket (MiLC), and international tournament exposure — including trips to India for turf-wicket experience." },
+      { question: "How is the youth program different from the adult program?", answer: "Youth sessions (ages 8-17) focus on foundational skill development, fun, and progressive learning in a supportive environment. Adult sessions are structured around league preparation, advanced technique refinement, and match simulation. Both groups benefit from the same international-caliber coaching staff." },
+      { question: "Where do your cricket academy players come from?", answer: "Our academy draws players from across the tri-state area — Newark, Wilmington, Middletown, Hockessin, and Bear in Delaware, Cecil County in Maryland, and Kennett Square in Pennsylvania. Many families drive 20-30 minutes because there's no comparable cricket training facility in the region." },
     ],
     ctaTitle: "Train Under International Coaches",
     ctaDescription: "Book a free trial session. Meet our IPL and international coaching staff, hit the nets, and see why families drive here from three states.",
@@ -252,6 +257,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
     overview: [
       "Head Coach Nabeel Adeel brings over 25 years of competitive and coaching experience to our academy. A BWF and USA Badminton Level-1 certified coach, multiple-time Pennsylvania State Champion, and current Head Coach of the Swarthmore College Varsity Badminton Team, Nabeel combines elite match experience with structured training methodologies and a proven record of developing junior and collegiate athletes. His coaching philosophy emphasizes strong fundamentals, tactical awareness, and long-term player growth.",
       "The academy is further strengthened by advisory board member Syam Prasad Anand — a BWF Level-1 certified coach and founding leader of multiple successful badminton organizations who has helped build world-class training facilities across the U.S. — and Nick, a decades-long competitive player and Dilwyne Badminton Club (Wilmington, DE) leader since 1996, who serves as a mentor and technical advisor. Whether your kid is picking up a racket for the first time or preparing for tournament competition, class sizes max out at 8 players so every athlete gets direct coaching attention.",
+      "Our academy draws players from across the region — including Wilmington, Newark, Middletown, Hockessin, and Bear in Delaware. For junior players, the academy builds footwork, stroke technique, and match strategy through progressive training that develops competitive readiness. For adult players, sessions focus on refining technique, advanced tactics, and tournament preparation. Private one-on-one coaching is also available for players who want accelerated improvement on specific aspects of their game.",
     ],
     stats: [
       { label: "Coaching", value: "BWF-Certified" },
@@ -316,7 +322,9 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
     faqs: [
       { question: "What age can children start?", answer: "We accept players from age 7. Our junior beginner program is designed to introduce the sport through fun, age-appropriate exercises." },
       { question: "Do you prepare players for tournaments?", answer: "Yes! Our advanced program includes tournament preparation, match simulation, and we regularly host in-house competitions." },
-      { question: "Can adults join the academy?", answer: "Absolutely. We have dedicated adult sessions for beginners, intermediate, and advanced players." },
+      { question: "Can adults join the academy?", answer: "Absolutely. We have dedicated adult sessions for beginners, intermediate, and advanced players. Many of our adult students come from the Wilmington and Newark badminton communities." },
+      { question: "Is private one-on-one coaching available?", answer: "Yes. Private lessons with Coach Nabeel Adeel are available for players who want focused attention on specific skills — whether that's smash technique, footwork patterns, or tournament-level match strategy. Contact us to schedule." },
+      { question: "How far is the badminton academy from Newark or Wilmington, DE?", answer: "We're about 20 minutes from Newark and 30 minutes from Wilmington via I-95. Our Elkton, MD location at 701 E Pulaski Hwy is the closest BWF-standard badminton facility for Delaware players. Free parking and easy highway access." },
     ],
     ctaTitle: "See What Proper Coaching Looks Like",
     ctaDescription: "Book a free trial session on our BWF-standard courts. Watch your kid move, meet Coach Nabeel, and decide.",
@@ -418,6 +426,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
     overview: [
       "Club volleyball tryouts are brutally competitive. The kids who make the team aren't necessarily the tallest or most athletic — they're the ones with clean passing technique, consistent serving, and court awareness that comes from structured training. That's exactly what Coach Viktor builds in this academy — drawing on 20+ years of competitive playing and championship-level coaching experience.",
       "The program runs in 10-week sessions, meeting twice a week. Class sizes max at 12 with a 6:1 player-to-coach ratio. Every session includes video review so players can see their progress. Parents: you'll watch from the viewing area and notice the difference in their movement and confidence within the first month.",
+      "Parents across the tri-state area choose our academy because structured indoor volleyball training is hard to find in this region. Families drive from Newark, Middletown, Bear, Wilmington, and throughout Cecil County for Coach Viktor's program. Whether your child is preparing for school tryouts, club volleyball, or just discovering the sport, our year-round indoor facility and expert coaching give them a developmental edge.",
     ],
     stats: [
       { label: "Program Length", value: "10 Weeks" },
@@ -481,6 +490,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
       { question: "Does my child need volleyball experience?", answer: "No! We have beginner groups that start from scratch. Players are grouped by age and ability so everyone gets the right challenge." },
       { question: "Will this prepare my child for club tryouts?", answer: "Yes — our program is specifically designed to develop the skills club coaches look for: clean passing, consistent serving, and court awareness." },
       { question: "What should my child bring?", answer: "Athletic wear, clean court shoes (no marking soles), knee pads (optional but recommended), and a water bottle. We provide all balls and equipment." },
+      { question: "Where do your volleyball academy players come from?", answer: "Our youth volleyball players come from across the tri-state area — Newark, Middletown, Bear, and Wilmington in Delaware, Cecil County in Maryland, and parts of Chester County, PA. We're the only dedicated indoor volleyball academy in the region with USAV-certified coaching." },
     ],
     ctaTitle: "See the Improvement in One Session",
     ctaDescription: "Book a free trial session. Watch your kid pass, serve, and hit — then talk to Coach Viktor about the right program for them.",

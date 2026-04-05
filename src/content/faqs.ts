@@ -27,7 +27,7 @@ export const HOMEPAGE_FAQS = [
   {
     question: "Is LevelUP Sports near Middletown, Delaware?",
     answer:
-      "Yes — LevelUP Sports is just 15 minutes from Middletown, DE via Route 40. We're located at 701 E Pulaski Hwy, Elkton, MD 21921. Drive times from nearby areas: Middletown, DE (15 min), Newark, DE (20 min), Bear, DE (25 min), Glasgow, DE (20 min), Wilmington, DE (30 min), North East, MD (10 min), Kennett Square, PA (25 min). We're right off I-95, exit 109A.",
+      "Yes — LevelUP Sports is just 15 minutes from Middletown, DE via Route 40. We're located at 701 E Pulaski Hwy, Elkton, MD 21921. Drive times from nearby areas: Middletown, DE (15 min), Glasgow, DE (20 min), Newark, DE (20 min), Bear, DE (25 min), New Castle, DE (25 min), Christiana, DE (25 min), Hockessin, DE (25 min), Wilmington, DE (30 min), North East, MD (10 min), Rising Sun, MD (15 min), Chesapeake City, MD (20 min), Havre de Grace, MD (25 min), Kennett Square, PA (25 min), Oxford, PA (30 min). We're right off I-95, exit 109A.",
   },
   {
     question: "What are LevelUP Sports' hours of operation?",
@@ -48,6 +48,16 @@ export const HOMEPAGE_FAQS = [
     question: "What is the cancellation policy at LevelUP Sports?",
     answer:
       "Court and cage rentals can be cancelled up to 24 hours in advance for a full refund. Cancellations within 24 hours can be rescheduled to another available slot but are not refundable. Memberships can be cancelled anytime with 30 days' notice — no cancellation fees, no contracts. We also allow membership freezes for up to 2 months per year at no cost.",
+  },
+  {
+    question: "Is LevelUP Sports near Wilmington, Delaware?",
+    answer:
+      "Yes — about 30 minutes south via I-95. We're at 701 E Pulaski Hwy, Elkton, MD 21921. Many of our members drive from Wilmington, Hockessin, and New Castle for our BWF-standard badminton courts, indoor cricket nets, batting cages, and pickleball courts. We're the closest facility of our kind for most Wilmington-area families.",
+  },
+  {
+    question: "Do you have programs for adults, or just kids?",
+    answer:
+      "Both! While our academies serve youth athletes primarily, we have dedicated adult programming across every sport: adult cricket net sessions and coaching, adult badminton open play and academy sessions, adult volleyball leagues and open play, adult soccer leagues, and pickleball (which is popular with all ages). Many adults from Wilmington, Newark, and Cecil County train here regularly.",
   },
 ];
 

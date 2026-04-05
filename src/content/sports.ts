@@ -61,6 +61,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     overview: [
       "You've watched your kid struggle at the plate. The frustration after an 0-for-3 game. The slump that drags into a second week. That's exactly why we partnered with Joe Vanaskey — \"Joltin' Joe\" — a former professional baseball player and scout with decades of experience training youth at his Field of Dreams Academy right here in Cecil County. Our cages run from 30 to 90 MPH, and every session starts with a coach who focuses on the fundamentals: batting, fielding, and technique.",
       "Parents: you can watch every session from our viewing area. You'll see the difference in their mechanics within weeks — not months. Academy players get structured instruction focused on measurable improvement. This isn't daycare with batting helmets. It's real development from a coach who played and scouted at the professional level.",
+      "Families from across Delaware and Maryland come to our Elkton facility for batting cage sessions and academy training — including Middletown, Newark, Bear, and Wilmington, DE, as well as North East, Rising Sun, and throughout Cecil County. Located right off I-95 exit 109A, we're the closest professional indoor batting cage facility for most of New Castle County, Delaware. Whether your child plays Little League, travel ball, or high school varsity, our cages and coaching are designed to accelerate their development year-round.",
     ],
     highlights: [
       { label: "Cages", value: "4" },
@@ -115,6 +116,8 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       { question: "How much do batting cages cost at LevelUP?", answer: "Private cage rental is $40/hour. Helmets and bats are provided. Members get Open Play access from just $8/hour (non-members $15/hour). Academy training packages start at $140 for 4 sessions. You can also try a free session first — no charge, no commitment." },
       { question: "What age can my child start using batting cages?", answer: "Ages 6 and up. We start younger kids at 30 MPH and work up from there. A coach helps them find the right speed and stance for their skill level." },
       { question: "Do you provide helmets and bats?", answer: "Yes — helmets are required and always provided. We have bats available for every age and size. You're welcome to bring your own bat too." },
+      { question: "Can adults use the batting cages?", answer: "Absolutely. Our cages go up to 90 MPH and are popular with adult softball and baseball players looking to stay sharp. Drop-in cage rental is $40/hour. Many adult players from Wilmington, Newark, and Cecil County use our cages for regular practice." },
+      { question: "How far are the batting cages from Middletown, DE?", answer: "Just 15 minutes. We're at 701 E Pulaski Hwy, Elkton, MD — right off I-95 exit 109A. It's also 20 minutes from Newark, 25 from Bear, and 30 from Wilmington. Free parking on-site." },
     ],
     academySlug: "baseball-academy",
     ctaTitle: "See the Difference in One Session",
@@ -136,6 +139,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     overview: [
       "LevelUP Sports is a proud partner of BRSS Cricket Academy (Baltimore Royals Sunny Sohal Cricket) — the largest cricket academy in North America. Formed through the merger of the Baltimore Royals and the Sunny Sohal Cricket Academy (SSCA), BRSS brings international-caliber coaching to Elkton. Our coaching staff includes an IPL veteran, a former Pakistan international fast bowler, and first-class cricketers from India. You won't find this level of coaching anywhere between Philadelphia and Baltimore.",
       "Whether your family has played cricket for generations or you're curious about the sport, our world-class coaching team meets you where you are. Many of our members drove 45+ minutes each way before we opened. Now they're 15 minutes away, training under coaches who've competed at the highest levels of world cricket. We serve families from Newark, Wilmington, Middletown, and across the tri-state area.",
+      "For adult league players, our facility offers the most complete indoor cricket training setup between Philadelphia and Baltimore. Book net sessions with professional bowling machines for solo practice or bring your club team for group training. Whether you're preparing for weekend league matches, sharpening your technique during the off-season, or working with our coaches on specific skills, our full-pitch and half-pitch options give you the space and equipment to train at a professional level. Players from Wilmington, Newark, Hockessin, Christiana, and across New Castle County train here regularly.",
     ],
     highlights: [
       { label: "Nets", value: "Full-Length" },
@@ -197,12 +201,14 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
         role: "Batting Coach",
         credentials: "First-class cricketer (India), NKP Salve Trophy representative, BRSS Academy batting coach",
         initials: "RM",
+        image: "/images/Coaches/Ravi Inder Singh Mehra.jpeg",
       },
       {
         name: "Rajit Passey",
         role: "Academy Director",
         credentials: "Punjab U19 captain, Baltimore Royals owner, BRSS Cricket Academy co-founder",
         initials: "RP",
+        image: "/images/Coaches/Rajit.jpeg",
       },
     ],
     faqs: [
@@ -211,6 +217,9 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       { question: "Can I just book a net without coaching?", answer: "Yes, net sessions can be booked independently. Full pitch rental is $180/hour, half pitch $90/hour, or a single cage for $40/hour. Bowling machines are available for self-practice." },
       { question: "What cricket equipment is provided?", answer: "We provide bats, pads, gloves, and helmets for beginners. Regular players are encouraged to bring their own gear." },
       { question: "Is there a pathway to competitive cricket?", answer: "Yes. Through our BRSS partnership, players have access to professional pathways including Major League Cricket (MLC), Minor League Cricket (MiLC), and international tournament exposure." },
+      { question: "Do you offer cricket training for adults?", answer: "Yes — we have dedicated adult sessions including weekday evening and weekend programs. Our net sessions are popular with adult league players from Wilmington, Newark, and across the tri-state area. You can book nets independently or join our adult coaching programs for structured skill development with our IPL and international-level coaches." },
+      { question: "How far is your cricket facility from Wilmington, DE?", answer: "About 30 minutes via I-95. We're at 701 E Pulaski Hwy, Elkton, MD — the only dedicated indoor cricket facility between Philadelphia and Baltimore. Players drive from Wilmington, Newark (20 min), Middletown (15 min), Hockessin, Christiana, and throughout New Castle County." },
+      { question: "Can I book a bowling machine session without a coach?", answer: "Yes. Our net sessions can be booked independently — full pitch at $180/hour, half pitch at $90/hour, or a single cage at $40/hour. Professional bowling machines are available for self-directed practice. Many adult players use these for match preparation and league training." },
     ],
     academySlug: "cricket-academy",
     ctaTitle: "Train Under International Coaches",
@@ -232,6 +241,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     overview: [
       "Your kid doesn't just want to rally — they want to compete. And they need courts and coaching that match their ambition. Our three BWF-standard courts feature synthetic sprung flooring (the same synthetic surface used in national competitions), tournament-calibrated LED lighting, and professional nets. This isn't a gym with lines painted on the floor.",
       "Head Coach Nabeel Adeel is a BWF and USA Badminton Level-1 certified coach with over 25 years of competitive and coaching experience — a multiple-time Pennsylvania State Champion and Head Coach of the Swarthmore College Varsity Badminton Team. He's joined by advisory board member Syam Prasad Anand, a BWF Level-1 certified coach who has helped build world-class training facilities across the U.S., and Nick, a decades-long competitive player and Dilwyne Badminton Club leader in Wilmington, DE. Whether you're picking up a racket for the first time or training for tournament play, the facility and coaching here will push you to the next level.",
+      "Our courts draw players from across the tri-state area — including Wilmington, Newark, Middletown, Hockessin, and Bear in Delaware, as well as Kennett Square and Oxford in Pennsylvania. For Wilmington-area players, we're closer than most city venues, with free parking and three competition-grade courts that are rarely fully booked on weekday mornings and afternoons. Whether you're looking for hourly court rentals for casual play, regular weekly slots for your doubles group, or structured coaching to take your game to the next level, our BWF-standard facility is the best option within 30 miles.",
     ],
     highlights: [
       { label: "Courts", value: "Pro-Grade" },
@@ -298,7 +308,10 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     faqs: [
       { question: "Do you provide badminton rackets?", answer: "We have rackets available for rental. Court rental is $40/hour. For regular players, we recommend investing in your own racket for the best experience. Academy packages start at $140 for 4 hours of coaching." },
       { question: "Is badminton suitable for younger children?", answer: "Yes! We offer junior programs for children as young as 7. It's a great sport for developing coordination and reflexes." },
-      { question: "Do you host badminton tournaments?", answer: "We host regular in-house tournaments and can help prepare players for external competitions." },
+      { question: "Do you host badminton tournaments?", answer: "We host regular in-house tournaments and can help prepare players for external competitions. Our tournament prep program covers match strategy, competitive drilling, and mental preparation." },
+      { question: "Do you offer private badminton coaching?", answer: "Yes. Private one-on-one and small-group coaching sessions are available with Coach Nabeel Adeel (BWF & USA Badminton Level-1 certified, PA State Champion). Private lessons are ideal for players who want accelerated improvement on specific aspects of their game — footwork, smash technique, match strategy, or tournament preparation." },
+      { question: "Can adults join badminton programs?", answer: "Absolutely. We have adult sessions in both our academy and open play programs. Many of our adult players come from Wilmington, Newark, and the Dilwyne Badminton Club community. Whether you're a beginner or an experienced club player, we have programs at your level." },
+      { question: "How far are your badminton courts from Wilmington, DE?", answer: "About 30 minutes via I-95. We're at 701 E Pulaski Hwy, Elkton, MD. Our BWF-standard courts are the closest competition-grade indoor badminton facility for Wilmington, Newark, Middletown, and Hockessin players. Easy access, free parking, and courts available 7 days a week." },
     ],
     academySlug: "badminton-academy",
     ctaTitle: "Step On Court and Feel the Difference",
@@ -320,6 +333,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     overview: [
       "You'll come for the exercise. You'll stay for the people. Our Tuesday and Thursday open play sessions have become the highlight of the week for 50+ regulars — and most of them started as complete beginners. Pickleball is the most social sport we offer, and our community proves it every session.",
       "If you've heard about pickleball from friends, seen it on the news, or you're looking for exercise that's fun and gentle on your joints — this is your place. We run beginner clinics weekly, and our regulars are the friendliest group in the building. Couples, friends, solo players — everyone finds their people here.",
+      "Our indoor pickleball courts are the go-to for players across Cecil County, MD and New Castle County, DE. We draw regulars from Middletown, Bear, Newark, Glasgow, Christiana, and even Wilmington — because finding quality indoor pickleball courts in the area isn't easy. Climate-controlled play means no wind, no rain, and no 95-degree heat. Just you, a paddle, and 50+ people who are happy you showed up.",
     ],
     highlights: [
       { label: "Courts", value: "Dedicated" },
@@ -366,6 +380,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       { question: "What's the difference between pickleball and tennis?", answer: "Pickleball uses a smaller court, solid paddles, and a perforated ball. It's easier to learn, gentler on joints, and incredibly social." },
       { question: "Do I need my own paddle?", answer: "Not at all! We provide paddles and balls for all open play and lesson sessions. Bring your own if you prefer." },
       { question: "Is pickleball good exercise?", answer: "Absolutely! It provides great cardio, improves agility and reflexes, and burns 400-600 calories per hour — all while having fun." },
+      { question: "Where are the closest indoor pickleball courts to Middletown, DE?", answer: "LevelUP Sports in Elkton, MD — just 15 minutes from Middletown via Route 40. We're also 20 minutes from Newark, 25 from Bear, and 30 from Wilmington. Our dedicated indoor courts mean you can play year-round regardless of weather." },
     ],
     ctaTitle: "Find Your People on the Court",
     ctaPrimary: { label: "Try a Free Session", href: "/free-trial" },
@@ -386,6 +401,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     overview: [
       "Whether your kid is learning to pass for the first time or your adult rec team needs a reliable indoor home, LevelUP has you covered. Our regulation-height nets, proper court lines, and professional flooring give you the real volleyball experience — not a makeshift setup in a church gym. Coach Viktor brings 20+ years of competitive playing experience and 6+ years coaching youth, university, and adult teams — he builds players who are fundamentally sound and mentally tough.",
       "Parents: this is the sport that teaches teamwork better than any other. Every point requires communication, trust, and coordination. Our youth programs focus on passing, serving, and court awareness — the skills that separate good players from great ones. And our adult open play nights? They've become the most fun evening of the week for 30+ regulars.",
+      "Teams and players from Newark, Middletown, Bear, Wilmington, and across New Castle County, DE choose our courts for regular practice because they're regulation quality, climate-controlled, and easy to get to. Club teams use us for practice space and scrimmages. School teams book courts for off-season training. Adult groups reserve weekly time slots for competitive and recreational play. At $120/hour for a full regulation court with professional flooring and adjustable nets, we're the best value for serious volleyball in the tri-state area.",
     ],
     highlights: [
       { label: "Courts", value: "Regulation" },
@@ -439,6 +455,9 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       { question: "What ages can play volleyball at LevelUP?", answer: "We offer programs for ages 8 and up, plus adult open play and leagues. Net heights are adjusted for younger age groups." },
       { question: "Do I need to bring my own volleyball?", answer: "No — we provide game balls for all sessions, open play, and rentals. You're welcome to bring your own if you prefer." },
       { question: "Can my team rent a court for practice?", answer: "Absolutely. Private court rental is $120/hour for team practices, scrimmages, or private training. Training packages start at $149/month for 4 sessions." },
+      { question: "Do you have adult volleyball leagues?", answer: "Yes — we run both recreational and competitive adult leagues with season play, standings, playoffs, and awards. Our adult open play nights also draw 30+ regulars weekly. Many of our adult players come from Newark, Middletown, Wilmington, and across Cecil County." },
+      { question: "How far are your volleyball courts from Newark, DE?", answer: "About 20 minutes via Route 40 or I-95. We're at 701 E Pulaski Hwy, Elkton, MD. Club teams, school teams, and adult groups from Newark, Bear, Middletown, Christiana, and Wilmington use our regulation indoor courts for practice and scrimmages year-round." },
+      { question: "Can my child prepare for school volleyball tryouts here?", answer: "That's exactly what our Volleyball Academy is designed for. Coach Viktor's 10-week program builds the passing, serving, and court awareness that school and club coaches look for. Players are grouped by age and skill level, with video review every session." },
     ],
     academySlug: "volleyball-academy",
     ctaTitle: "Get on the Court",
@@ -460,6 +479,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     overview: [
       "When fall leagues end and spring tryouts are months away, your kid's development doesn't have to stop. Our professional indoor turf gives players a year-round training ground — and a futsal-first approach that builds the close-control skills and quick decision-making that make the difference at outdoor tryouts. There's a reason the best soccer nations in the world train on small-sided indoor pitches.",
       "We run youth programs for ages 6 and up, adult open play multiple nights a week, and seasonal leagues for teams looking for competitive indoor games. The turf is professional-quality, the goals are regulation, and the focus is on technical excellence — first touch, passing under pressure, and vision. Parents: you'll see your kid's confidence with the ball transform within weeks.",
+      "Our indoor turf draws players and teams from throughout the tri-state area — Middletown, Newark, Bear, Wilmington, and Hockessin in Delaware, as well as Cecil County, MD and Chester County, PA. When outdoor fields are frozen, flooded, or scorching, our year-round indoor turf keeps your training on track. Local clubs from New Castle County and Cecil County book regular training slots, and our adult leagues give recreational and competitive players a place to play 12 months a year.",
     ],
     highlights: [
       { label: "Surface", value: "Pro Turf" },
@@ -505,7 +525,8 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     faqs: [
       { question: "What's the difference between futsal and indoor soccer?", answer: "Futsal uses a smaller, low-bounce ball and emphasizes close control and quick passing. It's the best way to develop technical skill. We offer both futsal and traditional indoor 5v5." },
       { question: "Do you offer soccer for younger kids?", answer: "Yes! Our academy starts at age 6 with age-appropriate training that focuses on fun, coordination, and basic ball skills." },
-      { question: "Can my outdoor team train here in winter?", answer: "Absolutely. Many local outdoor clubs use our turf for winter training. We offer team rates and can coordinate with your coaching staff." },
+      { question: "Can my outdoor team train here in winter?", answer: "Absolutely. Many local outdoor clubs use our turf for winter training. We offer team rates and can coordinate with your coaching staff. Teams from Newark, Middletown, Wilmington, and Cecil County book regular winter training sessions." },
+      { question: "Do you have adult soccer leagues?", answer: "Yes — we run 5v5 and futsal leagues for adult teams with season play, standings, playoffs, and championship nights. Adult open play is also available multiple evenings per week. Players come from across the tri-state area." },
     ],
     academySlug: "soccer-academy",
     ctaTitle: "Keep Playing. Keep Improving.",
