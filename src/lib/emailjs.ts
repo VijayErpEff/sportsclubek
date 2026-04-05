@@ -2,12 +2,21 @@ import emailjs from "@emailjs/browser";
 
 const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID ?? "";
 const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY ?? "";
-const CONTACT_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_CONTACT_TEMPLATE_ID ?? "";
-const SUBSCRIBE_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_SUBSCRIBE_TEMPLATE_ID ?? "";
-const AUTOREPLY_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_AUTOREPLY_TEMPLATE_ID ?? "";
+const NOTIFY_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_NOTIFY_TEMPLATE_ID ?? "";
+const REPLY_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_REPLY_TEMPLATE_ID ?? "";
 
 function isConfigured(): boolean {
   return Boolean(SERVICE_ID && PUBLIC_KEY);
+}
+
+async function sendAutoReply(params: {
+  to_email: string;
+  to_name: string;
+  subject: string;
+  message: string;
+}): Promise<void> {
+  if (!REPLY_TEMPLATE_ID) return;
+  await emailjs.send(SERVICE_ID, REPLY_TEMPLATE_ID, params, PUBLIC_KEY);
 }
 
 export async function sendContactForm(params: {
@@ -19,11 +28,11 @@ export async function sendContactForm(params: {
 }): Promise<void> {
   if (!isConfigured()) throw new Error("EmailJS not configured");
 
-  // Send form to business
   await emailjs.send(
     SERVICE_ID,
-    CONTACT_TEMPLATE_ID,
+    NOTIFY_TEMPLATE_ID,
     {
+      type: "Contact Form",
       from_name: params.name,
       from_email: params.email,
       phone: params.phone || "Not provided",
@@ -33,47 +42,68 @@ export async function sendContactForm(params: {
     PUBLIC_KEY
   );
 
-  // Send confirmation to user
-  if (AUTOREPLY_TEMPLATE_ID) {
-    await emailjs.send(
-      SERVICE_ID,
-      AUTOREPLY_TEMPLATE_ID,
-      {
-        to_name: params.name,
-        to_email: params.email,
-        subject: "We received your message",
-        message:
-          "Thank you for contacting LevelUP Sports! We'll get back to you within 24 hours.",
-      },
-      PUBLIC_KEY
-    );
-  }
+  await sendAutoReply({
+    to_email: params.email,
+    to_name: params.name,
+    subject: "We received your message",
+    message:
+      "Thank you for contacting LevelUP Sports! We'll get back to you within 24 hours.",
+  });
 }
 
 export async function sendSubscription(email: string): Promise<void> {
   if (!isConfigured()) throw new Error("EmailJS not configured");
 
-  // Notify business
   await emailjs.send(
     SERVICE_ID,
-    SUBSCRIBE_TEMPLATE_ID,
-    { subscriber_email: email },
+    NOTIFY_TEMPLATE_ID,
+    {
+      type: "Newsletter Subscription",
+      from_name: "",
+      from_email: email,
+      phone: "",
+      subject: "New Subscriber",
+      message: `${email} has subscribed to the newsletter.`,
+    },
     PUBLIC_KEY
   );
 
-  // Send welcome to subscriber
-  if (AUTOREPLY_TEMPLATE_ID) {
-    await emailjs.send(
-      SERVICE_ID,
-      AUTOREPLY_TEMPLATE_ID,
-      {
-        to_name: "",
-        to_email: email,
-        subject: "Welcome to LevelUP Sports!",
-        message:
-          "Thanks for subscribing! You'll receive updates about programs, events, and special offers.",
-      },
-      PUBLIC_KEY
-    );
-  }
+  await sendAutoReply({
+    to_email: email,
+    to_name: "",
+    subject: "Welcome to LevelUP Sports!",
+    message:
+      "Thanks for subscribing! You'll receive updates about programs, events, and special offers.",
+  });
+}
+
+export async function sendCareerApplication(params: {
+  name: string;
+  email: string;
+  phone: string;
+  position: string;
+  message: string;
+}): Promise<void> {
+  if (!isConfigured()) throw new Error("EmailJS not configured");
+
+  await emailjs.send(
+    SERVICE_ID,
+    NOTIFY_TEMPLATE_ID,
+    {
+      type: "Career Application",
+      from_name: params.name,
+      from_email: params.email,
+      phone: params.phone || "Not provided",
+      subject: `Application: ${params.position}`,
+      message: params.message,
+    },
+    PUBLIC_KEY
+  );
+
+  await sendAutoReply({
+    to_email: params.email,
+    to_name: params.name,
+    subject: "Application Received — LevelUP Sports",
+    message: `Thank you for applying for the ${params.position} position! Our team will review your application and reach out within a few business days.`,
+  });
 }

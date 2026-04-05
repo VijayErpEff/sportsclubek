@@ -3,9 +3,9 @@ import Link from "next/link";
 import { CTABanner } from "@/components/composed/cta-banner";
 import { Section } from "@/components/layout/section";
 import { Container } from "@/components/layout/container";
-import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { StaggerContainer, StaggerItem } from "@/components/ui/stagger";
+import { CareerApplyButton } from "@/components/composed/career-form";
 import { generateSEOMetadata } from "@/lib/seo/metadata";
 import { generateBreadcrumbLD } from "@/lib/seo/json-ld";
 import { Heart, TrendingUp, Users, Dumbbell, Briefcase, ArrowRight } from "lucide-react";
@@ -154,12 +154,12 @@ export default function CareersPage() {
                   </div>
                   <h3 className="font-semibold text-neutral-900 mb-1.5">{position.title}</h3>
                   <p className="text-sm text-neutral-500 mb-4 flex-1">{position.description}</p>
-                  <a
-                    href={`mailto:info@levelupsports.us?subject=Application: ${position.title}&body=Hi LevelUP Sports,%0D%0A%0D%0AI am interested in the ${position.title} position. Please find my resume attached.%0D%0A%0D%0AThank you.`}
+                  <CareerApplyButton
+                    position={position.title}
                     className="inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:text-accent-hover transition-colors"
                   >
                     Apply Now <ArrowRight className="h-3.5 w-3.5" />
-                  </a>
+                  </CareerApplyButton>
                 </div>
               </StaggerItem>
             ))}
@@ -178,11 +178,12 @@ export default function CareersPage() {
               <p className="text-neutral-500 text-sm mb-5">
                 We&apos;re always looking for talented people. Send us your resume and tell us what you&apos;d bring to LevelUP Sports.
               </p>
-              <Button variant="outline" size="sm" asChild>
-                <a href="mailto:info@levelupsports.us?subject=Open Application — LevelUP Sports">
-                  Send Your Resume
-                </a>
-              </Button>
+              <CareerApplyButton
+                position="Open Application"
+                className="inline-flex items-center justify-center h-10 px-6 rounded-lg border-2 border-primary text-primary font-semibold text-sm hover:bg-primary hover:text-white transition-colors"
+              >
+                Send Your Application
+              </CareerApplyButton>
             </div>
           </Reveal>
         </Container>
@@ -191,7 +192,7 @@ export default function CareersPage() {
       <CTABanner
         title="Ready to Join the Team?"
         description="Apply today and help us build the future of youth athletics in Elkton, MD."
-        primaryCTA={{ label: "Apply Now", href: "mailto:info@levelupsports.us?subject=Application — LevelUP Sports" }}
+        primaryCTA={{ label: "Contact Us", href: "/contact" }}
         secondaryCTA={{ label: "Learn More About Us", href: "/about" }}
       />
     </>
