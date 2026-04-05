@@ -512,7 +512,7 @@ export function ScheduleCalendar() {
   }, [toast]);
 
   const persistOverrides = useCallback(
-    async (next: ScheduleOverride[]) => {
+    async (next: ScheduleOverride[]): Promise<boolean> => {
       setOverrides(next);
       setSaving(true);
       const ok = await saveOverrides(next, auth.adminPin);
@@ -520,6 +520,7 @@ export function ScheduleCalendar() {
       if (!ok) {
         setToast("Failed to save — check connection");
       }
+      return ok;
     },
     [auth.adminPin]
   );
@@ -606,9 +607,11 @@ export function ScheduleCalendar() {
       });
     }
 
-    await persistOverrides(next);
+    const ok = await persistOverrides(next);
     closeForm();
-    setToast(form.mode === "add" ? "Session added" : "Session updated");
+    if (ok) {
+      setToast(form.mode === "add" ? "Session added" : "Session updated");
+    }
   }, [form, overrides, persistOverrides, closeForm]);
 
   const handleDelete = useCallback(
@@ -641,15 +644,15 @@ export function ScheduleCalendar() {
         ];
       }
 
-      await persistOverrides(next);
-      setToast("Session removed");
+      const ok = await persistOverrides(next);
+      if (ok) setToast("Session removed");
     },
     [overrides, persistOverrides]
   );
 
   const handleReset = useCallback(async () => {
-    await persistOverrides([]);
-    setToast("Schedule reset to default");
+    const ok = await persistOverrides([]);
+    if (ok) setToast("Schedule reset to default");
   }, [persistOverrides]);
 
   // ---- Derived schedule ----

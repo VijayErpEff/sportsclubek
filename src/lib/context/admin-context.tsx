@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect, useRef, useCallback, type ReactNode } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { PinModal } from "@/components/ui/pin-modal";
 import type { AdminAuth } from "@/lib/hooks/use-admin-auth";
 
@@ -21,12 +21,16 @@ export function AdminProvider({ children }: { children: ReactNode }) {
   const [pinError, setPinError] = useState(false);
   const [mounted, setMounted] = useState(false);
   const pinInputRef = useRef<HTMLInputElement>(null!);
+  const hasTriggered = useRef(false);
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => { setMounted(true); }, []);
 
   useEffect(() => {
-    if (mounted && searchParams.has("admin") && !adminMode) {
+    if (mounted && searchParams.has("admin") && !adminMode && !hasTriggered.current) {
+      hasTriggered.current = true;
       setPinModalOpen(true);
       setPinValue("");
       setPinError(false);
@@ -59,7 +63,16 @@ export function AdminProvider({ children }: { children: ReactNode }) {
     setTimeout(() => pinInputRef.current?.focus(), 100);
   }, []);
 
-  const exitAdmin = useCallback(() => { setAdminMode(false); setAdminPin(""); }, []);
+  const exitAdmin = useCallback(() => {
+    setAdminMode(false);
+    setAdminPin("");
+    hasTriggered.current = false;
+    // Remove ?admin from URL so it doesn't re-trigger
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete("admin");
+    const qs = params.toString();
+    router.replace(`${pathname}${qs ? `?${qs}` : ""}`, { scroll: false });
+  }, [searchParams, router, pathname]);
 
   const auth: AdminAuth = {
     adminMode,
