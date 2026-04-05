@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils/cn";
 import { useAdmin } from "@/lib/context/admin-context";
+import { BOOKING_URLS } from "@/lib/constants/booking";
 
 /* ── Types ── */
 interface CageItem {
@@ -303,6 +304,17 @@ function CageCard({
         {isMerged && sportLabel === "Available" && !note && (
           <p className="text-[0.65rem] text-white/25 mt-1">Double space configured for team drills.</p>
         )}
+        {!adminMode && sportLabel === "Available" && (
+          <a
+            href={BOOKING_URLS.offerings}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="inline-block mt-2 text-[0.65rem] font-bold text-[#2BA84A] hover:text-[#2BA84A]/80 transition-colors"
+          >
+            Book Now &rarr;
+          </a>
+        )}
       </div>
     </motion.div>
   );
@@ -360,6 +372,17 @@ function CourtCard({
       </span>
       {note && (
         <span className="text-[0.6rem] text-white/25 mt-1 block truncate">{note}</span>
+      )}
+      {!adminMode && sportLabel === "Available" && (
+        <a
+          href={BOOKING_URLS.offerings}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          className="inline-block mt-1.5 text-[0.6rem] font-bold text-[#2BA84A] hover:text-[#2BA84A]/80 transition-colors"
+        >
+          Book &rarr;
+        </a>
       )}
     </motion.div>
   );

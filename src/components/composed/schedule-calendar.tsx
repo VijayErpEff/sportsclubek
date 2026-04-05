@@ -14,7 +14,7 @@ import {
   type DaySchedule,
 } from "@/content/schedule";
 import { SITE_CONFIG } from "@/lib/constants/site";
-import { BOOKING_URLS } from "@/lib/constants/booking";
+import { BOOKING_URLS, getBookingUrl } from "@/lib/constants/booking";
 import { useAdmin } from "@/lib/context/admin-context";
 
 // ---------------------------------------------------------------------------
@@ -213,10 +213,14 @@ function applyOverrides(
 
 function SessionCard({ session, isNow }: { session: Session; isNow: boolean }) {
   const colors = SPORT_COLORS[session.sport];
+  const bookingUrl = getBookingUrl(session.sport);
   return (
-    <div
+    <a
+      href={bookingUrl}
+      target="_blank"
+      rel="noopener noreferrer"
       className={cn(
-        "rounded-xl border p-3.5 transition-all hover:shadow-md cursor-default",
+        "block rounded-xl border p-3.5 transition-all hover:shadow-md group",
         colors.bg,
         colors.border,
         isNow && "ring-2 ring-green-500/30 shadow-[0_0_12px_-3px_rgba(34,197,94,0.2)]"
@@ -237,14 +241,19 @@ function SessionCard({ session, isNow }: { session: Session; isNow: boolean }) {
               {session.time} – {session.endTime}
             </span>
           </div>
-          {session.level && (
-            <span className="inline-block mt-1.5 text-[11px] font-medium text-neutral-500 bg-white/70 px-2 py-0.5 rounded-full">
-              {session.level}
+          <div className="flex items-center justify-between mt-1.5">
+            {session.level ? (
+              <span className="inline-block text-[11px] font-medium text-neutral-500 bg-white/70 px-2 py-0.5 rounded-full">
+                {session.level}
+              </span>
+            ) : <span />}
+            <span className="text-[11px] font-semibold text-accent opacity-0 group-hover:opacity-100 transition-opacity">
+              Book &rarr;
             </span>
-          )}
+          </div>
         </div>
       </div>
-    </div>
+    </a>
   );
 }
 
@@ -1001,10 +1010,13 @@ export function ScheduleCalendar() {
 
                     const nowActive = isSessionNow(session, dayIndex);
                     return (
-                      <div
+                      <a
                         key={`${session.sport}-${session.time}-${session.activity}`}
+                        href={getBookingUrl(session.sport)}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className={cn(
-                          "rounded-lg border p-2 text-xs transition-all hover:shadow-sm",
+                          "block rounded-lg border p-2 text-xs transition-all hover:shadow-sm group",
                           colors.bg,
                           colors.border,
                           nowActive && "ring-2 ring-green-500/30"
@@ -1029,7 +1041,10 @@ export function ScheduleCalendar() {
                             {session.level}
                           </span>
                         )}
-                      </div>
+                        <span className="block mt-1 text-[10px] font-semibold text-accent opacity-0 group-hover:opacity-100 transition-opacity">
+                          Book &rarr;
+                        </span>
+                      </a>
                     );
                   })
                 ) : (

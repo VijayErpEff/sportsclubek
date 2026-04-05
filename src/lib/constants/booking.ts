@@ -4,7 +4,7 @@
 // Update URLs here when programs change — all pages reference this file.
 // ============================================================
 
-const UH_BASE = "https://app.upperhand.io/customers/2578-level_up-sports-and-athletics-club";
+const UH_BASE = "https://app.upperhand.io/customers/2578-levelup-sports-and-athletics-club";
 
 export const BOOKING_URLS = {
   /** All offerings — default landing for general booking */
@@ -30,4 +30,16 @@ export const BOOKING_URLS = {
   pickleballOpenPlay: `${UH_BASE}/events/174223-pickle_ball-open_play-weekdays-9am-4pm`,
   badmintonOpenPlay: `${UH_BASE}/events/174234-badminton-member-open_play-every_day`,
   baseballLittleSluggersL: `${UH_BASE}/events/181868-little-sluggers`,
+  kidsAgility: `${UH_BASE}/events/187194-kids-agility-and-athleticism-program`,
 } as const;
+
+/** Map sport type → booking URL. Falls back to general offerings. */
+export function getBookingUrl(sport: string): string {
+  const map: Record<string, string> = {
+    cricket: BOOKING_URLS.cricketCageRentals,
+    pickleball: BOOKING_URLS.pickleballOpenPlay,
+    badminton: BOOKING_URLS.badmintonOpenPlay,
+    agility: BOOKING_URLS.kidsAgility,
+  };
+  return map[sport] ?? BOOKING_URLS.offerings;
+}

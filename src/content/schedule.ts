@@ -36,7 +36,7 @@ export const SPORT_COLORS: Record<SportType, { bg: string; text: string; dot: st
   baseball:   { bg: "bg-primary/5",    text: "text-primary-dark",  dot: "bg-primary",     border: "border-primary/15" },
   cricket:    { bg: "bg-accent/5",     text: "text-accent-hover",  dot: "bg-accent",      border: "border-accent/15" },
   badminton:  { bg: "bg-info/5",       text: "text-primary-light", dot: "bg-info",        border: "border-info/15" },
-  pickleball: { bg: "bg-secondary/10", text: "text-accent",        dot: "bg-secondary",   border: "border-secondary/20" },
+  pickleball: { bg: "bg-teal-500/10",  text: "text-teal-700",       dot: "bg-teal-500",    border: "border-teal-500/20" },
   volleyball: { bg: "bg-amber-500/10", text: "text-amber-700",     dot: "bg-amber-500",   border: "border-amber-500/20" },
   soccer:     { bg: "bg-red-500/10",   text: "text-red-700",       dot: "bg-red-500",     border: "border-red-500/20" },
   agility:    { bg: "bg-warning/10",   text: "text-neutral-700",   dot: "bg-warning",     border: "border-warning/20" },
