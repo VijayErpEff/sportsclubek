@@ -11,6 +11,7 @@ import { AnnouncementBanner } from "@/components/composed/announcement-banner";
 import { Suspense } from "react";
 import { generateOrganizationLD } from "@/lib/seo/json-ld";
 import { SITE_CONFIG } from "@/lib/constants/site";
+import { AdminProvider } from "@/lib/context/admin-context";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -128,15 +129,19 @@ export default function RootLayout({
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
-        <ScrollProgressBar />
-        <Suspense><AnnouncementBanner /></Suspense>
-        <Navbar />
-        <main id="main-content">{children}</main>
-        <Footer />
-        <BackToTop />
-        <CookieConsent />
-        <MobileBottomNav />
-        <CommandPalette />
+        <Suspense>
+          <AdminProvider>
+            <ScrollProgressBar />
+            <AnnouncementBanner />
+            <Navbar />
+            <main id="main-content">{children}</main>
+            <Footer />
+            <BackToTop />
+            <CookieConsent />
+            <MobileBottomNav />
+            <CommandPalette />
+          </AdminProvider>
+        </Suspense>
       </body>
     </html>
   );

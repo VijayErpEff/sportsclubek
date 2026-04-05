@@ -5,8 +5,7 @@ import Link from "next/link";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { X, Pencil } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
-import { useAdminAuth } from "@/lib/hooks/use-admin-auth";
-import { PinModal } from "@/components/ui/pin-modal";
+import { useAdmin } from "@/lib/context/admin-context";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -44,7 +43,7 @@ function hashText(text: string): string {
 
 export function AnnouncementBanner() {
   const prefersReducedMotion = useReducedMotion();
-  const admin = useAdminAuth();
+  const admin = useAdmin();
 
   const [config, setConfig] = useState<BannerConfig | null>(null);
   const [dismissed, setDismissed] = useState(false);
@@ -290,9 +289,6 @@ export function AnnouncementBanner() {
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* ── Admin PIN modal ─────────────────────────────────────────────── */}
-      <PinModal auth={admin} variant="light" />
 
       {/* ── Edit modal ──────────────────────────────────────────────────── */}
       <AnimatePresence>

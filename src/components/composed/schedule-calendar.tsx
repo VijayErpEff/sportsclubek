@@ -2,7 +2,6 @@
 
 import { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils/cn";
 import { ChevronRight, Clock, Filter, Plus, X, Pencil } from "lucide-react";
@@ -16,8 +15,7 @@ import {
 } from "@/content/schedule";
 import { SITE_CONFIG } from "@/lib/constants/site";
 import { BOOKING_URLS } from "@/lib/constants/booking";
-import { useAdminAuth } from "@/lib/hooks/use-admin-auth";
-import { PinModal } from "@/components/ui/pin-modal";
+import { useAdmin } from "@/lib/context/admin-context";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -421,8 +419,7 @@ function AdminFormModal({
 // ---------------------------------------------------------------------------
 
 export function ScheduleCalendar() {
-  const searchParams = useSearchParams();
-  const auth = useAdminAuth();
+  const auth = useAdmin();
 
   // ---- Schedule state ----
   const [overrides, setOverrides] = useState<ScheduleOverride[]>([]);
@@ -551,9 +548,6 @@ export function ScheduleCalendar() {
 
   return (
     <div>
-      {/* PIN Modal */}
-      <PinModal auth={auth} variant="light" />
-
       {/* Admin Form Modal */}
       <AdminFormModal
         form={form}

@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
-import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils/cn";
+import { useAdmin } from "@/lib/context/admin-context";
 
 /* ── Types ── */
 interface CageItem {
@@ -21,7 +21,6 @@ interface CourtState {
 /* ── Constants ── */
 const STORAGE_KEY = "levelup_court_v5";
 const POLL_MS = 2000;
-const ADMIN_PIN = "6886";
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 const CAGE_STATES: { status: CageItem["status"]; sport: string | null }[] = [
@@ -360,18 +359,14 @@ function CourtCard({
 /* ── Main Component ── */
 export function CourtStatusBoard() {
   const [state, setState] = useState<CourtState>(defaultState);
-  const [adminMode, setAdminMode] = useState(false);
-  const [pinModalOpen, setPinModalOpen] = useState(false);
-  const [pinValue, setPinValue] = useState("");
-  const [pinError, setPinError] = useState(false);
+  const admin = useAdmin();
+  const adminMode = admin.adminMode;
   const [noteModal, setNoteModal] = useState<{
     open: boolean; type: "cage" | "slot"; index: number; title: string; value: string;
   }>({ open: false, type: "cage", index: 0, title: "", value: "" });
   const [mounted, setMounted] = useState(false);
   const reduced = useReducedMotion() ?? false;
 
-  const searchParams = useSearchParams();
-  const pinInputRef = useRef<HTMLInputElement>(null);
   const noteInputRef = useRef<HTMLInputElement>(null);
   const stateRef = useRef(state);
   stateRef.current = state;
@@ -401,13 +396,6 @@ export function CourtStatusBoard() {
   }, []);
 
   useEffect(() => {
-    if (mounted && searchParams.has("admin") && !adminMode) {
-      setPinModalOpen(true); setPinValue(""); setPinError(false);
-      setTimeout(() => pinInputRef.current?.focus(), 100);
-    }
-  }, [mounted, searchParams, adminMode]);
-
-  useEffect(() => {
     const id = setInterval(() => {
       const saved = loadState();
       if (saved && saved.updated !== stateRef.current.updated) setState(saved);
@@ -418,14 +406,8 @@ export function CourtStatusBoard() {
   const persist = useCallback((next: CourtState) => { setState(next); saveState(next); }, []);
 
   const handleAdminToggle = () => {
-    if (adminMode) { setAdminMode(false); return; }
-    setPinModalOpen(true); setPinValue(""); setPinError(false);
-    setTimeout(() => pinInputRef.current?.focus(), 100);
-  };
-
-  const submitPin = () => {
-    if (pinValue === ADMIN_PIN) { setAdminMode(true); setPinModalOpen(false); }
-    else { setPinError(true); setPinValue(""); pinInputRef.current?.focus(); }
+    if (adminMode) { admin.exitAdmin(); return; }
+    admin.openPinModal();
   };
 
   const toggleMerge = (idx: number) => {
@@ -666,36 +648,6 @@ export function CourtStatusBoard() {
           </div>
         </div>
       )}
-
-      {/* PIN Modal */}
-      <AnimatePresence>
-        {pinModalOpen && (
-          <motion.div
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md"
-            onClick={() => setPinModalOpen(false)}
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 10 }} transition={{ duration: 0.25, ease: EASE }}
-              className="bg-primary border border-white/10 rounded-2xl p-8 w-[90%] max-w-sm text-center shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <h3 className="font-display text-lg font-bold text-white mb-5">Enter Admin PIN</h3>
-              <input ref={pinInputRef} type="password" maxLength={6} value={pinValue}
-                onChange={(e) => { setPinValue(e.target.value); setPinError(false); }}
-                onKeyDown={(e) => { if (e.key === "Enter") submitPin(); if (e.key === "Escape") setPinModalOpen(false); }}
-                placeholder="PIN"
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-center font-mono text-lg tracking-[0.2em] text-white outline-none transition-colors focus:border-accent/50 placeholder:text-white/20" />
-              {pinError && <p className="text-error text-[0.75rem] mt-2">Incorrect PIN</p>}
-              <div className="flex gap-3 mt-5">
-                <button onClick={() => setPinModalOpen(false)} className="flex-1 py-2.5 rounded-xl border border-white/10 text-white/50 font-semibold text-[0.8rem] hover:bg-white/5 transition-colors">Cancel</button>
-                <button onClick={submitPin} className="flex-1 py-2.5 rounded-xl bg-accent/20 border border-accent/30 text-secondary font-semibold text-[0.8rem] hover:bg-accent/30 transition-colors">Enter</button>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* Note Modal */}
       <AnimatePresence>
