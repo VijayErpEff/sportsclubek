@@ -10,7 +10,7 @@ import { StaggerContainer, StaggerItem } from "@/components/ui/stagger";
 import { generateBreadcrumbLD, generateFAQLD } from "@/lib/seo/json-ld";
 import { ArrowRight, Check, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
-import type { SportPageData } from "@/content/sports";
+import { SPORT_PAGES, type SportPageData } from "@/content/sports";
 import { TrackEvent } from "@/components/ui/track-event";
 
 export function SportPageLayout({ data }: { data: SportPageData }) {
@@ -241,6 +241,60 @@ export function SportPageLayout({ data }: { data: SportPageData }) {
               <FAQAccordion items={data.faqs} />
             </Reveal>
           </div>
+        </Container>
+      </Section>
+
+      {/* Explore Other Sports */}
+      <Section variant="alternate" size="sm">
+        <Container>
+          <Reveal>
+            <div className="text-center mb-8">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-3">
+                More at LevelUP
+              </p>
+              <h2 className="font-display text-section text-neutral-900 text-balance">
+                Explore Other Sports
+              </h2>
+            </div>
+          </Reveal>
+          <StaggerContainer className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+            {Object.values(SPORT_PAGES)
+              .filter((s) => s.slug !== data.slug)
+              .map((sport) => (
+                <StaggerItem key={sport.slug}>
+                  <Link
+                    href={`/${sport.slug}`}
+                    className="group block rounded-xl border border-neutral-100 bg-white p-4 text-center shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5"
+                  >
+                    <p className="font-semibold text-sm text-neutral-900 group-hover:text-primary transition-colors">
+                      {sport.name}
+                    </p>
+                    <p className="text-[11px] text-neutral-400 mt-1 line-clamp-2">
+                      {sport.tagline}
+                    </p>
+                    {sport.academySlug && (
+                      <span className="inline-block mt-2 text-[10px] font-semibold text-accent">
+                        Academy &rarr;
+                      </span>
+                    )}
+                  </Link>
+                </StaggerItem>
+              ))}
+            <StaggerItem>
+              <Link
+                href="/kids-agility"
+                className="group block rounded-xl border border-neutral-100 bg-white p-4 text-center shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5"
+              >
+                <p className="font-semibold text-sm text-neutral-900 group-hover:text-primary transition-colors">
+                  Kids Agility
+                </p>
+                <p className="text-[11px] text-neutral-400 mt-1">Ages 5–12</p>
+                <span className="inline-block mt-2 text-[10px] font-semibold text-accent">
+                  Learn More &rarr;
+                </span>
+              </Link>
+            </StaggerItem>
+          </StaggerContainer>
         </Container>
       </Section>
 

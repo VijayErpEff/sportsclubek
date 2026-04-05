@@ -52,6 +52,36 @@ const facilityAreas = [
     alt: "Full-length indoor cricket nets with bowling machines at LevelUP Sports",
   },
   {
+    title: "Volleyball Courts",
+    stat: "Regulation",
+    description:
+      "Full regulation courts with adjustable nets, professional flooring, and proper court lines. Team practices, leagues, and open play.",
+    features: ["Adjustable nets", "Pro flooring", "All ages"],
+    link: "/volleyball",
+    image: "/images/sports/volleyball.jpg",
+    alt: "Indoor regulation volleyball courts at LevelUP Sports facility",
+  },
+  {
+    title: "Indoor Soccer Turf",
+    stat: "Pro-Grade",
+    description:
+      "Professional indoor turf for futsal and 5v5. Year-round soccer training when outdoor fields aren't an option.",
+    features: ["Pro turf", "Regulation goals", "Futsal-ready"],
+    link: "/soccer",
+    image: "/images/sports/soccer.jpg",
+    alt: "Professional indoor soccer turf at LevelUP Sports Elkton",
+  },
+  {
+    title: "Pickleball Courts",
+    stat: "Dedicated",
+    description:
+      "Indoor pickleball with professional nets, proper court lines, and a welcoming community of 50+ regular players.",
+    features: ["Dedicated courts", "Equipment provided", "All levels"],
+    link: "/pickleball",
+    image: "/images/sports/pickleball.png",
+    alt: "Indoor pickleball courts at LevelUP Sports Elkton MD",
+  },
+  {
     title: "Training Area",
     stat: "Multi-Purpose",
     description:

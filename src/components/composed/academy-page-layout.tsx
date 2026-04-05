@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { StaggerContainer, StaggerItem } from "@/components/ui/stagger";
 import { generateBreadcrumbLD, generateFAQLD, generateCourseLD } from "@/lib/seo/json-ld";
-import { Check, GraduationCap, Users, Clock, ArrowRight } from "lucide-react";
+import { Check, GraduationCap, Users, Clock, ArrowRight, Calendar, CreditCard, Trophy } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 import type { AcademyPageData } from "@/content/academies";
 import { TrackEvent } from "@/components/ui/track-event";
@@ -281,12 +281,58 @@ export function AcademyPageLayout({ data }: { data: AcademyPageData }) {
         </Container>
       </Section>
 
+      {/* Related Links */}
+      <Section size="sm">
+        <Container>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto">
+            {data.sportSlug && (
+              <Link
+                href={`/${data.sportSlug}`}
+                className="group flex items-center gap-3 p-4 rounded-xl border border-neutral-100 bg-white shadow-card hover:shadow-card-hover transition-all"
+              >
+                <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
+                  <Trophy className="h-4 w-4 text-primary" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-neutral-900 group-hover:text-primary transition-colors">{data.sport} Overview</p>
+                  <p className="text-[11px] text-neutral-400">Programs &amp; courts</p>
+                </div>
+              </Link>
+            )}
+            <Link
+              href="/schedule"
+              className="group flex items-center gap-3 p-4 rounded-xl border border-neutral-100 bg-white shadow-card hover:shadow-card-hover transition-all"
+            >
+              <div className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center shrink-0">
+                <Calendar className="h-4 w-4 text-accent" />
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-neutral-900 group-hover:text-accent transition-colors">View Schedule</p>
+                <p className="text-[11px] text-neutral-400">Find a session</p>
+              </div>
+            </Link>
+            <Link
+              href="/memberships"
+              className="group flex items-center gap-3 p-4 rounded-xl border border-neutral-100 bg-white shadow-card hover:shadow-card-hover transition-all"
+            >
+              <div className="w-10 h-10 bg-info/10 rounded-lg flex items-center justify-center shrink-0">
+                <CreditCard className="h-4 w-4 text-info" />
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-neutral-900 group-hover:text-info transition-colors">Memberships</p>
+                <p className="text-[11px] text-neutral-400">Save with a plan</p>
+              </div>
+            </Link>
+          </div>
+        </Container>
+      </Section>
+
       {/* CTA */}
       <CTABanner
         title={data.ctaTitle}
         description={data.ctaDescription}
         primaryCTA={{ label: "Enroll Now", href: data.enrollUrl }}
-        secondaryCTA={{ label: "Contact Us", href: "/about" }}
+        secondaryCTA={{ label: "Contact Us", href: "/contact" }}
       />
     </>
   );
