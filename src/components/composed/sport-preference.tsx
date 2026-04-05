@@ -229,10 +229,10 @@ export function SportPreference() {
                 >
                   <div className="text-center mb-6">
                     <h2 className="font-display text-subsection font-bold text-neutral-900">
-                      Get your personalized schedule
+                      Stay in the game
                     </h2>
                     <p className="text-sm text-neutral-500 mt-2">
-                      We&apos;ll send you {selected.map((s) => SPORTS.find((sp) => sp.slug === s)?.name).filter(Boolean).join(" & ")} updates and session times. No spam.
+                      Get {selected.map((s) => SPORTS.find((sp) => sp.slug === s)?.name).filter(Boolean).join(" & ")} updates, open play alerts, and exclusive offers.
                     </p>
                   </div>
 
@@ -263,7 +263,7 @@ export function SportPreference() {
                     {submitting ? (
                       <><Loader2 className="h-4 w-4 animate-spin mr-2" /> Saving...</>
                     ) : (
-                      <>Send My Schedule <ArrowRight className="h-4 w-4 ml-1" /></>
+                      <>Let&apos;s Go <ArrowRight className="h-4 w-4 ml-1" /></>
                     )}
                   </Button>
 
