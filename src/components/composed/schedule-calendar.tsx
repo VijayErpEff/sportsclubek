@@ -217,8 +217,6 @@ function SessionCard({ session, isNow }: { session: Session; isNow: boolean }) {
   return (
     <a
       href={bookingUrl}
-      target="_blank"
-      rel="noopener noreferrer"
       className={cn(
         "block rounded-xl border p-3.5 transition-all hover:shadow-md group",
         colors.bg,

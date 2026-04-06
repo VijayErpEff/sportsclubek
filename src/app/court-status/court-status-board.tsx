@@ -255,8 +255,6 @@ function CageCard({
       {!adminMode && sportLabel === "Available" && (
         <a
           href={BOOKING_URLS.offerings}
-          target="_blank"
-          rel="noopener noreferrer"
           onClick={(e) => e.stopPropagation()}
           className="inline-block mt-2 text-xs font-semibold text-accent hover:text-accent-hover transition-colors"
         >
@@ -319,8 +317,6 @@ function CourtCard({
       {!adminMode && sportLabel === "Available" && (
         <a
           href={BOOKING_URLS.offerings}
-          target="_blank"
-          rel="noopener noreferrer"
           onClick={(e) => e.stopPropagation()}
           className="inline-block mt-1.5 text-[11px] font-semibold text-accent hover:text-accent-hover transition-colors"
         >
