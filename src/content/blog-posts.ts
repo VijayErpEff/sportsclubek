@@ -245,7 +245,7 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     slug: "indoor-volleyball-leagues-near-newark-delaware",
     title: "Indoor Volleyball Leagues Near Newark, Delaware: Your Complete Guide",
-    excerpt: "Looking for indoor volleyball near Newark, DE? Here&rsquo;s everything you need to know about finding the right league, what to expect, and where to play year-round.",
+    excerpt: "Looking for indoor volleyball near Newark, DE? Here's everything you need to know about finding the right league, what to expect, and where to play year-round.",
     content: `<p>If you&rsquo;re searching for indoor volleyball near Newark, Delaware, you&rsquo;re not alone. Volleyball participation in the tri-state area has surged over the past few years, and for good reason. It&rsquo;s competitive, social, and one of the best full-body workouts you can get without it feeling like exercise.</p>
 
     <p>But finding a consistent, well-organized indoor league? That&rsquo;s been the hard part for players in Newark, Middletown, Bear, and surrounding areas. Most options involve driving 45 minutes north to Wilmington or cobbling together pickup games at community rec centers. That&rsquo;s changing.</p>
@@ -321,8 +321,8 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     slug: "beginners-guide-to-volleyball-how-to-get-started",
 
-    title: "Beginner&rsquo;s Guide to Volleyball: How to Get Started at Any Age",
-    excerpt: "Never played volleyball before? No problem. Here&rsquo;s everything you need to know to get on the court with confidence, whether you&rsquo;re 16 or 60.",
+    title: "Beginner's Guide to Volleyball: How to Get Started at Any Age",
+    excerpt: "Never played volleyball before? No problem. Here's everything you need to know to get on the court with confidence, whether you're 16 or 60.",
     content: `<p>Volleyball has a reputation as a sport you either played in school or you didn&rsquo;t. That reputation is wrong. Every week at LevelUP Sports, we see adults in their 30s, 40s, and 50s picking up a volleyball for the first time, and within a few sessions, they&rsquo;re hooked.</p>
 
     <p>If you&rsquo;ve been thinking about trying volleyball but feel like you missed the window, let me be direct: there is no window. You can start today.</p>
@@ -400,7 +400,7 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     slug: "5-volleyball-drills-that-build-real-game-skills",
     title: "5 Volleyball Drills That Build Real Game Skills",
-    excerpt: "Tired of drills that don&rsquo;t translate to actual games? Coach Viktor shares 5 practice drills that develop skills you&rsquo;ll use in every match.",
+    excerpt: "Tired of drills that don't translate to actual games? Coach Viktor shares 5 practice drills that develop skills you'll use in every match.",
     content: `<p>Most volleyball drills have the same problem: they&rsquo;re too isolated from real game situations. You can bump a ball against a wall 500 times and still freeze when a fast serve comes at you during a match.</p>
 
     <p>Coach Viktor, who leads the <a href="/volleyball-academy">Volleyball Academy at LevelUP Sports</a>, spent 20+ years playing competitive volleyball, including in the Ukrainian First League. He designs every drill around one principle: if it doesn&rsquo;t show up in a game, don&rsquo;t practice it.</p>
