@@ -43,6 +43,7 @@ export function Navbar() {
   const [bellStatus, setBellStatus] = useState<"idle" | "loading" | "success">("idle");
   const wrapperRef = useRef<HTMLDivElement>(null);
   const bellRef = useRef<HTMLDivElement>(null);
+  const bellDropdownRef = useRef<HTMLDivElement>(null);
 
   // Scroll detection
   useEffect(() => {
@@ -95,10 +96,13 @@ export function Navbar() {
     } catch {}
   }, []);
 
-  // Bell: click outside to close
+  // Bell: click outside to close (check both bell button ref and dropdown ref)
   useEffect(() => {
     function handler(e: MouseEvent) {
-      if (bellRef.current && !bellRef.current.contains(e.target as Node)) {
+      const target = e.target as Node;
+      const inBell = bellRef.current?.contains(target);
+      const inDropdown = bellDropdownRef.current?.contains(target);
+      if (!inBell && !inDropdown) {
         setBellOpen(false);
       }
     }
@@ -308,7 +312,7 @@ export function Navbar() {
 
       {/* ── Mobile Bell Dropdown ── */}
       {bellOpen && (
-        <div className="fixed inset-x-0 z-[99] lg:hidden" style={{ top: "calc(var(--banner-height, 0px) + 4rem)" }}>
+        <div ref={bellDropdownRef} className="fixed inset-x-0 z-[99] lg:hidden" style={{ top: "calc(var(--banner-height, 0px) + 4rem)" }}>
           <div className="mx-3 mt-1 bg-white rounded-2xl shadow-xl ring-1 ring-black/5 p-5">
             {bellStatus === "success" ? (
               <div className="flex items-center gap-2 justify-center py-2">
