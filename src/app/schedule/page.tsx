@@ -29,7 +29,7 @@ export default function SchedulePage() {
       />
 
       {/* Compact header — minimal on mobile so schedule is visible immediately */}
-      <section className="pt-24 pb-2 md:pt-32 md:pb-8">
+      <section className="pt-28 pb-6 md:pt-32 md:pb-8">
         <Container>
           <nav aria-label="Breadcrumb" className="text-xs text-neutral-400 mb-2 md:mb-4">
             <ol className="flex items-center gap-1.5">
@@ -40,7 +40,7 @@ export default function SchedulePage() {
               <li className="text-neutral-600 font-medium">Schedule</li>
             </ol>
           </nav>
-          <h1 className="font-display text-xl md:text-4xl font-bold tracking-tight text-neutral-900">
+          <h1 className="font-display text-3xl md:text-4xl font-bold tracking-tight text-neutral-900">
             Weekly Schedule
           </h1>
           <p className="hidden md:block mt-2 text-neutral-500 max-w-lg">

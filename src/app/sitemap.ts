@@ -80,6 +80,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.9,
     },
+    {
+      url: `${BASE_URL}/court-status`,
+      lastModified: LAST_CONTENT_UPDATE,
+      changeFrequency: "daily",
+      priority: 0.7,
+    },
 
     // ── Sport pages ──
     {

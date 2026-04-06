@@ -23,7 +23,7 @@ export function CTABanner({
   return (
     <section
       className={cn(
-        "relative overflow-hidden py-20 md:py-28",
+        "relative overflow-hidden py-16 md:py-20",
         variant === "primary"
           ? "bg-gradient-to-r from-primary-dark to-primary"
           : "bg-gradient-to-r from-secondary-dark via-secondary to-secondary-light",

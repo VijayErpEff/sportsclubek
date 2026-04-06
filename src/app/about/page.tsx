@@ -91,7 +91,7 @@ export default function AboutPage() {
       />
 
       {/* Hero — Split layout: text left, image right */}
-      <section className="pt-32 pb-20 md:pt-40 md:pb-28 relative overflow-hidden bg-neutral-50">
+      <section className="pt-28 pb-12 md:pt-32 md:pb-16 relative overflow-hidden bg-neutral-50">
         <Container className="relative">
           <nav aria-label="Breadcrumb" className="text-xs text-neutral-400 mb-8">
             <ol className="flex items-center gap-1.5">
@@ -107,7 +107,7 @@ export default function AboutPage() {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <Reveal variant="fade-right">
               <div>
-                <h1 className="font-display text-hero text-neutral-900 mb-6 text-balance">
+                <h1 className="font-display text-3xl md:text-4xl font-bold text-neutral-900 mb-6 text-balance">
                   Built by Parents. Run by Coaches. Made for Athletes.
                 </h1>
                 <p className="text-body-lg text-neutral-500 leading-relaxed max-w-lg">

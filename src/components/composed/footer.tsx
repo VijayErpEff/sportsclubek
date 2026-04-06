@@ -8,30 +8,25 @@ import { Container } from "@/components/layout/container";
 import { NewsletterSignup } from "./newsletter-signup";
 import { SITE_CONFIG, SPORTS } from "@/lib/constants/site";
 
-const footerSports = SPORTS.map((s) => ({
-  label: s.name,
-  href: `/${s.slug}`,
-}));
+const footerSportsAndAcademies = [
+  ...SPORTS.map((s) => ({
+    label: s.name,
+    href: `/${s.slug}`,
+  })),
+  { label: "Kids Agility", href: "/kids-agility" },
+];
 
 const footerCompany = [
   { label: "About", href: "/about" },
   { label: "Facilities", href: "/facilities" },
   { label: "Memberships", href: "/memberships" },
   { label: "Schedule", href: "/schedule" },
-  { label: "Careers", href: "/careers" },
-  { label: "Contact", href: "/contact" },
+  { label: "Court Status", href: "/court-status" },
   { label: "Free Trial", href: "/free-trial" },
+  { label: "Contact", href: "/contact" },
+  { label: "Careers", href: "/careers" },
   { label: "Birthday Parties", href: "/birthday-parties" },
   { label: "Summer Camps", href: "/summer-camps" },
-];
-
-const footerPrograms = [
-  { label: "Badminton Academy", href: "/badminton-academy" },
-  { label: "Cricket Academy", href: "/cricket-academy" },
-  { label: "Volleyball Academy", href: "/volleyball-academy" },
-  { label: "Baseball Academy", href: "/baseball-academy" },
-  { label: "Soccer Academy", href: "/soccer-academy" },
-  { label: "Kids Agility", href: "/kids-agility" },
 ];
 
 const socialLinks = [
@@ -103,32 +98,13 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Sports Column */}
+          {/* Sports & Programs Column */}
           <div>
             <h3 className="font-display font-semibold text-xs uppercase tracking-widest text-white/40 mb-4">
               Sports
             </h3>
             <ul className="space-y-2.5">
-              {footerSports.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-white/60 hover:text-white transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Programs Column */}
-          <div>
-            <h3 className="font-display font-semibold text-xs uppercase tracking-widest text-white/40 mb-4">
-              Programs
-            </h3>
-            <ul className="space-y-2.5">
-              {footerPrograms.map((link) => (
+              {footerSportsAndAcademies.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}

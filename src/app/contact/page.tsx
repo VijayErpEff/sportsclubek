@@ -31,7 +31,7 @@ export default function ContactPage() {
       />
 
       {/* Header */}
-      <Section className="pt-28 pb-8 md:pt-32 md:pb-10">
+      <Section className="pt-28 pb-6 md:pt-32 md:pb-8">
         <Container>
           <nav aria-label="Breadcrumb" className="text-sm text-neutral-500 mb-4">
             <ol className="flex items-center gap-2">

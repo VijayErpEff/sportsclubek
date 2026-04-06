@@ -18,9 +18,8 @@ import { TextReveal } from "@/components/ui/text-reveal";
 import { VideoHero } from "@/components/composed/video-hero";
 import { SportCard } from "@/components/composed/sport-card";
 import { StatCounter } from "@/components/composed/stat-counter";
-import { TestimonialCarousel } from "@/components/composed/testimonial-carousel";
-import { CTABanner } from "@/components/composed/cta-banner";
 import { GoogleReviews } from "@/components/composed/google-reviews";
+import { CTABanner } from "@/components/composed/cta-banner";
 import { AthleteSpotlight } from "@/components/composed/athlete-spotlight";
 import { LiveActivityBadge, NextSessionCountdown } from "@/components/composed/live-indicator";
 import { ReferralBanner } from "@/components/composed/referral-banner";
@@ -28,7 +27,6 @@ import { BlogCard } from "@/components/composed/blog-card";
 
 // Data
 import { SPORTS } from "@/lib/constants/site";
-import { TESTIMONIALS } from "@/content/testimonials";
 import { BLOG_POSTS } from "@/content/blog-posts";
 import { generateFAQLD } from "@/lib/seo/json-ld";
 import { HOMEPAGE_FAQS } from "@/content/faqs";
@@ -167,7 +165,7 @@ export default function HomePage() {
             <div className="text-center mt-10 flex flex-wrap items-center justify-center gap-6">
               <Link
                 href="/kids-agility"
-                className="inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-accent-hover transition-colors"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:text-accent-hover transition-colors"
               >
                 <Zap className="h-4 w-4" />
                 Kids Agility Training (Ages 5-12)
@@ -175,7 +173,7 @@ export default function HomePage() {
               </Link>
               <Link
                 href="/schedule"
-                className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary-light transition-colors"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary-light transition-colors"
               >
                 <Calendar className="h-4 w-4" />
                 View Full Schedule
@@ -296,43 +294,17 @@ export default function HomePage() {
 
 
       {/* ═══════════════════════════════════════════
+          ATHLETE SPOTLIGHT — Featured stories
+          ═══════════════════════════════════════════ */}
+      <AthleteSpotlight />
+
+      {/* ═══════════════════════════════════════════
           GOOGLE REVIEWS — Social proof
           ═══════════════════════════════════════════ */}
       <Section>
         <Container>
           <Reveal>
             <GoogleReviews />
-          </Reveal>
-        </Container>
-      </Section>
-
-      {/* ═══════════════════════════════════════════
-          ATHLETE SPOTLIGHT — Featured stories
-          ═══════════════════════════════════════════ */}
-      <AthleteSpotlight />
-
-      {/* ═══════════════════════════════════════════
-          TESTIMONIALS — Community voices
-          ═══════════════════════════════════════════ */}
-      <Section>
-        <Container>
-          <Reveal>
-            <div className="text-center mb-10">
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-4">
-                Real People, Real Results
-              </p>
-              <h2 className="font-display text-section text-neutral-900 mb-6 text-balance">
-                Don&apos;t Take Our Word for It
-              </h2>
-              <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-                Real families from Elkton, Middletown, Newark, and
-                Wilmington sharing their experience.
-              </p>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.1}>
-            <TestimonialCarousel testimonials={TESTIMONIALS} />
           </Reveal>
         </Container>
       </Section>
