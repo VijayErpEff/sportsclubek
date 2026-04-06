@@ -39,26 +39,6 @@ export const BLOG_POSTS: BlogPost[] = [
     featured: true,
   },
   {
-    slug: "summer-cricket-league-registration-open",
-    title: "Summer Cricket League Registration Now Open",
-    excerpt:
-      "Join our first-ever summer cricket league. Teams forming now for youth and adult divisions.",
-    content: `<p>We&rsquo;re excited to announce the launch of LevelUP&rsquo;s Summer Cricket League! Registration is now open for both youth (U-15) and adult divisions.</p>
-    <h2>League Details</h2>
-    <p>The league runs from June through August with matches every Saturday. Each team plays 8 regular season games followed by playoffs. Matches use a T20 format to keep the action fast-paced and exciting for players and spectators alike.</p>
-    <h2>Divisions</h2>
-    <ul><li><strong>Youth (U-15):</strong> Players ages 10&ndash;15. Modified rules for development and safety.</li><li><strong>Adult Open:</strong> All skill levels welcome. Great for beginners and competitive players alike.</li></ul>
-    <h2>Registration</h2>
-    <p>Individual registration is $75 per player (includes jersey). Team registration is $500 for a squad of 12. Early bird discount of 15% available through April 30.</p>
-    <p>Don&rsquo;t have a team? No problem &mdash; register as an individual and we&rsquo;ll place you on a team. It&rsquo;s a great way to meet fellow cricket enthusiasts in the tri-state area.</p>`,
-    author: "LevelUP Sports",
-    date: "2025-03-10",
-    readTime: 3,
-    category: "news",
-    sport: "Cricket",
-    image: "/images/Content/Blog2.jpeg",
-  },
-  {
     slug: "improve-badminton-footwork",
     title: "How to Improve Your Badminton Footwork in 30 Days",
     excerpt:
@@ -101,23 +81,6 @@ export const BLOG_POSTS: BlogPost[] = [
     sport: "Baseball",
     image: "/images/sports/baseball.jpg",
     featured: true,
-  },
-  {
-    slug: "spring-open-house-2025",
-    title: "Spring Open House: Free Tours, Demos & Family Fun — April 12",
-    excerpt:
-      "Join us for our biggest open house yet! Free facility tours, sport demos, giveaways, and special membership offers.",
-    content: `<p>Mark your calendars! LevelUP Sports is hosting our Spring Open House on Saturday, April 12 from 10 AM to 4 PM. Bring the whole family for a day of free sports, tours, and fun.</p>
-    <h2>What to Expect</h2>
-    <ul><li>Free facility tours every 30 minutes</li><li>Try-it-free demos in all six sports</li><li>Meet our coaching staff</li><li>Free batting cage sessions for kids</li><li>Food trucks and refreshments</li><li>Raffle prizes including free memberships</li></ul>
-    <h2>Special Offers</h2>
-    <p>Sign up for a membership at the Open House and get your first month FREE plus a LevelUP welcome kit. Existing members who bring a friend get a $25 credit.</p>
-    <p>No registration required &mdash; just show up and have fun! Parking is free and plentiful.</p>`,
-    author: "LevelUP Sports",
-    date: "2025-03-18",
-    readTime: 2,
-    category: "events",
-    image: "/images/sports/LevelUp/01-Main-Area-1.png",
   },
   {
     slug: "pickleball-beginner-mistakes",
@@ -357,6 +320,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: "beginners-guide-to-volleyball-how-to-get-started",
+
     title: "Beginner&rsquo;s Guide to Volleyball: How to Get Started at Any Age",
     excerpt: "Never played volleyball before? No problem. Here&rsquo;s everything you need to know to get on the court with confidence, whether you&rsquo;re 16 or 60.",
     content: `<p>Volleyball has a reputation as a sport you either played in school or you didn&rsquo;t. That reputation is wrong. Every week at LevelUP Sports, we see adults in their 30s, 40s, and 50s picking up a volleyball for the first time, and within a few sessions, they&rsquo;re hooked.</p>
@@ -431,7 +395,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 5,
     category: "training-tips",
     sport: "Volleyball",
-    image: "/images/Content/Blog2.jpeg",
+    image: "/images/sports/volleyball.jpg",
   },
   {
     slug: "5-volleyball-drills-that-build-real-game-skills",
@@ -595,7 +559,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 7,
     category: "training-tips",
     sport: "Cricket",
-    image: "/images/Content/Blog2.jpeg",
+    image: "/images/sports/cricket.png",
   },
   {
     slug: "meet-the-coaches-ipl-veterans-elkton-md",
@@ -1022,7 +986,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "2025-04-14",
     readTime: 6,
     category: "training-tips",
-    image: "/images/Content/Blog1.jpeg",
+    image: "/images/sports/facility.jpg",
   },
 ];
 
