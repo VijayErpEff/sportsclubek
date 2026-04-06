@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { X, Check, ArrowRight, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
@@ -26,6 +27,7 @@ type Step = "sports" | "email" | "done";
 
 export function SportPreference() {
   const prefersReduced = useReducedMotion();
+  const pathname = usePathname();
   const [visible, setVisible] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
   const [step, setStep] = useState<Step>("sports");
@@ -34,6 +36,9 @@ export function SportPreference() {
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
+    // Don't show on homepage — it has its own inline lead capture
+    if (pathname === "/") return;
+
     const timer = setTimeout(() => {
       try {
         const existingPref = localStorage.getItem(STORAGE_KEY);
@@ -44,7 +49,7 @@ export function SportPreference() {
       } catch {}
     }, 1500);
     return () => clearTimeout(timer);
-  }, []);
+  }, [pathname]);
 
   const handleToggleSport = useCallback((slug: string) => {
     setSelected((prev) =>
