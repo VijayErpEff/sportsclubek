@@ -42,7 +42,8 @@ export function Navbar() {
   const [bellEmail, setBellEmail] = useState("");
   const [bellStatus, setBellStatus] = useState<"idle" | "loading" | "success">("idle");
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const bellRef = useRef<HTMLDivElement>(null);
+  const bellDesktopRef = useRef<HTMLDivElement>(null);
+  const bellMobileRef = useRef<HTMLDivElement>(null);
   const bellDropdownRef = useRef<HTMLDivElement>(null);
 
   // Scroll detection
@@ -100,9 +101,10 @@ export function Navbar() {
   useEffect(() => {
     function handler(e: MouseEvent) {
       const target = e.target as Node;
-      const inBell = bellRef.current?.contains(target);
+      const inDesktop = bellDesktopRef.current?.contains(target);
+      const inMobile = bellMobileRef.current?.contains(target);
       const inDropdown = bellDropdownRef.current?.contains(target);
-      if (!inBell && !inDropdown) {
+      if (!inDesktop && !inMobile && !inDropdown) {
         setBellOpen(false);
       }
     }
@@ -214,7 +216,7 @@ export function Navbar() {
               <a href={`tel:${SITE_CONFIG.phone}`} onClick={trackPhoneCall} className="text-xs text-neutral-400 hover:text-primary transition-colors hidden xl:block">{SITE_CONFIG.phone}</a>
 
               {/* Bell lead capture */}
-              <div ref={bellRef} className="relative">
+              <div ref={bellDesktopRef} className="relative">
                 <button
                   onClick={() => setBellOpen((p) => !p)}
                   className="relative p-2 rounded-lg text-neutral-500 hover:text-primary hover:bg-neutral-50 transition-colors"
@@ -285,7 +287,7 @@ export function Navbar() {
 
             {/* Mobile: bell + toggle */}
             <div className="lg:hidden flex items-center gap-1">
-              <div ref={bellRef} className="relative">
+              <div ref={bellMobileRef} className="relative">
                 <button
                   onClick={() => setBellOpen((p) => !p)}
                   className="relative p-2 rounded-lg text-neutral-500 hover:text-primary hover:bg-neutral-50 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
