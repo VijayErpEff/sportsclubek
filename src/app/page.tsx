@@ -25,7 +25,6 @@ import { AthleteSpotlight } from "@/components/composed/athlete-spotlight";
 import { LiveActivityBadge, NextSessionCountdown } from "@/components/composed/live-indicator";
 import { ReferralBanner } from "@/components/composed/referral-banner";
 import { BlogCard } from "@/components/composed/blog-card";
-import { HomepageLeadCapture } from "@/components/composed/homepage-lead-capture";
 
 // Data
 import { SPORTS } from "@/lib/constants/site";
@@ -186,11 +185,6 @@ export default function HomePage() {
           </Reveal>
         </Container>
       </Section>
-
-      {/* ═══════════════════════════════════════════
-          LEAD CAPTURE — Inline after sports grid
-          ═══════════════════════════════════════════ */}
-      <HomepageLeadCapture />
 
       {/* ═══════════════════════════════════════════
           VALUE PROPOSITION — Scroll-driven text reveal

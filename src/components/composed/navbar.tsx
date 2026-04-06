@@ -4,12 +4,15 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronRight, Bell, ArrowRight, Check, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/layout/container";
 import { SITE_CONFIG } from "@/lib/constants/site";
 import { trackPhoneCall, trackCTAClick } from "@/lib/analytics";
+import { captureLead } from "@/lib/leads";
+
+const BELL_STORAGE_KEY = "lus_nav_subscribed";
 
 const SPORT_ITEMS = [
   { name: "Badminton", href: "/badminton", academy: "/badminton-academy" as string | null, emoji: "\ud83c\udff8", desc: "Competition-grade courts" },
@@ -33,7 +36,13 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [sportsOpen, setSportsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [bellOpen, setBellOpen] = useState(false);
+  const [bellDot, setBellDot] = useState(false);
+  const [bellName, setBellName] = useState("");
+  const [bellEmail, setBellEmail] = useState("");
+  const [bellStatus, setBellStatus] = useState<"idle" | "loading" | "success">("idle");
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const bellRef = useRef<HTMLDivElement>(null);
 
   // Scroll detection
   useEffect(() => {
@@ -66,7 +75,7 @@ export function Navbar() {
   // Escape to close
   useEffect(() => {
     const fn = (e: KeyboardEvent) => {
-      if (e.key === "Escape") { setSportsOpen(false); setMobileOpen(false); }
+      if (e.key === "Escape") { setSportsOpen(false); setMobileOpen(false); setBellOpen(false); }
     };
     document.addEventListener("keydown", fn);
     return () => document.removeEventListener("keydown", fn);
@@ -76,7 +85,49 @@ export function Navbar() {
   useEffect(() => {
     setSportsOpen(false);
     setMobileOpen(false);
+    setBellOpen(false);
   }, [pathname]);
+
+  // Bell: check if already subscribed
+  useEffect(() => {
+    try {
+      if (!localStorage.getItem(BELL_STORAGE_KEY)) setBellDot(true);
+    } catch {}
+  }, []);
+
+  // Bell: click outside to close
+  useEffect(() => {
+    function handler(e: MouseEvent) {
+      if (bellRef.current && !bellRef.current.contains(e.target as Node)) {
+        setBellOpen(false);
+      }
+    }
+    if (bellOpen) {
+      const id = setTimeout(() => document.addEventListener("click", handler), 0);
+      return () => { clearTimeout(id); document.removeEventListener("click", handler); };
+    }
+  }, [bellOpen]);
+
+  const handleBellSubmit = async () => {
+    if (!bellEmail.trim()) return;
+    setBellStatus("loading");
+    await captureLead({
+      email: bellEmail.trim(),
+      name: bellName.trim(),
+      source: "sport_preference",
+      context: "Navbar signup",
+    });
+    try { localStorage.setItem(BELL_STORAGE_KEY, "true"); } catch {}
+    setBellStatus("success");
+    setBellDot(false);
+    setTimeout(() => { setBellOpen(false); setBellStatus("idle"); }, 1500);
+  };
+
+  const handleBellDismiss = () => {
+    setBellOpen(false);
+    setBellDot(false);
+    try { sessionStorage.setItem("lus_bell_dismissed", "true"); } catch {}
+  };
 
   const isSportsPage = /volleyball|cricket|badminton|pickleball|soccer|baseball|kids-agility/.test(pathname);
 
@@ -157,23 +208,156 @@ export function Navbar() {
             {/* Desktop CTA */}
             <div className="hidden lg:flex items-center gap-3 ml-auto pl-4">
               <a href={`tel:${SITE_CONFIG.phone}`} onClick={trackPhoneCall} className="text-xs text-neutral-400 hover:text-primary transition-colors hidden xl:block">{SITE_CONFIG.phone}</a>
+
+              {/* Bell lead capture */}
+              <div ref={bellRef} className="relative">
+                <button
+                  onClick={() => setBellOpen((p) => !p)}
+                  className="relative p-2 rounded-lg text-neutral-500 hover:text-primary hover:bg-neutral-50 transition-colors"
+                  aria-label="Get updates"
+                  aria-expanded={bellOpen}
+                >
+                  <Bell className="h-4.5 w-4.5" />
+                  {bellDot && (
+                    <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-accent" />
+                  )}
+                </button>
+
+                {bellOpen && (
+                  <div className="absolute top-full mt-2 right-0 w-[320px] bg-white rounded-2xl shadow-xl ring-1 ring-black/5 p-5 animate-fade-in">
+                    {bellStatus === "success" ? (
+                      <div className="flex items-center gap-2 justify-center py-3">
+                        <Check className="h-5 w-5 text-accent" />
+                        <p className="text-sm font-semibold text-neutral-900">You&apos;re in!</p>
+                      </div>
+                    ) : (
+                      <>
+                        <p className="font-display text-base font-bold text-neutral-900 mb-1">Stay in the Game</p>
+                        <p className="text-xs text-neutral-500 mb-4">Get alerts for open play, new sessions &amp; offers.</p>
+                        <div className="space-y-2">
+                          <input
+                            type="text"
+                            value={bellName}
+                            onChange={(e) => setBellName(e.target.value)}
+                            placeholder="Your name"
+                            className="w-full h-10 px-3 rounded-lg border border-neutral-200 bg-neutral-50 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent/50"
+                          />
+                          <input
+                            type="email"
+                            value={bellEmail}
+                            onChange={(e) => setBellEmail(e.target.value)}
+                            onKeyDown={(e) => { if (e.key === "Enter") handleBellSubmit(); }}
+                            placeholder="Your email"
+                            className="w-full h-10 px-3 rounded-lg border border-neutral-200 bg-neutral-50 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent/50"
+                          />
+                          <button
+                            onClick={handleBellSubmit}
+                            disabled={!bellEmail.trim() || bellStatus === "loading"}
+                            className="w-full h-10 rounded-lg bg-accent text-white text-sm font-bold hover:bg-accent-hover transition-colors disabled:opacity-50 flex items-center justify-center gap-1.5"
+                          >
+                            {bellStatus === "loading" ? (
+                              <Loader2 className="h-4 w-4 animate-spin" />
+                            ) : (
+                              <>Let&apos;s Go <ArrowRight className="h-3.5 w-3.5" /></>
+                            )}
+                          </button>
+                        </div>
+                        <button
+                          onClick={handleBellDismiss}
+                          className="w-full text-center text-xs text-neutral-400 hover:text-neutral-600 pt-3 transition-colors"
+                        >
+                          No thanks
+                        </button>
+                      </>
+                    )}
+                  </div>
+                )}
+              </div>
+
               <Button size="sm" className="rounded-full px-5" asChild>
                 <Link href="/free-trial" onClick={() => trackCTAClick("Free Trial", "/free-trial")}>Free Trial</Link>
               </Button>
             </div>
 
-            {/* Mobile toggle */}
-            <button
-              className="lg:hidden p-2 rounded-lg text-neutral-700 hover:bg-neutral-100 min-w-[44px] min-h-[44px] flex items-center justify-center"
-              onClick={() => setMobileOpen(p => !p)}
-              aria-expanded={mobileOpen}
-              aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            >
-              {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </button>
+            {/* Mobile: bell + toggle */}
+            <div className="lg:hidden flex items-center gap-1">
+              <div ref={bellRef} className="relative">
+                <button
+                  onClick={() => setBellOpen((p) => !p)}
+                  className="relative p-2 rounded-lg text-neutral-500 hover:text-primary hover:bg-neutral-50 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+                  aria-label="Get updates"
+                >
+                  <Bell className="h-5 w-5" />
+                  {bellDot && (
+                    <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-accent" />
+                  )}
+                </button>
+              </div>
+              <button
+                className="p-2 rounded-lg text-neutral-700 hover:bg-neutral-100 min-w-[44px] min-h-[44px] flex items-center justify-center"
+                onClick={() => setMobileOpen(p => !p)}
+                aria-expanded={mobileOpen}
+                aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              >
+                {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              </button>
+            </div>
           </nav>
         </Container>
       </header>
+
+      {/* ── Mobile Bell Dropdown ── */}
+      {bellOpen && (
+        <div className="fixed inset-x-0 z-[99] lg:hidden" style={{ top: "calc(var(--banner-height, 0px) + 4rem)" }}>
+          <div className="mx-3 mt-1 bg-white rounded-2xl shadow-xl ring-1 ring-black/5 p-5">
+            {bellStatus === "success" ? (
+              <div className="flex items-center gap-2 justify-center py-2">
+                <Check className="h-5 w-5 text-accent" />
+                <p className="text-sm font-semibold text-neutral-900">You&apos;re in!</p>
+              </div>
+            ) : (
+              <>
+                <p className="font-display text-base font-bold text-neutral-900 mb-1">Stay in the Game</p>
+                <p className="text-xs text-neutral-500 mb-4">Get alerts for open play, new sessions &amp; offers.</p>
+                <div className="space-y-2">
+                  <input
+                    type="text"
+                    value={bellName}
+                    onChange={(e) => setBellName(e.target.value)}
+                    placeholder="Your name"
+                    className="w-full h-11 px-3 rounded-lg border border-neutral-200 bg-neutral-50 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent/50"
+                  />
+                  <input
+                    type="email"
+                    value={bellEmail}
+                    onChange={(e) => setBellEmail(e.target.value)}
+                    onKeyDown={(e) => { if (e.key === "Enter") handleBellSubmit(); }}
+                    placeholder="Your email"
+                    className="w-full h-11 px-3 rounded-lg border border-neutral-200 bg-neutral-50 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent/50"
+                  />
+                  <button
+                    onClick={handleBellSubmit}
+                    disabled={!bellEmail.trim() || bellStatus === "loading"}
+                    className="w-full h-11 rounded-lg bg-accent text-white text-sm font-bold hover:bg-accent-hover transition-colors disabled:opacity-50 flex items-center justify-center gap-1.5"
+                  >
+                    {bellStatus === "loading" ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      <>Let&apos;s Go <ArrowRight className="h-3.5 w-3.5" /></>
+                    )}
+                  </button>
+                </div>
+                <button
+                  onClick={handleBellDismiss}
+                  className="w-full text-center text-xs text-neutral-400 hover:text-neutral-600 pt-3 transition-colors"
+                >
+                  No thanks
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* ── Mobile Menu ── */}
       {mobileOpen && (
