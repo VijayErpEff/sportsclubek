@@ -25,6 +25,8 @@ export interface Session {
   sport: SportType;
   level?: string;
   spotsLeft?: number;
+  /** Optional Upper Hand booking/registration URL */
+  bookingUrl?: string;
 }
 
 export interface DaySchedule {

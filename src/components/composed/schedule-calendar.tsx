@@ -38,6 +38,7 @@ interface FormState {
   endTime: string; // stored in 24h "HH:MM" for <input type="time">
   sport: SportType;
   level: string;
+  bookingUrl: string;
   originalKey?: string;
   originalDay?: string;
 }
@@ -51,6 +52,7 @@ const EMPTY_FORM: FormState = {
   endTime: "",
   sport: "baseball",
   level: "",
+  bookingUrl: "",
 };
 
 const ALL_SPORTS = Object.keys(SPORT_LABELS) as SportType[];
@@ -268,7 +270,7 @@ function SessionCard({ session, isNow }: { session: Session; isNow: boolean }) {
   const sessionType = detectSessionType(session);
   const badge = SESSION_TYPE_BADGE[sessionType];
   const isRental = sessionType === "rental";
-  const bookingUrl = isRental ? `tel:${SITE_CONFIG.phone}` : getBookingUrl(session.sport);
+  const bookingUrl = session.bookingUrl || (isRental ? `tel:${SITE_CONFIG.phone}` : getBookingUrl(session.sport));
   return (
     <a
       href={bookingUrl}
@@ -575,6 +577,22 @@ function AdminFormModal({
                 className={inputCn}
               />
             </div>
+
+            {/* Booking URL */}
+            <div>
+              <label htmlFor="admin-booking-url" className={labelCn}>
+                Booking / Registration URL{" "}
+                <span className="text-neutral-400 font-normal">(optional)</span>
+              </label>
+              <input
+                id="admin-booking-url"
+                type="url"
+                value={form.bookingUrl}
+                onChange={(e) => onChange({ bookingUrl: e.target.value })}
+                placeholder="e.g. https://app.upperhand.io/..."
+                className={inputCn}
+              />
+            </div>
           </div>
 
           {/* Actions */}
@@ -666,6 +684,7 @@ export function ScheduleCalendar() {
         endTime: to24h(session.endTime),
         sport: session.sport,
         level: session.level ?? "",
+        bookingUrl: session.bookingUrl ?? "",
         originalKey: sessionKey(session),
         originalDay: day,
       });
@@ -688,6 +707,7 @@ export function ScheduleCalendar() {
       activity: form.activity.trim(),
       sport: form.sport,
       ...(form.level.trim() ? { level: form.level.trim() } : {}),
+      ...(form.bookingUrl.trim() ? { bookingUrl: form.bookingUrl.trim() } : {}),
     };
 
     let next = [...overrides];
@@ -1132,7 +1152,7 @@ export function ScheduleCalendar() {
                     return (
                       <a
                         key={`${session.sport}-${session.time}-${session.activity}`}
-                        href={sIsRental ? `tel:${SITE_CONFIG.phone}` : getBookingUrl(session.sport)}
+                        href={session.bookingUrl || (sIsRental ? `tel:${SITE_CONFIG.phone}` : getBookingUrl(session.sport))}
                         target="_blank"
                         rel="noopener noreferrer"
                         className={cn(

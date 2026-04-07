@@ -12,8 +12,9 @@ interface CageItem {
   status: "available" | "in-use" | "reserved";
   sport: string | null;
   note: string;
+  bookingUrl?: string;
 }
-interface SlotItem { state: string; note: string; }
+interface SlotItem { state: string; note: string; bookingUrl?: string; }
 interface CourtState {
   cages: { merges: [boolean, boolean, boolean]; items: CageItem[] };
   mp: { layout: string; slots: SlotItem[] };
@@ -206,11 +207,11 @@ const GRID_CLASSES: Record<string, string> = {
 /* ── Cage Card (light) ── */
 function CageCard({
   variant, label, sportLabel, statusLabel, note, isMerged,
-  adminMode, onClick, onNoteClick, className, index, reduced,
+  adminMode, onClick, onNoteClick, className, index, reduced, bookingUrl,
 }: {
   variant: string; label: string; sportLabel: string; statusLabel: string;
   note: string; isMerged: boolean; adminMode: boolean; onClick: () => void;
-  onNoteClick: () => void; className?: string; index: number; reduced: boolean;
+  onNoteClick: () => void; className?: string; index: number; reduced: boolean; bookingUrl?: string;
 }) {
   const s = STATUS[variant] || STATUS.available;
   return (
@@ -254,7 +255,7 @@ function CageCard({
       )}
       {!adminMode && sportLabel === "Available" && (
         <a
-          href={BOOKING_URLS.offerings}
+          href={bookingUrl || BOOKING_URLS.offerings}
           onClick={(e) => e.stopPropagation()}
           className="inline-block mt-2 text-xs font-semibold text-accent hover:text-accent-hover transition-colors"
         >
@@ -268,11 +269,11 @@ function CageCard({
 /* ── Court Card (light) ── */
 function CourtCard({
   variant, name, sportLabel, statusLabel, note,
-  adminMode, onClick, onNoteClick, className, index, reduced,
+  adminMode, onClick, onNoteClick, className, index, reduced, bookingUrl,
 }: {
   variant: string; name: string; sportLabel: string; statusLabel: string;
   note: string; adminMode: boolean; onClick: () => void; onNoteClick: () => void;
-  className?: string; index: number; reduced: boolean;
+  className?: string; index: number; reduced: boolean; bookingUrl?: string;
 }) {
   const s = STATUS[variant] || STATUS.available;
   return (
@@ -316,7 +317,7 @@ function CourtCard({
       )}
       {!adminMode && sportLabel === "Available" && (
         <a
-          href={BOOKING_URLS.offerings}
+          href={bookingUrl || BOOKING_URLS.offerings}
           onClick={(e) => e.stopPropagation()}
           className="inline-block mt-1.5 text-[11px] font-semibold text-accent hover:text-accent-hover transition-colors"
         >
@@ -333,8 +334,8 @@ export function CourtStatusBoard() {
   const admin = useAdmin();
   const adminMode = admin.adminMode;
   const [noteModal, setNoteModal] = useState<{
-    open: boolean; type: "cage" | "slot"; index: number; title: string; value: string;
-  }>({ open: false, type: "cage", index: 0, title: "", value: "" });
+    open: boolean; type: "cage" | "slot"; index: number; title: string; value: string; urlValue: string;
+  }>({ open: false, type: "cage", index: 0, title: "", value: "", urlValue: "" });
   const [mounted, setMounted] = useState(false);
   const reduced = useReducedMotion() ?? false;
 
@@ -402,7 +403,8 @@ export function CourtStatusBoard() {
 
   const openCageNote = (gi: number) => {
     const groups = computeGroups(state.cages.merges); const g = groups[gi];
-    setNoteModal({ open: true, type: "cage", index: g[0], title: groupLabel(g), value: state.cages.items[g[0]].note });
+    const c = state.cages.items[g[0]];
+    setNoteModal({ open: true, type: "cage", index: g[0], title: groupLabel(g), value: c.note, urlValue: c.bookingUrl ?? "" });
     setTimeout(() => noteInputRef.current?.focus(), 100);
   };
 
@@ -424,14 +426,22 @@ export function CourtStatusBoard() {
   };
 
   const openSlotNote = (i: number) => {
-    setNoteModal({ open: true, type: "slot", index: i, title: slotName(state.mp.layout, i), value: state.mp.slots[i].note });
+    const s = state.mp.slots[i];
+    setNoteModal({ open: true, type: "slot", index: i, title: slotName(state.mp.layout, i), value: s.note, urlValue: s.bookingUrl ?? "" });
     setTimeout(() => noteInputRef.current?.focus(), 100);
   };
 
   const saveNote = () => {
-    const next = structuredClone(state); const v = noteModal.value.trim();
-    if (noteModal.type === "cage") next.cages.items[noteModal.index].note = v;
-    else next.mp.slots[noteModal.index].note = v;
+    const next = structuredClone(state);
+    const v = noteModal.value.trim();
+    const url = noteModal.urlValue.trim() || undefined;
+    if (noteModal.type === "cage") {
+      next.cages.items[noteModal.index].note = v;
+      next.cages.items[noteModal.index].bookingUrl = url;
+    } else {
+      next.mp.slots[noteModal.index].note = v;
+      next.mp.slots[noteModal.index].bookingUrl = url;
+    }
     persist(next); setNoteModal((m) => ({ ...m, open: false }));
   };
 
@@ -567,6 +577,7 @@ export function CourtStatusBoard() {
                       isMerged={g.length > 1} adminMode={adminMode}
                       onClick={() => clickCageGroup(gi)} onNoteClick={() => openCageNote(gi)}
                       className="h-full" index={gi} reduced={reduced}
+                      bookingUrl={c.bookingUrl}
                     />
                   </div>
                 );
@@ -612,6 +623,7 @@ export function CourtStatusBoard() {
                     sportLabel={slotSportLabel(ly, i, slot.state)} statusLabel={slotStatusLabel(slot.state)}
                     note={slot.note} adminMode={adminMode} onClick={() => clickSlot(i)}
                     onNoteClick={() => openSlotNote(i)} index={i + groups.length} reduced={reduced}
+                    bookingUrl={slot.bookingUrl}
                     className={cn(
                       isFullWidth && ly === "bc-1" && "row-span-2",
                       isFullWidth && (ly === "vb-courts" || ly === "courts-vb") && "col-span-full",
@@ -670,11 +682,26 @@ export function CourtStatusBoard() {
               onClick={(e) => e.stopPropagation()}
             >
               <h3 className="font-display text-lg font-bold text-neutral-900 mb-4">{noteModal.title}</h3>
-              <input ref={noteInputRef} type="text" maxLength={60} value={noteModal.value}
-                onChange={(e) => setNoteModal((m) => ({ ...m, value: e.target.value }))}
-                onKeyDown={(e) => { if (e.key === "Enter") saveNote(); if (e.key === "Escape") setNoteModal((m) => ({ ...m, open: false })); }}
-                placeholder="e.g., League game 4–6pm"
-                className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl text-neutral-900 text-sm outline-none transition-colors focus:border-accent/50 focus:ring-2 focus:ring-accent/20 placeholder:text-neutral-400" />
+              <div className="space-y-3">
+                <div>
+                  <label className="block text-sm font-medium text-neutral-700 mb-1">Note</label>
+                  <input ref={noteInputRef} type="text" maxLength={60} value={noteModal.value}
+                    onChange={(e) => setNoteModal((m) => ({ ...m, value: e.target.value }))}
+                    onKeyDown={(e) => { if (e.key === "Enter") saveNote(); if (e.key === "Escape") setNoteModal((m) => ({ ...m, open: false })); }}
+                    placeholder="e.g., League game 4–6pm"
+                    className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl text-neutral-900 text-sm outline-none transition-colors focus:border-accent/50 focus:ring-2 focus:ring-accent/20 placeholder:text-neutral-400" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-neutral-700 mb-1">
+                    Booking URL <span className="text-neutral-400 font-normal">(optional)</span>
+                  </label>
+                  <input type="url" value={noteModal.urlValue}
+                    onChange={(e) => setNoteModal((m) => ({ ...m, urlValue: e.target.value }))}
+                    onKeyDown={(e) => { if (e.key === "Enter") saveNote(); if (e.key === "Escape") setNoteModal((m) => ({ ...m, open: false })); }}
+                    placeholder="e.g., https://app.upperhand.io/..."
+                    className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl text-neutral-900 text-sm outline-none transition-colors focus:border-accent/50 focus:ring-2 focus:ring-accent/20 placeholder:text-neutral-400" />
+                </div>
+              </div>
               <div className="flex gap-3 mt-5">
                 <button onClick={() => setNoteModal((m) => ({ ...m, value: "" }))} className="flex-1 py-2.5 rounded-xl border border-red-200 text-red-600 font-semibold text-sm hover:bg-red-50 transition-colors">Clear</button>
                 <button onClick={() => setNoteModal((m) => ({ ...m, open: false }))} className="flex-1 py-2.5 rounded-xl border border-neutral-200 text-neutral-500 font-semibold text-sm hover:bg-neutral-50 transition-colors">Cancel</button>
