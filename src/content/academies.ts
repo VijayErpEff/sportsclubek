@@ -26,6 +26,8 @@ export interface AcademyPageData {
   name: string;
   sport: string;
   sportSlug: string;
+  /** SEO-optimized H1 — varies per academy to target different service-area keywords */
+  headline: string;
   tagline: string;
   description: string;
   image: string;
@@ -49,6 +51,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
     name: "Baseball Academy",
     sport: "Baseball",
     sportSlug: "baseball",
+    headline: "Youth Baseball Academy — Serving Cecil County, Middletown & Newark",
     tagline: "Where Struggling Hitters Become Confident Ones",
     description: "Academy players improve their batting average by .095 points on average. Written progress reports every 4 weeks. 6:1 player-to-coach ratio.",
     image: "/images/sports/baseball.jpg",
@@ -131,6 +134,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
     slug: "cricket-academy",
     name: "Cricket Academy",
     sport: "Cricket",
+    headline: "Cricket Academy — BRSS Partner Near Newark, Wilmington & Hockessin, DE",
     sportSlug: "cricket",
     tagline: "Powered by BRSS — North America's Largest Cricket Academy",
     description: "IPL veterans, international fast bowlers, and first-class cricketers coaching right here in Elkton — 15 minutes from Middletown, not 45 minutes to Philly.",
@@ -247,6 +251,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
     slug: "badminton-academy",
     name: "Badminton Academy",
     sport: "Badminton",
+    headline: "Badminton Academy — BWF-Certified Coaching Near Middletown & Wilmington, DE",
     sportSlug: "badminton",
     tagline: "Expert Coaching That Turns Potential Into Results",
     description: "BWF & USA Badminton Level-1 certified coaching from a PA State Champion and Swarthmore College Varsity Head Coach — on proper synthetic courts.",
@@ -335,6 +340,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
     slug: "kids-agility",
     name: "Kids Agility",
     sport: "Multi-Sport",
+    headline: "Kids Agility & Athleticism Training — Ages 5–12 in the MD/DE/PA Tri-State Area",
     sportSlug: "",
     tagline: "The Confidence They'll Carry Into Every Sport",
     description: "The shy kid who sat out at recess? Two months later, he asked to join the school baseball team. That's what this program does.",
@@ -416,6 +422,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
     slug: "volleyball-academy",
     name: "Volleyball Academy",
     sport: "Volleyball",
+    headline: "Youth Volleyball Academy — Near Newark, Bear & Middletown, DE",
     sportSlug: "volleyball",
     tagline: "Build the Skills That Win Points — and Scholarships",
     description: "USAV-certified coaching, video analysis, and a development pathway from first-time passer to club-level competitor.",
@@ -501,6 +508,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
     slug: "soccer-academy",
     name: "Soccer Academy",
     sport: "Soccer",
+    headline: "Indoor Soccer & Futsal Academy — Serving Wilmington, Newark & Cecil County",
     sportSlug: "soccer",
     tagline: "The Technical Edge That Shows Up at Tryouts",
     description: "Futsal-first training that builds the close control, quick feet, and game intelligence that outdoor coaches notice immediately.",

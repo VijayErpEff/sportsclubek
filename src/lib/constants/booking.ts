@@ -10,6 +10,12 @@ export const BOOKING_URLS = {
   /** All offerings — default landing for general booking */
   offerings: `${UH_BASE}/offerings`,
 
+  /** Events / sessions schedule on Upper Hand */
+  schedule: `${UH_BASE}/events`,
+
+  /** Credit passes on Upper Hand */
+  creditPasses: `${UH_BASE}/credit_passes`,
+
   /** All memberships overview */
   memberships: `${UH_BASE}/memberships`,
 

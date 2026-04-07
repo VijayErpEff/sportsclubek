@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Star, ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 import { GOOGLE_REVIEWS, AGGREGATE_RATING, type GoogleReview } from "@/content/reviews";
+import { SITE_CONFIG } from "@/lib/constants/site";
 
 const APPLE_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -121,7 +122,7 @@ export function GoogleReviews({ className }: { className?: string }) {
             reviews
           </p>
           <a
-            href="https://www.google.com/maps"
+            href={SITE_CONFIG.googleReviewUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary-light transition-colors"

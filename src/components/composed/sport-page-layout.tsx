@@ -7,7 +7,7 @@ import { CTABanner } from "@/components/composed/cta-banner";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { StaggerContainer, StaggerItem } from "@/components/ui/stagger";
-import { generateBreadcrumbLD, generateFAQLD } from "@/lib/seo/json-ld";
+import { generateBreadcrumbLD, generateFAQLD, generateSportOfferLD } from "@/lib/seo/json-ld";
 import { ArrowRight, Check, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 import { SPORT_PAGES, type SportPageData } from "@/content/sports";
@@ -19,6 +19,11 @@ export function SportPageLayout({ data }: { data: SportPageData }) {
     { name: data.name, url: `/${data.slug}` },
   ]);
   const faqLD = generateFAQLD(data.faqs);
+  const sportLD = generateSportOfferLD({
+    name: data.name,
+    description: data.description,
+    slug: data.slug,
+  });
 
   return (
     <>
@@ -30,6 +35,10 @@ export function SportPageLayout({ data }: { data: SportPageData }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLD) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(sportLD) }}
       />
 
       {/* Page Header — clean, light, premium */}
@@ -56,7 +65,7 @@ export function SportPageLayout({ data }: { data: SportPageData }) {
                 {data.name} Program
               </div>
               <h1 className="font-display text-page-title text-neutral-900 mb-3 text-balance">
-                {data.name} in Elkton, MD
+                {data.headline}
               </h1>
               <p className="font-display text-subsection text-neutral-700 mb-4 text-balance max-w-lg">
                 {data.tagline}

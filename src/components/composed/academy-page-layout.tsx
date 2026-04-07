@@ -81,7 +81,7 @@ export function AcademyPageLayout({ data }: { data: AcademyPageData }) {
           </div>
 
           <h1 className="font-display text-page-title text-neutral-900 mb-3 max-w-2xl text-balance">
-            {data.name} — Elkton, MD
+            {data.headline}
           </h1>
           <p className="font-display text-subsection text-neutral-700 mb-4 max-w-xl text-balance">
             {data.tagline}

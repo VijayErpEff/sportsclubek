@@ -28,6 +28,8 @@ export interface FAQ {
 export interface SportPageData {
   slug: string;
   name: string;
+  /** SEO-optimized H1 — varies per sport to target different service-area keywords */
+  headline: string;
   tagline: string;
   description: string;
   image: string;
@@ -50,6 +52,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
   baseball: {
     slug: "baseball",
     name: "Baseball",
+    headline: "Indoor Batting Cages & Baseball Training in Elkton, MD",
     tagline: "They Don't Need More Reps. They Need the Right Ones.",
     description:
       "Indoor batting cages with machines up to 90 MPH and coaches who track your kid's progress. From first swings to varsity prep.",
@@ -128,6 +131,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
   cricket: {
     slug: "cricket",
     name: "Cricket",
+    headline: "Indoor Cricket Facility Serving Newark, Wilmington & Elkton",
     tagline: "IPL Coaches. World-Class Facility. Right Here in Elkton.",
     description:
       "Proud partners of BRSS Cricket Academy — North America's largest cricket academy. Train under IPL veterans, international cricketers, and first-class players at the only dedicated indoor cricket center between Philadelphia and Baltimore.",
@@ -230,6 +234,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
   badminton: {
     slug: "badminton",
     name: "Badminton",
+    headline: "BWF-Approved Badminton Courts Near Middletown, Newark & Wilmington, DE",
     tagline: "Courts That Match Your Ambition.",
     description:
       "3 BWF-standard courts with synthetic sprung flooring, tournament LED lighting, and a BWF-certified coach. Not a gym with lines on the floor.",
@@ -322,6 +327,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
   pickleball: {
     slug: "pickleball",
     name: "Pickleball",
+    headline: "Indoor Pickleball Courts in Elkton, MD — Near Middletown & Bear, DE",
     tagline: "Come for the Game. Stay for the People.",
     description:
       "Indoor pickleball with 50+ regular players, beginner clinics, and the most welcoming community in the building. You'll make friends here.",
@@ -390,6 +396,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
   volleyball: {
     slug: "volleyball",
     name: "Volleyball",
+    headline: "Indoor Volleyball Courts & Training Near Newark & Middletown, DE",
     tagline: "Set. Spike. Repeat.",
     description:
       "Indoor volleyball with regulation courts, expert coaching, and a community that cheers as loud as you play. Open play, clinics, and youth development.",
@@ -468,6 +475,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
   soccer: {
     slug: "soccer",
     name: "Soccer",
+    headline: "Indoor Soccer & Futsal in Elkton — Serving the MD/DE/PA Tri-State Area",
     tagline: "Year-Round Soccer. Rain or Shine.",
     description:
       "Professional indoor turf, futsal programs, and coaching that develops technical skill — not just fitness. Youth academies through adult open play.",

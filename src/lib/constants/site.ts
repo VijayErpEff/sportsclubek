@@ -19,6 +19,14 @@ export const SITE_CONFIG = {
     latitude: 39.6068,
     longitude: -75.8130,
   },
+  /** Google Maps Place ID for structured data and direct links */
+  googlePlaceId: "ChIJ7fTmJYapx4kRnh1EB51-01U",
+  /** Google Maps listing URL using Place ID */
+  googleMapsUrl:
+    "https://www.google.com/maps/place/?q=place_id:ChIJ7fTmJYapx4kRnh1EB51-01U",
+  /** Direct Google review URL — takes users straight to the review form */
+  googleReviewUrl:
+    "https://search.google.com/local/writereview?placeid=ChIJ7fTmJYapx4kRnh1EB51-01U",
   social: {
     facebook: "https://www.facebook.com/people/LevelUp-Sports-Athletics-Club/61579103465434/",
     instagram: "https://www.instagram.com/levelupsportsandathleticsclub/",

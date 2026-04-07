@@ -31,7 +31,7 @@ export function generateOrganizationLD() {
       latitude: SITE_CONFIG.geo.latitude,
       longitude: SITE_CONFIG.geo.longitude,
     },
-    hasMap: `https://www.google.com/maps?q=${encodeURIComponent(SITE_CONFIG.address.full)}`,
+    hasMap: `https://www.google.com/maps/place/?q=place_id:${SITE_CONFIG.googlePlaceId}`,
     priceRange: "$$",
     currenciesAccepted: "USD",
     paymentAccepted: "Cash, Credit Card, Debit Card, Apple Pay, Google Pay",
@@ -306,6 +306,24 @@ export function generateSportOfferLD(sport: {
       name: SITE_CONFIG.name,
       "@id": `${SITE_CONFIG.url}/#organization`,
     },
+    areaServed: [
+      ...SITE_CONFIG.serviceAreas.map((area) => ({
+        "@type": "City" as const,
+        name: area,
+      })),
+      { "@type": "AdministrativeArea" as const, name: "Cecil County, Maryland" },
+      { "@type": "AdministrativeArea" as const, name: "New Castle County, Delaware" },
+      { "@type": "AdministrativeArea" as const, name: "Chester County, Pennsylvania" },
+      {
+        "@type": "GeoCircle" as const,
+        geoMidpoint: {
+          "@type": "GeoCoordinates" as const,
+          latitude: SITE_CONFIG.geo.latitude,
+          longitude: SITE_CONFIG.geo.longitude,
+        },
+        geoRadius: "40000",
+      },
+    ],
   };
 }
 
@@ -356,6 +374,7 @@ export function generateCourseLD(course: {
       "@type": "SportsActivityLocation",
       name: SITE_CONFIG.name,
       sameAs: SITE_CONFIG.url,
+      "@id": `${SITE_CONFIG.url}/#organization`,
     },
     locationCreated: {
       "@type": "Place",
@@ -367,6 +386,34 @@ export function generateCourseLD(course: {
         addressRegion: SITE_CONFIG.address.state,
         postalCode: SITE_CONFIG.address.zip,
       },
+    },
+    availableChannel: {
+      "@type": "ServiceChannel",
+      serviceLocation: {
+        "@type": "Place",
+        name: SITE_CONFIG.name,
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: SITE_CONFIG.address.street,
+          addressLocality: SITE_CONFIG.address.city,
+          addressRegion: SITE_CONFIG.address.state,
+          postalCode: SITE_CONFIG.address.zip,
+        },
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: SITE_CONFIG.geo.latitude,
+          longitude: SITE_CONFIG.geo.longitude,
+        },
+      },
+      serviceArea: [
+        ...SITE_CONFIG.serviceAreas.map((area) => ({
+          "@type": "City" as const,
+          name: area,
+        })),
+        { "@type": "AdministrativeArea" as const, name: "Cecil County, Maryland" },
+        { "@type": "AdministrativeArea" as const, name: "New Castle County, Delaware" },
+        { "@type": "AdministrativeArea" as const, name: "Chester County, Pennsylvania" },
+      ],
     },
   };
 }

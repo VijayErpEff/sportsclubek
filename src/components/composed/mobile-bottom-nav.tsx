@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Home, Trophy, Calendar, Phone, LayoutGrid, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils/cn";
+import { BOOKING_URLS } from "@/lib/constants/booking";
 
 const SPORT_LINKS = [
   { name: "Badminton", href: "/badminton", emoji: "\ud83c\udff8" },
@@ -28,7 +29,7 @@ export function MobileBottomNav() {
   const navItems = [
     { label: "Home", href: "/", icon: Home },
     { label: "Sports", href: "#sports", icon: Trophy, isSheet: true },
-    { label: "Schedule", href: "/schedule", icon: Calendar },
+    { label: "Schedule", href: BOOKING_URLS.schedule, icon: Calendar },
     { label: "Courts", href: "/court-status", icon: LayoutGrid, isLive: true },
     { label: "Contact", href: "/contact", icon: Phone },
   ];
