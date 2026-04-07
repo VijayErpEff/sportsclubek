@@ -2,7 +2,7 @@ export async function captureLead(data: {
   email: string;
   name?: string;
   phone?: string;
-  source: "sport_preference" | "blog" | "returning_visitor" | "tour_request";
+  source: "sport_preference" | "blog" | "returning_visitor" | "tour_request" | "survey";
   context?: string;
 }): Promise<boolean> {
   try {

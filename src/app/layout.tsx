@@ -7,6 +7,7 @@ import { CookieConsent } from "@/components/composed/cookie-consent";
 import { MobileBottomNav } from "@/components/composed/mobile-bottom-nav";
 import { SportPreference } from "@/components/composed/sport-preference";
 import { ReturningVisitor } from "@/components/composed/returning-visitor";
+import { SurveyBanner } from "@/components/composed/survey-banner";
 import { ScrollProgressBar } from "@/components/ui/progress-bar";
 import { AnnouncementBanner } from "@/components/composed/announcement-banner";
 import { Suspense } from "react";
@@ -142,6 +143,7 @@ export default function RootLayout({
             <MobileBottomNav />
             <SportPreference />
             <ReturningVisitor />
+            <SurveyBanner />
           </AdminProvider>
         </Suspense>
       </body>

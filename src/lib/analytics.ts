@@ -94,3 +94,21 @@ export function trackSocialClick(platform: string) {
 export function trackCourtStatusView() {
   send({ action: "court_status_view", params: {} });
 }
+
+// ── Survey ──────────────────────────────────────────────────────────────────
+
+export function trackSurveyStart() {
+  send({ action: "survey_start", params: {} });
+}
+
+export function trackSurveyStep(step: number) {
+  send({ action: "survey_step", params: { step_number: step } });
+}
+
+export function trackSurveyComplete() {
+  send({ action: "survey_complete", params: {} });
+}
+
+export function trackSurveyAbandon(lastStep: number) {
+  send({ action: "survey_abandon", params: { last_step: lastStep } });
+}
