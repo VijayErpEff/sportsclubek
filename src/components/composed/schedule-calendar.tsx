@@ -236,12 +236,12 @@ const SESSION_TYPE_BADGE: Record<SessionType, { label: string; className: string
 function RentalAvailabilityCard() {
   return (
     <a
-      href={BOOKING_URLS.schedule}
+      href={`tel:${SITE_CONFIG.phone}`}
       className="block rounded-xl border border-dashed border-violet-400/40 bg-gradient-to-r from-violet-50/80 to-white p-4 transition-all hover:shadow-md hover:border-violet-400/60 group"
     >
       <div className="flex items-start gap-3">
         <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-violet-500/10 shrink-0">
-          <span className="text-lg">🏟️</span>
+          <Phone className="h-4 w-4 text-violet-600" />
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2">
@@ -251,7 +251,7 @@ function RentalAvailabilityCard() {
             All areas are convertible — book any available space on-demand for any sport. Batting cages, cricket nets, badminton, pickleball, volleyball, soccer.
           </p>
           <span className="inline-block mt-1.5 text-[11px] font-semibold text-violet-600 group-hover:underline">
-            Book a Rental &rarr;
+            Call to Book {SITE_CONFIG.phone} &rarr;
           </span>
         </div>
       </div>
@@ -265,10 +265,10 @@ function RentalAvailabilityCard() {
 
 function SessionCard({ session, isNow }: { session: Session; isNow: boolean }) {
   const colors = SPORT_COLORS[session.sport];
-  const bookingUrl = getBookingUrl(session.sport);
   const sessionType = detectSessionType(session);
   const badge = SESSION_TYPE_BADGE[sessionType];
   const isRental = sessionType === "rental";
+  const bookingUrl = isRental ? `tel:${SITE_CONFIG.phone}` : getBookingUrl(session.sport);
   return (
     <a
       href={bookingUrl}
@@ -312,7 +312,7 @@ function SessionCard({ session, isNow }: { session: Session; isNow: boolean }) {
                 ? "text-violet-600 opacity-100"
                 : "text-accent opacity-0 group-hover:opacity-100"
             )}>
-              {isRental ? "Book Rental \u2192" : "Book \u2192"}
+              {isRental ? "Call to Book \u2192" : "Book \u2192"}
             </span>
           </div>
         </div>
@@ -1142,7 +1142,7 @@ export function ScheduleCalendar() {
                     return (
                       <a
                         key={`${session.sport}-${session.time}-${session.activity}`}
-                        href={getBookingUrl(session.sport)}
+                        href={sIsRental ? `tel:${SITE_CONFIG.phone}` : getBookingUrl(session.sport)}
                         target="_blank"
                         rel="noopener noreferrer"
                         className={cn(
@@ -1185,7 +1185,7 @@ export function ScheduleCalendar() {
                             ? "text-violet-600 opacity-100"
                             : "text-accent opacity-0 group-hover:opacity-100"
                         )}>
-                          {sIsRental ? "Book Rental \u2192" : "Book \u2192"}
+                          {sIsRental ? "Call to Book \u2192" : "Book \u2192"}
                         </span>
                       </a>
                     );
