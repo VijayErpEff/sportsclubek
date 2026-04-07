@@ -16,6 +16,9 @@ export const BOOKING_URLS = {
   /** Credit passes on Upper Hand */
   creditPasses: `${UH_BASE}/credit_passes`,
 
+  /** Free trial pass — credit passes page */
+  freeTrial: `${UH_BASE}/credit_passes`,
+
   /** All memberships overview */
   memberships: `${UH_BASE}/memberships`,
 

@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils/cn";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/layout/container";
 import { SITE_CONFIG } from "@/lib/constants/site";
+import { BOOKING_URLS } from "@/lib/constants/booking";
 import { trackPhoneCall, trackCTAClick } from "@/lib/analytics";
 import { captureLead } from "@/lib/leads";
 
@@ -281,7 +282,7 @@ export function Navbar() {
               </div>
 
               <Button size="sm" className="rounded-full px-5" asChild>
-                <Link href="/free-trial" onClick={() => trackCTAClick("Free Trial", "/free-trial")}>Free Trial</Link>
+                <a href={BOOKING_URLS.freeTrial} onClick={() => trackCTAClick("Free Trial", BOOKING_URLS.freeTrial)}>Free Trial</a>
               </Button>
             </div>
 
@@ -402,7 +403,7 @@ export function Navbar() {
             </div>
             <div className="mt-auto px-6 pt-8 space-y-3">
               <Button size="lg" className="w-full rounded-full" asChild>
-                <Link href="/free-trial" onClick={() => setMobileOpen(false)}>Free Trial</Link>
+                <a href={BOOKING_URLS.freeTrial} onClick={() => setMobileOpen(false)}>Free Trial</a>
               </Button>
               <p className="text-center text-sm text-neutral-400">
                 <a href={`tel:${SITE_CONFIG.phone}`} className="hover:text-primary">{SITE_CONFIG.phone}</a>

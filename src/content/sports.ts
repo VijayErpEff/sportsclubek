@@ -124,7 +124,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     ],
     academySlug: "baseball-academy",
     ctaTitle: "See the Difference in One Session",
-    ctaPrimary: { label: "Try a Free Session", href: "/free-trial" },
+    ctaPrimary: { label: "Try a Free Session", href: BOOKING_URLS.freeTrial },
     ctaSecondary: { label: "View Academy", href: "/baseball-academy" },
   },
 
@@ -227,7 +227,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     ],
     academySlug: "cricket-academy",
     ctaTitle: "Train Under International Coaches",
-    ctaPrimary: { label: "Try a Free Session", href: "/free-trial" },
+    ctaPrimary: { label: "Try a Free Session", href: BOOKING_URLS.freeTrial },
     ctaSecondary: { label: "View Academy", href: "/cricket-academy" },
   },
 
@@ -320,7 +320,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     ],
     academySlug: "badminton-academy",
     ctaTitle: "Step On Court and Feel the Difference",
-    ctaPrimary: { label: "Try a Free Session", href: "/free-trial" },
+    ctaPrimary: { label: "Try a Free Session", href: BOOKING_URLS.freeTrial },
     ctaSecondary: { label: "View Academy", href: "/badminton-academy" },
   },
 
@@ -389,7 +389,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       { question: "Where are the closest indoor pickleball courts to Middletown, DE?", answer: "LevelUP Sports in Elkton, MD — just 15 minutes from Middletown via Route 40. We're also 20 minutes from Newark, 25 from Bear, and 30 from Wilmington. Our dedicated indoor courts mean you can play year-round regardless of weather." },
     ],
     ctaTitle: "Find Your People on the Court",
-    ctaPrimary: { label: "Try a Free Session", href: "/free-trial" },
+    ctaPrimary: { label: "Try a Free Session", href: BOOKING_URLS.freeTrial },
     ctaSecondary: { label: "View Memberships", href: BOOKING_URLS.memberships },
   },
 
@@ -468,7 +468,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     ],
     academySlug: "volleyball-academy",
     ctaTitle: "Get on the Court",
-    ctaPrimary: { label: "Try a Free Session", href: "/free-trial" },
+    ctaPrimary: { label: "Try a Free Session", href: BOOKING_URLS.freeTrial },
     ctaSecondary: { label: "View Academy", href: "/volleyball-academy" },
   },
 
@@ -538,7 +538,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     ],
     academySlug: "soccer-academy",
     ctaTitle: "Keep Playing. Keep Improving.",
-    ctaPrimary: { label: "Try a Free Session", href: "/free-trial" },
+    ctaPrimary: { label: "Try a Free Session", href: BOOKING_URLS.freeTrial },
     ctaSecondary: { label: "View Academy", href: "/soccer-academy" },
   },
 };

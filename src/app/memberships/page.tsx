@@ -9,6 +9,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { generateSEOMetadata } from "@/lib/seo/metadata";
 import { generateBreadcrumbLD, generateFAQLD } from "@/lib/seo/json-ld";
 import { MEMBERSHIP_FAQS } from "@/content/faqs";
+import { BOOKING_URLS } from "@/lib/constants/booking";
 import { Check, X, GraduationCap, Shield, Users } from "lucide-react";
 
 export const metadata: Metadata = generateSEOMetadata({
@@ -231,7 +232,7 @@ export default function MembershipsPage() {
       <CTABanner
         title="Try Before You Buy"
         description="Contact us or visit for a free tour. We'll help you find the perfect fit."
-        primaryCTA={{ label: "Try a Free Session", href: "/free-trial" }}
+        primaryCTA={{ label: "Try a Free Session", href: BOOKING_URLS.freeTrial }}
         secondaryCTA={{ label: "Contact Us", href: "/contact" }}
       />
     </>

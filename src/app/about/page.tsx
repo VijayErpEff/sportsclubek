@@ -117,7 +117,7 @@ export default function AboutPage() {
                 </p>
                 <div className="flex flex-wrap gap-4 mt-8">
                   <Button asChild>
-                    <Link href="/free-trial">Try a Free Session</Link>
+                    <a href={BOOKING_URLS.freeTrial}>Try a Free Session</a>
                   </Button>
                   <Button variant="outline" asChild>
                     <Link href="/schedule">View Schedule</Link>

@@ -9,6 +9,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { StaggerContainer, StaggerItem } from "@/components/ui/stagger";
 import { generateSEOMetadata } from "@/lib/seo/metadata";
 import { generateBreadcrumbLD } from "@/lib/seo/json-ld";
+import { BOOKING_URLS } from "@/lib/constants/booking";
 import {
   Thermometer, ParkingCircle, Wifi, ShieldCheck,
   Sparkles, Accessibility, Store, Clock, ArrowRight, MapPin,
@@ -447,7 +448,7 @@ export default function FacilitiesPage() {
       <CTABanner
         title="See It For Yourself"
         description="Schedule a facility tour or book your first session today."
-        primaryCTA={{ label: "Try a Free Session", href: "/free-trial" }}
+        primaryCTA={{ label: "Try a Free Session", href: BOOKING_URLS.freeTrial }}
         secondaryCTA={{ label: "View Schedule", href: "/schedule" }}
       />
     </>

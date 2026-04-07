@@ -27,6 +27,7 @@ import { BlogCard } from "@/components/composed/blog-card";
 
 // Data
 import { SPORTS } from "@/lib/constants/site";
+import { BOOKING_URLS } from "@/lib/constants/booking";
 import { BLOG_POSTS } from "@/content/blog-posts";
 import { generateFAQLD } from "@/lib/seo/json-ld";
 import { HOMEPAGE_FAQS } from "@/content/faqs";
@@ -111,7 +112,7 @@ export default function HomePage() {
         title="The Sports Facility Your Family Has Been Looking For"
         subtitle="15 minutes from Middletown. 20 from Newark. Every sport you love, coaches who remember your kid's name."
         badge="Now Open — 701 E Pulaski Hwy, Elkton"
-        primaryCTA={{ label: "Try a Free Session", href: "/free-trial" }}
+        primaryCTA={{ label: "Try a Free Session", href: BOOKING_URLS.freeTrial }}
         secondaryCTA={{ label: "Explore Programs", href: "#sports" }}
         overlayOpacity={0.5}
       />
@@ -420,7 +421,7 @@ export default function HomePage() {
       <CTABanner
         title="Your First Session Is Free"
         description="No commitment. No pressure. Just come play. If you love it, we'll talk memberships. If not, you tried a new sport for free."
-        primaryCTA={{ label: "Claim Your Free Session", href: "/free-trial" }}
+        primaryCTA={{ label: "Claim Your Free Session", href: BOOKING_URLS.freeTrial }}
         secondaryCTA={{ label: "View Pricing", href: "/memberships" }}
       />
     </>
