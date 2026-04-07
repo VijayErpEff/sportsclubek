@@ -234,7 +234,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
   badminton: {
     slug: "badminton",
     name: "Badminton",
-    headline: "BWF-Approved Badminton Courts Near Middletown, Newark & Wilmington, DE",
+    headline: "Professional Indoor Badminton Courts & Coaching Near Middletown, Newark & Wilmington, DE",
     tagline: "Courts That Match Your Ambition.",
     description:
       "3 BWF-standard courts with synthetic sprung flooring, tournament LED lighting, and a BWF-certified coach. Not a gym with lines on the floor.",

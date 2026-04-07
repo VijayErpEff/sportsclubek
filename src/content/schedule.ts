@@ -15,7 +15,8 @@ export type SportType =
   | "volleyball"
   | "soccer"
   | "agility"
-  | "open";
+  | "open"
+  | "rental";
 
 export interface Session {
   time: string;
@@ -41,6 +42,7 @@ export const SPORT_COLORS: Record<SportType, { bg: string; text: string; dot: st
   soccer:     { bg: "bg-red-500/10",   text: "text-red-700",       dot: "bg-red-500",     border: "border-red-500/20" },
   agility:    { bg: "bg-warning/10",   text: "text-neutral-700",   dot: "bg-warning",     border: "border-warning/20" },
   open:       { bg: "bg-neutral-50",   text: "text-neutral-600",   dot: "bg-neutral-400", border: "border-neutral-200" },
+  rental:     { bg: "bg-violet-500/10", text: "text-violet-700",   dot: "bg-violet-500",  border: "border-violet-500/20" },
 };
 
 export const SPORT_LABELS: Record<SportType, string> = {
@@ -52,6 +54,7 @@ export const SPORT_LABELS: Record<SportType, string> = {
   soccer: "Soccer",
   agility: "Kids Agility",
   open: "Open Play",
+  rental: "Rental",
 };
 
 // ============================================================
