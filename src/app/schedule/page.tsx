@@ -43,18 +43,22 @@ export default function SchedulePage() {
           <h1 className="font-display text-3xl md:text-4xl font-bold tracking-tight text-neutral-900">
             Weekly Schedule
           </h1>
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mt-2">
-            <p className="hidden md:block text-neutral-500 max-w-lg">
-              Filter by sport, pick your day, and find the perfect session.
-            </p>
-            <a
-              href="tel:(443) 406-6494"
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-dashed border-violet-400/40 bg-violet-50/50 text-xs font-medium text-violet-700 hover:bg-violet-50 transition-colors shrink-0"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-violet-500" />
-              Courts &amp; cages available for rental — call to book
-            </a>
-          </div>
+          <p className="hidden md:block mt-2 text-neutral-500 max-w-lg">
+            Filter by sport, pick your day, and find the perfect session.
+          </p>
+          <a
+            href="tel:(443) 406-6494"
+            className="mt-3 flex items-center gap-3 px-4 py-3 rounded-xl border border-dashed border-violet-400/50 bg-gradient-to-r from-violet-50 to-white hover:shadow-md transition-all group"
+          >
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-500 text-white shrink-0 group-hover:bg-violet-600 transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </span>
+            <div className="min-w-0 flex-1">
+              <p className="text-sm font-semibold text-violet-800">Courts &amp; Cages Available for Rental</p>
+              <p className="text-xs text-neutral-500">All areas convertible — book any space on-demand for any sport</p>
+            </div>
+            <span className="text-sm font-bold text-violet-600 shrink-0 group-hover:underline">(443) 406-6494</span>
+          </a>
         </Container>
       </section>
 

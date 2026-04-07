@@ -1240,27 +1240,6 @@ export function ScheduleCalendar() {
         </div>
       </div>
 
-      {/* Mobile sticky Call to Book bar */}
-      <div className="fixed bottom-14 inset-x-0 z-40 lg:hidden" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
-        <div className="mx-3 flex gap-2">
-          <a
-            href={`tel:${SITE_CONFIG.phone}`}
-            className="flex-1 flex items-center justify-center gap-2 py-3 bg-accent text-white font-bold text-sm rounded-xl shadow-lg shadow-accent/25"
-          >
-            <Phone className="h-4 w-4" />
-            Call to Book
-          </a>
-          <a
-            href={BOOKING_URLS.offerings}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 flex items-center justify-center gap-2 py-3 bg-primary text-white font-bold text-sm rounded-xl shadow-lg shadow-primary/25"
-          >
-            Book Online
-            <ChevronRight className="h-4 w-4" />
-          </a>
-        </div>
-      </div>
     </div>
   );
 }
