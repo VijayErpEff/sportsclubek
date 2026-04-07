@@ -965,8 +965,8 @@ export function ScheduleCalendar() {
         </div>
       </div>
 
-      {/* Day Tabs — fits all 7 days without scrolling */}
-      <div className="grid grid-cols-7 gap-1 mb-4">
+      {/* Day Tabs — mobile only; desktop grid has its own day headers */}
+      <div className="grid grid-cols-7 gap-1 mb-4 lg:hidden">
         {mergedSchedule.map((day, index) => {
           const sessionCount =
             activeSport === "all"
