@@ -214,6 +214,7 @@ function applyOverrides(
 function SessionCard({ session, isNow }: { session: Session; isNow: boolean }) {
   const colors = SPORT_COLORS[session.sport];
   const bookingUrl = getBookingUrl(session.sport);
+  const isRental = session.sport === "rental";
   return (
     <a
       href={bookingUrl}
@@ -221,17 +222,23 @@ function SessionCard({ session, isNow }: { session: Session; isNow: boolean }) {
         "block rounded-xl border p-3.5 transition-all hover:shadow-md group",
         colors.bg,
         colors.border,
+        isRental && "border-violet-500/30 border-dashed",
         isNow && "ring-2 ring-green-500/30 shadow-[0_0_12px_-3px_rgba(34,197,94,0.2)]"
       )}
     >
       <div className="flex items-start gap-2.5">
         <div className={cn("w-2 h-2 rounded-full mt-1.5 shrink-0", colors.dot)} />
         <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             <p className={cn("font-semibold text-sm leading-tight", colors.text)}>
               {session.activity}
             </p>
             {isNow && <NowBadge />}
+            {isRental && (
+              <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-[10px] font-semibold text-violet-600">
+                Available
+              </span>
+            )}
           </div>
           <div className="flex items-center gap-1.5 mt-1">
             <Clock className="h-3 w-3 text-neutral-400" />
@@ -245,8 +252,13 @@ function SessionCard({ session, isNow }: { session: Session; isNow: boolean }) {
                 {session.level}
               </span>
             ) : <span />}
-            <span className="text-[11px] font-semibold text-accent opacity-0 group-hover:opacity-100 transition-opacity">
-              Book &rarr;
+            <span className={cn(
+              "text-[11px] font-semibold transition-opacity",
+              isRental
+                ? "text-violet-600 opacity-100"
+                : "text-accent opacity-0 group-hover:opacity-100"
+            )}>
+              {isRental ? "Book Rental \u2192" : "Book \u2192"}
             </span>
           </div>
         </div>

@@ -46,6 +46,7 @@ export function getBookingUrl(sport: string): string {
     pickleball: BOOKING_URLS.pickleballOpenPlay,
     badminton: BOOKING_URLS.badmintonOpenPlay,
     agility: BOOKING_URLS.kidsAgility,
+    rental: BOOKING_URLS.schedule,
   };
   return map[sport] ?? BOOKING_URLS.offerings;
 }
