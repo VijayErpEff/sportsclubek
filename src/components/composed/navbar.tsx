@@ -9,7 +9,6 @@ import { cn } from "@/lib/utils/cn";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/layout/container";
 import { SITE_CONFIG } from "@/lib/constants/site";
-import { BOOKING_URLS } from "@/lib/constants/booking";
 import { trackPhoneCall, trackCTAClick } from "@/lib/analytics";
 import { captureLead } from "@/lib/leads";
 
@@ -28,7 +27,7 @@ const NAV_ITEMS = [
   { label: "Facilities", href: "/facilities" },
   { label: "Court Status", href: "/court-status" },
   { label: "Memberships", href: "/memberships" },
-  { label: "Schedule", href: BOOKING_URLS.schedule },
+  { label: "Schedule", href: "/schedule" },
   { label: "About", href: "/about" },
 ];
 
@@ -194,9 +193,9 @@ export function Navbar() {
                       <Link href="/kids-agility" className="text-xs text-neutral-400 hover:text-primary transition-colors" onClick={() => setSportsOpen(false)}>
                         Kids Agility (Ages 5-12) &rarr;
                       </Link>
-                      <a href={BOOKING_URLS.schedule} target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-accent hover:text-accent-hover transition-colors" onClick={() => setSportsOpen(false)}>
+                      <Link href="/schedule" className="text-xs font-semibold text-accent hover:text-accent-hover transition-colors" onClick={() => setSportsOpen(false)}>
                         Full Schedule &rarr;
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 )}

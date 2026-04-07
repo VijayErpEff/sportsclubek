@@ -59,7 +59,7 @@ export default function SchedulePage() {
       <CTABanner
         title="Ready to Train?"
         description="Become a member for unlimited access, or book a single session to get started."
-        primaryCTA={{ label: "View Memberships", href: BOOKING_URLS.memberships }}
+        primaryCTA={{ label: "Book a Session", href: BOOKING_URLS.schedule }}
         secondaryCTA={{ label: "Schedule a Tour", href: "/open-house" }}
       />
     </>

@@ -7,7 +7,6 @@ import { trackPhoneCall, trackSocialClick } from "@/lib/analytics";
 import { Container } from "@/components/layout/container";
 import { NewsletterSignup } from "./newsletter-signup";
 import { SITE_CONFIG, SPORTS } from "@/lib/constants/site";
-import { BOOKING_URLS } from "@/lib/constants/booking";
 
 const footerSportsAndAcademies = [
   ...SPORTS.map((s) => ({
@@ -21,7 +20,7 @@ const footerCompany = [
   { label: "About", href: "/about" },
   { label: "Facilities", href: "/facilities" },
   { label: "Memberships", href: "/memberships" },
-  { label: "Schedule", href: BOOKING_URLS.schedule },
+  { label: "Schedule", href: "/schedule" },
   { label: "Court Status", href: "/court-status" },
   { label: "Free Trial", href: "/free-trial" },
   { label: "Contact", href: "/contact" },
