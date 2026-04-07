@@ -208,13 +208,67 @@ function applyOverrides(
 }
 
 // ---------------------------------------------------------------------------
+// Session type detection & badges
+// ---------------------------------------------------------------------------
+
+type SessionType = "class" | "open-play" | "rental" | "event";
+
+function detectSessionType(session: Session): SessionType {
+  if (session.sport === "rental") return "rental";
+  if (session.sport === "open") return "open-play";
+  const a = session.activity.toLowerCase();
+  if (a.includes("open play") || a.includes("open batting") || a.includes("drop-in") || a.includes("drop in")) return "open-play";
+  if (a.includes("event") || a.includes("tournament") || a.includes("party") || a.includes("camp")) return "event";
+  return "class";
+}
+
+const SESSION_TYPE_BADGE: Record<SessionType, { label: string; className: string } | null> = {
+  class: { label: "Class", className: "bg-blue-500/10 border-blue-500/20 text-blue-600" },
+  "open-play": { label: "Open Play", className: "bg-emerald-500/10 border-emerald-500/20 text-emerald-600" },
+  rental: { label: "Available", className: "bg-violet-500/10 border-violet-500/20 text-violet-600" },
+  event: { label: "Event", className: "bg-amber-500/10 border-amber-500/20 text-amber-600" },
+};
+
+// ---------------------------------------------------------------------------
+// Rental Availability Card
+// ---------------------------------------------------------------------------
+
+function RentalAvailabilityCard() {
+  return (
+    <a
+      href={BOOKING_URLS.schedule}
+      className="block rounded-xl border border-dashed border-violet-400/40 bg-gradient-to-r from-violet-50/80 to-white p-4 transition-all hover:shadow-md hover:border-violet-400/60 group"
+    >
+      <div className="flex items-start gap-3">
+        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-violet-500/10 shrink-0">
+          <span className="text-lg">🏟️</span>
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-2">
+            <p className="font-semibold text-sm text-violet-800">Courts & Cages Available for Rental</p>
+          </div>
+          <p className="text-xs text-neutral-500 mt-0.5">
+            All areas are convertible — book any available space on-demand for any sport. Batting cages, cricket nets, badminton, pickleball, volleyball, soccer.
+          </p>
+          <span className="inline-block mt-1.5 text-[11px] font-semibold text-violet-600 group-hover:underline">
+            Book a Rental &rarr;
+          </span>
+        </div>
+      </div>
+    </a>
+  );
+}
+
+// ---------------------------------------------------------------------------
 // Session Card (non-admin)
 // ---------------------------------------------------------------------------
 
 function SessionCard({ session, isNow }: { session: Session; isNow: boolean }) {
   const colors = SPORT_COLORS[session.sport];
   const bookingUrl = getBookingUrl(session.sport);
-  const isRental = session.sport === "rental";
+  const sessionType = detectSessionType(session);
+  const badge = SESSION_TYPE_BADGE[sessionType];
+  const isRental = sessionType === "rental";
   return (
     <a
       href={bookingUrl}
@@ -234,9 +288,9 @@ function SessionCard({ session, isNow }: { session: Session; isNow: boolean }) {
               {session.activity}
             </p>
             {isNow && <NowBadge />}
-            {isRental && (
-              <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-[10px] font-semibold text-violet-600">
-                Available
+            {badge && (
+              <span className={cn("inline-flex items-center px-1.5 py-0.5 rounded-full border text-[10px] font-semibold", badge.className)}>
+                {badge.label}
               </span>
             )}
           </div>
@@ -948,6 +1002,9 @@ export function ScheduleCalendar() {
       {/* Mobile: Active Day Card View */}
       <div className="lg:hidden">
         <div className="space-y-2.5">
+          {/* Rental availability — always visible */}
+          {!isAdmin && <RentalAvailabilityCard />}
+
           {filteredSchedule[activeDay].sessions.length > 0 ? (
             filteredSchedule[activeDay].sessions.map((session) =>
               isAdmin ? (
@@ -988,6 +1045,13 @@ export function ScheduleCalendar() {
           )}
         </div>
       </div>
+
+      {/* Desktop: Rental Card (full width) */}
+      {!isAdmin && (
+        <div className="hidden lg:block mb-4">
+          <RentalAvailabilityCard />
+        </div>
+      )}
 
       {/* Desktop: Full Week Grid */}
       <div className="hidden lg:block">
@@ -1072,6 +1136,9 @@ export function ScheduleCalendar() {
                     }
 
                     const nowActive = isSessionNow(session, dayIndex);
+                    const sType = detectSessionType(session);
+                    const sBadge = SESSION_TYPE_BADGE[sType];
+                    const sIsRental = sType === "rental";
                     return (
                       <a
                         key={`${session.sport}-${session.time}-${session.activity}`}
@@ -1082,6 +1149,7 @@ export function ScheduleCalendar() {
                           "block rounded-lg border p-2 text-xs transition-all hover:shadow-sm group",
                           colors.bg,
                           colors.border,
+                          sIsRental && "border-dashed border-violet-500/30",
                           nowActive && "ring-2 ring-green-500/30"
                         )}
                       >
@@ -1099,13 +1167,25 @@ export function ScheduleCalendar() {
                         <p className="text-neutral-500 mt-0.5">
                           {session.time}
                         </p>
-                        {session.level && (
-                          <span className="inline-block mt-1 text-[10px] text-neutral-400 bg-white/60 px-1.5 py-0.5 rounded">
-                            {session.level}
-                          </span>
-                        )}
-                        <span className="block mt-1 text-[10px] font-semibold text-accent opacity-0 group-hover:opacity-100 transition-opacity">
-                          Book &rarr;
+                        <div className="flex items-center gap-1 mt-1 flex-wrap">
+                          {session.level && (
+                            <span className="inline-block text-[10px] text-neutral-400 bg-white/60 px-1.5 py-0.5 rounded">
+                              {session.level}
+                            </span>
+                          )}
+                          {sBadge && (
+                            <span className={cn("inline-block text-[9px] font-semibold px-1.5 py-0.5 rounded-full border", sBadge.className)}>
+                              {sBadge.label}
+                            </span>
+                          )}
+                        </div>
+                        <span className={cn(
+                          "block mt-1 text-[10px] font-semibold transition-opacity",
+                          sIsRental
+                            ? "text-violet-600 opacity-100"
+                            : "text-accent opacity-0 group-hover:opacity-100"
+                        )}>
+                          {sIsRental ? "Book Rental \u2192" : "Book \u2192"}
                         </span>
                       </a>
                     );
