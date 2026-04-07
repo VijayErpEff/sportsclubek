@@ -40,35 +40,20 @@ export default function SchedulePage() {
               <li className="text-neutral-600 font-medium">Schedule</li>
             </ol>
           </nav>
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-            <div>
-              <h1 className="font-display text-3xl md:text-4xl font-bold tracking-tight text-neutral-900">
-                Weekly Schedule
-              </h1>
-              <p className="hidden md:block mt-2 text-neutral-500 max-w-lg">
-                Filter by sport, pick your day, and find the perfect session.
-              </p>
-            </div>
-            <div className="flex items-center gap-2 shrink-0">
-              <a
-                href={BOOKING_URLS.schedule}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-accent text-white text-sm font-semibold hover:bg-accent-hover transition-colors"
-              >
-                Book Events
-              </a>
-              <a
-                href={BOOKING_URLS.memberships}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-white border border-neutral-200 text-neutral-700 text-sm font-semibold hover:bg-neutral-50 transition-colors"
-              >
-                Memberships
-              </a>
-              <a
-                href={BOOKING_URLS.creditPasses}
-                className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-white border border-neutral-200 text-neutral-700 text-sm font-semibold hover:bg-neutral-50 transition-colors"
-              >
-                Credit Passes
-              </a>
-            </div>
+          <h1 className="font-display text-3xl md:text-4xl font-bold tracking-tight text-neutral-900">
+            Weekly Schedule
+          </h1>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mt-2">
+            <p className="hidden md:block text-neutral-500 max-w-lg">
+              Filter by sport, pick your day, and find the perfect session.
+            </p>
+            <a
+              href="tel:(443) 406-6494"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-dashed border-violet-400/40 bg-violet-50/50 text-xs font-medium text-violet-700 hover:bg-violet-50 transition-colors shrink-0"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-violet-500" />
+              Courts &amp; cages available for rental — call to book
+            </a>
           </div>
         </Container>
       </section>

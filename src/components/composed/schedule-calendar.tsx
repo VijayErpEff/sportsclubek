@@ -1002,9 +1002,6 @@ export function ScheduleCalendar() {
       {/* Mobile: Active Day Card View */}
       <div className="lg:hidden">
         <div className="space-y-2.5">
-          {/* Rental availability — always visible */}
-          {!isAdmin && <RentalAvailabilityCard />}
-
           {filteredSchedule[activeDay].sessions.length > 0 ? (
             filteredSchedule[activeDay].sessions.map((session) =>
               isAdmin ? (
@@ -1045,13 +1042,6 @@ export function ScheduleCalendar() {
           )}
         </div>
       </div>
-
-      {/* Desktop: Rental Card (full width) */}
-      {!isAdmin && (
-        <div className="hidden lg:block mb-4">
-          <RentalAvailabilityCard />
-        </div>
-      )}
 
       {/* Desktop: Full Week Grid */}
       <div className="hidden lg:block">
