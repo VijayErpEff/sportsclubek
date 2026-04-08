@@ -269,6 +269,24 @@ export function generateOrganizationLD() {
       "court rentals Elkton MD",
     ],
     sameAs: Object.values(SITE_CONFIG.social),
+    // Booking action — tells AI/search "you can reserve here"
+    potentialAction: [
+      {
+        "@type": "ReserveAction",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: "https://app.upperhand.io/customers/2578-levelup-sports-and-athletics-club/offerings",
+          actionPlatform: [
+            "https://schema.org/DesktopWebPlatform",
+            "https://schema.org/MobileWebPlatform",
+          ],
+        },
+        result: {
+          "@type": "Reservation",
+          name: "Court or Cage Reservation",
+        },
+      },
+    ],
   };
 }
 

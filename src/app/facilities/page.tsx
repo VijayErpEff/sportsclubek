@@ -238,7 +238,7 @@ export default function FacilitiesPage() {
                 { value: "20,000+", label: "Sq Ft of Space" },
                 { value: "500+", label: "Athletes Trained" },
                 { value: "7", label: "Days a Week" },
-                { value: "4.9★", label: "Google Rating" },
+                { value: "5.0★", label: "Google Rating" },
               ].map((stat) => (
                 <div key={stat.label}>
                   <div className="font-mono text-section text-white font-bold">
