@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { StaggerContainer, StaggerItem } from "@/components/ui/stagger";
 import { generateSEOMetadata } from "@/lib/seo/metadata";
-import { generateBreadcrumbLD } from "@/lib/seo/json-ld";
+import { generateBreadcrumbLD, generateEventLD } from "@/lib/seo/json-ld";
 
 export const metadata: Metadata = generateSEOMetadata({
   title: "Open House — Tour Our Facility in Elkton, MD",
@@ -23,11 +23,25 @@ export default function OpenHousePage() {
     { name: "Open House", url: "/open-house" },
   ]);
 
+  const eventLD = generateEventLD({
+    name: "LevelUP Sports Open House — Free Facility Tour & Try-Out Sessions",
+    description:
+      "Tour our 20,000 sq ft indoor facility, meet coaches, and try free sessions in baseball, cricket, badminton, pickleball, volleyball, and soccer. Open to all ages. No registration fee.",
+    startDate: "2026-04-18T10:00:00-04:00",
+    endDate: "2026-04-18T15:00:00-04:00",
+    url: "/open-house",
+    isAccessibleForFree: true,
+  });
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLD) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(eventLD) }}
       />
 
       <Hero

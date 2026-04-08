@@ -29,7 +29,7 @@ export const BLOG_POSTS: BlogPost[] = [
     <p>Tennis balls are safer for close-range front toss and help players track smaller objects, improving hand-eye coordination. Mix speeds and locations to keep the hitter engaged and adapting.</p>
     <h2>5. Live Cage Sessions</h2>
     <p>Nothing replaces live machine work. Start at a comfortable speed and gradually increase. Focus on timing and making solid contact rather than power. Our cages at LevelUP go up to 90 MPH for advanced players.</p>
-    <p><strong>Ready to put these drills into practice?</strong> Book a batting cage session at LevelUP Sports and work with our pitching machines at your own pace.</p>`,
+    <p><strong>Ready to put these drills into practice?</strong> Book a <a href="/baseball">batting cage session</a> at LevelUP Sports and work with our pitching machines at your own pace. Serious about development? Check out the <a href="/baseball-academy">Baseball Academy</a> for structured coaching with Coach Joe Vanaskey.</p>`,
     author: "Coach Rivera",
     date: "2025-03-15",
     readTime: 4,
@@ -52,7 +52,7 @@ export const BLOG_POSTS: BlogPost[] = [
     <p>Practice specific rally patterns: net-to-back, cross-court clears, drop-and-drive sequences. A training partner or coach feeding shuttles makes this most effective. Record yourself to identify wasted movement.</p>
     <h2>Week 4: Integration</h2>
     <p>Play practice matches focusing specifically on returning to base position after every shot. Record yourself and compare your movement to week 1 &mdash; you&rsquo;ll be surprised at the improvement.</p>
-    <p>Our badminton courts at LevelUP Sports are available for individual practice and coaching sessions. Book your court time today.</p>`,
+    <p>Our <a href="/badminton">badminton courts</a> at LevelUP Sports are available for individual practice and coaching sessions. Want structured coaching? The <a href="/badminton-academy">Badminton Academy</a> with BWF-certified Coach Nabeel covers footwork, strokes, and match strategy. <a href="/free-trial">Try a free session</a> to see the courts.</p>`,
     author: "Coach Lee",
     date: "2025-03-05",
     readTime: 5,
@@ -73,7 +73,8 @@ export const BLOG_POSTS: BlogPost[] = [
     <p>Marcus enrolled in our Baseball Academy&rsquo;s twice-weekly sessions. Coach Rivera identified issues with his stance and timing almost immediately. &ldquo;Marcus had natural bat speed but his weight transfer was off,&rdquo; explains Coach Rivera. &ldquo;Once we fixed his load and stride, everything clicked.&rdquo;</p>
     <h2>The Results</h2>
     <p>Within three months, Marcus&rsquo;s batting average jumped from .220 to .340. By the end of the season, it was .380. He earned a starting spot and was named to the all-conference team.</p>
-    <p>&ldquo;LevelUP didn&rsquo;t just make me a better hitter,&rdquo; Marcus says. &ldquo;The coaches here taught me to believe in myself. That&rsquo;s something I&rsquo;ll carry with me forever.&rdquo;</p>`,
+    <p>&ldquo;LevelUP didn&rsquo;t just make me a better hitter,&rdquo; Marcus says. &ldquo;The coaches here taught me to believe in myself. That&rsquo;s something I&rsquo;ll carry with me forever.&rdquo;</p>
+    <p>Interested in the program that transformed Marcus&rsquo;s game? Learn more about the <a href="/baseball-academy">Baseball Academy</a> or <a href="/free-trial">book a free trial session</a> to meet Coach Rivera and see our <a href="/facilities">batting cages</a> in person.</p>`,
     author: "LevelUP Sports",
     date: "2025-02-28",
     readTime: 4,
@@ -102,7 +103,8 @@ export const BLOG_POSTS: BlogPost[] = [
     <h2>6. Skipping the Warm-Up</h2>
     <p>Pickleball involves quick lateral movements. A proper warm-up prevents injuries, especially for older players. Spend 5&ndash;10 minutes warming up before every session.</p>
     <h2>7. Not Taking Lessons</h2>
-    <p>A few hours of professional instruction will advance your game faster than months of self-teaching. Our beginner clinics at LevelUP run weekly and cover all the fundamentals.</p>`,
+    <p>A few hours of professional instruction will advance your game faster than months of self-teaching. Our beginner clinics at LevelUP run weekly and cover all the fundamentals.</p>
+    <p>Ready to fix these mistakes on the court? Check our <a href="/pickleball">pickleball program</a> for open play times and beginner clinics, or <a href="/free-trial">try a free session</a> to experience our dedicated indoor courts.</p>`,
     author: "LevelUP Sports",
     date: "2025-02-20",
     readTime: 5,
@@ -123,7 +125,7 @@ export const BLOG_POSTS: BlogPost[] = [
     <h2>Why Indoor Matters</h2>
     <p>Delaware weather is unpredictable. Between rain, heat, and cold, outdoor training gets cancelled constantly. Indoor facilities eliminate that problem entirely — 72°F year-round, no cancellations, no rescheduling. For families with kids in competitive programs, consistency is everything.</p>
     <h2>The Bottom Line</h2>
-    <p>If you're in Middletown, Bear, Glasgow, or southern New Castle County, you have more options than you think. LevelUP Sports is 15 minutes away and offers free trial sessions in all six sports — it's worth the drive to see the facility before committing.</p>`,
+    <p>If you're in Middletown, Bear, Glasgow, or southern New Castle County, you have more options than you think. <a href="/facilities">LevelUP Sports</a> is 15 minutes away and offers <a href="/free-trial">free trial sessions</a> in all six sports — including <a href="/baseball">baseball</a>, <a href="/cricket">cricket</a>, <a href="/badminton">badminton</a>, and <a href="/pickleball">pickleball</a>. It's worth the drive to see the facility before committing.</p>`,
     author: "LevelUP Sports",
     date: "2025-01-20",
     readTime: 4,
@@ -145,7 +147,7 @@ export const BLOG_POSTS: BlogPost[] = [
     <h2>Cost Expectations</h2>
     <p>Cage rental typically runs $35-45 per hour. Some facilities offer memberships that bring the per-visit cost down significantly. At LevelUP, a Pro membership gives unlimited cage access for $89/month — if you're going more than twice a week, the math works out quickly.</p>
     <h2>Free Trial Option</h2>
-    <p>Not sure if your kid will like it? LevelUP offers a free trial session with coaching included. It's the best way to see if cage work is right for your child's development without committing upfront.</p>`,
+    <p>Not sure if your kid will like it? LevelUP offers a <a href="/free-trial">free trial session</a> with coaching included. It's the best way to see if cage work is right for your child's development without committing upfront. Learn more about our full <a href="/baseball">baseball program</a> or explore the <a href="/baseball-academy">Baseball Academy</a> for structured youth development.</p>`,
     author: "Coach Rivera",
     date: "2025-02-05",
     readTime: 5,
@@ -167,7 +169,7 @@ export const BLOG_POSTS: BlogPost[] = [
     <h2>Questions to Ask Before Enrolling</h2>
     <ul><li>What are your coaches' playing and coaching backgrounds?</li><li>What is the player-to-coach ratio?</li><li>How do you track and communicate progress?</li><li>Can we observe a session before committing?</li><li>What's the cancellation policy?</li></ul>
     <h2>Local Options</h2>
-    <p>In Cecil County, LevelUP Sports offers academies in baseball, cricket, and badminton with class sizes capped at 8-12 players, written progress reports every 4 weeks, and a free trial session for every program. It's worth visiting the facility and watching a session before deciding.</p>`,
+    <p>In Cecil County, LevelUP Sports offers academies in <a href="/baseball-academy">baseball</a>, <a href="/cricket-academy">cricket</a>, and <a href="/badminton-academy">badminton</a> with class sizes capped at 8-12 players, written progress reports every 4 weeks, and a <a href="/free-trial">free trial session</a> for every program. It's worth visiting the <a href="/facilities">facility</a> and watching a session before deciding.</p>`,
     author: "LevelUP Sports",
     date: "2025-01-10",
     readTime: 6,
@@ -187,8 +189,8 @@ export const BLOG_POSTS: BlogPost[] = [
     <h2>Getting Started</h2>
     <p>You don't need equipment — any decent facility provides paddles and balls for beginners. Wear athletic shoes with good lateral support (running shoes aren't ideal). Take a beginner lesson or clinic before jumping into open play — learning proper technique from the start prevents bad habits and injury.</p>
     <h2>Where to Play Near Wilmington</h2>
-    <p>The closest dedicated indoor pickleball courts to Wilmington are at LevelUP Sports in Elkton, MD — about 30 minutes south. They offer weekly beginner clinics, regular open play sessions (Tuesday and Thursday evenings are the most popular), and all equipment is provided. Indoor courts mean no weather cancellations, which matters when you're building a consistent routine.</p>
-    <p>They also offer a free first session, so you can try it before committing to anything.</p>`,
+    <p>The closest dedicated indoor <a href="/pickleball">pickleball courts</a> to Wilmington are at LevelUP Sports in Elkton, MD — about 30 minutes south. They offer weekly beginner clinics, regular open play sessions (Tuesday and Thursday evenings are the most popular), and all equipment is provided. Indoor courts mean no weather cancellations, which matters when you're building a consistent routine.</p>
+    <p>They also offer a <a href="/free-trial">free first session</a>, so you can try it before committing to anything. Check the <a href="/schedule">schedule</a> for open play times, or explore <a href="/memberships">membership options</a> for the best value on regular play.</p>`,
     author: "LevelUP Sports",
     date: "2025-02-15",
     readTime: 5,
@@ -210,7 +212,7 @@ export const BLOG_POSTS: BlogPost[] = [
     <h2>Getting Involved</h2>
     <p>Whether you're an experienced cricketer looking for net sessions, a parent wanting proper coaching for your child, or a complete beginner curious about the sport, the options are better than they've ever been. LevelUP offers free trial sessions for newcomers — it's the easiest way to experience a proper indoor cricket setup.</p>
     <h2>Summer Leagues</h2>
-    <p>LevelUP is launching a summer cricket league in 2025 with youth (U-15) and adult divisions. T20 format, Saturday matches, June through August. Registration is open now at levelupsports.us.</p>`,
+    <p>LevelUP is launching a summer cricket league in 2025 with youth (U-15) and adult divisions. T20 format, Saturday matches, June through August. Learn more about the <a href="/cricket">cricket program</a>, meet the coaches at the <a href="/cricket-academy">BRSS Cricket Academy</a>, or <a href="/free-trial">book a free trial</a> to experience the nets firsthand.</p>`,
     author: "Rajit Passey",
     date: "2025-01-28",
     readTime: 5,

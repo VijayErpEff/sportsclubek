@@ -61,6 +61,39 @@ export const HOMEPAGE_FAQS = [
   },
 ];
 
+export const SAFETY_FAQS = [
+  {
+    question: "What safety measures are in place at LevelUP Sports?",
+    answer:
+      "Safety is built into everything we do. First-aid trained staff are on-site during all operating hours. Helmets are mandatory in our batting cages and provided free of charge. Protective gear is available for all sports. Our facility undergoes daily cleaning and equipment inspection. All courts have proper flooring, lighting, and ventilation to minimize injury risk.",
+  },
+  {
+    question: "Do I need to sign a liability waiver?",
+    answer:
+      "Yes. All participants (or a parent/guardian for minors under 18) must complete a liability waiver before their first session. You can complete it at check-in or fill it out online in advance to save time. The waiver covers standard sports participation risks and is a one-time requirement — you don't need to sign again on future visits.",
+  },
+  {
+    question: "Is LevelUP Sports insured?",
+    answer:
+      "Yes. We carry comprehensive general liability insurance and sports accident coverage. Our facility, equipment, and programs are fully insured. Coaches carry their own professional liability coverage as well.",
+  },
+  {
+    question: "What happens if someone gets injured at the facility?",
+    answer:
+      "First-aid trained staff respond immediately. We have first-aid kits and an AED (automated external defibrillator) on-site. For serious injuries, we follow established emergency procedures and contact emergency services. Our location at 701 E Pulaski Hwy provides quick access for emergency vehicles.",
+  },
+  {
+    question: "Is LevelUP Sports ADA accessible?",
+    answer:
+      "Yes. Our entire facility is ground-level with no steps or stairs. We have designated accessible parking spots nearest to the entrance, ADA-accessible restrooms, and wide aisles between courts for wheelchair and mobility device access. If you have specific accessibility needs, call us at (443) 406-6494 and we'll make sure your visit is comfortable.",
+  },
+  {
+    question: "What should I bring to my first visit at LevelUP Sports?",
+    answer:
+      "Just wear comfortable athletic clothing and clean indoor shoes with non-marking soles. We provide all sports equipment — bats, rackets, helmets, shuttlecocks, balls, and protective gear. Bring a water bottle (we have a refill station) and arrive 10 minutes early for check-in. Kids under 12 must have a parent or guardian on-site.",
+  },
+];
+
 export const MEMBERSHIP_FAQS = [
   {
     question: "Can I cancel my membership at any time?",

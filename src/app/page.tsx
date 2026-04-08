@@ -112,7 +112,7 @@ export default function HomePage() {
         title="The Sports Facility Your Family Has Been Looking For"
         subtitle="15 minutes from Middletown. 20 from Newark. Every sport you love, coaches who remember your kid's name."
         badge="Now Open — 701 E Pulaski Hwy, Elkton"
-        primaryCTA={{ label: "Try a Free Session", href: BOOKING_URLS.freeTrial }}
+        primaryCTA={{ label: "Try a Free Session", href: "/free-trial" }}
         secondaryCTA={{ label: "Explore Programs", href: "#sports" }}
         overlayOpacity={0.5}
       />
@@ -130,7 +130,7 @@ export default function HomePage() {
             <div className="flex items-center gap-2 text-white/50 text-sm">
               <Star className="h-4 w-4 text-warning fill-warning" />
               <span className="font-medium text-white/70">5.0</span>
-              <span className="hidden sm:inline">— 13 Google Reviews</span>
+              <span className="hidden sm:inline">— 20 Google Reviews</span>
             </div>
           </div>
         </Container>
@@ -178,6 +178,14 @@ export default function HomePage() {
               >
                 <Calendar className="h-4 w-4" />
                 View Full Schedule
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+              <Link
+                href="/offers"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:text-accent-hover transition-colors"
+              >
+                <Star className="h-4 w-4" />
+                Current Deals &amp; Offers
                 <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </div>
@@ -410,6 +418,13 @@ export default function HomePage() {
               >
                 Tour our facility &rarr;
               </Link>
+              {" "}or{" "}
+              <Link
+                href="/open-house"
+                className="text-accent hover:text-accent-hover font-medium"
+              >
+                attend our next Open House &rarr;
+              </Link>
             </p>
           </Reveal>
         </Container>
@@ -421,7 +436,7 @@ export default function HomePage() {
       <CTABanner
         title="Your First Session Is Free"
         description="No commitment. No pressure. Just come play. If you love it, we'll talk memberships. If not, you tried a new sport for free."
-        primaryCTA={{ label: "Claim Your Free Session", href: BOOKING_URLS.freeTrial }}
+        primaryCTA={{ label: "Claim Your Free Session", href: "/free-trial" }}
         secondaryCTA={{ label: "View Pricing", href: "/memberships" }}
       />
     </>

@@ -54,12 +54,6 @@ const nextConfig = {
         destination: "/",
         permanent: true,
       },
-      {
-        source: "/free-trial",
-        destination:
-          "https://app.upperhand.io/customers/2578-levelup-sports-and-athletics-club/credit_passes",
-        permanent: false,
-      },
     ];
   },
 };

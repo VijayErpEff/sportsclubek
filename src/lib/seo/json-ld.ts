@@ -417,3 +417,55 @@ export function generateCourseLD(course: {
     },
   };
 }
+
+// ── Event Schema ─────────────────────────────────────────────
+export function generateEventLD(event: {
+  name: string;
+  description: string;
+  startDate: string;
+  endDate: string;
+  url: string;
+  isAccessibleForFree?: boolean;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "SportsEvent",
+    name: event.name,
+    description: event.description,
+    startDate: event.startDate,
+    endDate: event.endDate,
+    eventStatus: "https://schema.org/EventScheduled",
+    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+    isAccessibleForFree: event.isAccessibleForFree ?? true,
+    url: `${SITE_CONFIG.url}${event.url}`,
+    location: {
+      "@type": "SportsActivityLocation",
+      name: SITE_CONFIG.name,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: SITE_CONFIG.address.street,
+        addressLocality: SITE_CONFIG.address.city,
+        addressRegion: SITE_CONFIG.address.state,
+        postalCode: SITE_CONFIG.address.zip,
+        addressCountry: "US",
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: SITE_CONFIG.geo.latitude,
+        longitude: SITE_CONFIG.geo.longitude,
+      },
+    },
+    organizer: {
+      "@type": "Organization",
+      name: SITE_CONFIG.name,
+      url: SITE_CONFIG.url,
+    },
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock",
+      url: `${SITE_CONFIG.url}${event.url}`,
+    },
+  };
+}

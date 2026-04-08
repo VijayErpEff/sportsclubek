@@ -24,6 +24,6 @@ export const GOOGLE_REVIEWS: GoogleReview[] = [
 
 export const AGGREGATE_RATING = {
   ratingValue: 5.0,
-  reviewCount: 13,
+  reviewCount: 20,
   bestRating: 5,
 };

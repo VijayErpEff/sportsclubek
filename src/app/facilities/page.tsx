@@ -13,6 +13,7 @@ import { BOOKING_URLS } from "@/lib/constants/booking";
 import {
   Thermometer, ParkingCircle, Wifi, ShieldCheck,
   Sparkles, Accessibility, Store, Clock, ArrowRight, MapPin,
+  CheckCircle, Car, DoorOpen, Heart, ClipboardCheck,
 } from "lucide-react";
 
 export const metadata: Metadata = generateSEOMetadata({
@@ -278,6 +279,201 @@ export default function FacilitiesPage() {
                 <p className="text-caption text-neutral-400 mt-0.5">{a.desc}</p>
               </StaggerItem>
             ))}
+          </StaggerContainer>
+        </Container>
+      </Section>
+
+      {/* Your First Visit — Check-in, Parking, ADA, Safety */}
+      <Section variant="alternate">
+        <Container>
+          <Reveal>
+            <div className="text-center mb-14">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-4">
+                Planning Your Visit
+              </p>
+              <h2 className="font-display text-section text-neutral-900 text-balance">
+                Your First Visit
+              </h2>
+              <p className="text-neutral-600 max-w-2xl mx-auto mt-4">
+                Everything you need to know before you walk through the door.
+              </p>
+            </div>
+          </Reveal>
+
+          <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <StaggerItem>
+              <div className="bg-white rounded-2xl p-6 shadow-card h-full">
+                <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4">
+                  <Car className="h-5 w-5 text-accent" />
+                </div>
+                <h3 className="font-display font-bold text-neutral-900 mb-2">
+                  Getting Here &amp; Parking
+                </h3>
+                <ul className="space-y-2 text-sm text-neutral-600">
+                  <li className="flex gap-2">
+                    <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                    <span>701 E Pulaski Hwy (Route 40), Elkton, MD — right off I-95 exit 109A</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                    <span>Free on-site parking with 50+ spaces directly in front of the building</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                    <span>Designated accessible parking spots nearest to the entrance</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                    <span>No public transit stops nearby — driving or ride-share recommended</span>
+                  </li>
+                </ul>
+              </div>
+            </StaggerItem>
+
+            <StaggerItem>
+              <div className="bg-white rounded-2xl p-6 shadow-card h-full">
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                  <DoorOpen className="h-5 w-5 text-primary" />
+                </div>
+                <h3 className="font-display font-bold text-neutral-900 mb-2">
+                  Check-In &amp; Entry
+                </h3>
+                <ul className="space-y-2 text-sm text-neutral-600">
+                  <li className="flex gap-2">
+                    <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                    <span>Walk in through the main entrance — front desk is directly ahead</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                    <span>Check in with staff at the front desk. First-timers get a quick orientation</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                    <span>Members can check in by name. Walk-ins welcome (subject to court availability)</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                    <span>Kids under 12 must have a parent or guardian on-site</span>
+                  </li>
+                </ul>
+              </div>
+            </StaggerItem>
+
+            <StaggerItem>
+              <div className="bg-white rounded-2xl p-6 shadow-card h-full">
+                <div className="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center mb-4">
+                  <ClipboardCheck className="h-5 w-5 text-secondary" />
+                </div>
+                <h3 className="font-display font-bold text-neutral-900 mb-2">
+                  What to Bring
+                </h3>
+                <ul className="space-y-2 text-sm text-neutral-600">
+                  <li className="flex gap-2">
+                    <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                    <span>Comfortable athletic clothing and clean indoor shoes (non-marking soles)</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                    <span>Water bottle — we have a refill station on-site</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                    <span>All sports equipment is provided — bats, rackets, helmets, shuttlecocks, balls</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                    <span>You can also bring your own gear if you prefer</span>
+                  </li>
+                </ul>
+              </div>
+            </StaggerItem>
+
+            <StaggerItem>
+              <div className="bg-white rounded-2xl p-6 shadow-card h-full">
+                <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4">
+                  <Accessibility className="h-5 w-5 text-accent" />
+                </div>
+                <h3 className="font-display font-bold text-neutral-900 mb-2">
+                  Accessibility
+                </h3>
+                <ul className="space-y-2 text-sm text-neutral-600">
+                  <li className="flex gap-2">
+                    <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                    <span>Ground-level entry — no steps or stairs to reach any court or training area</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                    <span>ADA-accessible restrooms on the main floor</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                    <span>Designated accessible parking directly at the entrance</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                    <span>Wide aisles between courts for wheelchair and mobility device access</span>
+                  </li>
+                </ul>
+              </div>
+            </StaggerItem>
+
+            <StaggerItem>
+              <div className="bg-white rounded-2xl p-6 shadow-card h-full">
+                <div className="w-12 h-12 rounded-xl bg-error/10 flex items-center justify-center mb-4">
+                  <ShieldCheck className="h-5 w-5 text-error" />
+                </div>
+                <h3 className="font-display font-bold text-neutral-900 mb-2">
+                  Safety &amp; Policies
+                </h3>
+                <ul className="space-y-2 text-sm text-neutral-600">
+                  <li className="flex gap-2">
+                    <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                    <span>First-aid trained staff on-site during all operating hours</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                    <span>Liability waiver required for all participants (completed at check-in or online)</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                    <span>Fully insured facility with general liability and sports accident coverage</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                    <span>Helmets mandatory in batting cages. Protective gear provided for all sports</span>
+                  </li>
+                </ul>
+              </div>
+            </StaggerItem>
+
+            <StaggerItem>
+              <div className="bg-white rounded-2xl p-6 shadow-card h-full">
+                <div className="w-12 h-12 rounded-xl bg-info/10 flex items-center justify-center mb-4">
+                  <Heart className="h-5 w-5 text-info" />
+                </div>
+                <h3 className="font-display font-bold text-neutral-900 mb-2">
+                  Family-Friendly
+                </h3>
+                <ul className="space-y-2 text-sm text-neutral-600">
+                  <li className="flex gap-2">
+                    <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                    <span>Viewing area for parents to watch practice and games</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                    <span>Free Wi-Fi so you can work while your kids train</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                    <span>Clean restrooms maintained throughout the day</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                    <span>Climate-controlled at 72°F — comfortable for spectators year-round</span>
+                  </li>
+                </ul>
+              </div>
+            </StaggerItem>
           </StaggerContainer>
         </Container>
       </Section>
