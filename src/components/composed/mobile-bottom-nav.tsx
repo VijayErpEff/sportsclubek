@@ -6,16 +6,7 @@ import { usePathname } from "next/navigation";
 import { Home, Trophy, Calendar, Phone, LayoutGrid, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils/cn";
-
-const SPORT_LINKS = [
-  { name: "Badminton", href: "/badminton", emoji: "\ud83c\udff8" },
-  { name: "Cricket", href: "/cricket", emoji: "\ud83c\udfcf" },
-  { name: "Volleyball", href: "/volleyball", emoji: "\ud83c\udfd0" },
-  { name: "Pickleball", href: "/pickleball", emoji: "\ud83c\udfd3" },
-  { name: "Baseball", href: "/baseball", emoji: "\u26be" },
-  { name: "Soccer", href: "/soccer", emoji: "\u26bd" },
-  { name: "Kids Agility", href: "/kids-agility", emoji: "\u26a1" },
-];
+import { SPORT_NAV_ITEMS } from "@/lib/constants/site";
 
 const APPLE_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -67,22 +58,57 @@ export function MobileBottomNav() {
                   </button>
                 </div>
                 <div className="grid grid-cols-2 gap-2">
-                  {SPORT_LINKS.map((sport) => (
-                    <Link
+                  {SPORT_NAV_ITEMS.map((sport) => (
+                    <div
                       key={sport.href}
-                      href={sport.href}
-                      onClick={() => setSportsOpen(false)}
                       className={cn(
-                        "flex items-center gap-2.5 p-3 rounded-xl transition-colors",
-                        pathname === sport.href || pathname.startsWith(sport.href + "-")
-                          ? "bg-primary/5 text-primary"
-                          : "bg-neutral-50 hover:bg-neutral-100 text-neutral-900"
+                        "rounded-xl overflow-hidden",
+                        pathname === sport.href || pathname === sport.academy
+                          ? "bg-primary/5"
+                          : "bg-neutral-50"
                       )}
                     >
-                      <span className="text-lg">{sport.emoji}</span>
-                      <span className="text-sm font-semibold">{sport.name}</span>
-                    </Link>
+                      <Link
+                        href={sport.href}
+                        onClick={() => setSportsOpen(false)}
+                        className={cn(
+                          "flex items-center gap-2.5 p-3 transition-colors min-h-[44px]",
+                          pathname === sport.href || pathname === sport.academy
+                            ? "text-primary"
+                            : "text-neutral-900 hover:bg-neutral-100"
+                        )}
+                      >
+                        <span className="text-lg">{sport.emoji}</span>
+                        <span className="text-sm font-semibold">{sport.name}</span>
+                      </Link>
+                      {sport.academy && (
+                        <Link
+                          href={sport.academy}
+                          onClick={() => setSportsOpen(false)}
+                          className={cn(
+                            "flex items-center px-3 pb-2.5 text-[11px] font-medium transition-colors",
+                            pathname === sport.academy ? "text-primary" : "text-accent hover:text-accent-hover"
+                          )}
+                        >
+                          <span className="ml-[calc(1.125rem+0.625rem)]">Academy &rarr;</span>
+                        </Link>
+                      )}
+                    </div>
                   ))}
+                  {/* Kids Agility — standalone, no academy */}
+                  <Link
+                    href="/kids-agility"
+                    onClick={() => setSportsOpen(false)}
+                    className={cn(
+                      "flex items-center gap-2.5 p-3 rounded-xl transition-colors min-h-[44px]",
+                      pathname === "/kids-agility"
+                        ? "bg-primary/5 text-primary"
+                        : "bg-neutral-50 hover:bg-neutral-100 text-neutral-900"
+                    )}
+                  >
+                    <span className="text-lg">{"\u26a1"}</span>
+                    <span className="text-sm font-semibold">Kids Agility</span>
+                  </Link>
                 </div>
               </div>
             </motion.div>

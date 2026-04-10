@@ -125,6 +125,15 @@ export const SPORTS = [
   },
 ] as const;
 
+export const SPORT_NAV_ITEMS = [
+  { name: "Badminton",  href: "/badminton",  academy: "/badminton-academy" as string | null,  emoji: "\ud83c\udff8", desc: "Competition-grade courts" },
+  { name: "Cricket",    href: "/cricket",    academy: "/cricket-academy" as string | null,    emoji: "\ud83c\udfcf", desc: "Nets & bowling machines" },
+  { name: "Volleyball", href: "/volleyball", academy: "/volleyball-academy" as string | null, emoji: "\ud83c\udfd0", desc: "Leagues, coaching & open play" },
+  { name: "Pickleball", href: "/pickleball", academy: null as string | null,                  emoji: "\ud83c\udfd3", desc: "Open play & rentals" },
+  { name: "Soccer",     href: "/soccer",     academy: "/soccer-academy" as string | null,     emoji: "\u26bd",       desc: "Indoor futsal & training" },
+  { name: "Baseball",   href: "/baseball",   academy: "/baseball-academy" as string | null,   emoji: "\u26be",       desc: "Batting cages & coaching" },
+];
+
 export const NAV_LINKS = [
   {
     label: "Sports",

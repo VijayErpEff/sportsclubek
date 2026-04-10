@@ -5,24 +5,18 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown, ChevronRight, Bell, ArrowRight, Check, Loader2 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils/cn";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/layout/container";
-import { SITE_CONFIG } from "@/lib/constants/site";
+import { SITE_CONFIG, SPORT_NAV_ITEMS } from "@/lib/constants/site";
 import { BOOKING_URLS } from "@/lib/constants/booking";
 import { trackPhoneCall, trackCTAClick } from "@/lib/analytics";
 import { captureLead } from "@/lib/leads";
 
 const BELL_STORAGE_KEY = "lus_nav_subscribed";
 
-const SPORT_ITEMS = [
-  { name: "Badminton", href: "/badminton", academy: "/badminton-academy" as string | null, emoji: "\ud83c\udff8", desc: "Competition-grade courts" },
-  { name: "Cricket", href: "/cricket", academy: "/cricket-academy", emoji: "\ud83c\udfcf", desc: "Nets & bowling machines" },
-  { name: "Volleyball", href: "/volleyball", academy: "/volleyball-academy", emoji: "\ud83c\udfd0", desc: "Leagues, coaching & open play" },
-  { name: "Pickleball", href: "/pickleball", academy: null as string | null, emoji: "\ud83c\udfd3", desc: "Open play & rentals" },
-  { name: "Soccer", href: "/soccer", academy: "/soccer-academy", emoji: "\u26bd", desc: "Indoor futsal & training" },
-  { name: "Baseball", href: "/baseball", academy: "/baseball-academy", emoji: "\u26be", desc: "Batting cages & coaching" },
-];
+const APPLE_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 const NAV_ITEMS = [
   { label: "Facilities", href: "/facilities" },
@@ -168,7 +162,7 @@ export function Navbar() {
                   <div className="absolute top-full mt-1 left-0 w-[480px] bg-white rounded-2xl shadow-xl ring-1 ring-black/5 p-5 animate-fade-in" role="menu">
                     <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-neutral-400 mb-3 px-1">Our Sports</p>
                     <div className="grid grid-cols-2 gap-1">
-                      {SPORT_ITEMS.map((sport) => (
+                      {SPORT_NAV_ITEMS.map((sport) => (
                         <Link key={sport.href} href={sport.href} role="menuitem"
                           className="group flex items-start gap-3 p-3 rounded-xl hover:bg-neutral-50 transition-colors"
                           onClick={() => setSportsOpen(false)}
@@ -367,51 +361,84 @@ export function Navbar() {
       )}
 
       {/* ── Mobile Menu ── */}
-      {mobileOpen && (
-        <div className="fixed inset-0 z-[110] lg:hidden bg-white" role="dialog" aria-modal="true">
-          <div className="h-full flex flex-col pt-20 pb-8 overflow-y-auto">
-            <div className="px-6 pb-6">
-              <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-neutral-400 mb-3 px-1">Our Sports</p>
-              <div className="grid grid-cols-2 gap-2">
-                {SPORT_ITEMS.map((sport) => (
-                  <Link key={sport.href} href={sport.href}
-                    className="flex items-center gap-2.5 p-3 rounded-xl bg-neutral-50 hover:bg-neutral-100 transition-colors"
-                    onClick={() => setMobileOpen(false)}>
-                    <span className="text-lg">{sport.emoji}</span>
-                    <div>
-                      <span className="text-sm font-semibold text-neutral-900">{sport.name}</span>
-                      <p className="text-[10px] text-neutral-400 leading-tight">{sport.desc}</p>
-                    </div>
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25, ease: APPLE_EASE }}
+            className="fixed inset-0 z-[110] lg:hidden bg-white"
+            role="dialog"
+            aria-modal="true"
+          >
+            <div className="h-full flex flex-col pt-20 pb-8 overflow-y-auto">
+              <div className="px-6 pb-6">
+                <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-neutral-400 mb-3 px-1">Our Sports</p>
+                <div className="grid grid-cols-2 gap-2">
+                  {SPORT_NAV_ITEMS.map((sport, i) => (
+                    <motion.div
+                      key={sport.href}
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.05 + i * 0.04, duration: 0.3, ease: APPLE_EASE }}
+                      className={cn("rounded-xl overflow-hidden", pathname === sport.href || pathname === sport.academy ? "bg-primary/5" : "bg-neutral-50")}
+                    >
+                      <Link
+                        href={sport.href}
+                        className="flex items-center gap-2.5 p-3 hover:bg-neutral-100 transition-colors min-h-[44px]"
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        <span className="text-lg">{sport.emoji}</span>
+                        <div>
+                          <span className={cn("text-sm font-semibold", pathname === sport.href ? "text-primary" : "text-neutral-900")}>{sport.name}</span>
+                          <p className="text-[10px] text-neutral-400 leading-tight">{sport.desc}</p>
+                        </div>
+                      </Link>
+                      {sport.academy && (
+                        <Link
+                          href={sport.academy}
+                          className={cn(
+                            "flex items-center px-3 pb-2.5 text-[11px] font-medium transition-colors min-h-[32px]",
+                            pathname === sport.academy ? "text-primary" : "text-accent hover:text-accent-hover"
+                          )}
+                          onClick={() => setMobileOpen(false)}
+                        >
+                          <span className="ml-[calc(1.125rem+0.625rem)]">Academy &rarr;</span>
+                        </Link>
+                      )}
+                    </motion.div>
+                  ))}
+                </div>
+                <Link href="/kids-agility" className="flex items-center gap-2.5 px-3 py-2.5 mt-2 text-sm text-neutral-500 hover:text-primary" onClick={() => setMobileOpen(false)}>
+                  + Kids Agility Training
+                </Link>
+              </div>
+              <div className="h-px bg-neutral-100 mx-6" />
+              <div className="px-6 pt-4 space-y-0.5">
+                <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-neutral-400 mb-2 px-1">Navigate</p>
+                {NAV_ITEMS.map((item) => (
+                  <Link key={item.label} href={item.href}
+                    className={cn("flex items-center px-3 py-3 text-base font-semibold rounded-xl min-h-[44px]",
+                      pathname === item.href ? "text-primary bg-primary/5" : "text-neutral-900 hover:bg-neutral-50"
+                    )} onClick={() => setMobileOpen(false)}>
+                    {item.label}
                   </Link>
                 ))}
+                <Link href="/contact" className="flex items-center px-3 py-3 text-base font-semibold text-neutral-900 hover:bg-neutral-50 rounded-xl min-h-[44px]" onClick={() => setMobileOpen(false)}>Contact</Link>
               </div>
-              <Link href="/kids-agility" className="flex items-center gap-2.5 px-3 py-2.5 mt-2 text-sm text-neutral-500 hover:text-primary" onClick={() => setMobileOpen(false)}>
-                + Kids Agility Training
-              </Link>
+              <div className="mt-auto px-6 pt-8 space-y-3">
+                <Button size="lg" className="w-full rounded-full" asChild>
+                  <a href={BOOKING_URLS.freeTrial} onClick={() => setMobileOpen(false)}>Free Trial</a>
+                </Button>
+                <p className="text-center text-sm text-neutral-400">
+                  <a href={`tel:${SITE_CONFIG.phone}`} className="hover:text-primary">{SITE_CONFIG.phone}</a>
+                </p>
+              </div>
             </div>
-            <div className="h-px bg-neutral-100 mx-6" />
-            <div className="px-6 pt-4 space-y-0.5">
-              {NAV_ITEMS.map((item) => (
-                <Link key={item.label} href={item.href}
-                  className={cn("flex items-center px-3 py-3 text-base font-semibold rounded-xl min-h-[44px]",
-                    pathname === item.href ? "text-primary bg-primary/5" : "text-neutral-900 hover:bg-neutral-50"
-                  )} onClick={() => setMobileOpen(false)}>
-                  {item.label}
-                </Link>
-              ))}
-              <Link href="/contact" className="flex items-center px-3 py-3 text-base font-semibold text-neutral-900 hover:bg-neutral-50 rounded-xl min-h-[44px]" onClick={() => setMobileOpen(false)}>Contact</Link>
-            </div>
-            <div className="mt-auto px-6 pt-8 space-y-3">
-              <Button size="lg" className="w-full rounded-full" asChild>
-                <a href={BOOKING_URLS.freeTrial} onClick={() => setMobileOpen(false)}>Free Trial</a>
-              </Button>
-              <p className="text-center text-sm text-neutral-400">
-                <a href={`tel:${SITE_CONFIG.phone}`} className="hover:text-primary">{SITE_CONFIG.phone}</a>
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

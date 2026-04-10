@@ -49,7 +49,8 @@ export function SurveyBanner() {
           animate={{ opacity: 1, y: 0 }}
           exit={prefersReduced ? { opacity: 0 } : { opacity: 0, y: -20 }}
           transition={{ duration: 0.4, ease: APPLE_EASE }}
-          className="fixed top-20 left-3 right-3 md:left-auto md:right-6 md:max-w-sm z-[90]"
+          className="fixed left-3 right-3 md:left-auto md:right-6 md:max-w-sm z-[102]"
+          style={{ top: "calc(var(--banner-height, 0px) + 4rem + 0.75rem)" }}
         >
           <div className="rounded-xl bg-gradient-to-r from-accent to-accent-hover shadow-lg shadow-accent/20 p-4 text-white relative">
             <button
