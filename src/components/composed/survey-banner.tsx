@@ -4,28 +4,42 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { X, MessageSquare } from "lucide-react";
-import { cn } from "@/lib/utils/cn";
 
 const SURVEY_COMPLETED_KEY = "lus_survey_completed";
 const SURVEY_DISMISSED_KEY = "lus_survey_dismissed";
-const PAGE_COUNT_KEY = "lus_survey_pages";
+const SURVEY_DISMISS_COUNT_KEY = "lus_survey_dismiss_count";
+const HAS_VISITED_KEY = "lus_has_visited";
 const SHOW_DELAY_MS = 4000;
 const AUTO_HIDE_MS = 15000;
 const APPLE_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
+// Progressive backoff: 3 days → 7 days → 14 days → 30 days (cap)
+const BACKOFF_DAYS = [3, 7, 14, 30];
+
+function getCooldownMs(dismissCount: number): number {
+  const idx = Math.min(dismissCount - 1, BACKOFF_DAYS.length - 1);
+  return BACKOFF_DAYS[idx] * 24 * 60 * 60 * 1000;
+}
+
+function isInCooldown(): boolean {
+  const dismissedAt = localStorage.getItem(SURVEY_DISMISSED_KEY);
+  if (!dismissedAt) return false;
+  const dismissCount = parseInt(localStorage.getItem(SURVEY_DISMISS_COUNT_KEY) || "1", 10);
+  const elapsed = Date.now() - parseInt(dismissedAt, 10);
+  return elapsed < getCooldownMs(dismissCount);
+}
 
 export function SurveyBanner() {
   const prefersReduced = useReducedMotion();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    // Don't show if completed or dismissed
+    // Don't show if completed (permanent) or still in cooldown
     if (localStorage.getItem(SURVEY_COMPLETED_KEY)) return;
-    if (localStorage.getItem(SURVEY_DISMISSED_KEY)) return;
+    if (isInCooldown()) return;
 
-    // Track page views in session — only show after 2+ pages
-    const count = parseInt(sessionStorage.getItem(PAGE_COUNT_KEY) || "0", 10) + 1;
-    sessionStorage.setItem(PAGE_COUNT_KEY, String(count));
-    if (count < 2) return;
+    // Mark as visited for future reference
+    localStorage.setItem(HAS_VISITED_KEY, "true");
 
     // Show after a short delay
     const showTimer = setTimeout(() => setVisible(true), SHOW_DELAY_MS);
@@ -38,7 +52,9 @@ export function SurveyBanner() {
 
   const dismiss = () => {
     setVisible(false);
-    localStorage.setItem(SURVEY_DISMISSED_KEY, "true");
+    const count = parseInt(localStorage.getItem(SURVEY_DISMISS_COUNT_KEY) || "0", 10) + 1;
+    localStorage.setItem(SURVEY_DISMISS_COUNT_KEY, String(count));
+    localStorage.setItem(SURVEY_DISMISSED_KEY, String(Date.now()));
   };
 
   return (
@@ -74,7 +90,7 @@ export function SurveyBanner() {
                 </p>
                 <Link
                   href="/survey"
-                  onClick={dismiss}
+                  onClick={() => setVisible(false)}
                   className="inline-flex items-center gap-1 mt-2 text-xs font-bold text-white underline underline-offset-2 hover:text-white/90 transition-colors"
                 >
                   Take the Survey &rarr;
