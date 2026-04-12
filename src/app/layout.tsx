@@ -112,6 +112,7 @@ export default function RootLayout({
       className={`${inter.variable} ${plusJakarta.variable} ${jetbrainsMono.variable}`}
     >
       <head>
+        <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-readable site information" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
