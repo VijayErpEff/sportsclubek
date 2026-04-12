@@ -1,12 +1,7 @@
 "use client";
 
-import { type ReactNode, useRef } from "react";
-import {
-  motion,
-  useReducedMotion,
-  useInView,
-  type Variants,
-} from "framer-motion";
+import { type ReactNode } from "react";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { cn } from "@/lib/utils/cn";
 
 type RevealVariant =
@@ -29,7 +24,11 @@ interface RevealProps {
 
 const APPLE_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
-function getStyles(variant: RevealVariant) {
+function getVariants(
+  variant: RevealVariant,
+  duration: number,
+  delay: number
+): Variants {
   const hidden: Record<string, number | string> = { opacity: 0 };
   const visible: Record<string, number | string> = { opacity: 1 };
 
@@ -56,7 +55,13 @@ function getStyles(variant: RevealVariant) {
       break;
   }
 
-  return { hidden, visible };
+  return {
+    hidden,
+    visible: {
+      ...visible,
+      transition: { duration, delay, ease: APPLE_EASE },
+    },
+  };
 }
 
 export function Reveal({
@@ -69,21 +74,17 @@ export function Reveal({
   once = true,
 }: RevealProps) {
   const prefersReduced = useReducedMotion();
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once, amount: threshold });
 
   if (prefersReduced) {
     return <div className={cn(className)}>{children}</div>;
   }
 
-  const { hidden, visible } = getStyles(variant);
-
   return (
     <motion.div
-      ref={ref}
-      animate={inView ? visible : hidden}
-      initial={false}
-      transition={{ duration, delay, ease: APPLE_EASE }}
+      variants={getVariants(variant, duration, delay)}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once, amount: threshold }}
       className={cn(className)}
     >
       {children}

@@ -69,7 +69,7 @@ function getFacilityImages(): Array<{ src: string; alt: string }> {
   try {
     return fs
       .readdirSync(dir)
-      .filter((f) => /\.(png|jpe?g|webp|avif)$/i.test(f))
+      .filter((f) => /^\d+-.*\.(png|jpe?g|webp|avif)$/i.test(f))
       .sort()
       .map((f) => ({
         src: `/images/sports/LevelUP/${f}`,

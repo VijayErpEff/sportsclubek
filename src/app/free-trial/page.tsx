@@ -78,6 +78,25 @@ export default function FreeTrialPage() {
         primaryCTA={{ label: "Book My Free Session", href: BOOKING_URLS.offerings }}
       />
 
+      {/* Waiver — required before first session */}
+      <Section size="sm">
+        <Container className="max-w-2xl">
+          <Reveal>
+            <div className="text-center mb-6">
+              <h2 className="font-display text-subsection text-neutral-900">
+                One Quick Form Before You Play
+              </h2>
+              <p className="text-neutral-500 text-sm mt-2">
+                All participants must sign our liability waiver before their first session. Takes 30 seconds.
+              </p>
+            </div>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <LiabilityWaiver />
+          </Reveal>
+        </Container>
+      </Section>
+
       {/* How It Works + What's Included — combined into one tight section */}
       <Section size="sm">
         <Container>
@@ -200,25 +219,6 @@ export default function FreeTrialPage() {
               </StaggerItem>
             ))}
           </StaggerContainer>
-        </Container>
-      </Section>
-
-      {/* Waiver — required before first session */}
-      <Section size="sm">
-        <Container className="max-w-2xl">
-          <Reveal>
-            <div className="text-center mb-6">
-              <h2 className="font-display text-subsection text-neutral-900">
-                One Quick Form Before You Play
-              </h2>
-              <p className="text-neutral-500 text-sm mt-2">
-                All participants must sign our liability waiver before their first session. Takes 30 seconds.
-              </p>
-            </div>
-          </Reveal>
-          <Reveal delay={0.05}>
-            <LiabilityWaiver />
-          </Reveal>
         </Container>
       </Section>
 
