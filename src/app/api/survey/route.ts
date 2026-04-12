@@ -17,18 +17,23 @@ export async function POST(request: Request) {
     const body = await request.json();
     const {
       visitorType, sports, rating, positives, improvements,
-      feedback, nps, name, phone, email,
+      feedback, nps, name, phone, email, barriers, triggers,
     } = body;
+
+    const hasVisited = visitorType === "member" || visitorType === "visited";
 
     // Validate required fields
     if (!visitorType || !VALID_VISITOR_TYPES.includes(visitorType)) {
       return NextResponse.json({ error: "Invalid visitor type" }, { status: 400 });
     }
-    if (typeof rating !== "number" || rating < 1 || rating > 5) {
-      return NextResponse.json({ error: "Rating must be 1-5" }, { status: 400 });
-    }
-    if (!nps || !VALID_NPS.includes(nps)) {
-      return NextResponse.json({ error: "Invalid NPS response" }, { status: 400 });
+    // Rating and NPS only required for visitors
+    if (hasVisited) {
+      if (typeof rating !== "number" || rating < 1 || rating > 5) {
+        return NextResponse.json({ error: "Rating must be 1-5" }, { status: 400 });
+      }
+      if (rating >= 4 && (!nps || !VALID_NPS.includes(nps))) {
+        return NextResponse.json({ error: "Invalid NPS response" }, { status: 400 });
+      }
     }
     if (!name?.trim() || !phone?.trim() || !email?.trim()) {
       return NextResponse.json({ error: "Name, phone, and email are required" }, { status: 400 });
@@ -41,11 +46,13 @@ export async function POST(request: Request) {
       id: `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
       visitorType,
       sports: Array.isArray(sports) ? sports : [],
-      rating,
+      rating: typeof rating === "number" ? rating : 0,
       positives: Array.isArray(positives) ? positives : [],
       improvements: Array.isArray(improvements) ? improvements : [],
       feedback: typeof feedback === "string" ? feedback.trim().slice(0, 500) : "",
-      nps,
+      nps: nps || "",
+      barriers: Array.isArray(barriers) ? barriers : [],
+      triggers: Array.isArray(triggers) ? triggers : [],
       name: name.trim(),
       phone: phone.trim(),
       email: email.trim().toLowerCase(),
@@ -56,13 +63,19 @@ export async function POST(request: Request) {
     await redis.lpush(SURVEY_KEY, JSON.stringify(response));
 
     // Also store as a lead for the leads dashboard
+    const contextParts = [];
+    if (response.rating) contextParts.push(`Rating: ${response.rating}/5`);
+    if (response.nps) contextParts.push(`NPS: ${response.nps}`);
+    if (response.sports.length) contextParts.push(`Sports: ${response.sports.join(", ")}`);
+    if (response.barriers.length) contextParts.push(`Barriers: ${response.barriers.join(", ")}`);
+
     const lead = {
       id: response.id,
       email: response.email,
       name: response.name,
       phone: response.phone,
       source: "survey",
-      context: `Rating: ${rating}/5, NPS: ${nps}, Sports: ${response.sports.join(", ") || "none"}`,
+      context: contextParts.join(", ") || "no details",
       timestamp: response.timestamp,
     };
     await redis.lpush(LEADS_KEY, JSON.stringify(lead));
@@ -100,26 +113,37 @@ export async function GET(request: Request) {
         });
       }
 
-      const avgRating = responses.reduce((s: number, r: { rating: number }) => s + r.rating, 0) / total;
+      const ratedResponses = responses.filter((r: { rating: number }) => r.rating > 0);
+      const avgRating = ratedResponses.length
+        ? ratedResponses.reduce((s: number, r: { rating: number }) => s + r.rating, 0) / ratedResponses.length
+        : 0;
       const npsCount = { promoter: 0, passive: 0, detractor: 0 };
       const visitorCount: Record<string, number> = {};
       const sportCount: Record<string, number> = {};
       const positiveCount: Record<string, number> = {};
       const improvementCount: Record<string, number> = {};
+      const barrierCount: Record<string, number> = {};
+      const triggerCount: Record<string, number> = {};
 
       for (const r of responses) {
         const resp = r as {
           nps: string; visitorType: string;
           sports: string[]; positives: string[]; improvements: string[];
+          barriers?: string[]; triggers?: string[];
         };
-        npsCount[resp.nps as keyof typeof npsCount]++;
+        if (resp.nps && npsCount[resp.nps as keyof typeof npsCount] !== undefined) {
+          npsCount[resp.nps as keyof typeof npsCount]++;
+        }
         visitorCount[resp.visitorType] = (visitorCount[resp.visitorType] || 0) + 1;
         for (const s of resp.sports) sportCount[s] = (sportCount[s] || 0) + 1;
         for (const p of resp.positives) positiveCount[p] = (positiveCount[p] || 0) + 1;
         for (const i of resp.improvements) improvementCount[i] = (improvementCount[i] || 0) + 1;
+        for (const b of resp.barriers || []) barrierCount[b] = (barrierCount[b] || 0) + 1;
+        for (const t of resp.triggers || []) triggerCount[t] = (triggerCount[t] || 0) + 1;
       }
 
-      const npsScore = Math.round(((npsCount.promoter - npsCount.detractor) / total) * 100);
+      const npsTotal = npsCount.promoter + npsCount.passive + npsCount.detractor;
+      const npsScore = npsTotal ? Math.round(((npsCount.promoter - npsCount.detractor) / npsTotal) * 100) : 0;
 
       return NextResponse.json({
         total,
@@ -130,6 +154,8 @@ export async function GET(request: Request) {
         topSports: Object.entries(sportCount).sort((a, b) => b[1] - a[1]),
         topPositives: Object.entries(positiveCount).sort((a, b) => b[1] - a[1]),
         topImprovements: Object.entries(improvementCount).sort((a, b) => b[1] - a[1]),
+        topBarriers: Object.entries(barrierCount).sort((a, b) => b[1] - a[1]),
+        topTriggers: Object.entries(triggerCount).sort((a, b) => b[1] - a[1]),
       }, {
         headers: { "Cache-Control": "no-store" },
       });
