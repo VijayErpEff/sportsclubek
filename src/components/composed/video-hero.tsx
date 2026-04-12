@@ -179,10 +179,11 @@ export function VideoHero({
                       src={image.src}
                       alt=""
                       fill
-                      priority={index < 2}
+                      priority={index === 0}
+                      loading={index === 0 ? "eager" : "lazy"}
                       className="object-cover"
                       sizes="100vw"
-                      quality={80}
+                      quality={75}
                     />
                   </motion.div>
                 ) : (
@@ -190,10 +191,11 @@ export function VideoHero({
                     src={image.src}
                     alt=""
                     fill
-                    priority={index < 2}
+                    priority={index === 0}
+                    loading={index === 0 ? "eager" : "lazy"}
                     className="object-cover"
                     sizes="100vw"
-                    quality={80}
+                    quality={75}
                   />
                 )}
               </div>

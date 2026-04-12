@@ -113,6 +113,7 @@ export default function RootLayout({
     >
       <head>
         <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-readable site information" />
+        <link rel="preload" href="/images/sports/LevelUp/01-Main-Area-1.jpg" as="image" fetchPriority="high" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
