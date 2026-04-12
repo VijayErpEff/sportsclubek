@@ -165,7 +165,7 @@ export function SportPreference() {
                 <>
                   <div className="text-center mb-6">
                     <h2 className="font-display text-subsection font-bold text-neutral-900">
-                      What brings you to LevelUp?
+                      What brings you to LevelUP?
                     </h2>
                     <p className="text-sm text-neutral-500 mt-2">
                       Select your sports to personalize your experience.

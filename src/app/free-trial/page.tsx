@@ -10,6 +10,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { StaggerContainer, StaggerItem } from "@/components/ui/stagger";
 import { FAQAccordion } from "@/components/composed/faq-accordion";
 import { CTABanner } from "@/components/composed/cta-banner";
+import { LiabilityWaiver } from "@/components/composed/liability-waiver";
 import { SPORTS } from "@/lib/constants/site";
 import {
   CheckCircle,
@@ -24,7 +25,7 @@ import { BOOKING_URLS } from "@/lib/constants/booking";
 export const metadata: Metadata = generateSEOMetadata({
   title: "Try a Free Session — Any Sport, No Commitment",
   description:
-    "Try any sport free at LevelUp Sports in Elkton, MD — 15 min from Middletown & Newark, DE. Batting cages, cricket, badminton & pickleball. No card required.",
+    "Try any sport free at LevelUP Sports in Elkton, MD — 15 min from Middletown & Newark, DE. Batting cages, cricket, badminton & pickleball. No card required.",
   path: "/free-trial",
 });
 
@@ -202,8 +203,27 @@ export default function FreeTrialPage() {
         </Container>
       </Section>
 
-      {/* FAQ — tight */}
+      {/* Waiver — required before first session */}
       <Section size="sm">
+        <Container className="max-w-2xl">
+          <Reveal>
+            <div className="text-center mb-6">
+              <h2 className="font-display text-subsection text-neutral-900">
+                One Quick Form Before You Play
+              </h2>
+              <p className="text-neutral-500 text-sm mt-2">
+                All participants must sign our liability waiver before their first session. Takes 30 seconds.
+              </p>
+            </div>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <LiabilityWaiver />
+          </Reveal>
+        </Container>
+      </Section>
+
+      {/* FAQ — tight */}
+      <Section variant="alternate" size="sm">
         <Container className="max-w-2xl">
           <Reveal>
             <h2 className="font-display text-subsection text-neutral-900 mb-6 text-center">

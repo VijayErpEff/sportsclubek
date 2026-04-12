@@ -13,7 +13,7 @@ import { generateBreadcrumbLD, generateEventLD } from "@/lib/seo/json-ld";
 export const metadata: Metadata = generateSEOMetadata({
   title: "Open House — Tour Our Facility in Elkton, MD",
   description:
-    "Visit LevelUp Sports for our Open House in Elkton, MD. Tour the facility, meet coaches, try a free session. No commitment. Open to all ages.",
+    "Visit LevelUP Sports for our Open House in Elkton, MD. Tour the facility, meet coaches, try a free session. No commitment. Open to all ages.",
   path: "/open-house",
 });
 
@@ -24,7 +24,7 @@ export default function OpenHousePage() {
   ]);
 
   const eventLD = generateEventLD({
-    name: "LevelUp Sports Open House — Free Facility Tour & Try-Out Sessions",
+    name: "LevelUP Sports Open House — Free Facility Tour & Try-Out Sessions",
     description:
       "Tour our 20,000 sq ft indoor facility, meet coaches, and try free sessions in baseball, cricket, badminton, pickleball, volleyball, and soccer. Open to all ages. No registration fee.",
     startDate: "2026-04-18T10:00:00-04:00",
@@ -74,7 +74,7 @@ export default function OpenHousePage() {
             <div>
               <h2 className="text-3xl font-bold tracking-tight mb-6 text-balance">Event Details</h2>
               <p className="text-lg text-muted-foreground mb-6">
-                Our Open House is your chance to experience everything LevelUp Sports has to
+                Our Open House is your chance to experience everything LevelUP Sports has to
                 offer — completely free and with no commitment. Bring the whole family, explore
                 our facility, and see firsthand why athletes of all ages choose to train here.
               </p>
@@ -97,7 +97,7 @@ export default function OpenHousePage() {
                   <div>
                     <h3 className="font-bold">Location</h3>
                     <p className="text-muted-foreground">
-                      LevelUp Sports, Elkton, MD
+                      LevelUP Sports, Elkton, MD
                     </p>
                   </div>
                 </div>

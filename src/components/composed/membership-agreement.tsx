@@ -116,7 +116,7 @@ export function MembershipAgreement() {
               <div className="max-h-80 overflow-y-auto rounded-lg bg-neutral-50 border border-neutral-100 p-4 text-sm text-neutral-700 leading-relaxed space-y-4 mb-6">
                 <p className="font-semibold text-neutral-900">
                   This Membership Agreement (&ldquo;Agreement&rdquo;) is entered into between
-                  LevelUp Sports &amp; Athletics Club (&ldquo;Club,&rdquo; &ldquo;we,&rdquo; or
+                  LevelUP Sports &amp; Athletics Club (&ldquo;Club,&rdquo; &ldquo;we,&rdquo; or
                   &ldquo;our&rdquo;) and the undersigned member (&ldquo;Member&rdquo; or
                   &ldquo;you&rdquo;). By signing below, you agree to the terms and conditions of
                   membership.
@@ -171,7 +171,7 @@ export function MembershipAgreement() {
                   <p className="font-semibold text-neutral-900">6. Assumption of Risk &amp; Waiver</p>
                   <ul className="list-disc pl-5 mt-1 space-y-1">
                     <li>Participation in sports and fitness activities involves inherent risks, including injury.</li>
-                    <li>By signing this Agreement, Member voluntarily assumes all risks and agrees that LevelUp Sports &amp; Athletics Club, its owners, staff, and affiliates are not liable for personal injury, accidents, or loss of property.</li>
+                    <li>By signing this Agreement, Member voluntarily assumes all risks and agrees that LevelUP Sports &amp; Athletics Club, its owners, staff, and affiliates are not liable for personal injury, accidents, or loss of property.</li>
                   </ul>
                 </div>
 

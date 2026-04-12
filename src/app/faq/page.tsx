@@ -13,9 +13,9 @@ import { SPORT_PAGES } from "@/content/sports";
 import { ACADEMY_PAGES } from "@/content/academies";
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: "FAQ — Frequently Asked Questions About LevelUp Sports",
+  title: "FAQ — Frequently Asked Questions About LevelUP Sports",
   description:
-    "Answers to common questions about LevelUp Sports in Elkton, MD. Hours, pricing, memberships, free trials, safety policies, youth academies, court rentals, and more.",
+    "Answers to common questions about LevelUP Sports in Elkton, MD. Hours, pricing, memberships, free trials, safety policies, youth academies, court rentals, and more.",
   path: "/faq",
 });
 
@@ -58,7 +58,7 @@ export default function FAQPage() {
       <Hero
         variant="page"
         title="Frequently Asked Questions"
-        subtitle="Everything you need to know about LevelUp Sports — hours, pricing, programs, safety, and more."
+        subtitle="Everything you need to know about LevelUP Sports — hours, pricing, programs, safety, and more."
       />
 
       {/* General */}

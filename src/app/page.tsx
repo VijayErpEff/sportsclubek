@@ -48,34 +48,34 @@ import {
 /** Descriptive alt text keyed by filename for SEO and accessibility */
 const FACILITY_ALT_TEXT: Record<string, string> = {
   "01-Main-Area-1.jpg":
-    "Indoor multi-sport facility main court area at LevelUp Sports in Elkton, MD",
+    "Indoor multi-sport facility main court area at LevelUP Sports in Elkton, MD",
   "02-Main-Area-2.jpg":
-    "Wide view of indoor courts for badminton, pickleball, and volleyball at LevelUp Sports",
+    "Wide view of indoor courts for badminton, pickleball, and volleyball at LevelUP Sports",
   "04-Training-Area.jpg":
-    "Youth sports training area with batting cages and agility equipment at LevelUp Sports",
+    "Youth sports training area with batting cages and agility equipment at LevelUP Sports",
   "05-Cricket-Nets.jpg":
-    "Professional indoor cricket nets and bowling machine setup at LevelUp Sports Elkton",
+    "Professional indoor cricket nets and bowling machine setup at LevelUP Sports Elkton",
   "06-Lounge.jpg":
-    "Player lounge and viewing area for families at LevelUp Sports & Athletics Club",
+    "Player lounge and viewing area for families at LevelUP Sports & Athletics Club",
 };
 
 /**
- * Auto-discovers hero images from public/images/sports/LevelUp/.
+ * Auto-discovers hero images from public/images/sports/LevelUP/.
  * Just add or remove image files in that folder — no code changes needed.
  * Files are sorted alphabetically; prefix with numbers (01-, 02-) to control order.
  */
 function getFacilityImages(): Array<{ src: string; alt: string }> {
-  const dir = path.join(process.cwd(), "public/images/sports/LevelUp");
+  const dir = path.join(process.cwd(), "public/images/sports/LevelUP");
   try {
     return fs
       .readdirSync(dir)
       .filter((f) => /\.(png|jpe?g|webp|avif)$/i.test(f))
       .sort()
       .map((f) => ({
-        src: `/images/sports/LevelUp/${f}`,
+        src: `/images/sports/LevelUP/${f}`,
         alt:
           FACILITY_ALT_TEXT[f] ??
-          `LevelUp Sports indoor facility — ${f.replace(/\.[^.]+$/, "").replace(/^\d+-/, "").replace(/-/g, " ")}`,
+          `LevelUP Sports indoor facility — ${f.replace(/\.[^.]+$/, "").replace(/^\d+-/, "").replace(/-/g, " ")}`,
       }));
   } catch {
     return [];
@@ -84,7 +84,7 @@ function getFacilityImages(): Array<{ src: string; alt: string }> {
 
 export const metadata: Metadata = {
   title:
-    "LevelUp Sports — Indoor Sports Facility in Elkton, MD",
+    "LevelUP Sports — Indoor Sports Facility in Elkton, MD",
   description:
     "Indoor batting cages, cricket nets, badminton & pickleball courts in Elkton, MD — 15 min from Middletown & Newark, DE. Youth academies, court rentals.",
   alternates: {

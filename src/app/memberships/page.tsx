@@ -17,7 +17,7 @@ import { LiabilityWaiver } from "@/components/composed/liability-waiver";
 export const metadata: Metadata = generateSEOMetadata({
   title: "Memberships & Pricing — Plans from $49/mo",
   description:
-    "Flexible membership plans at LevelUp Sports in Elkton, MD. Access batting cages, courts, and coaching. Individual, family, and elite tiers. Compare plans.",
+    "Flexible membership plans at LevelUP Sports in Elkton, MD. Access batting cages, courts, and coaching. Individual, family, and elite tiers. Compare plans.",
   path: "/memberships",
 });
 

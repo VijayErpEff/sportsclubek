@@ -259,7 +259,7 @@ export function SportPageLayout({ data }: { data: SportPageData }) {
           <Reveal>
             <div className="text-center mb-8">
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-3">
-                More at LevelUp
+                More at LevelUP
               </p>
               <h2 className="font-display text-section text-neutral-900 text-balance">
                 Explore Other Sports

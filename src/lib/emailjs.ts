@@ -47,7 +47,7 @@ export async function sendContactForm(params: {
     to_name: params.name,
     subject: "We received your message",
     message:
-      "Thank you for contacting LevelUp Sports! We'll get back to you within 24 hours.",
+      "Thank you for contacting LevelUP Sports! We'll get back to you within 24 hours.",
   });
 }
 
@@ -71,7 +71,7 @@ export async function sendSubscription(email: string): Promise<void> {
   await sendAutoReply({
     to_email: email,
     to_name: "",
-    subject: "Welcome to LevelUp Sports!",
+    subject: "Welcome to LevelUP Sports!",
     message:
       "Thanks for subscribing! You'll receive updates about programs, events, and special offers.",
   });
@@ -103,7 +103,7 @@ export async function sendCareerApplication(params: {
   await sendAutoReply({
     to_email: params.email,
     to_name: params.name,
-    subject: "Application Received — LevelUp Sports",
+    subject: "Application Received — LevelUP Sports",
     message: `Thank you for applying for the ${params.position} position! Our team will review your application and reach out within a few business days.`,
   });
 }

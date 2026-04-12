@@ -128,7 +128,7 @@ export function LiabilityWaiver() {
                 </p>
                 <p>
                   By registering for, checking into, or participating in any activities, programs,
-                  or events operated by LevelUp Sports &amp; Athletics Club (Elite Power Sports LLC),
+                  or events operated by LevelUP Sports &amp; Athletics Club (Elite Power Sports LLC),
                   the participant (or parent/legal guardian for minors) acknowledges, understands, and
                   agrees to the following:
                 </p>
@@ -145,7 +145,7 @@ export function LiabilityWaiver() {
                     I agree to follow all facility rules, instructions, and safety guidelines.
                   </p>
                   <p className="mt-2">
-                    I release, waive, and hold harmless LevelUp Sports &amp; Athletics Club, its
+                    I release, waive, and hold harmless LevelUP Sports &amp; Athletics Club, its
                     owners, employees, coaches, volunteers, affiliates, and representatives from any
                     and all claims, liabilities, damages, or causes of action arising from
                     participation in activities or use of the facility.
@@ -155,8 +155,8 @@ export function LiabilityWaiver() {
                 <div>
                   <p className="font-semibold text-neutral-900">2. Photo &amp; Video Consent</p>
                   <p className="mt-1">
-                    Participation in LevelUp Sports programs and activities constitutes permission for
-                    LevelUp Sports &amp; Athletics Club to capture and use photographs, videos, and
+                    Participation in LevelUP Sports programs and activities constitutes permission for
+                    LevelUP Sports &amp; Athletics Club to capture and use photographs, videos, and
                     audio recordings in which participants may appear.
                   </p>
                   <p className="mt-2">
@@ -182,7 +182,7 @@ export function LiabilityWaiver() {
                   <p className="font-semibold text-neutral-900">4. Acknowledgment</p>
                   <p className="mt-1">
                     By creating a member profile, registering for programs, checking in, or participating
-                    in any activity at LevelUp Sports &amp; Athletics Club, the participant (or
+                    in any activity at LevelUP Sports &amp; Athletics Club, the participant (or
                     parent/legal guardian for minors) confirms that they have read, understood, and agreed
                     to the terms of this waiver and consent.
                   </p>

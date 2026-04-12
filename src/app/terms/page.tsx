@@ -9,7 +9,7 @@ import { SITE_CONFIG } from "@/lib/constants/site";
 export const metadata: Metadata = generateSEOMetadata({
   title: "Terms of Service",
   description:
-    "Terms of service for LevelUp Sports & Athletics Club in Elkton, MD. Facility usage rules, booking policies, membership terms, and liability information.",
+    "Terms of service for LevelUP Sports & Athletics Club in Elkton, MD. Facility usage rules, booking policies, membership terms, and liability information.",
   path: "/terms",
 });
 
@@ -56,7 +56,7 @@ export default function TermsPage() {
                 Agreement to Terms
               </h2>
               <p>
-                By accessing or using the LevelUp Sports &amp; Athletics Club website ({" "}
+                By accessing or using the LevelUP Sports &amp; Athletics Club website ({" "}
                 <Link href="/" className="text-accent hover:text-accent-hover">
                   levelupsports.us
                 </Link>
@@ -73,9 +73,9 @@ export default function TermsPage() {
                 <li>Clean, non-marking indoor athletic shoes are required on all courts</li>
                 <li>Children under 12 must have a parent or guardian present on-site at all times</li>
                 <li>Helmets are mandatory in batting cages and are provided free of charge</li>
-                <li>Equipment provided by LevelUp Sports must be used responsibly and returned after each session</li>
+                <li>Equipment provided by LevelUP Sports must be used responsibly and returned after each session</li>
                 <li>Abusive, threatening, or unsportsmanlike behavior toward staff, coaches, or other members will result in removal from the facility and potential membership termination</li>
-                <li>LevelUp Sports reserves the right to refuse service to anyone who violates these rules</li>
+                <li>LevelUP Sports reserves the right to refuse service to anyone who violates these rules</li>
               </ul>
             </section>
 
@@ -87,7 +87,7 @@ export default function TermsPage() {
                 All participants (or a parent/guardian for minors under 18) must complete a liability waiver before their first session. Participation in sports and athletic activities involves inherent risks including but not limited to strains, sprains, fractures, and other injuries. By using our facility, you acknowledge and accept these risks.
               </p>
               <p className="mt-3">
-                LevelUp Sports &amp; Athletics Club maintains comprehensive general liability insurance and sports accident coverage. First-aid trained staff are on-site during all operating hours. An AED (automated external defibrillator) is available on the premises.
+                LevelUP Sports &amp; Athletics Club maintains comprehensive general liability insurance and sports accident coverage. First-aid trained staff are on-site during all operating hours. An AED (automated external defibrillator) is available on the premises.
               </p>
             </section>
 
@@ -114,7 +114,7 @@ export default function TermsPage() {
                 <li>Members may freeze their membership for up to 2 months per calendar year at no cost, with 7 days&rsquo; advance notice</li>
                 <li>Membership fees are billed monthly to the card on file</li>
                 <li>Membership benefits are non-transferable and for the named member only, unless part of a family plan</li>
-                <li>LevelUp Sports reserves the right to adjust pricing with 30 days&rsquo; notice to current members</li>
+                <li>LevelUP Sports reserves the right to adjust pricing with 30 days&rsquo; notice to current members</li>
               </ul>
             </section>
 
@@ -124,8 +124,8 @@ export default function TermsPage() {
               </h2>
               <ul className="list-disc pl-5 space-y-1">
                 <li>Academy programs (baseball, cricket, badminton, volleyball, soccer, kids agility) are sold in session packages</li>
-                <li>Missed sessions due to participant absence are not refundable or transferable unless the program is cancelled by LevelUp Sports</li>
-                <li>LevelUp Sports reserves the right to reschedule or cancel sessions due to staffing, weather emergencies, or low enrollment, with full credit or refund provided</li>
+                <li>Missed sessions due to participant absence are not refundable or transferable unless the program is cancelled by LevelUP Sports</li>
+                <li>LevelUP Sports reserves the right to reschedule or cancel sessions due to staffing, weather emergencies, or low enrollment, with full credit or refund provided</li>
                 <li>Academy coaches may adjust program content based on participant skill levels and group needs</li>
               </ul>
             </section>
@@ -135,7 +135,7 @@ export default function TermsPage() {
                 Website Terms
               </h2>
               <ul className="list-disc pl-5 space-y-1">
-                <li>All content on this website — text, images, logos, and design — is the property of LevelUp Sports &amp; Athletics Club and may not be reproduced without written permission</li>
+                <li>All content on this website — text, images, logos, and design — is the property of LevelUP Sports &amp; Athletics Club and may not be reproduced without written permission</li>
                 <li>We strive to keep website information accurate and up-to-date, but do not guarantee that all content is current at all times. Pricing, schedules, and program details are subject to change</li>
                 <li>Links to third-party websites are provided for convenience. We are not responsible for the content or practices of external sites</li>
               </ul>
@@ -146,7 +146,7 @@ export default function TermsPage() {
                 Limitation of Liability
               </h2>
               <p>
-                To the fullest extent permitted by Maryland law, LevelUp Sports &amp; Athletics Club shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of our facility or website. Our total liability for any claim shall not exceed the amount you paid to us in the 12 months preceding the claim.
+                To the fullest extent permitted by Maryland law, LevelUP Sports &amp; Athletics Club shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of our facility or website. Our total liability for any claim shall not exceed the amount you paid to us in the 12 months preceding the claim.
               </p>
             </section>
 

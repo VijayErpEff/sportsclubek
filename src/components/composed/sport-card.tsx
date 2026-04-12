@@ -64,7 +64,7 @@ export function SportCard({
           {image ? (
             <Image
               src={image}
-              alt={`${name} at LevelUp Sports`}
+              alt={`${name} at LevelUP Sports`}
               fill
               className="object-cover transition-transform duration-700 group-hover:scale-103"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"

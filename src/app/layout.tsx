@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     "pickleball courts Cecil County",
     "badminton lessons Delaware",
     "indoor sports facility",
-    "LevelUp Sports",
+    "LevelUP Sports",
     "indoor sports Middletown DE",
     "batting cages near Middletown Delaware",
     "cricket facility Newark DE",

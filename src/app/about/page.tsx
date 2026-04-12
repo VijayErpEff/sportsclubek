@@ -19,7 +19,7 @@ import {
 export const metadata: Metadata = generateSEOMetadata({
   title: "About Us — Our Mission, Coaches & Story",
   description:
-    "Meet the team behind LevelUp Sports in Elkton, MD. Our mission, coaching staff, and commitment to developing athletes of all ages in the tri-state area.",
+    "Meet the team behind LevelUP Sports in Elkton, MD. Our mission, coaching staff, and commitment to developing athletes of all ages in the tri-state area.",
   path: "/about",
 });
 
@@ -128,8 +128,8 @@ export default function AboutPage() {
             <Reveal variant="fade-left" delay={0.15}>
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-card-elevated">
                 <Image
-                  src="/images/sports/LevelUp/01-Main-Area-1.jpg"
-                  alt="Inside LevelUp Sports — modern indoor multi-sport facility in Elkton, MD"
+                  src="/images/sports/LevelUP/01-Main-Area-1.jpg"
+                  alt="Inside LevelUP Sports — modern indoor multi-sport facility in Elkton, MD"
                   fill
                   className="object-cover"
                   priority
@@ -331,7 +331,7 @@ export default function AboutPage() {
                   <div className="relative h-36 overflow-hidden">
                     <Image
                       src={coach.image}
-                      alt={`${coach.name} — ${coach.role} at LevelUp Sports`}
+                      alt={`${coach.name} — ${coach.role} at LevelUP Sports`}
                       fill
                       className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"

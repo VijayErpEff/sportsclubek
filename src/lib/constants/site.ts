@@ -1,6 +1,6 @@
 export const SITE_CONFIG = {
-  name: "LevelUp Sports & Athletics Club",
-  shortName: "LevelUp Sports",
+  name: "LevelUP Sports & Athletics Club",
+  shortName: "LevelUP Sports",
   tagline: "Elevate Your Game",
   description:
     "Premier multi-sport facility in Elkton, MD offering expert coaching, modern courts, and programs in baseball, cricket, badminton, pickleball, volleyball, and soccer for all ages and skill levels.",
@@ -28,7 +28,7 @@ export const SITE_CONFIG = {
   googleReviewUrl:
     "https://search.google.com/local/writereview?placeid=ChIJ7fTmJYapx4kRnh1EB51-01U",
   social: {
-    facebook: "https://www.facebook.com/people/LevelUp-Sports-Athletics-Club/61579103465434/",
+    facebook: "https://www.facebook.com/people/LevelUP-Sports-Athletics-Club/61579103465434/",
     instagram: "https://www.instagram.com/levelupsportsandathleticsclub/",
     twitter: "https://twitter.com/levelupsports",
     youtube: "https://youtube.com/@levelupsports",

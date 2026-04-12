@@ -49,7 +49,7 @@ export async function POST(request: Request) {
           Authorization: `Bearer ${resendApiKey}`,
         },
         body: JSON.stringify({
-          from: "LevelUp Sports <noreply@levelupsports.us>",
+          from: "LevelUP Sports <noreply@levelupsports.us>",
           to: [toEmail],
           subject: `[Contact] ${subject} — from ${name}`,
           reply_to: email,

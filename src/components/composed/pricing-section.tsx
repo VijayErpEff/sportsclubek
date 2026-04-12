@@ -9,7 +9,7 @@ import { BOOKING_URLS } from "@/lib/constants/booking";
 
 const plans = [
   {
-    name: "LevelUp Core",
+    name: "LevelUP Core",
     icon: Zap,
     price: 59.99,
     tagline: "Your game, your way.",
@@ -27,7 +27,7 @@ const plans = [
     recommended: false,
   },
   {
-    name: "LevelUp Momentum",
+    name: "LevelUP Momentum",
     icon: Trophy,
     price: 89.99,
     tagline: "Can't choose just one?",
@@ -46,7 +46,7 @@ const plans = [
     recommended: true,
   },
   {
-    name: "LevelUp Ultimate",
+    name: "LevelUP Ultimate",
     icon: Crown,
     price: 119.99,
     tagline: "The ultimate all-access pass.",

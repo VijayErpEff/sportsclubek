@@ -1,7 +1,7 @@
 export const TESTIMONIALS = [
   {
     quote:
-      "Very impressed! I contacted LevelUp the day before we were expecting to get rained out for our Little League practice. The staff was so nice and got us booked right away. The facility is excellent — there aren't many indoor options in the Cecil County area. The cages and booking flexibility were exactly what we needed.",
+      "Very impressed! I contacted LevelUP the day before we were expecting to get rained out for our Little League practice. The staff was so nice and got us booked right away. The facility is excellent — there aren't many indoor options in the Cecil County area. The cages and booking flexibility were exactly what we needed.",
     name: "Barry Janney",
     role: "Little League Coach",
     rating: 5,
@@ -36,7 +36,7 @@ export const TESTIMONIALS = [
   },
   {
     quote:
-      "I've been playing pickleball at LevelUp Sports & Athletics Club and it's been a great experience! The courts are well maintained, the atmosphere is energetic, and everyone is very welcoming. Highly recommend checking it out!",
+      "I've been playing pickleball at LevelUP Sports & Athletics Club and it's been a great experience! The courts are well maintained, the atmosphere is energetic, and everyone is very welcoming. Highly recommend checking it out!",
     name: "Venkata Ramakrishna M.",
     role: "Pickleball Player",
     rating: 5,

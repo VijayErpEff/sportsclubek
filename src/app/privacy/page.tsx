@@ -9,7 +9,7 @@ import { SITE_CONFIG } from "@/lib/constants/site";
 export const metadata: Metadata = generateSEOMetadata({
   title: "Privacy Policy",
   description:
-    "Privacy policy for LevelUp Sports & Athletics Club in Elkton, MD. How we collect, use, and protect your personal information.",
+    "Privacy policy for LevelUP Sports & Athletics Club in Elkton, MD. How we collect, use, and protect your personal information.",
   path: "/privacy",
 });
 
@@ -56,7 +56,7 @@ export default function PrivacyPage() {
                 Introduction
               </h2>
               <p>
-                LevelUp Sports &amp; Athletics Club (&ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;) operates the website{" "}
+                LevelUP Sports &amp; Athletics Club (&ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;) operates the website{" "}
                 <Link href="/" className="text-accent hover:text-accent-hover">
                   levelupsports.us
                 </Link>{" "}
