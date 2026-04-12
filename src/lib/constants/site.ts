@@ -78,7 +78,7 @@ export const SPORTS = [
     slug: "cricket",
     icon: "cricket",
     color: "#1B7D3A",
-    image: "/images/sports/cricket.png",
+    image: "/images/sports/cricket.jpg",
     description:
       "Professional cricket facility with nets, coaching, and structured programs.",
     hasAcademy: true,
@@ -98,7 +98,7 @@ export const SPORTS = [
     slug: "pickleball",
     icon: "pickleball",
     color: "#2BA84A",
-    image: "/images/sports/pickleball.png",
+    image: "/images/sports/pickleball.jpg",
     description:
       "Indoor pickleball courts for open play, lessons, and court rentals.",
     hasAcademy: false,

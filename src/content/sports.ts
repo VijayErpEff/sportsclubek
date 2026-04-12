@@ -135,7 +135,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     tagline: "IPL Coaches. World-Class Facility. Right Here in Elkton.",
     description:
       "Proud partners of BRSS Cricket Academy — North America's largest cricket academy. Train under IPL veterans, international cricketers, and first-class players at the only dedicated indoor cricket center between Philadelphia and Baltimore.",
-    image: "/images/sports/cricket.png",
+    image: "/images/sports/cricket.jpg",
     color: "#1B7D3A",
     metaTitle: "Indoor Cricket Facility & BRSS Academy Partner — Elkton, MD | Serving Newark, Wilmington & Middletown, DE",
     metaDescription:
@@ -331,7 +331,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     tagline: "Come for the Game. Stay for the People.",
     description:
       "Indoor pickleball with 50+ regular players, beginner clinics, and the most welcoming community in the building. You'll make friends here.",
-    image: "/images/sports/pickleball.png",
+    image: "/images/sports/pickleball.jpg",
     color: "#2BA84A",
     metaTitle: "Indoor Pickleball Courts — Elkton, MD | Near Middletown, Bear & Newark, DE",
     metaDescription:

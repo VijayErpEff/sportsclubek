@@ -14,7 +14,7 @@ export function generateSEOMetadata({
   title,
   description,
   path = "",
-  ogImage = "/images/og/default.jpg",
+  ogImage = "/images/sports/facility.jpg",
   ogType = "website",
   noIndex = false,
 }: SEOMetadataProps): Metadata {

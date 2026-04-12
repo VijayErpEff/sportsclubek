@@ -110,7 +110,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 5,
     category: "training-tips",
     sport: "Pickleball",
-    image: "/images/sports/pickleball.png",
+    image: "/images/sports/pickleball.jpg",
   },
   {
     slug: "best-indoor-sports-facilities-near-middletown-de",
@@ -130,7 +130,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "2025-01-20",
     readTime: 4,
     category: "news",
-    image: "/images/sports/LevelUp/02-Main-Area-2.png",
+    image: "/images/sports/LevelUp/02-Main-Area-2.jpg",
     featured: true,
   },
   {
@@ -153,7 +153,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 5,
     category: "training-tips",
     sport: "Baseball",
-    image: "/images/sports/LevelUp/04-Training-Area.png",
+    image: "/images/sports/LevelUp/04-Training-Area.jpg",
   },
   {
     slug: "parents-guide-youth-sports-academies-cecil-county",
@@ -196,7 +196,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 5,
     category: "training-tips",
     sport: "Pickleball",
-    image: "/images/sports/pickleball.png",
+    image: "/images/sports/pickleball.jpg",
   },
   {
     slug: "cricket-in-delaware-maryland-where-to-play",
@@ -218,7 +218,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 5,
     category: "news",
     sport: "Cricket",
-    image: "/images/sports/LevelUp/05-Cricket-Nets.png",
+    image: "/images/sports/LevelUp/05-Cricket-Nets.jpg",
   },
   {
     slug: "what-age-should-child-start-organized-sports",
@@ -397,7 +397,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 5,
     category: "training-tips",
     sport: "Volleyball",
-    image: "/images/sports/volleyball.jpg",
+    image: "/images/sports/LevelUp/02-Main-Area-2.jpg",
   },
   {
     slug: "5-volleyball-drills-that-build-real-game-skills",
@@ -561,7 +561,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 7,
     category: "training-tips",
     sport: "Cricket",
-    image: "/images/sports/cricket.png",
+    image: "/images/sports/cricket.jpg",
   },
   {
     slug: "meet-the-coaches-ipl-veterans-elkton-md",
@@ -629,7 +629,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 6,
     category: "news",
     sport: "Cricket",
-    image: "/images/sports/LevelUp/05-Cricket-Nets.png",
+    image: "/images/sports/LevelUp/05-Cricket-Nets.jpg",
     featured: true,
   },
   {
@@ -690,7 +690,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 5,
     category: "training-tips",
     sport: "Cricket",
-    image: "/images/sports/cricket.png",
+    image: "/images/sports/cricket.jpg",
   },
   {
     slug: "what-to-expect-bwf-certified-badminton-academy",
@@ -846,7 +846,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 5,
     category: "training-tips",
     sport: "Badminton",
-    image: "/images/sports/badminton.jpg",
+    image: "/images/sports/LevelUp/01-Main-Area-1.jpg",
   },
   {
     slug: "pickleball-vs-tennis-which-racquet-sport",
@@ -916,7 +916,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 5,
     category: "training-tips",
     sport: "Pickleball",
-    image: "/images/sports/pickleball.png",
+    image: "/images/sports/pickleball.jpg",
   },
   {
     slug: "why-multi-sport-training-makes-better-athletes",
@@ -988,7 +988,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "2025-04-14",
     readTime: 6,
     category: "training-tips",
-    image: "/images/sports/facility.jpg",
+    image: "/images/sports/LevelUp/04-Training-Area.jpg",
   },
 ];
 

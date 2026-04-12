@@ -64,7 +64,7 @@ export const metadata: Metadata = {
       "Premier indoor sports facility in Elkton, MD — 15 min from Middletown & Newark, DE. Batting cages, cricket nets, badminton & pickleball courts. Youth academies & court rentals. Open 7 days.",
     images: [
       {
-        url: `${SITE_CONFIG.url}/images/og/default.jpg`,
+        url: `${SITE_CONFIG.url}/images/sports/facility.jpg`,
         width: 1200,
         height: 630,
         alt: SITE_CONFIG.name,
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
     title: `${SITE_CONFIG.shortName} — Premier Sports Facility in Elkton, MD`,
     description:
       "Premier indoor sports facility in Elkton, MD — 15 min from Middletown & Newark, DE. Batting cages, cricket nets, badminton & pickleball courts. Youth academies & court rentals. Open 7 days.",
-    images: [`${SITE_CONFIG.url}/images/og/default.jpg`],
+    images: [`${SITE_CONFIG.url}/images/sports/facility.jpg`],
   },
   robots: {
     index: true,

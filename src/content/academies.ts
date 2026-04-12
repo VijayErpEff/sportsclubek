@@ -138,7 +138,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
     sportSlug: "cricket",
     tagline: "Powered by BRSS — North America's Largest Cricket Academy",
     description: "IPL veterans, international fast bowlers, and first-class cricketers coaching right here in Elkton — 15 minutes from Middletown, not 45 minutes to Philly.",
-    image: "/images/sports/cricket.png",
+    image: "/images/sports/cricket.jpg",
     color: "#1B7D3A",
     metaTitle: "Cricket Academy Maryland — BRSS Partner | Elkton, MD | Near Newark, Wilmington & Middletown, DE",
     metaDescription: "Train with IPL & Pakistan international coaches at Maryland's premier cricket academy in Elkton. BRSS Cricket Academy partner. Professional pathway for young cricketers. Enroll today.",

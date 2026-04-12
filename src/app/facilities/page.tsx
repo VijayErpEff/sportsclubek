@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: "Indoor Sports Facility Tour — Elkton, MD | Serving Middletown, Newark & Wilmington, DE",
+  title: "Indoor Sports Facility Tour — Elkton, MD",
   description:
     "Tour LevelUP Sports' 20,000 sq ft indoor facility in Elkton, MD — 15 min from Middletown, 20 from Newark, 30 from Wilmington. Batting cages, cricket nets, badminton & pickleball courts, volleyball courts, and soccer turf. Open 7 days.",
   path: "/facilities",
@@ -31,7 +31,7 @@ const facilityAreas = [
       "Four professional cages with machines from 30 to 90 MPH. Helmets provided. Your kid can work at their pace — or push their limits.",
     features: ["Adjustable speed", "Helmets included", "Video analysis available"],
     link: "/baseball",
-    image: "/images/sports/LevelUp/05-Cricket-Nets.png",
+    image: "/images/sports/LevelUp/05-Cricket-Nets.jpg",
     alt: "Indoor batting cages and cricket nets at LevelUP Sports facility in Elkton, MD",
   },
   {
@@ -51,7 +51,7 @@ const facilityAreas = [
       "Full-length nets with professional bowling machines. If you've been making do with tennis balls in the garage, this will feel like coming home.",
     features: ["Bowling machines", "Video analysis", "All skill levels"],
     link: "/cricket",
-    image: "/images/sports/cricket.png",
+    image: "/images/sports/cricket.jpg",
     alt: "Full-length indoor cricket nets with bowling machines at LevelUP Sports",
   },
   {
@@ -81,7 +81,7 @@ const facilityAreas = [
       "Indoor pickleball with professional nets, proper court lines, and a welcoming community of 50+ regular players.",
     features: ["Dedicated courts", "Equipment provided", "All levels"],
     link: "/pickleball",
-    image: "/images/sports/pickleball.png",
+    image: "/images/sports/pickleball.jpg",
     alt: "Indoor pickleball courts at LevelUP Sports Elkton MD",
   },
   {
@@ -91,7 +91,7 @@ const facilityAreas = [
       "Dedicated space for agility training, warm-ups, and conditioning. Cones, ladders, medicine balls, and more.",
     features: ["Agility equipment", "Conditioning gear", "Kids-friendly"],
     link: "/kids-agility",
-    image: "/images/sports/LevelUp/04-Training-Area.png",
+    image: "/images/sports/LevelUp/04-Training-Area.jpg",
     alt: "Indoor turf training area for youth agility and conditioning at LevelUP Sports Elkton",
   },
 ];
@@ -123,7 +123,7 @@ export default function FacilitiesPage() {
       {/* Hero — Full-bleed facility image */}
       <section className="relative min-h-[60vh] flex items-end overflow-hidden">
         <Image
-          src="/images/sports/LevelUp/01-Main-Area-1.png"
+          src="/images/sports/LevelUp/01-Main-Area-1.jpg"
           alt="Inside LevelUP Sports facility — modern indoor courts and training areas in Elkton, MD"
           fill
           className="object-cover"

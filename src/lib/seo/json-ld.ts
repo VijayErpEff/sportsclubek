@@ -16,7 +16,7 @@ export function generateOrganizationLD() {
     url: SITE_CONFIG.url,
     telephone: SITE_CONFIG.phone,
     email: SITE_CONFIG.email,
-    image: `${SITE_CONFIG.url}/images/og/default.jpg`,
+    image: `${SITE_CONFIG.url}/images/sports/facility.jpg`,
     logo: `${SITE_CONFIG.url}/images/logo.png`,
     address: {
       "@type": "PostalAddress",

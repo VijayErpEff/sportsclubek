@@ -1,7 +1,14 @@
+import { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/layout/container";
 import { Home, Search } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Page Not Found",
+  description: "The page you're looking for doesn't exist. Browse our sports programs, schedule, or contact us.",
+  robots: { index: false, follow: true },
+};
 
 export default function NotFound() {
   return (

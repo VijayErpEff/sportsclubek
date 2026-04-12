@@ -47,15 +47,15 @@ import {
 
 /** Descriptive alt text keyed by filename for SEO and accessibility */
 const FACILITY_ALT_TEXT: Record<string, string> = {
-  "01-Main-Area-1.png":
+  "01-Main-Area-1.jpg":
     "Indoor multi-sport facility main court area at LevelUP Sports in Elkton, MD",
-  "02-Main-Area-2.png":
+  "02-Main-Area-2.jpg":
     "Wide view of indoor courts for badminton, pickleball, and volleyball at LevelUP Sports",
-  "04-Training-Area.png":
+  "04-Training-Area.jpg":
     "Youth sports training area with batting cages and agility equipment at LevelUP Sports",
-  "05-Cricket-Nets.png":
+  "05-Cricket-Nets.jpg":
     "Professional indoor cricket nets and bowling machine setup at LevelUP Sports Elkton",
-  "06-Lounge.png":
+  "06-Lounge.jpg":
     "Player lounge and viewing area for families at LevelUP Sports & Athletics Club",
 };
 
@@ -86,7 +86,7 @@ export const metadata: Metadata = {
   title:
     "LevelUP Sports — Indoor Sports Facility in Elkton, MD",
   description:
-    "Indoor batting cages, cricket nets, badminton & pickleball courts in Elkton, MD — 15 min from Middletown & Newark, DE. Youth academies, court rentals. Book today.",
+    "Indoor batting cages, cricket nets, badminton & pickleball courts in Elkton, MD — 15 min from Middletown & Newark, DE. Youth academies, court rentals.",
   alternates: {
     canonical: "https://levelupsports.us",
   },
