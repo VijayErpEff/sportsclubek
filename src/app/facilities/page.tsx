@@ -31,7 +31,7 @@ const facilityAreas = [
       "Four professional cages with machines from 30 to 90 MPH. Helmets provided. Your kid can work at their pace — or push their limits.",
     features: ["Adjustable speed", "Helmets included", "Video analysis available"],
     link: "/baseball",
-    image: "/images/sports/LevelUP/05-Cricket-Nets.jpg",
+    image: "/images/sports/LevelUp/05-Cricket-Nets.jpg",
     alt: "Indoor batting cages and cricket nets at LevelUP Sports facility in Elkton, MD",
   },
   {
@@ -91,7 +91,7 @@ const facilityAreas = [
       "Dedicated space for agility training, warm-ups, and conditioning. Cones, ladders, medicine balls, and more.",
     features: ["Agility equipment", "Conditioning gear", "Kids-friendly"],
     link: "/kids-agility",
-    image: "/images/sports/LevelUP/04-Training-Area.jpg",
+    image: "/images/sports/LevelUp/04-Training-Area.jpg",
     alt: "Indoor turf training area for youth agility and conditioning at LevelUP Sports Elkton",
   },
 ];
@@ -123,7 +123,7 @@ export default function FacilitiesPage() {
       {/* Hero — Full-bleed facility image */}
       <section className="relative min-h-[60vh] flex items-end overflow-hidden">
         <Image
-          src="/images/sports/LevelUP/01-Main-Area-1.jpg"
+          src="/images/sports/LevelUp/01-Main-Area-1.jpg"
           alt="Inside LevelUP Sports facility — modern indoor courts and training areas in Elkton, MD"
           fill
           className="object-cover"

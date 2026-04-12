@@ -128,7 +128,7 @@ export default function AboutPage() {
             <Reveal variant="fade-left" delay={0.15}>
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-card-elevated">
                 <Image
-                  src="/images/sports/LevelUP/01-Main-Area-1.jpg"
+                  src="/images/sports/LevelUp/01-Main-Area-1.jpg"
                   alt="Inside LevelUP Sports — modern indoor multi-sport facility in Elkton, MD"
                   fill
                   className="object-cover"

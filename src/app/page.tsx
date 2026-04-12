@@ -60,19 +60,19 @@ const FACILITY_ALT_TEXT: Record<string, string> = {
 };
 
 /**
- * Auto-discovers hero images from public/images/sports/LevelUP/.
+ * Auto-discovers hero images from public/images/sports/LevelUp/.
  * Just add or remove image files in that folder — no code changes needed.
  * Files are sorted alphabetically; prefix with numbers (01-, 02-) to control order.
  */
 function getFacilityImages(): Array<{ src: string; alt: string }> {
-  const dir = path.join(process.cwd(), "public/images/sports/LevelUP");
+  const dir = path.join(process.cwd(), "public/images/sports/LevelUp");
   try {
     return fs
       .readdirSync(dir)
       .filter((f) => /^\d+-.*\.(png|jpe?g|webp|avif)$/i.test(f))
       .sort()
       .map((f) => ({
-        src: `/images/sports/LevelUP/${f}`,
+        src: `/images/sports/LevelUp/${f}`,
         alt:
           FACILITY_ALT_TEXT[f] ??
           `LevelUP Sports indoor facility — ${f.replace(/\.[^.]+$/, "").replace(/^\d+-/, "").replace(/-/g, " ")}`,
