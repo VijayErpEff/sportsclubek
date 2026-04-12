@@ -299,23 +299,19 @@ export function VideoHero({
             </>
           )}
 
-          {/* Title */}
-          {shouldAnimate ? (
-            <motion.h1
-              className="font-display text-hero text-white mb-4 md:mb-6"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.7,
-                delay: TITLE_DELAY,
-                ease: APPLE_EASE,
-              }}
-            >
-              {title}
-            </motion.h1>
-          ) : (
-            <h1 className="font-display text-hero text-white mb-4 md:mb-6">{title}</h1>
-          )}
+          {/* Title — always a real <h1> for SEO, animation layered on top */}
+          <motion.h1
+            className="font-display text-hero text-white mb-4 md:mb-6"
+            initial={shouldAnimate ? { opacity: 0, y: 30 } : false}
+            animate={{ opacity: 1, y: 0 }}
+            transition={shouldAnimate ? {
+              duration: 0.7,
+              delay: TITLE_DELAY,
+              ease: APPLE_EASE,
+            } : { duration: 0 }}
+          >
+            {title}
+          </motion.h1>
 
           {/* Subtitle — hidden on mobile to let images dominate */}
           {subtitle && (
