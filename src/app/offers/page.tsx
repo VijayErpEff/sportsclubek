@@ -14,7 +14,7 @@ import { BOOKING_URLS } from "@/lib/constants/booking";
 export const metadata: Metadata = generateSEOMetadata({
   title: "Current Offers & Promotions — Elkton, MD",
   description:
-    "Special deals and promotions at LevelUP Sports in Elkton, MD. First-time discounts, seasonal offers, membership specials, and referral rewards.",
+    "Special deals and promotions at LevelUp Sports in Elkton, MD. First-time discounts, seasonal offers, membership specials, and referral rewards.",
   path: "/offers",
 });
 
@@ -148,7 +148,7 @@ export default function OffersPage() {
               <div className="p-8">
                 <h3 className="text-xl font-bold mb-3">Refer a Friend</h3>
                 <p className="text-muted-foreground mb-4">
-                  Know someone who would love LevelUP Sports? Refer a friend and you both get
+                  Know someone who would love LevelUp Sports? Refer a friend and you both get
                   a free session. The more you refer, the more you earn.
                 </p>
                 <ul className="space-y-2 text-sm text-muted-foreground mb-6">
@@ -186,7 +186,7 @@ export default function OffersPage() {
               <h2 className="text-2xl font-bold tracking-tight mb-4 text-balance">Offer Terms</h2>
               <p className="text-muted-foreground text-sm">
                 All offers are subject to availability and may be withdrawn at any time. Offers
-                cannot be combined unless explicitly stated. Valid at the LevelUP Sports Elkton
+                cannot be combined unless explicitly stated. Valid at the LevelUp Sports Elkton
                 location only. Contact us for full terms and conditions.
               </p>
             </div>

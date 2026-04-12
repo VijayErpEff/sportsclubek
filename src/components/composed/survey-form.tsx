@@ -179,7 +179,7 @@ export function SurveyForm() {
           <Check className="h-8 w-8 text-accent" />
         </motion.div>
         <h3 className="font-display text-xl font-bold text-neutral-900 mb-2">Thank you!</h3>
-        <p className="text-neutral-500">Your feedback helps us improve. We&rsquo;re glad to have you in the LevelUP community.</p>
+        <p className="text-neutral-500">Your feedback helps us improve. We&rsquo;re glad to have you in the LevelUp community.</p>
       </div>
     );
   }
@@ -214,7 +214,7 @@ export function SurveyForm() {
           {/* Step 0: Visitor Type */}
           {step === 0 && (
             <motion.div key="s0" {...motionProps}>
-              <h3 className="font-display text-lg font-bold text-neutral-900 mb-1">How do you know LevelUP?</h3>
+              <h3 className="font-display text-lg font-bold text-neutral-900 mb-1">How do you know LevelUp?</h3>
               <p className="text-sm text-neutral-400 mb-5">This helps us understand your perspective.</p>
               <div className="grid grid-cols-2 gap-3">
                 {VISITOR_TYPES.map((vt) => (
@@ -358,7 +358,7 @@ export function SurveyForm() {
           {/* Step 5: NPS */}
           {step === 5 && (
             <motion.div key="s5" {...motionProps}>
-              <h3 className="font-display text-lg font-bold text-neutral-900 mb-1">Would you recommend LevelUP?</h3>
+              <h3 className="font-display text-lg font-bold text-neutral-900 mb-1">Would you recommend LevelUp?</h3>
               <p className="text-sm text-neutral-400 mb-6">To a friend or family member.</p>
               <div className="space-y-3">
                 {NPS_OPTIONS.map((opt) => (

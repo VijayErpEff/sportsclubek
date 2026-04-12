@@ -99,7 +99,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       ? `${SITE_CONFIG.url}${post.image}`
       : undefined,
     author: {
-      "@type": post.author === "LevelUP Sports" ? "Organization" : "Person",
+      "@type": post.author === "LevelUp Sports" ? "Organization" : "Person",
       name: post.author,
     },
     publisher: {
@@ -286,7 +286,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </h2>
               <p className="text-white/80 mb-8">
                 Put what you&apos;ve learned into practice. Book a session at
-                LevelUP Sports and work with our expert coaches.
+                LevelUp Sports and work with our expert coaches.
               </p>
               <div className="flex flex-wrap justify-center gap-3">
                 <Button

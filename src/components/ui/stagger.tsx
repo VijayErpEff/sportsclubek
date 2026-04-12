@@ -1,7 +1,7 @@
 "use client";
 
-import { type ReactNode, useState, useEffect } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { type ReactNode, useRef } from "react";
+import { motion, useReducedMotion, useInView } from "framer-motion";
 import { cn } from "@/lib/utils/cn";
 
 const APPLE_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -20,22 +20,18 @@ export function StaggerContainer({
   threshold = 0.1,
 }: StaggerContainerProps) {
   const prefersReduced = useReducedMotion();
-  const [ready, setReady] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, amount: threshold });
 
-  useEffect(() => {
-    const id = requestAnimationFrame(() => setReady(true));
-    return () => cancelAnimationFrame(id);
-  }, []);
-
-  if (!ready || prefersReduced) {
+  if (prefersReduced) {
     return <div className={cn(className)}>{children}</div>;
   }
 
   return (
     <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: threshold }}
+      ref={ref}
+      initial={false}
+      animate={inView ? "visible" : "hidden"}
       variants={{
         hidden: {},
         visible: {
@@ -59,14 +55,8 @@ export function StaggerItem({
   className?: string;
 }) {
   const prefersReduced = useReducedMotion();
-  const [ready, setReady] = useState(false);
 
-  useEffect(() => {
-    const id = requestAnimationFrame(() => setReady(true));
-    return () => cancelAnimationFrame(id);
-  }, []);
-
-  if (!ready || prefersReduced) {
+  if (prefersReduced) {
     return <div className={cn(className)}>{children}</div>;
   }
 

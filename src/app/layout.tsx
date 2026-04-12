@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     "pickleball courts Cecil County",
     "badminton lessons Delaware",
     "indoor sports facility",
-    "LevelUP Sports",
+    "LevelUp Sports",
     "indoor sports Middletown DE",
     "batting cages near Middletown Delaware",
     "cricket facility Newark DE",
@@ -136,7 +136,7 @@ export default function RootLayout({
             <ScrollProgressBar />
             <AnnouncementBanner />
             <Navbar />
-            <main id="main-content">{children}</main>
+            <main id="main-content" className="min-h-screen">{children}</main>
             <Footer />
             <BackToTop />
             <CookieConsent />

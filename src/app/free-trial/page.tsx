@@ -24,7 +24,7 @@ import { BOOKING_URLS } from "@/lib/constants/booking";
 export const metadata: Metadata = generateSEOMetadata({
   title: "Try a Free Session — Any Sport, No Commitment",
   description:
-    "Try any sport free at LevelUP Sports in Elkton, MD — 15 min from Middletown & Newark, DE. Batting cages, cricket, badminton & pickleball. No card required.",
+    "Try any sport free at LevelUp Sports in Elkton, MD — 15 min from Middletown & Newark, DE. Batting cages, cricket, badminton & pickleball. No card required.",
   path: "/free-trial",
 });
 

@@ -1,5 +1,5 @@
 /**
- * GA4 Analytics — centralized event tracking for LevelUP Sports.
+ * GA4 Analytics — centralized event tracking for LevelUp Sports.
  *
  * All events flow to Google Analytics 4 via gtag().
  * Set NEXT_PUBLIC_GA_ID in your environment to enable.

@@ -15,7 +15,7 @@ import { CheckCircle, PartyPopper, ClipboardList, Play, Armchair, Users, Buildin
 export const metadata: Metadata = generateSEOMetadata({
   title: "Birthday Parties & Group Events — Elkton, MD",
   description:
-    "Host a birthday party at LevelUP Sports in Elkton, MD. Batting cages, badminton, pickleball, and coaching for ages 6+. Packages from $249. Book today.",
+    "Host a birthday party at LevelUp Sports in Elkton, MD. Batting cages, badminton, pickleball, and coaching for ages 6+. Packages from $249. Book today.",
   path: "/birthday-parties",
 });
 
@@ -35,7 +35,7 @@ const PREMIUM_FEATURES = [
   "All equipment provided",
   "Setup and cleanup included",
   "Pizza, drinks, and paper goods included",
-  "Custom LevelUP party favors",
+  "Custom LevelUp party favors",
   "Photo station with props",
 ];
 

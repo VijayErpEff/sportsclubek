@@ -48,15 +48,15 @@ import {
 /** Descriptive alt text keyed by filename for SEO and accessibility */
 const FACILITY_ALT_TEXT: Record<string, string> = {
   "01-Main-Area-1.jpg":
-    "Indoor multi-sport facility main court area at LevelUP Sports in Elkton, MD",
+    "Indoor multi-sport facility main court area at LevelUp Sports in Elkton, MD",
   "02-Main-Area-2.jpg":
-    "Wide view of indoor courts for badminton, pickleball, and volleyball at LevelUP Sports",
+    "Wide view of indoor courts for badminton, pickleball, and volleyball at LevelUp Sports",
   "04-Training-Area.jpg":
-    "Youth sports training area with batting cages and agility equipment at LevelUP Sports",
+    "Youth sports training area with batting cages and agility equipment at LevelUp Sports",
   "05-Cricket-Nets.jpg":
-    "Professional indoor cricket nets and bowling machine setup at LevelUP Sports Elkton",
+    "Professional indoor cricket nets and bowling machine setup at LevelUp Sports Elkton",
   "06-Lounge.jpg":
-    "Player lounge and viewing area for families at LevelUP Sports & Athletics Club",
+    "Player lounge and viewing area for families at LevelUp Sports & Athletics Club",
 };
 
 /**
@@ -75,7 +75,7 @@ function getFacilityImages(): Array<{ src: string; alt: string }> {
         src: `/images/sports/LevelUp/${f}`,
         alt:
           FACILITY_ALT_TEXT[f] ??
-          `LevelUP Sports indoor facility — ${f.replace(/\.[^.]+$/, "").replace(/^\d+-/, "").replace(/-/g, " ")}`,
+          `LevelUp Sports indoor facility — ${f.replace(/\.[^.]+$/, "").replace(/^\d+-/, "").replace(/-/g, " ")}`,
       }));
   } catch {
     return [];
@@ -84,7 +84,7 @@ function getFacilityImages(): Array<{ src: string; alt: string }> {
 
 export const metadata: Metadata = {
   title:
-    "LevelUP Sports — Indoor Sports Facility in Elkton, MD",
+    "LevelUp Sports — Indoor Sports Facility in Elkton, MD",
   description:
     "Indoor batting cages, cricket nets, badminton & pickleball courts in Elkton, MD — 15 min from Middletown & Newark, DE. Youth academies, court rentals.",
   alternates: {

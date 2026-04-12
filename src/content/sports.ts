@@ -116,7 +116,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       },
     ],
     faqs: [
-      { question: "How much do batting cages cost at LevelUP?", answer: "Private cage rental is $40/hour. Helmets and bats are provided. Members get Open Play access from just $8/hour (non-members $15/hour). Academy training packages start at $140 for 4 sessions. You can also try a free session first — no charge, no commitment." },
+      { question: "How much do batting cages cost at LevelUp?", answer: "Private cage rental is $40/hour. Helmets and bats are provided. Members get Open Play access from just $8/hour (non-members $15/hour). Academy training packages start at $140 for 4 sessions. You can also try a free session first — no charge, no commitment." },
       { question: "What age can my child start using batting cages?", answer: "Ages 6 and up. We start younger kids at 30 MPH and work up from there. A coach helps them find the right speed and stance for their skill level." },
       { question: "Do you provide helmets and bats?", answer: "Yes — helmets are required and always provided. We have bats available for every age and size. You're welcome to bring your own bat too." },
       { question: "Can adults use the batting cages?", answer: "Absolutely. Our cages go up to 90 MPH and are popular with adult softball and baseball players looking to stay sharp. Drop-in cage rental is $40/hour. Many adult players from Wilmington, Newark, and Cecil County use our cages for regular practice." },
@@ -141,7 +141,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     metaDescription:
       "Train with IPL & international cricket coaches at Maryland's premier indoor facility in Elkton, MD. Proud BRSS Cricket Academy partner. Professional nets, bowling machines, youth & adult programs. Book today.",
     overview: [
-      "LevelUP Sports is a proud partner of BRSS Cricket Academy (Baltimore Royals Sunny Sohal Cricket) — the largest cricket academy in North America. Formed through the merger of the Baltimore Royals and the Sunny Sohal Cricket Academy (SSCA), BRSS brings international-caliber coaching to Elkton. Our coaching staff includes an IPL veteran, a former Pakistan international fast bowler, and first-class cricketers from India. You won't find this level of coaching anywhere between Philadelphia and Baltimore.",
+      "LevelUp Sports is a proud partner of BRSS Cricket Academy (Baltimore Royals Sunny Sohal Cricket) — the largest cricket academy in North America. Formed through the merger of the Baltimore Royals and the Sunny Sohal Cricket Academy (SSCA), BRSS brings international-caliber coaching to Elkton. Our coaching staff includes an IPL veteran, a former Pakistan international fast bowler, and first-class cricketers from India. You won't find this level of coaching anywhere between Philadelphia and Baltimore.",
       "Whether your family has played cricket for generations or you're curious about the sport, our world-class coaching team meets you where you are. Many of our members drove 45+ minutes each way before we opened. Now they're 15 minutes away, training under coaches who've competed at the highest levels of world cricket. We serve families from Newark, Wilmington, Middletown, and across the tri-state area.",
       "For adult league players, our facility offers the most complete indoor cricket training setup between Philadelphia and Baltimore. Book net sessions with professional bowling machines for solo practice or bring your club team for group training. Whether you're preparing for weekend league matches, sharpening your technique during the off-season, or working with our coaches on specific skills, our full-pitch and half-pitch options give you the space and equipment to train at a professional level. Players from Wilmington, Newark, Hockessin, Christiana, and across New Castle County train here regularly.",
     ],
@@ -216,7 +216,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       },
     ],
     faqs: [
-      { question: "What is BRSS Cricket Academy?", answer: "BRSS (Baltimore Royals Sunny Sohal Cricket) is the largest cricket academy in North America, formed through the merger of the Baltimore Royals and the Sunny Sohal Cricket Academy (SSCA). LevelUP is a proud partner facility, bringing BRSS's world-class coaching to the Elkton/tri-state area." },
+      { question: "What is BRSS Cricket Academy?", answer: "BRSS (Baltimore Royals Sunny Sohal Cricket) is the largest cricket academy in North America, formed through the merger of the Baltimore Royals and the Sunny Sohal Cricket Academy (SSCA). LevelUp is a proud partner facility, bringing BRSS's world-class coaching to the Elkton/tri-state area." },
       { question: "Do you offer cricket coaching for complete beginners?", answer: "Absolutely! Our junior development and beginner programs are designed for players with zero experience. Our coaches work with all skill levels — from first-timers to competitive players." },
       { question: "Can I just book a net without coaching?", answer: "Yes, net sessions can be booked independently. Full pitch rental is $180/hour, half pitch $90/hour, or a single cage for $40/hour. Bowling machines are available for self-practice." },
       { question: "What cricket equipment is provided?", answer: "We provide bats, pads, gloves, and helmets for beginners. Regular players are encouraged to bring their own gear." },
@@ -386,7 +386,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       { question: "What's the difference between pickleball and tennis?", answer: "Pickleball uses a smaller court, solid paddles, and a perforated ball. It's easier to learn, gentler on joints, and incredibly social." },
       { question: "Do I need my own paddle?", answer: "Not at all! We provide paddles and balls for all open play and lesson sessions. Bring your own if you prefer." },
       { question: "Is pickleball good exercise?", answer: "Absolutely! It provides great cardio, improves agility and reflexes, and burns 400-600 calories per hour — all while having fun." },
-      { question: "Where are the closest indoor pickleball courts to Middletown, DE?", answer: "LevelUP Sports in Elkton, MD — just 15 minutes from Middletown via Route 40. We're also 20 minutes from Newark, 25 from Bear, and 30 from Wilmington. Our dedicated indoor courts mean you can play year-round regardless of weather." },
+      { question: "Where are the closest indoor pickleball courts to Middletown, DE?", answer: "LevelUp Sports in Elkton, MD — just 15 minutes from Middletown via Route 40. We're also 20 minutes from Newark, 25 from Bear, and 30 from Wilmington. Our dedicated indoor courts mean you can play year-round regardless of weather." },
     ],
     ctaTitle: "Find Your People on the Court",
     ctaPrimary: { label: "Try a Free Session", href: BOOKING_URLS.freeTrial },
@@ -406,7 +406,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     metaDescription:
       "Indoor volleyball courts in Elkton, MD — 15 min from Middletown & Newark, DE. Youth academy, adult leagues, open play, and expert coaching. Book today.",
     overview: [
-      "Whether your kid is learning to pass for the first time or your adult rec team needs a reliable indoor home, LevelUP has you covered. Our regulation-height nets, proper court lines, and professional flooring give you the real volleyball experience — not a makeshift setup in a church gym. Coach Viktor brings 20+ years of competitive playing experience and 6+ years coaching youth, university, and adult teams — he builds players who are fundamentally sound and mentally tough.",
+      "Whether your kid is learning to pass for the first time or your adult rec team needs a reliable indoor home, LevelUp has you covered. Our regulation-height nets, proper court lines, and professional flooring give you the real volleyball experience — not a makeshift setup in a church gym. Coach Viktor brings 20+ years of competitive playing experience and 6+ years coaching youth, university, and adult teams — he builds players who are fundamentally sound and mentally tough.",
       "Parents: this is the sport that teaches teamwork better than any other. Every point requires communication, trust, and coordination. Our youth programs focus on passing, serving, and court awareness — the skills that separate good players from great ones. And our adult open play nights? They've become the most fun evening of the week for 30+ regulars.",
       "Teams and players from Newark, Middletown, Bear, Wilmington, and across New Castle County, DE choose our courts for regular practice because they're regulation quality, climate-controlled, and easy to get to. Club teams use us for practice space and scrimmages. School teams book courts for off-season training. Adult groups reserve weekly time slots for competitive and recreational play. At $120/hour for a full regulation court with professional flooring and adjustable nets, we're the best value for serious volleyball in the tri-state area.",
     ],
@@ -459,7 +459,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       },
     ],
     faqs: [
-      { question: "What ages can play volleyball at LevelUP?", answer: "We offer programs for ages 8 and up, plus adult open play and leagues. Net heights are adjusted for younger age groups." },
+      { question: "What ages can play volleyball at LevelUp?", answer: "We offer programs for ages 8 and up, plus adult open play and leagues. Net heights are adjusted for younger age groups." },
       { question: "Do I need to bring my own volleyball?", answer: "No — we provide game balls for all sessions, open play, and rentals. You're welcome to bring your own if you prefer." },
       { question: "Can my team rent a court for practice?", answer: "Absolutely. Private court rental is $120/hour for team practices, scrimmages, or private training. Training packages start at $149/month for 4 sessions." },
       { question: "Do you have adult volleyball leagues?", answer: "Yes — we run both recreational and competitive adult leagues with season play, standings, playoffs, and awards. Our adult open play nights also draw 30+ regulars weekly. Many of our adult players come from Newark, Middletown, Wilmington, and across Cecil County." },

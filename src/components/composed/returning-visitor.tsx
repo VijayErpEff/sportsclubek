@@ -104,7 +104,7 @@ export function ReturningVisitor() {
 
   const message = primarySportName
     ? `Welcome back! Ready for more ${primarySportName}?`
-    : "Welcome back to LevelUP!";
+    : "Welcome back to LevelUp!";
 
   return (
     <AnimatePresence>

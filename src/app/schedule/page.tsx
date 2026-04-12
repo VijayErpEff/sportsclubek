@@ -11,7 +11,7 @@ import { BOOKING_URLS } from "@/lib/constants/booking";
 export const metadata: Metadata = generateSEOMetadata({
   title: "Schedule & Book Sessions — Elkton, MD",
   description:
-    "View the LevelUP Sports weekly schedule. Batting cages, court rentals, academy classes, and open play in Elkton, MD. Book your session online today.",
+    "View the LevelUp Sports weekly schedule. Batting cages, court rentals, academy classes, and open play in Elkton, MD. Book your session online today.",
   path: "/schedule",
 });
 

@@ -1,7 +1,12 @@
 "use client";
 
-import { type ReactNode, useState, useEffect } from "react";
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { type ReactNode, useRef } from "react";
+import {
+  motion,
+  useReducedMotion,
+  useInView,
+  type Variants,
+} from "framer-motion";
 import { cn } from "@/lib/utils/cn";
 
 type RevealVariant =
@@ -24,11 +29,7 @@ interface RevealProps {
 
 const APPLE_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
-function getVariants(
-  variant: RevealVariant,
-  duration: number,
-  delay: number
-): Variants {
+function getStyles(variant: RevealVariant) {
   const hidden: Record<string, number | string> = { opacity: 0 };
   const visible: Record<string, number | string> = { opacity: 1 };
 
@@ -55,13 +56,7 @@ function getVariants(
       break;
   }
 
-  return {
-    hidden,
-    visible: {
-      ...visible,
-      transition: { duration, delay, ease: APPLE_EASE },
-    },
-  };
+  return { hidden, visible };
 }
 
 export function Reveal({
@@ -74,25 +69,21 @@ export function Reveal({
   once = true,
 }: RevealProps) {
   const prefersReduced = useReducedMotion();
-  const [ready, setReady] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once, amount: threshold });
 
-  useEffect(() => {
-    // Small delay to ensure hydration is complete before enabling animations
-    const id = requestAnimationFrame(() => setReady(true));
-    return () => cancelAnimationFrame(id);
-  }, []);
-
-  // SSR + before hydration + reduced motion: render children fully visible
-  if (!ready || prefersReduced) {
+  if (prefersReduced) {
     return <div className={cn(className)}>{children}</div>;
   }
 
+  const { hidden, visible } = getStyles(variant);
+
   return (
     <motion.div
-      variants={getVariants(variant, duration, delay)}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once, amount: threshold }}
+      ref={ref}
+      animate={inView ? visible : hidden}
+      initial={false}
+      transition={{ duration, delay, ease: APPLE_EASE }}
       className={cn(className)}
     >
       {children}

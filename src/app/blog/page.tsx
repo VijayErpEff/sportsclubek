@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils/cn";
 export const metadata: Metadata = generateSEOMetadata({
   title: "Training Tips & Sports Blog — Elkton, MD",
   description:
-    "Training tips, athlete spotlights, and news from LevelUP Sports in Elkton, MD. Expert advice for baseball, cricket, badminton, and pickleball players.",
+    "Training tips, athlete spotlights, and news from LevelUp Sports in Elkton, MD. Expert advice for baseball, cricket, badminton, and pickleball players.",
   path: "/blog",
 });
 
@@ -47,7 +47,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
       <Hero
         title="Training Tips, News & Stories"
-        subtitle="Expert advice, athlete spotlights, and the latest from LevelUP Sports. Fuel your game on and off the court."
+        subtitle="Expert advice, athlete spotlights, and the latest from LevelUp Sports. Fuel your game on and off the court."
       />
 
       <Section size="sm">

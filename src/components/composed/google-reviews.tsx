@@ -173,7 +173,7 @@ export function GoogleReviews({ className }: { className?: string }) {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SportsActivityLocation",
-            name: "LevelUP Sports & Athletics Club",
+            name: "LevelUp Sports & Athletics Club",
             aggregateRating: {
               "@type": "AggregateRating",
               ratingValue: AGGREGATE_RATING.ratingValue,

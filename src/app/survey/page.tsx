@@ -6,9 +6,9 @@ import { generateSEOMetadata } from "@/lib/seo/metadata";
 import { generateBreadcrumbLD } from "@/lib/seo/json-ld";
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: "Share Your Feedback — LevelUP Sports",
+  title: "Share Your Feedback — LevelUp Sports",
   description:
-    "Help us improve! Take our 30-second survey and tell us what you love and what we can do better at LevelUP Sports in Elkton, MD.",
+    "Help us improve! Take our 30-second survey and tell us what you love and what we can do better at LevelUp Sports in Elkton, MD.",
   path: "/survey",
 });
 

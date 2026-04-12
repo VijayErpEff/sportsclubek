@@ -7,7 +7,7 @@ import { CourtStatusBoard } from "./court-status-board";
 export const metadata: Metadata = generateSEOMetadata({
   title: "Live Court & Cage Availability — Elkton, MD",
   description:
-    "Check real-time court and cage availability at LevelUP Sports in Elkton, MD. See open courts for pickleball, badminton, cricket, volleyball, and batting cages.",
+    "Check real-time court and cage availability at LevelUp Sports in Elkton, MD. See open courts for pickleball, badminton, cricket, volleyball, and batting cages.",
   path: "/court-status",
 });
 

@@ -15,7 +15,7 @@ import { CheckCircle, Calendar, Clock, Shield, Sun, Users, MapPin } from "lucide
 export const metadata: Metadata = generateSEOMetadata({
   title: "Summer Sports Camps — Elkton, MD | Ages 6–16",
   description:
-    "Summer sports camps at LevelUP Sports in Elkton, MD. Baseball, cricket, badminton & multi-sport for ages 6-16. Full and half day. Near Middletown & Newark, DE.",
+    "Summer sports camps at LevelUp Sports in Elkton, MD. Baseball, cricket, badminton & multi-sport for ages 6-16. Full and half day. Near Middletown & Newark, DE.",
   path: "/summer-camps",
 });
 

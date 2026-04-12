@@ -13,7 +13,7 @@ import { Heart, TrendingUp, Users, Dumbbell, Briefcase, ArrowRight } from "lucid
 export const metadata: Metadata = generateSEOMetadata({
   title: "Careers — Join Our Team in Elkton, MD",
   description:
-    "Join the LevelUP Sports team in Elkton, MD. Coaching, facility operations, and front desk positions. Build the future of youth athletics in the tri-state area.",
+    "Join the LevelUp Sports team in Elkton, MD. Coaching, facility operations, and front desk positions. Build the future of youth athletics in the tri-state area.",
   path: "/careers",
 });
 
@@ -176,7 +176,7 @@ export default function CareersPage() {
                 Don&apos;t See Your Role?
               </h2>
               <p className="text-neutral-500 text-sm mb-5">
-                We&apos;re always looking for talented people. Send us your resume and tell us what you&apos;d bring to LevelUP Sports.
+                We&apos;re always looking for talented people. Send us your resume and tell us what you&apos;d bring to LevelUp Sports.
               </p>
               <CareerApplyButton
                 position="Open Application"

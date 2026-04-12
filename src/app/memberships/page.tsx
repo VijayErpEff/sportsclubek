@@ -11,11 +11,13 @@ import { generateBreadcrumbLD, generateFAQLD } from "@/lib/seo/json-ld";
 import { MEMBERSHIP_FAQS } from "@/content/faqs";
 import { BOOKING_URLS } from "@/lib/constants/booking";
 import { Check, X, GraduationCap, Shield, Users } from "lucide-react";
+import { MembershipAgreement } from "@/components/composed/membership-agreement";
+import { LiabilityWaiver } from "@/components/composed/liability-waiver";
 
 export const metadata: Metadata = generateSEOMetadata({
   title: "Memberships & Pricing — Plans from $49/mo",
   description:
-    "Flexible membership plans at LevelUP Sports in Elkton, MD. Access batting cages, courts, and coaching. Individual, family, and elite tiers. Compare plans.",
+    "Flexible membership plans at LevelUp Sports in Elkton, MD. Access batting cages, courts, and coaching. Individual, family, and elite tiers. Compare plans.",
   path: "/memberships",
 });
 
@@ -212,6 +214,33 @@ export default function MembershipsPage() {
           </Reveal>
         </Container>
       </section>
+
+      {/* Agreements & Waivers */}
+      <Section size="sm">
+        <Container>
+          <Reveal>
+            <div className="text-center mb-8">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-3">
+                Forms &amp; Agreements
+              </p>
+              <h2 className="font-display text-section text-neutral-900 text-balance">
+                Review &amp; sign before your first session.
+              </h2>
+              <p className="text-neutral-500 mt-2 max-w-xl mx-auto">
+                All members and participants must complete these forms. You only need to sign once.
+              </p>
+            </div>
+          </Reveal>
+          <div className="max-w-2xl mx-auto space-y-4">
+            <Reveal delay={0.05}>
+              <MembershipAgreement />
+            </Reveal>
+            <Reveal delay={0.1}>
+              <LiabilityWaiver />
+            </Reveal>
+          </div>
+        </Container>
+      </Section>
 
       {/* FAQ */}
       <Section variant="alternate" size="sm">

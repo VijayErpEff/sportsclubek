@@ -166,7 +166,7 @@ function CareerModal({
                 required
                 rows={4}
                 className="w-full px-4 py-3 rounded-lg border border-neutral-300 bg-white text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent resize-y text-sm"
-                placeholder="Your experience, qualifications, and why you'd like to join LevelUP Sports..."
+                placeholder="Your experience, qualifications, and why you'd like to join LevelUp Sports..."
               />
             </div>
 

@@ -1,6 +1,6 @@
 export const SITE_CONFIG = {
-  name: "LevelUP Sports & Athletics Club",
-  shortName: "LevelUP Sports",
+  name: "LevelUp Sports & Athletics Club",
+  shortName: "LevelUp Sports",
   tagline: "Elevate Your Game",
   description:
     "Premier multi-sport facility in Elkton, MD offering expert coaching, modern courts, and programs in baseball, cricket, badminton, pickleball, volleyball, and soccer for all ages and skill levels.",
