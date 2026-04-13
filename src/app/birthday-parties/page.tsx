@@ -6,37 +6,88 @@ import { Hero } from "@/components/composed/hero";
 import { Section } from "@/components/layout/section";
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils/cn";
 import { Reveal } from "@/components/ui/reveal";
 import { StaggerContainer, StaggerItem } from "@/components/ui/stagger";
 import { CTABanner } from "@/components/composed/cta-banner";
 import { SITE_CONFIG } from "@/lib/constants/site";
-import { CheckCircle, PartyPopper, ClipboardList, Play, Armchair, Users, Building, Bus, Award } from "lucide-react";
+import { CheckCircle, PartyPopper, ClipboardList, Play, Armchair, Users, Building, Bus, Award, Gift, Clock, Pizza, Timer } from "lucide-react";
 
 export const metadata: Metadata = generateSEOMetadata({
   title: "Birthday Parties & Group Events — Elkton, MD",
   description:
-    "Host a birthday party at LevelUP Sports in Elkton, MD. Batting cages, badminton, pickleball, and coaching for ages 6+. Packages from $249. Book today.",
+    "Host a birthday party at LevelUP Sports in Elkton, MD. Batting cages, badminton, pickleball, and more for ages 6+. Packages from $199 with pizza, drinks, and return gift coupons. Book today.",
   path: "/birthday-parties",
 });
 
-const STANDARD_FEATURES = [
-  "Up to 10 kids",
-  "90 minutes of court/cage time",
-  "Dedicated party host",
-  "All equipment provided",
-  "Setup and cleanup included",
-  "Bring your own cake and food",
-];
-
-const PREMIUM_FEATURES = [
-  "Up to 15 kids",
-  "2 hours of court/cage time",
-  "Dedicated party host + coaching session",
-  "All equipment provided",
-  "Setup and cleanup included",
-  "Pizza, drinks, and paper goods included",
-  "Custom LevelUP party favors",
-  "Photo station with props",
+const PACKAGES = [
+  {
+    name: "Level 1",
+    price: 199,
+    playTime: "1 Hour",
+    celebrationTime: "30 mins",
+    maxKids: 10,
+    additionalKid: 10,
+    food: "2 Cheese Pizzas + 1 Soft Drink (2L)",
+    returnGift: "$10 OFF (1 hr Cage/Court)",
+    birthdayGift: "$15 OFF (1 hr Cage/Court)",
+    totalGiftValue: 115,
+    features: [
+      "Up to 10 kids",
+      "1 hour of play time on courts & cages",
+      "30 min celebration time (cake & food)",
+      "2 cheese pizzas + 1 soft drink (2L)",
+      "All equipment provided",
+      "Setup and cleanup included",
+      "$10 OFF return gift for each guest",
+      "$15 OFF gift for the birthday child",
+    ],
+  },
+  {
+    name: "Level 2",
+    price: 349,
+    playTime: "2 Hours",
+    celebrationTime: "30 mins",
+    maxKids: 15,
+    additionalKid: 15,
+    food: "3 Cheese Pizzas + 1 Soft Drink (2L)",
+    returnGift: "$15 OFF (1 hr Cage/Court)",
+    birthdayGift: "$20 OFF (1 hr Cage/Court)",
+    totalGiftValue: 245,
+    popular: true,
+    features: [
+      "Up to 15 kids",
+      "2 hours of play time on courts & cages",
+      "30 min celebration time (cake & food)",
+      "3 cheese pizzas + 1 soft drink (2L)",
+      "All equipment provided",
+      "Setup and cleanup included",
+      "$15 OFF return gift for each guest",
+      "$20 OFF gift for the birthday child",
+    ],
+  },
+  {
+    name: "Level 3",
+    price: 449,
+    playTime: "3 Hours",
+    celebrationTime: "30 mins",
+    maxKids: 20,
+    additionalKid: 15,
+    food: "4 Cheese Pizzas + 2 Soft Drinks (2L)",
+    returnGift: "$15 OFF (1 hr Cage/Court)",
+    birthdayGift: "$40 OFF (1 hr Cage/Court)",
+    totalGiftValue: 340,
+    features: [
+      "Up to 20 kids",
+      "3 hours of play time on courts & cages",
+      "30 min celebration time (cake & food)",
+      "4 cheese pizzas + 2 soft drinks (2L)",
+      "All equipment provided",
+      "Setup and cleanup included",
+      "$15 OFF return gift for each guest",
+      "$40 OFF gift for the birthday child",
+    ],
+  },
 ];
 
 const HOW_IT_WORKS = [
@@ -66,7 +117,7 @@ export default function BirthdayPartiesPage() {
       <Hero
         variant="page"
         title="The Birthday Party They'll Actually Talk About"
-        subtitle="Forget bounce houses. Give them batting cages, badminton courts, and real coaching. Ages 6+."
+        subtitle="Forget bounce houses. Give them batting cages, badminton courts, and real coaching. Packages from $199 with pizza, drinks, and return gift coupons."
         primaryCTA={{ label: "Book a Party", href: "/contact" }}
       />
 
@@ -88,54 +139,76 @@ export default function BirthdayPartiesPage() {
           <Reveal>
             <div className="text-center mb-12">
               <h2 className="font-display text-section text-neutral-900 mb-3">Party Packages</h2>
-              <p className="text-neutral-500 max-w-xl mx-auto">Two packages. Zero stress. All fun.</p>
+              <p className="text-neutral-500 max-w-xl mx-auto">Three packages. Pizza included. Zero stress. All fun.</p>
             </div>
           </Reveal>
 
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <StaggerItem>
-              <div className="rounded-2xl border border-neutral-200 bg-white p-8 hover:shadow-lg transition-shadow">
-                <h3 className="font-display text-xl font-bold text-neutral-900 mb-1">Standard</h3>
-                <div className="flex items-baseline gap-1 mb-6">
-                  <span className="text-3xl font-bold text-primary">$249</span>
-                  <span className="text-neutral-500 text-sm">/ up to 10 kids</span>
-                </div>
-                <ul className="space-y-3 mb-8">
-                  {STANDARD_FEATURES.map((feature) => (
-                    <li key={feature} className="flex items-start gap-2.5">
-                      <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                      <span className="text-neutral-600 text-sm">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Button variant="outline" className="w-full" asChild>
-                  <Link href="/contact">Book Standard</Link>
-                </Button>
-              </div>
-            </StaggerItem>
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {PACKAGES.map((pkg) => (
+              <StaggerItem key={pkg.name}>
+                <div className={cn(
+                  "rounded-2xl bg-white p-7 hover:shadow-lg transition-shadow h-full flex flex-col relative",
+                  pkg.popular ? "border-2 border-accent" : "border border-neutral-200"
+                )}>
+                  {pkg.popular && (
+                    <div className="absolute -top-3 left-6 bg-accent text-white text-xs font-bold px-3 py-1 rounded-full">Most Popular</div>
+                  )}
+                  <h3 className="font-display text-xl font-bold text-neutral-900 mb-1">{pkg.name}</h3>
+                  <div className="flex items-baseline gap-1 mb-2">
+                    <span className="text-3xl font-bold text-primary">${pkg.price}</span>
+                    <span className="text-neutral-500 text-sm">/ up to {pkg.maxKids} kids</span>
+                  </div>
+                  <p className="text-xs text-neutral-400 mb-5">+${pkg.additionalKid}/kid beyond {pkg.maxKids}</p>
 
-            <StaggerItem>
-              <div className="rounded-2xl border-2 border-accent bg-white p-8 hover:shadow-lg transition-shadow relative">
-                <div className="absolute -top-3 left-6 bg-accent text-white text-xs font-bold px-3 py-1 rounded-full">Most Popular</div>
-                <h3 className="font-display text-xl font-bold text-neutral-900 mb-1">Premium</h3>
-                <div className="flex items-baseline gap-1 mb-6">
-                  <span className="text-3xl font-bold text-primary">$399</span>
-                  <span className="text-neutral-500 text-sm">/ up to 15 kids</span>
+                  {/* Quick stats */}
+                  <div className="flex flex-wrap gap-3 mb-5">
+                    <div className="flex items-center gap-1.5 text-xs text-neutral-600">
+                      <Play className="h-3.5 w-3.5 text-accent" />
+                      <span>{pkg.playTime} play</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-xs text-neutral-600">
+                      <Timer className="h-3.5 w-3.5 text-accent" />
+                      <span>{pkg.celebrationTime} celebration</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-xs text-neutral-600">
+                      <Pizza className="h-3.5 w-3.5 text-accent" />
+                      <span>Food included</span>
+                    </div>
+                  </div>
+
+                  <ul className="space-y-2.5 mb-6 flex-1">
+                    {pkg.features.map((feature) => (
+                      <li key={feature} className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                        <span className="text-neutral-600 text-sm">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* Return gift value callout */}
+                  <div className="rounded-lg bg-accent/5 border border-accent/20 p-3 mb-5">
+                    <div className="flex items-center gap-2 mb-1">
+                      <Gift className="h-4 w-4 text-accent" />
+                      <span className="text-xs font-bold text-accent uppercase tracking-wide">Limited Time Offer</span>
+                    </div>
+                    <p className="text-sm text-neutral-700">
+                      <span className="font-bold">${pkg.totalGiftValue} in return gift coupons</span> for all guests. Coupons valid 60 days.
+                    </p>
+                  </div>
+
+                  <Button className={cn("w-full", !pkg.popular && "bg-primary hover:bg-primary-light")} asChild>
+                    <Link href="/contact">Book {pkg.name}</Link>
+                  </Button>
                 </div>
-                <ul className="space-y-3 mb-8">
-                  {PREMIUM_FEATURES.map((feature) => (
-                    <li key={feature} className="flex items-start gap-2.5">
-                      <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                      <span className="text-neutral-600 text-sm">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Button className="w-full" asChild>
-                  <Link href="/contact">Book Premium</Link>
-                </Button>
-              </div>
-            </StaggerItem>
+              </StaggerItem>
+            ))}
           </StaggerContainer>
+
+          <Reveal delay={0.1}>
+            <p className="text-center text-xs text-neutral-400 mt-6 max-w-2xl mx-auto">
+              All packages include setup, cleanup, and all equipment. Bring your own cake! Additional kids beyond package max at ${PACKAGES[0].additionalKid}-${PACKAGES[1].additionalKid}/kid. Return gift coupon max value: $40/hour.
+            </p>
+          </Reveal>
         </Container>
       </Section>
 
