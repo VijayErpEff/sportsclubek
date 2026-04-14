@@ -57,7 +57,8 @@ export function Navbar() {
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
-  // Click outside to close dropdown
+  // Click outside to close dropdown — use mousedown so the close re-render
+  // completes before the click event reaches the target (e.g. logo link)
   useEffect(() => {
     function handler(e: MouseEvent) {
       if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
@@ -65,9 +66,8 @@ export function Navbar() {
       }
     }
     if (sportsOpen) {
-      // Delay adding the listener so the opening click doesn't immediately close it
-      const id = setTimeout(() => document.addEventListener("click", handler), 0);
-      return () => { clearTimeout(id); document.removeEventListener("click", handler); };
+      document.addEventListener("mousedown", handler);
+      return () => document.removeEventListener("mousedown", handler);
     }
   }, [sportsOpen]);
 
