@@ -30,6 +30,7 @@ const NAV_ITEMS = [
 export function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileSportsExpanded, setMobileSportsExpanded] = useState(false);
   const [sportsOpen, setSportsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [bellOpen, setBellOpen] = useState(false);
@@ -374,50 +375,8 @@ export function Navbar() {
             aria-modal="true"
           >
             <div className="h-full flex flex-col pt-20 pb-8 overflow-y-auto">
-              <div className="px-6 pb-6">
-                <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-neutral-400 mb-3 px-1">Our Sports</p>
-                <div className="grid grid-cols-2 gap-2">
-                  {SPORT_NAV_ITEMS.map((sport, i) => (
-                    <motion.div
-                      key={sport.href}
-                      initial={{ opacity: 0, y: 12 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.05 + i * 0.04, duration: 0.3, ease: APPLE_EASE }}
-                      className={cn("rounded-xl overflow-hidden", pathname === sport.href || pathname === sport.academy ? "bg-primary/5" : "bg-neutral-50")}
-                    >
-                      <Link
-                        href={sport.href}
-                        className="flex items-center gap-2.5 p-3 hover:bg-neutral-100 transition-colors min-h-[44px]"
-                        onClick={() => setMobileOpen(false)}
-                      >
-                        <span className="text-lg">{sport.emoji}</span>
-                        <div>
-                          <span className={cn("text-sm font-semibold", pathname === sport.href ? "text-primary" : "text-neutral-900")}>{sport.name}</span>
-                          <p className="text-[10px] text-neutral-400 leading-tight">{sport.desc}</p>
-                        </div>
-                      </Link>
-                      {sport.academy && (
-                        <Link
-                          href={sport.academy}
-                          className={cn(
-                            "flex items-center px-3 pb-2.5 text-[11px] font-medium transition-colors min-h-[32px]",
-                            pathname === sport.academy ? "text-primary" : "text-accent hover:text-accent-hover"
-                          )}
-                          onClick={() => setMobileOpen(false)}
-                        >
-                          <span className="ml-[calc(1.125rem+0.625rem)]">Academy &rarr;</span>
-                        </Link>
-                      )}
-                    </motion.div>
-                  ))}
-                </div>
-                <Link href="/kids-agility" className="flex items-center gap-2.5 px-3 py-2.5 mt-2 text-sm text-neutral-500 hover:text-primary" onClick={() => setMobileOpen(false)}>
-                  + Kids Agility Training
-                </Link>
-              </div>
-              <div className="h-px bg-neutral-100 mx-6" />
-              <div className="px-6 pt-4 space-y-0.5">
-                <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-neutral-400 mb-2 px-1">Navigate</p>
+              {/* Nav items first — immediately accessible */}
+              <div className="px-6 pb-4 space-y-0.5">
                 {NAV_ITEMS.map((item) => (
                   <Link key={item.label} href={item.href}
                     className={cn("flex items-center px-3 py-3 text-base font-semibold rounded-xl min-h-[44px]",
@@ -427,6 +386,59 @@ export function Navbar() {
                   </Link>
                 ))}
                 <Link href="/contact" className="flex items-center px-3 py-3 text-base font-semibold text-neutral-900 hover:bg-neutral-50 rounded-xl min-h-[44px]" onClick={() => setMobileOpen(false)}>Contact</Link>
+              </div>
+              <div className="h-px bg-neutral-100 mx-6" />
+              {/* Sports — collapsible section */}
+              <div className="px-6 pt-4 pb-6">
+                <button
+                  onClick={() => setMobileSportsExpanded((p) => !p)}
+                  className="flex items-center justify-between w-full px-1 mb-3"
+                >
+                  <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-neutral-400">Our Sports</p>
+                  <ChevronDown className={cn("h-3.5 w-3.5 text-neutral-400 transition-transform", mobileSportsExpanded && "rotate-180")} />
+                </button>
+                {mobileSportsExpanded && (
+                  <>
+                    <div className="grid grid-cols-2 gap-2">
+                      {SPORT_NAV_ITEMS.map((sport, i) => (
+                        <motion.div
+                          key={sport.href}
+                          initial={{ opacity: 0, y: 12 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: i * 0.03, duration: 0.2, ease: APPLE_EASE }}
+                          className={cn("rounded-xl overflow-hidden", pathname === sport.href || pathname === sport.academy ? "bg-primary/5" : "bg-neutral-50")}
+                        >
+                          <Link
+                            href={sport.href}
+                            className="flex items-center gap-2.5 p-3 hover:bg-neutral-100 transition-colors min-h-[44px]"
+                            onClick={() => setMobileOpen(false)}
+                          >
+                            <span className="text-lg">{sport.emoji}</span>
+                            <div>
+                              <span className={cn("text-sm font-semibold", pathname === sport.href ? "text-primary" : "text-neutral-900")}>{sport.name}</span>
+                              <p className="text-[10px] text-neutral-400 leading-tight">{sport.desc}</p>
+                            </div>
+                          </Link>
+                          {sport.academy && (
+                            <Link
+                              href={sport.academy}
+                              className={cn(
+                                "flex items-center px-3 pb-2.5 text-[11px] font-medium transition-colors min-h-[32px]",
+                                pathname === sport.academy ? "text-primary" : "text-accent hover:text-accent-hover"
+                              )}
+                              onClick={() => setMobileOpen(false)}
+                            >
+                              <span className="ml-[calc(1.125rem+0.625rem)]">Academy &rarr;</span>
+                            </Link>
+                          )}
+                        </motion.div>
+                      ))}
+                    </div>
+                    <Link href="/kids-agility" className="flex items-center gap-2.5 px-3 py-2.5 mt-2 text-sm text-neutral-500 hover:text-primary" onClick={() => setMobileOpen(false)}>
+                      + Kids Agility Training
+                    </Link>
+                  </>
+                )}
               </div>
               <div className="mt-auto px-6 pt-8 space-y-3">
                 <Button size="lg" className="w-full rounded-full" asChild>

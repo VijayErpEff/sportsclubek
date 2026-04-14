@@ -200,7 +200,7 @@ export default function BirthdayPartiesPage() {
                       <span className="text-xs font-bold text-accent uppercase tracking-wide">Limited Time Offer</span>
                     </div>
                     <p className="text-sm text-neutral-700">
-                      <span className="font-bold">${pkg.totalGiftValue} in return gift coupons</span> for all guests. Coupons valid 60 days.
+                      <span className="font-bold">${pkg.totalGiftValue} total</span> in return gift coupons ({pkg.returnGift} per guest + {pkg.birthdayGift} for birthday child). Coupons valid 60 days.
                     </p>
                   </div>
 
