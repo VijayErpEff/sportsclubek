@@ -35,7 +35,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 4,
     category: "training-tips",
     sport: "Baseball",
-    image: "/images/Content/Blog1.jpeg",
+    image: "/images/blog/batting-drills.jpg",
     featured: true,
   },
   {
@@ -58,7 +58,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 5,
     category: "training-tips",
     sport: "Badminton",
-    image: "/images/sports/badminton.jpg",
+    image: "/images/blog/badminton-footwork.jpg",
   },
   {
     slug: "athlete-spotlight-marcus-rivera",
@@ -80,7 +80,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 4,
     category: "athlete-spotlight",
     sport: "Baseball",
-    image: "/images/sports/baseball.jpg",
+    image: "/images/blog/athlete-spotlight.jpg",
     featured: true,
   },
   {
@@ -110,7 +110,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 5,
     category: "training-tips",
     sport: "Pickleball",
-    image: "/images/sports/pickleball.jpg",
+    image: "/images/blog/pickleball-mistakes.jpg",
   },
   {
     slug: "best-indoor-sports-facilities-near-middletown-de",
@@ -130,7 +130,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "2025-01-20",
     readTime: 4,
     category: "news",
-    image: "/images/sports/LevelUp/02-Main-Area-2.jpg",
+    image: "/images/blog/indoor-sports-facility.jpg",
     featured: true,
   },
   {
@@ -153,7 +153,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 5,
     category: "training-tips",
     sport: "Baseball",
-    image: "/images/sports/LevelUp/04-Training-Area.jpg",
+    image: "/images/blog/batting-cages-newark.jpg",
   },
   {
     slug: "parents-guide-youth-sports-academies-cecil-county",
@@ -174,7 +174,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "2025-01-10",
     readTime: 6,
     category: "training-tips",
-    image: "/images/sports/kids-agility.jpg",
+    image: "/images/blog/youth-sports-guide.jpg",
     featured: true,
   },
   {
@@ -196,7 +196,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 5,
     category: "training-tips",
     sport: "Pickleball",
-    image: "/images/sports/pickleball.jpg",
+    image: "/images/blog/pickleball-adults.jpg",
   },
   {
     slug: "what-age-should-child-start-organized-sports",
@@ -219,7 +219,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "2025-03-01",
     readTime: 6,
     category: "training-tips",
-    image: "/images/sports/facility.jpg",
+    image: "/images/blog/child-start-sports.jpg",
     featured: true,
   },
   {
@@ -299,7 +299,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 5,
     category: "training-tips",
     sport: "Volleyball",
-    image: "/images/sports/LevelUp/02-Main-Area-2.jpg",
+    image: "/images/blog/volleyball-beginners.jpg",
   },
   {
     slug: "5-volleyball-drills-that-build-real-game-skills",
@@ -373,7 +373,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 6,
     category: "training-tips",
     sport: "Volleyball",
-    image: "/images/sports/volleyball.jpg",
+    image: "/images/blog/volleyball-drills.jpg",
   },
   {
     slug: "meet-the-coaches-ipl-veterans-elkton-md",
@@ -441,7 +441,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 6,
     category: "news",
     sport: "Cricket",
-    image: "/images/sports/LevelUp/05-Cricket-Nets.jpg",
+    image: "/images/blog/ipl-coaches.jpg",
     featured: true,
   },
   {
@@ -502,7 +502,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 5,
     category: "training-tips",
     sport: "Cricket",
-    image: "/images/sports/cricket.jpg",
+    image: "/images/blog/cricket-batting-drills.jpg",
   },
   {
     slug: "what-to-expect-bwf-certified-badminton-academy",
@@ -579,7 +579,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 6,
     category: "training-tips",
     sport: "Badminton",
-    image: "/images/sports/badminton.jpg",
+    image: "/images/blog/bwf-badminton-academy.jpg",
   },
   {
     slug: "5-badminton-drills-beyond-footwork",
@@ -658,7 +658,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 5,
     category: "training-tips",
     sport: "Badminton",
-    image: "/images/sports/LevelUp/01-Main-Area-1.jpg",
+    image: "/images/blog/badminton-drills.jpg",
   },
   {
     slug: "pickleball-vs-tennis-which-racquet-sport",
@@ -728,7 +728,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 5,
     category: "training-tips",
     sport: "Pickleball",
-    image: "/images/sports/pickleball.jpg",
+    image: "/images/blog/pickleball-vs-tennis.jpg",
   },
   {
     slug: "why-multi-sport-training-makes-better-athletes",
@@ -800,7 +800,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "2025-04-14",
     readTime: 6,
     category: "training-tips",
-    image: "/images/sports/LevelUp/04-Training-Area.jpg",
+    image: "/images/blog/multi-sport-training.jpg",
   },
   {
     slug: "badminton-coaching-elkton-md",
@@ -885,7 +885,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 7,
     category: "training-tips",
     sport: "Badminton",
-    image: "/images/sports/badminton.jpg",
+    image: "/images/blog/badminton-coaching.jpg",
   },
   {
     slug: "youth-cricket-academy-elkton-md",
@@ -964,7 +964,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 7,
     category: "training-tips",
     sport: "Cricket",
-    image: "/images/sports/LevelUp/Cricket-Team.jpg",
+    image: "/images/blog/youth-cricket.jpg",
   },
   {
     slug: "youth-volleyball-academy-elkton-md",
@@ -1045,7 +1045,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 7,
     category: "training-tips",
     sport: "Volleyball",
-    image: "/images/sports/volleyball.jpg",
+    image: "/images/blog/youth-volleyball.jpg",
   },
   {
     slug: "adult-cricket-league-training-elkton-md",
@@ -1126,7 +1126,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 7,
     category: "news",
     sport: "Cricket",
-    image: "/images/sports/LevelUp/05-Cricket-Nets.jpg",
+    image: "/images/blog/adult-cricket.jpg",
   },
   {
     slug: "indoor-badminton-court-rentals-wilmington-de",
@@ -1193,7 +1193,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 6,
     category: "news",
     sport: "Badminton",
-    image: "/images/sports/LevelUp/01-Main-Area-1.jpg",
+    image: "/images/blog/badminton-courts-wilmington.jpg",
   },
   {
     slug: "indoor-volleyball-court-rentals-newark-de",
@@ -1282,7 +1282,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: 7,
     category: "news",
     sport: "Volleyball",
-    image: "/images/sports/volleyball.jpg",
+    image: "/images/blog/volleyball-courts-newark.jpg",
   },
 ];
 
