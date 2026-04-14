@@ -22,7 +22,7 @@ const NAV_ITEMS = [
   { label: "Facilities", href: "/facilities" },
   { label: "Court Status", href: "/court-status" },
   { label: "Memberships", href: "/memberships" },
-  { label: "Birthday Parties", href: "/birthday-parties" },
+  { label: "Parties", href: "/birthday-parties" },
   { label: "Schedule", href: "/schedule" },
   { label: "About", href: "/about" },
 ];

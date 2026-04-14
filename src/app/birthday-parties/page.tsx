@@ -2,7 +2,6 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { generateSEOMetadata } from "@/lib/seo/metadata";
 import { generateBreadcrumbLD } from "@/lib/seo/json-ld";
-import { Hero } from "@/components/composed/hero";
 import { Section } from "@/components/layout/section";
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
@@ -114,27 +113,36 @@ export default function BirthdayPartiesPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLD) }} />
 
-      <Hero
-        variant="page"
-        title="The Birthday Party They'll Actually Talk About"
-        subtitle="Forget bounce houses. Give them batting cages, badminton courts, and real coaching. Packages from $199 with pizza, drinks, and return gift coupons."
-        primaryCTA={{ label: "Book a Party", href: "/contact" }}
-      />
-
-      <Section className="py-4">
-        <Container>
-          <nav aria-label="Breadcrumb" className="text-sm text-neutral-500">
-            <ol className="flex items-center gap-2">
+      {/* Hero — Tight, flows directly into pricing (matches memberships style) */}
+      <section className="pt-28 md:pt-32 pb-6 md:pb-8 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.03] to-white" aria-hidden="true" />
+        <Container className="relative">
+          <nav aria-label="Breadcrumb" className="text-xs text-neutral-400 mb-4">
+            <ol className="flex items-center gap-1.5">
               <li><Link href="/" className="hover:text-primary transition-colors">Home</Link></li>
-              <li>/</li>
-              <li aria-current="page" className="text-neutral-900 font-medium">Birthday Parties</li>
+              <li className="text-neutral-300">/</li>
+              <li className="text-neutral-600 font-medium">Birthday Parties</li>
             </ol>
           </nav>
+          <div className="max-w-2xl mx-auto text-center">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-3">
+              Ages 6+ &bull; Pizza Included &bull; All Equipment Provided
+            </p>
+            <h1 className="font-display text-page-title text-neutral-900 mb-2 text-balance">
+              The Birthday Party They&rsquo;ll Actually Talk About
+            </h1>
+            <p className="text-neutral-500">
+              Forget bounce houses. Give them batting cages, badminton courts, and real coaching. Packages from $199 with return gift coupons.{" "}
+              <Link href="/contact" className="text-accent hover:text-accent-hover font-medium">
+                Book a party &rarr;
+              </Link>
+            </p>
+          </div>
         </Container>
-      </Section>
+      </section>
 
-      {/* Pricing Cards */}
-      <Section>
+      {/* Pricing Cards — flows directly from hero */}
+      <div className="pb-12 md:pb-16">
         <Container>
           <Reveal>
             <div className="text-center mb-12">
@@ -210,7 +218,7 @@ export default function BirthdayPartiesPage() {
             </p>
           </Reveal>
         </Container>
-      </Section>
+      </div>
 
       {/* How It Works */}
       <Section variant="alternate">
