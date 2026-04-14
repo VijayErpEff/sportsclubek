@@ -68,7 +68,7 @@ export const SPORTS = [
     slug: "badminton",
     icon: "badminton",
     color: "#2A5A8C",
-    image: "/images/sports/badminton.jpg",
+    image: "/images/sports/LevelUp/Badminton Area Single Court.jpg",
     description:
       "Competition-grade courts with coaching from certified professionals.",
     hasAcademy: true,
@@ -78,7 +78,7 @@ export const SPORTS = [
     slug: "cricket",
     icon: "cricket",
     color: "#1B7D3A",
-    image: "/images/sports/cricket.jpg",
+    image: "/images/sports/LevelUp/Cricket-Team.jpg",
     description:
       "Professional cricket facility with nets, coaching, and structured programs.",
     hasAcademy: true,
@@ -88,7 +88,7 @@ export const SPORTS = [
     slug: "volleyball",
     icon: "volleyball",
     color: "#D97706",
-    image: "/images/sports/volleyball.jpg",
+    image: "/images/sports/LevelUp/02-Main-Area-2.jpg",
     description:
       "Indoor volleyball courts with coaching, leagues, and open play for all levels.",
     hasAcademy: true,
@@ -98,7 +98,7 @@ export const SPORTS = [
     slug: "pickleball",
     icon: "pickleball",
     color: "#2BA84A",
-    image: "/images/sports/pickleball.jpg",
+    image: "/images/sports/LevelUp/Pickleball-2.jpg",
     description:
       "Indoor pickleball courts for open play, lessons, and court rentals.",
     hasAcademy: false,
@@ -108,7 +108,7 @@ export const SPORTS = [
     slug: "baseball",
     icon: "baseball",
     color: "#1B3A5C",
-    image: "/images/sports/baseball.jpg",
+    image: "/images/sports/LevelUp/Baseball.jpg",
     description:
       "Indoor batting cages and expert coaching for players of all levels.",
     hasAcademy: true,
@@ -118,7 +118,7 @@ export const SPORTS = [
     slug: "soccer",
     icon: "soccer",
     color: "#B83A2F",
-    image: "/images/sports/soccer.jpg",
+    image: "/images/sports/LevelUp/04-Training-Area.jpg",
     description:
       "Year-round indoor soccer and futsal on professional turf. Youth academies through adult leagues.",
     hasAcademy: true,
