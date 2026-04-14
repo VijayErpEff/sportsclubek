@@ -88,7 +88,7 @@ export const SPORTS = [
     slug: "volleyball",
     icon: "volleyball",
     color: "#D97706",
-    image: "/images/sports/LevelUp/02-Main-Area-2.jpg",
+    image: "/images/sports/volleyball.jpg",
     description:
       "Indoor volleyball courts with coaching, leagues, and open play for all levels.",
     hasAcademy: true,
