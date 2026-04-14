@@ -18,7 +18,7 @@ export const BLOG_POSTS: BlogPost[] = [
     title: "5 Batting Drills Every Youth Player Should Practice",
     excerpt:
       "Improve your swing mechanics with these coach-approved drills that you can practice at home or in our batting cages.",
-    content: `<p>Whether your young athlete is just starting out or looking to refine their swing, consistent practice with the right drills makes all the difference. Coach Rivera shares his top 5 batting drills that build real game-day confidence.</p>
+    content: `<p>Whether your young athlete is just starting out or looking to refine their swing, consistent practice with the right drills makes all the difference. Coach Joe Vanaskey shares his top 5 batting drills that build real game-day confidence.</p>
     <h2>1. Tee Work with Purpose</h2>
     <p>Don&rsquo;t just swing at the tee mindlessly. Place the tee at different heights and positions across the plate. Focus on driving the ball to specific zones &mdash; opposite field, up the middle, and pull side. This builds plate coverage and bat control that translates directly to live at-bats.</p>
     <h2>2. Soft Toss Variations</h2>
@@ -30,7 +30,7 @@ export const BLOG_POSTS: BlogPost[] = [
     <h2>5. Live Cage Sessions</h2>
     <p>Nothing replaces live machine work. Start at a comfortable speed and gradually increase. Focus on timing and making solid contact rather than power. Our cages at LevelUP go up to 90 MPH for advanced players.</p>
     <p><strong>Ready to put these drills into practice?</strong> Book a <a href="/baseball">batting cage session</a> at LevelUP Sports and work with our pitching machines at your own pace. Serious about development? Check out the <a href="/baseball-academy">Baseball Academy</a> for structured coaching with Coach Joe Vanaskey.</p>`,
-    author: "Coach Rivera",
+    author: "Coach Joe Vanaskey",
     date: "2025-03-15",
     readTime: 4,
     category: "training-tips",
@@ -43,7 +43,7 @@ export const BLOG_POSTS: BlogPost[] = [
     title: "How to Improve Your Badminton Footwork in 30 Days",
     excerpt:
       "Footwork is the foundation of badminton. Here's a structured 30-day plan to transform your court movement.",
-    content: `<p>In badminton, your feet are just as important as your racket. Coach Lee, our head badminton instructor, has designed a 30-day footwork program that any player can follow &mdash; from club-level beginners to competitive tournament players.</p>
+    content: `<p>In badminton, your feet are just as important as your racket. Coach Nabeel Adeel, our head badminton instructor, has designed a 30-day footwork program that any player can follow &mdash; from club-level beginners to competitive tournament players.</p>
     <h2>Week 1: Foundation Drills</h2>
     <p>Start with basic shadow footwork &mdash; move to all six corners of the court without a shuttle. Focus on split steps, lunges, and recovery. Aim for 15 minutes daily. This builds muscle memory for the movement patterns you&rsquo;ll use in every rally.</p>
     <h2>Week 2: Speed Ladder Work</h2>
@@ -53,7 +53,7 @@ export const BLOG_POSTS: BlogPost[] = [
     <h2>Week 4: Integration</h2>
     <p>Play practice matches focusing specifically on returning to base position after every shot. Record yourself and compare your movement to week 1 &mdash; you&rsquo;ll be surprised at the improvement.</p>
     <p>Our <a href="/badminton">badminton courts</a> at LevelUP Sports are available for individual practice and coaching sessions. Want structured coaching? The <a href="/badminton-academy">Badminton Academy</a> with BWF-certified Coach Nabeel covers footwork, strokes, and match strategy. <a href="/free-trial">Try a free session</a> to see the courts.</p>`,
-    author: "Coach Lee",
+    author: "Coach Nabeel Adeel",
     date: "2025-03-05",
     readTime: 5,
     category: "training-tips",
@@ -70,11 +70,11 @@ export const BLOG_POSTS: BlogPost[] = [
     <h2>The Starting Point</h2>
     <p>&ldquo;I was really discouraged,&rdquo; Marcus recalls. &ldquo;I loved baseball but I was struggling with my swing mechanics. My coach at school didn&rsquo;t have time to work with me one-on-one.&rdquo;</p>
     <h2>The Transformation</h2>
-    <p>Marcus enrolled in our Baseball Academy&rsquo;s twice-weekly sessions. Coach Rivera identified issues with his stance and timing almost immediately. &ldquo;Marcus had natural bat speed but his weight transfer was off,&rdquo; explains Coach Rivera. &ldquo;Once we fixed his load and stride, everything clicked.&rdquo;</p>
+    <p>Marcus enrolled in our Baseball Academy&rsquo;s twice-weekly sessions. Coach Joe Vanaskey identified issues with his stance and timing almost immediately. &ldquo;Marcus had natural bat speed but his weight transfer was off,&rdquo; explains Coach Joe Vanaskey. &ldquo;Once we fixed his load and stride, everything clicked.&rdquo;</p>
     <h2>The Results</h2>
     <p>Within three months, Marcus&rsquo;s batting average jumped from .220 to .340. By the end of the season, it was .380. He earned a starting spot and was named to the all-conference team.</p>
     <p>&ldquo;LevelUP didn&rsquo;t just make me a better hitter,&rdquo; Marcus says. &ldquo;The coaches here taught me to believe in myself. That&rsquo;s something I&rsquo;ll carry with me forever.&rdquo;</p>
-    <p>Interested in the program that transformed Marcus&rsquo;s game? Learn more about the <a href="/baseball-academy">Baseball Academy</a> or <a href="/free-trial">book a free trial session</a> to meet Coach Rivera and see our <a href="/facilities">batting cages</a> in person.</p>`,
+    <p>Interested in the program that transformed Marcus&rsquo;s game? Learn more about the <a href="/baseball-academy">Baseball Academy</a> or <a href="/free-trial">book a free trial session</a> to meet Coach Joe Vanaskey and see our <a href="/facilities">batting cages</a> in person.</p>`,
     author: "LevelUP Sports",
     date: "2025-02-28",
     readTime: 4,
@@ -148,7 +148,7 @@ export const BLOG_POSTS: BlogPost[] = [
     <p>Cage rental typically runs $35-45 per hour. Some facilities offer memberships that bring the per-visit cost down significantly. At LevelUP, a Pro membership gives unlimited cage access for $89/month — if you're going more than twice a week, the math works out quickly.</p>
     <h2>Free Trial Option</h2>
     <p>Not sure if your kid will like it? LevelUP offers a <a href="/free-trial">free trial session</a> with coaching included. It's the best way to see if cage work is right for your child's development without committing upfront. Learn more about our full <a href="/baseball">baseball program</a> or explore the <a href="/baseball-academy">Baseball Academy</a> for structured youth development.</p>`,
-    author: "Coach Rivera",
+    author: "Coach Joe Vanaskey",
     date: "2025-02-05",
     readTime: 5,
     category: "training-tips",
@@ -215,7 +215,7 @@ export const BLOG_POSTS: BlogPost[] = [
     <ul><li>They can follow multi-step instructions</li><li>They show interest in a sport (watching it, asking about it)</li><li>They can handle winning AND losing without major meltdowns</li><li>They want to go — you're not dragging them</li></ul>
     <h2>The Most Important Thing</h2>
     <p>At every age, the number one priority is that your child enjoys the experience. A child who has fun will keep playing. A child who's pressured will quit. Every program at LevelUP — from Kids Agility to our sport academies — is designed to make kids want to come back. That's the real measure of success.</p>`,
-    author: "Coach Williams",
+    author: "LevelUP Sports",
     date: "2025-03-01",
     readTime: 6,
     category: "training-tips",
