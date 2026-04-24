@@ -37,7 +37,7 @@ export const REDIRECTS: RedirectEntry[] = [
   {
     slug: "summer-camps",
     title: "Summer Sports Camps",
-    destination: `${UH_BASE}/offerings`,
+    destination: `${UH_BASE}/client-memberships/11545`,
   },
   {
     slug: "memberships",

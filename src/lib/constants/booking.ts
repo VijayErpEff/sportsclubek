@@ -34,8 +34,8 @@ export const BOOKING_URLS = {
   cricketAcademy: `${UH_BASE}/client-memberships/11416`,
   badmintonAcademy: `${UH_BASE}/client-memberships/11417`,
 
-  /** Summer Camps — all-summer camp registration on Upper Hand */
-  summerCamps: `${UH_BASE}/offerings`,
+  /** Summer Camps — 2026 camp registration on Upper Hand */
+  summerCamps: `${UH_BASE}/client-memberships/11545`,
 
   // ── Events / Drop-In / Rentals ───────────────────────────
   cricketCageRentals: `${UH_BASE}/events/186578-cricket-cage-rentals`,
