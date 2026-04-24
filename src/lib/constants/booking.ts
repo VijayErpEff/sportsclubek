@@ -34,6 +34,9 @@ export const BOOKING_URLS = {
   cricketAcademy: `${UH_BASE}/client-memberships/11416`,
   badmintonAcademy: `${UH_BASE}/client-memberships/11417`,
 
+  /** Summer Camps — all-summer camp registration on Upper Hand */
+  summerCamps: `${UH_BASE}/offerings`,
+
   // ── Events / Drop-In / Rentals ───────────────────────────
   cricketCageRentals: `${UH_BASE}/events/186578-cricket-cage-rentals`,
   pickleballOpenPlay: `${UH_BASE}/events/174223-pickle_ball-open_play-weekdays-9am-4pm`,

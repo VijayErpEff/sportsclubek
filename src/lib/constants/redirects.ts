@@ -35,6 +35,11 @@ export const REDIRECTS: RedirectEntry[] = [
     destination: `${UH_BASE}/offerings`,
   },
   {
+    slug: "summer-camps",
+    title: "Summer Sports Camps",
+    destination: `${UH_BASE}/offerings`,
+  },
+  {
     slug: "memberships",
     title: "Membership Plans",
     destination: `${UH_BASE}/memberships`,

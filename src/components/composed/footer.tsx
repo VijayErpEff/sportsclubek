@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Facebook, Instagram, Twitter, Youtube, MapPin, Phone, Mail, FileText } from "lucide-react";
+import { Facebook, Instagram, Youtube, MapPin, Phone, Mail, FileText } from "lucide-react";
 import { trackPhoneCall, trackSocialClick } from "@/lib/analytics";
 import { Container } from "@/components/layout/container";
 import { NewsletterSignup } from "./newsletter-signup";
@@ -36,7 +36,6 @@ const footerCompany = [
 const socialLinks = [
   { label: "Facebook", href: SITE_CONFIG.social.facebook, icon: Facebook },
   { label: "Instagram", href: SITE_CONFIG.social.instagram, icon: Instagram },
-  { label: "Twitter", href: SITE_CONFIG.social.twitter, icon: Twitter },
   { label: "YouTube", href: SITE_CONFIG.social.youtube, icon: Youtube },
 ];
 
