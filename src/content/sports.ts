@@ -76,7 +76,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       {
         title: "Batting Cage Rentals",
         description: "Reserve a professional batting cage for individual or group sessions at $40/hour. Adjustable pitching machines for every skill level.",
-        href: BOOKING_URLS.offerings,
+        href: "/batting-cage-rentals",
         tag: "Drop-In",
       },
       {
@@ -153,9 +153,9 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     ],
     programs: [
       {
-        title: "Net Sessions",
+        title: "Cricket Cage Rentals",
         description: "Book indoor net time for batting and bowling practice. Full pitch $180/hr, half pitch $90/hr, or single cage $40/hr. Bowling machines available for solo training.",
-        href: BOOKING_URLS.cricketCageRentals,
+        href: "/cricket-cage-rentals",
         tag: "Drop-In",
       },
       {

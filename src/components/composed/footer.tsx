@@ -31,6 +31,8 @@ const footerCompany = [
   { label: "Open House", href: "/open-house" },
   { label: "Birthday Parties", href: "/birthday-parties" },
   { label: "Summer Camps", href: "/summer-camps" },
+  { label: "Batting Cage Rentals", href: "/batting-cage-rentals" },
+  { label: "Cricket Cage Rentals", href: "/cricket-cage-rentals" },
 ];
 
 const socialLinks = [
