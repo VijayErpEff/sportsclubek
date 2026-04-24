@@ -33,6 +33,7 @@ export function SportPreference() {
   const [step, setStep] = useState<Step>("sports");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
@@ -75,6 +76,7 @@ export function SportPreference() {
     await captureLead({
       email: email.trim(),
       name: name.trim(),
+      phone: phone.trim(),
       source: "sport_preference",
       context: `Interested in: ${sportNames.join(", ")}`,
     });
@@ -85,7 +87,7 @@ export function SportPreference() {
     setSubmitting(false);
     setStep("done");
     setTimeout(() => setVisible(false), 1500);
-  }, [email, name, selected]);
+  }, [email, name, phone, selected]);
 
   const handleSkip = useCallback(() => {
     try {
@@ -255,6 +257,15 @@ export function SportPreference() {
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Your email"
                       required
+                      className="w-full h-12 px-4 rounded-xl border border-neutral-200 bg-neutral-50 text-neutral-900 text-sm placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent/50"
+                    />
+                    <input
+                      type="tel"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      placeholder="Phone number (optional)"
+                      autoComplete="tel"
+                      inputMode="tel"
                       className="w-full h-12 px-4 rounded-xl border border-neutral-200 bg-neutral-50 text-neutral-900 text-sm placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent/50"
                     />
                   </div>
