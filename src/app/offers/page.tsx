@@ -195,39 +195,45 @@ export default function OffersPage() {
             </div>
           </Reveal>
 
-          <StaggerContainer className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 max-w-6xl mx-auto">
+          <StaggerContainer className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 max-w-6xl mx-auto pt-4">
             {OFFERS.map((offer) => {
               const accentBg = offer.accent === "accent" ? "bg-accent" : "bg-primary";
-              const accentDot = offer.accent === "accent" ? "bg-accent" : "bg-primary";
               const accentText = offer.accent === "accent" ? "text-accent" : "text-primary";
               return (
                 <StaggerItem key={offer.title}>
                   <div
                     className={cn(
-                      "relative rounded-2xl bg-white overflow-hidden h-full flex flex-col hover:shadow-lg transition-shadow",
+                      "relative rounded-2xl bg-white h-full flex flex-col hover:shadow-lg transition-shadow",
                       offer.highlighted
                         ? "border-2 border-accent shadow-md"
                         : "border border-neutral-200"
                     )}
                   >
                     {offer.ribbon && (
-                      <div className="absolute -top-3 left-6 bg-accent text-white text-xs font-bold px-3 py-1 rounded-full z-10">
+                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent text-white text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-md z-10 whitespace-nowrap">
                         {offer.ribbon}
                       </div>
                     )}
 
-                    {/* Price header */}
-                    <div className={cn("p-6 text-white text-center", accentBg)}>
-                      <p className="text-xs font-semibold uppercase tracking-widest mb-1 opacity-90">
+                    {/* Price header — uniform height, rounded top to match card */}
+                    <div
+                      className={cn(
+                        "p-6 text-white text-center rounded-t-2xl flex flex-col items-center justify-center min-h-[170px]",
+                        accentBg
+                      )}
+                    >
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.2em] mb-2 opacity-90">
                         {offer.tag}
                       </p>
-                      <p className="font-display text-3xl md:text-4xl font-extrabold leading-none">
+                      <p className="font-display text-3xl font-extrabold leading-none text-balance">
                         {offer.priceLabel}
                         {offer.priceSuffix && (
                           <span className="text-lg font-normal">{offer.priceSuffix}</span>
                         )}
                       </p>
-                      <p className="text-sm opacity-90 mt-2">{offer.subLabel}</p>
+                      <p className="text-xs opacity-90 mt-2 leading-snug text-balance">
+                        {offer.subLabel}
+                      </p>
                     </div>
 
                     {/* Body */}
