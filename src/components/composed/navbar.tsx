@@ -37,6 +37,7 @@ export function Navbar() {
   const [bellDot, setBellDot] = useState(false);
   const [bellName, setBellName] = useState("");
   const [bellEmail, setBellEmail] = useState("");
+  const [bellPhone, setBellPhone] = useState("");
   const [bellStatus, setBellStatus] = useState<"idle" | "loading" | "success">("idle");
   const wrapperRef = useRef<HTMLDivElement>(null);
   const bellDesktopRef = useRef<HTMLDivElement>(null);
@@ -117,6 +118,7 @@ export function Navbar() {
     await captureLead({
       email: bellEmail.trim(),
       name: bellName.trim(),
+      phone: bellPhone.trim(),
       source: "sport_preference",
       context: "Navbar signup",
     });
@@ -253,6 +255,16 @@ export function Navbar() {
                             placeholder="Your email"
                             className="w-full h-10 px-3 rounded-lg border border-neutral-200 bg-neutral-50 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent/50"
                           />
+                          <input
+                            type="tel"
+                            value={bellPhone}
+                            onChange={(e) => setBellPhone(e.target.value)}
+                            onKeyDown={(e) => { if (e.key === "Enter") handleBellSubmit(); }}
+                            placeholder="Phone (optional)"
+                            autoComplete="tel"
+                            inputMode="tel"
+                            className="w-full h-10 px-3 rounded-lg border border-neutral-200 bg-neutral-50 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent/50"
+                          />
                           <button
                             onClick={handleBellSubmit}
                             disabled={!bellEmail.trim() || bellStatus === "loading"}
@@ -336,6 +348,16 @@ export function Navbar() {
                     onChange={(e) => setBellEmail(e.target.value)}
                     onKeyDown={(e) => { if (e.key === "Enter") handleBellSubmit(); }}
                     placeholder="Your email"
+                    className="w-full h-11 px-3 rounded-lg border border-neutral-200 bg-neutral-50 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent/50"
+                  />
+                  <input
+                    type="tel"
+                    value={bellPhone}
+                    onChange={(e) => setBellPhone(e.target.value)}
+                    onKeyDown={(e) => { if (e.key === "Enter") handleBellSubmit(); }}
+                    placeholder="Phone (optional)"
+                    autoComplete="tel"
+                    inputMode="tel"
                     className="w-full h-11 px-3 rounded-lg border border-neutral-200 bg-neutral-50 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent/50"
                   />
                   <button
