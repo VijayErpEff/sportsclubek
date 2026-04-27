@@ -16,7 +16,7 @@ import { CheckCircle, Sun, Sparkles, Trophy, Users } from "lucide-react";
 export const metadata: Metadata = generateSEOMetadata({
   title: "Current Offers & Promotions — Elkton, MD",
   description:
-    "Special deals and promotions at LevelUP Sports in Elkton, MD. Summer Camp early bird 10% off, Spring Game Pass $10/mo, Pickleball Golden Hour, and referral rewards.",
+    "Special deals at LevelUP Sports in Elkton, MD: May 30 Badminton Tournament ($80/team), Summer Camp early bird 10% off, Spring Game Pass $10/mo, Pickleball Golden Hour, and referral rewards.",
   path: "/offers",
 });
 
@@ -37,6 +37,25 @@ type Offer = {
 
 const OFFERS: Offer[] = [
   {
+    tag: "Tournament — May 30",
+    priceLabel: "$80",
+    priceSuffix: "/team",
+    subLabel: "Doubles — Register by May 26",
+    title: "LevelUP Badminton Tournament",
+    body: "Saturday, May 30 · 10 AM–6 PM. Beginner, Intermediate, and Advanced doubles brackets. Round Robin groups followed by playoffs on our BWF-standard courts. Limited spots — secure your team today.",
+    features: [
+      "Three skill divisions (Beginner / Intermediate / Advanced)",
+      "Round Robin + playoffs format",
+      "BWF-standard courts, tournament LED lighting",
+      "Registration closes Monday, May 26",
+    ],
+    fineprint: "Entry fee is per doubles team. Limited spots available — first come, first served.",
+    cta: { label: "Register Your Team", href: "/go/badminton-tournament" },
+    accent: "accent",
+    highlighted: true,
+    ribbon: "New — Limited Spots",
+  },
+  {
     tag: "Summer Camps 2026",
     priceLabel: "10% OFF",
     subLabel: "Early Bird — Limited Time",
@@ -51,7 +70,6 @@ const OFFERS: Offer[] = [
     fineprint: "Early bird discount applies before early bird deadline. Limited spots available.",
     cta: { label: "Reserve Your Spot", href: "/summer-camps" },
     accent: "accent",
-    highlighted: true,
     ribbon: "Most Popular",
   },
   {

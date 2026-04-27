@@ -23,6 +23,11 @@ const UH_BASE = "https://app.upperhand.io/customers/2578-levelup-sports-and-athl
 export const REDIRECTS: RedirectEntry[] = [
   // ── Events & Tournaments ────────────────────────────────
   {
+    slug: "badminton-tournament",
+    title: "LevelUP Badminton Tournament — May 30",
+    destination: `${UH_BASE}/events/194712-levelup-badminton-tournament`,
+  },
+  {
     slug: "table-tennis-tournament",
     title: "Table Tennis Tournament",
     destination: `${UH_BASE}/events/193175-table-tennis-tournament`,
