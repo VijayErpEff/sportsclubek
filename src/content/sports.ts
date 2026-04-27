@@ -258,7 +258,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       {
         title: "Badminton Tournament — May 30",
         description: "Doubles tournament across Beginner, Intermediate, and Advanced divisions. $80/team. Round Robin + playoffs, 10 AM–6 PM on our BWF-standard courts. Register by Monday, May 26.",
-        href: "/go/badminton-tournament",
+        href: "/events/badminton-tournament",
         tag: "Event",
       },
       {
@@ -319,7 +319,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     faqs: [
       { question: "Do you provide badminton rackets?", answer: "We have rackets available for rental. Court rental is $40/hour. For regular players, we recommend investing in your own racket for the best experience. Academy packages start at $140 for 4 hours of coaching." },
       { question: "Is badminton suitable for younger children?", answer: "Yes! We offer junior programs for children as young as 7. It's a great sport for developing coordination and reflexes." },
-      { question: "Do you host badminton tournaments?", answer: "Yes — our next event is the LevelUP Badminton Tournament on Saturday, May 30 (10 AM–6 PM). It's a $80/team doubles format with Beginner, Intermediate, and Advanced divisions, Round Robin groups, and playoffs. Registration closes Monday, May 26 — sign up at /go/badminton-tournament. We host in-house tournaments throughout the year and can also help prepare players for external competitions." },
+      { question: "Do you host badminton tournaments?", answer: "Yes — our next event is the LevelUP Badminton Tournament on Saturday, May 30 (10 AM–6 PM). It's a $80/team doubles format with Beginner, Intermediate, and Advanced divisions, Round Robin groups, and playoffs. Registration closes Monday, May 26. Full details, schedule, and FAQs are on our tournament page at levelupsports.us/events/badminton-tournament. We host in-house tournaments throughout the year and can also help prepare players for external competitions." },
       { question: "Do you offer private badminton coaching?", answer: "Yes. Private one-on-one and small-group coaching sessions are available with Coach Nabeel Adeel (BWF & USA Badminton Level-1 certified, PA State Champion). Private lessons are ideal for players who want accelerated improvement on specific aspects of their game — footwork, smash technique, match strategy, or tournament preparation." },
       { question: "Can adults join badminton programs?", answer: "Absolutely. We have adult sessions in both our academy and open play programs. Many of our adult players come from Wilmington, Newark, and the Dilwyne Badminton Club community. Whether you're a beginner or an experienced club player, we have programs at your level." },
       { question: "How far are your badminton courts from Wilmington, DE?", answer: "About 30 minutes via I-95. We're at 701 E Pulaski Hwy, Elkton, MD. Our BWF-standard courts are the closest competition-grade indoor badminton facility for Wilmington, Newark, Middletown, and Hockessin players. Easy access, free parking, and courts available 7 days a week." },

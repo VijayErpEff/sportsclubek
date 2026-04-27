@@ -50,7 +50,7 @@ const OFFERS: Offer[] = [
       "Registration closes Monday, May 26",
     ],
     fineprint: "Entry fee is per doubles team. Limited spots available — first come, first served.",
-    cta: { label: "Register Your Team", href: "/go/badminton-tournament" },
+    cta: { label: "Tournament Details", href: "/events/badminton-tournament" },
     accent: "accent",
     highlighted: true,
     ribbon: "New — Limited Spots",

@@ -2,7 +2,7 @@
   "enabled": true,
   "text": "LevelUP Badminton Tournament — Sat, May 30 · $80/team Doubles · Register by May 26",
   "linkText": "Register Your Team",
-  "linkUrl": "/go/badminton-tournament",
+  "linkUrl": "/events/badminton-tournament",
   "style": "gradient",
   "dismissible": true
 }

@@ -170,6 +170,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.6,
     },
+
+    // ── Events ──
+    {
+      url: `${BASE_URL}/events/badminton-tournament`,
+      lastModified: "2026-04-26",
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
     {
       url: `${BASE_URL}/birthday-parties`,
       lastModified: LAST_CONTENT_UPDATE,
