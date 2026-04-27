@@ -80,14 +80,11 @@ export function AnnouncementBanner() {
   const [dismissed, setDismissed] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const [draft, setDraft] = useState<BannerConfig | null>(null);
-  const [messageIndex, setMessageIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
 
   const bannerRef = useRef<HTMLDivElement>(null);
 
   // Normalize config into a message list once per render.
   const messages = config ? getMessages(config) : [];
-  const activeMessage = messages[messageIndex] ?? messages[0];
 
   // ── Load config ──────────────────────────────────────────────────────────
   useEffect(() => {
@@ -137,27 +134,6 @@ export function AnnouncementBanner() {
     }
   }, [config]);
 
-  // ── Auto-rotate through messages ─────────────────────────────────────────
-  useEffect(() => {
-    if (!config) return;
-    if (messages.length <= 1) return;
-    if (paused) return;
-    if (prefersReducedMotion) return;
-
-    const interval = config.rotateMs ?? 6000;
-    const timer = setInterval(() => {
-      setMessageIndex((i) => (i + 1) % messages.length);
-    }, interval);
-
-    return () => clearInterval(timer);
-  }, [config, messages.length, paused, prefersReducedMotion]);
-
-  // Keep index in range if message list changes
-  useEffect(() => {
-    if (messageIndex >= messages.length && messages.length > 0) {
-      setMessageIndex(0);
-    }
-  }, [messages.length, messageIndex]);
 
   // ── Measure banner height via ResizeObserver → CSS custom property ──────
   const visible = config?.enabled && !dismissed;
@@ -286,7 +262,7 @@ export function AnnouncementBanner() {
   return (
     <>
       <AnimatePresence>
-        {visible && config && activeMessage && (
+        {visible && config && messages.length > 0 && (
           <motion.div
             key="announcement-banner"
             {...motionProps}
@@ -295,69 +271,46 @@ export function AnnouncementBanner() {
             <div
               ref={bannerRef}
               className={cn(
-                "relative flex items-center justify-center min-h-[40px] py-2 px-4",
+                "relative flex items-center justify-center min-h-[40px] py-2 pl-4 pr-10",
                 style.wrapper
               )}
-              onMouseEnter={() => setPaused(true)}
-              onMouseLeave={() => setPaused(false)}
-              onFocus={() => setPaused(true)}
-              onBlur={() => setPaused(false)}
             >
-              {/* Banner content — fades between messages */}
-              <div
-                className="flex items-center gap-3 max-w-full"
-                aria-live="polite"
-                aria-atomic="true"
+              {/* Banner content — every message stacked, each its own clickable row */}
+              <ul
+                className={cn(
+                  "w-full max-w-5xl mx-auto flex flex-col items-center text-center",
+                  messages.length > 1
+                    ? "divide-y divide-current/15"
+                    : ""
+                )}
               >
-                <AnimatePresence mode="wait" initial={false}>
-                  <motion.p
-                    key={messageIndex}
-                    initial={prefersReducedMotion ? false : { opacity: 0, y: 4 }}
-                    animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-                    exit={prefersReducedMotion ? undefined : { opacity: 0, y: -4 }}
-                    transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] as const }}
-                    className="text-[13px] font-medium text-center leading-snug"
+                {messages.map((msg, i) => (
+                  <li
+                    key={`${i}-${msg.linkUrl}`}
+                    className={cn(
+                      "w-full text-[13px] font-medium leading-snug",
+                      messages.length > 1 ? "py-1.5" : "py-0"
+                    )}
                   >
-                    <span>{activeMessage.text}</span>
-                    {activeMessage.linkText && activeMessage.linkUrl && (
+                    <span>{msg.text}</span>
+                    {msg.linkText && msg.linkUrl && (
                       <>
                         {" "}
                         <Link
-                          href={activeMessage.linkUrl}
+                          href={msg.linkUrl}
                           className={cn(
-                            "inline-flex items-center gap-0.5 underline underline-offset-2 decoration-current/30 hover:decoration-current transition-colors",
+                            "inline-flex items-center gap-0.5 font-semibold underline underline-offset-2 decoration-current/40 hover:decoration-current transition-colors",
                             style.link
                           )}
                         >
-                          {activeMessage.linkText}
+                          {msg.linkText}
                           <span aria-hidden="true">&thinsp;&rarr;</span>
                         </Link>
                       </>
                     )}
-                  </motion.p>
-                </AnimatePresence>
-
-                {/* Slide indicators (only when >1 message) */}
-                {messages.length > 1 && (
-                  <span className="hidden sm:flex items-center gap-1.5 shrink-0" role="tablist" aria-label="Announcement messages">
-                    {messages.map((_, i) => (
-                      <button
-                        key={i}
-                        onClick={() => setMessageIndex(i)}
-                        role="tab"
-                        aria-selected={i === messageIndex}
-                        aria-label={`Show announcement ${i + 1} of ${messages.length}`}
-                        className={cn(
-                          "h-1.5 rounded-full transition-all",
-                          i === messageIndex
-                            ? "w-4 bg-current opacity-90"
-                            : "w-1.5 bg-current opacity-40 hover:opacity-70"
-                        )}
-                      />
-                    ))}
-                  </span>
-                )}
-              </div>
+                  </li>
+                ))}
+              </ul>
 
               {/* Admin pencil button */}
               {admin.adminMode && (
