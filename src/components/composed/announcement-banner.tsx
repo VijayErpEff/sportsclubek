@@ -11,13 +11,39 @@ import { useAdmin } from "@/lib/context/admin-context";
 // Types
 // ---------------------------------------------------------------------------
 
-interface BannerConfig {
-  enabled: boolean;
+interface BannerMessage {
   text: string;
   linkText: string;
   linkUrl: string;
+}
+
+interface BannerConfig {
+  enabled: boolean;
+  /** Single-message form (legacy/simple). */
+  text?: string;
+  linkText?: string;
+  linkUrl?: string;
+  /** Multi-message form — rotates every `rotateMs` ms (default 6000). */
+  messages?: BannerMessage[];
+  /** Rotation interval in ms when `messages` is used. Default 6000. */
+  rotateMs?: number;
   style: "gradient" | "solid" | "subtle";
   dismissible: boolean;
+}
+
+/** Coerce config into a non-empty list of messages. */
+function getMessages(config: BannerConfig): BannerMessage[] {
+  if (config.messages && config.messages.length > 0) return config.messages;
+  if (config.text) {
+    return [
+      {
+        text: config.text,
+        linkText: config.linkText ?? "",
+        linkUrl: config.linkUrl ?? "",
+      },
+    ];
+  }
+  return [];
 }
 
 const STORAGE_KEY = "levelup_banner_config";
@@ -37,6 +63,11 @@ function hashText(text: string): string {
   return h.toString(36);
 }
 
+/** Hash representing the full set of messages — used as the dismiss key. */
+function hashMessages(messages: BannerMessage[]): string {
+  return hashText(messages.map((m) => `${m.text}|${m.linkUrl}`).join("§"));
+}
+
 // ---------------------------------------------------------------------------
 // Component
 // ---------------------------------------------------------------------------
@@ -49,8 +80,14 @@ export function AnnouncementBanner() {
   const [dismissed, setDismissed] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const [draft, setDraft] = useState<BannerConfig | null>(null);
+  const [messageIndex, setMessageIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
 
   const bannerRef = useRef<HTMLDivElement>(null);
+
+  // Normalize config into a message list once per render.
+  const messages = config ? getMessages(config) : [];
+  const activeMessage = messages[messageIndex] ?? messages[0];
 
   // ── Load config ──────────────────────────────────────────────────────────
   useEffect(() => {
@@ -88,15 +125,39 @@ export function AnnouncementBanner() {
   // ── Dismiss check ────────────────────────────────────────────────────────
   useEffect(() => {
     if (!config) return;
+    const msgs = getMessages(config);
+    if (msgs.length === 0) return;
     try {
       const saved = sessionStorage.getItem(DISMISS_KEY);
-      if (saved === hashText(config.text)) {
+      if (saved === hashMessages(msgs)) {
         setDismissed(true);
       }
     } catch {
       // ignore
     }
   }, [config]);
+
+  // ── Auto-rotate through messages ─────────────────────────────────────────
+  useEffect(() => {
+    if (!config) return;
+    if (messages.length <= 1) return;
+    if (paused) return;
+    if (prefersReducedMotion) return;
+
+    const interval = config.rotateMs ?? 6000;
+    const timer = setInterval(() => {
+      setMessageIndex((i) => (i + 1) % messages.length);
+    }, interval);
+
+    return () => clearInterval(timer);
+  }, [config, messages.length, paused, prefersReducedMotion]);
+
+  // Keep index in range if message list changes
+  useEffect(() => {
+    if (messageIndex >= messages.length && messages.length > 0) {
+      setMessageIndex(0);
+    }
+  }, [messages.length, messageIndex]);
 
   // ── Measure banner height via ResizeObserver → CSS custom property ──────
   const visible = config?.enabled && !dismissed;
@@ -136,9 +197,11 @@ export function AnnouncementBanner() {
   // ── Dismiss handler ──────────────────────────────────────────────────────
   const handleDismiss = useCallback(() => {
     if (!config) return;
+    const msgs = getMessages(config);
+    if (msgs.length === 0) return;
     setDismissed(true);
     try {
-      sessionStorage.setItem(DISMISS_KEY, hashText(config.text));
+      sessionStorage.setItem(DISMISS_KEY, hashMessages(msgs));
     } catch {
       // storage full — still dismiss in-memory
     }
@@ -223,7 +286,7 @@ export function AnnouncementBanner() {
   return (
     <>
       <AnimatePresence>
-        {visible && config && (
+        {visible && config && activeMessage && (
           <motion.div
             key="announcement-banner"
             {...motionProps}
@@ -235,26 +298,66 @@ export function AnnouncementBanner() {
                 "relative flex items-center justify-center min-h-[40px] py-2 px-4",
                 style.wrapper
               )}
+              onMouseEnter={() => setPaused(true)}
+              onMouseLeave={() => setPaused(false)}
+              onFocus={() => setPaused(true)}
+              onBlur={() => setPaused(false)}
             >
-              {/* Banner content */}
-              <p className="text-[13px] font-medium text-center leading-snug">
-                <span>{config.text}</span>
-                {config.linkText && config.linkUrl && (
-                  <>
-                    {" "}
-                    <Link
-                      href={config.linkUrl}
-                      className={cn(
-                        "inline-flex items-center gap-0.5 underline underline-offset-2 decoration-current/30 hover:decoration-current transition-colors",
-                        style.link
-                      )}
-                    >
-                      {config.linkText}
-                      <span aria-hidden="true">&thinsp;&rarr;</span>
-                    </Link>
-                  </>
+              {/* Banner content — fades between messages */}
+              <div
+                className="flex items-center gap-3 max-w-full"
+                aria-live="polite"
+                aria-atomic="true"
+              >
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.p
+                    key={messageIndex}
+                    initial={prefersReducedMotion ? false : { opacity: 0, y: 4 }}
+                    animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+                    exit={prefersReducedMotion ? undefined : { opacity: 0, y: -4 }}
+                    transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] as const }}
+                    className="text-[13px] font-medium text-center leading-snug"
+                  >
+                    <span>{activeMessage.text}</span>
+                    {activeMessage.linkText && activeMessage.linkUrl && (
+                      <>
+                        {" "}
+                        <Link
+                          href={activeMessage.linkUrl}
+                          className={cn(
+                            "inline-flex items-center gap-0.5 underline underline-offset-2 decoration-current/30 hover:decoration-current transition-colors",
+                            style.link
+                          )}
+                        >
+                          {activeMessage.linkText}
+                          <span aria-hidden="true">&thinsp;&rarr;</span>
+                        </Link>
+                      </>
+                    )}
+                  </motion.p>
+                </AnimatePresence>
+
+                {/* Slide indicators (only when >1 message) */}
+                {messages.length > 1 && (
+                  <span className="hidden sm:flex items-center gap-1.5 shrink-0" role="tablist" aria-label="Announcement messages">
+                    {messages.map((_, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setMessageIndex(i)}
+                        role="tab"
+                        aria-selected={i === messageIndex}
+                        aria-label={`Show announcement ${i + 1} of ${messages.length}`}
+                        className={cn(
+                          "h-1.5 rounded-full transition-all",
+                          i === messageIndex
+                            ? "w-4 bg-current opacity-90"
+                            : "w-1.5 bg-current opacity-40 hover:opacity-70"
+                        )}
+                      />
+                    ))}
+                  </span>
                 )}
-              </p>
+              </div>
 
               {/* Admin pencil button */}
               {admin.adminMode && (
@@ -321,7 +424,7 @@ export function AnnouncementBanner() {
                   </span>
                   <input
                     type="text"
-                    value={draft.text}
+                    value={draft.text ?? ""}
                     onChange={(e) =>
                       setDraft((d) => (d ? { ...d, text: e.target.value } : d))
                     }
@@ -336,7 +439,7 @@ export function AnnouncementBanner() {
                   </span>
                   <input
                     type="text"
-                    value={draft.linkText}
+                    value={draft.linkText ?? ""}
                     onChange={(e) =>
                       setDraft((d) =>
                         d ? { ...d, linkText: e.target.value } : d
@@ -353,7 +456,7 @@ export function AnnouncementBanner() {
                   </span>
                   <input
                     type="text"
-                    value={draft.linkUrl}
+                    value={draft.linkUrl ?? ""}
                     onChange={(e) =>
                       setDraft((d) =>
                         d ? { ...d, linkUrl: e.target.value } : d

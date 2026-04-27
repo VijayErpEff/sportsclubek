@@ -173,6 +173,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // ── Events ──
     {
+      url: `${BASE_URL}/events/badminton-open-house`,
+      lastModified: "2026-04-26",
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
       url: `${BASE_URL}/events/badminton-tournament`,
       lastModified: "2026-04-26",
       changeFrequency: "weekly",

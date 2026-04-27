@@ -1,8 +1,18 @@
 {
   "enabled": true,
-  "text": "LevelUP Badminton Tournament — Sat, May 30 · $80/team Doubles · Register by May 26",
-  "linkText": "Register Your Team",
-  "linkUrl": "/events/badminton-tournament",
+  "messages": [
+    {
+      "text": "FREE Badminton Open House — Sat, May 2 · Coach Nick Tan (50 yrs exp) · Kids 6-7 PM, Adults 7:15-8 PM",
+      "linkText": "Reserve Free Spot",
+      "linkUrl": "/events/badminton-open-house"
+    },
+    {
+      "text": "LevelUP Badminton Tournament — Sat, May 30 · $80/team Doubles · Register by May 26",
+      "linkText": "Tournament Details",
+      "linkUrl": "/events/badminton-tournament"
+    }
+  ],
+  "rotateMs": 6000,
   "style": "gradient",
   "dismissible": true
 }

@@ -16,7 +16,7 @@ import { CheckCircle, Sun, Sparkles, Trophy, Users } from "lucide-react";
 export const metadata: Metadata = generateSEOMetadata({
   title: "Current Offers & Promotions — Elkton, MD",
   description:
-    "Special deals at LevelUP Sports in Elkton, MD: May 30 Badminton Tournament ($80/team), Summer Camp early bird 10% off, Spring Game Pass $10/mo, Pickleball Golden Hour, and referral rewards.",
+    "Special deals at LevelUP Sports in Elkton, MD: FREE Badminton Open House (May 2), May 30 Badminton Tournament ($80/team), Summer Camp early bird 10% off, Spring Game Pass $10/mo, Pickleball Golden Hour, and referral rewards.",
   path: "/offers",
 });
 
@@ -37,6 +37,24 @@ type Offer = {
 
 const OFFERS: Offer[] = [
   {
+    tag: "Open House — May 2",
+    priceLabel: "FREE",
+    subLabel: "All Ages & Levels Welcome",
+    title: "Badminton Open House w/ Coach Nick Tan",
+    body: "Saturday, May 2 — a free badminton clinic with Coach Nick Tan (50 years of experience). Kids 6–7 PM, Adults 7:15–8 PM. Hands-on coaching, fun drills, and zero pressure. Bring your racket and a friend.",
+    features: [
+      "Coach Nick Tan — 50 years of badminton experience",
+      "Kids session 6–7 PM · Adults 7:15–8 PM",
+      "All skill levels — never-played to club regular",
+      "Free loaner rackets available",
+    ],
+    fineprint: "Free event but please reserve your spot so we can plan the right coach-to-player ratio.",
+    cta: { label: "Reserve Free Spot", href: "/events/badminton-open-house" },
+    accent: "accent",
+    highlighted: true,
+    ribbon: "Free — Limited Spots",
+  },
+  {
     tag: "Tournament — May 30",
     priceLabel: "$80",
     priceSuffix: "/team",
@@ -51,9 +69,7 @@ const OFFERS: Offer[] = [
     ],
     fineprint: "Entry fee is per doubles team. Limited spots available — first come, first served.",
     cta: { label: "Tournament Details", href: "/events/badminton-tournament" },
-    accent: "accent",
-    highlighted: true,
-    ribbon: "New — Limited Spots",
+    accent: "primary",
   },
   {
     tag: "Summer Camps 2026",

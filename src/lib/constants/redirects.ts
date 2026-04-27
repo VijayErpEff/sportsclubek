@@ -23,6 +23,11 @@ const UH_BASE = "https://app.upperhand.io/customers/2578-levelup-sports-and-athl
 export const REDIRECTS: RedirectEntry[] = [
   // ── Events & Tournaments ────────────────────────────────
   {
+    slug: "badminton-open-house",
+    title: "FREE Badminton Open House — May 2",
+    destination: `${UH_BASE}/events/194708-levelup-badminton-training-clinic-open-house`,
+  },
+  {
     slug: "badminton-tournament",
     title: "LevelUP Badminton Tournament — May 30",
     destination: `${UH_BASE}/events/194712-levelup-badminton-tournament`,
