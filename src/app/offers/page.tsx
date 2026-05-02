@@ -16,7 +16,7 @@ import { CheckCircle, Sun, Sparkles, Trophy, Users } from "lucide-react";
 export const metadata: Metadata = generateSEOMetadata({
   title: "Current Offers & Promotions — Elkton, MD",
   description:
-    "Special deals at LevelUP Sports in Elkton, MD: FREE Badminton Open House (May 2), May 30 Badminton Tournament ($80/team), Summer Camp early bird 10% off, Spring Game Pass $10/mo, Pickleball Golden Hour, and referral rewards.",
+    "Special deals at LevelUP Sports in Elkton, MD: FREE Badminton Open House (May 2), May 30 Badminton Tournament ($80/team), Summer Camp 2026 (Sports + Coding & Robotics) early bird 10% off, Spring Game Pass $10/mo, Pickleball Golden Hour, and referral rewards.",
   path: "/offers",
 });
 
@@ -75,13 +75,13 @@ const OFFERS: Offer[] = [
     tag: "Summer Camps 2026",
     priceLabel: "10% OFF",
     subLabel: "Early Bird — Limited Time",
-    title: "Summer Camp Early Bird",
-    body: "Reserve your camper's spot at our 2026 Summer Camps and save 10% with early bird pricing. Ages 6+ rotate through Soccer, Baseball, Badminton, Cricket, Chess, and Agility — all indoors.",
+    title: "Two Camps — Multi-Sport & LevelUP × Code Ninjas",
+    body: "Reserve your camper's spot and save 10% with early bird pricing. Pick our flagship Multi-Sport Camp or the brand-new LevelUP × Code Ninjas Camp — Where Play Meets Coding! Same dates, same booking page, ages 6+.",
     features: [
       "Full Day $299/week (8:30 AM – 5:00 PM)",
-      "Half Day $199/week",
+      "Half Day $199/week (AM or PM batch)",
       "Weeks: June 22 · July 13 · Aug 10",
-      "Indoor facility — zero weather cancellations",
+      "Both camps share one booking link",
     ],
     fineprint: "Early bird discount applies before early bird deadline. Limited spots available.",
     cta: { label: "Reserve Your Spot", href: "/summer-camps" },
