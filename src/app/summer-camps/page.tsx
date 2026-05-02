@@ -358,10 +358,10 @@ export default function SummerCampsPage() {
       </Section>
 
       {/* ── Program Options (Full Day / Half Day) ──────────────────── */}
-      <Section className="pt-8 md:pt-12">
+      <Section className="pt-4 md:pt-6">
         <Container>
           <Reveal>
-            <div className="text-center mb-12 max-w-2xl mx-auto">
+            <div className="text-center mb-8 max-w-2xl mx-auto">
               <h2 className="font-display text-section text-neutral-900 mb-3">
                 Pick Your Program
               </h2>
