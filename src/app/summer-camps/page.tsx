@@ -339,7 +339,7 @@ export default function SummerCampsPage() {
       </section>
 
       {/* ── Breadcrumb ─────────────────────────────────────────────── */}
-      <Section className="py-4">
+      <Section className="pt-4 pb-0">
         <Container>
           <nav aria-label="Breadcrumb" className="text-sm text-neutral-500">
             <ol className="flex items-center gap-2">
@@ -358,7 +358,7 @@ export default function SummerCampsPage() {
       </Section>
 
       {/* ── Program Options (Full Day / Half Day) ──────────────────── */}
-      <Section>
+      <Section className="pt-8 md:pt-12">
         <Container>
           <Reveal>
             <div className="text-center mb-12 max-w-2xl mx-auto">
