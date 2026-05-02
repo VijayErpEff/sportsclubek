@@ -38,7 +38,7 @@ export const metadata: Metadata = generateSEOMetadata({
   title:
     "Summer Camp 2026 — Elkton, MD | LevelUP × Code Ninjas",
   description:
-    "LevelUP × Code Ninjas Summer Camp 2026 in Elkton, MD — Where Play Meets Coding! Coding, robotics, and sports rotations for ages 6+. Full Day $299, Half Day $199 (Sports OR Coding, AM or PM batch). Three weeks: June, July, August. Early bird 10% off.",
+    "LevelUP × Code Ninjas Summer Camp 2026 in Elkton, MD — Where Play Meets Coding! Coding, robotics, and sports rotations for ages 5+. Full Day $299, Half Day $199 (Sports OR Coding, AM or PM batch). Three weeks: June, July, August. Early bird 10% off.",
   path: "/summer-camps",
   ogImage: FLYER_IMAGE,
 });
@@ -190,7 +190,7 @@ const FAQS = [
   {
     question: "What ages is the camp for?",
     answer:
-      "The camp is open to boys and girls ages 6 and up. Campers are grouped by age and skill level so everyone gets an appropriate challenge across both the coding track and (for Full Day) the sports rotations.",
+      "The camp is open to boys and girls ages 5 and up. Campers are grouped by age and skill level so everyone gets an appropriate challenge across both the coding track and (for Full Day) the sports rotations.",
   },
   {
     question: "What does the camp schedule look like?",
@@ -235,7 +235,7 @@ export default function SummerCampsPage() {
   const courseLD = generateCourseLD({
     name: "LevelUP × Code Ninjas Summer Camp 2026",
     description:
-      "Co-branded summer camp with Code Ninjas for ages 6+ at LevelUP Sports in Elkton, MD. Coding, robotics, and sports rotations led by certified Code Ninjas Senseis and LevelUP coaches. Three options: Full Day $299/week (sports + coding, 8:30 AM – 5:00 PM), Half Day Sports $199/week (AM or PM batch), Half Day Coding & Robotics $199/week (AM or PM batch). Three weeks: June, July, August 2026.",
+      "Co-branded summer camp with Code Ninjas for ages 5+ at LevelUP Sports in Elkton, MD. Coding, robotics, and sports rotations led by certified Code Ninjas Senseis and LevelUP coaches. Three options: Full Day $299/week (sports + coding, 8:30 AM – 5:00 PM), Half Day Sports $199/week (AM or PM batch), Half Day Coding & Robotics $199/week (AM or PM batch). Three weeks: June, July, August 2026.",
     url: "/summer-camps",
   });
 
@@ -243,7 +243,7 @@ export default function SummerCampsPage() {
     generateEventLD({
       name: `LevelUP × Code Ninjas Summer Camp — ${w.label} (${w.range})`,
       description:
-        "Coding, robotics, and sports summer camp for ages 6+ at LevelUP Sports & Athletics Club in Elkton, MD, in partnership with Code Ninjas. Full Day ($299) and Half Day ($199, AM or PM batch).",
+        "Coding, robotics, and sports summer camp for ages 5+ at LevelUP Sports & Athletics Club in Elkton, MD, in partnership with Code Ninjas. Full Day ($299) and Half Day ($199, AM or PM batch).",
       startDate: w.startDate,
       endDate: w.endDate,
       url: "/summer-camps",
@@ -300,7 +300,7 @@ export default function SummerCampsPage() {
                 Coding, robotics, and sports &mdash; all under one indoor roof in Elkton, MD.
               </p>
               <p className="text-base text-white/60 max-w-xl leading-relaxed mb-8">
-                Ages 6 and up &middot; Three weeks (June, July, August) &middot; Full Day or Half Day (AM/PM).
+                Ages 5 and up &middot; Three weeks (June, July, August) &middot; Full Day or Half Day (AM/PM).
                 100% indoor, climate-controlled facility.
               </p>
 
@@ -329,7 +329,7 @@ export default function SummerCampsPage() {
                 </div>
                 <div>
                   <dt className="text-[11px] uppercase tracking-widest text-white/50 mb-1">Ages</dt>
-                  <dd className="font-display text-2xl font-bold text-accent">6+</dd>
+                  <dd className="font-display text-2xl font-bold text-accent">5+</dd>
                   <p className="text-xs text-white/50">boys &amp; girls</p>
                 </div>
               </dl>
@@ -340,7 +340,7 @@ export default function SummerCampsPage() {
               <div className="relative rounded-3xl overflow-hidden shadow-2xl ring-4 ring-white/10 bg-white/5 aspect-[4/3] lg:aspect-[5/4]">
                 <Image
                   src={FLYER_IMAGE}
-                  alt="LevelUP Sports and Code Ninjas partnership banner — Where Play Meets Coding! — co-branded summer camp 2026 for ages 6+"
+                  alt="LevelUP Sports and Code Ninjas partnership banner — Where Play Meets Coding! — co-branded summer camp 2026 for ages 5+"
                   fill
                   priority
                   sizes="(max-width: 1024px) 90vw, 480px"
@@ -462,8 +462,7 @@ export default function SummerCampsPage() {
                 Three Weeks of Summer. Pick Yours.
               </h2>
               <p className="text-neutral-500">
-                Both camps run the same three weeks. Book one camp, the other, or
-                mix-and-match across weeks &mdash; all from one booking page.
+                Book one week, two, or all three &mdash; all from one booking page.
               </p>
             </div>
           </Reveal>
@@ -513,6 +512,33 @@ export default function SummerCampsPage() {
               <p className="text-sm text-neutral-500">Limited time &mdash; register before spots fill</p>
             </div>
           </div>
+
+          {/* Friendly "other weeks" callout */}
+          <Reveal>
+            <div className="mt-10 max-w-3xl mx-auto rounded-2xl border border-primary/15 bg-primary/[0.04] p-6 sm:p-8 text-center">
+              <p className="font-display text-lg sm:text-xl font-semibold text-neutral-900 mb-2">
+                Looking for a different week?
+              </p>
+              <p className="text-neutral-600 leading-relaxed mb-5">
+                We&apos;d love to hear from you. If our June, July, or August dates don&apos;t
+                line up with your family&apos;s plans, reach out &mdash; if there&apos;s
+                enough interest we&apos;ll do our best to add another week.
+              </p>
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                <Button size="sm" variant="outline" asChild>
+                  <a href={`tel:${SITE_CONFIG.phone}`}>
+                    <Phone className="h-4 w-4 mr-2" aria-hidden="true" />
+                    Call (443) 406-6494
+                  </a>
+                </Button>
+                <Button size="sm" variant="ghost" asChild>
+                  <a href={`mailto:${SITE_CONFIG.email}?subject=Summer%20Camp%20-%20Alternate%20Week%20Request`}>
+                    Email us
+                  </a>
+                </Button>
+              </div>
+            </div>
+          </Reveal>
         </Container>
       </Section>
 

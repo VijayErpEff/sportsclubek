@@ -76,7 +76,7 @@ const OFFERS: Offer[] = [
     priceLabel: "10% OFF",
     subLabel: "Early Bird — Limited Time",
     title: "LevelUP × Code Ninjas — Where Play Meets Coding!",
-    body: "Reserve your camper's spot at our brand-new 2026 LevelUP × Code Ninjas Summer Camp and save 10% with early bird pricing. Coding, robotics, and sports rotations led by Code Ninjas Senseis and LevelUP coaches. Ages 6+.",
+    body: "Reserve your camper's spot at our brand-new 2026 LevelUP × Code Ninjas Summer Camp and save 10% with early bird pricing. Coding, robotics, and sports rotations led by Code Ninjas Senseis and LevelUP coaches. Ages 5+.",
     features: [
       "Full Day $299/week — coding + sports (8:30 AM – 5:00 PM)",
       "Half Day Sports $199/week — AM or PM batch",
