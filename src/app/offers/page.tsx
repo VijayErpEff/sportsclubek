@@ -79,9 +79,9 @@ const OFFERS: Offer[] = [
     body: "Reserve your camper's spot at our brand-new 2026 LevelUP × Code Ninjas Summer Camp and save 10% with early bird pricing. Coding, robotics, and sports rotations led by Code Ninjas Senseis and LevelUP coaches. Ages 6+.",
     features: [
       "Full Day $299/week — coding + sports (8:30 AM – 5:00 PM)",
-      "Half Day $199/week — Code Ninjas track (AM or PM)",
+      "Half Day Sports $199/week — AM or PM batch",
+      "Half Day Coding & Robotics $199/week — AM or PM batch",
       "Weeks: June 22 · July 13 · Aug 10",
-      "Indoor facility — zero weather cancellations",
     ],
     fineprint: "Early bird discount applies before early bird deadline. Limited spots available.",
     cta: { label: "Reserve Your Spot", href: "/summer-camps" },

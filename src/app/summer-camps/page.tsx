@@ -28,6 +28,7 @@ import {
   Award,
   Trophy,
   Cpu,
+  Zap,
 } from "lucide-react";
 
 const FLYER_IMAGE = "/images/sports/LevelUp/Summer Camp Code Ninjas.png";
@@ -37,7 +38,7 @@ export const metadata: Metadata = generateSEOMetadata({
   title:
     "Summer Camp 2026 — Elkton, MD | LevelUP × Code Ninjas",
   description:
-    "LevelUP × Code Ninjas Summer Camp 2026 in Elkton, MD — Where Play Meets Coding! Coding, robotics, and sports rotations for ages 6+. Full Day $299 / Half Day $199 (AM or PM). Three weeks: June, July, August. Early bird 10% off.",
+    "LevelUP × Code Ninjas Summer Camp 2026 in Elkton, MD — Where Play Meets Coding! Coding, robotics, and sports rotations for ages 6+. Full Day $299, Half Day $199 (Sports OR Coding, AM or PM batch). Three weeks: June, July, August. Early bird 10% off.",
   path: "/summer-camps",
   ogImage: FLYER_IMAGE,
 });
@@ -84,7 +85,7 @@ const TECH_TRACK = [
   { name: "Showcase Day", emoji: "🏆", blurb: "End-of-week demo for parents and friends." },
 ];
 
-// ── Program Options (Full Day / Half Day) ────────────────────────────────
+// ── Program Options ───────────────────────────────────────────────────────
 const PROGRAM_OPTIONS = [
   {
     id: "full-day",
@@ -104,9 +105,26 @@ const PROGRAM_OPTIONS = [
     ],
   },
   {
-    id: "half-day",
-    badge: "Half Day",
-    title: "Half Day",
+    id: "half-day-sports",
+    badge: "Half Day · Sports",
+    title: "Half Day — Sports",
+    schedule: "AM or PM Batch",
+    price: 199,
+    icon: Zap,
+    highlight: false,
+    description:
+      "Pure athletic training across Soccer, Baseball, Badminton, Cricket, Chess and Agility. Pick the morning or afternoon batch to fit your family's schedule.",
+    includes: [
+      "Six-sport rotation each week",
+      "Certified LevelUP coaches",
+      "All sports equipment provided",
+      "AM or PM batch — flexible scheduling",
+    ],
+  },
+  {
+    id: "half-day-coding",
+    badge: "Half Day · Coding",
+    title: "Half Day — Coding & Robotics",
     schedule: "AM or PM Batch",
     price: 199,
     icon: Cpu,
@@ -182,7 +200,7 @@ const FAQS = [
   {
     question: "What's the difference between Full Day and Half Day?",
     answer:
-      "Full Day ($299) combines Code Ninjas coding & robotics with sports rotations across Soccer, Baseball, Badminton, Cricket, Chess and Agility. Half Day ($199) is the Code Ninjas track only — pick the AM or PM batch.",
+      "Full Day ($299) combines Code Ninjas coding & robotics with sports rotations across Soccer, Baseball, Badminton, Cricket, Chess and Agility. Half Day ($199) comes in two options — Sports only or Coding & Robotics only — and each runs as either an AM (morning) or PM (afternoon) batch.",
   },
   {
     question: "What will my child learn in the Code Ninjas track?",
@@ -217,7 +235,7 @@ export default function SummerCampsPage() {
   const courseLD = generateCourseLD({
     name: "LevelUP × Code Ninjas Summer Camp 2026",
     description:
-      "Co-branded summer camp with Code Ninjas for ages 6+ at LevelUP Sports in Elkton, MD. Coding, robotics, and sports rotations led by certified Code Ninjas Senseis and LevelUP coaches. Full Day $299/week (8:30 AM – 5:00 PM), Half Day $199/week (AM or PM batch). Three weeks: June, July, August 2026.",
+      "Co-branded summer camp with Code Ninjas for ages 6+ at LevelUP Sports in Elkton, MD. Coding, robotics, and sports rotations led by certified Code Ninjas Senseis and LevelUP coaches. Three options: Full Day $299/week (sports + coding, 8:30 AM – 5:00 PM), Half Day Sports $199/week (AM or PM batch), Half Day Coding & Robotics $199/week (AM or PM batch). Three weeks: June, July, August 2026.",
     url: "/summer-camps",
   });
 
@@ -367,13 +385,13 @@ export default function SummerCampsPage() {
               </h2>
               <p className="text-neutral-500">
                 Choose the schedule that fits your family. Full Day combines coding,
-                robotics, and sports. Half Day focuses purely on the Code Ninjas track,
-                with morning and afternoon batches.
+                robotics, and sports. Half Day comes in two flavors &mdash; Sports only
+                or Coding &amp; Robotics only &mdash; each with morning and afternoon batches.
               </p>
             </div>
           </Reveal>
 
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10 items-stretch max-w-4xl mx-auto">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 items-stretch">
             {PROGRAM_OPTIONS.map((p) => (
               <StaggerItem key={p.id}>
                 <div
@@ -653,11 +671,12 @@ export default function SummerCampsPage() {
                   between coding sessions.
                 </p>
                 <p>
-                  Two flexible options: Full Day $299/week (8:30 AM – 5:00 PM) combines
-                  coding with sports, and Half Day $199/week (AM or PM batch) is the
-                  Code Ninjas track only. Three camp weeks &mdash; June 22, July 13, and
-                  August 10. Register early and save 10% with early bird pricing. Indoor
-                  facility means zero weather cancellations.
+                  Three flexible options: Full Day $299/week (8:30 AM – 5:00 PM) combines
+                  coding with sports; Half Day Sports $199/week (AM or PM batch) for
+                  athletics-only campers; and Half Day Coding &amp; Robotics $199/week
+                  (AM or PM batch) for STEM-focused campers. Three camp weeks &mdash;
+                  June 22, July 13, and August 10. Register early and save 10% with
+                  early bird pricing. Indoor facility means zero weather cancellations.
                 </p>
               </div>
             </div>
