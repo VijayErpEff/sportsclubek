@@ -16,7 +16,7 @@ import { CheckCircle, Sun, Sparkles, Trophy, Users } from "lucide-react";
 export const metadata: Metadata = generateSEOMetadata({
   title: "Current Offers & Promotions — Elkton, MD",
   description:
-    "Special deals at LevelUP Sports in Elkton, MD: FREE Badminton Open House (May 2), May 30 Badminton Tournament ($80/team), Summer Camp 2026 (Sports + Coding & Robotics) early bird 10% off, Spring Game Pass $10/mo, Pickleball Golden Hour, and referral rewards.",
+    "Special deals at LevelUP Sports in Elkton, MD: FREE Badminton Open House (May 2), May 30 Badminton Tournament ($80/team), LevelUP × Code Ninjas Summer Camp 2026 early bird 10% off, Spring Game Pass $10/mo, Pickleball Golden Hour, and referral rewards.",
   path: "/offers",
 });
 
@@ -72,16 +72,16 @@ const OFFERS: Offer[] = [
     accent: "primary",
   },
   {
-    tag: "Summer Camps 2026",
+    tag: "Summer Camp 2026",
     priceLabel: "10% OFF",
     subLabel: "Early Bird — Limited Time",
-    title: "Two Camps — Multi-Sport & LevelUP × Code Ninjas",
-    body: "Reserve your camper's spot and save 10% with early bird pricing. Pick our flagship Multi-Sport Camp or the brand-new LevelUP × Code Ninjas Camp — Where Play Meets Coding! Same dates, same booking page, ages 6+.",
+    title: "LevelUP × Code Ninjas — Where Play Meets Coding!",
+    body: "Reserve your camper's spot at our brand-new 2026 LevelUP × Code Ninjas Summer Camp and save 10% with early bird pricing. Coding, robotics, and sports rotations led by Code Ninjas Senseis and LevelUP coaches. Ages 6+.",
     features: [
-      "Full Day $299/week (8:30 AM – 5:00 PM)",
-      "Half Day $199/week (AM or PM batch)",
+      "Full Day $299/week — coding + sports (8:30 AM – 5:00 PM)",
+      "Half Day $199/week — Code Ninjas track (AM or PM)",
       "Weeks: June 22 · July 13 · Aug 10",
-      "Both camps share one booking link",
+      "Indoor facility — zero weather cancellations",
     ],
     fineprint: "Early bird discount applies before early bird deadline. Limited spots available.",
     cta: { label: "Reserve Your Spot", href: "/summer-camps" },
