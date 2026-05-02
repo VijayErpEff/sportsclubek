@@ -317,17 +317,16 @@ export default function SummerCampsPage() {
               </dl>
             </div>
 
-            {/* Right — flyer */}
-            <div className="relative">
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl ring-4 ring-white/10 bg-white/5">
+            {/* Right — flyer (cropped from top so banner + courts are visible) */}
+            <div className="relative max-w-md mx-auto lg:max-w-none lg:mx-0">
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl ring-4 ring-white/10 bg-white/5 aspect-[4/3] lg:aspect-[5/4]">
                 <Image
                   src={FLYER_IMAGE}
                   alt="LevelUP Sports and Code Ninjas partnership banner — Where Play Meets Coding! — co-branded summer camp 2026 for ages 6+"
-                  width={1200}
-                  height={1600}
+                  fill
                   priority
-                  sizes="(max-width: 1024px) 90vw, 560px"
-                  className="w-full h-auto block"
+                  sizes="(max-width: 1024px) 90vw, 480px"
+                  className="object-cover object-[50%_75%]"
                 />
               </div>
               <div className="absolute -top-4 -right-4 rounded-2xl bg-accent text-white px-4 py-2.5 shadow-lg rotate-3">
