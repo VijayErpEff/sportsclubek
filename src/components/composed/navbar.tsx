@@ -212,7 +212,7 @@ export function Navbar() {
 
             {/* Desktop CTA */}
             <div className="hidden lg:flex items-center gap-3 ml-auto pl-4">
-              <a href={`tel:${SITE_CONFIG.phone}`} onClick={trackPhoneCall} className="text-xs text-neutral-400 hover:text-primary transition-colors hidden xl:block">{SITE_CONFIG.phone}</a>
+              <a href={`tel:${SITE_CONFIG.phone}`} onClick={trackPhoneCall} className="text-xs text-neutral-400 hover:text-primary transition-colors hidden 2xl:block">{SITE_CONFIG.phone}</a>
 
               {/* Bell lead capture */}
               <div ref={bellDesktopRef} className="relative">
@@ -289,16 +289,17 @@ export function Navbar() {
                 )}
               </div>
 
-              <a
-                href="https://app.upperhand.io/accounts/login"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackCTAClick("Sign In", "https://app.upperhand.io/accounts/login")}
-                className="hidden xl:inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-neutral-600 hover:text-primary transition-colors"
-              >
-                <LogIn className="h-4 w-4" aria-hidden="true" />
-                Sign In
-              </a>
+              <Button size="sm" className="rounded-full px-5" asChild>
+                <a
+                  href="https://app.upperhand.io/accounts/login"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackCTAClick("Sign In", "https://app.upperhand.io/accounts/login")}
+                >
+                  <LogIn className="h-4 w-4 mr-1.5" aria-hidden="true" />
+                  Sign In
+                </a>
+              </Button>
 
               <Button size="sm" className="rounded-full px-5" asChild>
                 <a href={BOOKING_URLS.freeTrial} onClick={() => trackCTAClick("Free Trial", BOOKING_URLS.freeTrial)}>Free Trial</a>
@@ -475,21 +476,22 @@ export function Navbar() {
               </div>
               <div className="mt-auto px-6 pt-8 space-y-3">
                 <Button size="lg" className="w-full rounded-full" asChild>
+                  <a
+                    href="https://app.upperhand.io/accounts/login"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => {
+                      trackCTAClick("Sign In", "https://app.upperhand.io/accounts/login");
+                      setMobileOpen(false);
+                    }}
+                  >
+                    <LogIn className="h-4 w-4 mr-2" aria-hidden="true" />
+                    Sign In
+                  </a>
+                </Button>
+                <Button size="lg" className="w-full rounded-full" asChild>
                   <a href={BOOKING_URLS.freeTrial} onClick={() => setMobileOpen(false)}>Free Trial</a>
                 </Button>
-                <a
-                  href="https://app.upperhand.io/accounts/login"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => {
-                    trackCTAClick("Sign In", "https://app.upperhand.io/accounts/login");
-                    setMobileOpen(false);
-                  }}
-                  className="flex items-center justify-center gap-2 w-full h-11 rounded-full border border-neutral-200 text-sm font-semibold text-neutral-700 hover:bg-neutral-50 transition-colors"
-                >
-                  <LogIn className="h-4 w-4" aria-hidden="true" />
-                  Sign In
-                </a>
                 <p className="text-center text-sm text-neutral-400">
                   <a href={`tel:${SITE_CONFIG.phone}`} className="hover:text-primary">{SITE_CONFIG.phone}</a>
                 </p>
