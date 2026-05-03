@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, ChevronDown, ChevronRight, Bell, ArrowRight, Check, Loader2 } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronRight, Bell, ArrowRight, Check, Loader2, LogIn } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils/cn";
 import { Button } from "@/components/ui/button";
@@ -289,6 +289,17 @@ export function Navbar() {
                 )}
               </div>
 
+              <a
+                href="https://app.upperhand.io/accounts/login"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackCTAClick("Sign In", "https://app.upperhand.io/accounts/login")}
+                className="hidden xl:inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-neutral-600 hover:text-primary transition-colors"
+              >
+                <LogIn className="h-4 w-4" aria-hidden="true" />
+                Sign In
+              </a>
+
               <Button size="sm" className="rounded-full px-5" asChild>
                 <a href={BOOKING_URLS.freeTrial} onClick={() => trackCTAClick("Free Trial", BOOKING_URLS.freeTrial)}>Free Trial</a>
               </Button>
@@ -466,6 +477,19 @@ export function Navbar() {
                 <Button size="lg" className="w-full rounded-full" asChild>
                   <a href={BOOKING_URLS.freeTrial} onClick={() => setMobileOpen(false)}>Free Trial</a>
                 </Button>
+                <a
+                  href="https://app.upperhand.io/accounts/login"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => {
+                    trackCTAClick("Sign In", "https://app.upperhand.io/accounts/login");
+                    setMobileOpen(false);
+                  }}
+                  className="flex items-center justify-center gap-2 w-full h-11 rounded-full border border-neutral-200 text-sm font-semibold text-neutral-700 hover:bg-neutral-50 transition-colors"
+                >
+                  <LogIn className="h-4 w-4" aria-hidden="true" />
+                  Sign In
+                </a>
                 <p className="text-center text-sm text-neutral-400">
                   <a href={`tel:${SITE_CONFIG.phone}`} className="hover:text-primary">{SITE_CONFIG.phone}</a>
                 </p>
