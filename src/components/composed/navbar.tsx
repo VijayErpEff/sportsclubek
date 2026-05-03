@@ -140,13 +140,13 @@ export function Navbar() {
     <>
       <header className={cn("fixed inset-x-0 z-[100] transition-all duration-300", scrolled ? "shadow-md bg-white/80 backdrop-blur-lg" : "shadow-sm bg-white")} style={{ top: "var(--banner-height, 0px)" }}>
         <Container>
-          <nav className="flex items-center justify-between h-16" aria-label="Main navigation">
+          <nav className="flex items-center h-16 gap-4" aria-label="Main navigation">
             <Link href="/" className="shrink-0">
               <Image src="/images/logo.png" alt={SITE_CONFIG.shortName} width={150} height={38} className="h-8 w-auto" priority />
             </Link>
 
-            {/* ── Desktop Nav (centered) ── */}
-            <div className="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
+            {/* ── Desktop Nav (centered, flex-flow so it can't overlap CTAs) ── */}
+            <div className="hidden lg:flex items-center gap-1 flex-1 justify-center min-w-0">
               {/* Sports dropdown wrapper */}
               <div ref={wrapperRef} className="relative">
                 <button
@@ -211,7 +211,7 @@ export function Navbar() {
             </div>
 
             {/* Desktop CTA */}
-            <div className="hidden lg:flex items-center gap-3 ml-auto pl-4">
+            <div className="hidden lg:flex items-center gap-3 shrink-0">
               {/* Bell lead capture */}
               <div ref={bellDesktopRef} className="relative">
                 <button
@@ -305,7 +305,7 @@ export function Navbar() {
             </div>
 
             {/* Mobile: call + bell + toggle */}
-            <div className="lg:hidden flex items-center gap-1">
+            <div className="lg:hidden flex items-center gap-1 ml-auto">
               <a
                 href={`tel:${SITE_CONFIG.phone}`}
                 onClick={trackPhoneCall}
