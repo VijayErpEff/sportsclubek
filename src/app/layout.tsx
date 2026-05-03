@@ -3,6 +3,7 @@ import { inter, plusJakarta, jetbrainsMono } from "@/lib/fonts";
 import { Navbar } from "@/components/composed/navbar";
 import { Footer } from "@/components/composed/footer";
 import { BackToTop } from "@/components/composed/back-to-top";
+import { CallFab } from "@/components/composed/call-fab";
 import { CookieConsent } from "@/components/composed/cookie-consent";
 import { MobileBottomNav } from "@/components/composed/mobile-bottom-nav";
 import { SportPreference } from "@/components/composed/sport-preference";
@@ -27,6 +28,22 @@ export const metadata: Metadata = {
   },
   description:
     "Premier indoor sports facility in Elkton, MD — 15 min from Middletown & Newark, DE. Batting cages, cricket nets, badminton & pickleball courts. Youth academies, expert coaching, court rentals. Open 7 days.",
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [{ url: "/icons/apple-touch-icon-180.png", sizes: "180x180" }],
+  },
+  manifest: "/manifest.webmanifest",
+  themeColor: "#1B3A5C",
+  appleWebApp: {
+    capable: true,
+    title: "LevelUP",
+    statusBarStyle: "black-translucent",
+  },
   keywords: [
     "sports facility Elkton MD",
     "batting cages Elkton",
@@ -141,6 +158,7 @@ export default function RootLayout({
             <main id="main-content" className="min-h-screen">{children}</main>
             <Footer />
             <BackToTop />
+            <CallFab />
             <CookieConsent />
             <MobileBottomNav />
             <SportPreference />
