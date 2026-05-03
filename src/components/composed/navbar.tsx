@@ -4,14 +4,14 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, ChevronDown, ChevronRight, Bell, ArrowRight, Check, Loader2, LogIn } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronRight, Bell, ArrowRight, Check, Loader2, LogIn, Phone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils/cn";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/layout/container";
 import { SITE_CONFIG, SPORT_NAV_ITEMS } from "@/lib/constants/site";
 import { BOOKING_URLS } from "@/lib/constants/booking";
-import { trackCTAClick } from "@/lib/analytics";
+import { trackPhoneCall, trackCTAClick } from "@/lib/analytics";
 import { captureLead } from "@/lib/leads";
 
 const BELL_STORAGE_KEY = "lus_nav_subscribed";
@@ -304,8 +304,16 @@ export function Navbar() {
               </Button>
             </div>
 
-            {/* Mobile: bell + toggle */}
+            {/* Mobile: call + bell + toggle */}
             <div className="lg:hidden flex items-center gap-1">
+              <a
+                href={`tel:${SITE_CONFIG.phone}`}
+                onClick={trackPhoneCall}
+                className="p-2 rounded-lg text-accent bg-accent/10 hover:bg-accent/15 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+                aria-label={`Call ${SITE_CONFIG.phone}`}
+              >
+                <Phone className="h-5 w-5" />
+              </a>
               <div ref={bellMobileRef} className="relative">
                 <button
                   onClick={() => setBellOpen((p) => !p)}
