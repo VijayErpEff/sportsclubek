@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Container } from "@/components/layout/container";
 import { SITE_CONFIG, SPORT_NAV_ITEMS } from "@/lib/constants/site";
 import { BOOKING_URLS } from "@/lib/constants/booking";
-import { trackPhoneCall, trackCTAClick } from "@/lib/analytics";
+import { trackCTAClick } from "@/lib/analytics";
 import { captureLead } from "@/lib/leads";
 
 const BELL_STORAGE_KEY = "lus_nav_subscribed";
@@ -212,8 +212,6 @@ export function Navbar() {
 
             {/* Desktop CTA */}
             <div className="hidden lg:flex items-center gap-3 ml-auto pl-4">
-              <a href={`tel:${SITE_CONFIG.phone}`} onClick={trackPhoneCall} className="text-xs text-neutral-400 hover:text-primary transition-colors hidden 2xl:block">{SITE_CONFIG.phone}</a>
-
               {/* Bell lead capture */}
               <div ref={bellDesktopRef} className="relative">
                 <button
