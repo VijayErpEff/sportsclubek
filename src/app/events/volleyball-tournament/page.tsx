@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Calendar,
   Trophy,
@@ -20,7 +21,6 @@ import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { StaggerContainer, StaggerItem } from "@/components/ui/stagger";
-import { CTABanner } from "@/components/composed/cta-banner";
 import { CountdownTimer } from "@/components/composed/countdown-timer";
 import { FAQAccordion } from "@/components/composed/faq-accordion";
 
@@ -289,14 +289,39 @@ export default function VolleyballTournamentPage() {
       />
 
       {/* ═══════════════════════════════════════════
-          HERO — Flyer-style, "Bump. Set. Smash."
+          HERO — Flyer-style, "Bump. Set. Smash." with action photo
           ═══════════════════════════════════════════ */}
       <section className="relative pt-28 md:pt-32 pb-14 md:pb-20 overflow-hidden bg-gradient-to-br from-primary-dark via-primary to-primary-dark text-white">
         <div
           className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-secondary via-accent to-secondary"
           aria-hidden="true"
         />
-        {/* Decorative green accent squares — echoing the flyer's design language */}
+        {/* Warm radial spotlight — breaks up the navy monotony */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 opacity-60 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse 60% 50% at 75% 30%, rgba(43, 168, 74, 0.18) 0%, transparent 70%), radial-gradient(ellipse 40% 60% at 15% 80%, rgba(243, 156, 18, 0.10) 0%, transparent 65%)",
+          }}
+        />
+        {/* Court-line decoration — subtle volleyball court markings */}
+        <svg
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full opacity-[0.06] pointer-events-none"
+          preserveAspectRatio="xMidYMid slice"
+          viewBox="0 0 1200 800"
+          fill="none"
+          stroke="white"
+          strokeWidth="1.5"
+        >
+          <rect x="80" y="120" width="1040" height="560" />
+          <line x1="600" y1="120" x2="600" y2="680" />
+          <line x1="80" y1="320" x2="1120" y2="320" />
+          <line x1="80" y1="480" x2="1120" y2="480" />
+          <circle cx="600" cy="400" r="60" />
+        </svg>
+        {/* Decorative green accent squares */}
         <div
           aria-hidden="true"
           className="absolute top-1/4 right-12 w-4 h-4 bg-secondary rounded-sm hidden md:block"
@@ -385,27 +410,52 @@ export default function VolleyballTournamentPage() {
               </div>
             </Reveal>
 
-            {/* Date stamp card — echoes the flyer's "06 — 07" treatment */}
+            {/* Action photo + date sticker — replaces the all-typography
+                date card so the hero feels less monotone */}
             <Reveal variant="fade-left" delay={0.15}>
-              <div className="bg-white/10 backdrop-blur-sm border border-white/15 rounded-3xl p-8 md:p-10 text-center min-w-[220px] shadow-2xl">
-                <p className="text-xs font-bold uppercase tracking-[0.3em] text-white/70 mb-2">
-                  June
-                </p>
-                <p className="text-xs font-bold uppercase tracking-[0.3em] text-white/70 mb-6">
-                  2026
-                </p>
-                <div className="space-y-2">
-                  <div className="font-display font-extrabold text-6xl md:text-7xl tabular-nums">
-                    06
-                  </div>
-                  <div className="text-2xl text-white/40 font-light leading-none">—/—</div>
-                  <div className="font-display font-extrabold text-6xl md:text-7xl tabular-nums">
-                    07
+              <div className="relative w-full max-w-[320px] mx-auto lg:max-w-none lg:w-[300px]">
+                <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl ring-1 ring-white/15 rotate-2">
+                  <Image
+                    src="/images/sports/volleyball.jpg"
+                    alt="Volleyball player spiking the ball at LevelUP Sports indoor court"
+                    fill
+                    sizes="(max-width: 1024px) 320px, 300px"
+                    className="object-cover"
+                    priority
+                  />
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0 bg-gradient-to-t from-primary-dark/90 via-primary-dark/20 to-transparent"
+                  />
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-secondary/20"
+                  />
+                  {/* Date sticker — anchored bottom of photo */}
+                  <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-3">
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-secondary mb-0.5">
+                        June 2026
+                      </p>
+                      <p className="font-display font-extrabold text-4xl md:text-5xl text-white tabular-nums leading-none">
+                        06–07
+                      </p>
+                      <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-white/70 mt-1.5">
+                        Sat &amp; Sun
+                      </p>
+                    </div>
+                    <div className="bg-secondary text-primary-dark rounded-lg px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-wider shrink-0">
+                      6v6
+                    </div>
                   </div>
                 </div>
-                <p className="mt-6 text-xs font-bold uppercase tracking-[0.2em] text-secondary">
-                  Sat &amp; Sun
-                </p>
+                {/* Floating accent badge */}
+                <div
+                  aria-hidden="true"
+                  className="absolute -top-3 -right-3 bg-warning text-primary-dark rounded-full px-3 py-1.5 text-[11px] font-extrabold uppercase tracking-wider shadow-lg rotate-6"
+                >
+                  Cash Prize
+                </div>
               </div>
             </Reveal>
           </div>
@@ -429,7 +479,7 @@ export default function VolleyballTournamentPage() {
       </section>
 
       {/* ═══════════════════════════════════════════
-          KEY DETAILS
+          KEY DETAILS — Diversified icon colors break up the monotony
           ═══════════════════════════════════════════ */}
       <Section>
         <Container>
@@ -440,29 +490,47 @@ export default function VolleyballTournamentPage() {
                 label: "Dates",
                 value: TOURNAMENT.dateShort,
                 sub: "Saturday & Sunday",
+                iconBg: "bg-info/10",
+                iconColor: "text-info",
+                topBar: "bg-info",
               },
               {
                 icon: Trophy,
                 label: "Prizes",
                 value: "Cash + Trophies",
                 sub: "Gift cards & medals for runners-up",
+                iconBg: "bg-warning/15",
+                iconColor: "text-warning",
+                topBar: "bg-warning",
               },
               {
                 icon: Users,
                 label: "Format",
                 value: TOURNAMENT.format,
                 sub: "Co-ed · Youth & Adult divisions",
+                iconBg: "bg-accent/10",
+                iconColor: "text-accent",
+                topBar: "bg-accent",
               },
               {
                 icon: CircleDollarSign,
                 label: "Entry",
                 value: `${TOURNAMENT.price} / Team`,
                 sub: TOURNAMENT.rosterSize + " roster",
+                iconBg: "bg-secondary/15",
+                iconColor: "text-secondary",
+                topBar: "bg-secondary",
               },
             ].map((item) => (
               <StaggerItem key={item.label}>
-                <div className="bg-white rounded-2xl p-6 border border-neutral-100 shadow-sm h-full">
-                  <div className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-accent/10 text-accent mb-3">
+                <div className="bg-white rounded-2xl p-6 border border-neutral-100 shadow-sm h-full relative overflow-hidden">
+                  <div
+                    aria-hidden="true"
+                    className={`absolute top-0 left-0 right-0 h-1 ${item.topBar}`}
+                  />
+                  <div
+                    className={`inline-flex items-center justify-center w-10 h-10 rounded-lg ${item.iconBg} ${item.iconColor} mb-3`}
+                  >
                     <item.icon className="h-5 w-5" aria-hidden="true" />
                   </div>
                   <p className="text-[11px] font-bold uppercase tracking-wider text-neutral-400 mb-1">
@@ -480,13 +548,13 @@ export default function VolleyballTournamentPage() {
       </Section>
 
       {/* ═══════════════════════════════════════════
-          DIVISIONS
+          DIVISIONS — Soft tinted backdrop and per-division color identity
           ═══════════════════════════════════════════ */}
-      <Section variant="alternate">
+      <section className="py-14 md:py-20 bg-gradient-to-b from-info/5 to-white border-t border-neutral-100">
         <Container>
           <Reveal>
             <div className="text-center mb-10 max-w-2xl mx-auto">
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-3">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-info mb-3">
                 Two Divisions · Both Co-ed
               </p>
               <h2 className="font-display text-section text-neutral-900 mb-3 text-balance">
@@ -498,36 +566,62 @@ export default function VolleyballTournamentPage() {
             </div>
           </Reveal>
           <StaggerContainer className="grid gap-6 md:grid-cols-2 max-w-5xl mx-auto">
-            {DIVISIONS.map((d, idx) => (
-              <StaggerItem key={d.label}>
-                <article
-                  id={idx === 0 ? "youth" : "adult"}
-                  className="bg-white rounded-2xl p-7 border border-neutral-100 shadow-sm h-full flex flex-col"
-                >
-                  <div
-                    className={`inline-flex items-center gap-2 ${d.bg} ${d.accent} text-sm font-bold rounded-lg px-3 py-1.5 self-start mb-4`}
+            {DIVISIONS.map((d, idx) => {
+              const styles =
+                idx === 0
+                  ? {
+                      cardBorder: "border-secondary/30",
+                      stripe: "bg-gradient-to-r from-secondary to-accent",
+                      badgeBg: "bg-secondary text-primary-dark",
+                    }
+                  : {
+                      cardBorder: "border-info/30",
+                      stripe: "bg-gradient-to-r from-info to-primary-light",
+                      badgeBg: "bg-info text-white",
+                    };
+              return (
+                <StaggerItem key={d.label}>
+                  <article
+                    id={idx === 0 ? "youth" : "adult"}
+                    className={`relative bg-white rounded-2xl p-7 border ${styles.cardBorder} shadow-sm h-full flex flex-col overflow-hidden`}
                   >
-                    <span className="font-mono tracking-tight">{d.badge}</span>
-                  </div>
-                  <h3 className="font-display text-xl font-bold text-neutral-900 mb-2">
-                    {d.label}
-                  </h3>
-                  <p className="text-neutral-600 text-sm leading-relaxed">{d.description}</p>
-                </article>
-              </StaggerItem>
-            ))}
+                    <div
+                      aria-hidden="true"
+                      className={`absolute top-0 left-0 right-0 h-1.5 ${styles.stripe}`}
+                    />
+                    <div
+                      className={`inline-flex items-center gap-2 ${styles.badgeBg} text-sm font-bold rounded-lg px-3 py-1.5 self-start mb-4 mt-1`}
+                    >
+                      <span className="font-mono tracking-tight">{d.badge}</span>
+                    </div>
+                    <h3 className="font-display text-xl font-bold text-neutral-900 mb-2">
+                      {d.label}
+                    </h3>
+                    <p className="text-neutral-600 text-sm leading-relaxed">{d.description}</p>
+                  </article>
+                </StaggerItem>
+              );
+            })}
           </StaggerContainer>
         </Container>
-      </Section>
+      </section>
 
       {/* ═══════════════════════════════════════════
-          PRIZES
+          PRIZES — Warm trophy-gold backdrop for variety
           ═══════════════════════════════════════════ */}
-      <Section>
-        <Container>
+      <section className="relative overflow-hidden py-16 md:py-20 bg-gradient-to-br from-warning/5 via-white to-accent/5">
+        <div
+          aria-hidden="true"
+          className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-warning/10 blur-3xl"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-accent/10 blur-3xl"
+        />
+        <Container className="relative">
           <Reveal>
             <div className="text-center mb-10 max-w-2xl mx-auto">
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-3">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-warning mb-3">
                 What You&apos;re Playing For
               </p>
               <h2 className="font-display text-section text-neutral-900 mb-3 text-balance">
@@ -536,18 +630,47 @@ export default function VolleyballTournamentPage() {
             </div>
           </Reveal>
           <StaggerContainer className="grid md:grid-cols-3 gap-5 max-w-4xl mx-auto">
-            {PRIZES.map((p) => (
-              <StaggerItem key={p.label}>
-                <div className="bg-gradient-to-br from-accent/5 to-secondary/5 rounded-2xl p-6 border border-accent/15 h-full text-center">
-                  <p.icon className="h-8 w-8 text-accent mx-auto mb-3" aria-hidden="true" />
-                  <h3 className="font-display font-bold text-neutral-900 mb-2">{p.label}</h3>
-                  <p className="text-sm text-neutral-600 leading-relaxed">{p.detail}</p>
-                </div>
-              </StaggerItem>
-            ))}
+            {PRIZES.map((p, idx) => {
+              const tints = [
+                {
+                  bg: "from-warning/10 to-warning/5",
+                  border: "border-warning/25",
+                  icon: "text-warning",
+                  iconBg: "bg-warning/15",
+                },
+                {
+                  bg: "from-accent/10 to-secondary/5",
+                  border: "border-accent/25",
+                  icon: "text-accent",
+                  iconBg: "bg-accent/15",
+                },
+                {
+                  bg: "from-info/10 to-info/5",
+                  border: "border-info/25",
+                  icon: "text-info",
+                  iconBg: "bg-info/15",
+                },
+              ];
+              const t = tints[idx % tints.length];
+              return (
+                <StaggerItem key={p.label}>
+                  <div
+                    className={`bg-gradient-to-br ${t.bg} rounded-2xl p-6 border ${t.border} h-full text-center shadow-sm`}
+                  >
+                    <span
+                      className={`inline-flex items-center justify-center w-12 h-12 rounded-xl ${t.iconBg} mb-3`}
+                    >
+                      <p.icon className={`h-6 w-6 ${t.icon}`} aria-hidden="true" />
+                    </span>
+                    <h3 className="font-display font-bold text-neutral-900 mb-2">{p.label}</h3>
+                    <p className="text-sm text-neutral-600 leading-relaxed">{p.detail}</p>
+                  </div>
+                </StaggerItem>
+              );
+            })}
           </StaggerContainer>
         </Container>
-      </Section>
+      </section>
 
       {/* ═══════════════════════════════════════════
           SCHEDULE + WHAT TO BRING
@@ -727,20 +850,54 @@ export default function VolleyballTournamentPage() {
       </Section>
 
       {/* ═══════════════════════════════════════════
-          FINAL CTA
+          FINAL CTA — Custom green-toned banner (breaks up navy)
           ═══════════════════════════════════════════ */}
-      <CTABanner
-        title="Lock In Your Team's Spot"
-        description={`$200 per team. ${TOURNAMENT.rosterSize} rosters. Registration closes ${TOURNAMENT.registerByLabel}. Edit your lineup anytime before the lock.`}
-        primaryCTA={{
-          label: "Register Your Team",
-          href: TOURNAMENT.registerHref,
-        }}
-        secondaryCTA={{
-          label: "Explore Volleyball at LevelUP",
-          href: "/volleyball",
-        }}
-      />
+      <section className="relative overflow-hidden py-16 md:py-20 bg-gradient-to-br from-accent via-accent to-secondary text-white">
+        <div
+          aria-hidden="true"
+          className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-secondary-light/30 blur-3xl"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-primary-dark/20 blur-3xl"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute top-8 right-8 w-3 h-3 bg-white/40 rounded-sm hidden md:block"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute bottom-12 left-16 w-2 h-2 bg-white/40 rounded-sm hidden md:block"
+        />
+        <Container className="relative z-10 text-center">
+          <h2 className="font-display text-section text-white mb-4 text-balance">
+            Lock In Your Team&apos;s Spot
+          </h2>
+          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
+            $200 per team. Lock your spot with as few as 4 players. Registration closes{" "}
+            {TOURNAMENT.registerByLabel}. Edit your lineup anytime before the tournament.
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Button
+              size="xl"
+              asChild
+              className="bg-white text-accent hover:bg-neutral-50 shadow-lg"
+            >
+              <Link href={TOURNAMENT.registerHref}>
+                Register Your Team <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+            <Button
+              size="xl"
+              variant="outline"
+              className="border-white/40 text-white hover:bg-white hover:text-accent"
+              asChild
+            >
+              <Link href="/volleyball">Explore Volleyball at LevelUP</Link>
+            </Button>
+          </div>
+        </Container>
+      </section>
     </>
   );
 }
