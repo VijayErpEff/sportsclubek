@@ -185,6 +185,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.85,
     },
     {
+      url: `${BASE_URL}/events/volleyball-tournament`,
+      lastModified: "2026-05-06",
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
       url: `${BASE_URL}/birthday-parties`,
       lastModified: LAST_CONTENT_UPDATE,
       changeFrequency: "monthly",

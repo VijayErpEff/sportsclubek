@@ -5,8 +5,14 @@
       "text": "Summer Camp 2026 — LevelUP × Code Ninjas: Where Play Meets Coding! · Ages 5+ · Full Day $299 / Half Day $199 · Save 10% Early Bird",
       "linkText": "Reserve Your Spot",
       "linkUrl": "/summer-camps"
+    },
+    {
+      "text": "LevelUP Smash Cup — Indoor Volleyball Tournament · Jun 6–7, 2026 · Co-ed Youth & Adult · 6v6 · $200/team",
+      "linkText": "Register Your Team",
+      "linkUrl": "/events/volleyball-tournament"
     }
   ],
+  "rotateMs": 7000,
   "style": "gradient",
   "dismissible": true
 }

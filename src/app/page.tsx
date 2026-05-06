@@ -427,6 +427,17 @@ export default function HomePage() {
               </Link>
             </p>
           </Reveal>
+          <Reveal delay={0.3}>
+            <p className="text-center text-sm text-neutral-500 mt-3">
+              Coming up:{" "}
+              <Link
+                href="/events/volleyball-tournament"
+                className="text-accent hover:text-accent-hover font-semibold"
+              >
+                LevelUP Smash Cup — Indoor Volleyball Tournament, Jun 6–7 &rarr;
+              </Link>
+            </p>
+          </Reveal>
         </Container>
       </Section>
 
