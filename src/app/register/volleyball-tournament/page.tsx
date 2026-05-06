@@ -54,9 +54,9 @@ export default function VolleyballRegisterPage() {
               Register Your <span className="text-secondary">Team</span>
             </h1>
             <p className="text-lg text-white/80 max-w-2xl">
-              6v6 indoor volleyball, $200 per team, 6–10 player rosters. Pick a
-              division, build your squad, and you&apos;re in. You can edit
-              your roster anytime before the lock.
+              6v6 indoor volleyball, $200 per team. Lock your spot with as few
+              as 4 players, then build your roster up to 10 anytime before the
+              tournament.
             </p>
             <p className="text-sm text-white/60 mt-4">
               Already registered?{" "}

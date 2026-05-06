@@ -158,10 +158,10 @@ export function validateRegistrationInput(input: RegistrationInput): ValidationR
     errors.pin = "PIN must be exactly 4 digits.";
   }
 
-  // Roster
+  // Roster — minimum 4 to register; teams can add more before the tournament.
   const players = Array.isArray(input.players) ? input.players : [];
-  if (players.length < 6) {
-    errors.players = "Roster must have at least 6 players.";
+  if (players.length < 4) {
+    errors.players = "Roster must have at least 4 players.";
   } else if (players.length > 10) {
     errors.players = "Roster must have at most 10 players.";
   }
@@ -242,7 +242,7 @@ export function validateUpdateInput(
   }
 
   if (input.players !== undefined) {
-    if (input.players.length < 6) errors.players = "Roster must have at least 6 players.";
+    if (input.players.length < 4) errors.players = "Roster must have at least 4 players.";
     else if (input.players.length > 10) errors.players = "Roster must have at most 10 players.";
     input.players.forEach((p, idx) => {
       if (!p.name?.trim()) errors[`players.${idx}.name`] = "Player name required.";

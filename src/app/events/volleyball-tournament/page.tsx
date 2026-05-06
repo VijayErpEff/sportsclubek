@@ -163,7 +163,7 @@ const FAQS = [
   {
     question: "How big is the roster — and can we substitute players?",
     answer:
-      "Rosters are 6–10 players. You can use any combination of rostered players on the court at any time during the tournament. Players cannot play for more than one team in the same division.",
+      "Lock your team's spot with as few as 4 players, then build your roster up to 10 anytime before the tournament. We recommend 6 or more so you can rotate through the 6v6 format. You can use any combination of rostered players on the court at any time during the tournament. Players cannot play for more than one team in the same division.",
   },
   {
     question: "What if I don't have enough players or can't field a full team?",

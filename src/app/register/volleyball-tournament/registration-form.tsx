@@ -142,14 +142,14 @@ export function RegistrationForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="space-y-10">
+    <form onSubmit={handleSubmit} noValidate className="space-y-5 md:space-y-6">
       {/* ── Section 1: Team & Division ─────────────────── */}
       <FormSection
         step={1}
         title="Team & Division"
-        description="Pick your team name and the division you'll compete in. All divisions are co-ed."
+        description="Pick your team name and division. Both divisions are co-ed."
       >
-        <div className="space-y-4">
+        <div className="space-y-3">
           <FloatingInput
             label="Team name"
             name="teamName"
@@ -161,25 +161,25 @@ export function RegistrationForm() {
             autoComplete="off"
           />
           <fieldset>
-            <legend className="text-sm font-semibold text-neutral-700 mb-2">
+            <legend className="text-xs font-semibold text-neutral-700 mb-1.5">
               Division <span className="text-error">*</span>
             </legend>
-            <div className="grid sm:grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-2">
               <DivisionRadio
                 value="youth"
                 checked={division === "youth"}
                 onChange={() => setDivision("youth")}
                 badge="12–17"
-                title="Youth Division"
-                hint="Ages 12–17 · Co-ed"
+                title="Youth"
+                hint="Co-ed"
               />
               <DivisionRadio
                 value="adult"
                 checked={division === "adult"}
                 onChange={() => setDivision("adult")}
                 badge="18+"
-                title="Adult Division"
-                hint="Ages 18 and up · Co-ed"
+                title="Adult"
+                hint="Co-ed"
               />
             </div>
           </fieldset>
@@ -190,9 +190,9 @@ export function RegistrationForm() {
       <FormSection
         step={2}
         title="Team Captain"
-        description="The captain is the main point of contact for the tournament. Pick a 4-digit PIN — you'll use captain email + PIN to edit your roster later."
+        description="Main point of contact. Pick a 4-digit PIN — you'll use email + PIN to edit your roster later."
       >
-        <div className="grid md:grid-cols-2 gap-4">
+        <div className="grid sm:grid-cols-2 gap-3">
           <FloatingInput
             label="Captain full name"
             name="captainName"
@@ -222,7 +222,8 @@ export function RegistrationForm() {
             error={errors["captain.phone"]}
             autoComplete="tel"
           />
-          <div /> {/* spacer */}
+        </div>
+        <div className="grid sm:grid-cols-2 gap-3 mt-3">
           <FloatingInput
             label="4-digit PIN"
             name="pin"
@@ -249,8 +250,7 @@ export function RegistrationForm() {
           />
         </div>
         <p className="text-xs text-neutral-500 mt-3 leading-relaxed">
-          Save your captain email + PIN somewhere safe. You&apos;ll need both to edit your roster
-          before the tournament.
+          Save your email + PIN — you&apos;ll need both to edit your roster later.
         </p>
       </FormSection>
 
@@ -258,7 +258,7 @@ export function RegistrationForm() {
       <FormSection
         step={3}
         title="Team Roster"
-        description={`Add ${MIN_PLAYERS}–${MIN_PLAYERS + 4} players. ${division === "youth" ? "All players must be 12–17." : "All players must be 18 or older."} Player email and phone are optional.`}
+        description={`At least ${MIN_PLAYERS} players to register, up to 10. ${division === "youth" ? "Youth ages 12–17." : "Adults 18+."} Add more anytime before the tournament.`}
       >
         <RosterFields
           division={division}
@@ -271,10 +271,10 @@ export function RegistrationForm() {
       {/* ── Section 4: Emergency Contact + Notes ─────────────────── */}
       <FormSection
         step={4}
-        title="Emergency Contact & Notes"
-        description="Required for safety. Anything else we should know about your team? (Optional)"
+        title="Emergency Contact"
+        description="Required for safety. Notes are optional."
       >
-        <div className="grid md:grid-cols-2 gap-4 mb-4">
+        <div className="grid sm:grid-cols-2 gap-3 mb-3">
           <FloatingInput
             label="Emergency contact name"
             name="emergencyName"
@@ -307,14 +307,14 @@ export function RegistrationForm() {
       {/* ── Section 5: Payment + Terms ─────────────────── */}
       <FormSection
         step={5}
-        title="Payment & Confirmation"
-        description="$200 per team. You can pay now via Upper Hand, or register first and we'll follow up with payment instructions."
+        title="Payment"
+        description="$200 per team. Pay now via Upper Hand or register first and we'll follow up."
       >
-        <fieldset className="mb-4">
-          <legend className="text-sm font-semibold text-neutral-700 mb-2">
-            Payment option <span className="text-error">*</span>
+        <fieldset className="mb-3">
+          <legend className="text-xs font-semibold text-neutral-700 mb-1.5">
+            How will you pay? <span className="text-error">*</span>
           </legend>
-          <div className="grid sm:grid-cols-2 gap-3">
+          <div className="grid sm:grid-cols-2 gap-2">
             <PaymentRadio
               checked={paymentMethod === "pay_later"}
               onChange={() => setPaymentMethod("pay_later")}
@@ -401,23 +401,25 @@ function FormSection({
   return (
     <section
       aria-labelledby={`section-${step}-title`}
-      className="bg-white rounded-2xl border border-neutral-200 p-6 md:p-8 shadow-sm"
+      className="bg-white rounded-xl border border-neutral-200 p-4 md:p-6 shadow-sm"
     >
-      <div className="flex items-start gap-4 mb-5">
+      <div className="flex items-start gap-3 mb-4">
         <span
           aria-hidden="true"
-          className="shrink-0 inline-flex items-center justify-center w-9 h-9 rounded-lg bg-accent/10 text-accent font-bold"
+          className="shrink-0 inline-flex items-center justify-center w-7 h-7 rounded-md bg-accent/10 text-accent text-sm font-bold"
         >
           {step}
         </span>
-        <div>
+        <div className="min-w-0 flex-1">
           <h2
             id={`section-${step}-title`}
-            className="font-display text-xl font-bold text-neutral-900"
+            className="font-display text-base md:text-lg font-bold text-neutral-900 leading-tight"
           >
             {title}
           </h2>
-          <p className="text-sm text-neutral-600 mt-0.5 leading-relaxed">{description}</p>
+          <p className="text-xs md:text-sm text-neutral-600 mt-0.5 leading-relaxed">
+            {description}
+          </p>
         </div>
       </div>
       {children}
@@ -442,7 +444,7 @@ function DivisionRadio({
 }) {
   return (
     <label
-      className={`relative flex items-start gap-3 rounded-xl border-2 p-4 cursor-pointer transition-all ${
+      className={`relative flex items-center gap-2.5 rounded-lg border-2 p-2.5 cursor-pointer transition-all ${
         checked
           ? "border-accent bg-accent/5"
           : "border-neutral-200 bg-white hover:border-neutral-300"
@@ -458,15 +460,17 @@ function DivisionRadio({
       />
       <span
         aria-hidden="true"
-        className={`shrink-0 inline-flex items-center justify-center min-w-[3rem] px-2 h-10 rounded-lg font-mono font-bold text-sm ${
+        className={`shrink-0 inline-flex items-center justify-center min-w-[2.5rem] px-1.5 h-8 rounded-md font-mono font-bold text-xs ${
           checked ? "bg-accent text-white" : "bg-neutral-100 text-neutral-600"
         }`}
       >
         {badge}
       </span>
-      <span className="flex-1">
-        <span className="block font-display font-semibold text-neutral-900">{title}</span>
-        <span className="block text-xs text-neutral-500 mt-0.5">{hint}</span>
+      <span className="flex-1 min-w-0">
+        <span className="block font-display font-semibold text-sm text-neutral-900 leading-tight">
+          {title}
+        </span>
+        <span className="block text-[11px] text-neutral-500">{hint}</span>
       </span>
     </label>
   );
@@ -485,7 +489,7 @@ function PaymentRadio({
 }) {
   return (
     <label
-      className={`relative flex flex-col gap-1 rounded-xl border-2 p-4 cursor-pointer transition-all ${
+      className={`relative flex flex-col gap-0.5 rounded-lg border-2 p-3 cursor-pointer transition-all ${
         checked
           ? "border-accent bg-accent/5"
           : "border-neutral-200 bg-white hover:border-neutral-300"
@@ -498,8 +502,10 @@ function PaymentRadio({
         onChange={onChange}
         className="sr-only"
       />
-      <span className="font-display font-semibold text-neutral-900">{title}</span>
-      <span className="text-xs text-neutral-500 leading-relaxed">{hint}</span>
+      <span className="font-display font-semibold text-sm text-neutral-900 leading-tight">
+        {title}
+      </span>
+      <span className="text-[11px] text-neutral-500 leading-snug">{hint}</span>
     </label>
   );
 }

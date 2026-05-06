@@ -105,13 +105,15 @@ function LookupForm({
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="bg-white rounded-2xl border border-neutral-200 p-6 md:p-8 shadow-sm space-y-5 max-w-md mx-auto"
+      className="bg-white rounded-xl border border-neutral-200 p-4 md:p-6 shadow-sm space-y-4 max-w-md mx-auto"
     >
-      <div className="flex items-center gap-3 mb-2">
-        <span className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-accent/10 text-accent">
-          <LogIn className="h-5 w-5" aria-hidden="true" />
+      <div className="flex items-center gap-3 mb-1">
+        <span className="inline-flex items-center justify-center w-8 h-8 rounded-md bg-accent/10 text-accent">
+          <LogIn className="h-4 w-4" aria-hidden="true" />
         </span>
-        <h2 className="font-display text-xl font-bold text-neutral-900">Sign in to your registration</h2>
+        <h2 className="font-display text-base md:text-lg font-bold text-neutral-900">
+          Sign in to your registration
+        </h2>
       </div>
 
       <FloatingInput
@@ -274,7 +276,7 @@ function EditForm({
   };
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="space-y-8">
+    <form onSubmit={handleSubmit} noValidate className="space-y-5 md:space-y-6">
       <div className="bg-secondary/5 border border-secondary/20 rounded-xl p-4 flex items-start gap-3">
         <CheckCircle2 className="h-5 w-5 text-secondary shrink-0 mt-0.5" aria-hidden="true" />
         <div className="flex-1">
@@ -314,7 +316,7 @@ function EditForm({
 
       {/* Captain */}
       <Card title="Captain">
-        <div className="grid md:grid-cols-2 gap-4">
+        <div className="grid sm:grid-cols-2 gap-3">
           <FloatingInput
             label="Captain name"
             name="captainName"
@@ -356,7 +358,7 @@ function EditForm({
 
       {/* Emergency + Notes */}
       <Card title="Emergency Contact & Notes">
-        <div className="grid md:grid-cols-2 gap-4 mb-4">
+        <div className="grid sm:grid-cols-2 gap-3 mb-4">
           <FloatingInput
             label="Emergency contact name"
             name="emergencyName"
@@ -460,11 +462,15 @@ function Card({
   children: React.ReactNode;
 }) {
   return (
-    <section className="bg-white rounded-2xl border border-neutral-200 p-6 md:p-8 shadow-sm">
-      <div className="mb-5">
-        <h2 className="font-display text-xl font-bold text-neutral-900">{title}</h2>
+    <section className="bg-white rounded-xl border border-neutral-200 p-4 md:p-6 shadow-sm">
+      <div className="mb-4">
+        <h2 className="font-display text-base md:text-lg font-bold text-neutral-900 leading-tight">
+          {title}
+        </h2>
         {description && (
-          <p className="text-sm text-neutral-600 mt-0.5 leading-relaxed">{description}</p>
+          <p className="text-xs md:text-sm text-neutral-600 mt-0.5 leading-relaxed">
+            {description}
+          </p>
         )}
       </div>
       {children}
