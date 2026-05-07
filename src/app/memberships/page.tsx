@@ -15,7 +15,7 @@ import { MembershipAgreement } from "@/components/composed/membership-agreement"
 import { LiabilityWaiver } from "@/components/composed/liability-waiver";
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: "Memberships & Pricing — Plans from $49/mo",
+  title: "Memberships & Pricing — Plans from $59.99/mo",
   description:
     "Flexible membership plans at LevelUP Sports in Elkton, MD. Access batting cages, courts, and coaching. Individual, family, and elite tiers. Compare plans.",
   path: "/memberships",
