@@ -31,7 +31,6 @@ import {
   generateFAQLD,
 } from "@/lib/seo/json-ld";
 import { SITE_CONFIG } from "@/lib/constants/site";
-import { getRedirect } from "@/lib/constants/redirects";
 
 // ── Tournament constants (single source of truth) ──────────────────
 const TOURNAMENT = {
@@ -51,7 +50,6 @@ const TOURNAMENT = {
   structure: "Pool Play + Single-Elimination Playoffs",
   rosterSize: "6–10 players",
   registerHref: "/register/volleyball-tournament",
-  upperHandSlug: "volleyball-tournament",
   flyer: "/images/Content/volleyball-smash-cup-flyer.jpg",
   ogImage: "/images/og/volleyball-smash-cup.jpg",
 };
@@ -199,11 +197,6 @@ export const metadata: Metadata = generateSEOMetadata({
 
 // ── Page ────────────────────────────────────────────────────────────
 export default function VolleyballTournamentPage() {
-  // Hide the Upper Hand secondary CTA if no destination has been wired up yet.
-  const upperHandEntry = getRedirect(TOURNAMENT.upperHandSlug);
-  const showUpperHand =
-    !!upperHandEntry && !upperHandEntry.destination.includes("TBD");
-
   // ── JSON-LD ──
   const breadcrumbLD = generateBreadcrumbLD([
     { name: "Home", url: "/" },
@@ -380,23 +373,15 @@ export default function VolleyballTournamentPage() {
                 </p>
 
                 <div className="flex flex-wrap gap-3">
-                  <Button size="xl" asChild className="bg-secondary text-primary-dark hover:bg-secondary-light">
+                  <Button
+                    size="xl"
+                    asChild
+                    className="bg-secondary text-primary-dark hover:bg-secondary-light"
+                  >
                     <Link href={TOURNAMENT.registerHref}>
                       Register Your Team <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </Button>
-                  {showUpperHand && (
-                    <Button
-                      size="xl"
-                      variant="outline"
-                      className="border-white/30 text-white hover:bg-white hover:text-primary"
-                      asChild
-                    >
-                      <Link href={`/go/${TOURNAMENT.upperHandSlug}`}>
-                        Pay & Register on Upper Hand
-                      </Link>
-                    </Button>
-                  )}
                 </div>
                 <p className="text-sm text-white/60 mt-6">
                   Registration closes {TOURNAMENT.registerByLabel}.{" "}

@@ -2,7 +2,7 @@
 
 import { useState, useMemo, type FormEvent } from "react";
 import Link from "next/link";
-import { CheckCircle2, AlertCircle, Copy, Check } from "lucide-react";
+import { CheckCircle2, AlertCircle, Copy, Check, ArrowRight } from "lucide-react";
 
 import { FloatingInput, FloatingTextarea } from "@/components/ui/floating-input";
 import { Button } from "@/components/ui/button";
@@ -319,13 +319,13 @@ export function RegistrationForm() {
               checked={paymentMethod === "pay_later"}
               onChange={() => setPaymentMethod("pay_later")}
               title="Register now, pay later"
-              hint="We'll contact you with payment options (cash, Venmo, Zelle, card)."
+              hint="We'll follow up with payment options (cash, Venmo, Zelle, card)."
             />
             <PaymentRadio
               checked={paymentMethod === "upperhand"}
               onChange={() => setPaymentMethod("upperhand")}
               title="Pay via Upper Hand"
-              hint="We'll send you the Upper Hand checkout link to complete payment."
+              hint="Pay $200 by card on the next screen — locks your spot instantly."
             />
           </div>
         </fieldset>
@@ -528,6 +528,30 @@ function SuccessScreen({ success }: { success: SuccessState }) {
 
       <RegistrationIdBox id={success.id} />
 
+      {success.paymentMethod === "upperhand" && (
+        <div className="mt-6 bg-accent/5 border border-accent/30 rounded-xl p-5 text-left max-w-lg mx-auto">
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent mb-2">
+            Step 2 — Complete Payment
+          </p>
+          <h3 className="font-display text-lg font-bold text-neutral-900 mb-2">
+            Pay $200 via Upper Hand to confirm your spot
+          </h3>
+          <p className="text-sm text-neutral-600 mb-4 leading-relaxed">
+            Your team is held for 48 hours. Click below to finish checkout — your spot
+            isn&apos;t locked until payment clears.
+          </p>
+          <Button asChild size="lg" className="w-full sm:w-auto">
+            <a
+              href="/go/volleyball-tournament"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Pay on Upper Hand <ArrowRight className="ml-2 h-4 w-4" />
+            </a>
+          </Button>
+        </div>
+      )}
+
       <div className="mt-6 bg-neutral-50 border border-neutral-200 rounded-xl p-5 text-left max-w-lg mx-auto">
         <h3 className="font-semibold text-neutral-900 mb-2">What&apos;s next?</h3>
         <ul className="space-y-2 text-sm text-neutral-600">
@@ -536,12 +560,13 @@ function SuccessScreen({ success }: { success: SuccessState }) {
             <span>
               {success.paymentMethod === "upperhand" ? (
                 <>
-                  Complete payment via Upper Hand. We&apos;ll email the checkout link to{" "}
+                  Complete the Upper Hand payment above. A receipt will be sent to{" "}
                   <span className="font-mono text-neutral-900">{success.email}</span>.
                 </>
               ) : (
                 <>
-                  We&apos;ll reach out to <span className="font-mono text-neutral-900">{success.email}</span>{" "}
+                  We&apos;ll reach out to{" "}
+                  <span className="font-mono text-neutral-900">{success.email}</span>{" "}
                   with payment instructions (Venmo, Zelle, cash, or card).
                 </>
               )}
@@ -568,7 +593,7 @@ function SuccessScreen({ success }: { success: SuccessState }) {
       </div>
 
       <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
-        <Button asChild>
+        <Button asChild variant="outline">
           <Link href="/events/volleyball-tournament">Back to tournament page</Link>
         </Button>
         <Button asChild variant="outline">
