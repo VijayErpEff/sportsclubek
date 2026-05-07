@@ -33,12 +33,9 @@ export const REDIRECTS: RedirectEntry[] = [
     destination: `${UH_BASE}/events/194712-levelup-badminton-tournament`,
   },
   {
-    // Replace `<TBD-volleyball-event-id>` once the Upper Hand event is created.
-    // While destination contains "TBD", the secondary CTA on the tournament
-    // page hides itself (see events/volleyball-tournament/page.tsx).
     slug: "volleyball-tournament",
     title: "LevelUP Smash Cup — Volleyball Tournament Jun 6–7",
-    destination: `${UH_BASE}/events/<TBD-volleyball-event-id>`,
+    destination: `${UH_BASE}/events/195734-volleyball-tournamnet`,
   },
   {
     slug: "table-tennis-tournament",
