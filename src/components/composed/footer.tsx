@@ -3,6 +3,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Facebook, Instagram, Youtube, MapPin, Phone, Mail, FileText } from "lucide-react";
+
+function NextdoorIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M19.6 9.5c0-2.4-1.6-4.4-4.4-4.4-1.7 0-3 .8-3.7 2v-.6c0-.7-.5-1.2-1.2-1.2H8.7c-.5-1-1.5-1.7-2.6-1.7-.4 0-.7.3-.7.7s.3.7.7.7c.9 0 1.6.7 1.6 1.6V19c0 .6.5 1.1 1.1 1.1h1.4c.6 0 1.1-.5 1.1-1.1v-7.5c0-1.6 1-2.7 2.5-2.7s2.4 1 2.4 2.6V19c0 .6.5 1.1 1.1 1.1h1.4c.6 0 1.1-.5 1.1-1.1V9.5z" />
+    </svg>
+  );
+}
 import { trackPhoneCall, trackSocialClick } from "@/lib/analytics";
 import { Container } from "@/components/layout/container";
 import { NewsletterSignup } from "./newsletter-signup";
@@ -39,6 +47,7 @@ const socialLinks = [
   { label: "Facebook", href: SITE_CONFIG.social.facebook, icon: Facebook },
   { label: "Instagram", href: SITE_CONFIG.social.instagram, icon: Instagram },
   { label: "YouTube", href: SITE_CONFIG.social.youtube, icon: Youtube },
+  { label: "Nextdoor", href: SITE_CONFIG.social.nextdoor, icon: NextdoorIcon },
 ];
 
 export function Footer() {

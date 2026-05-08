@@ -31,6 +31,7 @@ export const SITE_CONFIG = {
     facebook: "https://www.facebook.com/people/LevelUP-Sports-Athletics-Club/61579103465434/",
     instagram: "https://www.instagram.com/levelupsportsandathleticsclub/",
     youtube: "https://www.youtube.com/@LevelUpSportsAthleticsClub",
+    nextdoor: "https://nextdoor.com/pages/levelup-sports/",
   },
   hours: {
     weekday: "6:00 AM - 11:00 PM",
