@@ -1,9 +1,14 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect, useRef, useCallback, type ReactNode } from "react";
-import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { PinModal } from "@/components/ui/pin-modal";
 import type { AdminAuth } from "@/lib/hooks/use-admin-auth";
+
+// Read ?admin from window.location instead of next/navigation's
+// useSearchParams — calling that hook in the root layout opts every
+// route on the site out of static rendering, which strips the SSR'd
+// HTML out of crawler responses (BAILOUT_TO_CLIENT_SIDE_RENDERING).
 
 const DEFAULT_PIN = "6886";
 
@@ -22,21 +27,22 @@ export function AdminProvider({ children }: { children: ReactNode }) {
   const [mounted, setMounted] = useState(false);
   const pinInputRef = useRef<HTMLInputElement>(null!);
   const hasTriggered = useRef(false);
-  const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => { setMounted(true); }, []);
 
   useEffect(() => {
-    if (mounted && searchParams.has("admin") && !adminMode && !hasTriggered.current) {
+    if (!mounted || adminMode || hasTriggered.current) return;
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("admin")) {
       hasTriggered.current = true;
       setPinModalOpen(true);
       setPinValue("");
       setPinError(false);
       setTimeout(() => pinInputRef.current?.focus(), 100);
     }
-  }, [mounted, searchParams, adminMode]);
+  }, [mounted, pathname, adminMode]);
 
   const submitPin = useCallback(() => {
     if (pinValue === DEFAULT_PIN) {
@@ -68,11 +74,11 @@ export function AdminProvider({ children }: { children: ReactNode }) {
     setAdminPin("");
     hasTriggered.current = false;
     // Remove ?admin from URL so it doesn't re-trigger
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams(window.location.search);
     params.delete("admin");
     const qs = params.toString();
     router.replace(`${pathname}${qs ? `?${qs}` : ""}`, { scroll: false });
-  }, [searchParams, router, pathname]);
+  }, [router, pathname]);
 
   const auth: AdminAuth = {
     adminMode,
