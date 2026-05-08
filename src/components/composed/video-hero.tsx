@@ -181,9 +181,10 @@ export function VideoHero({
                       fill
                       priority={index === 0}
                       loading={index === 0 ? "eager" : "lazy"}
+                      fetchPriority={index === 0 ? "high" : "low"}
                       className="object-cover"
                       sizes="100vw"
-                      quality={75}
+                      quality={index === 0 ? 70 : 65}
                     />
                   </motion.div>
                 ) : (
@@ -193,9 +194,10 @@ export function VideoHero({
                     fill
                     priority={index === 0}
                     loading={index === 0 ? "eager" : "lazy"}
+                    fetchPriority={index === 0 ? "high" : "low"}
                     className="object-cover"
                     sizes="100vw"
-                    quality={75}
+                    quality={index === 0 ? 70 : 65}
                   />
                 )}
               </div>

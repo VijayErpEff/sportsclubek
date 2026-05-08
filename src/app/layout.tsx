@@ -2,15 +2,10 @@ import type { Metadata } from "next";
 import { inter, plusJakarta, jetbrainsMono } from "@/lib/fonts";
 import { Navbar } from "@/components/composed/navbar";
 import { Footer } from "@/components/composed/footer";
-import { BackToTop } from "@/components/composed/back-to-top";
 import { CallFab } from "@/components/composed/call-fab";
-import { CookieConsent } from "@/components/composed/cookie-consent";
 import { MobileBottomNav } from "@/components/composed/mobile-bottom-nav";
-import { SportPreference } from "@/components/composed/sport-preference";
-import { ReturningVisitor } from "@/components/composed/returning-visitor";
-import { SurveyBanner } from "@/components/composed/survey-banner";
-import { ScrollProgressBar } from "@/components/ui/progress-bar";
 import { AnnouncementBanner } from "@/components/composed/announcement-banner";
+import { DeferredOverlays } from "@/components/composed/deferred-overlays";
 import { Suspense } from "react";
 import { generateOrganizationLD } from "@/lib/seo/json-ld";
 import { SITE_CONFIG } from "@/lib/constants/site";
@@ -152,18 +147,13 @@ export default function RootLayout({
         </a>
         <Suspense>
           <AdminProvider>
-            <ScrollProgressBar />
             <AnnouncementBanner />
             <Navbar />
             <main id="main-content" className="min-h-screen">{children}</main>
             <Footer />
-            <BackToTop />
             <CallFab />
-            <CookieConsent />
             <MobileBottomNav />
-            <SportPreference />
-            <ReturningVisitor />
-            <SurveyBanner />
+            <DeferredOverlays />
           </AdminProvider>
         </Suspense>
       </body>
