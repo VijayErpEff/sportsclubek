@@ -191,6 +191,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${BASE_URL}/events/soccer-open-house`,
+      lastModified: "2026-05-10",
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
       url: `${BASE_URL}/birthday-parties`,
       lastModified: LAST_CONTENT_UPDATE,
       changeFrequency: "monthly",

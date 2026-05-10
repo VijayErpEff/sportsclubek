@@ -38,6 +38,11 @@ export const REDIRECTS: RedirectEntry[] = [
     destination: `${UH_BASE}/events/195734-volleyball-tournamnet`,
   },
   {
+    slug: "soccer-open-house",
+    title: "FREE Soccer Open House — May 16",
+    destination: `${UH_BASE}/events/196159-levelup-soccer-open-house`,
+  },
+  {
     slug: "table-tennis-tournament",
     title: "Table Tennis Tournament",
     destination: `${UH_BASE}/events/193175-table-tennis-tournament`,
