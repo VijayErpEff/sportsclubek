@@ -296,13 +296,13 @@ export default function SoccerOpenHousePage() {
             </Reveal>
 
             <Reveal variant="fade-left" delay={0.15}>
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10 aspect-[4/5] max-w-md mx-auto">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10 aspect-square max-w-md mx-auto">
                 <Image
                   src={EVENT.flyer}
                   alt="LevelUP Soccer Academy Open House flyer — Saturday, May 16, 2026, 11 AM – 12:30 PM, free event with introductory offers 4 sessions $99 or 8 sessions $179"
                   fill
                   sizes="(max-width: 1024px) 90vw, 480px"
-                  className="object-cover"
+                  className="object-contain"
                   priority
                   fetchPriority="high"
                 />
