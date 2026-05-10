@@ -44,7 +44,7 @@ const EVENT = {
   startISO: "2026-05-16T11:00:00-04:00",
   endISO: "2026-05-16T12:30:00-04:00",
   registerUrl: "/go/soccer-open-house",
-  flyer: "/images/sports/LevelUp/SoccerOpenHouse.png",
+  flyer: "/images/sports/LevelUp/SoccerOpenHouse.jpeg",
 };
 
 const ACTIVITIES = [
