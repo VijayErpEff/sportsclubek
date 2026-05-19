@@ -7,6 +7,7 @@ import { ScheduleCalendar } from "@/components/composed/schedule-calendar";
 import { generateSEOMetadata } from "@/lib/seo/metadata";
 import { generateBreadcrumbLD } from "@/lib/seo/json-ld";
 import { BOOKING_URLS } from "@/lib/constants/booking";
+import { TrackEvent } from "@/components/ui/track-event";
 
 export const metadata: Metadata = generateSEOMetadata({
   title: "Schedule & Book Sessions — Elkton, MD",
@@ -23,6 +24,7 @@ export default function SchedulePage() {
 
   return (
     <>
+      <TrackEvent action="booking_started" params={{ source: "schedule_page" }} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLD) }}

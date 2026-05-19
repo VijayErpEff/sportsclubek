@@ -22,6 +22,7 @@ import { cn } from "@/lib/utils/cn";
 import { Button } from "@/components/ui/button";
 import { COURTS, generateTimeSlots, type Court, type TimeSlot } from "@/content/courts";
 import { SPORTS } from "@/lib/constants/site";
+import { trackBookingCompleted } from "@/lib/analytics";
 
 const APPLE_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 const STEPS = ["Sport", "Court", "Date & Time", "Confirm"] as const;
@@ -118,11 +119,16 @@ export function BookingWidget({ className }: { className?: string }) {
       }).catch(() => {
         // Silently handle in demo mode
       });
+      trackBookingCompleted({
+        sport: form.sport,
+        court_id: form.courtId,
+        value: selectedCourt?.pricePerHour,
+      });
       setIsSuccess(true);
     } finally {
       setIsSubmitting(false);
     }
-  }, [form]);
+  }, [form, selectedCourt]);
 
   const motionProps = prefersReduced
     ? {}

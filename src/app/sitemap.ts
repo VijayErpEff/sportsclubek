@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { BLOG_POSTS } from "@/content/blog-posts";
+import { LOCATIONS } from "@/content/locations";
 import { SITE_CONFIG } from "@/lib/constants/site";
 
 const BASE_URL = SITE_CONFIG.url;
@@ -250,6 +251,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.3,
     },
+
+    // ── Location landing pages (local SEO) ──
+    {
+      url: `${BASE_URL}/locations`,
+      lastModified: LAST_CONTENT_UPDATE,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    ...LOCATIONS.map((loc) => ({
+      url: `${BASE_URL}/locations/${loc.slug}`,
+      lastModified: LAST_CONTENT_UPDATE,
+      changeFrequency: "monthly" as const,
+      priority: 0.85,
+    })),
 
     // ── Blog ──
     ...blogEntries,

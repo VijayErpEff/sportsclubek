@@ -3,6 +3,7 @@ import { inter, plusJakarta, jetbrainsMono } from "@/lib/fonts";
 import { Navbar } from "@/components/composed/navbar";
 import { Footer } from "@/components/composed/footer";
 import { CallFab } from "@/components/composed/call-fab";
+import { StickyBookCTA } from "@/components/composed/sticky-book-cta";
 import { MobileBottomNav } from "@/components/composed/mobile-bottom-nav";
 import { AnnouncementBanner } from "@/components/composed/announcement-banner";
 import { DeferredOverlays } from "@/components/composed/deferred-overlays";
@@ -152,6 +153,7 @@ export default function RootLayout({
             <main id="main-content" className="min-h-screen">{children}</main>
             <Footer />
             <CallFab />
+            <StickyBookCTA />
             <MobileBottomNav />
             <DeferredOverlays />
           </AdminProvider>

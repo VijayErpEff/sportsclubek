@@ -1,6 +1,9 @@
+"use client";
+
 import { SITE_CONFIG } from "@/lib/constants/site";
 import { Button } from "@/components/ui/button";
 import { MapPin } from "lucide-react";
+import { trackDirectionsClick } from "@/lib/analytics";
 
 const mapQuery = encodeURIComponent(
   `${SITE_CONFIG.name}, ${SITE_CONFIG.address.full}`
@@ -8,7 +11,7 @@ const mapQuery = encodeURIComponent(
 const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(SITE_CONFIG.address.full)}`;
 const embedUrl = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
 
-export function MapEmbed() {
+export function MapEmbed({ source = "map_embed" }: { source?: string } = {}) {
   return (
     <section aria-label="Location map">
       <div className="rounded-xl overflow-hidden border border-neutral-200">
@@ -33,6 +36,7 @@ export function MapEmbed() {
             href={directionsUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackDirectionsClick(source)}
           >
             Get Directions
           </a>

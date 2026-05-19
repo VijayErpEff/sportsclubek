@@ -52,8 +52,53 @@ export function trackBookingClick(sport: string, program: string) {
   });
 }
 
+/** Fires when the sticky/floating "Book a Court" CTA is clicked. */
+export function trackBookingCTAClick(source_page: string) {
+  send({ action: "booking_cta_click", params: { source_page } });
+}
+
+/** Fires when /schedule is viewed or the booking widget is opened. */
+export function trackBookingStarted(source: string) {
+  send({ action: "booking_started", params: { source } });
+}
+
+/** Fires after a successful booking submission. Mark as a key event in GA4. */
+export function trackBookingCompleted(params: {
+  sport: string;
+  court_id?: string;
+  value?: number;
+}) {
+  send({
+    action: "booking_completed",
+    params: {
+      sport_name: params.sport,
+      court_id: params.court_id ?? "",
+      value: params.value ?? 0,
+      currency: "USD",
+    },
+  });
+}
+
 export function trackFreeTrialStart(sport?: string) {
   send({ action: "free_trial_start", params: { sport_name: sport ?? "any" } });
+}
+
+/** Fires when a "Get Directions" link is clicked. Key local-intent signal. */
+export function trackDirectionsClick(source: string) {
+  send({ action: "directions_click", params: { source } });
+}
+
+/** Fires on membership tier CTA click or inquiry-form open. */
+export function trackMembershipInquiry(tier: string) {
+  send({ action: "membership_inquiry", params: { tier_name: tier } });
+}
+
+/** Fires when a sport tile/card is clicked from any page. */
+export function trackSportCardClick(sport: string, source_page: string) {
+  send({
+    action: "sport_card_click",
+    params: { sport_name: sport, source_page },
+  });
 }
 
 // ── Forms ────────────────────────────────────────────────────────────────────
