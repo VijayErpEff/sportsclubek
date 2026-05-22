@@ -583,6 +583,6 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
     ],
     ctaTitle: "Better Touch. Better Player.",
     ctaDescription: "Book a free trial session on the turf. Watch your kid's feet move and see the futsal difference for yourself.",
-    enrollUrl: BOOKING_URLS.offerings,
+    enrollUrl: BOOKING_URLS.soccerAcademy,
   },
 };

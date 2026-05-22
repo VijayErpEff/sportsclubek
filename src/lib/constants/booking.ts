@@ -33,6 +33,7 @@ export const BOOKING_URLS = {
   volleyballAcademy: `${UH_BASE}/client-memberships/11415`,
   cricketAcademy: `${UH_BASE}/client-memberships/11416`,
   badmintonAcademy: `${UH_BASE}/client-memberships/11417`,
+  soccerAcademy: `${UH_BASE}/client-memberships/11566`,
 
   /** Summer Camps — 2026 camp registration on Upper Hand */
   summerCamps: `${UH_BASE}/client-memberships/11545`,
