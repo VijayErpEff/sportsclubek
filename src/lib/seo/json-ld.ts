@@ -437,6 +437,27 @@ export function generateCourseLD(course: {
 }
 
 // ── Event Schema ─────────────────────────────────────────────
+type EventOffer = {
+  price: string;
+  priceCurrency?: string;
+  url?: string;
+  availability?: string;
+  /** Date the offer/registration opens. Defaults to ~60 days before the event. */
+  validFrom?: string;
+  /** Registration deadline / last day the offer is valid. */
+  validThrough?: string;
+  name?: string;
+  category?: string;
+};
+
+/**
+ * SportsEvent JSON-LD for event pages (open houses, tournaments, camps).
+ *
+ * Always emits the fields Google recommends for Event rich results —
+ * `image`, `performer`, and `offers.validFrom` — falling back to sensible
+ * defaults so a page can never silently drop them. Pass `image`, `performer`,
+ * or a richer `offers` object to override the defaults per event.
+ */
 export function generateEventLD(event: {
   name: string;
   description: string;
@@ -444,7 +465,36 @@ export function generateEventLD(event: {
   endDate: string;
   url: string;
   isAccessibleForFree?: boolean;
+  image?: string | string[];
+  performer?: Record<string, unknown> | Array<Record<string, unknown>>;
+  organizer?: Record<string, unknown>;
+  sport?: string;
+  subEvent?: Array<Record<string, unknown>>;
+  offers?: EventOffer;
 }) {
+  const offer = event.offers ?? { price: "0", priceCurrency: "USD" };
+
+  // Offer/registration is valid from ~60 days before the event (typical
+  // registration-open window) unless a page supplies an explicit date.
+  const validFrom =
+    offer.validFrom ??
+    new Date(new Date(event.startDate).getTime() - 60 * 24 * 60 * 60 * 1000)
+      .toISOString()
+      .slice(0, 10);
+
+  // Fall back to the facility photo when a page doesn't provide a flyer.
+  const image = event.image
+    ? Array.isArray(event.image)
+      ? event.image
+      : [event.image]
+    : [`${SITE_CONFIG.url}/images/sports/facility.jpg`];
+
+  // Default performer to the club's coaching staff; pages pass coaches/teams.
+  const performer = event.performer ?? {
+    "@type": "PerformingGroup",
+    name: `${SITE_CONFIG.shortName} Coaching Staff`,
+  };
+
   return {
     "@context": "https://schema.org",
     "@type": "SportsEvent",
@@ -456,6 +506,8 @@ export function generateEventLD(event: {
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
     isAccessibleForFree: event.isAccessibleForFree ?? true,
     url: `${SITE_CONFIG.url}${event.url}`,
+    image,
+    ...(event.sport ? { sport: event.sport } : {}),
     location: {
       "@type": "SportsActivityLocation",
       name: SITE_CONFIG.name,
@@ -473,17 +525,23 @@ export function generateEventLD(event: {
         longitude: SITE_CONFIG.geo.longitude,
       },
     },
-    organizer: {
+    organizer: event.organizer ?? {
       "@type": "Organization",
       name: SITE_CONFIG.name,
       url: SITE_CONFIG.url,
     },
+    performer,
+    ...(event.subEvent ? { subEvent: event.subEvent } : {}),
     offers: {
       "@type": "Offer",
-      price: "0",
-      priceCurrency: "USD",
-      availability: "https://schema.org/InStock",
-      url: `${SITE_CONFIG.url}${event.url}`,
+      ...(offer.name ? { name: offer.name } : {}),
+      price: offer.price,
+      priceCurrency: offer.priceCurrency ?? "USD",
+      availability: offer.availability ?? "https://schema.org/InStock",
+      url: offer.url ?? `${SITE_CONFIG.url}${event.url}`,
+      validFrom,
+      ...(offer.validThrough ? { validThrough: offer.validThrough } : {}),
+      ...(offer.category ? { category: offer.category } : {}),
     },
   };
 }

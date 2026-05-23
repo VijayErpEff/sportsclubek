@@ -180,30 +180,27 @@ export default function SoccerOpenHousePage() {
     { name: "Open House — May 16", url: "/events/soccer-open-house" },
   ]);
 
-  const eventLD = {
-    ...generateEventLD({
-      name: EVENT.name,
-      description:
-        "Free soccer open house with the LevelUP Soccer Academy coaches. Skill drills, technical training, small-group focus on indoor turf. All ages welcome. Introductory offers: 4 sessions $99 or 8 sessions $179.",
-      startDate: EVENT.startISO,
-      endDate: EVENT.endISO,
-      url: "/events/soccer-open-house",
-      isAccessibleForFree: true,
-    }),
+  const eventLD = generateEventLD({
+    name: EVENT.name,
+    description:
+      "Free soccer open house with the LevelUP Soccer Academy coaches. Skill drills, technical training, small-group focus on indoor turf. All ages welcome. Introductory offers: 4 sessions $99 or 8 sessions $179.",
+    startDate: EVENT.startISO,
+    endDate: EVENT.endISO,
+    url: "/events/soccer-open-house",
+    isAccessibleForFree: true,
+    sport: "Soccer",
     image: [`${SITE_CONFIG.url}${EVENT.flyer}`],
-    offers: {
-      "@type": "Offer",
-      price: "0",
-      priceCurrency: "USD",
-      availability: "https://schema.org/InStock",
-      url: EVENT.registerUrl,
-      validThrough: EVENT.startISO,
-    },
     performer: {
-      "@type": "SportsTeam",
+      "@type": "PerformingGroup",
       name: "LevelUP Soccer Academy",
     },
-  };
+    offers: {
+      price: "0",
+      priceCurrency: "USD",
+      url: `${SITE_CONFIG.url}${EVENT.registerUrl}`,
+      validThrough: EVENT.startISO,
+    },
+  });
 
   const faqLD = generateFAQLD(FAQS);
 

@@ -143,32 +143,29 @@ export default function BadmintonOpenHousePage() {
     { name: "Open House — May 2", url: "/events/badminton-open-house" },
   ]);
 
-  const eventLD = {
-    ...generateEventLD({
-      name: EVENT.name,
-      description:
-        "Free badminton clinic and open house with Coach Nick Tan (50 years of experience). Kids session 6–7 PM, Adults session 7:15–8 PM. All ages and levels welcome.",
-      startDate: EVENT.startISO,
-      endDate: EVENT.endISO,
-      url: "/events/badminton-open-house",
-      isAccessibleForFree: true,
-    }),
+  const eventLD = generateEventLD({
+    name: EVENT.name,
+    description:
+      "Free badminton clinic and open house with Coach Nick Tan (50 years of experience). Kids session 6–7 PM, Adults session 7:15–8 PM. All ages and levels welcome.",
+    startDate: EVENT.startISO,
+    endDate: EVENT.endISO,
+    url: "/events/badminton-open-house",
+    isAccessibleForFree: true,
+    sport: "Badminton",
     image: [`${SITE_CONFIG.url}${EVENT.flyer}`],
-    offers: {
-      "@type": "Offer",
-      price: "0",
-      priceCurrency: "USD",
-      availability: "https://schema.org/InStock",
-      url: EVENT.registerUrl,
-      validThrough: EVENT.startISO,
-    },
     performer: {
       "@type": "Person",
       name: "Coach Nick Tan",
       description:
         "50 years of badminton experience, long-time leader of Dilwyne Badminton Club, Wilmington, DE.",
     },
-  };
+    offers: {
+      price: "0",
+      priceCurrency: "USD",
+      url: EVENT.registerUrl,
+      validThrough: EVENT.startISO,
+    },
+  });
 
   const faqLD = generateFAQLD(FAQS);
 

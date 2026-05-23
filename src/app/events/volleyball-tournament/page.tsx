@@ -204,27 +204,23 @@ export default function VolleyballTournamentPage() {
     { name: "Smash Cup Tournament", url: "/events/volleyball-tournament" },
   ]);
 
-  const eventLD = {
-    ...generateEventLD({
-      name: TOURNAMENT.name,
-      description:
-        "Indoor 6v6 volleyball tournament with co-ed Youth (12–17) and Adult (18+) divisions. Pool play Saturday, single-elimination playoffs Sunday, on regulation indoor courts in Elkton, MD.",
-      startDate: TOURNAMENT.startISO,
-      endDate: TOURNAMENT.endISO,
-      url: "/events/volleyball-tournament",
-      isAccessibleForFree: false,
-    }),
+  const eventLD = generateEventLD({
+    name: TOURNAMENT.name,
+    description:
+      "Indoor 6v6 volleyball tournament with co-ed Youth (12–17) and Adult (18+) divisions. Pool play Saturday, single-elimination playoffs Sunday, on regulation indoor courts in Elkton, MD.",
+    startDate: TOURNAMENT.startISO,
+    endDate: TOURNAMENT.endISO,
+    url: "/events/volleyball-tournament",
+    isAccessibleForFree: false,
+    sport: "Volleyball",
     image: [
       `${SITE_CONFIG.url}${TOURNAMENT.ogImage}`,
       `${SITE_CONFIG.url}${TOURNAMENT.flyer}`,
     ],
-    sport: "Volleyball",
     offers: {
-      "@type": "Offer",
       name: "Team Entry",
       price: "200",
       priceCurrency: "USD",
-      availability: "https://schema.org/InStock",
       url: `${SITE_CONFIG.url}${TOURNAMENT.registerHref}`,
       validThrough: TOURNAMENT.registerByISO,
       category: "Tournament Registration",
@@ -262,7 +258,7 @@ export default function VolleyballTournamentPage() {
       "@type": "PerformingGroup",
       name: "Registered Teams — Youth & Adult Divisions",
     },
-  };
+  });
 
   const faqLD = generateFAQLD(FAQS);
 

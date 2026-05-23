@@ -248,6 +248,17 @@ export default function SummerCampsPage() {
       endDate: w.endDate,
       url: "/summer-camps",
       isAccessibleForFree: false,
+      image: [`${SITE_CONFIG.url}${encodeURI(FLYER_IMAGE)}`],
+      performer: {
+        "@type": "PerformingGroup",
+        name: "LevelUP Coaches & Code Ninjas Senseis",
+      },
+      offers: {
+        price: "199",
+        priceCurrency: "USD",
+        url: `${SITE_CONFIG.url}${REGISTER_URL}`,
+        validThrough: w.startDate,
+      },
     })
   );
 

@@ -169,26 +169,27 @@ export default function BadmintonTournamentPage() {
     { name: "Tournament — May 30", url: "/events/badminton-tournament" },
   ]);
 
-  const eventLD = {
-    ...generateEventLD({
-      name: TOURNAMENT.name,
-      description:
-        "Doubles badminton tournament with Beginner, Intermediate, and Advanced divisions. Round Robin group play followed by playoffs on BWF-standard courts.",
-      startDate: TOURNAMENT.startISO,
-      endDate: TOURNAMENT.endISO,
-      url: "/events/badminton-tournament",
-      isAccessibleForFree: false,
-    }),
+  const eventLD = generateEventLD({
+    name: TOURNAMENT.name,
+    description:
+      "Doubles badminton tournament with Beginner, Intermediate, and Advanced divisions. Round Robin group play followed by playoffs on BWF-standard courts.",
+    startDate: TOURNAMENT.startISO,
+    endDate: TOURNAMENT.endISO,
+    url: "/events/badminton-tournament",
+    isAccessibleForFree: false,
+    sport: "Badminton",
     image: [`${SITE_CONFIG.url}${TOURNAMENT.flyer}`],
+    performer: {
+      "@type": "PerformingGroup",
+      name: "Registered Players — Beginner, Intermediate & Advanced Divisions",
+    },
     offers: {
-      "@type": "Offer",
       price: "80",
       priceCurrency: "USD",
-      availability: "https://schema.org/InStock",
       url: TOURNAMENT.registerUrl,
       validThrough: TOURNAMENT.registerByISO,
     },
-  };
+  });
 
   const faqLD = generateFAQLD(FAQS);
 
