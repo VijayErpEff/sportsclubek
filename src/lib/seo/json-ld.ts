@@ -360,6 +360,67 @@ export function generateBreadcrumbLD(
   };
 }
 
+/**
+ * JobPosting JSON-LD for individual roles on the /careers page.
+ * Enables eligibility for Google Jobs indexing.
+ */
+export function generateJobPostingLD(job: {
+  title: string;
+  description: string;
+  employmentType?: string;
+  datePosted: string;
+  validThrough: string;
+  url: string;
+  baseSalary?: { currency?: string; value: string | number; unitText?: string };
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "JobPosting",
+    title: job.title,
+    description: job.description,
+    datePosted: job.datePosted,
+    validThrough: job.validThrough,
+    employmentType: job.employmentType ?? "OTHER",
+    url: `${SITE_CONFIG.url}${job.url}`,
+    hiringOrganization: {
+      "@type": "Organization",
+      name: SITE_CONFIG.name,
+      sameAs: SITE_CONFIG.url,
+      logo: `${SITE_CONFIG.url}/images/logo.png`,
+      "@id": `${SITE_CONFIG.url}/#organization`,
+    },
+    jobLocation: {
+      "@type": "Place",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: SITE_CONFIG.address.street,
+        addressLocality: SITE_CONFIG.address.city,
+        addressRegion: SITE_CONFIG.address.state,
+        postalCode: SITE_CONFIG.address.zip,
+        addressCountry: SITE_CONFIG.address.country,
+      },
+    },
+    applicantLocationRequirements: {
+      "@type": "Country",
+      name: "US",
+    },
+    ...(job.baseSalary
+      ? {
+          baseSalary: {
+            "@type": "MonetaryAmount",
+            currency: job.baseSalary.currency ?? "USD",
+            value: {
+              "@type": "QuantitativeValue",
+              value: job.baseSalary.value,
+              unitText: job.baseSalary.unitText ?? "YEAR",
+            },
+          },
+        }
+      : {}),
+    directApply: false,
+  };
+}
+
 export function generateFAQLD(
   faqs: { question: string; answer: string }[]
 ) {
