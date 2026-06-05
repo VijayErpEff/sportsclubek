@@ -374,12 +374,28 @@ export default function VolleyballTournamentPage() {
                     asChild
                     className="bg-secondary text-primary-dark hover:bg-secondary-light"
                   >
-                    <Link href={TOURNAMENT.registerHref}>
-                      Register Your Team <ArrowRight className="ml-2 h-4 w-4" />
+                    <Link href="/smash-cup/live">
+                      📺 Live Standings <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
+                  </Button>
+                  <Button
+                    size="xl"
+                    variant="outline"
+                    asChild
+                    className="border-white/30 text-white hover:bg-white hover:text-primary-dark"
+                  >
+                    <Link href={TOURNAMENT.registerHref}>Register Your Team</Link>
                   </Button>
                 </div>
                 <p className="text-sm text-white/60 mt-6">
+                  Played a match?{" "}
+                  <Link
+                    href="/smash-cup/survey"
+                    className="underline underline-offset-2 hover:text-white transition-colors"
+                  >
+                    Share your post-game feedback →
+                  </Link>
+                  <br />
                   Registration closes {TOURNAMENT.registerByLabel}.{" "}
                   <Link
                     href="/register/volleyball-tournament/manage"
