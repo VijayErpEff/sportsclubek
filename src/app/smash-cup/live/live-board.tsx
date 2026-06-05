@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils/cn";
 import { Trophy, Lock, X, Check } from "lucide-react";
@@ -23,6 +24,7 @@ import {
 const POLL_MS = 5000;
 const EASE = [0.22, 1, 0.36, 1] as const;
 const POOL_IDS: PoolId[] = ["A", "B"];
+const ALL_TEAMS = [...POOLS.A, ...POOLS.B];
 
 /* ── Data access ── */
 async function fetchStandings(): Promise<StandingsState | null> {
@@ -57,11 +59,15 @@ interface EditTarget {
   id: string;
   title: string;
   sub: string;
-  nameA: string;
+  nameA: string; // auto-resolved name (shown as the "Auto" hint)
   nameB: string;
   a: number;
   b: number;
   done: boolean;
+  live: boolean;
+  editableTeams: boolean; // bracket matchups can be reassigned by admin
+  overrideA: string; // "" = auto/seed, else a chosen team name
+  overrideB: string;
 }
 
 const ROUND_GROUPS: { round: ResolvedMatch["round"]; title: string }[] = [
@@ -118,12 +124,16 @@ export function LiveBoard() {
         kind: "pool",
         id: matchId,
         title: `Pool ${m.pool}`,
-        sub: `${m.time} · ${m.court}`,
+        sub: m.court,
         nameA: POOLS[m.pool][m.i],
         nameB: POOLS[m.pool][m.j],
         a: score?.a ?? 0,
         b: score?.b ?? 0,
         done: score?.done ?? false,
+        live: (state.live ?? []).includes(matchId),
+        editableTeams: false,
+        overrideA: "",
+        overrideB: "",
       });
     },
     [state]
@@ -131,21 +141,25 @@ export function LiveBoard() {
 
   const openBracketEdit = useCallback(
     (rm: ResolvedMatch) => {
-      if (!rm.teamA || !rm.teamB) return;
+      const override = state.manualBracket?.[rm.id];
       setEdit({
         open: true,
         kind: "bracket",
         id: rm.id,
         title: rm.label,
-        sub: `${rm.time} · ${rm.court}${rm.bestOf > 1 ? ` · Best of ${rm.bestOf}` : ""}`,
-        nameA: rm.teamA,
-        nameB: rm.teamB,
+        sub: `${rm.court}${rm.bestOf > 1 ? ` · Best of ${rm.bestOf}` : ""}`,
+        nameA: rm.teamA ?? "TBD",
+        nameB: rm.teamB ?? "TBD",
         a: rm.scoreA,
         b: rm.scoreB,
         done: rm.done,
+        live: (state.live ?? []).includes(rm.id),
+        editableTeams: true,
+        overrideA: override?.teamA ?? "",
+        overrideB: override?.teamB ?? "",
       });
     },
-    []
+    [state]
   );
 
   const saveEdit = useCallback(() => {
@@ -154,10 +168,24 @@ export function LiveBoard() {
       ...state,
       pool: { ...state.pool },
       bracket: { ...state.bracket },
+      manualBracket: { ...(state.manualBracket || {}) },
     };
     const score = { a: edit.a, b: edit.b, done: edit.done };
-    if (edit.kind === "pool") next.pool[edit.id] = score;
-    else next.bracket[edit.id] = score;
+    if (edit.kind === "pool") {
+      next.pool[edit.id] = score;
+    } else {
+      next.bracket[edit.id] = score;
+      const entry: { teamA?: string; teamB?: string } = {};
+      if (edit.overrideA) entry.teamA = edit.overrideA;
+      if (edit.overrideB) entry.teamB = edit.overrideB;
+      if (entry.teamA || entry.teamB) next.manualBracket![edit.id] = entry;
+      else delete next.manualBracket![edit.id];
+    }
+    // Toggle this match in/out of the "now playing" set (one per court).
+    const liveSet = new Set(state.live ?? []);
+    if (edit.live) liveSet.add(edit.id);
+    else liveSet.delete(edit.id);
+    next.live = [...liveSet];
     persist(next);
     setEdit(null);
   }, [edit, state, persist]);
@@ -168,9 +196,15 @@ export function LiveBoard() {
       ...state,
       pool: { ...state.pool },
       bracket: { ...state.bracket },
+      manualBracket: { ...(state.manualBracket || {}) },
     };
-    if (edit.kind === "pool") delete next.pool[edit.id];
-    else delete next.bracket[edit.id];
+    if (edit.kind === "pool") {
+      delete next.pool[edit.id];
+    } else {
+      delete next.bracket[edit.id];
+      delete next.manualBracket![edit.id];
+    }
+    next.live = (state.live ?? []).filter((x) => x !== edit.id);
     persist(next);
     setEdit(null);
   }, [edit, state, persist]);
@@ -188,14 +222,24 @@ export function LiveBoard() {
       : "—";
 
   return (
-    <div className="fixed inset-0 z-[100] overflow-auto bg-[#0F2440] text-white">
+    <div className="fixed inset-0 z-[120] overflow-auto bg-[#0F2440] text-white">
       <div className="mx-auto max-w-[1700px] px-[clamp(0.75rem,2.5vw,3rem)] py-[clamp(0.75rem,2vw,2rem)]">
         {/* Header */}
         <header className="flex flex-wrap items-end justify-between gap-4 border-b border-white/10 pb-[clamp(0.75rem,1.5vw,1.5rem)]">
           <div>
-            <div className="flex items-center gap-3">
-              <h1 className="font-display font-extrabold tracking-tight text-[clamp(1.75rem,4vw,3.5rem)] leading-none">
-                {SMASH_CUP.name}
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="inline-flex items-center rounded-xl bg-white px-3 py-2 shadow-sm">
+                <Image
+                  src="/images/logo.png"
+                  alt="LevelUP Sports"
+                  width={170}
+                  height={42}
+                  priority
+                  className="h-[clamp(1.5rem,3vw,2.5rem)] w-auto"
+                />
+              </span>
+              <h1 className="font-display font-extrabold tracking-tight text-[clamp(1.5rem,3.5vw,3rem)] leading-none">
+                Smash Cup
               </h1>
               <span className="inline-flex items-center gap-2 rounded-full border border-[#2BA84A]/40 bg-[#2BA84A]/15 px-3 py-1 text-[clamp(0.65rem,1vw,0.9rem)] font-bold uppercase tracking-widest text-[#A8E6CF]">
                 <span className="relative flex h-2 w-2">
@@ -249,7 +293,7 @@ export function LiveBoard() {
 
         {adminMode && (
           <div className="mt-3 rounded-xl border border-[#2BA84A]/30 bg-[#2BA84A]/10 px-4 py-2 text-[clamp(0.7rem,1vw,0.95rem)] font-medium text-[#A8E6CF]">
-            Admin mode — tap any match to enter its score. Changes sync to every screen within 5 seconds.
+            Admin mode — tap any match to update its score (live, no need to mark final yet), mark it &ldquo;now playing,&rdquo; or assign bracket teams. Changes sync to every screen within ~5s.
           </div>
         )}
 
@@ -289,6 +333,7 @@ export function LiveBoard() {
                         key={m.id}
                         match={m}
                         adminMode={adminMode}
+                        isLive={(state.live ?? []).includes(m.id)}
                         onEdit={openBracketEdit}
                         reduced={reduced}
                       />
@@ -331,36 +376,84 @@ export function LiveBoard() {
               </div>
               <p className="mb-5 text-sm text-white/50">{edit.sub}</p>
 
-              <div className="grid grid-cols-[1fr_auto] items-center gap-3">
-                <span className="truncate text-sm font-semibold">{edit.nameA}</span>
-                <input
-                  type="number"
-                  min={0}
-                  inputMode="numeric"
-                  value={edit.a}
-                  onChange={(e) => setEdit((p) => p && { ...p, a: Math.max(0, Number(e.target.value) || 0) })}
-                  className="w-20 rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-center text-lg font-bold outline-none focus:border-[#2BA84A]/60 focus:ring-2 focus:ring-[#2BA84A]/30"
-                />
-                <span className="truncate text-sm font-semibold">{edit.nameB}</span>
-                <input
-                  type="number"
-                  min={0}
-                  inputMode="numeric"
-                  value={edit.b}
-                  onChange={(e) => setEdit((p) => p && { ...p, b: Math.max(0, Number(e.target.value) || 0) })}
-                  className="w-20 rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-center text-lg font-bold outline-none focus:border-[#2BA84A]/60 focus:ring-2 focus:ring-[#2BA84A]/30"
-                />
+              <div className="space-y-2.5">
+                {/* Side A */}
+                <div className="flex items-center gap-2">
+                  {edit.editableTeams ? (
+                    <select
+                      value={edit.overrideA}
+                      onChange={(e) => setEdit((p) => p && { ...p, overrideA: e.target.value })}
+                      className="min-w-0 flex-1 rounded-lg border border-white/15 bg-[#0F2440] px-2.5 py-2 text-sm font-semibold outline-none focus:border-[#2BA84A]/60"
+                    >
+                      <option value="">{edit.nameA === "TBD" ? "Auto (TBD)" : `Auto · ${edit.nameA}`}</option>
+                      {ALL_TEAMS.map((t) => (
+                        <option key={t} value={t}>{t}</option>
+                      ))}
+                    </select>
+                  ) : (
+                    <span className="min-w-0 flex-1 truncate text-sm font-semibold">{edit.nameA}</span>
+                  )}
+                  <input
+                    type="number"
+                    min={0}
+                    inputMode="numeric"
+                    value={edit.a}
+                    onChange={(e) => setEdit((p) => p && { ...p, a: Math.max(0, Number(e.target.value) || 0) })}
+                    className="w-16 shrink-0 rounded-lg border border-white/15 bg-white/5 px-2 py-2 text-center text-lg font-bold outline-none focus:border-[#2BA84A]/60 focus:ring-2 focus:ring-[#2BA84A]/30"
+                  />
+                </div>
+                {/* Side B */}
+                <div className="flex items-center gap-2">
+                  {edit.editableTeams ? (
+                    <select
+                      value={edit.overrideB}
+                      onChange={(e) => setEdit((p) => p && { ...p, overrideB: e.target.value })}
+                      className="min-w-0 flex-1 rounded-lg border border-white/15 bg-[#0F2440] px-2.5 py-2 text-sm font-semibold outline-none focus:border-[#2BA84A]/60"
+                    >
+                      <option value="">{edit.nameB === "TBD" ? "Auto (TBD)" : `Auto · ${edit.nameB}`}</option>
+                      {ALL_TEAMS.map((t) => (
+                        <option key={t} value={t}>{t}</option>
+                      ))}
+                    </select>
+                  ) : (
+                    <span className="min-w-0 flex-1 truncate text-sm font-semibold">{edit.nameB}</span>
+                  )}
+                  <input
+                    type="number"
+                    min={0}
+                    inputMode="numeric"
+                    value={edit.b}
+                    onChange={(e) => setEdit((p) => p && { ...p, b: Math.max(0, Number(e.target.value) || 0) })}
+                    className="w-16 shrink-0 rounded-lg border border-white/15 bg-white/5 px-2 py-2 text-center text-lg font-bold outline-none focus:border-[#2BA84A]/60 focus:ring-2 focus:ring-[#2BA84A]/30"
+                  />
+                </div>
               </div>
+              {edit.editableTeams && (
+                <p className="mt-2 text-xs text-white/40">
+                  Leave a team on &ldquo;Auto&rdquo; to fill it from the bracket automatically, or pick a team to set the matchup yourself.
+                </p>
+              )}
 
-              <label className="mt-5 flex items-center gap-2.5 text-sm">
-                <input
-                  type="checkbox"
-                  checked={edit.done}
-                  onChange={(e) => setEdit((p) => p && { ...p, done: e.target.checked })}
-                  className="h-4 w-4 accent-[#2BA84A]"
-                />
-                Mark as final (counts toward standings &amp; advances the bracket)
-              </label>
+              <div className="mt-5 space-y-2.5">
+                <label className="flex items-center gap-2.5 text-sm">
+                  <input
+                    type="checkbox"
+                    checked={edit.live}
+                    onChange={(e) => setEdit((p) => p && { ...p, live: e.target.checked })}
+                    className="h-4 w-4 accent-amber-500"
+                  />
+                  Now playing <span className="text-white/40">— shows a live badge on the board</span>
+                </label>
+                <label className="flex items-center gap-2.5 text-sm">
+                  <input
+                    type="checkbox"
+                    checked={edit.done}
+                    onChange={(e) => setEdit((p) => p && { ...p, done: e.target.checked })}
+                    className="h-4 w-4 accent-[#2BA84A]"
+                  />
+                  Mark as final <span className="text-white/40">— counts toward standings &amp; advances the bracket</span>
+                </label>
+              </div>
 
               <div className="mt-6 flex gap-3">
                 <button
@@ -414,8 +507,9 @@ function PoolPanel({
       transition={{ duration: 0.4, ease: EASE }}
       className="rounded-2xl border border-white/10 bg-white/[0.04] p-[clamp(0.75rem,1.5vw,1.5rem)]"
     >
-      <h2 className="mb-3 font-display text-[clamp(1.1rem,2vw,1.75rem)] font-bold">
+      <h2 className="mb-3 flex items-baseline gap-2 font-display text-[clamp(1.1rem,2vw,1.75rem)] font-bold">
         Pool {pool}
+        <span className="text-[clamp(0.6rem,0.9vw,0.85rem)] font-medium text-white/40">{matches[0]?.court}</span>
       </h2>
 
       <table className="w-full border-collapse text-[clamp(0.8rem,1.3vw,1.15rem)]">
@@ -478,6 +572,7 @@ function PoolPanel({
           const teamB = POOLS[m.pool][m.j];
           const aWon = s?.done && s.a >= s.b;
           const bWon = s?.done && s.b > s.a;
+          const isLive = (state.live ?? []).includes(m.id);
           return (
             <button
               key={m.id}
@@ -486,13 +581,18 @@ function PoolPanel({
               className={cn(
                 "flex w-full items-center gap-2 rounded-lg px-2.5 py-1.5 text-left text-[clamp(0.7rem,1.1vw,0.95rem)]",
                 adminMode ? "cursor-pointer hover:bg-white/10" : "cursor-default",
-                s?.done ? "bg-white/[0.03]" : "bg-transparent"
+                isLive ? "bg-amber-400/10 ring-1 ring-amber-400/30" : s?.done ? "bg-white/[0.03]" : "bg-transparent"
               )}
             >
-              <span className="w-12 shrink-0 text-white/40">{m.time}</span>
+              {isLive && <LiveDot />}
               <span className={cn("flex-1 truncate", aWon && "font-bold text-[#A8E6CF]")}>{teamA}</span>
-              <span className="shrink-0 tabular-nums text-white/80">
-                {s?.done ? `${s.a}–${s.b}` : "vs"}
+              <span
+                className={cn(
+                  "shrink-0 tabular-nums",
+                  !s ? "text-white/40" : s.done ? "text-white/80" : "font-semibold text-amber-300"
+                )}
+              >
+                {s ? `${s.a}–${s.b}` : "vs"}
               </span>
               <span className={cn("flex-1 truncate text-right", bWon && "font-bold text-[#A8E6CF]")}>{teamB}</span>
             </button>
@@ -507,16 +607,18 @@ function PoolPanel({
 function BracketCard({
   match,
   adminMode,
+  isLive,
   onEdit,
   reduced,
 }: {
   match: ResolvedMatch;
   adminMode: boolean;
+  isLive: boolean;
   onEdit: (m: ResolvedMatch) => void;
   reduced: boolean;
 }) {
   const ready = Boolean(match.teamA && match.teamB);
-  const tappable = adminMode && ready;
+  const tappable = adminMode; // editable anytime in admin — assign teams &/or scores
 
   const Side = ({ name, score, won }: { name: string | null; score: number; won: boolean }) => (
     <div
@@ -528,7 +630,9 @@ function BracketCard({
       <span className={cn("truncate", won ? "font-bold text-[#A8E6CF]" : name ? "text-white/90" : "italic text-white/35")}>
         {name ?? "TBD"}
       </span>
-      {match.done && <span className="shrink-0 tabular-nums font-bold">{score}</span>}
+      {match.started && (
+        <span className={cn("shrink-0 tabular-nums font-bold", match.done ? "" : "text-amber-300")}>{score}</span>
+      )}
     </div>
   );
 
@@ -541,19 +645,36 @@ function BracketCard({
       disabled={!tappable}
       className={cn(
         "w-full overflow-hidden rounded-xl border text-left",
-        match.round === "FINAL" ? "border-amber-400/40 bg-amber-500/[0.06]" : "border-white/10 bg-white/[0.04]",
+        isLive
+          ? "border-amber-400/50 bg-amber-400/[0.07]"
+          : match.round === "FINAL"
+            ? "border-amber-400/40 bg-amber-500/[0.06]"
+            : "border-white/10 bg-white/[0.04]",
         tappable && "cursor-pointer hover:border-[#2BA84A]/50",
-        !ready && "opacity-60"
+        !ready && !isLive && "opacity-70"
       )}
     >
       <div className="flex items-center justify-between px-3 pt-1.5 text-[clamp(0.55rem,0.8vw,0.72rem)] uppercase tracking-wider text-white/40">
-        <span>{match.label}</span>
-        <span>{match.time}{match.bestOf > 1 ? ` · Bo${match.bestOf}` : ""}</span>
+        <span className="inline-flex items-center gap-1.5">
+          {isLive && <LiveDot />}
+          {match.label}
+        </span>
+        <span>{match.court}{match.bestOf > 1 ? ` · Bo${match.bestOf}` : ""}</span>
       </div>
       <div className="mt-1 divide-y divide-white/10">
         <Side name={match.teamA} score={match.scoreA} won={match.winner !== null && match.winner === match.teamA} />
         <Side name={match.teamB} score={match.scoreB} won={match.winner !== null && match.winner === match.teamB} />
       </div>
     </motion.button>
+  );
+}
+
+/* ── Pulsing "now playing" dot ── */
+function LiveDot() {
+  return (
+    <span className="relative flex h-2 w-2 shrink-0" aria-label="Now playing">
+      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-70" />
+      <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-400" />
+    </span>
   );
 }

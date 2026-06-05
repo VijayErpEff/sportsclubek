@@ -24,6 +24,10 @@ export interface StandingsState {
   pool: Record<string, MatchScore>; // keyed by POOL_MATCHES id
   bracket: Record<string, MatchScore>; // keyed by BRACKET id
   manualSeeds?: Partial<Record<PoolId, string[]>>; // staff override of pool order
+  /** Admin override of who plays in a bracket match (overrides auto-seed). */
+  manualBracket?: Record<string, { teamA?: string | null; teamB?: string | null }>;
+  /** Ids of matches currently being played (up to one per court). */
+  live?: string[];
   updated: number;
 }
 
@@ -151,6 +155,7 @@ export interface ResolvedMatch {
   teamB: string | null;
   scoreA: number;
   scoreB: number;
+  started: boolean; // a score has been entered (may be in-progress)
   done: boolean;
   winner: string | null;
   loser: string | null;
@@ -173,8 +178,15 @@ export function resolveBracket(state: StandingsState): ResolvedMatch[] {
   };
 
   for (const m of BRACKET) {
-    const teamA = slotTeam(m.a);
-    const teamB = slotTeam(m.b);
+    const override = state.manualBracket?.[m.id];
+    const teamA =
+      override?.teamA !== undefined && override.teamA !== null
+        ? override.teamA
+        : slotTeam(m.a);
+    const teamB =
+      override?.teamB !== undefined && override.teamB !== null
+        ? override.teamB
+        : slotTeam(m.b);
     const score = state.bracket[m.id];
     const done = Boolean(score?.done) && teamA !== null && teamB !== null;
     let winner: string | null = null;
@@ -195,6 +207,7 @@ export function resolveBracket(state: StandingsState): ResolvedMatch[] {
       teamB,
       scoreA: score?.a ?? 0,
       scoreB: score?.b ?? 0,
+      started: Boolean(score),
       done,
       winner,
       loser,

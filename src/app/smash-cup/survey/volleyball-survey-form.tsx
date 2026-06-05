@@ -29,7 +29,7 @@ const DETAILS = [
 ] as const;
 
 const BEST_OPTIONS = ["Competition", "Atmosphere", "Facility & courts", "Officiating", "Organization", "Prizes & awards"];
-const IMPROVE_OPTIONS = ["More matches", "Scheduling & timing", "Officiating", "Facility / courts", "Food & drinks", "Communication"];
+const IMPROVE_OPTIONS = ["More matches", "Scheduling & timing", "Officiating", "Facility / courts", "Communication"];
 
 const PLAY_AGAIN = [
   { value: "promoter", label: "Definitely!", emoji: "\u{1F44D}", color: "border-green-300 bg-green-50 text-green-700" },
