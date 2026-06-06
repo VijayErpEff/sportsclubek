@@ -15,9 +15,12 @@ export type PoolId = "A" | "B";
 
 /** Pool rosters, ordered as entered (seeding is computed from results). */
 export const POOLS: Record<PoolId, string[]> = {
-  A: ["Smack that ace", "Everest Nepal", "Chapulines", "Team Satish"],
+  A: ["Smack that ace", "Everest Nepal", "Chapulines", "Rockers"],
   B: ["Big Balls No Calls", "Language Barrier", "BounceTown", "Team LevelUp"],
 };
+
+/** Top this many teams in each pool advance to the playoffs; the rest are out. */
+export const ADVANCE_CUTOFF = 2;
 
 /** A single round-robin pool match. `i`/`j` are indices into POOLS[pool]. */
 export interface PoolMatch {
@@ -56,7 +59,7 @@ export type Slot =
   | { winnerOf: string }
   | { loserOf: string };
 
-export type BracketRound = "QF" | "SF" | "THIRD" | "FINAL";
+export type BracketRound = "SF" | "THIRD" | "FINAL";
 
 export interface BracketMatch {
   id: string;
@@ -70,17 +73,14 @@ export interface BracketMatch {
 }
 
 /**
- * 8-team single elimination, seeded by pool finish. Cross-pool seeding keeps
- * the two pool winners (A1, B1) in opposite halves — they can only meet in
- * the final.
+ * 4-team single elimination — top 2 from each pool advance straight to the
+ * semifinals (bottom 2 in each pool are eliminated). Cross-pool seeding
+ * (A1·B2, A2·B1) keeps the two pool winners in opposite halves, so they can
+ * only meet in the final.
  */
 export const BRACKET: BracketMatch[] = [
-  { id: "QF1", round: "QF", label: "Quarterfinal 1", a: { seed: "A1" }, b: { seed: "B4" }, court: "Court 1", time: "1:00", bestOf: 1 },
-  { id: "QF2", round: "QF", label: "Quarterfinal 2", a: { seed: "B2" }, b: { seed: "A3" }, court: "Court 2", time: "1:00", bestOf: 1 },
-  { id: "QF3", round: "QF", label: "Quarterfinal 3", a: { seed: "B1" }, b: { seed: "A4" }, court: "Court 1", time: "1:30", bestOf: 1 },
-  { id: "QF4", round: "QF", label: "Quarterfinal 4", a: { seed: "A2" }, b: { seed: "B3" }, court: "Court 2", time: "1:30", bestOf: 1 },
-  { id: "SF1", round: "SF", label: "Semifinal 1", a: { winnerOf: "QF1" }, b: { winnerOf: "QF2" }, court: "Court 1", time: "2:00", bestOf: 1 },
-  { id: "SF2", round: "SF", label: "Semifinal 2", a: { winnerOf: "QF3" }, b: { winnerOf: "QF4" }, court: "Court 2", time: "2:00", bestOf: 1 },
-  { id: "THIRD", round: "THIRD", label: "3rd-Place Game", a: { loserOf: "SF1" }, b: { loserOf: "SF2" }, court: "Court 1", time: "2:30", bestOf: 1 },
-  { id: "FINAL", round: "FINAL", label: "Final", a: { winnerOf: "SF1" }, b: { winnerOf: "SF2" }, court: "Court 1", time: "3:00", bestOf: 3 },
+  { id: "SF1", round: "SF", label: "Semifinal 1", a: { seed: "A1" }, b: { seed: "B2" }, court: "Court 1", time: "1:00", bestOf: 1 },
+  { id: "SF2", round: "SF", label: "Semifinal 2", a: { seed: "A2" }, b: { seed: "B1" }, court: "Court 2", time: "1:00", bestOf: 1 },
+  { id: "THIRD", round: "THIRD", label: "3rd-Place Game", a: { loserOf: "SF1" }, b: { loserOf: "SF2" }, court: "Court 1", time: "1:45", bestOf: 1 },
+  { id: "FINAL", round: "FINAL", label: "Final", a: { winnerOf: "SF1" }, b: { winnerOf: "SF2" }, court: "Court 1", time: "2:15", bestOf: 3 },
 ];

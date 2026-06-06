@@ -10,11 +10,13 @@ import {
   SMASH_CUP,
   POOL_MATCHES,
   POOLS,
+  ADVANCE_CUTOFF,
   type PoolId,
 } from "@/lib/constants/smash-cup-bracket";
 import {
   computePoolStanding,
   resolveBracket,
+  poolsComplete,
   champion,
   emptyState,
   type StandingsState,
@@ -71,7 +73,6 @@ interface EditTarget {
 }
 
 const ROUND_GROUPS: { round: ResolvedMatch["round"]; title: string }[] = [
-  { round: "QF", title: "Quarterfinals" },
   { round: "SF", title: "Semifinals" },
   { round: "THIRD", title: "3rd Place" },
   { round: "FINAL", title: "Final" },
@@ -316,10 +317,10 @@ export function LiveBoard() {
           <h2 className="mb-[clamp(0.5rem,1.2vw,1.25rem)] font-display text-[clamp(1.1rem,2vw,1.75rem)] font-bold text-white/90">
             Playoff Bracket
             <span className="ml-2 text-[clamp(0.7rem,1vw,1rem)] font-normal text-white/40">
-              Single elimination · seeded by pool finish
+              Top 2 in each pool advance · cross-pool semifinals
             </span>
           </h2>
-          <div className="grid gap-[clamp(0.5rem,1.5vw,1.5rem)] md:grid-cols-2 xl:grid-cols-4">
+          <div className="grid gap-[clamp(0.5rem,1.5vw,1.5rem)] md:grid-cols-3">
             {ROUND_GROUPS.map((g) => (
               <div key={g.round}>
                 <h3 className="mb-2 text-[clamp(0.65rem,0.9vw,0.85rem)] font-bold uppercase tracking-widest text-white/40">
@@ -499,6 +500,7 @@ function PoolPanel({
 }) {
   const rows = computePoolStanding(pool, state);
   const matches = POOL_MATCHES.filter((m) => m.pool === pool);
+  const decided = poolsComplete(state);
 
   return (
     <motion.div
@@ -524,13 +526,15 @@ function PoolPanel({
         </thead>
         <tbody>
           {rows.map((r) => {
-            const seedSpot = r.rank <= 4; // all 4 advance, top finish = better seed
+            const advances = r.rank <= ADVANCE_CUTOFF;
+            const out = decided && !advances; // eliminated after pool play
             return (
               <tr
                 key={r.team}
                 className={cn(
                   "border-t border-white/5",
-                  r.rank === 1 && "bg-[#2BA84A]/10"
+                  r.rank === 1 && "bg-[#2BA84A]/10",
+                  out && "opacity-40"
                 )}
               >
                 <td className="py-2 pr-2">
@@ -539,7 +543,7 @@ function PoolPanel({
                       "inline-flex h-6 w-6 items-center justify-center rounded-md text-[clamp(0.65rem,1vw,0.9rem)] font-bold",
                       r.rank === 1
                         ? "bg-[#2BA84A] text-white"
-                        : seedSpot
+                        : advances
                           ? "bg-white/10 text-white/80"
                           : "text-white/50"
                     )}
@@ -547,7 +551,14 @@ function PoolPanel({
                     {r.rank}
                   </span>
                 </td>
-                <td className="py-2 font-semibold">{r.team}</td>
+                <td className="py-2 font-semibold">
+                  <span className={cn(out && "line-through")}>{r.team}</span>
+                  {out && (
+                    <span className="ml-2 rounded bg-red-500/20 px-1.5 py-0.5 text-[clamp(0.5rem,0.75vw,0.7rem)] font-bold uppercase tracking-wide text-red-300">
+                      Out
+                    </span>
+                  )}
+                </td>
                 <td className="py-2 px-2 text-center tabular-nums">{r.w}</td>
                 <td className="py-2 px-2 text-center tabular-nums text-white/60">{r.l}</td>
                 <td
