@@ -8,7 +8,7 @@
 export const SMASH_CUP = {
   name: "LevelUP Smash Cup",
   subtitle: "Indoor Volleyball Tournament",
-  date: "June 6–7, 2026",
+  date: "June 6, 2026",
 } as const;
 
 export type PoolId = "A" | "B";
