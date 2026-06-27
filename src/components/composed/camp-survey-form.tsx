@@ -362,7 +362,7 @@ export function CampSurveyForm() {
                 {form.rating <= 2 ? "We're sorry. What could we fix?" : "What could we do better?"}
               </h3>
               <p className="text-sm text-neutral-400 mb-4">Tap all that apply.</p>
-              <div className="flex flex-wrap gap-2 mb-5">
+              <div className="flex flex-wrap gap-2">
                 {IMPROVEMENT_OPTIONS.map((opt) => (
                   <button
                     key={opt}
@@ -379,20 +379,6 @@ export function CampSurveyForm() {
                     {opt}
                   </button>
                 ))}
-              </div>
-              <div>
-                <label htmlFor="camp-feedback" className="block text-sm font-medium text-neutral-700 mb-1.5">
-                  Anything else? <span className="text-neutral-400 font-normal">(optional)</span>
-                </label>
-                <textarea
-                  id="camp-feedback"
-                  value={form.feedback}
-                  onChange={(e) => setForm((f) => ({ ...f, feedback: e.target.value.slice(0, 500) }))}
-                  placeholder="Tell us anything — we're listening..."
-                  rows={3}
-                  className={cn(inputCn, "resize-none")}
-                />
-                <p className="text-right text-[11px] text-neutral-400 mt-1">{form.feedback.length}/500</p>
               </div>
             </motion.div>
           )}
@@ -493,6 +479,21 @@ export function CampSurveyForm() {
                       className={cn(inputCn, "pl-10")}
                     />
                   </div>
+                </div>
+
+                <div>
+                  <label htmlFor="camp-feedback" className="block text-sm font-medium text-neutral-700 mb-1">
+                    Anything else you&rsquo;d like to share? <span className="text-neutral-400 font-normal">(optional)</span>
+                  </label>
+                  <textarea
+                    id="camp-feedback"
+                    value={form.feedback}
+                    onChange={(e) => setForm((f) => ({ ...f, feedback: e.target.value.slice(0, 500) }))}
+                    placeholder="Favorite moments, suggestions, shout-outs to coaches…"
+                    rows={3}
+                    className={cn(inputCn, "resize-none")}
+                  />
+                  <p className="text-right text-[11px] text-neutral-400 mt-1">{form.feedback.length}/500</p>
                 </div>
 
                 <div>
