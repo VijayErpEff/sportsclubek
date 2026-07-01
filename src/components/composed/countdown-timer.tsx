@@ -56,21 +56,27 @@ function TimeUnit({
 }
 
 export function CountdownTimer({ targetDate, className }: CountdownTimerProps) {
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft(targetDate));
+  // Start null so the server render and the first client render match (no
+  // Date.now() during render). The real countdown fills in after mount, which
+  // avoids a hydration mismatch on the ticking values.
+  const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null);
   const prefersReduced = useReducedMotion();
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft(targetDate));
-    }, 1000);
+    const update = () => setTimeLeft(calculateTimeLeft(targetDate));
+    update();
+    const timer = setInterval(update, 1000);
     return () => clearInterval(timer);
   }, [targetDate]);
 
+  const display: TimeLeft = timeLeft ?? { days: 0, hours: 0, minutes: 0, seconds: 0 };
+
   const isExpired =
-    timeLeft.days === 0 &&
-    timeLeft.hours === 0 &&
-    timeLeft.minutes === 0 &&
-    timeLeft.seconds === 0;
+    timeLeft !== null &&
+    display.days === 0 &&
+    display.hours === 0 &&
+    display.minutes === 0 &&
+    display.seconds === 0;
 
   if (isExpired) {
     return (
@@ -83,16 +89,16 @@ export function CountdownTimer({ targetDate, className }: CountdownTimerProps) {
   return (
     <div
       className={cn("flex items-center justify-center gap-3 sm:gap-4", className)}
-      aria-label={`Countdown: ${timeLeft.days} days, ${timeLeft.hours} hours, ${timeLeft.minutes} minutes, ${timeLeft.seconds} seconds`}
+      aria-label={`Countdown: ${display.days} days, ${display.hours} hours, ${display.minutes} minutes, ${display.seconds} seconds`}
       role="timer"
     >
-      <TimeUnit value={timeLeft.days} label="Days" animate={!prefersReduced} />
+      <TimeUnit value={display.days} label="Days" animate={!prefersReduced} />
       <span className="text-2xl font-bold text-neutral-300 -mt-6">:</span>
-      <TimeUnit value={timeLeft.hours} label="Hours" animate={!prefersReduced} />
+      <TimeUnit value={display.hours} label="Hours" animate={!prefersReduced} />
       <span className="text-2xl font-bold text-neutral-300 -mt-6">:</span>
-      <TimeUnit value={timeLeft.minutes} label="Min" animate={!prefersReduced} />
+      <TimeUnit value={display.minutes} label="Min" animate={!prefersReduced} />
       <span className="text-2xl font-bold text-neutral-300 -mt-6">:</span>
-      <TimeUnit value={timeLeft.seconds} label="Sec" animate={!prefersReduced} />
+      <TimeUnit value={display.seconds} label="Sec" animate={!prefersReduced} />
     </div>
   );
 }

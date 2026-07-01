@@ -429,12 +429,12 @@ export default function HomePage() {
           </Reveal>
           <Reveal delay={0.3}>
             <p className="text-center text-sm text-neutral-500 mt-3">
-              Coming up:{" "}
+              This weekend:{" "}
               <Link
-                href="/events/volleyball-tournament"
+                href="/freedom-offer"
                 className="text-accent hover:text-accent-hover font-semibold"
               >
-                LevelUP Smash Cup — Indoor Volleyball Tournament, Jun 6–7 &rarr;
+                Freedom Offer — $5 open play &amp; 50% off rentals, July 3–5 &rarr;
               </Link>
             </p>
           </Reveal>

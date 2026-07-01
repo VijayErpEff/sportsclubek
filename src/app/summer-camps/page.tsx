@@ -47,18 +47,12 @@ export const metadata: Metadata = generateSEOMetadata({
 const CAMP_WEEKS = [
   {
     label: "Week 1",
-    range: "June 22 – 26, 2026",
-    startDate: "2026-06-22T08:30",
-    endDate: "2026-06-26T17:00",
-  },
-  {
-    label: "Week 2",
     range: "July 13 – 17, 2026",
     startDate: "2026-07-13T08:30",
     endDate: "2026-07-17T17:00",
   },
   {
-    label: "Week 3",
+    label: "Week 2",
     range: "August 10 – 14, 2026",
     startDate: "2026-08-10T08:30",
     endDate: "2026-08-14T17:00",
@@ -195,7 +189,7 @@ const FAQS = [
   {
     question: "What does the camp schedule look like?",
     answer:
-      "Full Day runs Monday–Friday, 8:30 AM to 5:00 PM. Half Day sessions are offered in two batches: AM (morning) and PM (afternoon). Camp weeks are June 22–26, July 13–17, and August 10–14, 2026.",
+      "Full Day runs Monday–Friday, 8:30 AM to 5:00 PM. Half Day sessions are offered in two batches: AM (morning) and PM (afternoon). Camp weeks are July 13–17 and August 10–14, 2026.",
   },
   {
     question: "What's the difference between Full Day and Half Day?",
@@ -711,8 +705,8 @@ export default function SummerCampsPage() {
                   Three flexible options: Full Day $299/week (8:30 AM – 5:00 PM) combines
                   coding with sports; Half Day Sports $199/week (AM or PM batch) for
                   athletics-only campers; and Half Day Coding &amp; Robotics $199/week
-                  (AM or PM batch) for STEM-focused campers. Three camp weeks &mdash;
-                  June 22, July 13, and August 10. Register early and save 10% with
+                  (AM or PM batch) for STEM-focused campers. Two camp weeks &mdash;
+                  July 13 and August 10. Register early and save 10% with
                   early bird pricing. Indoor facility means zero weather cancellations.
                 </p>
               </div>
