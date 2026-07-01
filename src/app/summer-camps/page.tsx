@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { generateSEOMetadata } from "@/lib/seo/metadata";
 import {
   generateBreadcrumbLD,
@@ -38,7 +37,7 @@ export const metadata: Metadata = generateSEOMetadata({
   title:
     "Summer Camp 2026 — Elkton, MD | LevelUP × Code Ninjas",
   description:
-    "LevelUP × Code Ninjas Summer Camp 2026 in Elkton, MD — Where Play Meets Coding! Coding, robotics, and sports rotations for ages 5+. Full Day $299, Half Day $199 (Sports OR Coding, AM or PM batch). Three weeks: June, July, August. Early bird 10% off.",
+    "LevelUP × Code Ninjas Summer Camp 2026 in Elkton, MD — Where Play Meets Coding! Coding, robotics, and sports rotations for ages 5+. Full Day $299, Half Day $199 (Sports OR Coding, AM or PM batch). Two weeks: July 13 and August 10. Register now — spots are limited.",
   path: "/summer-camps",
   ogImage: FLYER_IMAGE,
 });
@@ -179,7 +178,7 @@ const FAQS = [
   {
     question: "How much does the camp cost?",
     answer:
-      "Full Day is $299/week (8:30 AM – 5:00 PM) and Half Day is $199/week (AM or PM batch). Register before the early bird deadline and save 10%.",
+      "Full Day is $299/week (8:30 AM – 5:00 PM) and Half Day is $199/week (AM or PM batch). Spots are limited, so we recommend registering early to reserve your camper's week.",
   },
   {
     question: "What ages is the camp for?",
@@ -214,7 +213,7 @@ const FAQS = [
   {
     question: "How do I register?",
     answer:
-      "Register online via our Upper Hand booking page, call us at (443) 406-6494, or email info@levelupsports.us. Spots are limited and early bird pricing ends soon.",
+      "Register online via our Upper Hand booking page, call us at (443) 406-6494, or email info@levelupsports.us. Spots are limited, so we recommend booking early.",
   },
 ];
 
@@ -289,74 +288,53 @@ export default function SummerCampsPage() {
         </div>
 
         <Container className="relative">
-          <div className="grid gap-10 lg:gap-14 lg:grid-cols-2 items-center">
-            {/* Left — copy */}
-            <div>
-              <span className="inline-flex items-center gap-2 rounded-full bg-accent/20 border border-accent/40 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-[#A8E6CF] mb-5">
-                <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
-                Registration Open
-              </span>
-              <h1 className="font-display text-hero text-white mb-4 text-balance leading-[1.05]">
-                LevelUP × Code Ninjas
-                <span className="block text-accent mt-2">Where Play Meets Coding!</span>
-              </h1>
-              <p className="text-lg text-white/75 max-w-xl leading-relaxed mb-3">
-                Our brand-new 2026 summer camp in partnership with Code Ninjas.
-                Coding, robotics, and sports &mdash; all under one indoor roof in Elkton, MD.
-              </p>
-              <p className="text-base text-white/60 max-w-xl leading-relaxed mb-8">
-                Ages 5 and up &middot; Three weeks (June, July, August) &middot; Full Day or Half Day (AM/PM).
-                100% indoor, climate-controlled facility.
-              </p>
+          <div className="max-w-3xl">
+            <span className="inline-flex items-center gap-2 rounded-full bg-accent/20 border border-accent/40 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-[#A8E6CF] mb-5">
+              <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
+              Registration Open
+            </span>
+            <h1 className="font-display text-hero text-white mb-4 text-balance leading-[1.05]">
+              LevelUP × Code Ninjas
+              <span className="block text-accent mt-2">Where Play Meets Coding!</span>
+            </h1>
+            <p className="text-lg text-white/75 max-w-xl leading-relaxed mb-3">
+              Our brand-new 2026 summer camp in partnership with Code Ninjas.
+              Coding, robotics, and sports &mdash; all under one indoor roof in Elkton, MD.
+            </p>
+            <p className="text-base text-white/60 max-w-xl leading-relaxed mb-8">
+              Ages 5 and up &middot; Two weeks (July 13 &amp; August 10) &middot; Full Day or Half Day (AM/PM).
+              100% indoor, climate-controlled facility.
+            </p>
 
-              <div className="flex flex-wrap gap-3 mb-8">
-                <Button size="lg" asChild>
-                  <Link href={REGISTER_URL}>Register Now &mdash; Save 10%</Link>
-                </Button>
-                <Button size="lg" variant="outline" className="text-white border-white/30 hover:bg-white/10" asChild>
-                  <a href={`tel:${SITE_CONFIG.phone}`}>
-                    <Phone className="h-4 w-4 mr-2" aria-hidden="true" />
-                    Call (443) 406-6494
-                  </a>
-                </Button>
-              </div>
-
-              <dl className="grid grid-cols-3 gap-4 max-w-lg">
-                <div>
-                  <dt className="text-[11px] uppercase tracking-widest text-white/50 mb-1">Full Day</dt>
-                  <dd className="font-display text-2xl font-bold text-accent">$299</dd>
-                  <p className="text-xs text-white/50">per week</p>
-                </div>
-                <div>
-                  <dt className="text-[11px] uppercase tracking-widest text-white/50 mb-1">Half Day</dt>
-                  <dd className="font-display text-2xl font-bold text-accent">$199</dd>
-                  <p className="text-xs text-white/50">per week</p>
-                </div>
-                <div>
-                  <dt className="text-[11px] uppercase tracking-widest text-white/50 mb-1">Ages</dt>
-                  <dd className="font-display text-2xl font-bold text-accent">5+</dd>
-                  <p className="text-xs text-white/50">boys &amp; girls</p>
-                </div>
-              </dl>
+            <div className="flex flex-wrap gap-3 mb-10">
+              <Button size="lg" asChild>
+                <Link href={REGISTER_URL}>Register Now</Link>
+              </Button>
+              <Button size="lg" variant="outline" className="text-white border-white/30 hover:bg-white/10" asChild>
+                <a href={`tel:${SITE_CONFIG.phone}`}>
+                  <Phone className="h-4 w-4 mr-2" aria-hidden="true" />
+                  Call (443) 406-6494
+                </a>
+              </Button>
             </div>
 
-            {/* Right — flyer (cropped from top so banner + courts are visible) */}
-            <div className="relative max-w-md mx-auto lg:max-w-none lg:mx-0">
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl ring-4 ring-white/10 bg-white/5 aspect-[4/3] lg:aspect-[5/4]">
-                <Image
-                  src={FLYER_IMAGE}
-                  alt="LevelUP Sports and Code Ninjas partnership banner — Where Play Meets Coding! — co-branded summer camp 2026 for ages 5+"
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 90vw, 480px"
-                  className="object-cover object-[50%_75%]"
-                />
+            <dl className="grid grid-cols-3 gap-4 max-w-lg border-t border-white/10 pt-6">
+              <div>
+                <dt className="text-[11px] uppercase tracking-widest text-white/50 mb-1">Full Day</dt>
+                <dd className="font-display text-2xl font-bold text-accent">$299</dd>
+                <p className="text-xs text-white/50">per week</p>
               </div>
-              <div className="absolute -top-4 -right-4 rounded-2xl bg-accent text-white px-4 py-2.5 shadow-lg rotate-3">
-                <p className="font-display font-bold text-sm">Early Bird</p>
-                <p className="font-display font-extrabold text-xl leading-none">10% OFF</p>
+              <div>
+                <dt className="text-[11px] uppercase tracking-widest text-white/50 mb-1">Half Day</dt>
+                <dd className="font-display text-2xl font-bold text-accent">$199</dd>
+                <p className="text-xs text-white/50">per week</p>
               </div>
-            </div>
+              <div>
+                <dt className="text-[11px] uppercase tracking-widest text-white/50 mb-1">Ages</dt>
+                <dd className="font-display text-2xl font-bold text-accent">5+</dd>
+                <p className="text-xs text-white/50">boys &amp; girls</p>
+              </div>
+            </dl>
           </div>
         </Container>
       </section>
@@ -449,7 +427,7 @@ export default function SummerCampsPage() {
                     className="mt-auto w-full"
                     asChild
                   >
-                    <Link href={REGISTER_URL}>Register &mdash; Save 10%</Link>
+                    <Link href={REGISTER_URL}>Register Now</Link>
                   </Button>
                 </div>
               </StaggerItem>
@@ -513,8 +491,8 @@ export default function SummerCampsPage() {
             </div>
             <div className="p-6 rounded-2xl bg-accent/5 border border-accent/20 text-center">
               <Sun className="h-6 w-6 text-accent mx-auto mb-3" aria-hidden="true" />
-              <p className="font-semibold text-accent mb-1">Early Bird 10% Off</p>
-              <p className="text-sm text-neutral-500">Limited time &mdash; register before spots fill</p>
+              <p className="font-semibold text-accent mb-1">Now Enrolling</p>
+              <p className="text-sm text-neutral-500">Two weeks &mdash; July 13 &amp; Aug 10, spots fill fast</p>
             </div>
           </div>
 
@@ -706,8 +684,8 @@ export default function SummerCampsPage() {
                   coding with sports; Half Day Sports $199/week (AM or PM batch) for
                   athletics-only campers; and Half Day Coding &amp; Robotics $199/week
                   (AM or PM batch) for STEM-focused campers. Two camp weeks &mdash;
-                  July 13 and August 10. Register early and save 10% with
-                  early bird pricing. Indoor facility means zero weather cancellations.
+                  July 13 and August 10. Register early to reserve your camper&apos;s
+                  spot &mdash; spots are limited. Indoor facility means zero weather cancellations.
                 </p>
               </div>
             </div>
@@ -757,7 +735,7 @@ export default function SummerCampsPage() {
 
       <CTABanner
         title="Spots Are Limited — Register Today"
-        description="Secure your camper's week now and save 10% with early bird pricing. Call, email, or book instantly online."
+        description="Secure your camper's week now before spots fill. Call, email, or book instantly online."
         primaryCTA={{ label: "Register Now", href: REGISTER_URL }}
         secondaryCTA={{ label: `Call ${SITE_CONFIG.phone}`, href: `tel:${SITE_CONFIG.phone}` }}
       />

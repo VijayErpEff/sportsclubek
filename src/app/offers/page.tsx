@@ -16,7 +16,7 @@ import { CheckCircle, Sun, Sparkles, Trophy, Users } from "lucide-react";
 export const metadata: Metadata = generateSEOMetadata({
   title: "Current Offers & Promotions — Elkton, MD",
   description:
-    "Current deals at LevelUP Sports in Elkton, MD: Freedom Offer — $5 open play and 50% off net & cage rentals (July 3–5), LevelUP × Code Ninjas Summer Camp early bird 10% off, $10/mo Open Play Game Pass, Pickleball Golden Hour, and refer-a-friend rewards.",
+    "Current deals at LevelUP Sports in Elkton, MD: Freedom Offer — $5 open play and 50% off net & cage rentals (July 3–5), LevelUP × Code Ninjas Summer Camp now enrolling, $10/mo Open Play Game Pass, Pickleball Golden Hour, and refer-a-friend rewards.",
   path: "/offers",
 });
 
@@ -57,17 +57,18 @@ const OFFERS: Offer[] = [
   },
   {
     tag: "Summer Camp 2026",
-    priceLabel: "10% OFF",
-    subLabel: "Early Bird — Limited Time",
+    priceLabel: "From $199",
+    priceSuffix: "/wk",
+    subLabel: "Now Enrolling · Ages 5+",
     title: "LevelUP × Code Ninjas — Where Play Meets Coding!",
-    body: "Reserve your camper's spot at our 2026 LevelUP × Code Ninjas Summer Camp and save 10% with early bird pricing. Coding, robotics, and sports rotations led by Code Ninjas Senseis and LevelUP coaches. Ages 5+.",
+    body: "Reserve your camper's spot at our 2026 LevelUP × Code Ninjas Summer Camp. Coding, robotics, and sports rotations led by Code Ninjas Senseis and LevelUP coaches. Ages 5+.",
     features: [
       "Full Day $299/week — coding + sports (8:30 AM – 5:00 PM)",
       "Half Day Sports $199/week — AM or PM batch",
       "Half Day Coding & Robotics $199/week — AM or PM batch",
       "Upcoming weeks: July 13 · Aug 10",
     ],
-    fineprint: "Early bird discount applies before the early bird deadline. Limited spots available.",
+    fineprint: "Limited spots available. Register early to reserve your camper's week.",
     cta: { label: "Reserve Your Spot", href: "/summer-camps" },
     accent: "primary",
     ribbon: "Most Popular",
@@ -126,8 +127,8 @@ const OFFERS: Offer[] = [
 const WHY_OFFERS = [
   {
     icon: Sun,
-    title: "Save Up To 15%",
-    description: "Stack early bird, referral, and membership discounts for the best deal on training.",
+    title: "Real Savings",
+    description: "Stack referral rewards and membership perks for the best deal on training.",
   },
   {
     icon: Sparkles,
