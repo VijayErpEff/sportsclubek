@@ -41,3 +41,8 @@ yarn-error.log*
 next-env.d.ts
 test-results/
 test-screenshots/
+
+# large media — host on a CDN, not git (bloats repo and exceeds Netlify's function upload limit)
+/public/images/**/*.mp4
+# stray build artifact accidentally emitted into public/
+/public/images/.next/
