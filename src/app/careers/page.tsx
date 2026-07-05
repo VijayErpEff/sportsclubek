@@ -54,6 +54,18 @@ const openPositions: Position[] = [
       "Develop skills and strategies for youth and adult volleyball teams.",
   },
   {
+    title: "Baseball Coach",
+    type: "Full-Time",
+    description:
+      "Lead batting cage sessions and hitting, pitching, and fielding instruction for youth players.",
+  },
+  {
+    title: "Softball Coach",
+    type: "Full-Time",
+    description:
+      "Coach hitting, pitching, and fielding fundamentals for youth and teen softball players.",
+  },
+  {
     title: "Club Manager",
     type: "Full-Time",
     description:
