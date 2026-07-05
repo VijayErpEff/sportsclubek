@@ -14,6 +14,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { StaggerContainer, StaggerItem } from "@/components/ui/stagger";
 import { CTABanner } from "@/components/composed/cta-banner";
 import { SITE_CONFIG } from "@/lib/constants/site";
+import { BOOKING_URLS } from "@/lib/constants/booking";
 import {
   CheckCircle,
   Calendar,
@@ -31,7 +32,8 @@ import {
 } from "lucide-react";
 
 const FLYER_IMAGE = "/images/sports/LevelUp/Summer Camp Code Ninjas.png";
-const REGISTER_URL = "/go/summer-camps";
+/** In-page anchor for the program picker — generic CTAs scroll here. */
+const REGISTER_URL = "#register";
 
 export const metadata: Metadata = generateSEOMetadata({
   title:
@@ -49,12 +51,16 @@ const CAMP_WEEKS = [
     range: "July 13 – 17, 2026",
     startDate: "2026-07-13T08:30",
     endDate: "2026-07-17T17:00",
+    fullDayUrl: BOOKING_URLS.summerCampFullDayJul,
+    halfDayUrl: BOOKING_URLS.summerCampHalfDayJul,
   },
   {
     label: "Week 2",
     range: "August 10 – 14, 2026",
     startDate: "2026-08-10T08:30",
     endDate: "2026-08-14T17:00",
+    fullDayUrl: BOOKING_URLS.summerCampFullDayAug,
+    halfDayUrl: BOOKING_URLS.summerCampHalfDayAug,
   },
 ];
 
@@ -96,6 +102,10 @@ const PROGRAM_OPTIONS = [
       "Lunch break with supervised activities",
       "Take-home project from the end-of-week showcase",
     ],
+    register: [
+      { label: "Jul 13 – 17", url: BOOKING_URLS.summerCampFullDayJul },
+      { label: "Aug 10 – 14", url: BOOKING_URLS.summerCampFullDayAug },
+    ],
   },
   {
     id: "half-day-sports",
@@ -113,6 +123,10 @@ const PROGRAM_OPTIONS = [
       "All sports equipment provided",
       "AM or PM batch — flexible scheduling",
     ],
+    register: [
+      { label: "Jul 13 – 17", url: BOOKING_URLS.summerCampHalfDayJul },
+      { label: "Aug 10 – 14", url: BOOKING_URLS.summerCampHalfDayAug },
+    ],
   },
   {
     id: "half-day-coding",
@@ -129,6 +143,10 @@ const PROGRAM_OPTIONS = [
       "Small-group, instructor-led labs",
       "All laptops and robotics kits provided",
       "AM or PM batch — flexible scheduling",
+    ],
+    register: [
+      { label: "Jul 13 – 17", url: BOOKING_URLS.summerCampHalfDayJul },
+      { label: "Aug 10 – 14", url: BOOKING_URLS.summerCampHalfDayAug },
     ],
   },
 ];
@@ -228,7 +246,7 @@ export default function SummerCampsPage() {
   const courseLD = generateCourseLD({
     name: "LevelUP × Code Ninjas Summer Camp 2026",
     description:
-      "Co-branded summer camp with Code Ninjas for ages 5+ at LevelUP Sports in Elkton, MD. Coding, robotics, and sports rotations led by certified Code Ninjas Senseis and LevelUP coaches. Three options: Full Day $299/week (sports + coding, 8:30 AM – 5:00 PM), Half Day Sports $199/week (AM or PM batch), Half Day Coding & Robotics $199/week (AM or PM batch). Three weeks: June, July, August 2026.",
+      "Co-branded summer camp with Code Ninjas for ages 5+ at LevelUP Sports in Elkton, MD. Coding, robotics, and sports rotations led by certified Code Ninjas Senseis and LevelUP coaches. Three options: Full Day $299/week (sports + coding, 8:30 AM – 5:00 PM), Half Day Sports $199/week (AM or PM batch), Half Day Coding & Robotics $199/week (AM or PM batch). Two weeks: July 13–17 and August 10–14, 2026.",
     url: "/summer-camps",
   });
 
@@ -249,7 +267,7 @@ export default function SummerCampsPage() {
       offers: {
         price: "199",
         priceCurrency: "USD",
-        url: `${SITE_CONFIG.url}${REGISTER_URL}`,
+        url: w.halfDayUrl,
         validThrough: w.startDate,
       },
     })
@@ -359,7 +377,7 @@ export default function SummerCampsPage() {
       </Section>
 
       {/* ── Program Options (Full Day / Half Day) ──────────────────── */}
-      <Section className="pt-4 md:pt-6">
+      <Section id="register" className="pt-4 md:pt-6 scroll-mt-24">
         <Container>
           <Reveal>
             <div className="text-center mb-8 max-w-2xl mx-auto">
@@ -421,14 +439,23 @@ export default function SummerCampsPage() {
                       </li>
                     ))}
                   </ul>
-                  <Button
-                    size="sm"
-                    variant={p.highlight ? "primary" : "outline"}
-                    className="mt-auto w-full"
-                    asChild
-                  >
-                    <Link href={REGISTER_URL}>Register Now</Link>
-                  </Button>
+                  <div className="mt-auto">
+                    <p className="text-[11px] uppercase tracking-widest text-neutral-500 font-semibold mb-2 text-center">
+                      Register your week
+                    </p>
+                    <div className="grid grid-cols-2 gap-2">
+                      {p.register.map((r) => (
+                        <Button
+                          key={r.label}
+                          size="sm"
+                          variant={p.highlight ? "primary" : "outline"}
+                          asChild
+                        >
+                          <a href={r.url}>{r.label}</a>
+                        </Button>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </StaggerItem>
             ))}
@@ -442,10 +469,10 @@ export default function SummerCampsPage() {
           <Reveal>
             <div className="text-center mb-12 max-w-2xl mx-auto">
               <h2 className="font-display text-section text-neutral-900 mb-3">
-                Three Weeks of Summer. Pick Yours.
+                Two Weeks of Summer. Pick Yours.
               </h2>
               <p className="text-neutral-500">
-                Book one week, two, or all three &mdash; all from one booking page.
+                Book one week or both &mdash; choose Full Day or Half Day for each.
               </p>
             </div>
           </Reveal>
@@ -466,9 +493,14 @@ export default function SummerCampsPage() {
                   <p className="text-sm text-neutral-500 mb-4">
                     Full Day 8:30 AM &ndash; 5:00 PM &middot; Half Day AM &amp; PM batches
                   </p>
-                  <Button size="sm" className="mt-auto w-full" asChild>
-                    <Link href={REGISTER_URL}>Register This Week</Link>
-                  </Button>
+                  <div className="mt-auto grid grid-cols-2 gap-2">
+                    <Button size="sm" asChild>
+                      <a href={w.fullDayUrl}>Full Day</a>
+                    </Button>
+                    <Button size="sm" variant="outline" asChild>
+                      <a href={w.halfDayUrl}>Half Day</a>
+                    </Button>
+                  </div>
                 </div>
               </StaggerItem>
             ))}
@@ -503,7 +535,7 @@ export default function SummerCampsPage() {
                 Looking for a different week?
               </p>
               <p className="text-neutral-600 leading-relaxed mb-5">
-                We&apos;d love to hear from you. If our June, July, or August dates don&apos;t
+                We&apos;d love to hear from you. If our July or August dates don&apos;t
                 line up with your family&apos;s plans, reach out &mdash; if there&apos;s
                 enough interest we&apos;ll do our best to add another week.
               </p>

@@ -55,9 +55,31 @@ export const REDIRECTS: RedirectEntry[] = [
     destination: `${UH_BASE}/offerings`,
   },
   {
+    // Printed flyers/QRs point here — lands on the camp page, which links
+    // out to the four per-week Upper Hand events below.
     slug: "summer-camps",
-    title: "Summer Sports Camps",
-    destination: `${UH_BASE}/client-memberships/11545`,
+    title: "LevelUP × Code Ninjas Summer Camp",
+    destination: "/summer-camps",
+  },
+  {
+    slug: "summer-camp-full-day-july",
+    title: "Summer Camp Full Day — Jul 13–17",
+    destination: `${UH_BASE}/events/196907-summer-camp-full-day-07-13-07-17`,
+  },
+  {
+    slug: "summer-camp-half-day-july",
+    title: "Summer Camp Half Day — Jul 13–17",
+    destination: `${UH_BASE}/events/196909-summer-camp-half-day-07-13-07-17`,
+  },
+  {
+    slug: "summer-camp-full-day-august",
+    title: "Summer Camp Full Day — Aug 10–14",
+    destination: `${UH_BASE}/events/196908-summer-camp-full-day-08-10-08-14`,
+  },
+  {
+    slug: "summer-camp-half-day-august",
+    title: "Summer Camp Half Day — Aug 10–14",
+    destination: `${UH_BASE}/events/196910-summer-camp-half-day-08-10-08-14`,
   },
   {
     slug: "memberships",

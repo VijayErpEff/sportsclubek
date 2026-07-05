@@ -35,8 +35,11 @@ export const BOOKING_URLS = {
   badmintonAcademy: `${UH_BASE}/client-memberships/11417`,
   soccerAcademy: `${UH_BASE}/client-memberships/11566`,
 
-  /** Summer Camps — 2026 camp registration on Upper Hand */
-  summerCamps: `${UH_BASE}/client-memberships/11545`,
+  // ── Summer Camp 2026 (LevelUP × Code Ninjas) — per-week events ──
+  summerCampFullDayJul: `${UH_BASE}/events/196907-summer-camp-full-day-07-13-07-17`,
+  summerCampHalfDayJul: `${UH_BASE}/events/196909-summer-camp-half-day-07-13-07-17`,
+  summerCampFullDayAug: `${UH_BASE}/events/196908-summer-camp-full-day-08-10-08-14`,
+  summerCampHalfDayAug: `${UH_BASE}/events/196910-summer-camp-half-day-08-10-08-14`,
 
   // ── Events / Drop-In / Rentals ───────────────────────────
   cricketCageRentals: `${UH_BASE}/events/186578-cricket-cage-rentals`,
