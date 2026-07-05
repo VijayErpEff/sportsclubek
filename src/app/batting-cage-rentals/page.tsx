@@ -32,9 +32,9 @@ import {
 const PAGE_IMAGE = "/images/sports/LevelUp/Baseball Training Area.jpg";
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: "Batting Cage Rentals in Elkton, MD | Hourly Cage Rental",
+  title: "Baseball & Softball Batting Cages — Elkton, MD | $40/hr",
   description:
-    "Book an indoor batting cage rental at LevelUP Sports in Elkton, MD. 4 professional cages with pitching machines 30-90 MPH. Near Newark, Middletown & Wilmington DE. Hourly rentals, open 7 days.",
+    "Book an indoor baseball or softball batting cage at LevelUP Sports in Elkton, MD. 4 professional cages with pitching machines 30-90 MPH. Near Newark, Middletown & Wilmington DE. Hourly rentals, open 7 days.",
   path: "/batting-cage-rentals",
   ogImage: PAGE_IMAGE,
 });
@@ -252,7 +252,7 @@ export default function BattingCageRentalsPage() {
                 Indoor &bull; 30–90 MPH &bull; Open 7 Days
               </p>
               <h1 className="font-display text-page-title text-neutral-900 mb-4 text-balance">
-                Batting Cage Rentals in Elkton, MD
+                Baseball &amp; Softball Batting Cage Rentals in Elkton, MD
               </h1>
               <p className="text-lg text-neutral-500 mb-6 leading-relaxed">
                 Rent an indoor batting cage by the hour at LevelUP Sports &mdash; four pro
@@ -422,7 +422,15 @@ export default function BattingCageRentalsPage() {
                   >
                     birthday party
                   </Link>
-                  ? Our party packages combine cages, courts, and food.
+                  ? Our party packages combine cages, courts, and food. Playing
+                  cricket instead of baseball? We also rent{" "}
+                  <Link
+                    href="/cricket-cage-rentals"
+                    className="text-accent font-medium hover:underline"
+                  >
+                    full-length indoor cricket nets with bowling machines
+                  </Link>
+                  .
                 </p>
               </div>
             </div>

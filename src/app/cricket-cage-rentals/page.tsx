@@ -31,9 +31,9 @@ import {
 const PAGE_IMAGE = "/images/sports/LevelUp/05-Cricket-Nets.jpg";
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: "Cricket Cage Rentals in Elkton, MD | Indoor Cricket Nets",
+  title: "Indoor Cricket Net Rentals — Elkton, MD | Bowling Machines",
   description:
-    "Rent indoor cricket nets at LevelUP Sports in Elkton, MD. Full-length nets, bowling machines, and hourly cage rentals near Newark, Middletown & Wilmington DE. Book online, open 7 days.",
+    "Rent full-length indoor cricket nets at LevelUP Sports in Elkton, MD. Bowling machines and hourly cricket cage rentals near Newark, Middletown & Wilmington DE. Book online, open 7 days.",
   path: "/cricket-cage-rentals",
   ogImage: PAGE_IMAGE,
 });
@@ -251,7 +251,7 @@ export default function CricketCageRentalsPage() {
                 Indoor &bull; Bowling Machines &bull; Open 7 Days
               </p>
               <h1 className="font-display text-page-title text-neutral-900 mb-4 text-balance">
-                Cricket Cage Rentals in Elkton, MD
+                Indoor Cricket Net Rentals in Elkton, MD
               </h1>
               <p className="text-lg text-neutral-500 mb-6 leading-relaxed">
                 Rent full-length indoor cricket nets by the hour at LevelUP Sports.
@@ -420,7 +420,15 @@ export default function CricketCageRentalsPage() {
                   >
                     full cricket program
                   </Link>{" "}
-                  page for leagues and tournaments.
+                  page for leagues and tournaments. Here for baseball or softball
+                  instead? See our{" "}
+                  <Link
+                    href="/batting-cage-rentals"
+                    className="text-accent font-medium hover:underline"
+                  >
+                    batting cage rentals with pitching machines
+                  </Link>
+                  .
                 </p>
               </div>
             </div>
