@@ -116,7 +116,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       },
     ],
     faqs: [
-      { question: "How much do batting cages cost at LevelUP?", answer: "Private cage rental is $40/hour. Helmets and bats are provided. Members get Open Play access from just $8/hour (non-members $15/hour). Academy training packages start at $140 for 4 sessions. You can also try a free session first — no charge, no commitment." },
+      { question: "How much do batting cages cost at LevelUP?", answer: "Private cage rental is $40/hour. Helmets and bats are provided. Members get Open Play access from just $8/hour (non-members $15/hour). Academy training packages start at $140 for 4 sessions." },
       { question: "What age can my child start using batting cages?", answer: "Ages 6 and up. We start younger kids at 30 MPH and work up from there. A coach helps them find the right speed and stance for their skill level." },
       { question: "Do you provide helmets and bats?", answer: "Yes — helmets are required and always provided. We have bats available for every age and size. You're welcome to bring your own bat too." },
       { question: "Can adults use the batting cages?", answer: "Absolutely. Our cages go up to 90 MPH and are popular with adult softball and baseball players looking to stay sharp. Drop-in cage rental is $40/hour. Many adult players from Wilmington, Newark, and Cecil County use our cages for regular practice." },
@@ -124,7 +124,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     ],
     academySlug: "baseball-academy",
     ctaTitle: "See the Difference in One Session",
-    ctaPrimary: { label: "Try a Free Session", href: BOOKING_URLS.freeTrial },
+    ctaPrimary: { label: "Book a Session", href: BOOKING_URLS.offerings },
     ctaSecondary: { label: "View Academy", href: "/baseball-academy" },
   },
 
@@ -227,7 +227,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     ],
     academySlug: "cricket-academy",
     ctaTitle: "Train Under International Coaches",
-    ctaPrimary: { label: "Try a Free Session", href: BOOKING_URLS.freeTrial },
+    ctaPrimary: { label: "Book a Session", href: BOOKING_URLS.offerings },
     ctaSecondary: { label: "View Academy", href: "/cricket-academy" },
   },
 
@@ -320,7 +320,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     ],
     academySlug: "badminton-academy",
     ctaTitle: "Step On Court and Feel the Difference",
-    ctaPrimary: { label: "Try a Free Session", href: BOOKING_URLS.freeTrial },
+    ctaPrimary: { label: "Book a Session", href: BOOKING_URLS.offerings },
     ctaSecondary: { label: "View Academy", href: "/badminton-academy" },
   },
 
@@ -389,7 +389,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       { question: "Where are the closest indoor pickleball courts to Middletown, DE?", answer: "LevelUP Sports in Elkton, MD — just 15 minutes from Middletown via Route 40. We're also 20 minutes from Newark, 25 from Bear, and 30 from Wilmington. Our dedicated indoor courts mean you can play year-round regardless of weather." },
     ],
     ctaTitle: "Find Your People on the Court",
-    ctaPrimary: { label: "Try a Free Session", href: BOOKING_URLS.freeTrial },
+    ctaPrimary: { label: "Book a Session", href: BOOKING_URLS.offerings },
     ctaSecondary: { label: "View Memberships", href: BOOKING_URLS.memberships },
   },
 
@@ -468,7 +468,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     ],
     academySlug: "volleyball-academy",
     ctaTitle: "Get on the Court",
-    ctaPrimary: { label: "Try a Free Session", href: BOOKING_URLS.freeTrial },
+    ctaPrimary: { label: "Book a Session", href: BOOKING_URLS.offerings },
     ctaSecondary: { label: "View Academy", href: "/volleyball-academy" },
   },
 
@@ -538,7 +538,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     ],
     academySlug: "soccer-academy",
     ctaTitle: "Keep Playing. Keep Improving.",
-    ctaPrimary: { label: "Try a Free Session", href: BOOKING_URLS.freeTrial },
+    ctaPrimary: { label: "Book a Session", href: BOOKING_URLS.offerings },
     ctaSecondary: { label: "View Academy", href: "/soccer-academy" },
   },
 };

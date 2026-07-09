@@ -126,7 +126,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
       { question: "What should my child bring?", answer: "Athletic wear, cleats or turf shoes, a glove, and a water bottle. We provide bats, helmets, and other equipment." },
     ],
     ctaTitle: "See the Improvement in One Session",
-    ctaDescription: "Book a free trial session — no commitment. Watch your kid swing, talk to Coach Joe, and decide if it's right for them.",
+    ctaDescription: "Book a session — no long-term commitment. Watch your kid swing, talk to Coach Joe, and decide if it's right for them.",
     enrollUrl: BOOKING_URLS.baseballLittleSluggersL,
   },
 
@@ -243,7 +243,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
       { question: "Where do your cricket academy players come from?", answer: "Our academy draws players from across the tri-state area — Newark, Wilmington, Middletown, Hockessin, and Bear in Delaware, Cecil County in Maryland, and Kennett Square in Pennsylvania. Many families drive 20-30 minutes because there's no comparable cricket training facility in the region." },
     ],
     ctaTitle: "Train Under International Coaches",
-    ctaDescription: "Book a free trial session. Meet our IPL and international coaching staff, hit the nets, and see why families drive here from three states.",
+    ctaDescription: "Book a session. Meet our IPL and international coaching staff, hit the nets, and see why families drive here from three states.",
     enrollUrl: BOOKING_URLS.cricketAcademy,
   },
 
@@ -332,7 +332,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
       { question: "How far is the badminton academy from Newark or Wilmington, DE?", answer: "We're about 20 minutes from Newark and 30 minutes from Wilmington via I-95. Our Elkton, MD location at 701 E Pulaski Hwy is the closest BWF-standard badminton facility for Delaware players. Free parking and easy highway access." },
     ],
     ctaTitle: "See What Proper Coaching Looks Like",
-    ctaDescription: "Book a free trial session on our BWF-standard courts. Watch your kid move, meet Coach Nabeel, and decide.",
+    ctaDescription: "Book a session on our BWF-standard courts. Watch your kid move, meet Coach Nabeel, and decide.",
     enrollUrl: BOOKING_URLS.badmintonAcademy,
   },
 
@@ -411,10 +411,10 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
     faqs: [
       { question: "Is this program for kids who already play sports?", answer: "It's for everyone! Both athletes and non-athletes benefit. The program builds foundational movement skills that help in any sport — or just in being an active, confident kid." },
       { question: "What should my child wear?", answer: "Athletic clothing and clean indoor shoes. No cleats needed. We provide all equipment." },
-      { question: "Can my child try a session before enrolling?", answer: "Yes! We offer a free trial session so your child can experience the program before you commit." },
+      { question: "Can my child try a session before enrolling?", answer: "Yes! You can book a single session so your child can experience the program before you commit to full enrollment." },
     ],
     ctaTitle: "Watch Their Confidence Grow",
-    ctaDescription: "Book a free trial session. Your kid will run, jump, laugh, and leave wanting to come back. That's how we know it's working.",
+    ctaDescription: "Book a session. Your kid will run, jump, laugh, and leave wanting to come back. That's how we know it's working.",
     enrollUrl: BOOKING_URLS.kidsAgilityAcademy,
   },
 
@@ -500,7 +500,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
       { question: "Where do your volleyball academy players come from?", answer: "Our youth volleyball players come from across the tri-state area — Newark, Middletown, Bear, and Wilmington in Delaware, Cecil County in Maryland, and parts of Chester County, PA. We're the only dedicated indoor volleyball academy in the region with USAV-certified coaching." },
     ],
     ctaTitle: "See the Improvement in One Session",
-    ctaDescription: "Book a free trial session. Watch your kid pass, serve, and hit — then talk to Coach Viktor about the right program for them.",
+    ctaDescription: "Book a session. Watch your kid pass, serve, and hit — then talk to Coach Viktor about the right program for them.",
     enrollUrl: BOOKING_URLS.volleyballAcademy,
   },
 
@@ -582,7 +582,7 @@ export const ACADEMY_PAGES: Record<string, AcademyPageData> = {
       { question: "Do you work with outdoor club coaches?", answer: "Yes — many local clubs send players to us for supplemental technical training, especially in the off-season. We can coordinate with your child's outdoor coach." },
     ],
     ctaTitle: "Better Touch. Better Player.",
-    ctaDescription: "Book a free trial session on the turf. Watch your kid's feet move and see the futsal difference for yourself.",
+    ctaDescription: "Book a session on the turf. Watch your kid's feet move and see the futsal difference for yourself.",
     enrollUrl: BOOKING_URLS.soccerAcademy,
   },
 };

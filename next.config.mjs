@@ -54,6 +54,11 @@ const nextConfig = {
         destination: "/",
         permanent: true,
       },
+      {
+        source: "/free-trial",
+        destination: "/schedule",
+        permanent: true,
+      },
     ];
   },
 };

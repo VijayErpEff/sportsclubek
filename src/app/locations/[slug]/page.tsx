@@ -249,9 +249,9 @@ export default async function LocationPage({ params }: PageParams) {
 
       <CTABanner
         title={`Ready when you are, ${loc.city}`}
-        description={`Book a court, a cage, or a free academy trial. ${loc.driveTime} away — open 7 days a week.`}
+        description={`Book a court, a cage, or an academy session. ${loc.driveTime} away — open 7 days a week.`}
         primaryCTA={{ label: "Book a Court", href: "/schedule" }}
-        secondaryCTA={{ label: "Free Academy Trial", href: "/free-trial" }}
+        secondaryCTA={{ label: "Explore Academies", href: "/kids-agility" }}
       />
     </>
   );

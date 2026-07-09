@@ -72,7 +72,7 @@ export default function PrivacyPage() {
               <p>We collect information you voluntarily provide when you:</p>
               <ul className="list-disc pl-5 space-y-1 mt-2">
                 <li>Book a court, cage, or session through our booking platform</li>
-                <li>Sign up for a membership or free trial</li>
+                <li>Sign up for a membership</li>
                 <li>Fill out a contact form, tour request, or survey</li>
                 <li>Subscribe to our newsletter or training guide</li>
                 <li>Register for an event such as our Open House</li>

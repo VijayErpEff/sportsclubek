@@ -112,7 +112,7 @@ export default function HomePage() {
         title="The Sports Facility Your Family Has Been Looking For"
         subtitle="15 minutes from Middletown. 20 from Newark. Every sport you love, coaches who remember your kid's name."
         badge="Now Open — 701 E Pulaski Hwy, Elkton"
-        primaryCTA={{ label: "Try a Free Session", href: "/free-trial" }}
+        primaryCTA={{ label: "Book a Session", href: BOOKING_URLS.offerings }}
         secondaryCTA={{ label: "Explore Programs", href: "#sports" }}
         overlayOpacity={0.5}
       />
@@ -273,10 +273,10 @@ export default function HomePage() {
                     <Target className="h-5 w-5 text-info" />
                   </div>
                   <h3 className="font-semibold text-neutral-900 mb-1 text-sm">
-                    Free First Session
+                    Drop-Ins Welcome
                   </h3>
                   <p className="text-xs text-neutral-500">
-                    Try any sport, no commitment required
+                    Book a court or cage by the hour — no membership needed
                   </p>
                 </div>
               </StaggerItem>
@@ -445,9 +445,9 @@ export default function HomePage() {
           FINAL CTA — Convert
           ═══════════════════════════════════════════ */}
       <CTABanner
-        title="Your First Session Is Free"
-        description="No commitment. No pressure. Just come play. If you love it, we'll talk memberships. If not, you tried a new sport for free."
-        primaryCTA={{ label: "Claim Your Free Session", href: "/free-trial" }}
+        title="Ready to Get in the Game?"
+        description="Six sports, expert coaches, and courts that never rain out. Book a session, come play, and see why families from three states train here."
+        primaryCTA={{ label: "Book a Session", href: BOOKING_URLS.offerings }}
         secondaryCTA={{ label: "View Pricing", href: "/memberships" }}
       />
     </>

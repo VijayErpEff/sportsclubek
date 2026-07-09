@@ -76,12 +76,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
-      url: `${BASE_URL}/free-trial`,
-      lastModified: LAST_CONTENT_UPDATE,
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-    {
       url: `${BASE_URL}/court-status`,
       lastModified: LAST_CONTENT_UPDATE,
       changeFrequency: "daily",

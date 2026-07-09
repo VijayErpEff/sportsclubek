@@ -300,7 +300,12 @@ export function Navbar() {
               </Button>
 
               <Button size="sm" className="rounded-full px-5" asChild>
-                <a href={BOOKING_URLS.freeTrial} onClick={() => trackCTAClick("Free Trial", BOOKING_URLS.freeTrial)}>Free Trial</a>
+                <a
+                  href={BOOKING_URLS.offerings}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackCTAClick("Book a Session", BOOKING_URLS.offerings)}
+                >Book a Session</a>
               </Button>
             </div>
 
@@ -496,7 +501,12 @@ export function Navbar() {
                   </a>
                 </Button>
                 <Button size="lg" className="w-full rounded-full" asChild>
-                  <a href={BOOKING_URLS.freeTrial} onClick={() => setMobileOpen(false)}>Free Trial</a>
+                  <a
+                    href={BOOKING_URLS.offerings}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setMobileOpen(false)}
+                  >Book a Session</a>
                 </Button>
                 <p className="text-center text-sm text-neutral-400">
                   <a href={`tel:${SITE_CONFIG.phone}`} className="hover:text-primary">{SITE_CONFIG.phone}</a>

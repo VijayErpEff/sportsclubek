@@ -644,7 +644,7 @@ export default function FacilitiesPage() {
       <CTABanner
         title="See It For Yourself"
         description="Schedule a facility tour or book your first session today."
-        primaryCTA={{ label: "Try a Free Session", href: BOOKING_URLS.freeTrial }}
+        primaryCTA={{ label: "Book a Session", href: BOOKING_URLS.offerings }}
         secondaryCTA={{ label: "View Schedule", href: "/schedule" }}
       />
     </>

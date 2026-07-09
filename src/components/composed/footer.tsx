@@ -31,7 +31,6 @@ const footerCompany = [
   { label: "Memberships", href: "/memberships" },
   { label: "Schedule", href: "/schedule" },
   { label: "Court Status", href: "/court-status" },
-  { label: "Free Trial", href: "/free-trial" },
   { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },
   { label: "Careers", href: "/careers" },

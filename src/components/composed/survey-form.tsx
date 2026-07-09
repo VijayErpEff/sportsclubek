@@ -41,7 +41,7 @@ const STEP_LABELS: Record<StepId, string> = {
 
 const VISITOR_TYPES = [
   { value: "member", label: "Current Member", emoji: "\u{1F3C5}" },
-  { value: "visited", label: "Visited / Free Trial", emoji: "\u{1F44B}" },
+  { value: "visited", label: "Visited Before", emoji: "\u{1F44B}" },
   { value: "not_visited", label: "Haven't Visited Yet", emoji: "\u{1F5FA}\uFE0F" },
   { value: "exploring", label: "Just Exploring Online", emoji: "\u{1F50D}" },
 ];
@@ -71,7 +71,7 @@ const BARRIER_OPTIONS = [
 ];
 
 const TRIGGER_OPTIONS = [
-  "Free trial session", "A friend's recommendation", "Seeing the facility in person",
+  "An open house or try-out event", "A friend's recommendation", "Seeing the facility in person",
   "More info about programs", "Lower intro pricing", "Weekend availability",
   "Knowing coaches' credentials", "Kids-specific programs",
 ];
@@ -265,7 +265,7 @@ export function SurveyForm() {
         <p className="text-neutral-500">
           {hasVisited
             ? "Your feedback helps us improve. We\u2019re glad to have you in the LevelUP community."
-            : "We\u2019d love to see you at LevelUP! Check your email for a free trial invite."}
+            : "We\u2019d love to see you at LevelUP! Keep an eye on your email for what\u2019s coming up."}
         </p>
       </div>
     );
@@ -538,7 +538,7 @@ export function SurveyForm() {
               <p className="text-sm text-neutral-400 mb-5">
                 {hasVisited
                   ? "So we can follow up and keep you in the loop."
-                  : "We\u2019ll send you a free trial invite and keep you updated."}
+                  : "We\u2019ll keep you updated on programs, events, and offers."}
               </p>
               <div className="space-y-3">
                 <div>

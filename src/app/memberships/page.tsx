@@ -78,7 +78,7 @@ export default function MembershipsPage() {
               Simple Plans. No Contracts. Cancel Anytime.
             </h1>
             <p className="text-neutral-500">
-              Not sure? Try a free session first — no card required. Open Play is $15/hour without a membership — with one, it drops to just $8/hour (50% off).{" "}
+              Open Play is $15/hour without a membership — with one, it drops to just $8/hour (50% off).{" "}
               <Link href="/offers" className="text-accent hover:text-accent-hover font-medium">
                 See current deals &rarr;
               </Link>
@@ -262,9 +262,9 @@ export default function MembershipsPage() {
       </Section>
 
       <CTABanner
-        title="Try Before You Buy"
+        title="See It Before You Join"
         description="Contact us or visit for a free tour. We'll help you find the perfect fit."
-        primaryCTA={{ label: "Try a Free Session", href: "/free-trial" }}
+        primaryCTA={{ label: "Book a Session", href: BOOKING_URLS.offerings }}
         secondaryCTA={{ label: "Contact Us", href: "/contact" }}
       />
     </>

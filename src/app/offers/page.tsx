@@ -106,29 +106,13 @@ const OFFERS: Offer[] = [
     cta: { label: "Claim This Offer", href: BOOKING_URLS.pickleballGoldenHour },
     accent: "primary",
   },
-  {
-    tag: "Members",
-    priceLabel: "Free",
-    subLabel: "Session for Both",
-    title: "Refer a Friend",
-    body: "Know someone who would love LevelUP Sports? Refer a friend and you both get a free session. The more you refer, the more you earn.",
-    features: [
-      "Existing members and enrollees eligible",
-      "Friend must be a first-time visitor",
-      "No limit on number of referrals",
-      "Free session redeemable on any sport",
-    ],
-    fineprint: "Valid through December 31, 2026. Referral must mention your name at booking.",
-    cta: { label: "Refer a Friend", href: "/contact" },
-    accent: "primary",
-  },
 ];
 
 const WHY_OFFERS = [
   {
     icon: Sun,
     title: "Real Savings",
-    description: "Stack referral rewards and membership perks for the best deal on training.",
+    description: "Genuine discounts and membership perks for the best deal on training.",
   },
   {
     icon: Sparkles,

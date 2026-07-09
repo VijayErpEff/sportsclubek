@@ -13,7 +13,7 @@ import { generateBreadcrumbLD, generateEventLD } from "@/lib/seo/json-ld";
 export const metadata: Metadata = generateSEOMetadata({
   title: "Open House — Tour Our Facility in Elkton, MD",
   description:
-    "Visit LevelUP Sports for our Open House in Elkton, MD. Tour the facility, meet coaches, try a free session. No commitment. Open to all ages.",
+    "Visit LevelUP Sports for our Open House in Elkton, MD. Tour the facility, meet coaches, try out every sport. No commitment. Open to all ages.",
   path: "/open-house",
 });
 
@@ -24,9 +24,9 @@ export default function OpenHousePage() {
   ]);
 
   const eventLD = generateEventLD({
-    name: "LevelUP Sports Open House — Free Facility Tour & Try-Out Sessions",
+    name: "LevelUP Sports Open House — Free Facility Tour & Try-Out Day",
     description:
-      "Tour our 20,000 sq ft indoor facility, meet coaches, and try free sessions in baseball, cricket, badminton, pickleball, volleyball, and soccer. Open to all ages. No registration fee.",
+      "Tour our 20,000 sq ft indoor facility, meet coaches, and try out baseball, cricket, badminton, pickleball, volleyball, and soccer. Open to all ages. No registration fee.",
     startDate: "2026-04-18T10:00:00-04:00",
     endDate: "2026-04-18T15:00:00-04:00",
     url: "/open-house",
@@ -46,7 +46,7 @@ export default function OpenHousePage() {
 
       <Hero
         title="Open House — Tour Our Sports Facility"
-        subtitle="Join us for our next Open House. Tour the facility, meet the coaches, and try a free session."
+        subtitle="Join us for our next Open House. Tour the facility, meet the coaches, and try out every sport."
       />
 
       {/* Breadcrumb Navigation */}
@@ -136,7 +136,7 @@ export default function OpenHousePage() {
                   </p>
                 </div>
                 <div className="rounded-xl border bg-background p-6 shadow-sm">
-                  <h3 className="font-bold mb-2">Free Try-Out Sessions</h3>
+                  <h3 className="font-bold mb-2">Try-Out Sessions</h3>
                   <p className="text-sm text-muted-foreground">
                     Step into the cages, hit the courts, or join a mini training session. Try
                     before you commit — we want you to feel confident in your decision.

@@ -79,10 +79,6 @@ export function trackBookingCompleted(params: {
   });
 }
 
-export function trackFreeTrialStart(sport?: string) {
-  send({ action: "free_trial_start", params: { sport_name: sport ?? "any" } });
-}
-
 /** Fires when a "Get Directions" link is clicked. Key local-intent signal. */
 export function trackDirectionsClick(source: string) {
   send({ action: "directions_click", params: { source } });

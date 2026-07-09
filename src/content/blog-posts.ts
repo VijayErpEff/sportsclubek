@@ -52,7 +52,7 @@ export const BLOG_POSTS: BlogPost[] = [
     <p>Practice specific rally patterns: net-to-back, cross-court clears, drop-and-drive sequences. A training partner or coach feeding shuttles makes this most effective. Record yourself to identify wasted movement.</p>
     <h2>Week 4: Integration</h2>
     <p>Play practice matches focusing specifically on returning to base position after every shot. Record yourself and compare your movement to week 1 &mdash; you&rsquo;ll be surprised at the improvement.</p>
-    <p>Our <a href="/badminton">badminton courts</a> at LevelUP Sports are available for individual practice and coaching sessions. Want structured coaching? The <a href="/badminton-academy">Badminton Academy</a> with BWF-certified Coach Nabeel covers footwork, strokes, and match strategy. <a href="/free-trial">Try a free session</a> to see the courts.</p>`,
+    <p>Our <a href="/badminton">badminton courts</a> at LevelUP Sports are available for individual practice and coaching sessions. Want structured coaching? The <a href="/badminton-academy">Badminton Academy</a> with BWF-certified Coach Nabeel covers footwork, strokes, and match strategy. <a href="/schedule">Book a court</a> to see them for yourself.</p>`,
     author: "Coach Nabeel Adeel",
     date: "2025-03-05",
     readTime: 5,
@@ -74,7 +74,7 @@ export const BLOG_POSTS: BlogPost[] = [
     <h2>The Results</h2>
     <p>Within three months, Marcus&rsquo;s batting average jumped from .220 to .340. By the end of the season, it was .380. He earned a starting spot and was named to the all-conference team.</p>
     <p>&ldquo;LevelUP didn&rsquo;t just make me a better hitter,&rdquo; Marcus says. &ldquo;The coaches here taught me to believe in myself. That&rsquo;s something I&rsquo;ll carry with me forever.&rdquo;</p>
-    <p>Interested in the program that transformed Marcus&rsquo;s game? Learn more about the <a href="/baseball-academy">Baseball Academy</a> or <a href="/free-trial">book a free trial session</a> to meet Coach Joe Vanaskey and see our <a href="/facilities">batting cages</a> in person.</p>`,
+    <p>Interested in the program that transformed Marcus&rsquo;s game? Learn more about the <a href="/baseball-academy">Baseball Academy</a> or <a href="/schedule">book a session</a> to meet Coach Joe Vanaskey and see our <a href="/facilities">batting cages</a> in person.</p>`,
     author: "LevelUP Sports",
     date: "2025-02-28",
     readTime: 4,
@@ -104,7 +104,7 @@ export const BLOG_POSTS: BlogPost[] = [
     <p>Pickleball involves quick lateral movements. A proper warm-up prevents injuries, especially for older players. Spend 5&ndash;10 minutes warming up before every session.</p>
     <h2>7. Not Taking Lessons</h2>
     <p>A few hours of professional instruction will advance your game faster than months of self-teaching. Our beginner clinics at LevelUP run weekly and cover all the fundamentals.</p>
-    <p>Ready to fix these mistakes on the court? Check our <a href="/pickleball">pickleball program</a> for open play times and beginner clinics, or <a href="/free-trial">try a free session</a> to experience our dedicated indoor courts.</p>`,
+    <p>Ready to fix these mistakes on the court? Check our <a href="/pickleball">pickleball program</a> for open play times and beginner clinics, or <a href="/schedule">book a session</a> to experience our dedicated indoor courts.</p>`,
     author: "LevelUP Sports",
     date: "2025-02-20",
     readTime: 5,
@@ -125,7 +125,7 @@ export const BLOG_POSTS: BlogPost[] = [
     <h2>Why Indoor Matters</h2>
     <p>Delaware weather is unpredictable. Between rain, heat, and cold, outdoor training gets cancelled constantly. Indoor facilities eliminate that problem entirely — 72°F year-round, no cancellations, no rescheduling. For families with kids in competitive programs, consistency is everything.</p>
     <h2>The Bottom Line</h2>
-    <p>If you're in Middletown, Bear, Glasgow, or southern New Castle County, you have more options than you think. <a href="/facilities">LevelUP Sports</a> is 15 minutes away and offers <a href="/free-trial">free trial sessions</a> in all six sports — including <a href="/baseball">baseball</a>, <a href="/cricket">cricket</a>, <a href="/badminton">badminton</a>, and <a href="/pickleball">pickleball</a>. It's worth the drive to see the facility before committing.</p>`,
+    <p>If you're in Middletown, Bear, Glasgow, or southern New Castle County, you have more options than you think. <a href="/facilities">LevelUP Sports</a> is 15 minutes away and offers six sports under one roof — including <a href="/baseball">baseball</a>, <a href="/cricket">cricket</a>, <a href="/badminton">badminton</a>, and <a href="/pickleball">pickleball</a>. It's worth the drive to see the facility before committing.</p>`,
     author: "LevelUP Sports",
     date: "2025-01-20",
     readTime: 4,
@@ -146,8 +146,8 @@ export const BLOG_POSTS: BlogPost[] = [
     <p>Helmets should be provided and required. Machines should be well-maintained with consistent speed. Ideally, the facility has a coach on staff who can offer quick tips — a small adjustment to stance or timing can make a huge difference. LevelUP Sports in Elkton, MD (20 minutes from Newark) offers all of this, with 4 cages ranging from 30 to 90 MPH and coaching available.</p>
     <h2>Cost Expectations</h2>
     <p>Cage rental typically runs $35-45 per hour. Some facilities offer memberships that bring the per-visit cost down significantly. At LevelUP, a Pro membership gives unlimited cage access for $89/month — if you're going more than twice a week, the math works out quickly.</p>
-    <h2>Free Trial Option</h2>
-    <p>Not sure if your kid will like it? LevelUP offers a <a href="/free-trial">free trial session</a> with coaching included. It's the best way to see if cage work is right for your child's development without committing upfront. Learn more about our full <a href="/baseball">baseball program</a> or explore the <a href="/baseball-academy">Baseball Academy</a> for structured youth development.</p>`,
+    <h2>Try It Before Committing</h2>
+    <p>Not sure if your kid will like it? <a href="/schedule">Book a single cage session</a> with coaching included. It's the best way to see if cage work is right for your child's development without committing to a full program upfront. Learn more about our full <a href="/baseball">baseball program</a> or explore the <a href="/baseball-academy">Baseball Academy</a> for structured youth development.</p>`,
     author: "Coach Joe Vanaskey",
     date: "2025-02-05",
     readTime: 5,
@@ -169,7 +169,7 @@ export const BLOG_POSTS: BlogPost[] = [
     <h2>Questions to Ask Before Enrolling</h2>
     <ul><li>What are your coaches' playing and coaching backgrounds?</li><li>What is the player-to-coach ratio?</li><li>How do you track and communicate progress?</li><li>Can we observe a session before committing?</li><li>What's the cancellation policy?</li></ul>
     <h2>Local Options</h2>
-    <p>In Cecil County, LevelUP Sports offers academies in <a href="/baseball-academy">baseball</a>, <a href="/cricket-academy">cricket</a>, and <a href="/badminton-academy">badminton</a> with class sizes capped at 8-12 players, written progress reports every 4 weeks, and a <a href="/free-trial">free trial session</a> for every program. It's worth visiting the <a href="/facilities">facility</a> and watching a session before deciding.</p>`,
+    <p>In Cecil County, LevelUP Sports offers academies in <a href="/baseball-academy">baseball</a>, <a href="/cricket-academy">cricket</a>, and <a href="/badminton-academy">badminton</a> with class sizes capped at 8-12 players, and written progress reports every 4 weeks. It's worth visiting the <a href="/facilities">facility</a> and watching a session before deciding.</p>`,
     author: "LevelUP Sports",
     date: "2025-01-10",
     readTime: 6,
@@ -190,7 +190,7 @@ export const BLOG_POSTS: BlogPost[] = [
     <p>You don't need equipment — any decent facility provides paddles and balls for beginners. Wear athletic shoes with good lateral support (running shoes aren't ideal). Take a beginner lesson or clinic before jumping into open play — learning proper technique from the start prevents bad habits and injury.</p>
     <h2>Where to Play Near Wilmington</h2>
     <p>The closest dedicated indoor <a href="/pickleball">pickleball courts</a> to Wilmington are at LevelUP Sports in Elkton, MD — about 30 minutes south. They offer weekly beginner clinics, regular open play sessions (Tuesday and Thursday evenings are the most popular), and all equipment is provided. Indoor courts mean no weather cancellations, which matters when you're building a consistent routine.</p>
-    <p>They also offer a <a href="/free-trial">free first session</a>, so you can try it before committing to anything. Check the <a href="/schedule">schedule</a> for open play times, or explore <a href="/memberships">membership options</a> for the best value on regular play.</p>`,
+    <p>You can <a href="/schedule">book a single session</a> before committing to anything. Check the <a href="/schedule">schedule</a> for open play times, or explore <a href="/memberships">membership options</a> for the best value on regular play.</p>`,
     author: "LevelUP Sports",
     date: "2025-02-15",
     readTime: 5,
@@ -291,7 +291,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
     <p>Stop reading and go play. Seriously. You can learn the theory all day, but nothing replaces getting on a court and touching a ball.</p>
 
-    <p>LevelUP Sports offers a <a href="/free-trial">free trial session</a> for new players. Show up, try it, and see if it clicks. The facility is 20 minutes from Newark, 15 from Middletown, and 30 from Wilmington. Check the <a href="/volleyball">volleyball page</a> for open play times and beginner sessions.</p>
+    <p>New players can <a href="/schedule">book a single session</a> — show up, try it, and see if it clicks. The facility is 20 minutes from Newark, 15 from Middletown, and 30 from Wilmington. Check the <a href="/volleyball">volleyball page</a> for open play times and beginner sessions.</p>
 
     <p>You don&rsquo;t need to be athletic. You don&rsquo;t need to be young. You just need to show up.</p>`,
     author: "Coach Viktor",
@@ -569,7 +569,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
     <h2>Getting Started</h2>
 
-    <p>If you&rsquo;re curious about what structured badminton coaching feels like, LevelUP offers a <a href="/free-trial">free trial session</a>. You don&rsquo;t need to bring anything except athletic shoes and a willingness to work. Equipment is provided.</p>
+    <p>If you&rsquo;re curious about what structured badminton coaching feels like, <a href="/schedule">book a session</a> at LevelUP. You don&rsquo;t need to bring anything except athletic shoes and a willingness to work. Equipment is provided.</p>
 
     <p>The difference between casual play and coached training is something you feel in the first session. You&rsquo;ll leave knowing exactly what to work on and why. That alone is worth showing up for.</p>
 
@@ -722,7 +722,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
     <h2>Try Before You Decide</h2>
 
-    <p>The best way to figure out which sport is right for you is to play them. LevelUP Sports offers <a href="/free-trial">free trial sessions</a> in both <a href="/pickleball">pickleball</a> and <a href="/badminton">badminton</a>, with equipment provided. Come try both in the same week and see which one clicks. You might walk in planning to play pickleball and walk out signing up for badminton lessons. It happens more than you&rsquo;d think.</p>`,
+    <p>The best way to figure out which sport is right for you is to play them. LevelUP Sports offers <a href="/schedule">open play sessions</a> in both <a href="/pickleball">pickleball</a> and <a href="/badminton">badminton</a>, with equipment provided. Come try both in the same week and see which one clicks. You might walk in planning to play pickleball and walk out signing up for badminton lessons. It happens more than you&rsquo;d think.</p>`,
     author: "LevelUP Sports",
     date: "2025-04-11",
     readTime: 5,
@@ -789,7 +789,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
     <p>Parents often feel pressure (from coaches, from other parents, from the culture) to specialize their child early. &ldquo;If they don&rsquo;t do travel baseball year-round, they&rsquo;ll fall behind.&rdquo; The research says the opposite. The kids who play multiple sports don&rsquo;t fall behind. They catch up and pass the early specializers by high school.</p>
 
-    <p>Your job as a parent is to provide opportunities for variety and let your child lead. Sign them up for a free trial in a sport they&rsquo;ve never tried. Let them play different sports in different seasons. Resist the urge to commit to year-round single-sport training before they&rsquo;re in high school.</p>
+    <p>Your job as a parent is to provide opportunities for variety and let your child lead. Sign them up for a session in a sport they&rsquo;ve never tried. Let them play different sports in different seasons. Resist the urge to commit to year-round single-sport training before they&rsquo;re in high school.</p>
 
     <h2>Getting Started with Multi-Sport Training</h2>
 
@@ -875,7 +875,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
     <h2>Getting Started</h2>
 
-    <p>The easiest way to experience the coaching and the courts is our <a href="/free-trial">free trial session</a>. You&rsquo;ll get on a BWF-standard court, work with a certified coach, and see the difference that proper instruction and proper facilities make. No commitment required &mdash; just show up in athletic clothes and court shoes.</p>
+    <p>The easiest way to experience the coaching and the courts is to <a href="/schedule">book a session</a>. You&rsquo;ll get on a BWF-standard court, work with a certified coach, and see the difference that proper instruction and proper facilities make. No long-term commitment required &mdash; just show up in athletic clothes and court shoes.</p>
 
     <p>Check the <a href="/schedule">current schedule</a> for available academy sessions and open court times. Whether you&rsquo;re a junior just starting out, an adult looking for quality recreational play, or a competitive player training for tournaments, the coaching infrastructure at LevelUP is built to move your game forward.</p>
 
@@ -891,7 +891,7 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: "youth-cricket-academy-elkton-md",
     title: "Indoor Cricket for Youth Players — Elkton, MD",
     excerpt:
-      "Youth cricket academy powered by BRSS Cricket Academy. Ages 6-16, IPL-level coaching, indoor nets, bowling machines, and free trial sessions.",
+      "Youth cricket academy powered by BRSS Cricket Academy. Ages 6-16, IPL-level coaching, indoor nets, and bowling machines.",
     content: `<p>Cricket is the fastest-growing youth sport in America, and for good reason. It develops hand-eye coordination, strategic thinking, teamwork, and physical fitness in a way few other sports can match. But for families in the Maryland, Delaware, and Pennsylvania tri-state area, finding proper youth cricket coaching has always been the challenge. Park fields with uneven bounces, volunteer coaches with limited technical knowledge, and programs that shut down every winter.</p>
 
     <p>That changed when BRSS Cricket Academy &mdash; North America&rsquo;s largest cricket academy &mdash; partnered with <a href="/cricket">LevelUP Sports &amp; Athletics Club</a> to bring world-class youth cricket training to Elkton, MD. For the first time, young players in this region have access to professional-grade indoor facilities and coaches who&rsquo;ve competed at the highest levels of international cricket.</p>
@@ -952,9 +952,9 @@ export const BLOG_POSTS: BlogPost[] = [
 
     <p>Several of our families have children in multiple sports at LevelUP, combining cricket with <a href="/badminton">badminton</a>, <a href="/baseball">baseball</a>, or our <a href="/kids-agility">Kids Agility program</a>. The multi-sport approach develops well-rounded athletes, and having everything under one roof makes scheduling manageable for busy families.</p>
 
-    <h2>Free Trial Sessions</h2>
+    <h2>See a Session Before You Enroll</h2>
 
-    <p>We know that choosing a sports program for your child is a significant decision. That&rsquo;s why we offer <a href="/free-trial">free trial sessions</a> for every new family. Your child gets a full session experience &mdash; warm-up, coaching, net practice, and a game scenario &mdash; with no commitment required. All equipment is provided. Just bring athletic clothing and closed-toe shoes.</p>
+    <p>We know that choosing a sports program for your child is a significant decision. That&rsquo;s why new families can <a href="/schedule">book a single session</a>. Your child gets a full session experience &mdash; warm-up, coaching, net practice, and a game scenario &mdash; with no long-term commitment. All equipment is provided. Just bring athletic clothing and closed-toe shoes.</p>
 
     <p>The trial session also gives you a chance to meet the coaches, see the facility, ask questions, and watch your child interact with the program. Most families know within one session whether this is the right fit.</p>
 
@@ -1033,9 +1033,9 @@ export const BLOG_POSTS: BlogPost[] = [
 
     <p>The combination of professional coaching, dedicated courts, and structured programming makes the drive worthwhile for families who want more than what local rec center programs can offer.</p>
 
-    <h2>Get Started with a Free Trial</h2>
+    <h2>Get Started with a Session</h2>
 
-    <p>We believe the best way to evaluate any youth sports program is to experience it firsthand. That&rsquo;s why we offer a <a href="/free-trial">free trial session</a> for every new player. Your child will participate in a full academy session &mdash; warm-up, skill drills, coached scrimmage &mdash; and you&rsquo;ll get to watch the coaching in action.</p>
+    <p>We believe the best way to evaluate any youth sports program is to experience it firsthand. That&rsquo;s why new players can <a href="/schedule">book a single session</a>. Your child will participate in a full academy session &mdash; warm-up, skill drills, coached scrimmage &mdash; and you&rsquo;ll get to watch the coaching in action.</p>
 
     <p>No equipment needed. No commitment required. Just athletic clothing, court shoes, and a willingness to try something new.</p>
 
@@ -1185,7 +1185,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
     <h2>Try the Courts</h2>
 
-    <p>The best way to understand the difference is to play on our courts yourself. We offer a <a href="/free-trial">free trial session</a> for new players, giving you a chance to experience the courts, the lighting, and the flooring without any financial commitment. Bring your racket (or use one of ours), wear court shoes, and see what BWF-standard badminton feels like.</p>
+    <p>The best way to understand the difference is to play on our courts yourself. New players can <a href="/schedule">book a court session</a> and experience the courts, the lighting, and the flooring firsthand. Bring your racket (or use one of ours), wear court shoes, and see what BWF-standard badminton feels like.</p>
 
     <p>Visit the <a href="/badminton">badminton program page</a> for full details on everything we offer &mdash; from recreational play to competitive coaching through the <a href="/badminton-academy">Badminton Academy</a>. Check the <a href="/schedule">schedule</a> for open play times and available court slots.</p>`,
     author: "LevelUP Sports",
@@ -1274,7 +1274,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
     <p>Ready to see the courts? Check the <a href="/schedule">current schedule</a> for available time slots, or visit the <a href="/volleyball">volleyball program page</a> for complete details on everything we offer. For recurring team bookings or special requests, reach out through the website and we&rsquo;ll set up a schedule that works for your group.</p>
 
-    <p>If you&rsquo;re a player looking to improve individually, explore the <a href="/volleyball-academy">Volleyball Academy</a> or take advantage of our <a href="/free-trial">free trial session</a> to experience the coaching and facility firsthand. We also offer <a href="/memberships">membership options</a> for regular players seeking the best per-visit value.</p>
+    <p>If you&rsquo;re a player looking to improve individually, explore the <a href="/volleyball-academy">Volleyball Academy</a> or <a href="/schedule">book a session</a> to experience the coaching and facility firsthand. We also offer <a href="/memberships">membership options</a> for regular players seeking the best per-visit value.</p>
 
     <p>Twenty minutes from Newark. Professional courts. No excuses.</p>`,
     author: "LevelUP Sports",

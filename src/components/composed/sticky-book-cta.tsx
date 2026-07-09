@@ -9,7 +9,6 @@ import { trackBookingCTAClick } from "@/lib/analytics";
 const HIDE_ON_ROUTES: ReadonlyArray<string> = [
   "/schedule",
   "/register",
-  "/free-trial",
   "/survey",
   "/go",
 ];

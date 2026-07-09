@@ -11,11 +11,12 @@ import { generateBreadcrumbLD, generateFAQLD } from "@/lib/seo/json-ld";
 import { HOMEPAGE_FAQS, MEMBERSHIP_FAQS, SAFETY_FAQS } from "@/content/faqs";
 import { SPORT_PAGES } from "@/content/sports";
 import { ACADEMY_PAGES } from "@/content/academies";
+import { BOOKING_URLS } from "@/lib/constants/booking";
 
 export const metadata: Metadata = generateSEOMetadata({
   title: "FAQ — Frequently Asked Questions About LevelUP Sports",
   description:
-    "Answers to common questions about LevelUP Sports in Elkton, MD. Hours, pricing, memberships, free trials, safety policies, youth academies, court rentals, and more.",
+    "Answers to common questions about LevelUP Sports in Elkton, MD. Hours, pricing, memberships, safety policies, youth academies, court rentals, and more.",
   path: "/faq",
 });
 
@@ -162,7 +163,7 @@ export default function FAQPage() {
         title="Still Have Questions?"
         description="Our team is happy to help. Call us, email, or stop by."
         primaryCTA={{ label: "Contact Us", href: "/contact" }}
-        secondaryCTA={{ label: "Try a Free Session", href: "/free-trial" }}
+        secondaryCTA={{ label: "Book a Session", href: BOOKING_URLS.offerings }}
       />
     </>
   );

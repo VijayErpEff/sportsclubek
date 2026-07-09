@@ -10,9 +10,9 @@ export const HOMEPAGE_FAQS = [
       "No — drop-ins are welcome! You can rent a batting cage or court on a per-session basis without any membership. Open Play is $15/hour for non-members ($8/hour for members — a 50% discount). Private rentals range from $40/hour for a batting cage, badminton court, or cricket cage, up to $120/hour for a volleyball court. That said, memberships save you significant money if you come regularly. Our Core plan starts at $59.99/month.",
   },
   {
-    question: "Can my child try a free session before signing up?",
+    question: "Can my child try a session before signing up?",
     answer:
-      "Yes! We offer a completely free trial session for every sport — no credit card required, no obligation. Your child gets a 60-minute coached session with all equipment provided, plus a personalized skill assessment. Visit our Free Trial page to book: levelupsports.us/free-trial",
+      "Yes — you can book a single session in any sport with no membership or long-term commitment required. Your child gets a coached session with all equipment provided, and our coaches will help you find the right program from there. Book online or call us at (443) 406-6494.",
   },
   {
     question: "How much does it cost to rent a batting cage or court at LevelUP?",
