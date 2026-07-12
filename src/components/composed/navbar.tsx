@@ -146,13 +146,13 @@ export function Navbar() {
             </Link>
 
             {/* ── Desktop Nav (centered, flex-flow so it can't overlap CTAs) ── */}
-            <div className="hidden lg:flex items-center gap-1 flex-1 justify-center min-w-0">
+            <div className="hidden xl:flex items-center gap-1 flex-1 justify-center min-w-0">
               {/* Sports dropdown wrapper */}
               <div ref={wrapperRef} className="relative">
                 <button
                   onClick={() => setSportsOpen(prev => !prev)}
                   className={cn(
-                    "flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-lg transition-colors",
+                    "flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg transition-colors",
                     sportsOpen || isSportsPage ? "text-primary bg-primary/5" : "text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50"
                   )}
                   aria-expanded={sportsOpen}
@@ -202,7 +202,7 @@ export function Navbar() {
 
               {NAV_ITEMS.map((item) => (
                 <Link key={item.label} href={item.href}
-                  className={cn("px-4 py-2 text-sm font-medium rounded-lg transition-colors",
+                  className={cn("px-3 py-2 text-sm font-medium rounded-lg whitespace-nowrap transition-colors",
                     pathname === item.href ? "text-primary bg-primary/5" : "text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50"
                   )}>
                   {item.label}
@@ -211,7 +211,7 @@ export function Navbar() {
             </div>
 
             {/* Desktop CTA */}
-            <div className="hidden lg:flex items-center gap-3 shrink-0">
+            <div className="hidden xl:flex items-center gap-2 shrink-0">
               {/* Bell lead capture */}
               <div ref={bellDesktopRef} className="relative">
                 <button
@@ -287,7 +287,7 @@ export function Navbar() {
                 )}
               </div>
 
-              <Button size="sm" variant="ghost" className="rounded-full px-4" asChild>
+              <Button size="sm" variant="ghost" className="rounded-full px-3" asChild>
                 <a
                   href={BOOKING_URLS.login}
                   target="_blank"
@@ -299,7 +299,7 @@ export function Navbar() {
                 </a>
               </Button>
 
-              <Button size="sm" variant="outline" className="rounded-full px-5" asChild>
+              <Button size="sm" variant="outline" className="rounded-full px-4" asChild>
                 <a
                   href={BOOKING_URLS.createAccount}
                   target="_blank"
@@ -308,7 +308,7 @@ export function Navbar() {
                 >Create Account</a>
               </Button>
 
-              <Button size="sm" className="rounded-full px-5" asChild>
+              <Button size="sm" className="rounded-full px-4" asChild>
                 <a
                   href={BOOKING_URLS.offerings}
                   target="_blank"
@@ -319,7 +319,7 @@ export function Navbar() {
             </div>
 
             {/* Mobile: call + bell + toggle */}
-            <div className="lg:hidden flex items-center gap-1 ml-auto">
+            <div className="xl:hidden flex items-center gap-1 ml-auto">
               <a
                 href={`tel:${SITE_CONFIG.phone}`}
                 onClick={trackPhoneCall}
@@ -355,7 +355,7 @@ export function Navbar() {
 
       {/* ── Mobile Bell Dropdown ── */}
       {bellOpen && (
-        <div ref={bellDropdownRef} className="fixed inset-x-0 z-[99] lg:hidden" style={{ top: "calc(var(--banner-height, 0px) + 4rem)" }}>
+        <div ref={bellDropdownRef} className="fixed inset-x-0 z-[99] xl:hidden" style={{ top: "calc(var(--banner-height, 0px) + 4rem)" }}>
           <div className="mx-3 mt-1 bg-white rounded-2xl shadow-xl ring-1 ring-black/5 p-5">
             {bellStatus === "success" ? (
               <div className="flex items-center gap-2 justify-center py-2">
@@ -424,7 +424,7 @@ export function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25, ease: APPLE_EASE }}
-            className="fixed inset-0 z-[110] lg:hidden bg-white"
+            className="fixed inset-0 z-[110] xl:hidden bg-white"
             role="dialog"
             aria-modal="true"
           >
