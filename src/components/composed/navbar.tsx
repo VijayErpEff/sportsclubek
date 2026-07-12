@@ -287,16 +287,25 @@ export function Navbar() {
                 )}
               </div>
 
-              <Button size="sm" className="rounded-full px-5" asChild>
+              <Button size="sm" variant="ghost" className="rounded-full px-4" asChild>
                 <a
-                  href="https://app.upperhand.io/accounts/login"
+                  href={BOOKING_URLS.login}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => trackCTAClick("Sign In", "https://app.upperhand.io/accounts/login")}
+                  onClick={() => trackCTAClick("Sign In", BOOKING_URLS.login)}
                 >
                   <LogIn className="h-4 w-4 mr-1.5" aria-hidden="true" />
                   Sign In
                 </a>
+              </Button>
+
+              <Button size="sm" variant="outline" className="rounded-full px-5" asChild>
+                <a
+                  href={BOOKING_URLS.createAccount}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackCTAClick("Create Account", BOOKING_URLS.createAccount)}
+                >Create Account</a>
               </Button>
 
               <Button size="sm" className="rounded-full px-5" asChild>
@@ -488,25 +497,36 @@ export function Navbar() {
               <div className="mt-auto px-6 pt-8 space-y-3">
                 <Button size="lg" className="w-full rounded-full" asChild>
                   <a
-                    href="https://app.upperhand.io/accounts/login"
+                    href={BOOKING_URLS.offerings}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setMobileOpen(false)}
+                  >Book a Session</a>
+                </Button>
+                <Button size="lg" variant="outline" className="w-full rounded-full" asChild>
+                  <a
+                    href={BOOKING_URLS.createAccount}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => {
-                      trackCTAClick("Sign In", "https://app.upperhand.io/accounts/login");
+                      trackCTAClick("Create Account", BOOKING_URLS.createAccount);
+                      setMobileOpen(false);
+                    }}
+                  >Create Account</a>
+                </Button>
+                <Button size="lg" variant="ghost" className="w-full rounded-full" asChild>
+                  <a
+                    href={BOOKING_URLS.login}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => {
+                      trackCTAClick("Sign In", BOOKING_URLS.login);
                       setMobileOpen(false);
                     }}
                   >
                     <LogIn className="h-4 w-4 mr-2" aria-hidden="true" />
                     Sign In
                   </a>
-                </Button>
-                <Button size="lg" className="w-full rounded-full" asChild>
-                  <a
-                    href={BOOKING_URLS.offerings}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => setMobileOpen(false)}
-                  >Book a Session</a>
                 </Button>
                 <p className="text-center text-sm text-neutral-400">
                   <a href={`tel:${SITE_CONFIG.phone}`} className="hover:text-primary">{SITE_CONFIG.phone}</a>

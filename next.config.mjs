@@ -59,6 +59,14 @@ const nextConfig = {
         destination: "/schedule",
         permanent: true,
       },
+      {
+        // Shareable shortcut for flyers/social — Upper Hand's login page has
+        // no sign-up link, so this is the only path to account creation.
+        source: "/signup",
+        destination:
+          "https://app.upperhand.io/customers/2578-level_up-sports-and-athletics-club/create_user",
+        permanent: false,
+      },
     ];
   },
 };

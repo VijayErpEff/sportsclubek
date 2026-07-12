@@ -40,6 +40,7 @@ const footerCompany = [
   { label: "Summer Camps", href: "/summer-camps" },
   { label: "Batting Cage Rentals", href: "/batting-cage-rentals" },
   { label: "Cricket Cage Rentals", href: "/cricket-cage-rentals" },
+  { label: "Create Account", href: "/signup" },
 ];
 
 const socialLinks = [

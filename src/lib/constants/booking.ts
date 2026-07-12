@@ -10,6 +10,15 @@ export const BOOKING_URLS = {
   /** All offerings — default landing for general booking */
   offerings: `${UH_BASE}/offerings`,
 
+  /** Upper Hand account login (existing customers) */
+  login: "https://app.upperhand.io/accounts/login",
+
+  /** New-account registration — Upper Hand's login page has no sign-up link,
+      so we must link here directly. Slug differs from UH_BASE (level_up vs
+      levelup) — that's the URL Upper Hand issues; do not "fix" it. */
+  createAccount:
+    "https://app.upperhand.io/customers/2578-level_up-sports-and-athletics-club/create_user",
+
   /** Events / sessions schedule on Upper Hand */
   schedule: `${UH_BASE}/events`,
 

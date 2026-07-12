@@ -96,6 +96,11 @@ export const SAFETY_FAQS = [
 
 export const MEMBERSHIP_FAQS = [
   {
+    question: "How do I create an account to book sessions or join?",
+    answer:
+      "All bookings and memberships run through our partner platform, Upper Hand. Create your free account at levelupsports.us/signup — it takes about a minute. Once registered, you can sign in anytime to book courts, cages, academy sessions, and manage your membership. Note: the Upper Hand sign-in page doesn't have a sign-up link, so use our /signup link to register first.",
+  },
+  {
     question: "Can I cancel my membership at any time?",
     answer:
       "Yes. All memberships can be cancelled with 30 days' notice. No long-term contracts, no cancellation fees. We want you here because you love it, not because you're locked in.",
