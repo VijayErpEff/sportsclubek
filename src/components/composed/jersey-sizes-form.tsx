@@ -21,7 +21,7 @@ const SIZE_OPTIONS = [
   { value: "A2XL", label: "Adult 2XL" },
 ];
 
-interface UniformFormData {
+interface JerseySizesFormData {
   athleteName: string;
   sports: string[];
   jerseySize: string;
@@ -32,7 +32,7 @@ interface UniformFormData {
   email: string;
 }
 
-const EMPTY_FORM: UniformFormData = {
+const EMPTY_FORM: JerseySizesFormData = {
   athleteName: "",
   sports: [],
   jerseySize: "",
@@ -76,9 +76,9 @@ function SizePicker({
   );
 }
 
-export function UniformForm() {
+export function JerseySizesForm() {
   const prefersReduced = useReducedMotion();
-  const [form, setForm] = useState<UniformFormData>(EMPTY_FORM);
+  const [form, setForm] = useState<JerseySizesFormData>(EMPTY_FORM);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -103,7 +103,7 @@ export function UniformForm() {
     setStatus("loading");
     setErrorMsg("");
     try {
-      const res = await fetch("/api/uniforms", {
+      const res = await fetch("/api/jersey-sizes", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
@@ -163,13 +163,13 @@ export function UniformForm() {
           </h3>
           <div className="space-y-4">
             <div>
-              <label htmlFor="uniform-athlete-name" className="block text-sm font-medium text-neutral-700 mb-1">
+              <label htmlFor="jersey-athlete-name" className="block text-sm font-medium text-neutral-700 mb-1">
                 Athlete&rsquo;s name
               </label>
               <div className="relative">
                 <User className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400" />
                 <input
-                  id="uniform-athlete-name" type="text" required
+                  id="jersey-athlete-name" type="text" required
                   value={form.athleteName}
                   onChange={(e) => setForm((f) => ({ ...f, athleteName: e.target.value }))}
                   placeholder="Name as it should appear on our roster"
@@ -220,11 +220,11 @@ export function UniformForm() {
             Between sizes? Pick the larger one — kids grow fast.
           </p>
           <div>
-            <label htmlFor="uniform-notes" className="block text-sm font-medium text-neutral-700 mb-1">
+            <label htmlFor="jersey-notes" className="block text-sm font-medium text-neutral-700 mb-1">
               Fit notes <span className="text-neutral-400 font-normal">(optional)</span>
             </label>
             <input
-              id="uniform-notes" type="text"
+              id="jersey-notes" type="text"
               value={form.notes}
               onChange={(e) => setForm((f) => ({ ...f, notes: e.target.value.slice(0, 300) }))}
               placeholder="e.g. tall for their age, prefers a loose fit"
@@ -237,11 +237,11 @@ export function UniformForm() {
         <div className="space-y-4 border-t border-neutral-100 pt-5">
           <h3 className="font-display text-lg font-bold text-neutral-900">Parent contact</h3>
           <div>
-            <label htmlFor="uniform-parent-name" className="block text-sm font-medium text-neutral-700 mb-1">Parent name</label>
+            <label htmlFor="jersey-parent-name" className="block text-sm font-medium text-neutral-700 mb-1">Parent name</label>
             <div className="relative">
               <User className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400" />
               <input
-                id="uniform-parent-name" type="text" required
+                id="jersey-parent-name" type="text" required
                 value={form.parentName}
                 onChange={(e) => setForm((f) => ({ ...f, parentName: e.target.value }))}
                 placeholder="Your name"
@@ -250,11 +250,11 @@ export function UniformForm() {
             </div>
           </div>
           <div>
-            <label htmlFor="uniform-phone" className="block text-sm font-medium text-neutral-700 mb-1">Phone</label>
+            <label htmlFor="jersey-phone" className="block text-sm font-medium text-neutral-700 mb-1">Phone</label>
             <div className="relative">
               <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400" />
               <input
-                id="uniform-phone" type="tel" required
+                id="jersey-phone" type="tel" required
                 value={form.phone}
                 onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
                 placeholder="(443) 000-0000"
@@ -263,11 +263,11 @@ export function UniformForm() {
             </div>
           </div>
           <div>
-            <label htmlFor="uniform-email" className="block text-sm font-medium text-neutral-700 mb-1">Email</label>
+            <label htmlFor="jersey-email" className="block text-sm font-medium text-neutral-700 mb-1">Email</label>
             <div className="relative">
               <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400" />
               <input
-                id="uniform-email" type="email" required
+                id="jersey-email" type="email" required
                 value={form.email}
                 onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
                 placeholder="you@example.com"

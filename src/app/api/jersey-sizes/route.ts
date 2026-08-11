@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { redis } from "@/lib/storage/redis";
 
-const UNIFORMS_KEY = "uniform_submissions";
+const JERSEY_SIZES_KEY = "jersey_size_submissions";
 const LEADS_KEY = "leads";
 const ADMIN_PIN = process.env.ADMIN_PIN || "6886";
 
@@ -52,8 +52,8 @@ export async function POST(request: Request) {
       timestamp: new Date().toISOString(),
     };
 
-    // Store uniform submission
-    await redis.lpush(UNIFORMS_KEY, JSON.stringify(submission));
+    // Store jersey size submission
+    await redis.lpush(JERSEY_SIZES_KEY, JSON.stringify(submission));
 
     // Also store as a lead for the leads dashboard
     const lead = {
@@ -61,8 +61,8 @@ export async function POST(request: Request) {
       email: submission.email,
       name: submission.parentName,
       phone: submission.phone,
-      source: "uniforms",
-      context: `Uniform sizing — Athlete: ${submission.athleteName}, Sports: ${submission.sports.join(", ")}, Jersey: ${submission.jerseySize}, Track pants: ${submission.trackPantsSize}`,
+      source: "jersey_sizes",
+      context: `Jersey sizes — Athlete: ${submission.athleteName}, Sports: ${submission.sports.join(", ")}, Jersey: ${submission.jerseySize}, Track pants: ${submission.trackPantsSize}`,
       timestamp: submission.timestamp,
     };
     await redis.lpush(LEADS_KEY, JSON.stringify(lead));
@@ -86,7 +86,7 @@ export async function GET(request: Request) {
   }
 
   try {
-    const raw = await redis.lrange(UNIFORMS_KEY, 0, -1);
+    const raw = await redis.lrange(JERSEY_SIZES_KEY, 0, -1);
     const submissions = raw.map((item: string | object) =>
       typeof item === "string" ? JSON.parse(item) : item
     );
