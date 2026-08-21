@@ -15,7 +15,7 @@ import { CheckCircle, PartyPopper, ClipboardList, Play, Armchair, Users, Buildin
 export const metadata: Metadata = generateSEOMetadata({
   title: "Birthday Parties & Group Events — Elkton, MD",
   description:
-    "Host a birthday party at LevelUP Sports in Elkton, MD. Batting cages, badminton, pickleball, and more for ages 6+. Packages from $199 with equipment, setup, and cleanup included. Book today.",
+    "Host a birthday party at LevelUP Sports in Elkton, MD. Batting cages, badminton, pickleball, and more for ages 6+. Packages from $199 with all equipment provided. Book today.",
   path: "/birthday-parties",
 });
 
@@ -102,7 +102,7 @@ export default function BirthdayPartiesPage() {
           </nav>
           <div className="max-w-2xl mx-auto text-center">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-3">
-              Ages 6+ &bull; All Equipment Provided &bull; Setup &amp; Cleanup Included
+              Ages 6+ &bull; All Equipment Provided
             </p>
             <h1 className="font-display text-page-title text-neutral-900 mb-2 text-balance">
               The Birthday Party They&rsquo;ll Actually Talk About
@@ -179,7 +179,7 @@ export default function BirthdayPartiesPage() {
 
           <Reveal delay={0.1}>
             <p className="text-center text-xs text-neutral-400 mt-6 max-w-2xl mx-auto">
-              All packages include setup, cleanup, and all equipment. Bring your own cake and food! Additional kids beyond package max at ${PACKAGES[0].additionalKid}-${PACKAGES[1].additionalKid}/kid.
+              All packages include all equipment. Bring your own cake and food! Additional kids beyond package max at ${PACKAGES[0].additionalKid}-${PACKAGES[1].additionalKid}/kid.
             </p>
           </Reveal>
         </Container>
