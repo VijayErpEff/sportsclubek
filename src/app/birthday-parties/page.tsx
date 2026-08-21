@@ -32,7 +32,6 @@ const PACKAGES = [
       "1 hour of play time on courts & cages",
       "30 min celebration time (bring your own cake & food)",
       "All equipment provided",
-      "Setup and cleanup included",
     ],
   },
   {
@@ -48,7 +47,6 @@ const PACKAGES = [
       "2 hours of play time on courts & cages",
       "30 min celebration time (bring your own cake & food)",
       "All equipment provided",
-      "Setup and cleanup included",
     ],
   },
   {
@@ -63,7 +61,6 @@ const PACKAGES = [
       "3 hours of play time on courts & cages",
       "30 min celebration time (bring your own cake & food)",
       "All equipment provided",
-      "Setup and cleanup included",
     ],
   },
 ];
