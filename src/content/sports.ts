@@ -263,7 +263,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
       },
       {
         title: "Badminton Academy",
-        description: "Structured training programs developing footwork, technique, and match strategy with certified coaches. Package 1: $140 (4 hrs coaching) | Package 2: $250 (8 hrs coaching + 4 hrs practice). Saturdays & Tuesday evenings.",
+        description: "Structured training programs developing footwork, technique, and match strategy with certified coaches. Package 1: $140 (4 hrs coaching) | Package 2: $250 (8 hrs coaching). Monday & Wednesday evenings.",
         href: "/badminton-academy",
         tag: "Academy",
       },
