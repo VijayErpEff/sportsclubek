@@ -1,12 +1,6 @@
 {
-  "enabled": true,
-  "messages": [
-    {
-      "text": "Summer Camp 2026 — LevelUP × Code Ninjas: Where Play Meets Coding! · Ages 5+ · Full Day $299 / Half Day $199 · Weeks of Jul 13 & Aug 10",
-      "linkText": "Reserve Your Spot",
-      "linkUrl": "/summer-camps"
-    }
-  ],
+  "enabled": false,
+  "messages": [],
   "rotateMs": 7000,
   "style": "gradient",
   "dismissible": true
