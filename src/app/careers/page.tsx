@@ -98,6 +98,37 @@ const openPositions: Position[] = [
       "Coach hitting, pitching, and fielding fundamentals for youth and teen softball players.",
   },
   {
+    title: "Assistant Coach",
+    type: "Open",
+    description:
+      "Support coaching across all our sports — baseball, cricket, badminton, pickleball, soccer, and more — wherever the team needs you.",
+    details: {
+      summary:
+        "Work alongside our head coaches across every program at LevelUP — assisting with academy sessions, camps, open play, and events in whichever sport needs support that day. A great fit for a versatile, athletic person who loves working with kids and wants hands-on coaching experience across multiple sports.",
+      location: "Elkton, MD — on-site",
+      compensation: "Based on experience and availability",
+      responsibilities: [
+        "Assist head coaches during academy sessions, group lessons, and camps across all sports.",
+        "Help run drills, manage groups, and keep sessions moving safely and on schedule.",
+        "Set up and break down courts, cages, and training equipment.",
+        "Support open houses, tournaments, birthday parties, and club events.",
+        "Step in wherever needed — flexibility across sports is the core of this role.",
+      ],
+      requirements: [
+        "Playing experience in at least one of our sports (baseball, cricket, badminton, pickleball, soccer, or volleyball).",
+        "Comfortable working with young athletes (ages 5–18).",
+        "Reliable, punctual, and coachable — you'll learn our methods from the head coaches.",
+        "Ability to pass a background check.",
+      ],
+      niceToHave: [
+        "Multi-sport playing or coaching background.",
+        "First aid / CPR certification.",
+        "Availability on weekday evenings and weekends.",
+        "Interest in growing into a head coaching role.",
+      ],
+    },
+  },
+  {
     title: "Club Manager",
     type: "Full-Time",
     description:
