@@ -54,6 +54,38 @@ const openPositions: Position[] = [
       "Develop skills and strategies for youth and adult volleyball teams.",
   },
   {
+    title: "Soccer Coach",
+    type: "Full-Time",
+    description:
+      "Lead youth soccer training — footwork, ball control, and small-sided game play for young athletes.",
+    details: {
+      summary:
+        "Coach youth soccer sessions at our Elkton, MD facility — from first-touch fundamentals for beginners to technical and tactical development for competitive players. You'll run structured, high-energy sessions that build skill and confidence in every athlete.",
+      location: "Elkton, MD — on-site",
+      compensation: "Competitive, based on experience and certifications",
+      responsibilities: [
+        "Plan and lead structured soccer training sessions for youth players of all skill levels.",
+        "Teach core fundamentals — dribbling, passing, receiving, shooting, and defending.",
+        "Run small-sided games and drills that develop decision-making and game IQ.",
+        "Track player progress and communicate development goals with families.",
+        "Maintain a safe, positive, and inclusive training environment.",
+        "Support open houses, camps, and club events as needed.",
+      ],
+      requirements: [
+        "Playing or coaching experience in competitive soccer.",
+        "Experience working with young athletes (ages 5–18).",
+        "Strong communication skills with kids and parents alike.",
+        "Ability to pass a background check.",
+      ],
+      niceToHave: [
+        "US Soccer or United Soccer Coaches license (Grassroots or higher).",
+        "First aid / CPR certification.",
+        "Experience coaching futsal or indoor soccer formats.",
+        "Multi-sport coaching background.",
+      ],
+    },
+  },
+  {
     title: "Baseball Coach",
     type: "Full-Time",
     description:

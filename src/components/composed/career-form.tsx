@@ -144,12 +144,13 @@ function CareerModal({
 
             <div>
               <label htmlFor="career-phone" className="block text-sm font-medium text-neutral-900 mb-1">
-                Phone
+                Phone <span className="text-error">*</span>
               </label>
               <input
                 id="career-phone"
                 name="phone"
                 type="tel"
+                required
                 autoComplete="tel"
                 placeholder="(555) 123-4567"
                 className={inputCn}

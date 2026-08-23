@@ -91,11 +91,14 @@ export async function sendCareerApplication(params: {
     NOTIFY_TEMPLATE_ID,
     {
       type: "Career Application",
+      name: params.name,
       from_name: params.name,
       from_email: params.email,
       phone: params.phone || "Not provided",
-      subject: `Application: ${params.position}`,
-      message: params.message,
+      subject: `Application: ${params.position} — ${params.name}`,
+      // Embed applicant details in the body so they show regardless of
+      // which variables the EmailJS template renders.
+      message: `Applicant: ${params.name}\nEmail: ${params.email}\nPhone: ${params.phone || "Not provided"}\nPosition: ${params.position}\n\n${params.message}`,
     },
     PUBLIC_KEY
   );
