@@ -58,11 +58,11 @@ export async function POST(request: Request) {
       }
     }
 
-    // 2. Notify hiring inbox.
+    // 2. Notify hiring inbox + confirm to applicant, in parallel (Netlify 10s cap).
     let notified = false;
     if (isEmailConfigured()) {
-      try {
-        await sendEmail({
+      const [notifyResult, replyResult] = await Promise.allSettled([
+        sendEmail({
           to: BUSINESS_INBOX,
           replyTo: email,
           subject: `[Application] ${position} — ${name}`,
@@ -76,15 +76,8 @@ export async function POST(request: Request) {
             extra: [{ label: "Position", value: position }],
             receivedAt: application.timestamp,
           }),
-        });
-        notified = true;
-      } catch (err) {
-        console.error("[Careers] notification failed:", err);
-      }
-
-      // 3. Applicant confirmation (non-fatal).
-      try {
-        await sendEmail({
+        }),
+        sendEmail({
           to: email,
           replyTo: BUSINESS_INBOX,
           subject: `Application received: ${position} — LevelUP Sports`,
@@ -99,10 +92,11 @@ export async function POST(request: Request) {
             ],
             preheader: `Thanks ${name.split(" ")[0]} — your ${position} application is in. Here's what happens next.`,
           }),
-        });
-      } catch (err) {
-        console.error("[Careers] auto-reply failed:", err);
-      }
+        }),
+      ]);
+      notified = notifyResult.status === "fulfilled";
+      if (notifyResult.status === "rejected") console.error("[Careers] notification failed:", notifyResult.reason);
+      if (replyResult.status === "rejected") console.error("[Careers] auto-reply failed:", replyResult.reason);
     }
 
     if (!stored && !notified) {

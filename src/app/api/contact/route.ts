@@ -39,23 +39,14 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Email service unavailable. Please call (443) 406-6494." }, { status: 503 });
     }
 
-    await sendEmail({
-      to: BUSINESS_INBOX,
-      replyTo: email,
-      subject: `[Contact] ${subject} — ${name}`,
-      html: notificationEmail({
-        type: "Contact Form",
-        subject,
-        fromName: name,
-        fromEmail: email,
-        phone,
-        message,
+    const [notifyResult, replyResult] = await Promise.allSettled([
+      sendEmail({
+        to: BUSINESS_INBOX,
+        replyTo: email,
+        subject: `[Contact] ${subject} — ${name}`,
+        html: notificationEmail({ type: "Contact Form", subject, fromName: name, fromEmail: email, phone, message }),
       }),
-    });
-
-    // Confirmation to the sender — failure here must not fail the request.
-    try {
-      await sendEmail({
+      sendEmail({
         to: email,
         replyTo: BUSINESS_INBOX,
         subject: `We got your message about ${subject} — LevelUP Sports`,
@@ -70,9 +61,12 @@ export async function POST(request: Request) {
           ],
           preheader: `Thanks ${name.split(" ")[0]} — we'll reply about ${subject} within one business day.`,
         }),
-      });
-    } catch (err) {
-      console.error("[Contact] auto-reply failed:", err);
+      }),
+    ]);
+    if (replyResult.status === "rejected") console.error("[Contact] auto-reply failed:", replyResult.reason);
+    if (notifyResult.status === "rejected") {
+      console.error("[Contact] notification failed:", notifyResult.reason);
+      return NextResponse.json({ error: "Failed to send message. Please try again or call (443) 406-6494." }, { status: 500 });
     }
 
     return NextResponse.json({ message: "Thank you! We'll get back to you soon." });

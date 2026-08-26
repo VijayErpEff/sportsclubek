@@ -31,9 +31,14 @@ export interface SendEmailInput {
   replyTo?: string;
 }
 
+/** How long to wait for ACS to confirm delivery hand-off before returning. */
+const CONFIRM_TIMEOUT_MS = 5000;
+
 /**
- * Sends an email through ACS. Waits for the send to be accepted by the
- * service, then returns the operation id. Throws on failure.
+ * Sends an email through ACS. `beginSend` throws immediately on auth/validation
+ * errors (the request was rejected). Once accepted, ACS queues the message; we
+ * wait a bounded time for the "Succeeded" confirmation so a serverless function
+ * (Netlify: 10s cap) never hangs on polling. Returns the operation id.
  */
 export async function sendEmail(input: SendEmailInput): Promise<string> {
   const acs = getClient();
@@ -53,11 +58,22 @@ export async function sendEmail(input: SendEmailInput): Promise<string> {
   };
 
   const poller = await acs.beginSend(message);
-  const result = await poller.pollUntilDone();
-  if (result.status !== "Succeeded") {
-    throw new Error(`ACS send failed: ${result.status} ${result.error?.message ?? ""}`.trim());
+
+  const confirmed = await Promise.race([
+    poller.pollUntilDone(),
+    new Promise<null>((resolve) => setTimeout(() => resolve(null), CONFIRM_TIMEOUT_MS)),
+  ]);
+
+  if (confirmed === null) {
+    const state = poller.getOperationState();
+    const id = state.result?.id ?? "unknown";
+    console.warn(`[email] ACS accepted message ${id} but confirmation not received within ${CONFIRM_TIMEOUT_MS}ms`);
+    return id;
   }
-  return result.id;
+  if (confirmed.status !== "Succeeded") {
+    throw new Error(`ACS send failed: ${confirmed.status} ${confirmed.error?.message ?? ""}`.trim());
+  }
+  return confirmed.id;
 }
 
 function htmlToText(html: string): string {
