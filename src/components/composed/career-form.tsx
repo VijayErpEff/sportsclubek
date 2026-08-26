@@ -46,16 +46,39 @@ function CareerModal({
     const form = e.currentTarget;
     const data = new FormData(form);
 
+    const payload = {
+      name: (data.get("name") as string)?.trim() || "",
+      email: (data.get("email") as string)?.trim() || "",
+      phone: (data.get("phone") as string)?.trim() || "",
+      position,
+      message: (data.get("message") as string)?.trim() || "",
+    };
+
+    // 1. Persist to Redis first so the application is never lost even if
+    //    the email notification fails (quota, template, spam, etc.).
+    let stored = false;
     try {
-      await sendCareerApplication({
-        name: (data.get("name") as string)?.trim() || "",
-        email: (data.get("email") as string)?.trim() || "",
-        phone: (data.get("phone") as string)?.trim() || "",
-        position,
-        message: (data.get("message") as string)?.trim() || "",
+      const res = await fetch("/api/careers", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       });
-      setStatus("success");
+      stored = res.ok;
     } catch {
+      stored = false;
+    }
+
+    // 2. Email notification + applicant auto-reply via EmailJS.
+    try {
+      await sendCareerApplication(payload);
+      setStatus("success");
+    } catch (err) {
+      console.error("[Careers] EmailJS send failed:", err);
+      if (stored) {
+        // Application is safely recorded — treat as success for the applicant.
+        setStatus("success");
+        return;
+      }
       setErrorMessage("Failed to submit. Please try again or email us directly.");
       setStatus("error");
     }
