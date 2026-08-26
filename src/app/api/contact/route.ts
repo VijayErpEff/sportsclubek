@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import { sendEmail, BUSINESS_INBOX, isEmailConfigured } from "@/lib/email/acs";
+import { notificationEmail, autoReplyEmail } from "@/lib/email/templates";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -29,58 +31,53 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
-
     if (!EMAIL_REGEX.test(email)) {
-      return NextResponse.json(
-        { error: "Please provide a valid email address." },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Please provide a valid email address." }, { status: 400 });
+    }
+    if (!isEmailConfigured()) {
+      console.error("[Contact] ACS not configured");
+      return NextResponse.json({ error: "Email service unavailable. Please call (443) 406-6494." }, { status: 503 });
     }
 
-    const resendApiKey = process.env.RESEND_API_KEY;
-    const toEmail = process.env.CONTACT_EMAIL || "info@levelupsports.us";
+    await sendEmail({
+      to: BUSINESS_INBOX,
+      replyTo: email,
+      subject: `[Contact] ${subject} — ${name}`,
+      html: notificationEmail({
+        type: "Contact Form",
+        subject,
+        fromName: name,
+        fromEmail: email,
+        phone,
+        message,
+      }),
+    });
 
-    if (resendApiKey) {
-      // Send via Resend
-      const res = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${resendApiKey}`,
-        },
-        body: JSON.stringify({
-          from: "LevelUP Sports <noreply@levelupsports.us>",
-          to: [toEmail],
-          subject: `[Contact] ${subject} — from ${name}`,
-          reply_to: email,
-          html: `<h2>New Contact Form Submission</h2>
-            <p><strong>Name:</strong> ${name}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Phone:</strong> ${phone || "Not provided"}</p>
-            <p><strong>Subject:</strong> ${subject}</p>
-            <hr />
-            <p>${message.replace(/\n/g, "<br />")}</p>`,
+    // Confirmation to the sender — failure here must not fail the request.
+    try {
+      await sendEmail({
+        to: email,
+        replyTo: BUSINESS_INBOX,
+        subject: `We got your message about ${subject} — LevelUP Sports`,
+        html: autoReplyEmail({
+          subject: "Thanks for reaching out",
+          name,
+          message: `We received your message about ${subject} and a member of our team will reply within one business day. For anything urgent, call us at (443) 406-6494 — we're at the facility seven days a week.`,
+          nextSteps: [
+            "Our front desk reviews your message and routes it to the right coach or manager.",
+            "You'll hear back by email within one business day.",
+            "Prefer to talk it through? Call (443) 406-6494 or stop by 701 E Pulaski Hwy, Elkton.",
+          ],
+          preheader: `Thanks ${name.split(" ")[0]} — we'll reply about ${subject} within one business day.`,
         }),
       });
-
-      if (!res.ok) {
-        console.error("[Contact] Resend error:", await res.text());
-        return NextResponse.json({ error: "Failed to send message. Please try again." }, { status: 500 });
-      }
-    } else {
-      // Fallback: log to console when no email service configured
-      console.log(`[Contact] From: ${name} <${email}>, Subject: ${subject}`);
-      console.log(`[Contact] Message: ${message}`);
+    } catch (err) {
+      console.error("[Contact] auto-reply failed:", err);
     }
 
-    return NextResponse.json(
-      { message: "Thank you! We'll get back to you soon." },
-      { status: 200 }
-    );
-  } catch {
-    return NextResponse.json(
-      { error: "Something went wrong. Please try again." },
-      { status: 500 }
-    );
+    return NextResponse.json({ message: "Thank you! We'll get back to you soon." });
+  } catch (err) {
+    console.error("[Contact] error:", err);
+    return NextResponse.json({ error: "Something went wrong. Please try again." }, { status: 500 });
   }
 }

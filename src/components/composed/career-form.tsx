@@ -3,7 +3,6 @@
 import { useState, type FormEvent } from "react";
 import { CheckCircle, Loader2, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-import { sendCareerApplication } from "@/lib/emailjs";
 
 export function CareerApplyButton({
   position,
@@ -54,32 +53,23 @@ function CareerModal({
       message: (data.get("message") as string)?.trim() || "",
     };
 
-    // 1. Persist to Redis first so the application is never lost even if
-    //    the email notification fails (quota, template, spam, etc.).
-    let stored = false;
     try {
       const res = await fetch("/api/careers", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      stored = res.ok;
-    } catch {
-      stored = false;
-    }
-
-    // 2. Email notification + applicant auto-reply via EmailJS.
-    try {
-      await sendCareerApplication(payload);
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        throw new Error(body.error || "Request failed");
+      }
       setStatus("success");
     } catch (err) {
-      console.error("[Careers] EmailJS send failed:", err);
-      if (stored) {
-        // Application is safely recorded — treat as success for the applicant.
-        setStatus("success");
-        return;
-      }
-      setErrorMessage("Failed to submit. Please try again or email us directly.");
+      setErrorMessage(
+        err instanceof Error && err.message !== "Request failed"
+          ? err.message
+          : "Failed to submit. Please try again or email us directly."
+      );
       setStatus("error");
     }
   };

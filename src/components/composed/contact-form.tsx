@@ -2,7 +2,6 @@
 
 import { useState, type FormEvent } from "react";
 import { CheckCircle, Loader2 } from "lucide-react";
-import { sendContactForm } from "@/lib/emailjs";
 
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -17,16 +16,28 @@ export function ContactForm() {
     const data = new FormData(form);
 
     try {
-      await sendContactForm({
-        name: (data.get("name") as string)?.trim() || "",
-        email: (data.get("email") as string)?.trim() || "",
-        phone: (data.get("phone") as string)?.trim() || "",
-        subject: (data.get("subject") as string)?.trim() || "",
-        message: (data.get("message") as string)?.trim() || "",
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: (data.get("name") as string)?.trim() || "",
+          email: (data.get("email") as string)?.trim() || "",
+          phone: (data.get("phone") as string)?.trim() || "",
+          subject: (data.get("subject") as string)?.trim() || "",
+          message: (data.get("message") as string)?.trim() || "",
+        }),
       });
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        throw new Error(body.error || "Request failed");
+      }
       setStatus("success");
-    } catch {
-      setErrorMessage("Failed to send message. Please try again or call us directly.");
+    } catch (err) {
+      setErrorMessage(
+        err instanceof Error && err.message !== "Request failed"
+          ? err.message
+          : "Failed to send message. Please try again or call us directly."
+      );
       setStatus("error");
     }
   };

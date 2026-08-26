@@ -4,7 +4,6 @@ import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
 import { trackNewsletterSignup } from "@/lib/analytics";
-import { sendSubscription } from "@/lib/emailjs";
 
 export function NewsletterSignup() {
   const [email, setEmail] = useState("");
@@ -19,7 +18,12 @@ export function NewsletterSignup() {
     setErrorMessage("");
 
     try {
-      await sendSubscription(email);
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      if (!res.ok) throw new Error("Subscribe failed");
       trackNewsletterSignup();
       setStatus("success");
       setEmail("");

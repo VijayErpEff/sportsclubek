@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { redis } from "@/lib/storage/redis";
+import { sendEmail, BUSINESS_INBOX, isEmailConfigured } from "@/lib/email/acs";
+import { notificationEmail, autoReplyEmail } from "@/lib/email/templates";
 
 const APPLICATIONS_KEY = "career_applications";
 const ADMIN_PIN = process.env.ADMIN_PIN || "6886";
@@ -15,12 +17,11 @@ export interface CareerApplication {
   timestamp: string;
 }
 
-/** POST — persist a career application (called by the careers form before EmailJS). */
+/**
+ * POST — persist a career application to Redis, then notify the hiring inbox
+ * and send the applicant a confirmation via ACS.
+ */
 export async function POST(request: Request) {
-  if (!redis) {
-    return NextResponse.json({ error: "Storage not configured" }, { status: 503 });
-  }
-
   try {
     const body = await request.json();
     const name = String(body.name ?? "").trim();
@@ -46,10 +47,75 @@ export async function POST(request: Request) {
       timestamp: new Date().toISOString(),
     };
 
-    await redis.lpush(APPLICATIONS_KEY, JSON.stringify(application));
-    return NextResponse.json({ success: true, id: application.id });
-  } catch {
-    return NextResponse.json({ error: "Failed to save application" }, { status: 500 });
+    // 1. Persist first — the application must never be lost because email failed.
+    let stored = false;
+    if (redis) {
+      try {
+        await redis.lpush(APPLICATIONS_KEY, JSON.stringify(application));
+        stored = true;
+      } catch (err) {
+        console.error("[Careers] Redis error:", err);
+      }
+    }
+
+    // 2. Notify hiring inbox.
+    let notified = false;
+    if (isEmailConfigured()) {
+      try {
+        await sendEmail({
+          to: BUSINESS_INBOX,
+          replyTo: email,
+          subject: `[Application] ${position} — ${name}`,
+          html: notificationEmail({
+            type: "Career Application",
+            subject: position,
+            fromName: name,
+            fromEmail: email,
+            phone,
+            message,
+            extra: [{ label: "Position", value: position }],
+            receivedAt: application.timestamp,
+          }),
+        });
+        notified = true;
+      } catch (err) {
+        console.error("[Careers] notification failed:", err);
+      }
+
+      // 3. Applicant confirmation (non-fatal).
+      try {
+        await sendEmail({
+          to: email,
+          replyTo: BUSINESS_INBOX,
+          subject: `Application received: ${position} — LevelUP Sports`,
+          html: autoReplyEmail({
+            subject: "We received your application",
+            name,
+            message: `Thanks for applying for the ${position} role at LevelUP Sports & Athletics Club. We read every application personally, and we're excited you want to help athletes in Elkton level up.`,
+            nextSteps: [
+              "Our hiring team reviews your application within 3–5 business days.",
+              "If it looks like a fit, we'll email or call you to set up a conversation at the facility.",
+              "Questions in the meantime? Reply to info@levelupsports.us or call (443) 406-6494.",
+            ],
+            preheader: `Thanks ${name.split(" ")[0]} — your ${position} application is in. Here's what happens next.`,
+          }),
+        });
+      } catch (err) {
+        console.error("[Careers] auto-reply failed:", err);
+      }
+    }
+
+    if (!stored && !notified) {
+      return NextResponse.json(
+        { error: "We couldn't submit your application. Please email info@levelupsports.us directly." },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json({ success: true, id: application.id, stored, notified });
+  } catch (err) {
+    console.error("[Careers] error:", err);
+    return NextResponse.json({ error: "Failed to submit application" }, { status: 500 });
   }
 }
 
