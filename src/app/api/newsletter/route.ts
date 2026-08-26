@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { redis } from "@/lib/storage/redis";
-import { sendEmail, BUSINESS_INBOX, isEmailConfigured } from "@/lib/email/acs";
+import { sendEmail, BUSINESS_INBOX, REPLY_TO_INBOX, isEmailConfigured } from "@/lib/email/acs";
 import { notificationEmail, autoReplyEmail } from "@/lib/email/templates";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -48,7 +48,7 @@ export async function POST(request: Request) {
     // Welcome email (always — even for repeat subscribers so the UI promise holds).
     await sendEmail({
       to: email,
-      replyTo: BUSINESS_INBOX,
+      replyTo: REPLY_TO_INBOX,
       subject: "Welcome to LevelUP Sports — you're on the list",
       html: autoReplyEmail({
         subject: "You're in. Welcome to the club.",

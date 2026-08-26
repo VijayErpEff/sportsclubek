@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { redis } from "@/lib/storage/redis";
-import { sendEmail, BUSINESS_INBOX, isEmailConfigured } from "@/lib/email/acs";
+import { sendEmail, BUSINESS_INBOX, REPLY_TO_INBOX, isEmailConfigured } from "@/lib/email/acs";
 import { notificationEmail, autoReplyEmail } from "@/lib/email/templates";
 
 const APPLICATIONS_KEY = "career_applications";
@@ -79,7 +79,7 @@ export async function POST(request: Request) {
         }),
         sendEmail({
           to: email,
-          replyTo: BUSINESS_INBOX,
+          replyTo: REPLY_TO_INBOX,
           subject: `Application received: ${position} — LevelUP Sports`,
           html: autoReplyEmail({
             subject: "We received your application",

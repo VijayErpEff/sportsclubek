@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { sendEmail, BUSINESS_INBOX, isEmailConfigured } from "@/lib/email/acs";
+import { sendEmail, BUSINESS_INBOX, REPLY_TO_INBOX, isEmailConfigured } from "@/lib/email/acs";
 import { notificationEmail, autoReplyEmail } from "@/lib/email/templates";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -48,7 +48,7 @@ export async function POST(request: Request) {
       }),
       sendEmail({
         to: email,
-        replyTo: BUSINESS_INBOX,
+        replyTo: REPLY_TO_INBOX,
         subject: `We got your message about ${subject} — LevelUP Sports`,
         html: autoReplyEmail({
           subject: "Thanks for reaching out",

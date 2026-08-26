@@ -1,7 +1,7 @@
 # Netlify — Next.js (App Router) via the official Next runtime.
 # API routes (/api/contact, /api/newsletter, /api/careers) run as Netlify Functions.
 # Required env vars (Site settings → Environment variables):
-#   ACS_CONNECTION_STRING, ACS_SENDER_ADDRESS, CONTACT_EMAIL,
+#   ACS_CONNECTION_STRING, ACS_SENDER_ADDRESS, CONTACT_EMAIL (comma-separated list OK),
 #   UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN, ADMIN_PIN,
 #   NEXT_PUBLIC_GA_ID, NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION, NEXT_PUBLIC_BING_SITE_VERIFICATION
 [build]

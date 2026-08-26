@@ -7,7 +7,18 @@ import { EmailClient, type EmailMessage } from "@azure/communication-email";
  */
 
 const SENDER = process.env.ACS_SENDER_ADDRESS || "DoNotReply@levelupsports.us";
-export const BUSINESS_INBOX = process.env.CONTACT_EMAIL || "info@levelupsports.us";
+/**
+ * Business inbox(es) for notifications. `CONTACT_EMAIL` may be a single
+ * address or a comma/semicolon-separated list, e.g.
+ * "info@levelupsports.us, vijay@levelupsports.us".
+ */
+export const BUSINESS_INBOX: string[] = (process.env.CONTACT_EMAIL || "info@levelupsports.us")
+  .split(/[,;]/)
+  .map((s) => s.trim())
+  .filter(Boolean);
+
+/** Address applicants/customers should reply to (first business inbox). */
+export const REPLY_TO_INBOX = BUSINESS_INBOX[0];
 
 let client: EmailClient | null | undefined;
 
