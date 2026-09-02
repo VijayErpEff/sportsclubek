@@ -28,14 +28,13 @@ const APP_DOES = [
 ];
 
 interface Props {
-  searchParams: Promise<{ to?: string; c?: string; choose?: string }>;
+  searchParams: Promise<{ to?: string; c?: string }>;
 }
 
 export default async function AppPage({ searchParams }: Props) {
   const sp = await searchParams;
   const path = safePath(sp.to);
   const context = sp.c ?? "app";
-  const forceChooser = sp.choose === "1";
 
   const breadcrumbLD = generateBreadcrumbLD([
     { name: "Home", url: "/" },
@@ -77,11 +76,7 @@ export default async function AppPage({ searchParams }: Props) {
 
               <StoreBadges context={context} className="mt-8" />
 
-              <OpenInApp
-                path={path}
-                context={context}
-                forceChooser={forceChooser}
-              />
+              <OpenInApp path={path} context={context} />
             </div>
 
             {/* Device panel */}
