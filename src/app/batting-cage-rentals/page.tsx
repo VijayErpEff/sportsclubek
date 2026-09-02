@@ -62,7 +62,7 @@ const FEATURES = [
     icon: Clock,
     title: "Hourly Rentals",
     description:
-      "Book by the hour. Reserve online through Upper Hand — instant confirmation.",
+      "Book by the hour in the LevelUP app — instant confirmation.",
   },
   {
     icon: Users,
@@ -82,7 +82,7 @@ const HOW_IT_WORKS = [
   {
     step: "Book online",
     description:
-      "Pick your cage, date, and time slot on Upper Hand. Instant confirmation — no waiting on a call-back.",
+      "Pick your cage, date, and time slot in the LevelUP app. Instant confirmation — no waiting on a call-back.",
   },
   {
     step: "Show up",
@@ -114,7 +114,7 @@ const FAQS = [
   {
     question: "How much does a batting cage rental cost at LevelUP Sports?",
     answer:
-      "Our batting cages rent by the hour. Current pricing is posted on our Upper Hand booking page — book online for real-time availability and instant confirmation.",
+      "Our batting cages rent by the hour. Current pricing is in the LevelUP app — book there for real-time availability and instant confirmation.",
   },
   {
     question: "Do you rent batting cages near Newark, DE?",
@@ -263,8 +263,6 @@ export default function BattingCageRentalsPage() {
                 <Button size="lg" asChild>
                   <a
                     href={BOOKING_URLS.offerings}
-                    target="_blank"
-                    rel="noopener noreferrer"
                   >
                     Book a Cage Now
                   </a>
@@ -497,8 +495,6 @@ export default function BattingCageRentalsPage() {
                 <Button size="lg" asChild>
                   <a
                     href={BOOKING_URLS.offerings}
-                    target="_blank"
-                    rel="noopener noreferrer"
                   >
                     <Calendar className="h-4 w-4 mr-2" aria-hidden="true" />
                     Book Your Cage

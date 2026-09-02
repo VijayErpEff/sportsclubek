@@ -5,6 +5,7 @@ import {
   generateRegistrationId,
   hashPin,
   normalizeEmail,
+  normalizePaymentMethod,
   sanitizePlayers,
   validateRegistrationInput,
   type RegistrationInput,
@@ -85,7 +86,7 @@ export async function POST(request: Request) {
       phone: input.emergencyContact.phone.trim(),
     },
     notes: input.notes,
-    paymentMethod: input.paymentMethod,
+    paymentMethod: normalizePaymentMethod(input.paymentMethod),
     paymentStatus: "pending",
     createdAt: now,
     updatedAt: now,
@@ -103,8 +104,8 @@ export async function POST(request: Request) {
       success: true,
       id,
       message:
-        input.paymentMethod === "upperhand"
-          ? "Registration saved. Complete payment via the Upper Hand link to confirm your spot."
+        normalizePaymentMethod(input.paymentMethod) === "pay_online"
+          ? "Registration saved. Complete payment in the LevelUP app to confirm your spot."
           : "Registration saved. We'll contact you with payment instructions.",
     },
     { status: 201 }

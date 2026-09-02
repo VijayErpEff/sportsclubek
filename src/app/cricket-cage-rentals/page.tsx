@@ -61,7 +61,7 @@ const FEATURES = [
     icon: Clock,
     title: "Hourly Rentals",
     description:
-      "Book by the hour on Upper Hand. Instant confirmation — ideal for weekly practice or one-off sessions.",
+      "Book by the hour in the LevelUP app. Instant confirmation — ideal for weekly practice or one-off sessions.",
   },
   {
     icon: Users,
@@ -81,7 +81,7 @@ const HOW_IT_WORKS = [
   {
     step: "Reserve online",
     description:
-      "Pick your net, date, and time slot on Upper Hand. Real-time availability, instant confirmation.",
+      "Pick your net, date, and time slot in the LevelUP app. Real-time availability, instant confirmation.",
   },
   {
     step: "Arrive and check in",
@@ -113,7 +113,7 @@ const FAQS = [
   {
     question: "How much does a cricket cage rental cost at LevelUP Sports?",
     answer:
-      "Cricket nets rent by the hour. Current rates and real-time availability are on our Upper Hand booking page — check there for instant confirmation and any discounts for multi-session bookings.",
+      "Cricket nets rent by the hour. Current rates and real-time availability are in the LevelUP app — check there for instant confirmation and any discounts for multi-session bookings.",
   },
   {
     question: "Where are the closest indoor cricket nets to Newark, DE?",
@@ -262,8 +262,6 @@ export default function CricketCageRentalsPage() {
                 <Button size="lg" asChild>
                   <a
                     href={BOOKING_URLS.cricketCageRentals}
-                    target="_blank"
-                    rel="noopener noreferrer"
                   >
                     Book a Net Now
                   </a>
@@ -495,8 +493,6 @@ export default function CricketCageRentalsPage() {
                 <Button size="lg" asChild>
                   <a
                     href={BOOKING_URLS.cricketCageRentals}
-                    target="_blank"
-                    rel="noopener noreferrer"
                   >
                     <Calendar className="h-4 w-4 mr-2" aria-hidden="true" />
                     Book Your Net

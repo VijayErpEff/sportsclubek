@@ -1,6 +1,6 @@
 // ============================================================
 // TRACKED REDIRECT LINKS
-// Used by /go/[slug] to redirect to external URLs (e.g., Upper Hand events).
+// Used by /go/[slug] to redirect flyer/QR traffic to its destination.
 // GA4 captures the pageview + UTM params before redirecting.
 //
 // To add a new link:
@@ -8,6 +8,8 @@
 //   2. Use on flyers/emails as: levelupsports.us/go/your-slug
 //   3. Add UTM params for tracking: ?utm_source=flyer&utm_medium=print&utm_campaign=your-campaign
 // ============================================================
+
+import { appLink } from "./app";
 
 export interface RedirectEntry {
   /** Short slug used in the URL: /go/[slug] */
@@ -18,45 +20,44 @@ export interface RedirectEntry {
   destination: string;
 }
 
-const UH_BASE = "https://app.upperhand.io/customers/2578-levelup-sports-and-athletics-club";
 
 export const REDIRECTS: RedirectEntry[] = [
   // ── Events & Tournaments ────────────────────────────────
   {
     slug: "badminton-open-house",
     title: "FREE Badminton Open House — May 2",
-    destination: `${UH_BASE}/events/194708-levelup-badminton-training-clinic-open-house`,
+    destination: appLink("/", "badminton-open-house"),
   },
   {
     slug: "badminton-tournament",
     title: "LevelUP Badminton Tournament — May 30",
-    destination: `${UH_BASE}/events/194712-levelup-badminton-tournament`,
+    destination: appLink("/", "badminton-tournament"),
   },
   {
     slug: "volleyball-tournament",
     title: "LevelUP Smash Cup — Volleyball Tournament Jun 6–7",
-    destination: `${UH_BASE}/events/195734-volleyball-tournamnet`,
+    destination: appLink("/", "volleyball-tournament"),
   },
   {
     slug: "soccer-open-house",
     title: "FREE Soccer Open House — May 16",
-    destination: `${UH_BASE}/events/196159-levelup-soccer-open-house`,
+    destination: appLink("/", "soccer-open-house"),
   },
   {
     slug: "table-tennis-tournament",
     title: "Table Tennis Tournament",
-    destination: `${UH_BASE}/events/193175-table-tennis-tournament`,
+    destination: appLink("/", "table-tennis-tournament"),
   },
 
   // ── Offerings & Programs ────────────────────────────────
   {
     slug: "offerings",
     title: "All Programs & Offerings",
-    destination: `${UH_BASE}/offerings`,
+    destination: appLink("/", "offerings"),
   },
   {
     // Printed flyers/QRs point here — lands on the camp page, which links
-    // out to the four per-week Upper Hand events below.
+    // out to the four per-week camp sessions below.
     slug: "summer-camps",
     title: "LevelUP × Code Ninjas Summer Camp",
     destination: "/summer-camps",
@@ -64,86 +65,86 @@ export const REDIRECTS: RedirectEntry[] = [
   {
     slug: "summer-camp-full-day-july",
     title: "Summer Camp Full Day — Jul 13–17",
-    destination: `${UH_BASE}/events/196907-summer-camp-full-day-07-13-07-17`,
+    destination: appLink("/", "summer-camp-full-day-july"),
   },
   {
     slug: "summer-camp-half-day-july",
     title: "Summer Camp Half Day — Jul 13–17",
-    destination: `${UH_BASE}/events/196909-summer-camp-half-day-07-13-07-17`,
+    destination: appLink("/", "summer-camp-half-day-july"),
   },
   {
     slug: "summer-camp-full-day-august",
     title: "Summer Camp Full Day — Aug 10–14",
-    destination: `${UH_BASE}/events/196908-summer-camp-full-day-08-10-08-14`,
+    destination: appLink("/", "summer-camp-full-day-august"),
   },
   {
     slug: "summer-camp-half-day-august",
     title: "Summer Camp Half Day — Aug 10–14",
-    destination: `${UH_BASE}/events/196910-summer-camp-half-day-08-10-08-14`,
+    destination: appLink("/", "summer-camp-half-day-august"),
   },
   {
     slug: "memberships",
     title: "Membership Plans",
-    destination: `${UH_BASE}/memberships`,
+    destination: appLink("/", "memberships"),
   },
   {
     slug: "spring-offer",
     title: "Spring Game Pass Offer",
-    destination: `${UH_BASE}/client-memberships/11431`,
+    destination: appLink("/", "spring-offer"),
   },
 
   // ── Academies ───────────────────────────────────────────
   {
     slug: "kids-agility-academy",
     title: "Kids Agility Academy",
-    destination: `${UH_BASE}/client-memberships/11414`,
+    destination: appLink("/", "kids-agility-academy"),
   },
   {
     slug: "volleyball-academy",
     title: "Volleyball Academy",
-    destination: `${UH_BASE}/client-memberships/11415`,
+    destination: appLink("/", "volleyball-academy"),
   },
   {
     slug: "cricket-academy",
     title: "Cricket Academy",
-    destination: `${UH_BASE}/client-memberships/11416`,
+    destination: appLink("/", "cricket-academy"),
   },
   {
     slug: "badminton-academy",
     title: "Badminton Academy",
-    destination: `${UH_BASE}/client-memberships/11417`,
+    destination: appLink("/", "badminton-academy"),
   },
 
   // ── Drop-In & Rentals ──────────────────────────────────
   {
     slug: "cricket-cage-rentals",
     title: "Cricket Cage Rentals",
-    destination: `${UH_BASE}/events/186578-cricket-cage-rentals`,
+    destination: appLink("/", "cricket-cage-rentals"),
   },
   {
     slug: "pickleball-open-play",
     title: "Pickleball Open Play",
-    destination: `${UH_BASE}/events/174223-pickle_ball-open_play-weekdays-9am-4pm`,
+    destination: appLink("/", "pickleball-open-play"),
   },
   {
     slug: "badminton-open-play",
     title: "Badminton Open Play",
-    destination: `${UH_BASE}/events/174234-badminton-member-open_play-every_day`,
+    destination: appLink("/", "badminton-open-play"),
   },
   {
     slug: "little-sluggers",
     title: "Little Sluggers Baseball",
-    destination: `${UH_BASE}/events/181868-little-sluggers`,
+    destination: appLink("/", "little-sluggers"),
   },
   {
     slug: "kids-agility",
     title: "Kids Agility Program",
-    destination: `${UH_BASE}/events/187194-kids-agility-and-athleticism-program`,
+    destination: appLink("/", "kids-agility"),
   },
   {
     slug: "pickleball-golden-hour",
     title: "Pickleball Golden Hour",
-    destination: `${UH_BASE}/client-memberships/11264`,
+    destination: appLink("/", "pickleball-golden-hour"),
   },
 ];
 

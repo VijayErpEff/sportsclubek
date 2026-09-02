@@ -98,7 +98,7 @@ export const MEMBERSHIP_FAQS = [
   {
     question: "How do I create an account to book sessions or join?",
     answer:
-      "All bookings and memberships run through our partner platform, Upper Hand. Create your free account at levelupsports.us/signup — it takes about a minute. Once registered, you can sign in anytime to book courts, cages, academy sessions, and manage your membership. Note: the Upper Hand sign-in page doesn't have a sign-up link, so use our /signup link to register first.",
+      "Everything runs in the LevelUP Sports & Athletics app. Download it free from the App Store or Google Play — or go to levelupsports.us/app and we'll send you to the right place — then create your account in about a minute. From there you can book courts, cages, and academy sessions, and manage your membership. Prefer a browser? The same account works at app.levelupsports.us.",
   },
   {
     question: "Can I cancel my membership at any time?",

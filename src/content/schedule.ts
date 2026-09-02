@@ -25,7 +25,7 @@ export interface Session {
   sport: SportType;
   level?: string;
   spotsLeft?: number;
-  /** Optional Upper Hand booking/registration URL */
+  /** Optional booking/registration link (usually a /app smart link) */
   bookingUrl?: string;
 }
 

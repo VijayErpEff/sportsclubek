@@ -656,8 +656,6 @@ export function CourtStatusBoard() {
             </a>
             <a
               href={BOOKING_URLS.offerings}
-              target="_blank"
-              rel="noopener noreferrer"
               className="flex-1 flex items-center justify-center gap-2 py-3 bg-primary text-white font-bold text-sm rounded-xl shadow-lg shadow-primary/25"
             >
               Book Online
@@ -698,7 +696,7 @@ export function CourtStatusBoard() {
                   <input type="url" value={noteModal.urlValue}
                     onChange={(e) => setNoteModal((m) => ({ ...m, urlValue: e.target.value }))}
                     onKeyDown={(e) => { if (e.key === "Enter") saveNote(); if (e.key === "Escape") setNoteModal((m) => ({ ...m, open: false })); }}
-                    placeholder="e.g., https://app.upperhand.io/..."
+                    placeholder="e.g., https://app.levelupsports.us/..."
                     className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl text-neutral-900 text-sm outline-none transition-colors focus:border-accent/50 focus:ring-2 focus:ring-accent/20 placeholder:text-neutral-400" />
                 </div>
               </div>

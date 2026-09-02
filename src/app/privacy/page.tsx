@@ -78,7 +78,7 @@ export default function PrivacyPage() {
                 <li>Register for an event such as our Open House</li>
               </ul>
               <p className="mt-3">
-                This may include your name, email address, phone number, and payment information. Payment processing is handled by our booking partner (Upper Hand) and payment processors — we do not store credit card numbers on our servers.
+                This may include your name, email address, phone number, and payment information. Bookings and payments are handled in the LevelUP Sports &amp; Athletics app and its payment processors — we do not store credit card numbers on our servers.
               </p>
 
               <h3 className="font-semibold text-neutral-900 mt-4 mb-2">Information Collected Automatically</h3>
@@ -118,10 +118,13 @@ export default function PrivacyPage() {
                   </a>.
                 </li>
                 <li>
-                  <strong>Upper Hand</strong> — online booking, scheduling, and payment processing. See{" "}
-                  <a href="https://www.upperhand.com/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-accent hover:text-accent-hover">
-                    Upper Hand&rsquo;s Privacy Policy
-                  </a>.
+                  <strong>LevelUP Sports &amp; Athletics app</strong> — our own booking,
+                  scheduling, and payment platform at app.levelupsports.us and in the iOS and
+                  Android apps. Account and booking data you enter there is covered by this policy.
+                </li>
+                <li>
+                  <strong>Apple App Store and Google Play</strong> — app distribution. Each store
+                  collects its own download and device data under its own policy.
                 </li>
                 <li>
                   <strong>Vercel</strong> — website hosting and content delivery.

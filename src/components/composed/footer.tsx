@@ -41,6 +41,7 @@ const footerCompany = [
   { label: "Batting Cage Rentals", href: "/batting-cage-rentals" },
   { label: "Cricket Cage Rentals", href: "/cricket-cage-rentals" },
   { label: "Create Account", href: "/signup" },
+  { label: "Get the App", href: "/app?choose=1&c=footer" },
 ];
 
 const socialLinks = [

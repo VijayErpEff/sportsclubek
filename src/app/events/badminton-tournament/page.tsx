@@ -30,6 +30,7 @@ import {
   generateFAQLD,
 } from "@/lib/seo/json-ld";
 import { SITE_CONFIG } from "@/lib/constants/site";
+import { appLink } from "@/lib/constants/app";
 
 // ── Tournament constants ────────────────────────────────────────────
 const TOURNAMENT = {
@@ -46,8 +47,7 @@ const TOURNAMENT = {
   priceUnit: "per team",
   format: "Doubles",
   structure: "Round Robin + Playoffs",
-  registerUrl:
-    "https://app.upperhand.io/customers/2578-levelup-sports-and-athletics-club/events/194712-levelup-badminton-tournament",
+  registerUrl: appLink("/", "badminton-tournament"),
   flyer: "/images/Content/badminton-tournament-may-30.jpeg",
 };
 
@@ -112,7 +112,7 @@ const FAQS = [
   {
     question: "How do I register for the tournament?",
     answer:
-      "Registration is handled through Upper Hand. Click any 'Register Your Team' button on this page or go to levelupsports.us/go/badminton-tournament. Entry is $80 per doubles team and registration closes Monday, May 26, 2026.",
+      "Registration is handled in the LevelUP Sports & Athletics app. Click any 'Register Your Team' button on this page or go to levelupsports.us/go/badminton-tournament. Entry is $80 per doubles team and registration closes Monday, May 26, 2026.",
   },
   {
     question: "Can I register as an individual without a partner?",
@@ -137,7 +137,7 @@ const FAQS = [
   {
     question: "What if I need to cancel after registering?",
     answer:
-      "Cancellations are handled through Upper Hand. Refund eligibility depends on how close to the event you cancel — please reach out to us at (443) 406-6494 if you need help.",
+      "Cancellations are handled in the LevelUP app. Refund eligibility depends on how close to the event you cancel — please reach out to us at (443) 406-6494 if you need help.",
   },
   {
     question: "Are the courts BWF-standard?",
@@ -250,8 +250,6 @@ export default function BadmintonTournamentPage() {
                   <Button size="xl" asChild className="bg-accent hover:bg-accent-hover">
                     <a
                       href={TOURNAMENT.registerUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
                     >
                       Register Your Team <ArrowRight className="ml-2 h-4 w-4" />
                     </a>
@@ -570,7 +568,7 @@ export default function BadmintonTournamentPage() {
         title="Secure Your Team's Spot"
         description={`$80 per doubles team. Registration closes ${TOURNAMENT.registerByLabel}. Limited spots — book now to lock in your division.`}
         primaryCTA={{
-          label: "Register on Upper Hand",
+          label: "Register in the LevelUP App",
           href: TOURNAMENT.registerUrl,
         }}
         secondaryCTA={{

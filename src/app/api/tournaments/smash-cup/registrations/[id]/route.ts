@@ -7,6 +7,7 @@ import {
   verifyPin,
   type UpdateInput,
   type VolleyballRegistration,
+  normalizePaymentMethod,
 } from "@/lib/storage/tournament-registration";
 
 const RATE_LIMIT_MAX = 12;
@@ -112,7 +113,7 @@ export async function PUT(
       phone: update.emergencyContact?.phone ?? reg.emergencyContact.phone,
     },
     notes: update.notes ?? reg.notes,
-    paymentMethod: update.paymentMethod ?? reg.paymentMethod,
+    paymentMethod: normalizePaymentMethod(update.paymentMethod ?? reg.paymentMethod),
     updatedAt: new Date().toISOString(),
   };
 

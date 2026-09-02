@@ -32,6 +32,7 @@ import {
   generateFAQLD,
 } from "@/lib/seo/json-ld";
 import { SITE_CONFIG } from "@/lib/constants/site";
+import { appLink } from "@/lib/constants/app";
 
 // ── Event constants ─────────────────────────────────────────────────
 const EVENT = {
@@ -40,8 +41,7 @@ const EVENT = {
   date: "Saturday, May 2, 2026",
   startISO: "2026-05-02T18:00:00-04:00",
   endISO: "2026-05-02T20:00:00-04:00",
-  registerUrl:
-    "https://app.upperhand.io/customers/2578-levelup-sports-and-athletics-club/events/194708-levelup-badminton-training-clinic-open-house",
+  registerUrl: appLink("/", "badminton-open-house"),
   flyer: "/images/Content/badminton-open-house-may-2.jpeg",
 };
 
@@ -86,7 +86,7 @@ const FAQS = [
   {
     question: "Is this really free?",
     answer:
-      "Yes — the Badminton Open House on Saturday, May 2 is completely free. No registration fee and no commitment. We just ask that you reserve your spot through Upper Hand so we can plan the right coach-to-player ratio.",
+      "Yes — the Badminton Open House on Saturday, May 2 is completely free. No registration fee and no commitment. We just ask that you reserve your spot in the LevelUP app so we can plan the right coach-to-player ratio.",
   },
   {
     question: "Do I need any badminton experience?",
@@ -226,8 +226,6 @@ export default function BadmintonOpenHousePage() {
                   <Button size="xl" asChild className="bg-secondary text-white hover:bg-secondary/90">
                     <a
                       href={EVENT.registerUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
                     >
                       Reserve Your Free Spot <ArrowRight className="ml-2 h-4 w-4" />
                     </a>
@@ -563,7 +561,7 @@ export default function BadmintonOpenHousePage() {
         title="Reserve Your Free Spot"
         description="Saturday, May 2 — Kids 6–7 PM, Adults 7:15–8 PM. No cost, no commitment, no pressure. Limited spots — please register so we can plan."
         primaryCTA={{
-          label: "Reserve on Upper Hand",
+          label: "Reserve in the LevelUP App",
           href: EVENT.registerUrl,
         }}
         secondaryCTA={{

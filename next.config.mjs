@@ -60,11 +60,26 @@ const nextConfig = {
         permanent: true,
       },
       {
-        // Shareable shortcut for flyers/social — Upper Hand's login page has
-        // no sign-up link, so this is the only path to account creation.
+        // Shareable shortcuts for flyers/social. All account and booking entry
+        // points funnel through /app, which opens the LevelUP app when it is
+        // installed and otherwise offers the store download or the browser.
         source: "/signup",
-        destination:
-          "https://app.upperhand.io/customers/2578-level_up-sports-and-athletics-club/create_user",
+        destination: "/app?c=signup",
+        permanent: false,
+      },
+      {
+        source: "/signin",
+        destination: "/app?c=signin",
+        permanent: false,
+      },
+      {
+        source: "/download",
+        destination: "/app?c=download",
+        permanent: false,
+      },
+      {
+        source: "/get-app",
+        destination: "/app?c=get-app",
         permanent: false,
       },
     ];

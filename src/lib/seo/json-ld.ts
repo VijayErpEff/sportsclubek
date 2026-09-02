@@ -1,5 +1,6 @@
 import { SITE_CONFIG, SPORTS } from "@/lib/constants/site";
 import { AGGREGATE_RATING } from "@/content/reviews";
+import { APP } from "@/lib/constants/app";
 
 /**
  * Enhanced Organization/LocalBusiness JSON-LD with full local SEO signals.
@@ -275,10 +276,12 @@ export function generateOrganizationLD() {
         "@type": "ReserveAction",
         target: {
           "@type": "EntryPoint",
-          urlTemplate: "https://app.upperhand.io/customers/2578-levelup-sports-and-athletics-club/offerings",
+          urlTemplate: APP.web,
           actionPlatform: [
             "https://schema.org/DesktopWebPlatform",
             "https://schema.org/MobileWebPlatform",
+            "https://schema.org/IOSPlatform",
+            "https://schema.org/AndroidPlatform",
           ],
         },
         result: {

@@ -3,7 +3,28 @@ import { createHash, randomBytes, scryptSync, timingSafeEqual } from "crypto";
 // ── Types ──────────────────────────────────────────────────────────
 
 export type Division = "youth" | "adult";
-export type PaymentMethod = "pay_later" | "upperhand";
+export type PaymentMethod = "pay_later" | "pay_online";
+
+/**
+ * Registrations taken before the move to the LevelUP app stored the old
+ * booking platform's name as the payment method. Records already in Redis
+ * still carry it, so accept it on the way in and normalize on the way out.
+ */
+const LEGACY_PAY_ONLINE = "upperhand";
+
+/** Coerce a stored or submitted payment method to a current value. */
+export function normalizePaymentMethod(value: unknown): PaymentMethod {
+  return value === "pay_online" || value === LEGACY_PAY_ONLINE
+    ? "pay_online"
+    : "pay_later";
+}
+
+/** True for any accepted payment method, legacy values included. */
+function isPaymentMethod(value: unknown): boolean {
+  return (
+    value === "pay_later" || value === "pay_online" || value === LEGACY_PAY_ONLINE
+  );
+}
 export type PaymentStatus = "pending" | "paid" | "waived";
 
 export interface RosterPlayer {
@@ -96,7 +117,7 @@ export function toSafeRegistration(reg: VolleyballRegistration): SafeRegistratio
   const { pinHash: _h, pinSalt: _s, ...safe } = reg;
   void _h;
   void _s;
-  return safe;
+  return { ...safe, paymentMethod: normalizePaymentMethod(safe.paymentMethod) };
 }
 
 /** Normalize email for lookup keying — lowercased, trimmed. */
@@ -198,7 +219,7 @@ export function validateRegistrationInput(input: RegistrationInput): ValidationR
   }
 
   // Payment method
-  if (input.paymentMethod !== "pay_later" && input.paymentMethod !== "upperhand") {
+  if (!isPaymentMethod(input.paymentMethod)) {
     errors.paymentMethod = "Pick a payment option.";
   }
 
@@ -270,11 +291,7 @@ export function validateUpdateInput(
     errors["emergencyContact.phone"] = "Valid emergency contact phone required.";
   }
 
-  if (
-    input.paymentMethod !== undefined &&
-    input.paymentMethod !== "pay_later" &&
-    input.paymentMethod !== "upperhand"
-  ) {
+  if (input.paymentMethod !== undefined && !isPaymentMethod(input.paymentMethod)) {
     errors.paymentMethod = "Invalid payment option.";
   }
 

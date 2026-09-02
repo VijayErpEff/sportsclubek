@@ -1,58 +1,64 @@
 // ============================================================
-// UPPER HAND BOOKING URLS
-// Centralized booking links for the Upper Hand platform.
-// Update URLs here when programs change — all pages reference this file.
+// BOOKING LINKS
+// Everything bookable — sessions, rentals, academies, memberships,
+// accounts — now runs in the LevelUP member app (see lib/constants/app.ts).
+//
+// Every entry below points at the internal /app smart link rather than a
+// destination URL. That page opens the native app when the visitor has it
+// and otherwise offers the store download or app.levelupsports.us in the
+// browser, so a single funnel covers all three cases.
+//
+// The `c` label each link carries is GA4 attribution only. Once the app
+// publishes per-program deep paths, pass them as the first argument to
+// `appLink` here — no call site needs to change.
 // ============================================================
 
-const UH_BASE = "https://app.upperhand.io/customers/2578-levelup-sports-and-athletics-club";
+import { appLink } from "./app";
 
 export const BOOKING_URLS = {
   /** All offerings — default landing for general booking */
-  offerings: `${UH_BASE}/offerings`,
+  offerings: appLink("/", "offerings"),
 
-  /** Upper Hand account login (existing customers) */
-  login: "https://app.upperhand.io/accounts/login",
+  /** Existing members signing in */
+  login: appLink("/", "sign-in"),
 
-  /** New-account registration — Upper Hand's login page has no sign-up link,
-      so we must link here directly. Slug differs from UH_BASE (level_up vs
-      levelup) — that's the URL Upper Hand issues; do not "fix" it. */
-  createAccount:
-    "https://app.upperhand.io/customers/2578-level_up-sports-and-athletics-club/create_user",
+  /** New-account registration */
+  createAccount: appLink("/", "create-account"),
 
-  /** Events / sessions schedule on Upper Hand */
-  schedule: `${UH_BASE}/events`,
+  /** Events / sessions schedule */
+  schedule: appLink("/", "schedule"),
 
-  /** Credit passes on Upper Hand */
-  creditPasses: `${UH_BASE}/credit_passes`,
+  /** Credit passes */
+  creditPasses: appLink("/", "credit-passes"),
 
   /** All memberships overview */
-  memberships: `${UH_BASE}/memberships`,
+  memberships: appLink("/", "memberships"),
 
   /** Spring Offer - Game Pass ($10/month, 3-month commitment, OpenPlay access) */
-  springOffer: `${UH_BASE}/client-memberships/11431`,
+  springOffer: appLink("/", "spring-offer"),
 
   /** Pickleball Golden Hour package */
-  pickleballGoldenHour: `${UH_BASE}/client-memberships/11264`,
+  pickleballGoldenHour: appLink("/", "pickleball-golden-hour"),
 
   // ── Academy Enrollments ──────────────────────────────────
-  kidsAgilityAcademy: `${UH_BASE}/client-memberships/11414`,
-  volleyballAcademy: `${UH_BASE}/client-memberships/11415`,
-  cricketAcademy: `${UH_BASE}/client-memberships/11416`,
-  badmintonAcademy: `${UH_BASE}/client-memberships/11417`,
-  soccerAcademy: `${UH_BASE}/client-memberships/11566`,
+  kidsAgilityAcademy: appLink("/", "kids-agility-academy"),
+  volleyballAcademy: appLink("/", "volleyball-academy"),
+  cricketAcademy: appLink("/", "cricket-academy"),
+  badmintonAcademy: appLink("/", "badminton-academy"),
+  soccerAcademy: appLink("/", "soccer-academy"),
 
   // ── Summer Camp 2026 (LevelUP × Code Ninjas) — per-week events ──
-  summerCampFullDayJul: `${UH_BASE}/events/196907-summer-camp-full-day-07-13-07-17`,
-  summerCampHalfDayJul: `${UH_BASE}/events/196909-summer-camp-half-day-07-13-07-17`,
-  summerCampFullDayAug: `${UH_BASE}/events/196908-summer-camp-full-day-08-10-08-14`,
-  summerCampHalfDayAug: `${UH_BASE}/events/196910-summer-camp-half-day-08-10-08-14`,
+  summerCampFullDayJul: appLink("/", "summer-camp-full-day-july"),
+  summerCampHalfDayJul: appLink("/", "summer-camp-half-day-july"),
+  summerCampFullDayAug: appLink("/", "summer-camp-full-day-august"),
+  summerCampHalfDayAug: appLink("/", "summer-camp-half-day-august"),
 
   // ── Events / Drop-In / Rentals ───────────────────────────
-  cricketCageRentals: `${UH_BASE}/events/186578-cricket-cage-rentals`,
-  pickleballOpenPlay: `${UH_BASE}/events/174223-pickle_ball-open_play-weekdays-9am-4pm`,
-  badmintonOpenPlay: `${UH_BASE}/events/174234-badminton-member-open_play-every_day`,
-  baseballLittleSluggersL: `${UH_BASE}/events/181868-little-sluggers`,
-  kidsAgility: `${UH_BASE}/events/187194-kids-agility-and-athleticism-program`,
+  cricketCageRentals: appLink("/", "cricket-cage-rentals"),
+  pickleballOpenPlay: appLink("/", "pickleball-open-play"),
+  badmintonOpenPlay: appLink("/", "badminton-open-play"),
+  baseballLittleSluggersL: appLink("/", "little-sluggers"),
+  kidsAgility: appLink("/", "kids-agility"),
 } as const;
 
 /** Map sport type → booking URL. Falls back to general offerings. */

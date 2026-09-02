@@ -16,7 +16,7 @@ import {
 } from "../roster-fields";
 
 type Division = "youth" | "adult";
-type PaymentMethod = "pay_later" | "upperhand";
+type PaymentMethod = "pay_later" | "pay_online";
 
 interface SafeRegistration {
   id: string;
@@ -410,7 +410,7 @@ function EditForm({
           </label>
           <label
             className={`relative flex flex-col gap-1 rounded-xl border-2 p-4 cursor-pointer transition-all ${
-              paymentMethod === "upperhand"
+              paymentMethod === "pay_online"
                 ? "border-accent bg-accent/5"
                 : "border-neutral-200 bg-white hover:border-neutral-300"
             }`}
@@ -418,13 +418,13 @@ function EditForm({
             <input
               type="radio"
               name="paymentMethod"
-              checked={paymentMethod === "upperhand"}
-              onChange={() => setPaymentMethod("upperhand")}
+              checked={paymentMethod === "pay_online"}
+              onChange={() => setPaymentMethod("pay_online")}
               className="sr-only"
             />
-            <span className="font-display font-semibold text-neutral-900">Pay via Upper Hand</span>
+            <span className="font-display font-semibold text-neutral-900">Pay in the LevelUP app</span>
             <span className="text-xs text-neutral-500 leading-relaxed">
-              We&apos;ll send the Upper Hand checkout link.
+              We&apos;ll send the in-app checkout link.
             </span>
           </label>
         </div>

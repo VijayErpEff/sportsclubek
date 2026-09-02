@@ -99,7 +99,7 @@ export default function TermsPage() {
                 <li>Court and cage rentals can be cancelled up to 24 hours in advance for a full refund</li>
                 <li>Cancellations within 24 hours may be rescheduled to another available slot but are not refundable</li>
                 <li>No-shows forfeit the full session fee</li>
-                <li>Online bookings are processed through our partner, Upper Hand. Their terms of service also apply to transactions made through their platform</li>
+                <li>Online bookings are processed in the LevelUP Sports &amp; Athletics app (iOS, Android, and app.levelupsports.us). The app&rsquo;s terms also apply to transactions made there</li>
                 <li>Walk-in sessions are subject to court and cage availability</li>
               </ul>
             </section>

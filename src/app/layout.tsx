@@ -110,6 +110,11 @@ export const metadata: Metadata = {
         : {}),
     },
   },
+  other: {
+    // Safari's native Smart App Banner — surfaces "Open" for visitors who
+    // already have the LevelUP app and "View" for those who don't.
+    "apple-itunes-app": "app-id=6777309227, app-argument=https://app.levelupsports.us",
+  },
 };
 
 export default function RootLayout({

@@ -290,8 +290,6 @@ export function Navbar() {
               <Button size="sm" variant="ghost" className="rounded-full px-3" asChild>
                 <a
                   href={BOOKING_URLS.login}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   onClick={() => trackCTAClick("Sign In", BOOKING_URLS.login)}
                 >
                   <LogIn className="h-4 w-4 mr-1.5" aria-hidden="true" />
@@ -302,8 +300,6 @@ export function Navbar() {
               <Button size="sm" variant="outline" className="rounded-full px-4" asChild>
                 <a
                   href={BOOKING_URLS.createAccount}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   onClick={() => trackCTAClick("Create Account", BOOKING_URLS.createAccount)}
                 >Create Account</a>
               </Button>
@@ -311,8 +307,6 @@ export function Navbar() {
               <Button size="sm" className="rounded-full px-4" asChild>
                 <a
                   href={BOOKING_URLS.offerings}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   onClick={() => trackCTAClick("Book a Session", BOOKING_URLS.offerings)}
                 >Book a Session</a>
               </Button>
@@ -498,16 +492,12 @@ export function Navbar() {
                 <Button size="lg" className="w-full rounded-full" asChild>
                   <a
                     href={BOOKING_URLS.offerings}
-                    target="_blank"
-                    rel="noopener noreferrer"
                     onClick={() => setMobileOpen(false)}
                   >Book a Session</a>
                 </Button>
                 <Button size="lg" variant="outline" className="w-full rounded-full" asChild>
                   <a
                     href={BOOKING_URLS.createAccount}
-                    target="_blank"
-                    rel="noopener noreferrer"
                     onClick={() => {
                       trackCTAClick("Create Account", BOOKING_URLS.createAccount);
                       setMobileOpen(false);
@@ -517,8 +507,6 @@ export function Navbar() {
                 <Button size="lg" variant="ghost" className="w-full rounded-full" asChild>
                   <a
                     href={BOOKING_URLS.login}
-                    target="_blank"
-                    rel="noopener noreferrer"
                     onClick={() => {
                       trackCTAClick("Sign In", BOOKING_URLS.login);
                       setMobileOpen(false);

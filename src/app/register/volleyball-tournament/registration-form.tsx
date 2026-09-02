@@ -16,7 +16,7 @@ import {
 } from "./roster-fields";
 
 type Division = "youth" | "adult";
-type PaymentMethod = "pay_later" | "upperhand";
+type PaymentMethod = "pay_later" | "pay_online";
 
 interface SuccessState {
   id: string;
@@ -308,7 +308,7 @@ export function RegistrationForm() {
       <FormSection
         step={5}
         title="Payment"
-        description="$200 per team. Pay now via Upper Hand or register first and we'll follow up."
+        description="$200 per team. Pay now in the LevelUP app or register first and we'll follow up."
       >
         <fieldset className="mb-3">
           <legend className="text-xs font-semibold text-neutral-700 mb-1.5">
@@ -322,9 +322,9 @@ export function RegistrationForm() {
               hint="We'll follow up with payment options (cash, Venmo, Zelle, card)."
             />
             <PaymentRadio
-              checked={paymentMethod === "upperhand"}
-              onChange={() => setPaymentMethod("upperhand")}
-              title="Pay via Upper Hand"
+              checked={paymentMethod === "pay_online"}
+              onChange={() => setPaymentMethod("pay_online")}
+              title="Pay in the LevelUP app"
               hint="Pay $200 by card on the next screen — locks your spot instantly."
             />
           </div>
@@ -528,13 +528,13 @@ function SuccessScreen({ success }: { success: SuccessState }) {
 
       <RegistrationIdBox id={success.id} />
 
-      {success.paymentMethod === "upperhand" && (
+      {success.paymentMethod === "pay_online" && (
         <div className="mt-6 bg-accent/5 border border-accent/30 rounded-xl p-5 text-left max-w-lg mx-auto">
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent mb-2">
             Step 2 — Complete Payment
           </p>
           <h3 className="font-display text-lg font-bold text-neutral-900 mb-2">
-            Pay $200 via Upper Hand to confirm your spot
+            Pay $200 in the LevelUP app to confirm your spot
           </h3>
           <p className="text-sm text-neutral-600 mb-4 leading-relaxed">
             Your team is held for 48 hours. Click below to finish checkout — your spot
@@ -543,10 +543,8 @@ function SuccessScreen({ success }: { success: SuccessState }) {
           <Button asChild size="lg" className="w-full sm:w-auto">
             <a
               href="/go/volleyball-tournament"
-              target="_blank"
-              rel="noopener noreferrer"
             >
-              Pay on Upper Hand <ArrowRight className="ml-2 h-4 w-4" />
+              Pay in the LevelUP App <ArrowRight className="ml-2 h-4 w-4" />
             </a>
           </Button>
         </div>
@@ -558,9 +556,9 @@ function SuccessScreen({ success }: { success: SuccessState }) {
           <li className="flex items-start gap-2">
             <span className="text-accent mt-0.5">1.</span>
             <span>
-              {success.paymentMethod === "upperhand" ? (
+              {success.paymentMethod === "pay_online" ? (
                 <>
-                  Complete the Upper Hand payment above. A receipt will be sent to{" "}
+                  Complete the payment above in the LevelUP app. A receipt will be sent to{" "}
                   <span className="font-mono text-neutral-900">{success.email}</span>.
                 </>
               ) : (

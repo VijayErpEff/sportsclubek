@@ -231,7 +231,7 @@ const FAQS = [
   {
     question: "How do I register?",
     answer:
-      "Register online via our Upper Hand booking page, call us at (443) 406-6494, or email info@levelupsports.us. Spots are limited, so we recommend booking early.",
+      "Register in the LevelUP Sports & Athletics app, call us at (443) 406-6494, or email info@levelupsports.us. Spots are limited, so we recommend booking early.",
   },
 ];
 

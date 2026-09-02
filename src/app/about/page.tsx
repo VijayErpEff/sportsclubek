@@ -117,7 +117,7 @@ export default function AboutPage() {
                 </p>
                 <div className="flex flex-wrap gap-4 mt-8">
                   <Button asChild>
-                    <a href={BOOKING_URLS.offerings} target="_blank" rel="noopener noreferrer">
+                    <a href={BOOKING_URLS.offerings}>
                       Book a Session
                     </a>
                   </Button>

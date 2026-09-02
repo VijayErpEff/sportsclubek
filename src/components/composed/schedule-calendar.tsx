@@ -589,7 +589,7 @@ function AdminFormModal({
                 type="url"
                 value={form.bookingUrl}
                 onChange={(e) => onChange({ bookingUrl: e.target.value })}
-                placeholder="e.g. https://app.upperhand.io/..."
+                placeholder="e.g. https://app.levelupsports.us/..."
                 className={inputCn}
               />
             </div>
