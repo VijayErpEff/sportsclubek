@@ -34,12 +34,6 @@ export const BOOKING_URLS = {
   /** All memberships overview */
   memberships: appLink("/", "memberships"),
 
-  /** Spring Offer - Game Pass ($10/month, 3-month commitment, OpenPlay access) */
-  springOffer: appLink("/", "spring-offer"),
-
-  /** Pickleball Golden Hour package */
-  pickleballGoldenHour: appLink("/", "pickleball-golden-hour"),
-
   // ── Academy Enrollments ──────────────────────────────────
   kidsAgilityAcademy: appLink("/", "kids-agility-academy"),
   volleyballAcademy: appLink("/", "volleyball-academy"),

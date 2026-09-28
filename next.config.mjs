@@ -60,6 +60,12 @@ const nextConfig = {
         permanent: true,
       },
       {
+        // July 2026 Freedom Offer has ended — send old links to current offers.
+        source: "/freedom-offer",
+        destination: "/offers",
+        permanent: true,
+      },
+      {
         // Shareable shortcuts for flyers/social. All account and booking entry
         // points funnel through /app, which opens the LevelUP app when it is
         // installed and otherwise offers the store download or the browser.

@@ -429,12 +429,12 @@ export default function HomePage() {
           </Reveal>
           <Reveal delay={0.3}>
             <p className="text-center text-sm text-neutral-500 mt-3">
-              This weekend:{" "}
+              Every Tuesday:{" "}
               <Link
-                href="/freedom-offer"
+                href="/offers"
                 className="text-accent hover:text-accent-hover font-semibold"
               >
-                Freedom Offer — $5 open play &amp; 50% off rentals, July 3–5 &rarr;
+                $5 Pickleball Tuesdays — indoor open play, 5–10 PM &rarr;
               </Link>
             </p>
           </Reveal>

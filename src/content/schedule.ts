@@ -7,6 +7,8 @@
 // Sport options: "baseball" | "cricket" | "badminton" | "pickleball" | "volleyball" | "soccer" | "agility" | "open"
 // ============================================================
 
+import { BOOKING_URLS } from "@/lib/constants/booking";
+
 export type SportType =
   | "baseball"
   | "cricket"
@@ -80,6 +82,7 @@ export const WEEKLY_SCHEDULE: DaySchedule[] = [
     shortDay: "Tue",
     sessions: [
       { time: "9:00 AM",  endTime: "11:00 AM", activity: "Open Batting Cages",          sport: "open" },
+      { time: "5:00 PM",  endTime: "10:00 PM", activity: "$5 Pickleball Tuesdays — Open Play", sport: "pickleball", level: "All Levels · $5/person", bookingUrl: BOOKING_URLS.pickleballOpenPlay },
       { time: "5:30 PM",  endTime: "7:30 PM",  activity: "Baseball Academy",             sport: "baseball",  level: "Ages 13–15" },
       { time: "7:30 PM",  endTime: "9:30 PM",  activity: "Open Badminton Courts",        sport: "open" },
     ],

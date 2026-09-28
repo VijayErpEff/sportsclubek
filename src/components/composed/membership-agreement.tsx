@@ -126,7 +126,6 @@ export function MembershipAgreement() {
                   <p className="font-semibold text-neutral-900">1. Membership Options &amp; Fees</p>
                   <ul className="list-disc pl-5 mt-1 space-y-1">
                     <li><strong>Core Membership &ndash; $59.99/month:</strong> Access to one (1) sport of your choice (Cricket, Badminton, Volleyball, or Pickleball). 8 OpenPlay sessions per month.</li>
-                    <li><strong>Momentum Membership &ndash; $89.99/month:</strong> Access all sports of your choice. 16 OpenPlay sessions per month.</li>
                     <li><strong>Elite Membership &ndash; $129.99/month:</strong> Unlimited access to all available sports. 24 OpenPlay sessions per month.</li>
                   </ul>
                   <p className="mt-1">Membership fees are billed monthly (or annually if selected). All fees are subject to applicable taxes.</p>

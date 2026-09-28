@@ -87,11 +87,6 @@ export const REDIRECTS: RedirectEntry[] = [
     title: "Membership Plans",
     destination: appLink("/", "memberships"),
   },
-  {
-    slug: "spring-offer",
-    title: "Spring Game Pass Offer",
-    destination: appLink("/", "spring-offer"),
-  },
 
   // ── Academies ───────────────────────────────────────────
   {
@@ -127,6 +122,12 @@ export const REDIRECTS: RedirectEntry[] = [
     destination: appLink("/", "pickleball-open-play"),
   },
   {
+    // Flyer/social link for the current promotion — lands on the offer page.
+    slug: "pickleball-tuesdays",
+    title: "$5 Pickleball Tuesdays",
+    destination: "/offers",
+  },
+  {
     slug: "badminton-open-play",
     title: "Badminton Open Play",
     destination: appLink("/", "badminton-open-play"),
@@ -140,11 +141,6 @@ export const REDIRECTS: RedirectEntry[] = [
     slug: "kids-agility",
     title: "Kids Agility Program",
     destination: appLink("/", "kids-agility"),
-  },
-  {
-    slug: "pickleball-golden-hour",
-    title: "Pickleball Golden Hour",
-    destination: appLink("/", "pickleball-golden-hour"),
   },
 ];
 

@@ -1,134 +1,69 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { CTABanner } from "@/components/composed/cta-banner";
 import { Section } from "@/components/layout/section";
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { StaggerContainer, StaggerItem } from "@/components/ui/stagger";
-import { cn } from "@/lib/utils/cn";
 import { generateSEOMetadata } from "@/lib/seo/metadata";
 import { generateBreadcrumbLD } from "@/lib/seo/json-ld";
 import { BOOKING_URLS } from "@/lib/constants/booking";
 import { SITE_CONFIG } from "@/lib/constants/site";
-import { CheckCircle, Sun, Sparkles, Trophy, Users } from "lucide-react";
+import { CalendarDays, Clock, MapPin, Phone, Users, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: "Current Offers & Promotions — Elkton, MD",
+  title: "$5 Pickleball Tuesdays — Open Play in Elkton, MD",
   description:
-    "Current deals at LevelUP Sports in Elkton, MD: Freedom Offer — $5 open play and 50% off net & cage rentals (July 3–5), LevelUP × Code Ninjas Summer Camp now enrolling, $10/mo Open Play Game Pass, Pickleball Golden Hour, and refer-a-friend rewards.",
+    "$5 Pickleball Tuesdays at LevelUP Sports in Elkton, MD: indoor pickleball open play every Tuesday, 5–10 PM, just $5 per person. Bring your friends — everyone is welcome.",
   path: "/offers",
 });
 
-type Offer = {
-  tag: string;
-  priceLabel: string;
-  priceSuffix?: string;
-  subLabel: string;
-  title: string;
-  body: string;
-  features: string[];
-  fineprint: string;
-  cta: { label: string; href: string };
-  accent: "accent" | "primary";
-  highlighted?: boolean;
-  ribbon?: string;
+// ── The one promotion running right now ─────────────────────────
+const PROMO = {
+  name: "$5 Pickleball Tuesdays",
+  price: "$5",
+  priceNote: "per person",
+  day: "Every Tuesday",
+  hours: "5:00 – 10:00 PM",
+  flyer: "/images/offers/pickleball-tuesdays.jpg",
+  fineprint:
+    "$5 per person, per Tuesday open-play visit. Walk-ins welcome; paddles and balls provided. Cannot be combined with other offers. Valid at the LevelUP Sports Elkton location only.",
 };
 
-const OFFERS: Offer[] = [
+const DETAILS = [
   {
-    tag: "Freedom Offer — July 3–5",
-    priceLabel: "$5",
-    priceSuffix: "/play",
-    subLabel: "Open Play · July 4th Weekend",
-    title: "Freedom Offer — Play All Weekend",
-    body: "Celebrate the long weekend: $5 open play and 50% off net & cage rentals, July 3–5. Six sports on climate-controlled indoor courts, all ages. No membership needed — walk in and play.",
-    features: [
-      "$5 open play — every sport, all three days",
-      "50% off net & batting-cage rentals",
-      "Fri 1–9 PM · Sat & Sun 9 AM–9 PM",
-      "Climate-controlled · ages 5 to 65+",
-    ],
-    fineprint: "Valid July 3–5, 2026 only. $5 per open-play visit. Cannot be combined with other offers.",
-    cta: { label: "See the Offer", href: "/freedom-offer" },
-    accent: "accent",
-    highlighted: true,
-    ribbon: "Limited — July 3–5",
+    icon: CalendarDays,
+    label: "When",
+    value: "Every Tuesday",
+    sub: "Weekly — no sign-up window, just show up",
   },
   {
-    tag: "Summer Camp 2026",
-    priceLabel: "From $199",
-    priceSuffix: "/wk",
-    subLabel: "Now Enrolling · Ages 5+",
-    title: "LevelUP × Code Ninjas — Where Play Meets Coding!",
-    body: "Reserve your camper's spot at our 2026 LevelUP × Code Ninjas Summer Camp. Coding, robotics, and sports rotations led by Code Ninjas Senseis and LevelUP coaches. Ages 5+.",
-    features: [
-      "Full Day $299/week — coding + sports (8:30 AM – 5:00 PM)",
-      "Half Day Sports $199/week — AM or PM batch",
-      "Half Day Coding & Robotics $199/week — AM or PM batch",
-      "Upcoming weeks: July 13 · Aug 10",
-    ],
-    fineprint: "Limited spots available. Register early to reserve your camper's week.",
-    cta: { label: "Reserve Your Spot", href: "/summer-camps" },
-    accent: "primary",
-    ribbon: "Most Popular",
-  },
-  {
-    tag: "Game Pass",
-    priceLabel: "$10",
-    priceSuffix: "/mo",
-    subLabel: "Open Play Access",
-    title: "Open Play Game Pass",
-    body: "Pay just $10/month and get Open Play access to badminton, pickleball, and volleyball. Perfect for regulars who want unlimited court time on a budget.",
-    features: [
-      "Badminton, pickleball, and volleyball included",
-      "3-month commitment required",
-      "No join fee",
-      "Cancel after your 3-month term",
-    ],
-    fineprint: "Plus taxes & fees. Limited time offer.",
-    cta: { label: "Claim This Offer", href: BOOKING_URLS.springOffer },
-    accent: "primary",
-  },
-  {
-    tag: "Pickleball",
-    priceLabel: "Golden Hour",
-    subLabel: "Special Pickleball Package",
-    title: "Pickleball Golden Hour",
-    body: "An exclusive membership package with premium pickleball court access and dedicated play times. Built for players who want to level up.",
-    features: [
-      "Dedicated pickleball court time",
-      "Premium membership perks",
-      "All equipment included",
-      "Priority booking windows",
-    ],
-    fineprint: "Limited availability. Sign up today.",
-    cta: { label: "Claim This Offer", href: BOOKING_URLS.pickleballGoldenHour },
-    accent: "primary",
-  },
-];
-
-const WHY_OFFERS = [
-  {
-    icon: Sun,
-    title: "Real Savings",
-    description: "Genuine discounts and membership perks for the best deal on training.",
-  },
-  {
-    icon: Sparkles,
-    title: "Real Value",
-    description: "No gimmicks or 'up to' fine print. Every offer below is exactly what it looks like.",
-  },
-  {
-    icon: Trophy,
-    title: "Flexible Terms",
-    description: "Month-to-month, short commitments, and cancel-anytime options across most offers.",
+    icon: Clock,
+    label: "Hours",
+    value: "5:00 – 10:00 PM",
+    sub: "Come for an hour or stay the whole evening",
   },
   {
     icon: Users,
-    title: "Local, Not Corporate",
-    description: "Independently owned. Every dollar stays in Elkton supporting youth athletics.",
+    label: "Who",
+    value: "Everyone is welcome",
+    sub: "Beginners, regulars, families, groups of friends",
   },
+  {
+    icon: MapPin,
+    label: "Where",
+    value: "LevelUP Sports & Athletics Club",
+    sub: `${SITE_CONFIG.address.street}, ${SITE_CONFIG.address.city}, MD 21921`,
+  },
+];
+
+const WHAT_TO_EXPECT = [
+  "Indoor, climate-controlled pickleball courts — no wind, no rain, no heat",
+  "Round-robin open play, so you rotate in with players at your level",
+  "Paddles and balls provided if you don't have your own",
+  "50+ regulars who started as beginners and are happy you showed up",
 ];
 
 export default function OffersPage() {
@@ -137,21 +72,72 @@ export default function OffersPage() {
     { name: "Offers", url: "/offers" },
   ]);
 
+  // Recurring weekly event schema — no hard dates to go stale.
+  const eventLD = {
+    "@context": "https://schema.org",
+    "@type": "SportsEvent",
+    name: `${PROMO.name} — ${SITE_CONFIG.shortName}`,
+    description:
+      "Indoor pickleball open play every Tuesday from 5 to 10 PM at LevelUP Sports & Athletics Club in Elkton, MD. $5 per person. Everyone is welcome.",
+    sport: "Pickleball",
+    url: `${SITE_CONFIG.url}/offers`,
+    image: [`${SITE_CONFIG.url}${PROMO.flyer}`],
+    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+    eventStatus: "https://schema.org/EventScheduled",
+    eventSchedule: {
+      "@type": "Schedule",
+      byDay: "https://schema.org/Tuesday",
+      startTime: "17:00",
+      endTime: "22:00",
+      repeatFrequency: "P1W",
+      scheduleTimezone: "America/New_York",
+    },
+    location: {
+      "@type": "SportsActivityLocation",
+      name: SITE_CONFIG.name,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: SITE_CONFIG.address.street,
+        addressLocality: SITE_CONFIG.address.city,
+        addressRegion: "MD",
+        postalCode: "21921",
+        addressCountry: "US",
+      },
+    },
+    organizer: {
+      "@type": "Organization",
+      name: SITE_CONFIG.name,
+      url: SITE_CONFIG.url,
+      telephone: SITE_CONFIG.phone,
+    },
+    offers: {
+      "@type": "Offer",
+      price: "5",
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock",
+      url: `${SITE_CONFIG.url}/offers`,
+    },
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLD) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(eventLD) }}
+      />
 
-      {/* Hero — tight, breadcrumb inline */}
-      <section className="pt-28 md:pt-32 pb-6 md:pb-8 relative overflow-hidden">
+      {/* Hero — offer copy left, flyer right (5/7 split, flyer overlaps the section edge) */}
+      <section className="pt-28 md:pt-32 pb-12 md:pb-20 relative overflow-hidden">
         <div
           className="absolute inset-0 bg-gradient-to-b from-primary/[0.03] to-white"
           aria-hidden="true"
         />
         <Container className="relative">
-          <nav aria-label="Breadcrumb" className="text-xs text-neutral-400 mb-4">
+          <nav aria-label="Breadcrumb" className="text-xs text-neutral-400 mb-6">
             <ol className="flex items-center gap-1.5">
               <li>
                 <Link href="/" className="hover:text-primary transition-colors">
@@ -162,141 +148,99 @@ export default function OffersPage() {
               <li className="text-neutral-600 font-medium">Offers</li>
             </ol>
           </nav>
-          <div className="max-w-2xl mx-auto text-center">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-3">
-              Save on Summer Camps, Open Play &amp; More
-            </p>
-            <h1 className="font-display text-page-title text-neutral-900 mb-2 text-balance">
-              Current Offers &amp; Deals
-            </h1>
-            <p className="text-neutral-500">
-              Active promotions at LevelUP Sports &mdash; Elkton&rsquo;s premier indoor
-              athletics club.{" "}
-              <Link
-                href="/summer-camps"
-                className="text-accent hover:text-accent-hover font-medium"
-              >
-                See Summer Camps &rarr;
-              </Link>
-            </p>
+
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+            <div className="lg:col-span-7">
+              <Reveal>
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-4">
+                  Current Offer · Pickleball Open Play
+                </p>
+                <h1 className="font-display text-hero text-neutral-900 text-balance leading-[1.05]">
+                  $5 Pickleball Tuesdays
+                </h1>
+                <p className="mt-5 text-lg text-neutral-600 max-w-xl leading-relaxed">
+                  Indoor open play every Tuesday from 5 to 10 PM &mdash; just $5 per
+                  person. Bring your friends. Everyone is welcome.
+                </p>
+              </Reveal>
+
+              <Reveal delay={0.1}>
+                <div className="mt-8 flex flex-wrap items-end gap-x-8 gap-y-4">
+                  <div>
+                    <p className="font-mono text-6xl md:text-7xl font-bold text-accent leading-none">
+                      {PROMO.price}
+                    </p>
+                    <p className="text-sm text-neutral-500 mt-1">{PROMO.priceNote}</p>
+                  </div>
+                  <div className="pb-1 border-l-2 border-neutral-200 pl-6">
+                    <p className="font-display text-xl font-bold text-neutral-900">
+                      {PROMO.day}
+                    </p>
+                    <p className="font-mono text-neutral-600">{PROMO.hours}</p>
+                  </div>
+                </div>
+              </Reveal>
+
+              <Reveal delay={0.2}>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <Button size="lg" asChild>
+                    <Link href={BOOKING_URLS.pickleballOpenPlay}>
+                      Book Tuesday Open Play
+                      <ArrowRight className="h-4 w-4 ml-2" aria-hidden="true" />
+                    </Link>
+                  </Button>
+                  <Button size="lg" variant="outline" asChild>
+                    <a href={`tel:${SITE_CONFIG.phone}`}>
+                      <Phone className="h-4 w-4 mr-2" aria-hidden="true" />
+                      Call {SITE_CONFIG.phone}
+                    </a>
+                  </Button>
+                </div>
+                <p className="mt-4 text-sm text-neutral-500">
+                  No membership needed. Walk-ins welcome &mdash; or reserve your spot in the
+                  LevelUP app.
+                </p>
+              </Reveal>
+            </div>
+
+            <div className="lg:col-span-5 lg:-mr-8 xl:-mr-16">
+              <Reveal variant="fade-left" delay={0.15}>
+                <div className="relative mx-auto max-w-md lg:max-w-none lg:rotate-[1.5deg]">
+                  <Image
+                    src={PROMO.flyer}
+                    alt="$5 Pickleball Tuesdays flyer — pickleball open play every Tuesday 5 to 10 PM, $5 per person, at LevelUP Sports & Athletics Club, 701 E Pulaski Hwy, Elkton, MD"
+                    width={1000}
+                    height={1000}
+                    priority
+                    sizes="(max-width: 1024px) 90vw, 40vw"
+                    className="rounded-2xl shadow-card-elevated ring-1 ring-neutral-200"
+                  />
+                </div>
+              </Reveal>
+            </div>
           </div>
         </Container>
       </section>
 
-      {/* Offer Cards */}
-      <div className="pb-12 md:pb-16">
+      {/* Details */}
+      <Section variant="alternate" size="sm">
         <Container>
-          <Reveal>
-            <div className="text-center mb-10">
-              <h2 className="font-display text-section text-neutral-900 mb-3">
-                Pick Your Offer
-              </h2>
-              <p className="text-neutral-500 max-w-xl mx-auto">
-                All offers are active today. Click any card to claim &mdash; or call us for help
-                choosing.
-              </p>
-            </div>
-          </Reveal>
-
-          <StaggerContainer className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 max-w-6xl mx-auto pt-4">
-            {OFFERS.map((offer) => {
-              const accentBg = offer.accent === "accent" ? "bg-accent" : "bg-primary";
-              const accentText = offer.accent === "accent" ? "text-accent" : "text-primary";
-              return (
-                <StaggerItem key={offer.title}>
-                  <div
-                    className={cn(
-                      "relative rounded-2xl bg-white h-full flex flex-col hover:shadow-lg transition-shadow",
-                      offer.highlighted
-                        ? "border-2 border-accent shadow-md"
-                        : "border border-neutral-200"
-                    )}
-                  >
-                    {offer.ribbon && (
-                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent text-white text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-md z-10 whitespace-nowrap">
-                        {offer.ribbon}
-                      </div>
-                    )}
-
-                    {/* Price header — uniform height, rounded top to match card */}
-                    <div
-                      className={cn(
-                        "p-6 text-white text-center rounded-t-2xl flex flex-col items-center justify-center min-h-[170px]",
-                        accentBg
-                      )}
-                    >
-                      <p className="text-[11px] font-semibold uppercase tracking-[0.2em] mb-2 opacity-90">
-                        {offer.tag}
-                      </p>
-                      <p className="font-display text-3xl font-extrabold leading-none text-balance">
-                        {offer.priceLabel}
-                        {offer.priceSuffix && (
-                          <span className="text-lg font-normal">{offer.priceSuffix}</span>
-                        )}
-                      </p>
-                      <p className="text-xs opacity-90 mt-2 leading-snug text-balance">
-                        {offer.subLabel}
-                      </p>
+          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {DETAILS.map((item) => (
+              <StaggerItem key={item.label}>
+                <div className="p-6 rounded-2xl bg-white border border-neutral-100 h-full">
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-accent/10 text-accent">
+                      <item.icon className="h-4 w-4" aria-hidden="true" />
                     </div>
-
-                    {/* Body */}
-                    <div className="p-6 flex flex-col flex-1">
-                      <h3 className="font-display text-lg font-bold text-neutral-900 mb-2">
-                        {offer.title}
-                      </h3>
-                      <p className="text-neutral-600 text-sm mb-4 leading-relaxed">
-                        {offer.body}
-                      </p>
-                      <ul className="space-y-2 mb-5 flex-1">
-                        {offer.features.map((feature) => (
-                          <li key={feature} className="flex items-start gap-2">
-                            <CheckCircle
-                              className={cn("h-4 w-4 shrink-0 mt-0.5", accentText)}
-                            />
-                            <span className="text-neutral-600 text-sm">{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      <p className="text-xs text-neutral-400 border-t border-neutral-100 pt-4 mb-4">
-                        {offer.fineprint}
-                      </p>
-                      <Button
-                        className={cn(
-                          "w-full mt-auto",
-                          offer.accent === "primary" && "bg-primary hover:bg-primary-light"
-                        )}
-                        asChild
-                      >
-                        <Link href={offer.cta.href}>{offer.cta.label}</Link>
-                      </Button>
-                    </div>
+                    <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-neutral-500">
+                      {item.label}
+                    </p>
                   </div>
-                </StaggerItem>
-              );
-            })}
-          </StaggerContainer>
-        </Container>
-      </div>
-
-      {/* Why These Offers */}
-      <Section variant="alternate">
-        <Container>
-          <Reveal>
-            <h2 className="font-display text-section text-neutral-900 mb-10 text-center">
-              Why Our Offers Win
-            </h2>
-          </Reveal>
-          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {WHY_OFFERS.map((item) => (
-              <StaggerItem key={item.title}>
-                <div className="p-6 rounded-2xl bg-white border border-neutral-100 text-center h-full">
-                  <div className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-accent/10 text-accent mb-3">
-                    <item.icon className="h-5 w-5" aria-hidden="true" />
-                  </div>
-                  <h3 className="font-display text-base font-semibold text-neutral-900 mb-1">
-                    {item.title}
-                  </h3>
-                  <p className="text-neutral-500 text-sm">{item.description}</p>
+                  <p className="font-display text-base font-bold text-neutral-900">
+                    {item.value}
+                  </p>
+                  <p className="text-sm text-neutral-500 mt-1">{item.sub}</p>
                 </div>
               </StaggerItem>
             ))}
@@ -304,32 +248,65 @@ export default function OffersPage() {
         </Container>
       </Section>
 
-      {/* Terms */}
+      {/* What to expect + fine print */}
       <Section>
         <Container>
-          <Reveal>
-            <div className="max-w-2xl mx-auto text-center">
-              <h2 className="font-display text-section text-neutral-900 mb-4">
-                Offer Terms
-              </h2>
-              <p className="text-neutral-500 text-sm leading-relaxed">
-                All offers are subject to availability and may be withdrawn at any time.
-                Offers cannot be combined unless explicitly stated. Valid at the LevelUP
-                Sports Elkton location only. Contact us for full terms and conditions.
-              </p>
+          <div className="grid lg:grid-cols-12 gap-10">
+            <div className="lg:col-span-7">
+              <Reveal>
+                <h2 className="font-display text-section text-neutral-900 mb-5">
+                  What to expect on a Tuesday
+                </h2>
+                <ul className="space-y-3">
+                  {WHAT_TO_EXPECT.map((line) => (
+                    <li key={line} className="flex items-start gap-3">
+                      <span
+                        className="mt-2 h-2 w-2 rounded-full bg-accent shrink-0"
+                        aria-hidden="true"
+                      />
+                      <span className="text-neutral-700 leading-relaxed">{line}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-6 text-neutral-600">
+                  New to the game?{" "}
+                  <Link
+                    href="/pickleball"
+                    className="text-accent hover:text-accent-hover font-medium"
+                  >
+                    See our pickleball program &rarr;
+                  </Link>
+                </p>
+              </Reveal>
             </div>
-          </Reveal>
+            <div className="lg:col-span-5 lg:pl-8 lg:border-l border-neutral-100">
+              <Reveal delay={0.1}>
+                <h2 className="font-display text-lg font-bold text-neutral-900 mb-3">
+                  Offer terms
+                </h2>
+                <p className="text-sm text-neutral-500 leading-relaxed">{PROMO.fineprint}</p>
+                <p className="text-sm text-neutral-500 leading-relaxed mt-3">
+                  Offers are subject to availability and may be withdrawn at any time.
+                  Questions? Email{" "}
+                  <a
+                    href={`mailto:${SITE_CONFIG.email}`}
+                    className="text-accent hover:text-accent-hover font-medium"
+                  >
+                    {SITE_CONFIG.email}
+                  </a>
+                  .
+                </p>
+              </Reveal>
+            </div>
+          </div>
         </Container>
       </Section>
 
       <CTABanner
-        title="Questions About Our Offers?"
-        description="Our team is happy to help you find the best deal. Call, email, or walk in today."
-        primaryCTA={{ label: "Contact Us", href: "/contact" }}
-        secondaryCTA={{
-          label: `Call ${SITE_CONFIG.phone}`,
-          href: `tel:${SITE_CONFIG.phone}`,
-        }}
+        title="See You Tuesday"
+        description="Grab a paddle, bring a friend, and play indoors for $5. Reserve in the LevelUP app or just walk in."
+        primaryCTA={{ label: "Book Tuesday Open Play", href: BOOKING_URLS.pickleballOpenPlay }}
+        secondaryCTA={{ label: "View Memberships", href: "/memberships" }}
       />
     </>
   );

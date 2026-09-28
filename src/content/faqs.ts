@@ -17,7 +17,7 @@ export const HOMEPAGE_FAQS = [
   {
     question: "How much does it cost to rent a batting cage or court at LevelUP?",
     answer:
-      "Baseball cage rental is $40/hour. Cricket rentals range from $40/hour (single cage) to $90/hour (half pitch) to $180/hour (full pitch). Badminton courts are $40/hour. Volleyball court rental is $120/hour. Open Play is $15/hour for non-members or just $8/hour for members (50% off). All prices are per court/cage, not per person — so you can split the cost with friends or family. Memberships start at $59.99/month (Core), $89.99/month (Momentum), or $119.99/month (Ultimate).",
+      "Baseball cage rental is $40/hour. Cricket rentals range from $40/hour (single cage) to $90/hour (half pitch) to $180/hour (full pitch). Badminton courts are $40/hour. Volleyball court rental is $120/hour. Open Play is $15/hour for non-members or just $8/hour for members (50% off). All prices are per court/cage, not per person — so you can split the cost with friends or family. Memberships are $59.99/month (Core, one sport) or $119.99/month (Ultimate, all sports).",
   },
   {
     question: "What ages are your youth sports programs for?",
@@ -128,6 +128,6 @@ export const MEMBERSHIP_FAQS = [
   {
     question: "Is a LevelUP membership worth it?",
     answer:
-      "If you visit 3+ times per week, membership pays for itself in the first month. Open Play without a membership is $15/hour — with a membership, it drops to just $8/hour (50% off). Private cage and court rentals run $40-$120/hour. With a Momentum membership at $89.99/month, you get 14 Open Play sessions, all sports included, and priority booking. Most members tell us they wish they'd signed up sooner.",
+      "If you visit 3+ times per week, membership pays for itself in the first month. Open Play without a membership is $15/hour — with a membership, it drops to just $8/hour (50% off). Private cage and court rentals run $40-$120/hour. With an Ultimate membership at $119.99/month, you get 24 Open Play sessions, all sports included, and highest booking priority. Most members tell us they wish they'd signed up sooner.",
   },
 ];

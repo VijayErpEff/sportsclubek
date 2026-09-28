@@ -4,7 +4,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils/cn";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Check, Zap, Trophy, Crown } from "lucide-react";
+import { Check, Zap, Crown } from "lucide-react";
 import { BOOKING_URLS } from "@/lib/constants/booking";
 
 const plans = [
@@ -27,25 +27,6 @@ const plans = [
     recommended: false,
   },
   {
-    name: "LevelUP Momentum",
-    icon: Trophy,
-    price: 89.99,
-    tagline: "Can't choose just one?",
-    sport: "All Sports",
-    sessions: "14 Open Plays",
-    description:
-      "Access to all sports — play what you want, when you want. Switch between games based on your mood, and keep every workout exciting.",
-    features: [
-      "14 Open Play sessions/month",
-      "All sports included",
-      "Priority booking",
-      "Program discounts",
-      "Equipment rental discounts",
-      "Add more sessions anytime",
-    ],
-    recommended: true,
-  },
-  {
     name: "LevelUP Ultimate",
     icon: Crown,
     price: 119.99,
@@ -62,7 +43,7 @@ const plans = [
       "Equipment rental & pro shop discounts",
       "Add more sessions anytime",
     ],
-    recommended: false,
+    recommended: true,
   },
 ];
 
@@ -88,7 +69,7 @@ export function PricingSection() {
       </div>
 
       {/* Pricing Cards */}
-      <div className="grid md:grid-cols-3 gap-5 lg:gap-6 max-w-5xl mx-auto items-start">
+      <div className="grid md:grid-cols-2 gap-5 lg:gap-6 max-w-3xl mx-auto items-start">
         {plans.map((plan) => {
           const Icon = plan.icon;
 
