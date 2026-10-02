@@ -438,6 +438,17 @@ export default function HomePage() {
               </Link>
             </p>
           </Reveal>
+          <Reveal delay={0.35}>
+            <p className="text-center text-sm text-neutral-500 mt-2">
+              Saturday, October 24:{" "}
+              <Link
+                href="/events/volleyball-tournament"
+                className="text-accent hover:text-accent-hover font-semibold"
+              >
+                Smash Cup volleyball tournament — co-ed 16+, $250/team, cash prizes &rarr;
+              </Link>
+            </p>
+          </Reveal>
         </Container>
       </Section>
 

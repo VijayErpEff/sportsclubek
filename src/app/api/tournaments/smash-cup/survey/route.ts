@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { redis } from "@/lib/storage/redis";
 
-const SURVEY_KEY = "tournament:smash-cup:survey";
+// Fall 2026 edition — June responses live under tournament:smash-cup:survey.
+const SURVEY_KEY = "tournament:smash-cup-oct-2026:survey";
 const ADMIN_PIN = process.env.ADMIN_PIN || "6886";
 
 const NO_CACHE_HEADERS = {

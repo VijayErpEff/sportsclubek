@@ -11,11 +11,12 @@ import {
   RosterFields,
   emptyPlayer,
   MIN_PLAYERS,
+  MAX_PLAYERS,
+  MIN_AGE,
   playerInputsToApi,
   type PlayerInput,
 } from "./roster-fields";
 
-type Division = "youth" | "adult";
 type PaymentMethod = "pay_later" | "pay_online";
 
 interface SuccessState {
@@ -27,7 +28,6 @@ interface SuccessState {
 export function RegistrationForm() {
   // ── Form state ─────────────────────────────────────────────
   const [teamName, setTeamName] = useState("");
-  const [division, setDivision] = useState<Division>("adult");
   const [captainName, setCaptainName] = useState("");
   const [captainEmail, setCaptainEmail] = useState("");
   const [captainPhone, setCaptainPhone] = useState("");
@@ -52,7 +52,6 @@ export function RegistrationForm() {
   const validate = (): Record<string, string> => {
     const errs: Record<string, string> = {};
     if (!teamName.trim() || teamName.trim().length < 2) errs.teamName = "Team name required.";
-    if (division !== "youth" && division !== "adult") errs.division = "Pick a division.";
     if (!captainName.trim()) errs["captain.name"] = "Captain name required.";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(captainEmail.trim()))
       errs["captain.email"] = "Valid email required.";
@@ -64,16 +63,9 @@ export function RegistrationForm() {
     if (players.length < MIN_PLAYERS) errs.players = `At least ${MIN_PLAYERS} players required.`;
     players.forEach((p, idx) => {
       if (!p.name.trim()) errs[`players.${idx}.name`] = "Player name required.";
-      if (division === "youth") {
-        const age = Number(p.age);
-        if (!p.age.trim() || isNaN(age) || age < 12 || age > 17) {
-          errs[`players.${idx}.age`] = "Youth players must be 12–17.";
-        }
-      } else if (p.age.trim()) {
-        const age = Number(p.age);
-        if (!isNaN(age) && age < 18) {
-          errs[`players.${idx}.age`] = "Adult players must be 18 or older.";
-        }
+      const age = Number(p.age);
+      if (!p.age.trim() || isNaN(age) || age < MIN_AGE) {
+        errs[`players.${idx}.age`] = `Players must be ${MIN_AGE} or older.`;
       }
     });
 
@@ -106,7 +98,7 @@ export function RegistrationForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           teamName: teamName.trim(),
-          division,
+          division: "open",
           captain: {
             name: captainName.trim(),
             email: captainEmail.trim(),
@@ -143,47 +135,22 @@ export function RegistrationForm() {
 
   return (
     <form onSubmit={handleSubmit} noValidate className="space-y-5 md:space-y-6">
-      {/* ── Section 1: Team & Division ─────────────────── */}
+      {/* ── Section 1: Team ─────────────────── */}
       <FormSection
         step={1}
-        title="Team & Division"
-        description="Pick your team name and division. Both divisions are co-ed."
+        title="Your Team"
+        description="One open division — co-ed, ages 16+. Pick a team name your crew will answer to."
       >
-        <div className="space-y-3">
-          <FloatingInput
-            label="Team name"
-            name="teamName"
-            required
-            value={teamName}
-            onChange={(e) => setTeamName(e.target.value)}
-            error={errors.teamName}
-            maxLength={60}
-            autoComplete="off"
-          />
-          <fieldset>
-            <legend className="text-xs font-semibold text-neutral-700 mb-1.5">
-              Division <span className="text-error">*</span>
-            </legend>
-            <div className="grid grid-cols-2 gap-2">
-              <DivisionRadio
-                value="youth"
-                checked={division === "youth"}
-                onChange={() => setDivision("youth")}
-                badge="12–17"
-                title="Youth"
-                hint="Co-ed"
-              />
-              <DivisionRadio
-                value="adult"
-                checked={division === "adult"}
-                onChange={() => setDivision("adult")}
-                badge="18+"
-                title="Adult"
-                hint="Co-ed"
-              />
-            </div>
-          </fieldset>
-        </div>
+        <FloatingInput
+          label="Team name"
+          name="teamName"
+          required
+          value={teamName}
+          onChange={(e) => setTeamName(e.target.value)}
+          error={errors.teamName}
+          maxLength={60}
+          autoComplete="off"
+        />
       </FormSection>
 
       {/* ── Section 2: Captain & PIN ─────────────────── */}
@@ -258,10 +225,9 @@ export function RegistrationForm() {
       <FormSection
         step={3}
         title="Team Roster"
-        description={`At least ${MIN_PLAYERS} players to register, up to 10. ${division === "youth" ? "Youth ages 12–17." : "Adults 18+."} Add more anytime before the tournament.`}
+        description={`At least ${MIN_PLAYERS} players to register, up to ${MAX_PLAYERS}. All players must be ${MIN_AGE}+. Add more anytime before the tournament.`}
       >
         <RosterFields
-          division={division}
           players={players}
           errors={errors}
           onChange={setPlayers}
@@ -308,7 +274,7 @@ export function RegistrationForm() {
       <FormSection
         step={5}
         title="Payment"
-        description="$200 per team. Pay now in the LevelUP app or register first and we'll follow up."
+        description="$250 per team. Pay now in the LevelUP app or register first and we'll follow up."
       >
         <fieldset className="mb-3">
           <legend className="text-xs font-semibold text-neutral-700 mb-1.5">
@@ -325,7 +291,7 @@ export function RegistrationForm() {
               checked={paymentMethod === "pay_online"}
               onChange={() => setPaymentMethod("pay_online")}
               title="Pay in the LevelUP app"
-              hint="Pay $200 by card on the next screen — locks your spot instantly."
+              hint="Pay $250 by card on the next screen — locks your spot instantly."
             />
           </div>
         </fieldset>
@@ -427,55 +393,6 @@ function FormSection({
   );
 }
 
-function DivisionRadio({
-  value,
-  checked,
-  onChange,
-  badge,
-  title,
-  hint,
-}: {
-  value: string;
-  checked: boolean;
-  onChange: () => void;
-  badge: string;
-  title: string;
-  hint: string;
-}) {
-  return (
-    <label
-      className={`relative flex items-center gap-2.5 rounded-lg border-2 p-2.5 cursor-pointer transition-all ${
-        checked
-          ? "border-accent bg-accent/5"
-          : "border-neutral-200 bg-white hover:border-neutral-300"
-      }`}
-    >
-      <input
-        type="radio"
-        name="division"
-        value={value}
-        checked={checked}
-        onChange={onChange}
-        className="sr-only"
-      />
-      <span
-        aria-hidden="true"
-        className={`shrink-0 inline-flex items-center justify-center min-w-[2.5rem] px-1.5 h-8 rounded-md font-mono font-bold text-xs ${
-          checked ? "bg-accent text-white" : "bg-neutral-100 text-neutral-600"
-        }`}
-      >
-        {badge}
-      </span>
-      <span className="flex-1 min-w-0">
-        <span className="block font-display font-semibold text-sm text-neutral-900 leading-tight">
-          {title}
-        </span>
-        <span className="block text-[11px] text-neutral-500">{hint}</span>
-      </span>
-    </label>
-  );
-}
-
 function PaymentRadio({
   checked,
   onChange,
@@ -519,7 +436,7 @@ function SuccessScreen({ success }: { success: SuccessState }) {
         <CheckCircle2 className="h-7 w-7 text-secondary" aria-hidden="true" />
       </div>
       <h2 className="font-display text-2xl md:text-3xl font-bold text-neutral-900 mb-3 text-balance">
-        You&apos;re registered for the Smash Cup!
+        You&apos;re registered for the Fall Smash Cup!
       </h2>
       <p className="text-neutral-600 mb-6 max-w-lg mx-auto">
         We&apos;ve saved your team. Use the registration ID below if you contact us about your
@@ -534,7 +451,7 @@ function SuccessScreen({ success }: { success: SuccessState }) {
             Step 2 — Complete Payment
           </p>
           <h3 className="font-display text-lg font-bold text-neutral-900 mb-2">
-            Pay $200 in the LevelUP app to confirm your spot
+            Pay $250 in the LevelUP app to confirm your spot
           </h3>
           <p className="text-sm text-neutral-600 mb-4 leading-relaxed">
             Your team is held for 48 hours. Click below to finish checkout — your spot
@@ -585,7 +502,17 @@ function SuccessScreen({ success }: { success: SuccessState }) {
           </li>
           <li className="flex items-start gap-2">
             <span className="text-accent mt-0.5">3.</span>
-            <span>Pool seedings and check-in times go out the week of the tournament.</span>
+            <span>
+              Pool seedings and your check-in time go out the week of October 24. On game day,
+              scores and the bracket are live at{" "}
+              <Link
+                href="/smash-cup/live"
+                className="text-accent hover:text-accent-hover font-semibold underline underline-offset-2"
+              >
+                levelupsports.us/smash-cup/live
+              </Link>
+              .
+            </span>
           </li>
         </ul>
       </div>

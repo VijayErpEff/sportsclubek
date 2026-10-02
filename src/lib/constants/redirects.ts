@@ -34,9 +34,16 @@ export const REDIRECTS: RedirectEntry[] = [
     destination: appLink("/", "badminton-tournament"),
   },
   {
+    // Payment / booking entry in the LevelUP app for the Oct 24 tournament.
     slug: "volleyball-tournament",
-    title: "LevelUP Smash Cup — Volleyball Tournament Jun 6–7",
+    title: "LevelUP Smash Cup — Volleyball Tournament Oct 24",
     destination: appLink("/", "volleyball-tournament"),
+  },
+  {
+    // Flyer / social short link — lands on the team registration form.
+    slug: "volleyball-register",
+    title: "Register — LevelUP Smash Cup Volleyball Tournament Oct 24",
+    destination: "/register/volleyball-tournament",
   },
   {
     slug: "soccer-open-house",

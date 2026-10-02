@@ -26,7 +26,7 @@ export async function POST(request: Request) {
 
   const input: RegistrationInput = {
     teamName: body.teamName?.trim() ?? "",
-    division: body.division as RegistrationInput["division"],
+    division: "open",
     captain: {
       name: body.captain?.name?.trim() ?? "",
       email: body.captain?.email?.trim() ?? "",
@@ -70,7 +70,7 @@ export async function POST(request: Request) {
 
   const registration: VolleyballRegistration = {
     id,
-    tournament: "smash-cup-jun-2026",
+    tournament: "smash-cup-oct-2026",
     teamName: input.teamName.trim(),
     division: input.division,
     captain: {

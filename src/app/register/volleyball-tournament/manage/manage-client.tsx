@@ -11,11 +11,13 @@ import {
   RosterFields,
   emptyPlayer,
   MIN_PLAYERS,
+  MAX_PLAYERS,
+  MIN_AGE,
   playerInputsToApi,
   type PlayerInput,
 } from "../roster-fields";
 
-type Division = "youth" | "adult";
+type Division = "open";
 type PaymentMethod = "pay_later" | "pay_online";
 
 interface SafeRegistration {
@@ -215,16 +217,9 @@ function EditForm({
     if (players.length < MIN_PLAYERS) errs.players = `At least ${MIN_PLAYERS} players required.`;
     players.forEach((p, idx) => {
       if (!p.name.trim()) errs[`players.${idx}.name`] = "Player name required.";
-      if (initial.division === "youth") {
-        const age = Number(p.age);
-        if (!p.age.trim() || isNaN(age) || age < 12 || age > 17) {
-          errs[`players.${idx}.age`] = "Youth players must be 12–17.";
-        }
-      } else if (p.age.trim()) {
-        const age = Number(p.age);
-        if (!isNaN(age) && age < 18) {
-          errs[`players.${idx}.age`] = "Adult players must be 18 or older.";
-        }
+      const age = Number(p.age);
+      if (!p.age.trim() || isNaN(age) || age < MIN_AGE) {
+        errs[`players.${idx}.age`] = `Players must be ${MIN_AGE} or older.`;
       }
     });
     if (Object.keys(errs).length > 0) {
@@ -282,11 +277,11 @@ function EditForm({
         <div className="flex-1">
           <p className="text-sm text-neutral-700">
             <span className="font-semibold text-neutral-900">{initial.teamName}</span> ·{" "}
-            <span className="capitalize">{initial.division}</span> Division ·{" "}
+            Open Division (co-ed, 16+) ·{" "}
             <span className="font-mono text-xs text-neutral-500">{initial.id}</span>
           </p>
           <p className="text-xs text-neutral-500 mt-0.5">
-            Division and captain email can&apos;t be changed here — call us if you need to.
+            Captain email can&apos;t be changed here — call us if you need to.
           </p>
         </div>
       </div>
@@ -346,10 +341,9 @@ function EditForm({
       {/* Roster */}
       <Card
         title="Roster"
-        description={`${initial.division === "youth" ? "Youth" : "Adult"} division — ${MIN_PLAYERS}–10 players.`}
+        description={`Open division — ${MIN_PLAYERS}–${MAX_PLAYERS} players, all ${MIN_AGE}+.`}
       >
         <RosterFields
-          division={initial.division}
           players={players}
           errors={errors}
           onChange={setPlayers}

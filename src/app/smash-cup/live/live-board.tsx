@@ -4,14 +4,13 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils/cn";
-import { Trophy, Lock, X, Check } from "lucide-react";
+import { Trophy, Lock, X, Check, Users } from "lucide-react";
 import { useAdmin } from "@/lib/context/admin-context";
 import {
   SMASH_CUP,
-  POOL_MATCHES,
-  POOLS,
   ADVANCE_CUTOFF,
   type PoolId,
+  type Pools,
 } from "@/lib/constants/smash-cup-bracket";
 import {
   computePoolStanding,
@@ -19,14 +18,18 @@ import {
   poolsComplete,
   champion,
   emptyState,
+  getPools,
+  getPoolMatches,
+  allTeams,
+  hasPools,
+  activePools,
   type StandingsState,
   type ResolvedMatch,
 } from "@/lib/smash-cup-standings";
+import { PoolsSetup } from "./pools-setup";
 
 const POLL_MS = 5000;
 const EASE = [0.22, 1, 0.36, 1] as const;
-const POOL_IDS: PoolId[] = ["A", "B"];
-const ALL_TEAMS = [...POOLS.A, ...POOLS.B];
 
 /* ── Data access ── */
 async function fetchStandings(): Promise<StandingsState | null> {
@@ -86,6 +89,7 @@ export function LiveBoard() {
   const [state, setState] = useState<StandingsState>(emptyState);
   const [mounted, setMounted] = useState(false);
   const [edit, setEdit] = useState<EditTarget | null>(null);
+  const [poolsOpen, setPoolsOpen] = useState(false);
   const stateRef = useRef(state);
   stateRef.current = state;
 
@@ -115,19 +119,40 @@ export function LiveBoard() {
     [admin.adminPin]
   );
 
+  const savePools = useCallback(
+    (pools: Pools) => {
+      // Drop scores and live flags for matchups that no longer exist.
+      const validIds = new Set(getPoolMatches({ ...state, pools }).map((m) => m.id));
+      const pool: StandingsState["pool"] = {};
+      for (const [id, score] of Object.entries(state.pool)) {
+        if (validIds.has(id)) pool[id] = score;
+      }
+      const next: StandingsState = {
+        ...state,
+        pools,
+        pool,
+        live: (state.live ?? []).filter((id) => validIds.has(id) || state.bracket[id]),
+      };
+      persist(next);
+      setPoolsOpen(false);
+    },
+    [state, persist]
+  );
+
   const openPoolEdit = useCallback(
     (matchId: string) => {
-      const m = POOL_MATCHES.find((x) => x.id === matchId);
+      const m = getPoolMatches(state).find((x) => x.id === matchId);
       if (!m) return;
+      const pools = getPools(state);
       const score = state.pool[matchId];
       setEdit({
         open: true,
         kind: "pool",
         id: matchId,
         title: `Pool ${m.pool}`,
-        sub: m.court,
-        nameA: POOLS[m.pool][m.i],
-        nameB: POOLS[m.pool][m.j],
+        sub: `${m.court} · ${m.time}`,
+        nameA: pools[m.pool][m.i],
+        nameB: pools[m.pool][m.j],
         a: score?.a ?? 0,
         b: score?.b ?? 0,
         done: score?.done ?? false,
@@ -212,6 +237,9 @@ export function LiveBoard() {
 
   const bracket = resolveBracket(state);
   const champ = champion(state);
+  const teamOptions = allTeams(state);
+  const visiblePools = activePools(state);
+  const ready = hasPools(state);
   const updatedTime =
     mounted && state.updated
       ? new Intl.DateTimeFormat("en-US", {
@@ -241,6 +269,9 @@ export function LiveBoard() {
               </span>
               <h1 className="font-display font-extrabold tracking-tight text-[clamp(1.5rem,3.5vw,3rem)] leading-none">
                 Smash Cup
+                <span className="ml-2 text-[0.5em] font-bold uppercase tracking-widest text-white/50">
+                  {SMASH_CUP.edition}
+                </span>
               </h1>
               <span className="inline-flex items-center gap-2 rounded-full border border-[#2BA84A]/40 bg-[#2BA84A]/15 px-3 py-1 text-[clamp(0.65rem,1vw,0.9rem)] font-bold uppercase tracking-widest text-[#A8E6CF]">
                 <span className="relative flex h-2 w-2">
@@ -260,12 +291,20 @@ export function LiveBoard() {
             Updated {updatedTime} ET
             <div className="mt-1">
               {adminMode ? (
-                <button
-                  onClick={admin.exitAdmin}
-                  className="rounded-lg border border-[#2BA84A]/40 bg-[#2BA84A]/15 px-3 py-1 font-semibold text-[#A8E6CF] hover:bg-[#2BA84A]/25"
-                >
-                  Exit Admin
-                </button>
+                <span className="inline-flex flex-wrap justify-end gap-2">
+                  <button
+                    onClick={() => setPoolsOpen(true)}
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-white/15 px-3 py-1 font-semibold text-white/80 hover:bg-white/5"
+                  >
+                    <Users className="h-3.5 w-3.5" /> Teams &amp; Pools
+                  </button>
+                  <button
+                    onClick={admin.exitAdmin}
+                    className="rounded-lg border border-[#2BA84A]/40 bg-[#2BA84A]/15 px-3 py-1 font-semibold text-[#A8E6CF] hover:bg-[#2BA84A]/25"
+                  >
+                    Exit Admin
+                  </button>
+                </span>
               ) : (
                 <button
                   onClick={admin.openPinModal}
@@ -294,30 +333,58 @@ export function LiveBoard() {
 
         {adminMode && (
           <div className="mt-3 rounded-xl border border-[#2BA84A]/30 bg-[#2BA84A]/10 px-4 py-2 text-[clamp(0.7rem,1vw,0.95rem)] font-medium text-[#A8E6CF]">
-            Admin mode — tap any match to update its score (live, no need to mark final yet), mark it &ldquo;now playing,&rdquo; or assign bracket teams. Changes sync to every screen within ~5s.
+            Admin mode — {ready ? "tap any match to update its score (live, no need to mark final yet), mark it “now playing,” or assign bracket teams." : "start with Teams & Pools to place registered teams into Pool A and Pool B."} Changes sync to every screen within ~5s.
+          </div>
+        )}
+
+        {/* Empty state — before staff set up pools on game day */}
+        {mounted && !ready && (
+          <div className="mt-[clamp(1rem,2.5vw,2.5rem)] rounded-2xl border border-dashed border-white/15 px-6 py-[clamp(2rem,5vw,4rem)] text-center">
+            <p className="text-[clamp(0.65rem,1vw,0.9rem)] font-bold uppercase tracking-[0.25em] text-[#A8E6CF]">
+              Saturday · {SMASH_CUP.date} · First serve 11 AM
+            </p>
+            <p className="mt-3 font-display text-[clamp(1.25rem,3vw,2.5rem)] font-extrabold">
+              Pools &amp; standings post here after check-in
+            </p>
+            <p className="mx-auto mt-2 max-w-xl text-[clamp(0.8rem,1.3vw,1.1rem)] text-white/50">
+              Live scores, pool tables, and the playoff bracket update on this screen all day.
+              Keep it open courtside or on your phone.
+            </p>
           </div>
         )}
 
         {/* Pools */}
-        <div className="mt-[clamp(0.75rem,2vw,2rem)] grid gap-[clamp(0.75rem,2vw,2rem)] lg:grid-cols-2">
-          {POOL_IDS.map((pool) => (
-            <PoolPanel
-              key={pool}
-              pool={pool}
-              state={state}
-              adminMode={adminMode}
-              onEditMatch={openPoolEdit}
-              reduced={reduced}
-            />
-          ))}
-        </div>
+        {ready && (
+          <div
+            className={cn(
+              "mt-[clamp(0.75rem,2vw,2rem)] grid gap-[clamp(0.75rem,2vw,2rem)]",
+              visiblePools.length > 1 ? "lg:grid-cols-2" : "lg:max-w-3xl"
+            )}
+          >
+            {visiblePools.map((pool) => (
+              <PoolPanel
+                key={pool}
+                pool={pool}
+                state={state}
+                adminMode={adminMode}
+                onEditMatch={openPoolEdit}
+                reduced={reduced}
+              />
+            ))}
+          </div>
+        )}
 
         {/* Bracket */}
+        {ready && bracket.length > 0 && (
         <section className="mt-[clamp(1rem,2.5vw,2.5rem)]">
           <h2 className="mb-[clamp(0.5rem,1.2vw,1.25rem)] font-display text-[clamp(1.1rem,2vw,1.75rem)] font-bold text-white/90">
             Playoff Bracket
             <span className="ml-2 text-[clamp(0.7rem,1vw,1rem)] font-normal text-white/40">
-              Top 2 in each pool advance · cross-pool semifinals
+              {visiblePools.length > 1
+                ? "Top 2 in each pool advance · cross-pool semifinals"
+                : bracket.length > 1
+                  ? "Top 4 advance · 1 v 4, 2 v 3"
+                  : "Top 2 play the final"}
             </span>
           </h2>
           <div className="grid gap-[clamp(0.5rem,1.5vw,1.5rem)] md:grid-cols-3">
@@ -344,11 +411,25 @@ export function LiveBoard() {
             ))}
           </div>
         </section>
+        )}
 
         <footer className="mt-[clamp(1rem,2vw,2rem)] pb-6 text-center text-[clamp(0.6rem,0.85vw,0.8rem)] text-white/30">
           LevelUP Sports &amp; Athletics Club · Elkton, MD · levelupsports.us/smash-cup/live
         </footer>
       </div>
+
+      {/* Teams & pools modal */}
+      <AnimatePresence>
+        {poolsOpen && (
+          <PoolsSetup
+            pools={getPools(state)}
+            adminPin={admin.adminPin}
+            reduced={reduced}
+            onSave={savePools}
+            onClose={() => setPoolsOpen(false)}
+          />
+        )}
+      </AnimatePresence>
 
       {/* Score modal */}
       <AnimatePresence>
@@ -387,7 +468,7 @@ export function LiveBoard() {
                       className="min-w-0 flex-1 rounded-lg border border-white/15 bg-[#0F2440] px-2.5 py-2 text-sm font-semibold outline-none focus:border-[#2BA84A]/60"
                     >
                       <option value="">{edit.nameA === "TBD" ? "Auto (TBD)" : `Auto · ${edit.nameA}`}</option>
-                      {ALL_TEAMS.map((t) => (
+                      {teamOptions.map((t) => (
                         <option key={t} value={t}>{t}</option>
                       ))}
                     </select>
@@ -412,7 +493,7 @@ export function LiveBoard() {
                       className="min-w-0 flex-1 rounded-lg border border-white/15 bg-[#0F2440] px-2.5 py-2 text-sm font-semibold outline-none focus:border-[#2BA84A]/60"
                     >
                       <option value="">{edit.nameB === "TBD" ? "Auto (TBD)" : `Auto · ${edit.nameB}`}</option>
-                      {ALL_TEAMS.map((t) => (
+                      {teamOptions.map((t) => (
                         <option key={t} value={t}>{t}</option>
                       ))}
                     </select>
@@ -499,7 +580,8 @@ function PoolPanel({
   reduced: boolean;
 }) {
   const rows = computePoolStanding(pool, state);
-  const matches = POOL_MATCHES.filter((m) => m.pool === pool);
+  const pools = getPools(state);
+  const matches = getPoolMatches(state).filter((m) => m.pool === pool);
   const decided = poolsComplete(state);
 
   return (
@@ -579,8 +661,8 @@ function PoolPanel({
       <div className="mt-4 space-y-1.5">
         {matches.map((m) => {
           const s = state.pool[m.id];
-          const teamA = POOLS[m.pool][m.i];
-          const teamB = POOLS[m.pool][m.j];
+          const teamA = pools[m.pool][m.i];
+          const teamB = pools[m.pool][m.j];
           const aWon = s?.done && s.a >= s.b;
           const bWon = s?.done && s.b > s.a;
           const isLive = (state.live ?? []).includes(m.id);
@@ -596,6 +678,7 @@ function PoolPanel({
               )}
             >
               {isLive && <LiveDot />}
+              <span className="w-10 shrink-0 tabular-nums text-white/35">{m.time}</span>
               <span className={cn("flex-1 truncate", aWon && "font-bold text-[#A8E6CF]")}>{teamA}</span>
               <span
                 className={cn(

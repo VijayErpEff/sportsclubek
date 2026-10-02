@@ -11,7 +11,7 @@ import { ManageClient } from "./manage-client";
 
 export const metadata: Metadata = {
   ...generateSEOMetadata({
-    title: "Manage Your Smash Cup Registration",
+    title: "Manage Your Fall Smash Cup Registration",
     description:
       "Edit your LevelUP Smash Cup volleyball tournament registration — update team name, captain info, or roster. Captain email + 4-digit PIN required.",
     path: "/register/volleyball-tournament/manage",

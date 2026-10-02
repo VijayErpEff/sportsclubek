@@ -5,10 +5,15 @@
 // ---------------------------------------------------------------------------
 
 import {
-  POOLS,
-  POOL_MATCHES,
-  BRACKET,
+  POOL_IDS,
+  ADVANCE_CUTOFF,
+  buildPoolMatches,
+  buildBracket,
+  emptyPools,
   type PoolId,
+  type Pools,
+  type PoolMatch,
+  type BracketMatch,
   type Slot,
 } from "@/lib/constants/smash-cup-bracket";
 
@@ -21,8 +26,10 @@ export interface MatchScore {
 
 /** Dynamic tournament state persisted in Redis. */
 export interface StandingsState {
-  pool: Record<string, MatchScore>; // keyed by POOL_MATCHES id
-  bracket: Record<string, MatchScore>; // keyed by BRACKET id
+  /** Team names per pool, in entry order. Set by staff on game day. */
+  pools?: Pools;
+  pool: Record<string, MatchScore>; // keyed by pool match id
+  bracket: Record<string, MatchScore>; // keyed by bracket match id
   manualSeeds?: Partial<Record<PoolId, string[]>>; // staff override of pool order
   /** Admin override of who plays in a bracket match (overrides auto-seed). */
   manualBracket?: Record<string, { teamA?: string | null; teamB?: string | null }>;
@@ -32,7 +39,38 @@ export interface StandingsState {
 }
 
 export function emptyState(): StandingsState {
-  return { pool: {}, bracket: {}, updated: 0 };
+  return { pools: emptyPools(), pool: {}, bracket: {}, updated: 0 };
+}
+
+// ── Derived structure ──────────────────────────────────────────────
+
+export function getPools(state: StandingsState): Pools {
+  return { A: state.pools?.A ?? [], B: state.pools?.B ?? [] };
+}
+
+export function getPoolMatches(state: StandingsState): PoolMatch[] {
+  return buildPoolMatches(getPools(state));
+}
+
+export function getBracket(state: StandingsState): BracketMatch[] {
+  return buildBracket(getPools(state));
+}
+
+export function allTeams(state: StandingsState): string[] {
+  const p = getPools(state);
+  return [...p.A, ...p.B];
+}
+
+/** True once at least one pool has two teams — the board has something to show. */
+export function hasPools(state: StandingsState): boolean {
+  const p = getPools(state);
+  return p.A.length >= 2 || p.B.length >= 2;
+}
+
+/** Pools that actually have teams (an empty Pool B is hidden from the board). */
+export function activePools(state: StandingsState): PoolId[] {
+  const p = getPools(state);
+  return POOL_IDS.filter((id) => p[id].length > 0);
 }
 
 export interface StandingRow {
@@ -54,7 +92,7 @@ export function computePoolStanding(
   pool: PoolId,
   state: StandingsState
 ): StandingRow[] {
-  const teams = POOLS[pool];
+  const teams = getPools(state)[pool];
   const rows = teams.map((team) => ({
     team,
     played: 0,
@@ -66,7 +104,7 @@ export function computePoolStanding(
     rank: 0,
   }));
 
-  const matches = POOL_MATCHES.filter((m) => m.pool === pool);
+  const matches = getPoolMatches(state).filter((m) => m.pool === pool);
   // Track head-to-head winners: h2h[winnerIdx] holds the set of beaten idxs.
   const h2hWins: Record<number, Set<number>> = {};
 
@@ -127,14 +165,15 @@ export function computePoolStanding(
 
 /** True once every pool match is final — seeds are then locked in. */
 export function poolsComplete(state: StandingsState): boolean {
-  return POOL_MATCHES.every((m) => state.pool[m.id]?.done);
+  const matches = getPoolMatches(state);
+  return matches.length > 0 && matches.every((m) => state.pool[m.id]?.done);
 }
 
 /** Map of seed code ("A1".."B4") → team name, or null until pools finish. */
 export function seedMap(state: StandingsState): Record<string, string | null> {
   const map: Record<string, string | null> = {};
   const ready = poolsComplete(state) || Boolean(state.manualSeeds);
-  for (const pool of ["A", "B"] as PoolId[]) {
+  for (const pool of POOL_IDS) {
     const rows = computePoolStanding(pool, state);
     const complete = ready || Boolean(state.manualSeeds?.[pool]);
     rows.forEach((r) => {
@@ -163,7 +202,7 @@ export interface ResolvedMatch {
 
 /**
  * Resolve the full bracket: fill team names from seeds, then propagate
- * winners/losers through QF → SF → Final / 3rd-place as results come in.
+ * winners/losers through SF → Final / 3rd-place as results come in.
  */
 export function resolveBracket(state: StandingsState): ResolvedMatch[] {
   const seeds = seedMap(state);
@@ -177,7 +216,7 @@ export function resolveBracket(state: StandingsState): ResolvedMatch[] {
     return "winnerOf" in slot ? src.winner : src.loser;
   };
 
-  for (const m of BRACKET) {
+  for (const m of getBracket(state)) {
     const override = state.manualBracket?.[m.id];
     const teamA =
       override?.teamA !== undefined && override.teamA !== null
@@ -223,3 +262,5 @@ export function resolveBracket(state: StandingsState): ResolvedMatch[] {
 export function champion(state: StandingsState): string | null {
   return resolveBracket(state).find((m) => m.id === "FINAL")?.winner ?? null;
 }
+
+export { ADVANCE_CUTOFF };

@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { redis } from "@/lib/storage/redis";
 
-const STANDINGS_KEY = "tournament:smash-cup:standings";
+// Fall 2026 edition — June data lives under tournament:smash-cup:standings.
+const STANDINGS_KEY = "tournament:smash-cup-oct-2026:standings";
 const ADMIN_PIN = process.env.ADMIN_PIN || "6886";
 
 const NO_CACHE_HEADERS = {

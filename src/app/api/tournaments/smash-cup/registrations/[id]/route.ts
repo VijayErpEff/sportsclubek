@@ -90,7 +90,7 @@ export async function PUT(
     paymentMethod: body.paymentMethod,
   };
 
-  const validation = validateUpdateInput(update, reg.division);
+  const validation = validateUpdateInput(update);
   if (!validation.ok) {
     return NextResponse.json(
       { error: "Validation failed", fields: validation.errors },

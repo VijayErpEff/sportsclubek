@@ -2,7 +2,14 @@ import { createHash, randomBytes, scryptSync, timingSafeEqual } from "crypto";
 
 // ── Types ──────────────────────────────────────────────────────────
 
-export type Division = "youth" | "adult";
+/**
+ * Fall 2026 Smash Cup runs a single co-ed open division, ages 16+.
+ * Kept as a union so a future edition can add divisions without a migration.
+ */
+export type Division = "open";
+export const MIN_AGE = 16;
+export const MIN_ROSTER = 4;
+export const MAX_ROSTER = 8;
 export type PaymentMethod = "pay_later" | "pay_online";
 
 /**
@@ -37,7 +44,7 @@ export interface RosterPlayer {
 
 export interface VolleyballRegistration {
   id: string;
-  tournament: "smash-cup-jun-2026";
+  tournament: "smash-cup-oct-2026";
   teamName: string;
   division: Division;
   captain: {
@@ -64,7 +71,8 @@ export type SafeRegistration = Omit<VolleyballRegistration, "pinHash" | "pinSalt
 
 // ── Redis key helpers ──────────────────────────────────────────────
 
-const NAMESPACE = "tournament:smash-cup";
+// Namespaced per edition so the June 2026 records stay untouched.
+const NAMESPACE = "tournament:smash-cup-oct-2026";
 
 export const KEYS = {
   reg: (id: string) => `${NAMESPACE}:reg:${id}`,
@@ -161,8 +169,8 @@ export function validateRegistrationInput(input: RegistrationInput): ValidationR
   if (input.teamName?.trim().length > 60) {
     errors.teamName = "Team name must be 60 characters or fewer.";
   }
-  if (input.division !== "youth" && input.division !== "adult") {
-    errors.division = "Pick a division.";
+  if (input.division !== "open") {
+    errors.division = "Invalid division.";
   }
 
   // Captain
@@ -181,23 +189,17 @@ export function validateRegistrationInput(input: RegistrationInput): ValidationR
 
   // Roster — minimum 4 to register; teams can add more before the tournament.
   const players = Array.isArray(input.players) ? input.players : [];
-  if (players.length < 4) {
-    errors.players = "Roster must have at least 4 players.";
-  } else if (players.length > 10) {
-    errors.players = "Roster must have at most 10 players.";
+  if (players.length < MIN_ROSTER) {
+    errors.players = `Roster must have at least ${MIN_ROSTER} players.`;
+  } else if (players.length > MAX_ROSTER) {
+    errors.players = `Roster must have at most ${MAX_ROSTER} players.`;
   }
   players.forEach((p, idx) => {
     if (!p.name?.trim()) {
       errors[`players.${idx}.name`] = "Player name required.";
     }
-    if (input.division === "youth") {
-      if (typeof p.age !== "number" || p.age < 12 || p.age > 17) {
-        errors[`players.${idx}.age`] = "Youth players must be 12–17.";
-      }
-    } else if (input.division === "adult") {
-      if (typeof p.age === "number" && p.age < 18) {
-        errors[`players.${idx}.age`] = "Adult players must be 18 or older.";
-      }
+    if (typeof p.age !== "number" || p.age < MIN_AGE) {
+      errors[`players.${idx}.age`] = `Players must be ${MIN_AGE} or older.`;
     }
     if (p.email && !EMAIL_REGEX.test(p.email.trim())) {
       errors[`players.${idx}.email`] = "Invalid email.";
@@ -237,10 +239,7 @@ export interface UpdateInput {
   paymentMethod?: PaymentMethod;
 }
 
-export function validateUpdateInput(
-  input: UpdateInput,
-  division: Division
-): ValidationResult {
+export function validateUpdateInput(input: UpdateInput): ValidationResult {
   const errors: Record<string, string> = {};
 
   if (input.teamName !== undefined) {
@@ -263,16 +262,15 @@ export function validateUpdateInput(
   }
 
   if (input.players !== undefined) {
-    if (input.players.length < 4) errors.players = "Roster must have at least 4 players.";
-    else if (input.players.length > 10) errors.players = "Roster must have at most 10 players.";
+    if (input.players.length < MIN_ROSTER) {
+      errors.players = `Roster must have at least ${MIN_ROSTER} players.`;
+    } else if (input.players.length > MAX_ROSTER) {
+      errors.players = `Roster must have at most ${MAX_ROSTER} players.`;
+    }
     input.players.forEach((p, idx) => {
       if (!p.name?.trim()) errors[`players.${idx}.name`] = "Player name required.";
-      if (division === "youth") {
-        if (typeof p.age !== "number" || p.age < 12 || p.age > 17) {
-          errors[`players.${idx}.age`] = "Youth players must be 12–17.";
-        }
-      } else if (typeof p.age === "number" && p.age < 18) {
-        errors[`players.${idx}.age`] = "Adult players must be 18 or older.";
+      if (typeof p.age !== "number" || p.age < MIN_AGE) {
+        errors[`players.${idx}.age`] = `Players must be ${MIN_AGE} or older.`;
       }
       if (p.email && !EMAIL_REGEX.test(p.email.trim())) {
         errors[`players.${idx}.email`] = "Invalid email.";

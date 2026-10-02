@@ -41,17 +41,17 @@ export async function GET(request: Request) {
     const registrations = records.filter((r): r is NonNullable<typeof r> => r !== null);
 
     // Aggregate counts useful for the host
-    const byDivision = { youth: 0, adult: 0 };
+    const byPayment = { pending: 0, paid: 0, waived: 0 };
     let totalPlayers = 0;
     for (const r of registrations) {
-      byDivision[r.division] = (byDivision[r.division] || 0) + 1;
+      byPayment[r.paymentStatus] = (byPayment[r.paymentStatus] || 0) + 1;
       totalPlayers += r.players.length;
     }
 
     return NextResponse.json(
       {
         total: registrations.length,
-        byDivision,
+        byPayment,
         totalPlayers,
         registrations,
       },

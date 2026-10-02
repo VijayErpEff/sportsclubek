@@ -15,20 +15,20 @@ export interface PlayerInput {
 }
 
 export const MIN_PLAYERS = 4;
-export const MAX_PLAYERS = 10;
+export const MAX_PLAYERS = 8;
+export const MIN_AGE = 16;
 
 export function emptyPlayer(): PlayerInput {
   return { name: "", age: "", email: "", phone: "" };
 }
 
 interface RosterFieldsProps {
-  division: "youth" | "adult";
   players: PlayerInput[];
   errors: Record<string, string>;
   onChange: (players: PlayerInput[]) => void;
 }
 
-export function RosterFields({ division, players, errors, onChange }: RosterFieldsProps) {
+export function RosterFields({ players, errors, onChange }: RosterFieldsProps) {
   const updatePlayer = (idx: number, patch: Partial<PlayerInput>) => {
     const next = players.map((p, i) => (i === idx ? { ...p, ...patch } : p));
     onChange(next);
@@ -80,7 +80,6 @@ export function RosterFields({ division, players, errors, onChange }: RosterFiel
             key={idx}
             idx={idx}
             player={p}
-            division={division}
             errors={errors}
             canRemove={players.length > MIN_PLAYERS}
             onUpdate={(patch) => updatePlayer(idx, patch)}
@@ -95,7 +94,6 @@ export function RosterFields({ division, players, errors, onChange }: RosterFiel
 function PlayerRow({
   idx,
   player,
-  division,
   errors,
   canRemove,
   onUpdate,
@@ -103,7 +101,6 @@ function PlayerRow({
 }: {
   idx: number;
   player: PlayerInput;
-  division: "youth" | "adult";
   errors: Record<string, string>;
   canRemove: boolean;
   onUpdate: (patch: Partial<PlayerInput>) => void;
@@ -144,13 +141,13 @@ function PlayerRow({
             error={errors[`players.${idx}.name`]}
           />
           <FloatingInput
-            label={division === "youth" ? "Age" : "Age (opt)"}
+            label="Age"
             name={`players.${idx}.age`}
             type="number"
             inputMode="numeric"
-            min={division === "youth" ? 12 : 0}
-            max={division === "youth" ? 17 : 99}
-            required={division === "youth"}
+            min={MIN_AGE}
+            max={99}
+            required
             value={player.age}
             onChange={(e) => onUpdate({ age: e.target.value })}
             error={errors[`players.${idx}.age`]}

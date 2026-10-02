@@ -5,13 +5,13 @@ import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils/cn";
 import { Check, ArrowLeft, ArrowRight, Loader2, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { POOLS } from "@/lib/constants/smash-cup-bracket";
+import type { StandingsState } from "@/lib/smash-cup-standings";
 import { captureLead } from "@/lib/leads";
 
 const APPLE_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 const DONE_KEY = "lus_smashcup_survey_done";
 
-const TEAMS = [...POOLS.A, ...POOLS.B, "Spectator / Other"];
+const OTHER = "Spectator / Other";
 
 const RATING_OPTIONS = [
   { value: 1, emoji: "\u{1F61E}", label: "Poor" },
@@ -76,6 +76,17 @@ const EMPTY: Form = {
 };
 
 export function VolleyballSurveyForm() {
+  // Team names come from the live board's pool setup (set by staff on game day).
+  const [TEAMS, setTeams] = useState<string[]>([OTHER]);
+  useEffect(() => {
+    fetch("/api/tournaments/smash-cup/standings", { cache: "no-store" })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data: StandingsState | null) => {
+        const names = [...(data?.pools?.A ?? []), ...(data?.pools?.B ?? [])];
+        if (names.length) setTeams([...names, OTHER]);
+      })
+      .catch(() => {});
+  }, []);
   const reduced = useReducedMotion();
   const [stepIndex, setStepIndex] = useState(0);
   const [direction, setDirection] = useState(1);

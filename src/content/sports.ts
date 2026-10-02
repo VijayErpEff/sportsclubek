@@ -418,6 +418,12 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     ],
     programs: [
       {
+        title: "Smash Cup Tournament — Oct 24",
+        description: "One-day 6v6 indoor tournament. Co-ed, ages 16+, up to 8 players per team, $250 per team, cash prizes. Register your squad online.",
+        href: "/events/volleyball-tournament",
+        tag: "Tournament",
+      },
+      {
         title: "Court Rentals",
         description: "Reserve a full volleyball court for team practice, scrimmages, or private training sessions at $120/hour.",
         href: BOOKING_URLS.offerings,

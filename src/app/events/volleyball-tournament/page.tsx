@@ -34,93 +34,87 @@ import { SITE_CONFIG } from "@/lib/constants/site";
 
 // ── Tournament constants (single source of truth) ──────────────────
 const TOURNAMENT = {
-  name: "LevelUP Smash Cup — Indoor Volleyball Tournament",
-  shortName: "LevelUP Smash Cup",
+  name: "LevelUP Smash Cup — Fall 2026 Indoor Volleyball Tournament",
+  shortName: "LevelUP Smash Cup — Fall 2026",
   tagline: "Bump. Set. Smash.",
   promise: "Form your squad. Win the cup.",
-  date: "Saturday & Sunday, June 6–7, 2026",
-  dateShort: "Jun 6–7, 2026",
-  startISO: "2026-06-06T09:00:00-04:00",
-  endISO: "2026-06-07T19:00:00-04:00",
-  registerByISO: "2026-06-02T23:59:00-04:00",
-  registerByLabel: "Tuesday, June 2, 2026",
-  price: "$200",
+  date: "Saturday, October 24, 2026",
+  dateShort: "Oct 24, 2026",
+  startISO: "2026-10-24T11:00:00-04:00",
+  endISO: "2026-10-24T21:00:00-04:00",
+  registerByISO: "2026-10-20T23:59:00-04:00",
+  registerByLabel: "Tuesday, October 20, 2026",
+  price: "$250",
   priceUnit: "per team",
   format: "6v6 Indoor",
   structure: "Pool Play + Single-Elimination Playoffs",
-  rosterSize: "6–10 players",
+  rosterSize: "4–8 players",
+  eligibility: "Co-ed · Ages 16+",
   registerHref: "/register/volleyball-tournament",
-  flyer: "/images/Content/volleyball-smash-cup-flyer.jpg",
-  ogImage: "/images/og/volleyball-smash-cup.jpg",
+  flyer: "/images/Content/volleyball-smash-cup-fall-2026.jpg",
+  ogImage: "/images/og/volleyball-smash-cup-fall-2026.jpg",
 };
 
-const DIVISIONS = [
+const ELIGIBILITY = [
   {
-    label: "Youth Division",
-    badge: "12–17",
-    description:
-      "Co-ed brackets for ages 12–17. Same 6v6 format, same pro-grade nets and sprung courts — built for our next generation of competitive players.",
-    accent: "text-secondary",
-    bg: "bg-secondary/10",
+    label: "Co-ed, open division",
+    detail:
+      "One bracket, every squad. Set your own gender mix — there's no required ratio on the court.",
   },
   {
-    label: "Adult Division",
-    badge: "18+",
-    description:
-      "Co-ed brackets for ages 18 and up. Recreational squads through serious club teams welcome — a real tournament weekend, win or lose.",
-    accent: "text-accent",
-    bg: "bg-accent/10",
+    label: "Ages 16 and up",
+    detail:
+      "Every rostered player must be 16 or older on game day. High-school crews, college teams, and adult clubs all welcome.",
+  },
+  {
+    label: "Up to 8 players per team",
+    detail:
+      "Lock your spot with as few as 4 and build your roster to 8. Six on the court, two ready to rotate in.",
   },
 ];
 
 const SCHEDULE = [
   {
-    time: "Sat 8:30 AM",
+    time: "10:15 AM",
     title: "Check-in & Warm-up",
     description:
-      "Captains check in, sign waivers, and confirm rosters. Courts open for warm-up at 8:30 AM sharp.",
+      "Captains check in, sign waivers, and confirm rosters. Courts open for warm-up before first serve.",
   },
   {
-    time: "Sat 9:30 AM",
-    title: "Pool Play — Day 1",
+    time: "11:00 AM",
+    title: "Pool Play",
     description:
-      "Every team plays a guaranteed minimum of four pool matches across both divisions. Pools seeded after registration closes.",
+      "First serve at 11. Every team is guaranteed multiple pool matches. Pools are seeded after registration closes.",
   },
   {
-    time: "Sat 6:00 PM",
-    title: "Day 1 Wrap & Standings",
+    time: "Afternoon",
+    title: "Playoff Bracket",
     description:
-      "Final pool standings posted. Teams advance into the bracket draw for Sunday's playoffs.",
+      "Top teams from each pool advance to single-elimination playoffs. Bracket times are posted courtside and sent to captains.",
   },
   {
-    time: "Sun 9:00 AM",
-    title: "Playoff Brackets",
-    description:
-      "Single-elimination playoffs — Youth and Adult divisions run on parallel courts.",
-  },
-  {
-    time: "Sun 4:30 PM",
+    time: "Evening",
     title: "Finals & Awards",
     description:
-      "Division finals followed by trophies, cash prizes, and gift-card medals for runners-up.",
+      "Championship match followed by cash prizes, trophies, and medals. Exact times go out to captains the week of the tournament.",
   },
 ];
 
 const PRIZES = [
   {
     icon: Trophy,
-    label: "Champion (per division)",
+    label: "Champions",
     detail: "Cash prize + championship trophy + LevelUP gear",
   },
   {
     icon: Award,
     label: "Runner-up",
-    detail: "Gift cards + medals for every player",
+    detail: "Cash prize + medals for every player",
   },
   {
     icon: Sparkles,
     label: "All-Tournament Team",
-    detail: "Selected by coaches across both divisions",
+    detail: "Selected by the tournament staff across the day",
   },
 ];
 
@@ -129,14 +123,15 @@ const WHAT_TO_BRING = [
   "Light athletic clothing — facility is climate-controlled",
   "Water bottle (refill stations on-site)",
   "Knee pads (recommended)",
+  "Photo ID for age verification (all players 16+)",
   "Roster confirmation + signed waivers (sent after registration)",
 ];
 
 const FAQS = [
   {
-    question: "How do I register a team for the LevelUP Smash Cup?",
+    question: "How do I register a team for the Fall Smash Cup?",
     answer:
-      "Register online at levelupsports.us/register/volleyball-tournament. Pick a division (Youth 12–17 or Adult 18+), enter your team and captain info, add 6–10 players, and pick your payment option. Entry is $200 per team and registration closes Tuesday, June 2, 2026.",
+      "Register online at levelupsports.us/register/volleyball-tournament. Enter your team and captain info, add 4–8 players (all ages 16+), and pick your payment option. Entry is $250 per team and registration closes Tuesday, October 20, 2026.",
   },
   {
     question: "Can I edit my team roster after I register?",
@@ -144,24 +139,24 @@ const FAQS = [
       "Yes. After you register, you'll get a registration ID. Anytime before the roster lock, head to levelupsports.us/register/volleyball-tournament/manage and sign in with your captain email + 4-digit PIN to add, remove, or update players.",
   },
   {
-    question: "What does the $200 entry fee cover?",
+    question: "What does the $250 entry fee cover?",
     answer:
-      "$200 per team covers all matches across both days, court time, officials, awards, and gym access throughout the tournament. Each team is guaranteed a minimum of four pool-play matches plus playoff matches if they advance.",
+      "$250 per team covers all matches, court time, officials, awards, and gym access for the full day. Each team is guaranteed multiple pool-play matches plus playoff matches if they advance.",
   },
   {
     question: "What's the format — 6v6 indoor with pools and playoffs?",
     answer:
-      "Yes — 6v6 indoor volleyball on regulation nets. Saturday is round-robin pool play (every team is guaranteed a minimum number of matches). Top teams from each pool advance to single-elimination playoffs on Sunday.",
+      "Yes — 6v6 indoor volleyball on regulation nets, all in one day. The morning is round-robin pool play (every team is guaranteed multiple matches). Top teams from each pool advance to single-elimination playoffs in the afternoon, with the final and awards in the evening.",
   },
   {
-    question: "Are Youth and Adult divisions both co-ed?",
+    question: "Who can play? Is it co-ed?",
     answer:
-      "Both divisions are co-ed. Teams set their own gender mix — there is no required ratio. Youth Division is for ages 12–17; Adult Division is for ages 18 and up.",
+      "It's a single co-ed open division. Teams set their own gender mix — there is no required ratio. Every rostered player must be 16 or older on October 24, 2026. Bring a photo ID to check-in.",
   },
   {
     question: "How big is the roster — and can we substitute players?",
     answer:
-      "Lock your team's spot with as few as 4 players, then build your roster up to 10 anytime before the tournament. We recommend 6 or more so you can rotate through the 6v6 format. You can use any combination of rostered players on the court at any time during the tournament. Players cannot play for more than one team in the same division.",
+      "Lock your team's spot with as few as 4 players, then build your roster up to 8 anytime before the tournament. We recommend 6 or more so you can rotate through the 6v6 format. Any rostered player can take the court at any time. Players cannot play for more than one team.",
   },
   {
     question: "What if I don't have enough players or can't field a full team?",
@@ -171,12 +166,12 @@ const FAQS = [
   {
     question: "Can spectators come to watch?",
     answer:
-      "Absolutely. Friends and family are welcome at no charge. We have dedicated viewing areas around the courts with seating, plus concessions running throughout the day on Saturday and Sunday.",
+      "Absolutely. Friends and family are welcome at no charge. We have dedicated viewing areas around the courts with seating, plus concessions running throughout the day.",
   },
   {
     question: "What if I need to cancel after registering?",
     answer:
-      "Refunds in full are available up to 14 days before the tournament. Inside 14 days, refunds are at the club's discretion. Email info@levelupsports.us or call (443) 406-6494 to cancel.",
+      "Refunds in full are available up to 14 days before the tournament (through October 10, 2026). Inside 14 days, refunds are at the club's discretion. Email info@levelupsports.us or call (443) 406-6494 to cancel.",
   },
   {
     question: "Where exactly is the tournament held?",
@@ -188,9 +183,9 @@ const FAQS = [
 // ── Metadata ────────────────────────────────────────────────────────
 export const metadata: Metadata = generateSEOMetadata({
   title:
-    "LevelUP Smash Cup — Volleyball Tournament Jun 6–7, 2026 | $200/team",
+    "Volleyball Tournament — Oct 24, 2026 | LevelUP Smash Cup, $250/team",
   description:
-    "Indoor 6v6 volleyball tournament at LevelUP Sports in Elkton, MD on June 6–7, 2026. Co-ed Youth (12–17) and Adult (18+) divisions, $200 per team, 6–10 player rosters, cash + trophies. Register online and edit your roster anytime.",
+    "Indoor 6v6 volleyball tournament at LevelUP Sports in Elkton, MD on Saturday, October 24, 2026. Co-ed, ages 16+, up to 8 players per team, $250 per team, cash prizes. Register online and edit your roster anytime.",
   path: "/events/volleyball-tournament",
   ogImage: TOURNAMENT.ogImage,
 });
@@ -201,13 +196,13 @@ export default function VolleyballTournamentPage() {
   const breadcrumbLD = generateBreadcrumbLD([
     { name: "Home", url: "/" },
     { name: "Volleyball", url: "/volleyball" },
-    { name: "Smash Cup Tournament", url: "/events/volleyball-tournament" },
+    { name: "Fall Smash Cup Tournament", url: "/events/volleyball-tournament" },
   ]);
 
   const eventLD = generateEventLD({
     name: TOURNAMENT.name,
     description:
-      "Indoor 6v6 volleyball tournament with co-ed Youth (12–17) and Adult (18+) divisions. Pool play Saturday, single-elimination playoffs Sunday, on regulation indoor courts in Elkton, MD.",
+      "One-day indoor 6v6 volleyball tournament — co-ed open division, ages 16+, up to 8 players per team. Pool play from 11 AM, single-elimination playoffs, cash prizes. Regulation indoor courts in Elkton, MD.",
     startDate: TOURNAMENT.startISO,
     endDate: TOURNAMENT.endISO,
     url: "/events/volleyball-tournament",
@@ -219,34 +214,12 @@ export default function VolleyballTournamentPage() {
     ],
     offers: {
       name: "Team Entry",
-      price: "200",
+      price: "250",
       priceCurrency: "USD",
       url: `${SITE_CONFIG.url}${TOURNAMENT.registerHref}`,
       validThrough: TOURNAMENT.registerByISO,
       category: "Tournament Registration",
     },
-    subEvent: [
-      {
-        "@type": "SportsEvent",
-        name: "LevelUP Smash Cup — Youth Division (12–17)",
-        description:
-          "Co-ed 6v6 indoor volleyball brackets for ages 12–17. Pool play and single-elimination playoffs.",
-        startDate: TOURNAMENT.startISO,
-        endDate: TOURNAMENT.endISO,
-        sport: "Volleyball",
-        url: `${SITE_CONFIG.url}/events/volleyball-tournament#youth`,
-      },
-      {
-        "@type": "SportsEvent",
-        name: "LevelUP Smash Cup — Adult Division (18+)",
-        description:
-          "Co-ed 6v6 indoor volleyball brackets for adults 18 and up. Pool play and single-elimination playoffs.",
-        startDate: TOURNAMENT.startISO,
-        endDate: TOURNAMENT.endISO,
-        sport: "Volleyball",
-        url: `${SITE_CONFIG.url}/events/volleyball-tournament#adult`,
-      },
-    ],
     organizer: {
       "@type": "Organization",
       name: SITE_CONFIG.name,
@@ -256,7 +229,7 @@ export default function VolleyballTournamentPage() {
     },
     performer: {
       "@type": "PerformingGroup",
-      name: "Registered Teams — Youth & Adult Divisions",
+      name: "Registered Teams — Co-ed Open Division",
     },
   });
 
@@ -339,7 +312,7 @@ export default function VolleyballTournamentPage() {
                 </Link>
               </li>
               <li className="text-white/30">/</li>
-              <li className="text-white font-medium">Smash Cup — Jun 6–7</li>
+              <li className="text-white font-medium">Smash Cup — Oct 24</li>
             </ol>
           </nav>
 
@@ -365,7 +338,7 @@ export default function VolleyballTournamentPage() {
 
                 <p className="text-lg md:text-xl text-white/85 mb-8 max-w-xl text-balance">
                   <span className="font-semibold text-white">Form your squad. Win the cup.</span>{" "}
-                  6v6 indoor volleyball — co-ed Youth and Adult divisions on game day.
+                  One-day 6v6 indoor volleyball — co-ed, ages 16+, cash prizes on the line.
                 </p>
 
                 <div className="flex flex-wrap gap-3">
@@ -374,8 +347,8 @@ export default function VolleyballTournamentPage() {
                     asChild
                     className="bg-secondary text-primary-dark hover:bg-secondary-light"
                   >
-                    <Link href="/smash-cup/live">
-                      📺 Live Standings <ArrowRight className="ml-2 h-4 w-4" />
+                    <Link href={TOURNAMENT.registerHref}>
+                      Register Your Team <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </Button>
                   <Button
@@ -384,24 +357,24 @@ export default function VolleyballTournamentPage() {
                     asChild
                     className="border-white/30 text-white hover:bg-white hover:text-primary-dark"
                   >
-                    <Link href={TOURNAMENT.registerHref}>Register Your Team</Link>
+                    <a href="#details">Tournament Details</a>
                   </Button>
                 </div>
                 <p className="text-sm text-white/60 mt-6">
-                  Played a match?{" "}
-                  <Link
-                    href="/smash-cup/survey"
-                    className="underline underline-offset-2 hover:text-white transition-colors"
-                  >
-                    Share your post-game feedback →
-                  </Link>
-                  <br />
                   Registration closes {TOURNAMENT.registerByLabel}.{" "}
                   <Link
                     href="/register/volleyball-tournament/manage"
                     className="underline underline-offset-2 hover:text-white transition-colors"
                   >
                     Already registered? Edit your roster →
+                  </Link>
+                  <br />
+                  On game day, follow{" "}
+                  <Link
+                    href="/smash-cup/live"
+                    className="underline underline-offset-2 hover:text-white transition-colors"
+                  >
+                    live scores &amp; the bracket →
                   </Link>
                 </p>
               </div>
@@ -432,13 +405,13 @@ export default function VolleyballTournamentPage() {
                   <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-3">
                     <div>
                       <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-secondary mb-0.5">
-                        June 2026
+                        October 2026
                       </p>
                       <p className="font-display font-extrabold text-4xl md:text-5xl text-white tabular-nums leading-none">
-                        06–07
+                        24
                       </p>
                       <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-white/70 mt-1.5">
-                        Sat &amp; Sun
+                        Saturday · 11 AM
                       </p>
                     </div>
                     <div className="bg-secondary text-primary-dark rounded-lg px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-wider shrink-0">
@@ -478,15 +451,15 @@ export default function VolleyballTournamentPage() {
       {/* ═══════════════════════════════════════════
           KEY DETAILS — Diversified icon colors break up the monotony
           ═══════════════════════════════════════════ */}
-      <Section>
+      <Section id="details">
         <Container>
           <StaggerContainer className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
             {[
               {
                 icon: Calendar,
-                label: "Dates",
+                label: "Date",
                 value: TOURNAMENT.dateShort,
-                sub: "Saturday & Sunday",
+                sub: "Saturday · 11 AM onwards",
                 iconBg: "bg-info/10",
                 iconColor: "text-info",
                 topBar: "bg-info",
@@ -494,8 +467,8 @@ export default function VolleyballTournamentPage() {
               {
                 icon: Trophy,
                 label: "Prizes",
-                value: "Cash + Trophies",
-                sub: "Gift cards & medals for runners-up",
+                value: "Cash Prizes",
+                sub: "Trophies + medals for the top two",
                 iconBg: "bg-warning/15",
                 iconColor: "text-warning",
                 topBar: "bg-warning",
@@ -504,7 +477,7 @@ export default function VolleyballTournamentPage() {
                 icon: Users,
                 label: "Format",
                 value: TOURNAMENT.format,
-                sub: "Co-ed · Youth & Adult divisions",
+                sub: TOURNAMENT.eligibility,
                 iconBg: "bg-accent/10",
                 iconColor: "text-accent",
                 topBar: "bg-accent",
@@ -513,7 +486,7 @@ export default function VolleyballTournamentPage() {
                 icon: CircleDollarSign,
                 label: "Entry",
                 value: `${TOURNAMENT.price} / Team`,
-                sub: TOURNAMENT.rosterSize + " roster",
+                sub: "Max 8 players per team",
                 iconBg: "bg-secondary/15",
                 iconColor: "text-secondary",
                 topBar: "bg-secondary",
@@ -545,61 +518,62 @@ export default function VolleyballTournamentPage() {
       </Section>
 
       {/* ═══════════════════════════════════════════
-          DIVISIONS — Soft tinted backdrop and per-division color identity
+          WHO PLAYS — Flyer on the left, eligibility stack on the right
           ═══════════════════════════════════════════ */}
       <section className="py-14 md:py-20 bg-gradient-to-b from-info/5 to-white border-t border-neutral-100">
         <Container>
-          <Reveal>
-            <div className="text-center mb-10 max-w-2xl mx-auto">
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-info mb-3">
-                Two Divisions · Both Co-ed
-              </p>
-              <h2 className="font-display text-section text-neutral-900 mb-3 text-balance">
-                A Bracket for Every Squad
-              </h2>
-              <p className="text-neutral-600">
-                Run it back with your high-school crew or rally a backyard club — there&apos;s a division built for the way you play.
-              </p>
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+            <Reveal variant="fade-right" className="lg:col-span-5">
+              <div className="relative max-w-md mx-auto lg:max-w-none lg:-rotate-1">
+                <Image
+                  src={TOURNAMENT.flyer}
+                  alt="LevelUP Volleyball Tournament flyer — Saturday, October 24, 2026, 11 AM onwards, co-ed ages 16+, maximum 8 players per team, $250 team registration, cash prizes"
+                  width={1000}
+                  height={1000}
+                  sizes="(max-width: 1024px) 90vw, 40vw"
+                  className="rounded-2xl shadow-2xl ring-1 ring-neutral-200"
+                />
+              </div>
+            </Reveal>
+            <div className="lg:col-span-7">
+              <Reveal>
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-info mb-3">
+                  One Division · Co-ed · 16+
+                </p>
+                <h2 className="font-display text-section text-neutral-900 mb-3 text-balance">
+                  Who Takes the Court
+                </h2>
+                <p className="text-neutral-600 mb-8 max-w-xl">
+                  Run it back with your high-school crew, your college friends, or the
+                  Tuesday-night rec squad. One open bracket means every team plays for the
+                  same cup.
+                </p>
+              </Reveal>
+              <StaggerContainer className="space-y-4">
+                {ELIGIBILITY.map((e, idx) => {
+                  const stripes = [
+                    "bg-gradient-to-r from-secondary to-accent",
+                    "bg-gradient-to-r from-info to-primary-light",
+                    "bg-gradient-to-r from-warning to-accent",
+                  ];
+                  return (
+                    <StaggerItem key={e.label}>
+                      <article className="relative bg-white rounded-2xl p-6 border border-neutral-200 shadow-sm overflow-hidden">
+                        <div
+                          aria-hidden="true"
+                          className={`absolute top-0 bottom-0 left-0 w-1.5 ${stripes[idx % stripes.length]}`}
+                        />
+                        <h3 className="font-display text-lg font-bold text-neutral-900 mb-1 pl-2">
+                          {e.label}
+                        </h3>
+                        <p className="text-neutral-600 text-sm leading-relaxed pl-2">{e.detail}</p>
+                      </article>
+                    </StaggerItem>
+                  );
+                })}
+              </StaggerContainer>
             </div>
-          </Reveal>
-          <StaggerContainer className="grid gap-6 md:grid-cols-2 max-w-5xl mx-auto">
-            {DIVISIONS.map((d, idx) => {
-              const styles =
-                idx === 0
-                  ? {
-                      cardBorder: "border-secondary/30",
-                      stripe: "bg-gradient-to-r from-secondary to-accent",
-                      badgeBg: "bg-secondary text-primary-dark",
-                    }
-                  : {
-                      cardBorder: "border-info/30",
-                      stripe: "bg-gradient-to-r from-info to-primary-light",
-                      badgeBg: "bg-info text-white",
-                    };
-              return (
-                <StaggerItem key={d.label}>
-                  <article
-                    id={idx === 0 ? "youth" : "adult"}
-                    className={`relative bg-white rounded-2xl p-7 border ${styles.cardBorder} shadow-sm h-full flex flex-col overflow-hidden`}
-                  >
-                    <div
-                      aria-hidden="true"
-                      className={`absolute top-0 left-0 right-0 h-1.5 ${styles.stripe}`}
-                    />
-                    <div
-                      className={`inline-flex items-center gap-2 ${styles.badgeBg} text-sm font-bold rounded-lg px-3 py-1.5 self-start mb-4 mt-1`}
-                    >
-                      <span className="font-mono tracking-tight">{d.badge}</span>
-                    </div>
-                    <h3 className="font-display text-xl font-bold text-neutral-900 mb-2">
-                      {d.label}
-                    </h3>
-                    <p className="text-neutral-600 text-sm leading-relaxed">{d.description}</p>
-                  </article>
-                </StaggerItem>
-              );
-            })}
-          </StaggerContainer>
+          </div>
         </Container>
       </section>
 
@@ -678,13 +652,15 @@ export default function VolleyballTournamentPage() {
             <Reveal variant="fade-right">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-3">
-                  Tournament Weekend
+                  Game Day · Saturday, October 24
                 </p>
                 <h2 className="font-display text-section text-neutral-900 mb-4 text-balance">
-                  How the Weekend Runs
+                  How the Day Runs
                 </h2>
                 <p className="text-neutral-600 mb-6">
-                  Day 1 is pool play — every team is guaranteed multiple matches. Day 2 is single-elimination playoffs across both divisions, capped by finals and awards.
+                  First serve at 11 AM. Pool play guarantees every team multiple matches, then
+                  the top teams move into single-elimination playoffs, capped by the final and
+                  awards. Exact bracket times go to captains the week of the tournament.
                 </p>
                 <div className="bg-white rounded-xl p-5 border border-neutral-200">
                   <h3 className="font-semibold text-neutral-900 mb-3 flex items-center gap-2">
@@ -871,8 +847,8 @@ export default function VolleyballTournamentPage() {
             Lock In Your Team&apos;s Spot
           </h2>
           <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-            $200 per team. Lock your spot with as few as 4 players. Registration closes{" "}
-            {TOURNAMENT.registerByLabel}. Edit your lineup anytime before the tournament.
+            $250 per team. Lock your spot with as few as 4 players and build to 8. Registration
+            closes {TOURNAMENT.registerByLabel}. Edit your lineup anytime before the tournament.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Button

@@ -1,28 +1,40 @@
 // ---------------------------------------------------------------------------
-// LevelUP Smash Cup — fixed tournament structure (single source of truth).
-// Team names live only in registrations, so the pools/seeding below are the
-// canonical bracket. Match SCORES are dynamic and stored in Redis; this file
-// holds only the things that never change during the tournament.
+// LevelUP Smash Cup — tournament structure (single source of truth).
+//
+// Fall 2026 edition. Team names are not known until registration closes, so
+// the pools are NOT hard-coded here: staff assign registered teams to Pool A /
+// Pool B on game day (stored in Redis as `StandingsState.pools`). Everything
+// below derives the round-robin schedule and the playoff bracket from those
+// pools, for any pool size. Match SCORES are dynamic and stored alongside.
 // ---------------------------------------------------------------------------
 
 export const SMASH_CUP = {
   name: "LevelUP Smash Cup",
+  edition: "Fall 2026",
   subtitle: "Indoor Volleyball Tournament",
-  date: "June 6, 2026",
+  date: "October 24, 2026",
+  /** First serve, 24-hour local time. Pool slots are laid out from here. */
+  firstServe: { hour: 11, minute: 0 },
+  /** Minutes per pool match slot (one set to 25, switch, next match). */
+  poolSlotMinutes: 30,
+  /** Minutes per bracket slot. */
+  bracketSlotMinutes: 40,
 } as const;
 
 export type PoolId = "A" | "B";
+export const POOL_IDS: PoolId[] = ["A", "B"];
+export type Pools = Record<PoolId, string[]>;
 
-/** Pool rosters, ordered as entered (seeding is computed from results). */
-export const POOLS: Record<PoolId, string[]> = {
-  A: ["Smack that ace", "Everest Nepal", "Chapulines", "Rockers"],
-  B: ["Big Balls No Calls", "Language Barrier", "BounceTown", "Team LevelUp"],
-};
+export function emptyPools(): Pools {
+  return { A: [], B: [] };
+}
 
 /** Top this many teams in each pool advance to the playoffs; the rest are out. */
 export const ADVANCE_CUTOFF = 2;
 
-/** A single round-robin pool match. `i`/`j` are indices into POOLS[pool]. */
+const COURT_FOR_POOL: Record<PoolId, string> = { A: "Court 1", B: "Court 2" };
+
+/** A single round-robin pool match. `i`/`j` are indices into pools[pool]. */
 export interface PoolMatch {
   id: string;
   pool: PoolId;
@@ -31,24 +43,6 @@ export interface PoolMatch {
   court: string;
   time: string;
 }
-
-/** Round-robin schedule (6 per pool) — mirrors the published time grid. */
-export const POOL_MATCHES: PoolMatch[] = [
-  // Court 1 — Pool A
-  { id: "A-12", pool: "A", i: 0, j: 1, court: "Court 1", time: "9:30" },
-  { id: "A-34", pool: "A", i: 2, j: 3, court: "Court 1", time: "10:00" },
-  { id: "A-13", pool: "A", i: 0, j: 2, court: "Court 1", time: "10:30" },
-  { id: "A-24", pool: "A", i: 1, j: 3, court: "Court 1", time: "11:00" },
-  { id: "A-14", pool: "A", i: 0, j: 3, court: "Court 1", time: "11:30" },
-  { id: "A-23", pool: "A", i: 1, j: 2, court: "Court 1", time: "12:00" },
-  // Court 2 — Pool B
-  { id: "B-12", pool: "B", i: 0, j: 1, court: "Court 2", time: "9:30" },
-  { id: "B-34", pool: "B", i: 2, j: 3, court: "Court 2", time: "10:00" },
-  { id: "B-13", pool: "B", i: 0, j: 2, court: "Court 2", time: "10:30" },
-  { id: "B-24", pool: "B", i: 1, j: 3, court: "Court 2", time: "11:00" },
-  { id: "B-14", pool: "B", i: 0, j: 3, court: "Court 2", time: "11:30" },
-  { id: "B-23", pool: "B", i: 1, j: 2, court: "Court 2", time: "12:00" },
-];
 
 /**
  * Where a bracket slot's team comes from: a pool seed (e.g. "A1"), or the
@@ -72,15 +66,118 @@ export interface BracketMatch {
   bestOf: number;
 }
 
+// ── helpers ─────────────────────────────────────────────────────────
+
+/** Stable, order-independent match id built from the two team names. */
+export function poolMatchId(pool: PoolId, teamA: string, teamB: string): string {
+  const [x, y] = [slug(teamA), slug(teamB)].sort();
+  return `${pool}:${x}|${y}`;
+}
+
+function slug(name: string): string {
+  return name
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 40);
+}
+
+function clock(minutesFromMidnight: number): string {
+  const h24 = Math.floor(minutesFromMidnight / 60) % 24;
+  const m = minutesFromMidnight % 60;
+  const h12 = h24 % 12 === 0 ? 12 : h24 % 12;
+  return `${h12}:${String(m).padStart(2, "0")}`;
+}
+
+const FIRST_SERVE_MIN = SMASH_CUP.firstServe.hour * 60 + SMASH_CUP.firstServe.minute;
+
 /**
- * 4-team single elimination — top 2 from each pool advance straight to the
- * semifinals (bottom 2 in each pool are eliminated). Cross-pool seeding
- * (A1·B2, A2·B1) keeps the two pool winners in opposite halves, so they can
- * only meet in the final.
+ * Round-robin pairings in "circle method" rounds, so a team never plays twice
+ * in a row when the pool has an even count, and sits out at most one slot
+ * when odd. Returns index pairs into the pool's team list.
  */
-export const BRACKET: BracketMatch[] = [
-  { id: "SF1", round: "SF", label: "Semifinal 1", a: { seed: "A1" }, b: { seed: "B2" }, court: "Court 1", time: "1:00", bestOf: 1 },
-  { id: "SF2", round: "SF", label: "Semifinal 2", a: { seed: "A2" }, b: { seed: "B1" }, court: "Court 2", time: "1:00", bestOf: 1 },
-  { id: "THIRD", round: "THIRD", label: "3rd-Place Game", a: { loserOf: "SF1" }, b: { loserOf: "SF2" }, court: "Court 1", time: "1:45", bestOf: 1 },
-  { id: "FINAL", round: "FINAL", label: "Final", a: { winnerOf: "SF1" }, b: { winnerOf: "SF2" }, court: "Court 1", time: "2:15", bestOf: 3 },
-];
+function roundRobinPairs(n: number): Array<[number, number]> {
+  if (n < 2) return [];
+  const ids = Array.from({ length: n }, (_, i) => i);
+  if (n % 2 === 1) ids.push(-1); // bye
+  const size = ids.length;
+  const rounds = size - 1;
+  const out: Array<[number, number]> = [];
+  const rot = [...ids];
+  for (let r = 0; r < rounds; r++) {
+    for (let k = 0; k < size / 2; k++) {
+      const a = rot[k];
+      const b = rot[size - 1 - k];
+      if (a !== -1 && b !== -1) out.push([Math.min(a, b), Math.max(a, b)]);
+    }
+    // rotate all but the first
+    rot.splice(1, 0, rot.pop() as number);
+  }
+  return out;
+}
+
+/** Every pool match, with court and an estimated start time. */
+export function buildPoolMatches(pools: Pools): PoolMatch[] {
+  const out: PoolMatch[] = [];
+  for (const pool of POOL_IDS) {
+    const teams = pools[pool] ?? [];
+    roundRobinPairs(teams.length).forEach(([i, j], idx) => {
+      out.push({
+        id: poolMatchId(pool, teams[i], teams[j]),
+        pool,
+        i,
+        j,
+        court: COURT_FOR_POOL[pool],
+        time: clock(FIRST_SERVE_MIN + idx * SMASH_CUP.poolSlotMinutes),
+      });
+    });
+  }
+  return out;
+}
+
+/** Minutes from midnight when the last pool slot on any court ends. */
+function poolPlayEndsAt(pools: Pools): number {
+  const longest = Math.max(
+    0,
+    ...POOL_IDS.map((p) => roundRobinPairs((pools[p] ?? []).length).length)
+  );
+  return FIRST_SERVE_MIN + longest * SMASH_CUP.poolSlotMinutes;
+}
+
+/**
+ * Playoff bracket derived from the pool layout:
+ *  - two pools with 2+ teams each → cross-pool semis (A1·B2, A2·B1), 3rd, final
+ *  - one pool with 4+ teams       → A1·A4, A2·A3 semis, 3rd, final
+ *  - one pool with 2–3 teams      → straight final A1·A2
+ *  - anything smaller             → no bracket yet
+ */
+export function buildBracket(pools: Pools): BracketMatch[] {
+  const a = (pools.A ?? []).length;
+  const b = (pools.B ?? []).length;
+  const start = poolPlayEndsAt(pools) + 30; // half-hour break after pools
+  const t = (slot: number) => clock(start + slot * SMASH_CUP.bracketSlotMinutes);
+
+  const semis = (sf1: [Slot, Slot], sf2: [Slot, Slot]): BracketMatch[] => [
+    { id: "SF1", round: "SF", label: "Semifinal 1", a: sf1[0], b: sf1[1], court: "Court 1", time: t(0), bestOf: 1 },
+    { id: "SF2", round: "SF", label: "Semifinal 2", a: sf2[0], b: sf2[1], court: "Court 2", time: t(0), bestOf: 1 },
+    { id: "THIRD", round: "THIRD", label: "3rd-Place Game", a: { loserOf: "SF1" }, b: { loserOf: "SF2" }, court: "Court 2", time: t(1), bestOf: 1 },
+    { id: "FINAL", round: "FINAL", label: "Final", a: { winnerOf: "SF1" }, b: { winnerOf: "SF2" }, court: "Court 1", time: t(1), bestOf: 3 },
+  ];
+
+  if (a >= 2 && b >= 2) {
+    return semis([{ seed: "A1" }, { seed: "B2" }], [{ seed: "A2" }, { seed: "B1" }]);
+  }
+  const only: PoolId | null = a >= 2 && b === 0 ? "A" : b >= 2 && a === 0 ? "B" : null;
+  if (!only) return [];
+  const n = only === "A" ? a : b;
+  if (n >= 4) {
+    return semis(
+      [{ seed: `${only}1` }, { seed: `${only}4` }],
+      [{ seed: `${only}2` }, { seed: `${only}3` }]
+    );
+  }
+  return [
+    { id: "FINAL", round: "FINAL", label: "Final", a: { seed: `${only}1` }, b: { seed: `${only}2` }, court: "Court 1", time: t(0), bestOf: 3 },
+  ];
+}

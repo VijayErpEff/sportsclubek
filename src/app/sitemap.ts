@@ -187,7 +187,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${BASE_URL}/events/volleyball-tournament`,
-      lastModified: "2026-05-06",
+      lastModified: "2026-10-02",
       changeFrequency: "weekly",
       priority: 0.9,
     },
