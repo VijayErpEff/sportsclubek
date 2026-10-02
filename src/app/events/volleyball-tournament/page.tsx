@@ -380,51 +380,25 @@ export default function VolleyballTournamentPage() {
               </div>
             </Reveal>
 
-            {/* Action photo + date sticker — replaces the all-typography
-                date card so the hero feels less monotone */}
+            {/* Tournament flyer — the real event artwork, tilted like a pinned poster */}
             <Reveal variant="fade-left" delay={0.15}>
-              <div className="relative w-full max-w-[320px] mx-auto lg:max-w-none lg:w-[300px]">
-                <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl ring-1 ring-white/15 rotate-2">
+              <div className="relative w-full max-w-[360px] mx-auto lg:max-w-none lg:w-[380px]">
+                <div className="relative aspect-square rounded-3xl overflow-hidden shadow-2xl ring-1 ring-white/15 rotate-2">
                   <Image
-                    src="/images/sports/volleyball.jpg"
-                    alt="Volleyball player spiking the ball at LevelUP Sports indoor court"
+                    src={TOURNAMENT.flyer}
+                    alt="LevelUP Volleyball Tournament flyer — Saturday, October 24, 2026, 11 AM onwards, co-ed ages 16+, maximum 8 players per team, $250 team registration, cash prizes"
                     fill
-                    sizes="(max-width: 1024px) 320px, 300px"
+                    sizes="(max-width: 1024px) 360px, 380px"
                     className="object-cover"
                     priority
                   />
-                  <div
-                    aria-hidden="true"
-                    className="absolute inset-0 bg-gradient-to-t from-primary-dark/90 via-primary-dark/20 to-transparent"
-                  />
-                  <div
-                    aria-hidden="true"
-                    className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-secondary/20"
-                  />
-                  {/* Date sticker — anchored bottom of photo */}
-                  <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-3">
-                    <div>
-                      <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-secondary mb-0.5">
-                        October 2026
-                      </p>
-                      <p className="font-display font-extrabold text-4xl md:text-5xl text-white tabular-nums leading-none">
-                        24
-                      </p>
-                      <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-white/70 mt-1.5">
-                        Saturday · 11 AM
-                      </p>
-                    </div>
-                    <div className="bg-secondary text-primary-dark rounded-lg px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-wider shrink-0">
-                      6v6
-                    </div>
-                  </div>
                 </div>
                 {/* Floating accent badge */}
                 <div
                   aria-hidden="true"
                   className="absolute -top-3 -right-3 bg-warning text-primary-dark rounded-full px-3 py-1.5 text-[11px] font-extrabold uppercase tracking-wider shadow-lg rotate-6"
                 >
-                  Cash Prize
+                  Cash Prizes
                 </div>
               </div>
             </Reveal>
@@ -525,14 +499,15 @@ export default function VolleyballTournamentPage() {
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             <Reveal variant="fade-right" className="lg:col-span-5">
               <div className="relative max-w-md mx-auto lg:max-w-none lg:-rotate-1">
-                <Image
-                  src={TOURNAMENT.flyer}
-                  alt="LevelUP Volleyball Tournament flyer — Saturday, October 24, 2026, 11 AM onwards, co-ed ages 16+, maximum 8 players per team, $250 team registration, cash prizes"
-                  width={1000}
-                  height={1000}
-                  sizes="(max-width: 1024px) 90vw, 40vw"
-                  className="rounded-2xl shadow-2xl ring-1 ring-neutral-200"
-                />
+                <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl ring-1 ring-neutral-200">
+                  <Image
+                    src="/images/sports/volleyball.jpg"
+                    alt="Volleyball player spiking the ball at LevelUP Sports indoor court"
+                    fill
+                    sizes="(max-width: 1024px) 90vw, 40vw"
+                    className="object-cover"
+                  />
+                </div>
               </div>
             </Reveal>
             <div className="lg:col-span-7">
