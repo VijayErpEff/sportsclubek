@@ -16,6 +16,14 @@ export interface PlayerInput {
 
 export const MIN_PLAYERS = 4;
 export const MAX_PLAYERS = 8;
+
+/**
+ * How many are on the team as the app counts it: every listed player plus the captain, unless the
+ * captain is on the list already. The app's team size (4–8) includes the captain.
+ */
+export function teamTotal(players: PlayerInput[]): number {
+  return players.length + (players.some((p) => p.isCaptain) ? 0 : 1);
+}
 export const MIN_AGE = 16;
 
 export function emptyPlayer(): PlayerInput {
@@ -30,12 +38,15 @@ interface RosterFieldsProps {
 
 export function RosterFields({ players, errors, onChange }: RosterFieldsProps) {
   const updatePlayer = (idx: number, patch: Partial<PlayerInput>) => {
-    const next = players.map((p, i) => (i === idx ? { ...p, ...patch } : p));
+    // One captain: ticking "that's me" on a row clears it on every other row.
+    const next = players.map((p, i) =>
+      i === idx ? { ...p, ...patch } : patch.isCaptain === true ? { ...p, isCaptain: false } : p
+    );
     onChange(next);
   };
 
   const addPlayer = () => {
-    if (players.length >= MAX_PLAYERS) return;
+    if (teamTotal(players) >= MAX_PLAYERS) return;
     onChange([...players, emptyPlayer()]);
   };
 
@@ -48,11 +59,13 @@ export function RosterFields({ players, errors, onChange }: RosterFieldsProps) {
     <div className="space-y-3">
       <div className="flex items-center justify-between flex-wrap gap-2">
         <p className="text-xs sm:text-sm text-neutral-600">
-          <span className="font-semibold text-neutral-900">{players.length}</span>
-          <span className="text-neutral-400"> / {MAX_PLAYERS}</span>
+          <span className="font-semibold text-neutral-900">{teamTotal(players)}</span>
+          <span className="text-neutral-400"> / {MAX_PLAYERS} incl. captain</span>
           {" — "}
           {players.length < MIN_PLAYERS ? (
             <span className="text-error">need {MIN_PLAYERS}+</span>
+          ) : teamTotal(players) > MAX_PLAYERS ? (
+            <span className="text-error">one too many</span>
           ) : (
             <span className="text-secondary">looks good</span>
           )}
@@ -62,7 +75,7 @@ export function RosterFields({ players, errors, onChange }: RosterFieldsProps) {
           size="sm"
           variant="outline"
           onClick={addPlayer}
-          disabled={players.length >= MAX_PLAYERS}
+          disabled={teamTotal(players) >= MAX_PLAYERS}
         >
           <Plus className="h-4 w-4" /> Add player
         </Button>
@@ -166,6 +179,17 @@ function PlayerRow({
         </Button>
       </div>
 
+      {/* The captain on their own roster: the app counts them once, as the captain row */}
+      <label className="mt-2 ml-9 flex items-center gap-2 text-xs text-neutral-600 cursor-pointer">
+        <input
+          type="checkbox"
+          name={`players.${idx}.isCaptain`}
+          checked={player.isCaptain === true}
+          onChange={(e) => onUpdate({ isCaptain: e.target.checked })}
+          className="rounded border-neutral-300 text-accent focus:ring-accent/30"
+        />
+        This is me, the captain
+      </label>
       {/* Contact toggle + collapsible email/phone */}
       <div className="mt-2 ml-9">
         <button

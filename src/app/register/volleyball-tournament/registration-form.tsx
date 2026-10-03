@@ -6,6 +6,7 @@ import { CheckCircle2, AlertCircle, Copy, Check, ArrowRight } from "lucide-react
 
 import { FloatingInput, FloatingTextarea } from "@/components/ui/floating-input";
 import { Button } from "@/components/ui/button";
+import { APP } from "@/lib/constants/app";
 
 import {
   RosterFields,
@@ -13,6 +14,7 @@ import {
   MIN_PLAYERS,
   MAX_PLAYERS,
   MIN_AGE,
+  teamTotal,
   playerInputsToApi,
   type PlayerInput,
 } from "./roster-fields";
@@ -20,9 +22,12 @@ import {
 type PaymentMethod = "pay_later" | "pay_online";
 
 interface SuccessState {
+  /** The reference the captain quotes at the desk, e.g. LU-123. */
   id: string;
-  paymentMethod: PaymentMethod;
+  paymentChoice: "card" | "later" | "free";
   email: string;
+  amountDue: number;
+  teamName: string;
 }
 
 export function RegistrationForm() {
@@ -31,8 +36,6 @@ export function RegistrationForm() {
   const [captainName, setCaptainName] = useState("");
   const [captainEmail, setCaptainEmail] = useState("");
   const [captainPhone, setCaptainPhone] = useState("");
-  const [pin, setPin] = useState("");
-  const [pinConfirm, setPinConfirm] = useState("");
   const [players, setPlayers] = useState<PlayerInput[]>(() =>
     Array.from({ length: MIN_PLAYERS }, () => emptyPlayer())
   );
@@ -57,10 +60,10 @@ export function RegistrationForm() {
       errs["captain.email"] = "Valid email required.";
     if (!captainPhone.trim() || captainPhone.trim().length < 7)
       errs["captain.phone"] = "Valid phone required.";
-    if (!/^\d{4}$/.test(pin)) errs.pin = "PIN must be exactly 4 digits.";
-    if (pin && pinConfirm !== pin) errs.pinConfirm = "PINs don't match.";
 
     if (players.length < MIN_PLAYERS) errs.players = `At least ${MIN_PLAYERS} players required.`;
+    if (teamTotal(players) > MAX_PLAYERS)
+      errs.players = `Up to ${MAX_PLAYERS} on a team including the captain — tick "This is me, the captain" on your own row, or remove one.`;
     players.forEach((p, idx) => {
       if (!p.name.trim()) errs[`players.${idx}.name`] = "Player name required.";
       const age = Number(p.age);
@@ -72,7 +75,7 @@ export function RegistrationForm() {
     if (!emergencyName.trim()) errs["emergencyContact.name"] = "Emergency contact required.";
     if (!emergencyPhone.trim() || emergencyPhone.trim().length < 7)
       errs["emergencyContact.phone"] = "Valid phone required.";
-    if (!acceptedTerms) errs.terms = "Please accept the tournament terms to continue.";
+    if (!acceptedTerms) errs.terms = "Please accept the waiver and tournament terms to continue.";
     return errs;
   };
 
@@ -104,7 +107,7 @@ export function RegistrationForm() {
             email: captainEmail.trim(),
             phone: captainPhone.trim(),
           },
-          pin,
+          waiverAccepted: acceptedTerms,
           players: playerInputsToApi(players),
           emergencyContact: {
             name: emergencyName.trim(),
@@ -120,7 +123,19 @@ export function RegistrationForm() {
         setSubmitError(data.error || "Registration failed. Please review and try again.");
         return;
       }
-      setSuccess({ id: data.id, paymentMethod, email: captainEmail.trim().toLowerCase() });
+      // A card payment goes straight to Stripe's hosted page; the team is already held in the app,
+      // so closing the tab loses nothing — the confirmation email carries the same link.
+      if (data.checkoutUrl) {
+        window.location.assign(data.checkoutUrl);
+        return;
+      }
+      setSuccess({
+        id: data.id,
+        paymentChoice: data.paymentChoice ?? "later",
+        email: data.captainEmail ?? captainEmail.trim().toLowerCase(),
+        amountDue: typeof data.amountDue === "number" ? data.amountDue : 250,
+        teamName: data.teamName ?? teamName.trim(),
+      });
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch {
       setSubmitError("Couldn't reach the server. Check your connection and try again.");
@@ -157,7 +172,7 @@ export function RegistrationForm() {
       <FormSection
         step={2}
         title="Team Captain"
-        description="Main point of contact. Pick a 4-digit PIN — you'll use email + PIN to edit your roster later."
+        description="Main point of contact. Your email becomes your LevelUP app login — that's where you manage the roster and see the schedule."
       >
         <div className="grid sm:grid-cols-2 gap-3">
           <FloatingInput
@@ -190,34 +205,9 @@ export function RegistrationForm() {
             autoComplete="tel"
           />
         </div>
-        <div className="grid sm:grid-cols-2 gap-3 mt-3">
-          <FloatingInput
-            label="4-digit PIN"
-            name="pin"
-            type="password"
-            inputMode="numeric"
-            required
-            maxLength={4}
-            value={pin}
-            onChange={(e) => setPin(e.target.value.replace(/\D/g, "").slice(0, 4))}
-            error={errors.pin}
-            autoComplete="new-password"
-          />
-          <FloatingInput
-            label="Confirm PIN"
-            name="pinConfirm"
-            type="password"
-            inputMode="numeric"
-            required
-            maxLength={4}
-            value={pinConfirm}
-            onChange={(e) => setPinConfirm(e.target.value.replace(/\D/g, "").slice(0, 4))}
-            error={errors.pinConfirm}
-            autoComplete="new-password"
-          />
-        </div>
         <p className="text-xs text-neutral-500 mt-3 leading-relaxed">
-          Save your email + PIN — you&apos;ll need both to edit your roster later.
+          First time with us? We&apos;ll email you a link to set your app password. Already have the
+          app? Your team lands on the account that uses this email.
         </p>
       </FormSection>
 
@@ -225,7 +215,7 @@ export function RegistrationForm() {
       <FormSection
         step={3}
         title="Team Roster"
-        description={`At least ${MIN_PLAYERS} players to register, up to ${MAX_PLAYERS}. All players must be ${MIN_AGE}+. Add more anytime before the tournament.`}
+        description={`At least ${MIN_PLAYERS} players to register, up to ${MAX_PLAYERS} on the team including the captain. All players must be ${MIN_AGE}+. Add more anytime before the tournament.`}
       >
         <RosterFields
           players={players}
@@ -274,7 +264,7 @@ export function RegistrationForm() {
       <FormSection
         step={5}
         title="Payment"
-        description="$250 per team. Pay now in the LevelUP app or register first and we'll follow up."
+        description="$250 per team. Pay by card now, or register first and pay at the desk."
       >
         <fieldset className="mb-3">
           <legend className="text-xs font-semibold text-neutral-700 mb-1.5">
@@ -284,14 +274,14 @@ export function RegistrationForm() {
             <PaymentRadio
               checked={paymentMethod === "pay_later"}
               onChange={() => setPaymentMethod("pay_later")}
-              title="Register now, pay later"
-              hint="We'll follow up with payment options (cash, Venmo, Zelle, card)."
+              title="Register now, pay at the desk"
+              hint="Cash, Venmo, Zelle or card at LevelUP before registration closes. Your spot is held."
             />
             <PaymentRadio
               checked={paymentMethod === "pay_online"}
               onChange={() => setPaymentMethod("pay_online")}
-              title="Pay in the LevelUP app"
-              hint="Pay $250 by card on the next screen — locks your spot instantly."
+              title="Pay $250 by card now"
+              hint="Secure checkout on the next screen — locks your spot the moment it clears."
             />
           </div>
         </fieldset>
@@ -305,15 +295,15 @@ export function RegistrationForm() {
             aria-invalid={!!errors.terms}
           />
           <span>
-            I confirm all rostered players will sign the standard liability waiver at check-in,
-            and I accept the{" "}
+            As captain I accept the tournament waiver and the{" "}
             <Link
               href="/terms"
               className="text-accent hover:text-accent-hover underline underline-offset-2"
             >
               tournament terms
-            </Link>
-            .
+            </Link>{" "}
+            for my team. Players I list with an email will be asked to sign their own waiver in the
+            app; everyone else signs at check-in.
           </span>
         </label>
         {errors.terms && (
@@ -445,26 +435,8 @@ function SuccessScreen({ success }: { success: SuccessState }) {
 
       <RegistrationIdBox id={success.id} />
 
-      {success.paymentMethod === "pay_online" && (
-        <div className="mt-6 bg-accent/5 border border-accent/30 rounded-xl p-5 text-left max-w-lg mx-auto">
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent mb-2">
-            Step 2 — Complete Payment
-          </p>
-          <h3 className="font-display text-lg font-bold text-neutral-900 mb-2">
-            Pay $250 in the LevelUP app to confirm your spot
-          </h3>
-          <p className="text-sm text-neutral-600 mb-4 leading-relaxed">
-            Your team is held for 48 hours. Click below to finish checkout — your spot
-            isn&apos;t locked until payment clears.
-          </p>
-          <Button asChild size="lg" className="w-full sm:w-auto">
-            <a
-              href="/go/volleyball-tournament"
-            >
-              Pay in the LevelUP App <ArrowRight className="ml-2 h-4 w-4" />
-            </a>
-          </Button>
-        </div>
+      {success.paymentChoice === "later" && (
+        <PayNowBox reference={success.id} email={success.email} amountDue={success.amountDue} />
       )}
 
       <div className="mt-6 bg-neutral-50 border border-neutral-200 rounded-xl p-5 text-left max-w-lg mx-auto">
@@ -473,31 +445,24 @@ function SuccessScreen({ success }: { success: SuccessState }) {
           <li className="flex items-start gap-2">
             <span className="text-accent mt-0.5">1.</span>
             <span>
-              {success.paymentMethod === "pay_online" ? (
-                <>
-                  Complete the payment above in the LevelUP app. A receipt will be sent to{" "}
-                  <span className="font-mono text-neutral-900">{success.email}</span>.
-                </>
+              A confirmation is on its way to{" "}
+              <span className="font-mono text-neutral-900">{success.email}</span>
+              {success.paymentChoice === "later" ? (
+                <> with your reference. Pay ${success.amountDue.toFixed(0)} at the desk (cash, Venmo, Zelle or card) before registration closes, or use the card button above.</>
               ) : (
-                <>
-                  We&apos;ll reach out to{" "}
-                  <span className="font-mono text-neutral-900">{success.email}</span>{" "}
-                  with payment instructions (Venmo, Zelle, cash, or card).
-                </>
+                <>. Your spot is confirmed.</>
               )}
             </span>
           </li>
           <li className="flex items-start gap-2">
             <span className="text-accent mt-0.5">2.</span>
             <span>
-              Need to update your roster?{" "}
-              <Link
-                href="/register/volleyball-tournament/manage"
-                className="text-accent hover:text-accent-hover font-semibold underline underline-offset-2"
-              >
-                Manage your registration
-              </Link>{" "}
-              with your captain email + PIN.
+              Manage your roster in the LevelUP app. First time? Look for the &quot;set your password&quot;
+              email, then sign in at{" "}
+              <a href={`${APP.web}/tournaments`} className="text-accent hover:text-accent-hover font-semibold underline underline-offset-2">
+                app.levelupsports.us
+              </a>
+              . Players you listed with an email have been invited to sign their waiver.
             </span>
           </li>
           <li className="flex items-start gap-2">
@@ -516,15 +481,54 @@ function SuccessScreen({ success }: { success: SuccessState }) {
           </li>
         </ul>
       </div>
-
       <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
         <Button asChild variant="outline">
           <Link href="/events/volleyball-tournament">Back to tournament page</Link>
         </Button>
         <Button asChild variant="outline">
-          <Link href="/register/volleyball-tournament/manage">Manage registration</Link>
+          <a href={`${APP.web}/tournaments`}>Open the LevelUP app</a>
         </Button>
       </div>
+    </div>
+  );
+}
+
+/** A held team paying by card after all: the same hosted Checkout, re-issued for this registration. */
+function PayNowBox({ reference, email, amountDue }: { reference: string; email: string; amountDue: number }) {
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const payNow = async () => {
+    setBusy(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/tournaments/smash-cup/checkout-link", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ reference, email }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.checkoutUrl) {
+        setError(data.error || "We couldn't start a card payment. Pay at the desk, or try again in a moment.");
+        return;
+      }
+      window.location.assign(data.checkoutUrl);
+    } catch {
+      setError("Couldn't reach the server. Check your connection and try again.");
+    } finally {
+      setBusy(false);
+    }
+  };
+  return (
+    <div className="mt-6 bg-accent/5 border border-accent/30 rounded-xl p-5 text-left max-w-lg mx-auto">
+      <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent mb-2">Changed your mind?</p>
+      <h3 className="font-display text-lg font-bold text-neutral-900 mb-2">Pay ${amountDue.toFixed(0)} by card now</h3>
+      <p className="text-sm text-neutral-600 mb-4 leading-relaxed">
+        Your team is held either way. Paying by card locks the spot the moment it clears.
+      </p>
+      <Button size="lg" className="w-full sm:w-auto" onClick={payNow} isLoading={busy}>
+        Pay by card <ArrowRight className="ml-2 h-4 w-4" />
+      </Button>
+      {error && <p className="text-sm text-error mt-3" role="alert">{error}</p>}
     </div>
   );
 }

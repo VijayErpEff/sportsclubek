@@ -136,7 +136,7 @@ const FAQS = [
   {
     question: "Can I edit my team roster after I register?",
     answer:
-      "Yes. After you register, you'll get a registration ID. Anytime before the roster lock, head to levelupsports.us/register/volleyball-tournament/manage and sign in with your captain email + 4-digit PIN to add, remove, or update players.",
+      "Yes. Your team lives in the LevelUP app on the account that uses your captain email. After you register, you'll get a \"set your password\" email (if you're new) — sign in at app.levelupsports.us to add, remove, or update players anytime before the roster lock.",
   },
   {
     question: "What does the $250 entry fee cover?",

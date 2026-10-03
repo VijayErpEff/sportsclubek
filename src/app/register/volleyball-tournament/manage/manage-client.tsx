@@ -1,473 +1,80 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import Link from "next/link";
-import { CheckCircle2, AlertCircle, LogIn } from "lucide-react";
-
-import { FloatingInput, FloatingTextarea } from "@/components/ui/floating-input";
+import { useSearchParams } from "next/navigation";
+import { AlertCircle, ArrowRight, KeyRound, LogIn } from "lucide-react";
+import { FloatingInput } from "@/components/ui/floating-input";
 import { Button } from "@/components/ui/button";
+import { APP } from "@/lib/constants/app";
 
-import {
-  RosterFields,
-  emptyPlayer,
-  MIN_PLAYERS,
-  MAX_PLAYERS,
-  MIN_AGE,
-  playerInputsToApi,
-  type PlayerInput,
-} from "../roster-fields";
-
-type Division = "open";
-type PaymentMethod = "pay_later" | "pay_online";
-
-interface SafeRegistration {
-  id: string;
-  teamName: string;
-  division: Division;
-  captain: { name: string; email: string; phone: string };
-  players: Array<{ name: string; age?: number; email?: string; phone?: string }>;
-  emergencyContact: { name: string; phone: string };
-  notes?: string;
-  paymentMethod: PaymentMethod;
-  paymentStatus: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
+/**
+ * Registrations live in the LevelUP app now. Rosters, the schedule and waivers are managed there
+ * on the captain's account (the email they registered with). What this page still does for a team
+ * that chose to pay at the desk: hand out a fresh card link for the reference in their email.
+ */
 export function ManageClient() {
-  const [phase, setPhase] = useState<"lookup" | "edit">("lookup");
-  const [registration, setRegistration] = useState<SafeRegistration | null>(null);
-  const [pin, setPin] = useState("");
-
-  if (phase === "lookup") {
-    return (
-      <LookupForm
-        onFound={(reg, pinValue) => {
-          setRegistration(reg);
-          setPin(pinValue);
-          setPhase("edit");
-        }}
-      />
-    );
-  }
-
-  if (registration) {
-    return (
-      <EditForm
-        initial={registration}
-        pin={pin}
-        onUpdated={(reg) => setRegistration(reg)}
-      />
-    );
-  }
-
-  return null;
-}
-
-// ─── Lookup form ───────────────────────────────────────────────────
-
-function LookupForm({
-  onFound,
-}: {
-  onFound: (reg: SafeRegistration, pin: string) => void;
-}) {
+  const params = useSearchParams();
+  const cancelled = params.get("cancelled") === "1";
+  const [reference, setReference] = useState("");
   const [email, setEmail] = useState("");
-  const [pin, setPin] = useState("");
+  const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = async (e: FormEvent) => {
+  const payNow = async (e: FormEvent) => {
     e.preventDefault();
     setError(null);
-    if (!email.trim() || !/^\d{4}$/.test(pin)) {
-      setError("Enter your captain email and 4-digit PIN.");
-      return;
-    }
-    setSubmitting(true);
+    if (!reference.trim() || !email.trim()) { setError("Enter your reference and the captain's email."); return; }
+    setBusy(true);
     try {
-      const res = await fetch("/api/tournaments/smash-cup/lookup", {
+      const res = await fetch("/api/tournaments/smash-cup/checkout-link", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: email.trim(), pin }),
+        body: JSON.stringify({ reference: reference.trim(), email: email.trim() }),
       });
       const data = await res.json();
-      if (!res.ok) {
-        setError(data.error || "Couldn't find that registration.");
-        return;
-      }
-      onFound(data.registration as SafeRegistration, pin);
+      if (!res.ok || !data.checkoutUrl) { setError(data.error || "We couldn't start a card payment. Pay at the desk, or try again in a moment."); return; }
+      window.location.assign(data.checkoutUrl);
     } catch {
-      setError("Couldn't reach the server. Try again.");
+      setError("Couldn't reach the server. Check your connection and try again.");
     } finally {
-      setSubmitting(false);
+      setBusy(false);
     }
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      noValidate
-      className="bg-white rounded-xl border border-neutral-200 p-4 md:p-6 shadow-sm space-y-4 max-w-md mx-auto"
-    >
-      <div className="flex items-center gap-3 mb-1">
-        <span className="inline-flex items-center justify-center w-8 h-8 rounded-md bg-accent/10 text-accent">
-          <LogIn className="h-4 w-4" aria-hidden="true" />
-        </span>
-        <h2 className="font-display text-base md:text-lg font-bold text-neutral-900">
-          Sign in to your registration
-        </h2>
-      </div>
-
-      <FloatingInput
-        label="Captain email"
-        name="email"
-        type="email"
-        required
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        autoComplete="email"
-      />
-      <FloatingInput
-        label="4-digit PIN"
-        name="pin"
-        type="password"
-        inputMode="numeric"
-        required
-        maxLength={4}
-        value={pin}
-        onChange={(e) => setPin(e.target.value.replace(/\D/g, "").slice(0, 4))}
-        autoComplete="current-password"
-      />
-
-      {error && (
-        <div
-          role="alert"
-          className="rounded-xl bg-error/5 border border-error/20 px-4 py-3 flex items-start gap-3 text-error"
-        >
-          <AlertCircle className="h-5 w-5 shrink-0 mt-0.5" aria-hidden="true" />
-          <p className="text-sm leading-relaxed">{error}</p>
+    <div className="grid gap-6 md:grid-cols-2">
+      <div className="bg-white rounded-2xl border border-neutral-200 p-6">
+        <div className="flex items-center gap-2 mb-3">
+          <LogIn className="h-5 w-5 text-accent" aria-hidden="true" />
+          <h2 className="font-display text-lg font-bold text-neutral-900">Your roster, schedule and waivers</h2>
         </div>
-      )}
-
-      <Button type="submit" size="lg" isLoading={submitting} className="w-full">
-        Sign In
-      </Button>
-
-      <p className="text-xs text-neutral-500 text-center">
-        Don&apos;t have a registration yet?{" "}
-        <Link
-          href="/register/volleyball-tournament"
-          className="text-accent hover:text-accent-hover font-semibold underline underline-offset-2"
-        >
-          Register your team
-        </Link>
-        .
-      </p>
-    </form>
-  );
-}
-
-// ─── Edit form ─────────────────────────────────────────────────────
-
-function EditForm({
-  initial,
-  pin,
-  onUpdated,
-}: {
-  initial: SafeRegistration;
-  pin: string;
-  onUpdated: (reg: SafeRegistration) => void;
-}) {
-  const [teamName, setTeamName] = useState(initial.teamName);
-  const [captainName, setCaptainName] = useState(initial.captain.name);
-  const [captainPhone, setCaptainPhone] = useState(initial.captain.phone);
-  const [players, setPlayers] = useState<PlayerInput[]>(() =>
-    initial.players.length
-      ? initial.players.map((p) => ({
-          name: p.name,
-          age: typeof p.age === "number" ? String(p.age) : "",
-          email: p.email ?? "",
-          phone: p.phone ?? "",
-        }))
-      : Array.from({ length: MIN_PLAYERS }, () => emptyPlayer())
-  );
-  const [emergencyName, setEmergencyName] = useState(initial.emergencyContact.name);
-  const [emergencyPhone, setEmergencyPhone] = useState(initial.emergencyContact.phone);
-  const [notes, setNotes] = useState(initial.notes ?? "");
-  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(initial.paymentMethod);
-
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null);
-  const [submitting, setSubmitting] = useState(false);
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    setError(null);
-    setSuccess(null);
-    setErrors({});
-
-    // Lightweight client validation — server is authoritative
-    const errs: Record<string, string> = {};
-    if (!teamName.trim()) errs.teamName = "Team name required.";
-    if (!captainName.trim()) errs["captain.name"] = "Captain name required.";
-    if (!captainPhone.trim()) errs["captain.phone"] = "Captain phone required.";
-    if (!emergencyName.trim()) errs["emergencyContact.name"] = "Emergency contact name required.";
-    if (!emergencyPhone.trim()) errs["emergencyContact.phone"] = "Emergency contact phone required.";
-    if (players.length < MIN_PLAYERS) errs.players = `At least ${MIN_PLAYERS} players required.`;
-    players.forEach((p, idx) => {
-      if (!p.name.trim()) errs[`players.${idx}.name`] = "Player name required.";
-      const age = Number(p.age);
-      if (!p.age.trim() || isNaN(age) || age < MIN_AGE) {
-        errs[`players.${idx}.age`] = `Players must be ${MIN_AGE} or older.`;
-      }
-    });
-    if (Object.keys(errs).length > 0) {
-      setErrors(errs);
-      return;
-    }
-
-    setSubmitting(true);
-    try {
-      const res = await fetch(
-        `/api/tournaments/smash-cup/registrations/${encodeURIComponent(initial.id)}`,
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            pin,
-            teamName: teamName.trim(),
-            captain: { name: captainName.trim(), phone: captainPhone.trim() },
-            players: playerInputsToApi(players),
-            emergencyContact: { name: emergencyName.trim(), phone: emergencyPhone.trim() },
-            notes: notes.trim() || undefined,
-            paymentMethod,
-          }),
-        }
-      );
-      const data = await res.json();
-      if (!res.ok) {
-        if (data.fields) setErrors(data.fields);
-        setError(data.error || "Update failed.");
-        return;
-      }
-      setSuccess("Registration updated.");
-      onUpdated({
-        ...initial,
-        teamName: teamName.trim(),
-        captain: { ...initial.captain, name: captainName.trim(), phone: captainPhone.trim() },
-        players: playerInputsToApi(players),
-        emergencyContact: { name: emergencyName.trim(), phone: emergencyPhone.trim() },
-        notes: notes.trim() || undefined,
-        paymentMethod,
-        updatedAt: new Date().toISOString(),
-      });
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } catch {
-      setError("Couldn't reach the server. Try again.");
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
-  return (
-    <form onSubmit={handleSubmit} noValidate className="space-y-5 md:space-y-6">
-      <div className="bg-secondary/5 border border-secondary/20 rounded-xl p-4 flex items-start gap-3">
-        <CheckCircle2 className="h-5 w-5 text-secondary shrink-0 mt-0.5" aria-hidden="true" />
-        <div className="flex-1">
-          <p className="text-sm text-neutral-700">
-            <span className="font-semibold text-neutral-900">{initial.teamName}</span> ·{" "}
-            Open Division (co-ed, 16+) ·{" "}
-            <span className="font-mono text-xs text-neutral-500">{initial.id}</span>
-          </p>
-          <p className="text-xs text-neutral-500 mt-0.5">
-            Captain email can&apos;t be changed here — call us if you need to.
-          </p>
+        <p className="text-sm text-neutral-600 leading-relaxed mb-4">
+          Everything about your team lives in the LevelUP app, on the account that uses your captain
+          email. First time? Use the &quot;set your password&quot; email we sent when you registered — or
+          request a new one below.
+        </p>
+        <div className="flex flex-col gap-2">
+          <Button asChild><a href={`${APP.web}/tournaments`}>Open my team in the app <ArrowRight className="ml-2 h-4 w-4" /></a></Button>
+          <Button asChild variant="outline"><a href={`${APP.web}/auth/forgot-password`}><KeyRound className="mr-2 h-4 w-4" /> Set or reset my password</a></Button>
         </div>
       </div>
 
-      {success && (
-        <div
-          role="status"
-          className="rounded-xl bg-secondary/5 border border-secondary/30 px-4 py-3 flex items-start gap-3 text-secondary"
-        >
-          <CheckCircle2 className="h-5 w-5 shrink-0 mt-0.5" aria-hidden="true" />
-          <p className="text-sm leading-relaxed">{success}</p>
+      <form onSubmit={payNow} noValidate className="bg-white rounded-2xl border border-neutral-200 p-6">
+        <h2 className="font-display text-lg font-bold text-neutral-900 mb-1">Pay your team fee by card</h2>
+        <p className="text-sm text-neutral-600 leading-relaxed mb-4">
+          {cancelled
+            ? "No charge was made. Your team is still held — pay now, or at the desk before registration closes."
+            : "Chose to pay at the desk and changed your mind? Enter the reference from your confirmation email."}
+        </p>
+        <div className="space-y-3">
+          <FloatingInput label="Registration reference (e.g. LU-123)" name="reference" required value={reference} onChange={(e) => setReference(e.target.value)} autoComplete="off" />
+          <FloatingInput label="Captain email" name="email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" />
         </div>
-      )}
-
-      {/* Team */}
-      <Card title="Team">
-        <FloatingInput
-          label="Team name"
-          name="teamName"
-          required
-          value={teamName}
-          onChange={(e) => setTeamName(e.target.value)}
-          error={errors.teamName}
-          maxLength={60}
-        />
-      </Card>
-
-      {/* Captain */}
-      <Card title="Captain">
-        <div className="grid sm:grid-cols-2 gap-3">
-          <FloatingInput
-            label="Captain name"
-            name="captainName"
-            required
-            value={captainName}
-            onChange={(e) => setCaptainName(e.target.value)}
-            error={errors["captain.name"]}
-          />
-          <FloatingInput
-            label="Captain email (locked)"
-            name="captainEmail"
-            value={initial.captain.email}
-            disabled
-          />
-          <FloatingInput
-            label="Captain phone"
-            name="captainPhone"
-            type="tel"
-            required
-            value={captainPhone}
-            onChange={(e) => setCaptainPhone(e.target.value)}
-            error={errors["captain.phone"]}
-          />
-        </div>
-      </Card>
-
-      {/* Roster */}
-      <Card
-        title="Roster"
-        description={`Open division — ${MIN_PLAYERS}–${MAX_PLAYERS} players, all ${MIN_AGE}+.`}
-      >
-        <RosterFields
-          players={players}
-          errors={errors}
-          onChange={setPlayers}
-        />
-      </Card>
-
-      {/* Emergency + Notes */}
-      <Card title="Emergency Contact & Notes">
-        <div className="grid sm:grid-cols-2 gap-3 mb-4">
-          <FloatingInput
-            label="Emergency contact name"
-            name="emergencyName"
-            required
-            value={emergencyName}
-            onChange={(e) => setEmergencyName(e.target.value)}
-            error={errors["emergencyContact.name"]}
-          />
-          <FloatingInput
-            label="Emergency contact phone"
-            name="emergencyPhone"
-            type="tel"
-            required
-            value={emergencyPhone}
-            onChange={(e) => setEmergencyPhone(e.target.value)}
-            error={errors["emergencyContact.phone"]}
-          />
-        </div>
-        <FloatingTextarea
-          label="Notes (optional)"
-          name="notes"
-          value={notes}
-          onChange={(e) => setNotes(e.target.value)}
-          maxLength={500}
-        />
-      </Card>
-
-      {/* Payment */}
-      <Card title="Payment Option">
-        <div className="grid sm:grid-cols-2 gap-3">
-          <label
-            className={`relative flex flex-col gap-1 rounded-xl border-2 p-4 cursor-pointer transition-all ${
-              paymentMethod === "pay_later"
-                ? "border-accent bg-accent/5"
-                : "border-neutral-200 bg-white hover:border-neutral-300"
-            }`}
-          >
-            <input
-              type="radio"
-              name="paymentMethod"
-              checked={paymentMethod === "pay_later"}
-              onChange={() => setPaymentMethod("pay_later")}
-              className="sr-only"
-            />
-            <span className="font-display font-semibold text-neutral-900">Register now, pay later</span>
-            <span className="text-xs text-neutral-500 leading-relaxed">
-              We&apos;ll contact you with payment options.
-            </span>
-          </label>
-          <label
-            className={`relative flex flex-col gap-1 rounded-xl border-2 p-4 cursor-pointer transition-all ${
-              paymentMethod === "pay_online"
-                ? "border-accent bg-accent/5"
-                : "border-neutral-200 bg-white hover:border-neutral-300"
-            }`}
-          >
-            <input
-              type="radio"
-              name="paymentMethod"
-              checked={paymentMethod === "pay_online"}
-              onChange={() => setPaymentMethod("pay_online")}
-              className="sr-only"
-            />
-            <span className="font-display font-semibold text-neutral-900">Pay in the LevelUP app</span>
-            <span className="text-xs text-neutral-500 leading-relaxed">
-              We&apos;ll send the in-app checkout link.
-            </span>
-          </label>
-        </div>
-      </Card>
-
-      {error && (
-        <div
-          role="alert"
-          className="rounded-xl bg-error/5 border border-error/20 px-4 py-3 flex items-start gap-3 text-error"
-        >
-          <AlertCircle className="h-5 w-5 shrink-0 mt-0.5" aria-hidden="true" />
-          <p className="text-sm leading-relaxed">{error}</p>
-        </div>
-      )}
-
-      <div className="flex flex-col sm:flex-row items-center gap-3 pt-2">
-        <Button type="submit" size="xl" isLoading={submitting} className="w-full sm:w-auto">
-          Save Changes
-        </Button>
-        <Button type="button" variant="ghost" asChild className="w-full sm:w-auto">
-          <Link href="/events/volleyball-tournament">Back to tournament</Link>
-        </Button>
-      </div>
-    </form>
-  );
-}
-
-function Card({
-  title,
-  description,
-  children,
-}: {
-  title: string;
-  description?: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <section className="bg-white rounded-xl border border-neutral-200 p-4 md:p-6 shadow-sm">
-      <div className="mb-4">
-        <h2 className="font-display text-base md:text-lg font-bold text-neutral-900 leading-tight">
-          {title}
-        </h2>
-        {description && (
-          <p className="text-xs md:text-sm text-neutral-600 mt-0.5 leading-relaxed">
-            {description}
-          </p>
+        {error && (
+          <p className="text-sm text-error mt-3 flex items-start gap-2" role="alert"><AlertCircle className="h-4 w-4 mt-0.5 shrink-0" aria-hidden="true" />{error}</p>
         )}
-      </div>
-      {children}
-    </section>
+        <Button type="submit" size="lg" className="mt-4 w-full sm:w-auto" isLoading={busy}>Pay $250 by card</Button>
+      </form>
+    </div>
   );
 }

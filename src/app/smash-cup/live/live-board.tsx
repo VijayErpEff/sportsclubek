@@ -423,7 +423,6 @@ export function LiveBoard() {
         {poolsOpen && (
           <PoolsSetup
             pools={getPools(state)}
-            adminPin={admin.adminPin}
             reduced={reduced}
             onSave={savePools}
             onClose={() => setPoolsOpen(false)}

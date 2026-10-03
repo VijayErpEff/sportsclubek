@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { Suspense } from "react";
 import Link from "next/link";
 
 import { Section } from "@/components/layout/section";
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
   ...generateSEOMetadata({
     title: "Manage Your Fall Smash Cup Registration",
     description:
-      "Edit your LevelUP Smash Cup volleyball tournament registration — update team name, captain info, or roster. Captain email + 4-digit PIN required.",
+      "Your LevelUP Smash Cup team: manage the roster in the LevelUP app, or pay your team fee by card with your registration reference.",
     path: "/register/volleyball-tournament/manage",
   }),
   robots: { index: false, follow: false },
@@ -49,8 +50,8 @@ export default function ManagePage() {
               Manage Your <span className="text-secondary">Registration</span>
             </h1>
             <p className="text-lg text-white/80 max-w-2xl">
-              Sign in with your captain email + 4-digit PIN to update your team name, roster, or
-              captain info before the tournament.
+              Your roster, schedule and waivers live in the LevelUP app on your captain email. Chose
+              to pay at the desk and want to pay by card instead? Use your reference below.
             </p>
           </Reveal>
         </Container>
@@ -58,9 +59,9 @@ export default function ManagePage() {
 
       <Section size="lg">
         <Container className="max-w-3xl">
-          <ManageClient />
+          <Suspense fallback={null}><ManageClient /></Suspense>
           <p className="text-center text-xs text-neutral-500 mt-10">
-            Forgot your PIN? Call{" "}
+            Need a hand? Call{" "}
             <a
               href={`tel:${SITE_CONFIG.phone}`}
               className="text-accent font-semibold hover:text-accent-hover"

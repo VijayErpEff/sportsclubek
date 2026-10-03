@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { X, Check, Plus, RefreshCw } from "lucide-react";
+import { X, Check, Plus } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 import { POOL_IDS, type PoolId, type Pools } from "@/lib/constants/smash-cup-bracket";
 
@@ -11,18 +11,17 @@ type Assignment = PoolId | "";
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 /**
- * Staff modal: pull registered teams, assign each to Pool A / Pool B (or leave
- * it out), add a walk-in team by name, and save. Pool order = entry order.
+ * Staff modal: type the team names from the LevelUP app's tournament admin,
+ * assign each to Pool A / Pool B (or leave it out), and save. Pool order =
+ * entry order. Registrations themselves live in the app, not on this site.
  */
 export function PoolsSetup({
   pools,
-  adminPin,
   reduced,
   onSave,
   onClose,
 }: {
   pools: Pools;
-  adminPin: string;
   reduced: boolean;
   onSave: (next: Pools) => void;
   onClose: () => void;
@@ -36,47 +35,6 @@ export function PoolsSetup({
     return init;
   });
   const [custom, setCustom] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [loadError, setLoadError] = useState<string | null>(null);
-
-  const loadRegistrations = async () => {
-    setLoading(true);
-    setLoadError(null);
-    try {
-      const res = await fetch(
-        `/api/tournaments/smash-cup/registrations?pin=${encodeURIComponent(adminPin)}`,
-        { cache: "no-store" }
-      );
-      if (!res.ok) {
-        setLoadError("Couldn't load registrations — you can still type team names below.");
-        return;
-      }
-      const data = (await res.json()) as { registrations: { teamName: string }[] };
-      const names = data.registrations.map((r) => r.teamName.trim()).filter(Boolean);
-      // Oldest registration first so the list reads in sign-up order.
-      names.reverse();
-      setTeams((prev) => {
-        const seen = new Set(prev.map((t) => t.toLowerCase()));
-        const merged = [...prev];
-        for (const n of names) {
-          if (!seen.has(n.toLowerCase())) {
-            merged.push(n);
-            seen.add(n.toLowerCase());
-          }
-        }
-        return merged;
-      });
-    } catch {
-      setLoadError("Couldn't reach the server — you can still type team names below.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    loadRegistrations();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const counts = useMemo(() => {
     const c: Record<PoolId, number> = { A: 0, B: 0 };
@@ -134,8 +92,8 @@ export function PoolsSetup({
               Teams &amp; Pools
             </h3>
             <p className="mt-1 text-sm text-white/50">
-              Assign each team to Pool A (Court 1) or Pool B (Court 2). Pool order is the order
-              below. Leave a team blank if they didn&apos;t show.
+              Add the checked-in teams from the LevelUP app, then assign each to Pool A (Court 1)
+              or Pool B (Court 2). Pool order is the order below. Mark a no-show as Out.
             </p>
           </div>
           <button
@@ -154,22 +112,12 @@ export function PoolsSetup({
           <span className="rounded-full bg-sky-400/15 px-2.5 py-1 font-bold text-sky-200">
             Pool B · {counts.B}
           </span>
-          <button
-            type="button"
-            onClick={loadRegistrations}
-            disabled={loading}
-            className="ml-auto inline-flex items-center gap-1.5 rounded-lg border border-white/15 px-2.5 py-1 font-medium text-white/60 hover:bg-white/5 disabled:opacity-50"
-          >
-            <RefreshCw className={cn("h-3.5 w-3.5", loading && "animate-spin")} />
-            Reload registrations
-          </button>
         </div>
-        {loadError && <p className="px-6 pb-2 text-xs text-amber-300">{loadError}</p>}
 
         <div className="min-h-0 flex-1 overflow-y-auto px-6">
           {teams.length === 0 ? (
             <p className="rounded-xl border border-dashed border-white/15 p-6 text-center text-sm text-white/40">
-              {loading ? "Loading registered teams…" : "No teams yet. Add one below."}
+              No teams yet. Add the first one below.
             </p>
           ) : (
             <ul className="divide-y divide-white/10">
@@ -218,7 +166,7 @@ export function PoolsSetup({
               type="text"
               value={custom}
               onChange={(e) => setCustom(e.target.value)}
-              placeholder="Add a walk-in team name"
+              placeholder="Team name (as registered in the app)"
               maxLength={60}
               className="min-w-0 flex-1 rounded-lg border border-white/15 bg-[#0F2440] px-3 py-2 text-sm outline-none focus:border-[#2BA84A]/60"
             />

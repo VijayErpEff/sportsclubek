@@ -152,11 +152,12 @@ export interface RegistrationInput {
   teamName: string;
   division: Division;
   captain: { name: string; email: string; phone: string };
-  pin: string;
   players: RosterPlayer[];
   emergencyContact: { name: string; phone: string };
   notes?: string;
   paymentMethod: PaymentMethod;
+  /** The captain accepts the tournament waiver and terms for the team. Required by the app. */
+  waiverAccepted: boolean;
 }
 
 export function validateRegistrationInput(input: RegistrationInput): ValidationResult {
@@ -182,17 +183,19 @@ export function validateRegistrationInput(input: RegistrationInput): ValidationR
     errors["captain.phone"] = "Valid captain phone required.";
   }
 
-  // PIN — exactly 4 digits
-  if (!/^\d{4}$/.test(input.pin || "")) {
-    errors.pin = "PIN must be exactly 4 digits.";
+  // Waiver — the app refuses a team whose captain has not accepted it
+  if (input.waiverAccepted !== true) {
+    errors.terms = "Please accept the waiver and tournament terms to continue.";
   }
 
   // Roster — minimum 4 to register; teams can add more before the tournament.
   const players = Array.isArray(input.players) ? input.players : [];
+  // The app counts the captain in the team size, so a captain not on the list is one more.
+  const teamSize = players.length + (players.some((p) => p.isCaptain) ? 0 : 1);
   if (players.length < MIN_ROSTER) {
     errors.players = `Roster must have at least ${MIN_ROSTER} players.`;
-  } else if (players.length > MAX_ROSTER) {
-    errors.players = `Roster must have at most ${MAX_ROSTER} players.`;
+  } else if (teamSize > MAX_ROSTER) {
+    errors.players = `Up to ${MAX_ROSTER} on a team including the captain.`;
   }
   players.forEach((p, idx) => {
     if (!p.name?.trim()) {

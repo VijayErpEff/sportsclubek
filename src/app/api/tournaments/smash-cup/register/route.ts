@@ -1,20 +1,33 @@
 import { NextResponse } from "next/server";
-import { redis } from "@/lib/storage/redis";
 import {
-  KEYS,
-  generateRegistrationId,
-  hashPin,
-  normalizeEmail,
   normalizePaymentMethod,
   sanitizePlayers,
   validateRegistrationInput,
   type RegistrationInput,
-  type VolleyballRegistration,
 } from "@/lib/storage/tournament-registration";
+import { appConfigured, callApp, SMASH_CUP_TOURNAMENT_ID } from "@/lib/levelup-app";
+
+// The team is registered IN THE LEVELUP APP (the single record for registrations, rosters,
+// payments and notifications). This route validates for the screen, then hands the team to the
+// app's public door with the site key. A card payment comes back as a Stripe hosted Checkout link.
+
+interface AppRegistration {
+  registrationId: number;
+  reference: string;
+  teamName: string;
+  status: string;
+  amountDue: number;
+  paymentChoice: "card" | "later" | "free";
+  checkoutUrl: string | null;
+  checkoutExpiresAt: string | null;
+  captainEmail: string;
+  playersInvited: number;
+  playersListed: number;
+}
 
 export async function POST(request: Request) {
-  if (!redis) {
-    return NextResponse.json({ error: "Storage not configured" }, { status: 503 });
+  if (!appConfigured()) {
+    return NextResponse.json({ error: "Registration is not open right now. Please try again shortly." }, { status: 503 });
   }
 
   let body: Partial<RegistrationInput>;
@@ -32,82 +45,51 @@ export async function POST(request: Request) {
       email: body.captain?.email?.trim() ?? "",
       phone: body.captain?.phone?.trim() ?? "",
     },
-    pin: body.pin ?? "",
     players: Array.isArray(body.players) ? body.players : [],
     emergencyContact: {
       name: body.emergencyContact?.name?.trim() ?? "",
       phone: body.emergencyContact?.phone?.trim() ?? "",
     },
     notes: body.notes?.toString().trim().slice(0, 500),
-    paymentMethod: (body.paymentMethod as RegistrationInput["paymentMethod"]) ?? "pay_later",
+    paymentMethod: normalizePaymentMethod(body.paymentMethod),
+    waiverAccepted: body.waiverAccepted === true,
   };
 
   const validation = validateRegistrationInput(input);
   if (!validation.ok) {
-    return NextResponse.json(
-      { error: "Validation failed", fields: validation.errors },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: "Validation failed", fields: validation.errors }, { status: 400 });
   }
 
-  const emailKey = normalizeEmail(input.captain.email);
+  const origin = new URL(request.url).origin.replace(/^http:/, "https:");
+  const players = sanitizePlayers(input.players);
+  const result = await callApp<AppRegistration>("POST", `/public/tournaments/${SMASH_CUP_TOURNAMENT_ID}/team-registrations`, {
+    teamName: input.teamName,
+    captain: input.captain,
+    players: players.map((p) => ({ name: p.name, age: p.age ?? null, email: p.email ?? null, phone: p.phone ?? null, isCaptain: p.isCaptain === true })),
+    emergencyContact: input.emergencyContact,
+    waiverAccepted: true,
+    paymentChoice: input.paymentMethod === "pay_online" ? "card" : "later",
+    notes: input.notes || null,
+    successUrl: `${origin}/register/volleyball-tournament/paid?session_id={CHECKOUT_SESSION_ID}`,
+    cancelUrl: `${origin}/register/volleyball-tournament/manage?cancelled=1`,
+  });
 
-  // Reject duplicate captain-email registrations for this tournament.
-  const existingId = await redis.get<string>(KEYS.lookup(emailKey));
-  if (existingId) {
-    return NextResponse.json(
-      {
-        error:
-          "A team is already registered with this captain email. Use the Manage Registration page to edit it.",
-      },
-      { status: 409 }
-    );
+  if (!result.ok || !result.data) {
+    const status = result.status === 503 || result.status === 502 ? 503 : 400;
+    return NextResponse.json({ error: result.error, code: result.code }, { status });
   }
-
-  const { hash, salt } = hashPin(input.pin);
-  const id = generateRegistrationId();
-  const now = new Date().toISOString();
-
-  const registration: VolleyballRegistration = {
-    id,
-    tournament: "smash-cup-oct-2026",
-    teamName: input.teamName.trim(),
-    division: input.division,
-    captain: {
-      name: input.captain.name.trim(),
-      email: emailKey,
-      phone: input.captain.phone.trim(),
-    },
-    pinHash: hash,
-    pinSalt: salt,
-    players: sanitizePlayers(input.players),
-    emergencyContact: {
-      name: input.emergencyContact.name.trim(),
-      phone: input.emergencyContact.phone.trim(),
-    },
-    notes: input.notes,
-    paymentMethod: normalizePaymentMethod(input.paymentMethod),
-    paymentStatus: "pending",
-    createdAt: now,
-    updatedAt: now,
-  };
-
-  // Write registration, lookup index, and enumeration list.
-  // Upstash REST doesn't support MULTI; do them sequentially. Lookup is set
-  // last so we don't leave a dangling lookup pointing to a missing record.
-  await redis.set(KEYS.reg(id), JSON.stringify(registration));
-  await redis.lpush(KEYS.list, id);
-  await redis.set(KEYS.lookup(emailKey), id);
-
-  return NextResponse.json(
-    {
-      success: true,
-      id,
-      message:
-        normalizePaymentMethod(input.paymentMethod) === "pay_online"
-          ? "Registration saved. Complete payment in the LevelUP app to confirm your spot."
-          : "Registration saved. We'll contact you with payment instructions.",
-    },
-    { status: 201 }
-  );
+  const r = result.data;
+  return NextResponse.json({
+    id: r.reference,
+    registrationId: r.registrationId,
+    teamName: r.teamName,
+    status: r.status,
+    amountDue: r.amountDue,
+    paymentChoice: r.paymentChoice,
+    checkoutUrl: r.checkoutUrl,
+    checkoutExpiresAt: r.checkoutExpiresAt,
+    captainEmail: r.captainEmail,
+    playersInvited: r.playersInvited,
+    playersListed: r.playersListed,
+  });
 }
