@@ -1,6 +1,17 @@
 {
-  "enabled": false,
-  "messages": [],
+  "enabled": true,
+  "messages": [
+    {
+      "text": "Smash Cup Volleyball Tournament · Sat, Oct 24 · co-ed 16+ · $250/team · cash prizes.",
+      "linkText": "Register your team",
+      "linkUrl": "/events/volleyball-tournament"
+    },
+    {
+      "text": "LPCL Kick Off · Premier Cricket League · Fri, Nov 6 from 5 PM · $850/team · $1,000 to the winners.",
+      "linkText": "Register your team",
+      "linkUrl": "/events/cricket-league"
+    }
+  ],
   "rotateMs": 7000,
   "style": "gradient",
   "dismissible": true
