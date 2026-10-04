@@ -22,6 +22,7 @@ const NAV_ITEMS = [
   { label: "Facilities", href: "/facilities" },
   { label: "Court Status", href: "/court-status" },
   { label: "Memberships", href: "/memberships" },
+  { label: "Events", href: "/events" },
   { label: "Parties", href: "/birthday-parties" },
   { label: "Schedule", href: "/schedule" },
   { label: "About", href: "/about" },

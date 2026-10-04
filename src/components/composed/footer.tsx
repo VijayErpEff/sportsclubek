@@ -30,6 +30,7 @@ const footerCompany = [
   { label: "Facilities", href: "/facilities" },
   { label: "Memberships", href: "/memberships" },
   { label: "Schedule", href: "/schedule" },
+  { label: "Events", href: "/events" },
   { label: "Court Status", href: "/court-status" },
   { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },

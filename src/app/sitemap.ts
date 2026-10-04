@@ -186,6 +186,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.85,
     },
     {
+      url: `${BASE_URL}/events`,
+      lastModified: "2026-10-04",
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
       url: `${BASE_URL}/events/cricket-league`,
       lastModified: "2026-10-03",
       changeFrequency: "weekly",
