@@ -7,21 +7,22 @@ import { Container } from "@/components/layout/container";
 import { Reveal } from "@/components/ui/reveal";
 import { generateSEOMetadata } from "@/lib/seo/metadata";
 import { SITE_CONFIG } from "@/lib/constants/site";
-
-import { ManageClient } from "@/components/tournament/manage-client";
 import { TOURNAMENTS } from "@/lib/constants/tournaments";
+import { ManageClient } from "@/components/tournament/manage-client";
+
+const T = TOURNAMENTS.lpcl;
 
 export const metadata: Metadata = {
   ...generateSEOMetadata({
-    title: "Manage Your Fall Smash Cup Registration",
+    title: "Manage Your LPCL Kick Off Registration",
     description:
-      "Your LevelUP Smash Cup team: manage the roster in the LevelUP app, or pay your team fee by card with your registration reference.",
-    path: "/register/volleyball-tournament/manage",
+      "Your LPCL Kick Off team: manage the squad in the LevelUP app, or pay your team fee by card with your registration reference.",
+    path: `${T.registerHref}/manage`,
   }),
   robots: { index: false, follow: false },
 };
 
-export default function ManagePage() {
+export default function CricketLeagueManagePage() {
   return (
     <>
       <Section className="pt-28 md:pt-32 pb-6 bg-gradient-to-b from-primary-dark to-primary text-white">
@@ -35,11 +36,8 @@ export default function ManagePage() {
               </li>
               <li className="text-white/30">/</li>
               <li>
-                <Link
-                  href="/events/volleyball-tournament"
-                  className="hover:text-white transition-colors"
-                >
-                  Smash Cup
+                <Link href={T.eventHref} className="hover:text-white transition-colors">
+                  LPCL Kick Off
                 </Link>
               </li>
               <li className="text-white/30">/</li>
@@ -51,7 +49,7 @@ export default function ManagePage() {
               Manage Your <span className="text-secondary">Registration</span>
             </h1>
             <p className="text-lg text-white/80 max-w-2xl">
-              Your roster, schedule and waivers live in the LevelUP app on your captain email. Chose
+              Your squad, fixtures and waivers live in the LevelUP app on your captain email. Chose
               to pay at the desk and want to pay by card instead? Use your reference below.
             </p>
           </Reveal>
@@ -60,7 +58,9 @@ export default function ManagePage() {
 
       <Section size="lg">
         <Container className="max-w-3xl">
-          <Suspense fallback={null}><ManageClient tournament={TOURNAMENTS["smash-cup"]} /></Suspense>
+          <Suspense fallback={null}>
+            <ManageClient tournament={T} />
+          </Suspense>
           <p className="text-center text-xs text-neutral-500 mt-10">
             Need a hand? Call{" "}
             <a
@@ -75,8 +75,8 @@ export default function ManagePage() {
               className="text-accent font-semibold hover:text-accent-hover"
             >
               {SITE_CONFIG.email}
-            </a>{" "}
-            and we&apos;ll verify and reset.
+            </a>
+            .
           </p>
         </Container>
       </Section>

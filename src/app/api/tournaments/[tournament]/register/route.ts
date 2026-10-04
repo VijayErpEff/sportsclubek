@@ -5,7 +5,8 @@ import {
   validateRegistrationInput,
   type RegistrationInput,
 } from "@/lib/storage/tournament-registration";
-import { appConfigured, callApp, SMASH_CUP_TOURNAMENT_ID } from "@/lib/levelup-app";
+import { appConfigured, appTournamentId, callApp } from "@/lib/levelup-app";
+import { isTournamentSlug, TOURNAMENTS } from "@/lib/constants/tournaments";
 
 // The team is registered IN THE LEVELUP APP (the single record for registrations, rosters,
 // payments and notifications). This route validates for the screen, then hands the team to the
@@ -25,8 +26,12 @@ interface AppRegistration {
   playersListed: number;
 }
 
-export async function POST(request: Request) {
-  if (!appConfigured()) {
+export async function POST(request: Request, ctx: { params: Promise<{ tournament: string }> }) {
+  const { tournament: slug } = await ctx.params;
+  if (!isTournamentSlug(slug)) return NextResponse.json({ error: "Unknown tournament" }, { status: 404 });
+  const t = TOURNAMENTS[slug];
+
+  if (!appConfigured(slug)) {
     return NextResponse.json({ error: "Registration is not open right now. Please try again shortly." }, { status: 503 });
   }
 
@@ -55,14 +60,18 @@ export async function POST(request: Request) {
     waiverAccepted: body.waiverAccepted === true,
   };
 
-  const validation = validateRegistrationInput(input);
+  const validation = validateRegistrationInput(input, {
+    minPlayers: t.minPlayers,
+    maxPlayers: t.maxPlayers,
+    minAge: t.minAge,
+  });
   if (!validation.ok) {
     return NextResponse.json({ error: "Validation failed", fields: validation.errors }, { status: 400 });
   }
 
   const origin = new URL(request.url).origin.replace(/^http:/, "https:");
   const players = sanitizePlayers(input.players);
-  const result = await callApp<AppRegistration>("POST", `/public/tournaments/${SMASH_CUP_TOURNAMENT_ID}/team-registrations`, {
+  const result = await callApp<AppRegistration>("POST", `/public/tournaments/${appTournamentId(slug)}/team-registrations`, {
     teamName: input.teamName,
     captain: input.captain,
     players: players.map((p) => ({ name: p.name, age: p.age ?? null, email: p.email ?? null, phone: p.phone ?? null, isCaptain: p.isCaptain === true })),
@@ -70,8 +79,8 @@ export async function POST(request: Request) {
     waiverAccepted: true,
     paymentChoice: input.paymentMethod === "pay_online" ? "card" : "later",
     notes: input.notes || null,
-    successUrl: `${origin}/register/volleyball-tournament/paid?session_id={CHECKOUT_SESSION_ID}`,
-    cancelUrl: `${origin}/register/volleyball-tournament/manage?cancelled=1`,
+    successUrl: `${origin}${t.registerHref}/paid?session_id={CHECKOUT_SESSION_ID}`,
+    cancelUrl: `${origin}${t.registerHref}/manage?cancelled=1`,
   });
 
   if (!result.ok || !result.data) {

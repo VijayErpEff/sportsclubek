@@ -7,13 +7,11 @@ import { CheckCircle2, AlertCircle, Copy, Check, ArrowRight } from "lucide-react
 import { FloatingInput, FloatingTextarea } from "@/components/ui/floating-input";
 import { Button } from "@/components/ui/button";
 import { APP } from "@/lib/constants/app";
+import { feeLabel, type TournamentConfig } from "@/lib/constants/tournaments";
 
 import {
   RosterFields,
   emptyPlayer,
-  MIN_PLAYERS,
-  MAX_PLAYERS,
-  MIN_AGE,
   teamTotal,
   playerInputsToApi,
   type PlayerInput,
@@ -30,7 +28,9 @@ interface SuccessState {
   teamName: string;
 }
 
-export function RegistrationForm() {
+export function RegistrationForm({ tournament }: { tournament: TournamentConfig }) {
+  const { minPlayers: MIN_PLAYERS, maxPlayers: MAX_PLAYERS, minAge: MIN_AGE } = tournament;
+  const fee = feeLabel(tournament);
   // ── Form state ─────────────────────────────────────────────
   const [teamName, setTeamName] = useState("");
   const [captainName, setCaptainName] = useState("");
@@ -96,7 +96,7 @@ export function RegistrationForm() {
     setSubmitting(true);
 
     try {
-      const res = await fetch("/api/tournaments/smash-cup/register", {
+      const res = await fetch(`${tournament.apiBase}/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -133,7 +133,7 @@ export function RegistrationForm() {
         id: data.id,
         paymentChoice: data.paymentChoice ?? "later",
         email: data.captainEmail ?? captainEmail.trim().toLowerCase(),
-        amountDue: typeof data.amountDue === "number" ? data.amountDue : 250,
+        amountDue: typeof data.amountDue === "number" ? data.amountDue : (tournament.fee ?? 0),
         teamName: data.teamName ?? teamName.trim(),
       });
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -145,7 +145,7 @@ export function RegistrationForm() {
   };
 
   if (success) {
-    return <SuccessScreen success={success} />;
+    return <SuccessScreen success={success} tournament={tournament} />;
   }
 
   return (
@@ -154,7 +154,7 @@ export function RegistrationForm() {
       <FormSection
         step={1}
         title="Your Team"
-        description="One open division — co-ed, ages 16+. Pick a team name your crew will answer to."
+        description={tournament.eligibility}
       >
         <FloatingInput
           label="Team name"
@@ -218,6 +218,7 @@ export function RegistrationForm() {
         description={`At least ${MIN_PLAYERS} players to register, up to ${MAX_PLAYERS} on the team including the captain. All players must be ${MIN_AGE}+. Add more anytime before the tournament.`}
       >
         <RosterFields
+          rules={{ minPlayers: MIN_PLAYERS, maxPlayers: MAX_PLAYERS, minAge: MIN_AGE }}
           players={players}
           errors={errors}
           onChange={setPlayers}
@@ -264,7 +265,11 @@ export function RegistrationForm() {
       <FormSection
         step={5}
         title="Payment"
-        description="$250 per team. Pay by card now, or register first and pay at the desk."
+        description={
+          tournament.fee !== null
+            ? `$${tournament.fee} per team. Pay by card now, or register first and pay at the desk.`
+            : "Pay the team fee by card now (the amount is shown at checkout), or register first and pay at the desk."
+        }
       >
         <fieldset className="mb-3">
           <legend className="text-xs font-semibold text-neutral-700 mb-1.5">
@@ -280,7 +285,7 @@ export function RegistrationForm() {
             <PaymentRadio
               checked={paymentMethod === "pay_online"}
               onChange={() => setPaymentMethod("pay_online")}
-              title="Pay $250 by card now"
+              title={`Pay ${fee} by card now`}
               hint="Secure checkout on the next screen — locks your spot the moment it clears."
             />
           </div>
@@ -297,13 +302,17 @@ export function RegistrationForm() {
           <span>
             As captain I accept the tournament waiver and the{" "}
             <Link
-              href="/terms"
+              href="/terms#tournaments"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-accent hover:text-accent-hover underline underline-offset-2"
             >
               tournament terms
             </Link>{" "}
-            for my team. Players I list with an email will be asked to sign their own waiver in the
-            app; everyone else signs at check-in.
+            (including the assumption of risk, release of liability, indemnity, and arbitration
+            clause) for myself and my team. Players I list with an email will be asked to sign their
+            own waiver in the app; everyone else signs at check-in. Entry fees are non-refundable
+            after the registration deadline.
           </span>
         </label>
         {errors.terms && (
@@ -419,14 +428,14 @@ function PaymentRadio({
 
 // ─── Success screen ────────────────────────────────────────────────
 
-function SuccessScreen({ success }: { success: SuccessState }) {
+function SuccessScreen({ success, tournament }: { success: SuccessState; tournament: TournamentConfig }) {
   return (
     <div className="bg-white rounded-2xl border border-secondary/30 p-6 md:p-10 text-center">
       <div className="mx-auto w-14 h-14 rounded-full bg-secondary/10 flex items-center justify-center mb-5">
         <CheckCircle2 className="h-7 w-7 text-secondary" aria-hidden="true" />
       </div>
       <h2 className="font-display text-2xl md:text-3xl font-bold text-neutral-900 mb-3 text-balance">
-        You&apos;re registered for the Fall Smash Cup!
+        You&apos;re registered for the {tournament.shortName}!
       </h2>
       <p className="text-neutral-600 mb-6 max-w-lg mx-auto">
         We&apos;ve saved your team. Use the registration ID below if you contact us about your
@@ -436,7 +445,12 @@ function SuccessScreen({ success }: { success: SuccessState }) {
       <RegistrationIdBox id={success.id} />
 
       {success.paymentChoice === "later" && (
-        <PayNowBox reference={success.id} email={success.email} amountDue={success.amountDue} />
+        <PayNowBox
+          reference={success.id}
+          email={success.email}
+          amountDue={success.amountDue}
+          apiBase={tournament.apiBase}
+        />
       )}
 
       <div className="mt-6 bg-neutral-50 border border-neutral-200 rounded-xl p-5 text-left max-w-lg mx-auto">
@@ -448,7 +462,7 @@ function SuccessScreen({ success }: { success: SuccessState }) {
               A confirmation is on its way to{" "}
               <span className="font-mono text-neutral-900">{success.email}</span>
               {success.paymentChoice === "later" ? (
-                <> with your reference. Pay ${success.amountDue.toFixed(0)} at the desk (cash, Venmo, Zelle or card) before registration closes, or use the card button above.</>
+                <> with your reference. Pay {success.amountDue > 0 ? `$${success.amountDue.toFixed(0)}` : "the team fee"} at the desk (cash, Venmo, Zelle or card) before registration closes, or use the card button above.</>
               ) : (
                 <>. Your spot is confirmed.</>
               )}
@@ -468,7 +482,7 @@ function SuccessScreen({ success }: { success: SuccessState }) {
           <li className="flex items-start gap-2">
             <span className="text-accent mt-0.5">3.</span>
             <span>
-              Pool seedings and your check-in time go out the week of October 24. On game day,
+              Pool seedings and your check-in time go out the week of the tournament. On game day,
               scores and the bracket are live at{" "}
               <Link
                 href="/smash-cup/live"
@@ -483,7 +497,7 @@ function SuccessScreen({ success }: { success: SuccessState }) {
       </div>
       <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
         <Button asChild variant="outline">
-          <Link href="/events/volleyball-tournament">Back to tournament page</Link>
+          <Link href={tournament.eventHref}>Back to tournament page</Link>
         </Button>
         <Button asChild variant="outline">
           <a href={`${APP.web}/tournaments`}>Open the LevelUP app</a>
@@ -494,14 +508,14 @@ function SuccessScreen({ success }: { success: SuccessState }) {
 }
 
 /** A held team paying by card after all: the same hosted Checkout, re-issued for this registration. */
-function PayNowBox({ reference, email, amountDue }: { reference: string; email: string; amountDue: number }) {
+function PayNowBox({ reference, email, amountDue, apiBase }: { reference: string; email: string; amountDue: number; apiBase: string }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const payNow = async () => {
     setBusy(true);
     setError(null);
     try {
-      const res = await fetch("/api/tournaments/smash-cup/checkout-link", {
+      const res = await fetch(`${apiBase}/checkout-link`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ reference, email }),
@@ -521,7 +535,7 @@ function PayNowBox({ reference, email, amountDue }: { reference: string; email: 
   return (
     <div className="mt-6 bg-accent/5 border border-accent/30 rounded-xl p-5 text-left max-w-lg mx-auto">
       <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent mb-2">Changed your mind?</p>
-      <h3 className="font-display text-lg font-bold text-neutral-900 mb-2">Pay ${amountDue.toFixed(0)} by card now</h3>
+      <h3 className="font-display text-lg font-bold text-neutral-900 mb-2">Pay {amountDue > 0 ? `$${amountDue.toFixed(0)}` : "your team fee"} by card now</h3>
       <p className="text-sm text-neutral-600 mb-4 leading-relaxed">
         Your team is held either way. Paying by card locks the spot the moment it clears.
       </p>

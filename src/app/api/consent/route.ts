@@ -13,7 +13,7 @@ export async function POST(request: Request) {
 
   try {
     const body = await request.json();
-    const { type, name, email, phone, isMinor, guardianName } = body;
+    const { type, name, email, phone, isMinor, guardianName, waiverVersion } = body;
 
     if (!type || !VALID_TYPES.includes(type)) {
       return NextResponse.json({ error: "Invalid consent type" }, { status: 400 });
@@ -31,6 +31,7 @@ export async function POST(request: Request) {
     const record = {
       id: `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
       type,
+      waiverVersion: typeof waiverVersion === "string" ? waiverVersion.slice(0, 20) : undefined,
       name: name.trim(),
       email: email.trim().toLowerCase(),
       phone: phone?.trim() || "",

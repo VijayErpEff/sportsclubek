@@ -449,6 +449,17 @@ export default function HomePage() {
               </Link>
             </p>
           </Reveal>
+          <Reveal delay={0.4}>
+            <p className="text-center text-sm text-neutral-500 mt-2">
+              Friday, November 6:{" "}
+              <Link
+                href="/events/cricket-league"
+                className="text-accent hover:text-accent-hover font-semibold"
+              >
+                LPCL Kick Off — Premier Cricket League, $850/team, $1,000 to the winners &rarr;
+              </Link>
+            </p>
+          </Reveal>
         </Container>
       </Section>
 

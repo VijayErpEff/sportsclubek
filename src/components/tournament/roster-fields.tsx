@@ -14,29 +14,34 @@ export interface PlayerInput {
   isCaptain?: boolean;
 }
 
-export const MIN_PLAYERS = 4;
-export const MAX_PLAYERS = 8;
+export interface RosterRules {
+  minPlayers: number;
+  /** Counts the captain, as the app does. */
+  maxPlayers: number;
+  minAge: number;
+}
 
 /**
  * How many are on the team as the app counts it: every listed player plus the captain, unless the
- * captain is on the list already. The app's team size (4–8) includes the captain.
+ * captain is on the list already. The app's team size includes the captain.
  */
 export function teamTotal(players: PlayerInput[]): number {
   return players.length + (players.some((p) => p.isCaptain) ? 0 : 1);
 }
-export const MIN_AGE = 16;
 
 export function emptyPlayer(): PlayerInput {
   return { name: "", age: "", email: "", phone: "" };
 }
 
 interface RosterFieldsProps {
+  rules: RosterRules;
   players: PlayerInput[];
   errors: Record<string, string>;
   onChange: (players: PlayerInput[]) => void;
 }
 
-export function RosterFields({ players, errors, onChange }: RosterFieldsProps) {
+export function RosterFields({ rules, players, errors, onChange }: RosterFieldsProps) {
+  const { minPlayers: MIN_PLAYERS, maxPlayers: MAX_PLAYERS, minAge: MIN_AGE } = rules;
   const updatePlayer = (idx: number, patch: Partial<PlayerInput>) => {
     // One captain: ticking "that's me" on a row clears it on every other row.
     const next = players.map((p, i) =>
@@ -93,6 +98,7 @@ export function RosterFields({ players, errors, onChange }: RosterFieldsProps) {
             key={idx}
             idx={idx}
             player={p}
+            minAge={MIN_AGE}
             errors={errors}
             canRemove={players.length > MIN_PLAYERS}
             onUpdate={(patch) => updatePlayer(idx, patch)}
@@ -107,6 +113,7 @@ export function RosterFields({ players, errors, onChange }: RosterFieldsProps) {
 function PlayerRow({
   idx,
   player,
+  minAge,
   errors,
   canRemove,
   onUpdate,
@@ -114,6 +121,7 @@ function PlayerRow({
 }: {
   idx: number;
   player: PlayerInput;
+  minAge: number;
   errors: Record<string, string>;
   canRemove: boolean;
   onUpdate: (patch: Partial<PlayerInput>) => void;
@@ -158,7 +166,7 @@ function PlayerRow({
             name={`players.${idx}.age`}
             type="number"
             inputMode="numeric"
-            min={MIN_AGE}
+            min={minAge}
             max={99}
             required
             value={player.age}

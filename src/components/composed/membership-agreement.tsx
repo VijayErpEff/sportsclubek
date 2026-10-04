@@ -167,10 +167,14 @@ export function MembershipAgreement() {
                 </div>
 
                 <div>
-                  <p className="font-semibold text-neutral-900">6. Assumption of Risk &amp; Waiver</p>
+                  <p className="font-semibold text-neutral-900">6. Assumption of Risk, Release &amp; Indemnity</p>
                   <ul className="list-disc pl-5 mt-1 space-y-1">
-                    <li>Participation in sports and fitness activities involves inherent risks, including injury.</li>
-                    <li>By signing this Agreement, Member voluntarily assumes all risks and agrees that LevelUP Sports &amp; Athletics Club, its owners, staff, and affiliates are not liable for personal injury, accidents, or loss of property.</li>
+                    <li>Sports and fitness activities are dangerous and involve inherent and other risks that cannot be eliminated, including serious injury, permanent disability, and death. Member voluntarily and knowingly assumes all such risks, including risks caused by the condition of the premises or equipment, by other members and guests, and by the ordinary negligence of the Club.</li>
+                    <li><strong>To the fullest extent permitted by Maryland law, Member releases, waives, and covenants not to sue Elite Power Sports LLC d/b/a LevelUP Sports &amp; Athletics Club and its owners, staff, coaches, contractors, affiliates, and insurers (the &ldquo;Released Parties&rdquo;) from any claim for personal injury, illness, death, or loss of or damage to property arising from membership, use of the premises, or any activity, including claims based on the Released Parties&rsquo; ordinary negligence.</strong></li>
+                    <li>Member agrees to defend, indemnify, and hold harmless the Released Parties, including attorney&rsquo;s fees, from any claim arising from Member&rsquo;s or Member&rsquo;s guests&rsquo; participation, presence, or conduct, or from any injury or damage they suffer or cause.</li>
+                    <li>Member authorizes emergency medical care at Member&rsquo;s expense, carries their own health and accident insurance, and acknowledges the Club does not insure members. The Club is not responsible for lost, stolen, or damaged property or vehicles.</li>
+                    <li>The Club&rsquo;s total liability to Member for any claim is limited to the dues Member paid for the billing period in which the claim arose, and the Club is never liable for indirect, consequential, or punitive damages.</li>
+                    <li>The full assumption of risk, release, indemnity, medical authorization, and media consent in the Club&rsquo;s Liability Waiver and Terms of Service (levelupsports.us/terms) are incorporated into this Agreement.</li>
                   </ul>
                 </div>
 
@@ -191,13 +195,13 @@ export function MembershipAgreement() {
                 </div>
 
                 <div>
-                  <p className="font-semibold text-neutral-900">9. Governing Law</p>
-                  <p className="mt-1">This Agreement shall be governed by and construed under the laws of the State of Maryland.</p>
+                  <p className="font-semibold text-neutral-900">9. Governing Law &amp; Disputes</p>
+                  <p className="mt-1">This Agreement is governed by the laws of the State of Maryland. Any dispute is subject to the binding individual arbitration, class-action and jury-trial waiver, one-year claim limit, and Cecil County venue in the Club&rsquo;s Terms of Service. If any provision is unenforceable, the rest of this Agreement remains in effect.</p>
                 </div>
 
                 <div>
                   <p className="font-semibold text-neutral-900">10. Acknowledgment &amp; Agreement</p>
-                  <p className="mt-1">By signing below, Member acknowledges that they have read, understood, and agree to all terms of this Membership Agreement.</p>
+                  <p className="mt-1">By signing below, Member acknowledges that they have read and understood this entire Agreement and the Terms of Service, that they are giving up legal rights including the right to sue, and that submitting this form is their electronic signature.</p>
                 </div>
               </div>
 

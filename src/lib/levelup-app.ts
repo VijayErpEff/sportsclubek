@@ -4,11 +4,14 @@
 // front door. These run inside Next API routes only — the site key must never
 // reach the browser.
 //
-// Env (Netlify → Site settings → Environment variables):
-//   LEVELUP_APP_API_BASE   e.g. https://app.levelupsports.us
-//   LEVELUP_PUBLIC_SITE_KEY  the value of PublicSite:ApiKey on that server
-//   LEVELUP_SMASH_CUP_TOURNAMENT_ID  the tournament's id in the app
+// Env (host → Environment variables):
+//   LEVELUP_APP_API_BASE             e.g. https://app.levelupsports.us
+//   LEVELUP_PUBLIC_SITE_KEY          the value of PublicSite:ApiKey on that server
+//   LEVELUP_SMASH_CUP_TOURNAMENT_ID  the Smash Cup's id in the app
+//   LEVELUP_LPCL_TOURNAMENT_ID       the LPCL Kick Off's id in the app (defaults to 2)
 // ============================================================
+
+import type { TournamentSlug } from "@/lib/constants/tournaments";
 
 export interface AppCallResult<T> {
   ok: boolean;
@@ -24,10 +27,34 @@ function config() {
   return { base, key, configured: !!base && !!key };
 }
 
-export const SMASH_CUP_TOURNAMENT_ID = Number(process.env.LEVELUP_SMASH_CUP_TOURNAMENT_ID || 0);
+/** Env var that holds each tournament's id in the app, plus a default where one is known. */
+const TOURNAMENT_ID_ENV: Record<TournamentSlug, { name: string; fallback?: string }> = {
+  "smash-cup": { name: "LEVELUP_SMASH_CUP_TOURNAMENT_ID" },
+  lpcl: { name: "LEVELUP_LPCL_TOURNAMENT_ID", fallback: "2" },
+};
 
-export function appConfigured(): boolean {
-  return config().configured && SMASH_CUP_TOURNAMENT_ID > 0;
+/** The tournament's id in the app, or 0 when unset. */
+export function appTournamentId(slug: TournamentSlug): number {
+  const { name, fallback } = TOURNAMENT_ID_ENV[slug];
+  return Number(process.env[name] || fallback || 0);
+}
+
+export function appConfigured(slug: TournamentSlug): boolean {
+  const { configured } = config();
+  const id = appTournamentId(slug);
+  const ok = configured && id > 0;
+  if (!ok) {
+    // Names only, never values: this line is what the function log shows when the bridge
+    // answers "not open right now", so the missing variable can be named instead of guessed.
+    const { name } = TOURNAMENT_ID_ENV[slug];
+    const missing = [
+      !process.env.LEVELUP_APP_API_BASE && "LEVELUP_APP_API_BASE",
+      !process.env.LEVELUP_PUBLIC_SITE_KEY && "LEVELUP_PUBLIC_SITE_KEY",
+      !(id > 0) && `${name} (read as "${process.env[name] ?? ""}")`,
+    ].filter(Boolean);
+    console.warn(`[levelup-app] registration bridge not configured for ${slug}; missing: ${missing.join(", ") || "nothing — check scopes"}`);
+  }
+  return ok;
 }
 
 export async function callApp<T>(

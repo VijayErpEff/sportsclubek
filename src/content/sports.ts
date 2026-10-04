@@ -153,6 +153,12 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     ],
     programs: [
       {
+        title: "LPCL Kick Off — Nov 6",
+        description: "LevelUP Premier Cricket League opening night. Friday, November 6 from 5 PM. $850 per team. Trophies for winners and runners-up, $1,000 and $500 cash prizes. Registrations open now.",
+        href: "/events/cricket-league",
+        tag: "League",
+      },
+      {
         title: "Cricket Cage Rentals",
         description: "Book indoor net time for batting and bowling practice. Full pitch $180/hr, half pitch $90/hr, or single cage $40/hr. Bowling machines available for solo training.",
         href: "/cricket-cage-rentals",

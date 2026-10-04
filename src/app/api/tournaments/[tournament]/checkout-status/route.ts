@@ -1,10 +1,13 @@
 import { NextResponse } from "next/server";
 import { appConfigured, callApp } from "@/lib/levelup-app";
+import { isTournamentSlug } from "@/lib/constants/tournaments";
 
 // What the "paid" page shows when Stripe sends the captain back. The app settles on the spot when
 // the page beats the webhook, so "Unpaid" here means Stripe has not confirmed yet — poll once more.
-export async function GET(request: Request) {
-  if (!appConfigured()) return NextResponse.json({ error: "Not configured." }, { status: 503 });
+export async function GET(request: Request, ctx: { params: Promise<{ tournament: string }> }) {
+  const { tournament: slug } = await ctx.params;
+  if (!isTournamentSlug(slug)) return NextResponse.json({ error: "Unknown tournament" }, { status: 404 });
+  if (!appConfigured(slug)) return NextResponse.json({ error: "Not configured." }, { status: 503 });
   const sessionId = new URL(request.url).searchParams.get("session_id")?.trim();
   if (!sessionId || !/^cs_[A-Za-z0-9_]+$/.test(sessionId)) return NextResponse.json({ error: "Missing checkout session." }, { status: 400 });
   const result = await callApp<unknown>("GET", `/public/tournaments/checkout/${encodeURIComponent(sessionId)}`);

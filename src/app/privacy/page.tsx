@@ -43,7 +43,7 @@ export default function PrivacyPage() {
             Privacy Policy
           </h1>
           <p className="text-neutral-500 text-sm">
-            Last updated: April 8, 2026
+            Last updated: October 3, 2026
           </p>
         </Container>
       </section>
@@ -127,7 +127,19 @@ export default function PrivacyPage() {
                   collects its own download and device data under its own policy.
                 </li>
                 <li>
-                  <strong>Vercel</strong> — website hosting and content delivery.
+                  <strong>Stripe</strong> — card payments for tournament entries and in the LevelUP
+                  app. Stripe receives your card details directly; we never see or store full card
+                  numbers. See{" "}
+                  <a href="https://stripe.com/privacy" target="_blank" rel="noopener noreferrer" className="text-accent hover:text-accent-hover">
+                    Stripe&rsquo;s Privacy Policy
+                  </a>.
+                </li>
+                <li>
+                  <strong>Azure Communication Services</strong> — sends our transactional email
+                  (confirmations, waivers, receipts).
+                </li>
+                <li>
+                  <strong>Vercel / Netlify</strong> — website hosting and content delivery.
                 </li>
                 <li>
                   <strong>Google Maps</strong> — embedded maps on our contact and facilities pages.
@@ -152,7 +164,8 @@ export default function PrivacyPage() {
                 Data Security
               </h2>
               <p>
-                We implement appropriate technical and organizational measures to protect your personal information, including HTTPS encryption for all website traffic, secure hosting infrastructure, and access controls for staff. However, no method of electronic transmission or storage is 100% secure, and we cannot guarantee absolute security.
+                We implement appropriate technical and organizational measures to protect your personal information, including HTTPS encryption for all website traffic, secure hosting infrastructure, and access controls for staff. However, no method of electronic transmission or storage is 100% secure, and we cannot guarantee absolute security. To the fullest extent permitted by law, we are not liable for unauthorized access, loss, or disclosure of information that occurs despite these measures, including through a third-party service, and your use of our website and app is subject to the limitation of liability in our{" "}
+                <Link href="/terms#liability" className="text-accent hover:text-accent-hover">Terms of Service</Link>.
               </p>
             </section>
 

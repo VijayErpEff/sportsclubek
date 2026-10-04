@@ -6,13 +6,14 @@ import { AlertCircle, ArrowRight, KeyRound, LogIn } from "lucide-react";
 import { FloatingInput } from "@/components/ui/floating-input";
 import { Button } from "@/components/ui/button";
 import { APP } from "@/lib/constants/app";
+import { feeLabel, type TournamentConfig } from "@/lib/constants/tournaments";
 
 /**
  * Registrations live in the LevelUP app now. Rosters, the schedule and waivers are managed there
  * on the captain's account (the email they registered with). What this page still does for a team
  * that chose to pay at the desk: hand out a fresh card link for the reference in their email.
  */
-export function ManageClient() {
+export function ManageClient({ tournament }: { tournament: TournamentConfig }) {
   const params = useSearchParams();
   const cancelled = params.get("cancelled") === "1";
   const [reference, setReference] = useState("");
@@ -26,7 +27,7 @@ export function ManageClient() {
     if (!reference.trim() || !email.trim()) { setError("Enter your reference and the captain's email."); return; }
     setBusy(true);
     try {
-      const res = await fetch("/api/tournaments/smash-cup/checkout-link", {
+      const res = await fetch(`${tournament.apiBase}/checkout-link`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ reference: reference.trim(), email: email.trim() }),
@@ -73,7 +74,7 @@ export function ManageClient() {
         {error && (
           <p className="text-sm text-error mt-3 flex items-start gap-2" role="alert"><AlertCircle className="h-4 w-4 mt-0.5 shrink-0" aria-hidden="true" />{error}</p>
         )}
-        <Button type="submit" size="lg" className="mt-4 w-full sm:w-auto" isLoading={busy}>Pay $250 by card</Button>
+        <Button type="submit" size="lg" className="mt-4 w-full sm:w-auto" isLoading={busy}>Pay {feeLabel(tournament)} by card</Button>
       </form>
     </div>
   );

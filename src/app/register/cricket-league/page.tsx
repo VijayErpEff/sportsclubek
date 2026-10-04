@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import { Suspense } from "react";
 import Link from "next/link";
 
 import { Section } from "@/components/layout/section";
@@ -7,21 +6,23 @@ import { Container } from "@/components/layout/container";
 import { Reveal } from "@/components/ui/reveal";
 import { generateSEOMetadata } from "@/lib/seo/metadata";
 import { SITE_CONFIG } from "@/lib/constants/site";
-
-import { ManageClient } from "@/components/tournament/manage-client";
 import { TOURNAMENTS } from "@/lib/constants/tournaments";
+import { RegistrationForm } from "@/components/tournament/registration-form";
+
+const T = TOURNAMENTS.lpcl;
 
 export const metadata: Metadata = {
   ...generateSEOMetadata({
-    title: "Manage Your Fall Smash Cup Registration",
+    title: "Register Your Team — LPCL Kick Off Cricket Tournament",
     description:
-      "Your LevelUP Smash Cup team: manage the roster in the LevelUP app, or pay your team fee by card with your registration reference.",
-    path: "/register/volleyball-tournament/manage",
+      "Register your team for the LevelUP Premier Cricket League Kick Off — Friday, November 6, 2026 in Elkton, MD. Indoor cricket, trophies, $1,000 and $500 cash prizes.",
+    path: T.registerHref,
   }),
-  robots: { index: false, follow: false },
+  // Registration funnel — keep crawl budget on the marketing page.
+  robots: { index: false, follow: true },
 };
 
-export default function ManagePage() {
+export default function CricketLeagueRegisterPage() {
   return (
     <>
       <Section className="pt-28 md:pt-32 pb-6 bg-gradient-to-b from-primary-dark to-primary text-white">
@@ -35,24 +36,35 @@ export default function ManagePage() {
               </li>
               <li className="text-white/30">/</li>
               <li>
-                <Link
-                  href="/events/volleyball-tournament"
-                  className="hover:text-white transition-colors"
-                >
-                  Smash Cup
+                <Link href={T.eventHref} className="hover:text-white transition-colors">
+                  LPCL Kick Off
                 </Link>
               </li>
               <li className="text-white/30">/</li>
-              <li className="text-white font-medium">Manage Registration</li>
+              <li className="text-white font-medium">Register</li>
             </ol>
           </nav>
           <Reveal>
+            <p className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.25em] text-white/80 bg-white/10 px-3 py-1.5 rounded-full mb-5 border border-white/15">
+              <span className="inline-block w-1.5 h-1.5 bg-secondary rounded-sm" aria-hidden="true" />
+              LevelUP Premier Cricket League · {T.dateLabel}
+            </p>
             <h1 className="font-display text-hero leading-[1.05] mb-3 text-balance">
-              Manage Your <span className="text-secondary">Registration</span>
+              Register Your <span className="text-secondary">Team</span>
             </h1>
             <p className="text-lg text-white/80 max-w-2xl">
-              Your roster, schedule and waivers live in the LevelUP app on your captain email. Chose
-              to pay at the desk and want to pay by card instead? Use your reference below.
+              Indoor cricket under the lights, Friday, November 6 from 5 PM. $850 per team. Lock your spot with
+              as few as {T.minPlayers} players, then build your squad to {T.maxPlayers} anytime
+              before kick off.
+            </p>
+            <p className="text-sm text-white/60 mt-4">
+              Already registered?{" "}
+              <Link
+                href={`${T.registerHref}/manage`}
+                className="underline underline-offset-2 hover:text-white transition-colors"
+              >
+                Manage your registration →
+              </Link>
             </p>
           </Reveal>
         </Container>
@@ -60,9 +72,9 @@ export default function ManagePage() {
 
       <Section size="lg">
         <Container className="max-w-3xl">
-          <Suspense fallback={null}><ManageClient tournament={TOURNAMENTS["smash-cup"]} /></Suspense>
+          <RegistrationForm tournament={T} />
           <p className="text-center text-xs text-neutral-500 mt-10">
-            Need a hand? Call{" "}
+            Questions? Call{" "}
             <a
               href={`tel:${SITE_CONFIG.phone}`}
               className="text-accent font-semibold hover:text-accent-hover"
@@ -75,8 +87,8 @@ export default function ManagePage() {
               className="text-accent font-semibold hover:text-accent-hover"
             >
               {SITE_CONFIG.email}
-            </a>{" "}
-            and we&apos;ll verify and reset.
+            </a>
+            .
           </p>
         </Container>
       </Section>

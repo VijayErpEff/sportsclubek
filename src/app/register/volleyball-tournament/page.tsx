@@ -7,7 +7,8 @@ import { Reveal } from "@/components/ui/reveal";
 import { generateSEOMetadata } from "@/lib/seo/metadata";
 import { SITE_CONFIG } from "@/lib/constants/site";
 
-import { RegistrationForm } from "./registration-form";
+import { RegistrationForm } from "@/components/tournament/registration-form";
+import { TOURNAMENTS } from "@/lib/constants/tournaments";
 
 export const metadata: Metadata = {
   ...generateSEOMetadata({
@@ -73,7 +74,7 @@ export default function VolleyballRegisterPage() {
 
       <Section size="lg">
         <Container className="max-w-3xl">
-          <RegistrationForm />
+          <RegistrationForm tournament={TOURNAMENTS["smash-cup"]} />
           <p className="text-center text-xs text-neutral-500 mt-10">
             Questions? Call{" "}
             <a

@@ -160,7 +160,19 @@ export interface RegistrationInput {
   waiverAccepted: boolean;
 }
 
-export function validateRegistrationInput(input: RegistrationInput): ValidationResult {
+export interface RosterRules {
+  minPlayers: number;
+  /** Counts the captain, as the app does. */
+  maxPlayers: number;
+  minAge: number;
+}
+
+const DEFAULT_RULES: RosterRules = { minPlayers: MIN_ROSTER, maxPlayers: MAX_ROSTER, minAge: MIN_AGE };
+
+export function validateRegistrationInput(
+  input: RegistrationInput,
+  rules: RosterRules = DEFAULT_RULES
+): ValidationResult {
   const errors: Record<string, string> = {};
 
   // Team
@@ -192,17 +204,17 @@ export function validateRegistrationInput(input: RegistrationInput): ValidationR
   const players = Array.isArray(input.players) ? input.players : [];
   // The app counts the captain in the team size, so a captain not on the list is one more.
   const teamSize = players.length + (players.some((p) => p.isCaptain) ? 0 : 1);
-  if (players.length < MIN_ROSTER) {
-    errors.players = `Roster must have at least ${MIN_ROSTER} players.`;
-  } else if (teamSize > MAX_ROSTER) {
-    errors.players = `Up to ${MAX_ROSTER} on a team including the captain.`;
+  if (players.length < rules.minPlayers) {
+    errors.players = `Roster must have at least ${rules.minPlayers} players.`;
+  } else if (teamSize > rules.maxPlayers) {
+    errors.players = `Up to ${rules.maxPlayers} on a team including the captain.`;
   }
   players.forEach((p, idx) => {
     if (!p.name?.trim()) {
       errors[`players.${idx}.name`] = "Player name required.";
     }
-    if (typeof p.age !== "number" || p.age < MIN_AGE) {
-      errors[`players.${idx}.age`] = `Players must be ${MIN_AGE} or older.`;
+    if (typeof p.age !== "number" || p.age < rules.minAge) {
+      errors[`players.${idx}.age`] = `Players must be ${rules.minAge} or older.`;
     }
     if (p.email && !EMAIL_REGEX.test(p.email.trim())) {
       errors[`players.${idx}.email`] = "Invalid email.";

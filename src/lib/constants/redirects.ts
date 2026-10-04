@@ -40,6 +40,17 @@ export const REDIRECTS: RedirectEntry[] = [
     destination: appLink("/", "volleyball-tournament"),
   },
   {
+    // LPCL Kick Off — cricket league flyer links.
+    slug: "lpcl",
+    title: "LPCL Kick Off — LevelUP Premier Cricket League, Nov 6",
+    destination: "/events/cricket-league",
+  },
+  {
+    slug: "lpcl-register",
+    title: "Register — LPCL Kick Off, Nov 6",
+    destination: "/register/cricket-league",
+  },
+  {
     // Flyer / social short link — lands on the team registration form.
     slug: "volleyball-register",
     title: "Register — LevelUP Smash Cup Volleyball Tournament Oct 24",

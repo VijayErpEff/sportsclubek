@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { CheckCircle2, Clock, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { APP } from "@/lib/constants/app";
+import type { TournamentConfig } from "@/lib/constants/tournaments";
 
 interface Status {
   registrationId: number;
@@ -23,7 +24,7 @@ interface Status {
  * landed yet, so "Unpaid" is only ever a few seconds old — we ask again a handful of times before
  * telling the captain to check their email.
  */
-export function PaidClient() {
+export function PaidClient({ tournament }: { tournament: TournamentConfig }) {
   const params = useSearchParams();
   const sessionId = params.get("session_id");
   const [status, setStatus] = useState<Status | null>(null);
@@ -35,7 +36,7 @@ export function PaidClient() {
     let cancelled = false;
     const look = async () => {
       try {
-        const res = await fetch(`/api/tournaments/smash-cup/checkout-status?session_id=${encodeURIComponent(sessionId)}`, { cache: "no-store" });
+        const res = await fetch(`${tournament.apiBase}/checkout-status?session_id=${encodeURIComponent(sessionId)}`, { cache: "no-store" });
         const data = await res.json();
         if (cancelled) return;
         if (!res.ok) { setError(data.error || "We couldn't find that payment."); return; }
@@ -47,7 +48,7 @@ export function PaidClient() {
     };
     look();
     return () => { cancelled = true; };
-  }, [sessionId, attempts]);
+  }, [sessionId, attempts, tournament.apiBase]);
 
   if (error) {
     return (
@@ -55,7 +56,7 @@ export function PaidClient() {
         <AlertCircle className="mx-auto h-10 w-10 text-error mb-4" aria-hidden="true" />
         <h1 className="font-display text-2xl font-bold text-neutral-900 mb-2">Something went wrong</h1>
         <p className="text-neutral-600 mb-6">{error}</p>
-        <Button asChild variant="outline"><Link href="/register/volleyball-tournament/manage">Manage registration</Link></Button>
+        <Button asChild variant="outline"><Link href={`${tournament.registerHref}/manage`}>Manage registration</Link></Button>
       </div>
     );
   }
@@ -78,7 +79,7 @@ export function PaidClient() {
       <p className="inline-block bg-primary text-white rounded-xl px-5 py-3 font-mono text-lg mb-6">{status.reference}</p>
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
         <Button asChild><a href={`${APP.web}/tournaments`}>Manage your team in the app</a></Button>
-        <Button asChild variant="outline"><Link href="/events/volleyball-tournament">Back to tournament page</Link></Button>
+        <Button asChild variant="outline"><Link href={tournament.eventHref}>Back to tournament page</Link></Button>
       </div>
     </div>
   );
