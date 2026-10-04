@@ -18,14 +18,18 @@ const BELL_STORAGE_KEY = "lus_nav_subscribed";
 
 const APPLE_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
+// `secondary` items live in the mobile menu and the footer only. The desktop
+// bar is capped at the 1280px container, and with the Sports menu plus the
+// Sign In / Create Account / Book cluster there is no room for them without
+// running into the logo or the bell.
 const NAV_ITEMS = [
   { label: "Facilities", href: "/facilities" },
-  { label: "Court Status", href: "/court-status" },
+  { label: "Court Status", href: "/court-status", secondary: true },
   { label: "Memberships", href: "/memberships" },
   { label: "Events", href: "/events" },
   { label: "Parties", href: "/birthday-parties" },
   { label: "Schedule", href: "/schedule" },
-  { label: "About", href: "/about" },
+  { label: "About", href: "/about", secondary: true },
 ];
 
 export function Navbar() {
@@ -203,7 +207,8 @@ export function Navbar() {
 
               {NAV_ITEMS.map((item) => (
                 <Link key={item.label} href={item.href}
-                  className={cn("px-3 py-2 text-sm font-medium rounded-lg whitespace-nowrap transition-colors",
+                  className={cn("px-2.5 2xl:px-3 py-2 text-sm font-medium rounded-lg whitespace-nowrap transition-colors",
+                    item.secondary ? "hidden" : "inline-flex",
                     pathname === item.href ? "text-primary bg-primary/5" : "text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50"
                   )}>
                   {item.label}
