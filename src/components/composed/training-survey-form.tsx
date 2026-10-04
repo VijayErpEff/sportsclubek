@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils/cn";
 import { Check, ArrowLeft, ArrowRight, Loader2, User, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SPORTS } from "@/lib/constants/site";
+import { ConsentNotice } from "@/components/composed/consent-notice";
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -572,6 +573,7 @@ export function TrainingSurveyForm() {
                     />
                   </div>
                 </div>
+                <ConsentNotice sms marketing />
               </div>
 
               {status === "error" && (

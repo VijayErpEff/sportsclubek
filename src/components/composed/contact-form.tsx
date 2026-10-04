@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { CheckCircle, Loader2 } from "lucide-react";
+import { ConsentNotice } from "@/components/composed/consent-notice";
 
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -156,6 +157,7 @@ export function ContactForm() {
           "Send Message"
         )}
       </button>
+      <ConsentNotice sms />
     </form>
   );
 }

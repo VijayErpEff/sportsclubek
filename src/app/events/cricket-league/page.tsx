@@ -117,7 +117,12 @@ const FAQS = [
   {
     question: "What does it cost to enter a team?",
     answer:
-      "$850 per team. One fee covers the whole squad for the night — pay by card when you register, or register now and pay at the desk before the deadline. Entry fees are non-refundable after registration closes.",
+      "$850 per team. One fee covers the whole squad for the night — pay by card when you register, or register now and pay at the desk before the deadline.",
+  },
+  {
+    question: "What if we need to withdraw?",
+    answer:
+      "Withdraw in writing before registration closes on November 3, 2026 and your entry fee is credited to your account, less a $25 administrative fee. After the deadline, and once fixtures are posted, entry fees are non-refundable. If we cancel the event, entry fees are refunded in full.",
   },
   {
     question: "What are the prizes?",

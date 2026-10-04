@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils/cn";
 import { Button } from "@/components/ui/button";
 import { SPORTS } from "@/lib/constants/site";
 import { captureLead } from "@/lib/leads";
+import { ConsentNotice } from "@/components/composed/consent-notice";
 
 const STORAGE_KEY = "lus_sport_pref";
 const DISMISSED_KEY = "lus_sport_pref_dismissed";
@@ -282,6 +283,7 @@ export function SportPreference() {
                       <>Let&apos;s Go <ArrowRight className="h-4 w-4 ml-1" /></>
                     )}
                   </Button>
+                  <ConsentNotice sms marketing className="mt-3" />
 
                   <button
                     onClick={handleSkip}

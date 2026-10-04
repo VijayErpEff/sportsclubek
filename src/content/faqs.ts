@@ -47,7 +47,7 @@ export const HOMEPAGE_FAQS = [
   {
     question: "What is the cancellation policy at LevelUP Sports?",
     answer:
-      "Court and cage rentals can be cancelled up to 24 hours in advance for a full refund. Cancellations within 24 hours can be rescheduled to another available slot but are not refundable. Memberships can be cancelled anytime with 30 days' notice — no cancellation fees, no contracts. We also allow membership freezes for up to 2 months per year at no cost.",
+      "Court and cage rentals can be cancelled in the LevelUP app up to 24 hours in advance for a credit to your account. Cancellations within 24 hours and no-shows forfeit the fee. Monthly memberships can be cancelled anytime with notice before your next billing date — no cancellation fee, no contract. We also allow membership freezes for up to 2 months per year at no cost.",
   },
   {
     question: "Is LevelUP Sports near Wilmington, Delaware?",
@@ -103,7 +103,7 @@ export const MEMBERSHIP_FAQS = [
   {
     question: "Can I cancel my membership at any time?",
     answer:
-      "Yes. All memberships can be cancelled with 30 days' notice. No long-term contracts, no cancellation fees. We want you here because you love it, not because you're locked in.",
+      "Yes. Monthly memberships can be cancelled anytime with written notice at least 7 days before your next billing date — no cancellation fee, no long-term contract. Your access continues to the end of the period you've paid for; fees already paid aren't refunded. We want you here because you love it, not because you're locked in.",
   },
   {
     question: "Can I freeze my membership temporarily?",

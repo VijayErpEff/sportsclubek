@@ -79,7 +79,7 @@ export function CookieConsent() {
           <div className="mx-auto max-w-5xl">
             <div className="flex items-start justify-between gap-2 mb-3 sm:mb-0">
               <p id="cookie-description" className="text-sm text-neutral-600 flex-1">
-                We use cookies to improve your experience.
+                We use cookies to improve your experience. See our <a href="/privacy" className="underline underline-offset-2 hover:text-neutral-900">Privacy Policy</a>.
               </p>
               <button
                 onClick={handleRejectAll}

@@ -75,10 +75,12 @@ export default function PrivacyPage() {
                 <li>Sign up for a membership</li>
                 <li>Fill out a contact form, tour request, or survey</li>
                 <li>Subscribe to our newsletter or training guide</li>
-                <li>Register for an event such as our Open House</li>
+                <li>Register yourself or a team for a tournament, league, camp, open house, or other event</li>
+                <li>Sign a liability waiver, membership agreement, or consent form</li>
+                <li>Apply for a job</li>
               </ul>
               <p className="mt-3">
-                This may include your name, email address, phone number, and payment information. Bookings and payments are handled in the LevelUP Sports &amp; Athletics app and its payment processors — we do not store credit card numbers on our servers.
+                This may include your name, email address, phone number, date of birth or age, emergency contact, team and roster details, survey answers, and payment information. For minors, we collect this from a parent or guardian. Bookings and payments are handled in the LevelUP Sports &amp; Athletics app and its payment processor (Stripe) — we never see or store full card numbers.
               </p>
 
               <h3 className="font-semibold text-neutral-900 mt-4 mb-2">Information Collected Automatically</h3>
@@ -171,10 +173,36 @@ export default function PrivacyPage() {
 
             <section>
               <h2 className="font-display text-lg font-bold text-neutral-900 mb-3">
+                Email, Text Message &amp; Call Consent
+              </h2>
+              <p>
+                When you give us your email on a form, you agree to receive emails from us about your inquiry, bookings, and account, and — where the form says so — our newsletter and offers. Every marketing email has an unsubscribe link.
+              </p>
+              <p className="mt-3">
+                When you give us your phone number, you consent to receive calls and text messages from LevelUP Sports at that number, including automated or pre-recorded messages, about your inquiry, bookings, programs, and offers. Consent is not a condition of any purchase. Message and data rates may apply; message frequency varies. Reply <strong>STOP</strong> to any text to opt out and <strong>HELP</strong> for help, or email{" "}
+                <a href={`mailto:${SITE_CONFIG.email}`} className="text-accent hover:text-accent-hover">{SITE_CONFIG.email}</a>.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="font-display text-lg font-bold text-neutral-900 mb-3">
+                Where Your Information Is Stored &amp; How Long We Keep It
+              </h2>
+              <ul className="list-disc pl-5 space-y-1">
+                <li>Form submissions, leads, survey answers, and newsletter sign-ups are stored in our hosted database (Upstash Redis) and may be copied to a private Google Sheet used by our staff to follow up.</li>
+                <li>Accounts, bookings, memberships, rosters, and payment records are stored in the LevelUP app. Card details are held only by Stripe.</li>
+                <li>Signed waivers, consents, and membership agreements are kept with the version of the text you agreed to, the date and time, and your IP address, so we can prove what was agreed.</li>
+                <li>We keep leads and marketing data until you ask us to delete it or it has been inactive for 3 years. We keep booking, payment, and account records for 7 years for tax and accounting purposes. We keep signed waivers and consents for at least 5 years after your last visit — and, for a minor, until 3 years after they turn 18 — because that is how long a claim could be brought.</li>
+                <li>We may keep information longer where the law requires or where it is needed for a dispute.</li>
+              </ul>
+            </section>
+
+            <section>
+              <h2 className="font-display text-lg font-bold text-neutral-900 mb-3">
                 Children&rsquo;s Privacy
               </h2>
               <p>
-                Our programs serve youth athletes ages 5 and up. We collect personal information about minors only with parental or guardian consent, typically through the membership or enrollment process. Parents and guardians may contact us at any time to review, update, or request deletion of their child&rsquo;s information.
+                Our programs serve youth athletes ages 5 and up. Our website and app are not directed to children under 13, and we do not knowingly collect information online directly from a child under 13. Information about a minor (name, age, emergency contact, medical notes relevant to participation, photos) is collected from and with the consent of a parent or legal guardian through membership, enrollment, waiver, or event registration. Parents and guardians may contact us at any time to review, update, or request deletion of their child&rsquo;s information. If you believe a child under 13 has given us information directly, email us and we will delete it.
               </p>
             </section>
 
@@ -189,7 +217,11 @@ export default function PrivacyPage() {
                 <li>Request deletion of your personal information</li>
                 <li>Opt out of marketing communications at any time</li>
                 <li>Withdraw consent where processing is based on consent</li>
+                <li>Opt out of the use of your photo or likeness in future marketing (we cannot recall material already published)</li>
               </ul>
+              <p className="mt-3">
+                We do not sell personal information, and we do not share it with third parties for their own targeted advertising. Residents of Maryland and other states with privacy laws may exercise the rights those laws give them by contacting us; we will verify your identity before acting on a request and respond within the time the law requires. You will not be treated differently for exercising a right.
+              </p>
               <p className="mt-3">
                 To exercise any of these rights, contact us at{" "}
                 <a href={`mailto:${SITE_CONFIG.email}`} className="text-accent hover:text-accent-hover">

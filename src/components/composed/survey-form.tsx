@@ -7,6 +7,7 @@ import { Check, ArrowLeft, ArrowRight, Loader2, User, Phone, Mail } from "lucide
 import { Button } from "@/components/ui/button";
 import { SPORTS } from "@/lib/constants/site";
 import { captureLead } from "@/lib/leads";
+import { ConsentNotice } from "@/components/composed/consent-notice";
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -580,6 +581,7 @@ export function SurveyForm() {
                     />
                   </div>
                 </div>
+                <ConsentNotice sms marketing />
               </div>
 
               {status === "error" && (

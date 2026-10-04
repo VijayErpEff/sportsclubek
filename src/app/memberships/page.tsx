@@ -92,7 +92,7 @@ export default function MembershipsPage() {
         <Container>
           <PricingSection />
           <p className="text-center text-sm text-neutral-400 mt-6">
-            All plans include 30-day cancellation. No long-term contracts.
+            Monthly plans, no long-term contracts. Cancel anytime with notice before your next billing date — access runs to the end of the paid period. See our <Link href="/terms#memberships" className="underline underline-offset-2 hover:text-neutral-600">membership terms</Link>.
           </p>
         </Container>
       </div>

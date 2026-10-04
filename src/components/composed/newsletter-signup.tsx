@@ -4,6 +4,7 @@ import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
 import { trackNewsletterSignup } from "@/lib/analytics";
+import { ConsentNotice } from "@/components/composed/consent-notice";
 
 export function NewsletterSignup() {
   const [email, setEmail] = useState("");
@@ -72,6 +73,7 @@ export function NewsletterSignup() {
           {errorMessage}
         </p>
       )}
+      <ConsentNotice marketing className="mt-2" />
     </form>
   );
 }

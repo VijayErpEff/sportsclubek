@@ -5,6 +5,7 @@ import { CheckCircle, Loader2, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 import { SPORTS } from "@/lib/constants/site";
 import { captureLead } from "@/lib/leads";
+import { ConsentNotice } from "@/components/composed/consent-notice";
 
 const STORAGE_KEY = "lus_homepage_subscribed";
 
@@ -115,6 +116,7 @@ export function HomepageLeadCapture() {
                   )}
                 </button>
               </div>
+              <ConsentNotice marketing className="mt-3" />
             </form>
           </div>
         )}

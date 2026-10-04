@@ -84,7 +84,7 @@ const SCHEDULE = [
     time: "11:00 AM",
     title: "Pool Play",
     description:
-      "First serve at 11. Every team is guaranteed multiple pool matches. Pools are seeded after registration closes.",
+      "First serve at 11. Every team is scheduled for multiple pool matches. Pools are seeded after registration closes.",
   },
   {
     time: "Afternoon",
@@ -141,12 +141,12 @@ const FAQS = [
   {
     question: "What does the $250 entry fee cover?",
     answer:
-      "$250 per team covers all matches, court time, officials, awards, and gym access for the full day. Each team is guaranteed multiple pool-play matches plus playoff matches if they advance.",
+      "$250 per team covers all matches, court time, officials, awards, and gym access for the full day. Each team is scheduled for multiple pool-play matches plus playoff matches if they advance.",
   },
   {
     question: "What's the format — 6v6 indoor with pools and playoffs?",
     answer:
-      "Yes — 6v6 indoor volleyball on regulation nets, all in one day. The morning is round-robin pool play (every team is guaranteed multiple matches). Top teams from each pool advance to single-elimination playoffs in the afternoon, with the final and awards in the evening.",
+      "Yes — 6v6 indoor volleyball on regulation nets, all in one day. The morning is round-robin pool play (every team is scheduled for multiple matches). Top teams from each pool advance to single-elimination playoffs in the afternoon, with the final and awards in the evening.",
   },
   {
     question: "Who can play? Is it co-ed?",
@@ -171,7 +171,7 @@ const FAQS = [
   {
     question: "What if I need to cancel after registering?",
     answer:
-      "Refunds in full are available up to 14 days before the tournament (through October 10, 2026). Inside 14 days, refunds are at the club's discretion. Email info@levelupsports.us or call (443) 406-6494 to cancel.",
+      "Withdraw in writing before registration closes on October 20, 2026 and your entry fee is credited to your account, less a $25 administrative fee. After the deadline, and once a schedule or bracket is posted, entry fees are non-refundable. If we cancel the event, entry fees are refunded in full. Email info@levelupsports.us to withdraw.",
   },
   {
     question: "Where exactly is the tournament held?",
@@ -633,7 +633,7 @@ export default function VolleyballTournamentPage() {
                   How the Day Runs
                 </h2>
                 <p className="text-neutral-600 mb-6">
-                  First serve at 11 AM. Pool play guarantees every team multiple matches, then
+                  First serve at 11 AM. Pool play gives every team multiple matches, then
                   the top teams move into single-elimination playoffs, capped by the final and
                   awards. Exact bracket times go to captains the week of the tournament.
                 </p>

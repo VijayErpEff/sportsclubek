@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils/cn";
 import { Check, ArrowLeft, ArrowRight, Loader2, User, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { captureLead } from "@/lib/leads";
+import { ConsentNotice } from "@/components/composed/consent-notice";
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -480,6 +481,7 @@ export function CampSurveyForm() {
                     />
                   </div>
                 </div>
+                <ConsentNotice sms marketing />
 
                 <div>
                   <label htmlFor="camp-feedback" className="block text-sm font-medium text-neutral-700 mb-1">
