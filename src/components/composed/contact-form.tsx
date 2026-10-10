@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { trackLead } from "@/lib/analytics";
 import { CheckCircle, Loader2 } from "lucide-react";
 import { ConsentNotice } from "@/components/composed/consent-notice";
 
@@ -32,6 +33,7 @@ export function ContactForm() {
         const body = await res.json().catch(() => ({}));
         throw new Error(body.error || "Request failed");
       }
+      trackLead("contact_form");
       setStatus("success");
     } catch (err) {
       setErrorMessage(

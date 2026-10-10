@@ -7,6 +7,7 @@ import { StickyBookCTA } from "@/components/composed/sticky-book-cta";
 import { MobileBottomNav } from "@/components/composed/mobile-bottom-nav";
 import { AnnouncementBanner } from "@/components/composed/announcement-banner";
 import { DeferredOverlays } from "@/components/composed/deferred-overlays";
+import { MetaPixel } from "@/components/composed/meta-pixel";
 import { Suspense } from "react";
 import { generateOrganizationLD } from "@/lib/seo/json-ld";
 import { SITE_CONFIG } from "@/lib/constants/site";
@@ -142,7 +143,9 @@ export default function RootLayout({
           <>
             <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`} />
             <script dangerouslySetInnerHTML={{
-              __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${process.env.NEXT_PUBLIC_GA_ID}');`
+              // Consent Mode v2: storage stays denied until the cookie banner grants it.
+              // Without consent GA sends cookieless pings only; MetaPixel applies later choices.
+              __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}var c={};try{var m=document.cookie.match(/(?:^|; )cookie-consent=([^;]*)/);if(m)c=JSON.parse(decodeURIComponent(m[1]))}catch(e){}var a=c.analytics?'granted':'denied',k=c.marketing?'granted':'denied';gtag('consent','default',{analytics_storage:a,ad_storage:k,ad_user_data:k,ad_personalization:k});gtag('js',new Date());gtag('config','${process.env.NEXT_PUBLIC_GA_ID}');`
             }} />
           </>
         )}
@@ -161,6 +164,7 @@ export default function RootLayout({
             <StickyBookCTA />
             <MobileBottomNav />
             <DeferredOverlays />
+            <MetaPixel />
           </AdminProvider>
         </Suspense>
       </body>

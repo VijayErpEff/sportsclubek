@@ -1,3 +1,5 @@
+import { trackLead } from "@/lib/analytics";
+
 export async function captureLead(data: {
   email: string;
   name?: string;
@@ -11,6 +13,7 @@ export async function captureLead(data: {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
+    if (res.ok) trackLead(data.source);
     return res.ok;
   } catch {
     return false;

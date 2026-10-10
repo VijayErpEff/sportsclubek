@@ -43,7 +43,7 @@ export default function PrivacyPage() {
             Privacy Policy
           </h1>
           <p className="text-neutral-500 text-sm">
-            Last updated: October 3, 2026
+            Last updated: October 10, 2026
           </p>
         </Container>
       </section>
@@ -120,6 +120,15 @@ export default function PrivacyPage() {
                   </a>.
                 </li>
                 <li>
+                  <strong>Meta Pixel (Facebook and Instagram)</strong> — measures how our Facebook and
+                  Instagram ads perform and lets us show ads to people who have visited our site. It
+                  loads only if you accept marketing cookies, and you can withdraw that choice at any
+                  time. See{" "}
+                  <a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener noreferrer" className="text-accent hover:text-accent-hover">
+                    Meta&rsquo;s Privacy Policy
+                  </a>.
+                </li>
+                <li>
                   <strong>LevelUP Sports &amp; Athletics app</strong> — our own booking,
                   scheduling, and payment platform at app.levelupsports.us and in the iOS and
                   Android apps. Account and booking data you enter there is covered by this policy.
@@ -157,7 +166,7 @@ export default function PrivacyPage() {
                 Cookies
               </h2>
               <p>
-                Our website uses cookies and similar technologies for analytics (Google Analytics) and to remember your preferences. You can control cookies through your browser settings. Disabling cookies may affect some website functionality but will not prevent you from using our core services.
+                Our website uses cookies and similar technologies for analytics (Google Analytics), for advertising measurement (the Meta Pixel, only if you accept marketing cookies), and to remember your preferences. You choose which categories to allow in the cookie banner, and you can also control cookies through your browser settings. Disabling cookies may affect some website functionality but will not prevent you from using our core services.
               </p>
             </section>
 

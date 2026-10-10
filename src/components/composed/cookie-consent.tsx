@@ -3,36 +3,13 @@
 import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
-
-const COOKIE_NAME = "cookie-consent";
-
-interface ConsentState {
-  necessary: boolean;
-  analytics: boolean;
-  marketing: boolean;
-}
-
-const DEFAULT_CONSENT: ConsentState = {
-  necessary: true,
-  analytics: false,
-  marketing: false,
-};
-
-function getConsentCookie(): ConsentState | null {
-  if (typeof document === "undefined") return null;
-  const match = document.cookie.match(new RegExp(`(?:^|; )${COOKIE_NAME}=([^;]*)`));
-  if (!match) return null;
-  try {
-    return JSON.parse(decodeURIComponent(match[1]));
-  } catch {
-    return null;
-  }
-}
-
-function setConsentCookie(state: ConsentState) {
-  const maxAge = 365 * 24 * 60 * 60; // 1 year
-  document.cookie = `${COOKIE_NAME}=${encodeURIComponent(JSON.stringify(state))};path=/;max-age=${maxAge};SameSite=Lax`;
-}
+import {
+  DEFAULT_CONSENT,
+  OPEN_CONSENT_EVENT,
+  getConsent,
+  saveConsent as persistConsent,
+  type ConsentState,
+} from "@/lib/consent";
 
 export function CookieConsent() {
   const [visible, setVisible] = useState(false);
@@ -40,14 +17,21 @@ export function CookieConsent() {
   const [consent, setConsent] = useState<ConsentState>(DEFAULT_CONSENT);
 
   useEffect(() => {
-    const existing = getConsentCookie();
+    const existing = getConsent();
     if (!existing) {
       setVisible(true);
     }
+    const reopen = () => {
+      setConsent(getConsent() ?? DEFAULT_CONSENT);
+      setShowPreferences(true);
+      setVisible(true);
+    };
+    window.addEventListener(OPEN_CONSENT_EVENT, reopen);
+    return () => window.removeEventListener(OPEN_CONSENT_EVENT, reopen);
   }, []);
 
   const saveConsent = useCallback((state: ConsentState) => {
-    setConsentCookie(state);
+    persistConsent(state);
     setVisible(false);
     setShowPreferences(false);
   }, []);

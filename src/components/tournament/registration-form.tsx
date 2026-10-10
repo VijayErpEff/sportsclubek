@@ -7,6 +7,7 @@ import { CheckCircle2, AlertCircle, Copy, Check, ArrowRight } from "lucide-react
 import { FloatingInput, FloatingTextarea } from "@/components/ui/floating-input";
 import { Button } from "@/components/ui/button";
 import { APP } from "@/lib/constants/app";
+import { trackTournamentRegistration } from "@/lib/analytics";
 import { feeLabel, type TournamentConfig } from "@/lib/constants/tournaments";
 
 import {
@@ -123,6 +124,7 @@ export function RegistrationForm({ tournament }: { tournament: TournamentConfig 
         setSubmitError(data.error || "Registration failed. Please review and try again.");
         return;
       }
+      trackTournamentRegistration(tournament.slug, tournament.fee);
       // A card payment goes straight to Stripe's hosted page; the team is already held in the app,
       // so closing the tab loses nothing — the confirmation email carries the same link.
       if (data.checkoutUrl) {

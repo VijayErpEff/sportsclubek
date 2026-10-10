@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { OPEN_CONSENT_EVENT } from "@/lib/consent";
 import Image from "next/image";
 import { Facebook, Instagram, Youtube, MapPin, Phone, Mail, FileText } from "lucide-react";
 
@@ -168,6 +169,13 @@ export function Footer() {
             <Link href="/terms" className="text-xs text-white/40 hover:text-white/60 transition-colors">
               Terms of Service
             </Link>
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new Event(OPEN_CONSENT_EVENT))}
+              className="text-xs text-white/40 hover:text-white/60 transition-colors"
+            >
+              Cookie settings
+            </button>
           </div>
 
           <div className="flex items-center gap-4">

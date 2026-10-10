@@ -4,6 +4,11 @@
  * All events flow to Google Analytics 4 via gtag().
  * Set NEXT_PUBLIC_GA_ID in your environment to enable.
  *
+ * Conversions that Meta ads optimize for (Lead, Schedule, CompleteRegistration,
+ * Contact, Subscribe) are also sent to the Meta Pixel via metaTrack(). The pixel
+ * only exists after marketing consent (see components/composed/meta-pixel.tsx),
+ * so these calls are no-ops otherwise.
+ *
  * Naming convention: snake_case, prefixed by category.
  * See https://support.google.com/analytics/answer/9267735 for GA4 limits.
  */
@@ -21,6 +26,12 @@ function gtag(...args: unknown[]) {
 
 function send({ action, params }: GtagEvent) {
   gtag("event", action, params);
+}
+
+type MetaStandardEvent = "Lead" | "Schedule" | "CompleteRegistration" | "Contact" | "Subscribe";
+
+function metaTrack(event: MetaStandardEvent, params?: Record<string, string | number>) {
+  if (typeof window !== "undefined") window.fbq?.("track", event, params);
 }
 
 // ── CTA & Navigation ─────────────────────────────────────────────────────────
@@ -55,6 +66,13 @@ export function trackBookingClick(sport: string, program: string) {
 /** Fires when the sticky/floating "Book a Court" CTA is clicked. */
 export function trackBookingCTAClick(source_page: string) {
   send({ action: "booking_cta_click", params: { source_page } });
+  metaTrack("Schedule", { content_name: "Book a Court CTA" });
+}
+
+/** Fires on the /app hand-off page when the visitor opens the app or continues in the browser. */
+export function trackBookSession(label: string, destination: string) {
+  send({ action: "cta_click", params: { cta_label: label, destination } });
+  metaTrack("Schedule", { content_name: label });
 }
 
 /** Fires when /schedule is viewed or the booking widget is opened. */
@@ -77,6 +95,7 @@ export function trackBookingCompleted(params: {
       currency: "USD",
     },
   });
+  metaTrack("Schedule", { content_name: params.sport, value: params.value ?? 0, currency: "USD" });
 }
 
 /** Fires when a "Get Directions" link is clicked. Key local-intent signal. */
@@ -103,8 +122,22 @@ export function trackFormSubmit(formName: string) {
   send({ action: "form_submit", params: { form_name: formName } });
 }
 
+/** A lead was saved (sport-interest popups, tour requests, contact form, surveys). */
+export function trackLead(source: string) {
+  send({ action: "generate_lead", params: { lead_source: source } });
+  metaTrack("Lead", { content_name: source });
+}
+
+/** A tournament team registration was accepted (before any payment). */
+export function trackTournamentRegistration(tournament: string, fee: number | null) {
+  const value = fee ?? 0;
+  send({ action: "tournament_registration", params: { tournament, value, currency: "USD" } });
+  metaTrack("CompleteRegistration", { content_name: tournament, value, currency: "USD" });
+}
+
 export function trackNewsletterSignup() {
   send({ action: "newsletter_signup", params: {} });
+  metaTrack("Subscribe");
 }
 
 // ── Engagement ───────────────────────────────────────────────────────────────
@@ -126,6 +159,7 @@ export function trackScheduleView(sport?: string) {
 
 export function trackPhoneCall() {
   send({ action: "phone_call_click", params: {} });
+  metaTrack("Contact");
 }
 
 export function trackSocialClick(platform: string) {

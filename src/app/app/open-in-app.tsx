@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { ArrowUpRight, Globe } from "lucide-react";
 import { APP, appUrl } from "@/lib/constants/app";
-import { trackCTAClick } from "@/lib/analytics";
+import { trackBookSession } from "@/lib/analytics";
 import { Button } from "@/components/ui/button";
 
 type Platform = "ios" | "android" | "desktop";
@@ -90,7 +90,7 @@ export function OpenInApp({ path, context }: Props) {
         >
           <a
             href={openHref(platform, path)}
-            onClick={() => trackCTAClick(`Open app (${platform})`, context)}
+            onClick={() => trackBookSession(`Open app (${platform})`, context)}
           >
             Already have it? Open the app
             <ArrowUpRight className="h-5 w-5" aria-hidden="true" />
@@ -101,7 +101,7 @@ export function OpenInApp({ path, context }: Props) {
       <a
         href={webHref}
         className="inline-flex min-h-[44px] items-center gap-2 font-semibold text-neutral-700 underline decoration-neutral-300 underline-offset-4 transition-colors hover:text-primary hover:decoration-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
-        onClick={() => trackCTAClick("Continue in browser", webHref)}
+        onClick={() => trackBookSession("Continue in browser", webHref)}
       >
         <Globe className="h-4 w-4" aria-hidden="true" />
         Don&rsquo;t want the app? Use the web version

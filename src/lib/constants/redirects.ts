@@ -56,6 +56,13 @@ export const REDIRECTS: RedirectEntry[] = [
     title: "Register — LevelUP Smash Cup Volleyball Tournament Oct 24",
     destination: "/register/volleyball-tournament",
   },
+  // ── Social profiles ─────────────────────────────────────
+  {
+    // Instagram bio link — UTM-tagged so organic Instagram traffic shows up in GA4.
+    slug: "instagram",
+    title: "LevelUP Sports & Athletics Club",
+    destination: "/?utm_source=instagram&utm_medium=social&utm_campaign=bio_link",
+  },
   {
     slug: "soccer-open-house",
     title: "FREE Soccer Open House — May 16",
