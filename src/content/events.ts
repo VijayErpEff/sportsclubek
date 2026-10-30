@@ -68,6 +68,22 @@ export const EVENTS: ClubEvent[] = [
     cta: "Register your team",
   },
   {
+    slug: "volleyball-clinic-fall-2026",
+    name: "5-Week Volleyball Clinic",
+    kind: "Clinic",
+    sport: "Volleyball",
+    dateLabel: "Wednesdays 6–7:30 PM or Sundays 11 AM–12:30 PM · Nov 11 – Dec 20, 2026",
+    startISO: "2026-11-11T18:00:00-05:00",
+    endISO: "2026-12-20T12:30:00-05:00",
+    blurb:
+      "Serve, pass, set, spike. Five weeks of skills work, teamwork, and game play — train Wednesdays, Sundays, or both. Enroll early for a bonus session.",
+    price: "$199 / 1 day a week · $349 / both",
+    image: "/images/Content/volleyball-clinic-fall-2026.jpg",
+    imageAlt: "LevelUP 5-Week Volleyball Clinic flyer — Wednesdays 6 to 7:30 PM and Sundays 11 AM to 12:30 PM, $199 or $349",
+    href: "/events/volleyball-clinic",
+    cta: "Clinic details",
+  },
+  {
     slug: "soccer-clinic-fall-2026",
     name: "5-Week Soccer Clinic",
     kind: "Clinic",

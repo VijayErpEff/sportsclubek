@@ -76,6 +76,16 @@ export const REDIRECTS: RedirectEntry[] = [
     destination: appLink("/training", "soccer-clinic"),
   },
   {
+    slug: "volleyball-clinic",
+    title: "5-Week Volleyball Clinic — Wednesdays & Sundays from Nov 11",
+    destination: "/events/volleyball-clinic",
+  },
+  {
+    slug: "volleyball-clinic-register",
+    title: "Register — 5-Week Volleyball Clinic",
+    destination: appLink("/training", "volleyball-clinic"),
+  },
+  {
     slug: "soccer-open-house",
     title: "FREE Soccer Open House — May 16",
     destination: appLink("/", "soccer-open-house"),
