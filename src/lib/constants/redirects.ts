@@ -64,6 +64,18 @@ export const REDIRECTS: RedirectEntry[] = [
     destination: "/?utm_source=instagram&utm_medium=social&utm_campaign=bio_link",
   },
   {
+    // Fall 2026 Soccer Clinic flyer/social links. The page link is the
+    // default; the register link skips straight to the app's /training page.
+    slug: "soccer-clinic",
+    title: "5-Week Soccer Clinic — Thursdays from Nov 12",
+    destination: "/events/soccer-clinic",
+  },
+  {
+    slug: "soccer-clinic-register",
+    title: "Register — 5-Week Soccer Clinic",
+    destination: appLink("/training", "soccer-clinic"),
+  },
+  {
     slug: "soccer-open-house",
     title: "FREE Soccer Open House — May 16",
     destination: appLink("/", "soccer-open-house"),

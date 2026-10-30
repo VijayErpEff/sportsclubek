@@ -3,7 +3,7 @@
 // sorts them into Upcoming / Recurring / Past by date automatically.
 // ============================================================
 
-export type EventKind = "Tournament" | "League" | "Open House" | "Camp" | "Open Play";
+export type EventKind = "Tournament" | "League" | "Open House" | "Camp" | "Clinic" | "Open Play";
 
 export interface ClubEvent {
   slug: string;
@@ -66,6 +66,22 @@ export const EVENTS: ClubEvent[] = [
     imageAlt: "LPCL Kick Off flyer — LevelUP Premier Cricket League, Friday, November 6",
     href: "/events/cricket-league",
     cta: "Register your team",
+  },
+  {
+    slug: "soccer-clinic-fall-2026",
+    name: "5-Week Soccer Clinic",
+    kind: "Clinic",
+    sport: "Soccer",
+    dateLabel: "Thursdays, Nov 12 – Dec 17, 2026 · 6:30–7:30 PM",
+    startISO: "2026-11-12T18:30:00-05:00",
+    endISO: "2026-12-17T19:30:00-05:00",
+    blurb:
+      "Five Thursday-evening sessions for ages 6+: dribbling, passing, ball control, shooting, and scrimmages on our indoor turf. Enroll by Nov 5 and get a bonus session that night.",
+    price: "$149 / 5 weeks",
+    image: "/images/Content/soccer-clinic-fall-2026.jpg",
+    imageAlt: "LevelUP 5-Week Soccer Clinic flyer — ages 6+, Thursdays 6:30 to 7:30 PM, $149",
+    href: "/events/soccer-clinic",
+    cta: "Clinic details",
   },
   {
     slug: "pickleball-tuesdays",

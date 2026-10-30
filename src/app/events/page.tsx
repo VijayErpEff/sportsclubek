@@ -31,6 +31,7 @@ const KIND_STYLES: Record<ClubEvent["kind"], string> = {
   League: "bg-accent/15 text-accent-hover",
   "Open House": "bg-info/10 text-primary",
   Camp: "bg-secondary/20 text-accent-hover",
+  Clinic: "bg-secondary/20 text-accent-hover",
   "Open Play": "bg-primary/10 text-primary",
 };
 
