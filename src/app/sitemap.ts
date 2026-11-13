@@ -198,6 +198,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${BASE_URL}/events/volleyball-saturdays`,
+      lastModified: "2026-11-12",
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
       url: `${BASE_URL}/events/soccer-clinic`,
       lastModified: "2026-10-30",
       changeFrequency: "weekly",

@@ -2,14 +2,14 @@
   "enabled": true,
   "messages": [
     {
-      "text": "New 5-week clinics from Nov 11 · Volleyball (Wed or Sun) · Soccer (Thu, ages 6+) · enroll early for a bonus session.",
-      "linkText": "See the clinics",
-      "linkUrl": "/events"
+      "text": "New: Saturday volleyball training with Coach Ken Cranker · 5 weeks from Nov 14 · Beginners 8–12 $199 · Intermediate/Advanced 12+ $249.",
+      "linkText": "Register",
+      "linkUrl": "/events/volleyball-saturdays"
     },
     {
-      "text": "LPCL Kick Off · Premier Cricket League · Fri, Nov 6 from 5 PM · $850/team · $1,000 to the winners.",
-      "linkText": "Register your team",
-      "linkUrl": "/events/cricket-league"
+      "text": "5-week clinics underway · Volleyball (Wed or Sun) · Soccer (Thu, ages 6+).",
+      "linkText": "See the clinics",
+      "linkUrl": "/events"
     }
   ],
   "rotateMs": 7000,

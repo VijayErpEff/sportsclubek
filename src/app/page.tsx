@@ -451,12 +451,12 @@ export default function HomePage() {
           </Reveal>
           <Reveal delay={0.4}>
             <p className="text-center text-sm text-neutral-500 mt-2">
-              Friday, November 6:{" "}
+              Saturdays from November 14:{" "}
               <Link
-                href="/events/cricket-league"
+                href="/events/volleyball-saturdays"
                 className="text-accent hover:text-accent-hover font-semibold"
               >
-                LPCL Kick Off — Premier Cricket League, $850/team, $1,000 to the winners &rarr;
+                Volleyball training with Coach Ken Cranker — ages 8–12 and 12+, from $199 &rarr;
               </Link>
             </p>
           </Reveal>

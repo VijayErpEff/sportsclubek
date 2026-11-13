@@ -44,6 +44,7 @@ export const BOOKING_URLS = {
   // ── Clinics — registration lives on the app's /training page ──
   soccerClinic: appLink("/training", "soccer-clinic"),
   volleyballClinic: appLink("/training", "volleyball-clinic"),
+  volleyballSaturdays: appLink("/training", "volleyball-saturdays"),
 
   // ── Summer Camp 2026 (LevelUP × Code Ninjas) — per-week events ──
   summerCampFullDayJul: appLink("/", "summer-camp-full-day-july"),

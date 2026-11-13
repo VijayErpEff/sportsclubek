@@ -86,6 +86,17 @@ export const REDIRECTS: RedirectEntry[] = [
     destination: appLink("/training", "volleyball-clinic"),
   },
   {
+    // Saturday training with Coach Ken Cranker (flyer 2026-11-12).
+    slug: "volleyball-saturdays",
+    title: "Saturday Volleyball Training with Coach Ken Cranker — from Nov 14",
+    destination: "/events/volleyball-saturdays",
+  },
+  {
+    slug: "volleyball-saturdays-register",
+    title: "Register — Saturday Volleyball Training",
+    destination: appLink("/training", "volleyball-saturdays"),
+  },
+  {
     slug: "soccer-open-house",
     title: "FREE Soccer Open House — May 16",
     destination: appLink("/", "soccer-open-house"),

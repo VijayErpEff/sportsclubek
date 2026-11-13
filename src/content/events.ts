@@ -68,6 +68,22 @@ export const EVENTS: ClubEvent[] = [
     cta: "Register your team",
   },
   {
+    slug: "volleyball-saturdays-fall-2026",
+    name: "Saturday Volleyball Training with Coach Ken Cranker",
+    kind: "Clinic",
+    sport: "Volleyball",
+    dateLabel: "5 Saturdays · Nov 14 – Dec 19, 2026 · 11 AM or 1 PM",
+    startISO: "2026-11-14T11:00:00-05:00",
+    endISO: "2026-12-19T14:30:00-05:00",
+    blurb:
+      "Two groups, five Saturdays. Beginners ages 8–12 (11 AM–12:30 PM): serving, passing, setting, footwork. Intermediate/advanced ages 12+ (1–2:30 PM): technique, attacking, blocking, game strategy.",
+    price: "$199 beginners · $249 intermediate/advanced",
+    image: "/images/Content/volleyball-saturday-training-fall-2026.jpg",
+    imageAlt: "LevelUP Volleyball Training with Coach Ken Cranker flyer — Saturdays Nov 14 to Dec 19, $199 and $249",
+    href: "/events/volleyball-saturdays",
+    cta: "Training details",
+  },
+  {
     slug: "volleyball-clinic-fall-2026",
     name: "5-Week Volleyball Clinic",
     kind: "Clinic",
