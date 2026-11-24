@@ -361,10 +361,10 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
         tag: "Rental",
       },
       {
-        title: "Open Play — $5 Tuesdays",
-        description: "Drop in for round-robin play. Every Tuesday from 5–10 PM it's just $5 per person. All skill levels welcome — we'll match you with players at your level.",
+        title: "Open Play — Pickleball Tuesdays",
+        description: "Drop in for round-robin play. Every Tuesday from 5–10 PM it's $8 per person. All skill levels welcome — we'll match you with players at your level.",
         href: BOOKING_URLS.pickleballOpenPlay,
-        tag: "$5 Tuesdays",
+        tag: "$8 Tuesdays",
       },
       {
         title: "Beginner Lessons",

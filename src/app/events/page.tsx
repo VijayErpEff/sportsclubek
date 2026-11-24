@@ -22,7 +22,7 @@ export const revalidate = 3600;
 export const metadata: Metadata = generateSEOMetadata({
   title: "Events & Tournaments — Elkton, MD",
   description:
-    "Upcoming tournaments, leagues, open play nights, open houses, and camps at LevelUP Sports in Elkton, MD: Smash Cup volleyball, LPCL cricket league, $5 Pickleball Tuesdays, and more.",
+    "Upcoming tournaments, leagues, open play nights, open houses, and camps at LevelUP Sports in Elkton, MD: Smash Cup volleyball, LPCL cricket league, Pickleball Tuesdays open play, and more.",
   path: "/events",
 });
 

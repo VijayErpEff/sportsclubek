@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { redis } from "@/lib/storage/redis";
 
-const SCHEDULE_KEY = "schedule_overrides";
+// v2 since the Nov 2026 schedule rewrite; the old key is kept in Redis for reference.
+const SCHEDULE_KEY = "schedule_overrides_v2";
 const ADMIN_PIN = process.env.ADMIN_PIN || "6886";
 
 const NO_CACHE_HEADERS = {

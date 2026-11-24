@@ -65,77 +65,77 @@ export const SPORT_LABELS: Record<SportType, string> = {
 // WEEKLY SCHEDULE DATA — Edit below to update the calendar
 // ============================================================
 
+// Source: facility schedule draft of Nov 14, 2026. "Open slot" and
+// unconfirmed items (Golden Pass, Strike Zone cricket flex, private bookings)
+// are intentionally left off. Court counts appear in the level line.
+// Live admin edits are stored under a fresh key (see api/schedule/route.ts)
+// so the old overrides don't stack on top of this week.
+
 export const WEEKLY_SCHEDULE: DaySchedule[] = [
   {
     day: "Monday",
     shortDay: "Mon",
     sessions: [
-      { time: "9:00 AM",  endTime: "11:00 AM", activity: "Open Batting Cages",          sport: "open" },
-      { time: "3:30 PM",  endTime: "5:00 PM",  activity: "Kids Agility",                sport: "agility",   level: "Ages 5–7" },
-      { time: "5:00 PM",  endTime: "7:00 PM",  activity: "Baseball Academy",             sport: "baseball",  level: "Ages 8–12" },
-      { time: "7:00 PM",  endTime: "9:00 PM",  activity: "Badminton Academy",            sport: "badminton", level: "All Levels" },
-      { time: "7:00 PM",  endTime: "9:00 PM",  activity: "Adult Cricket Nets",           sport: "cricket",   level: "All Levels" },
+      { time: "5:00 PM",  endTime: "9:00 PM",  activity: "Badminton Open Play",         sport: "badminton",  level: "3 courts", bookingUrl: BOOKING_URLS.badmintonOpenPlay },
+      { time: "5:00 PM",  endTime: "9:00 PM",  activity: "Pickleball Open Play",        sport: "pickleball", level: "3 courts", bookingUrl: BOOKING_URLS.pickleballOpenPlay },
     ],
   },
   {
     day: "Tuesday",
     shortDay: "Tue",
     sessions: [
-      { time: "9:00 AM",  endTime: "11:00 AM", activity: "Open Batting Cages",          sport: "open" },
-      { time: "5:00 PM",  endTime: "10:00 PM", activity: "$5 Pickleball Tuesdays — Open Play", sport: "pickleball", level: "All Levels · $5/person", bookingUrl: BOOKING_URLS.pickleballOpenPlay },
-      { time: "5:30 PM",  endTime: "7:30 PM",  activity: "Baseball Academy",             sport: "baseball",  level: "Ages 13–15" },
-      { time: "7:30 PM",  endTime: "9:30 PM",  activity: "Open Badminton Courts",        sport: "open" },
+      { time: "5:00 PM",  endTime: "10:00 PM", activity: "Pickleball Tuesdays — Open Play", sport: "pickleball", level: "6 courts · $8/person", bookingUrl: BOOKING_URLS.pickleballOpenPlay },
+      { time: "5:00 PM",  endTime: "10:00 PM", activity: "Badminton Open Play",         sport: "badminton",  level: "1 court", bookingUrl: BOOKING_URLS.badmintonOpenPlay },
+      { time: "5:30 PM",  endTime: "7:30 PM",  activity: "Soccer Training",             sport: "soccer" },
     ],
   },
   {
     day: "Wednesday",
     shortDay: "Wed",
     sessions: [
-      { time: "9:00 AM",  endTime: "11:00 AM", activity: "Open Batting Cages",          sport: "open" },
-      { time: "3:30 PM",  endTime: "5:00 PM",  activity: "Kids Agility",                sport: "agility",   level: "Ages 8–10" },
-      { time: "5:00 PM",  endTime: "7:00 PM",  activity: "Cricket Academy",              sport: "cricket",   level: "Youth" },
-      { time: "7:00 PM",  endTime: "9:00 PM",  activity: "Badminton Academy",            sport: "badminton", level: "All Levels" },
-      { time: "7:00 PM",  endTime: "9:00 PM",  activity: "Baseball Academy",             sport: "baseball",  level: "Ages 16–18" },
+      { time: "5:30 PM",  endTime: "7:30 PM",  activity: "Cricket Training",            sport: "cricket",    level: "Youth" },
+      { time: "5:30 PM",  endTime: "7:30 PM",  activity: "Badminton Training",          sport: "badminton",  level: "1 court" },
+      { time: "5:30 PM",  endTime: "7:30 PM",  activity: "Pickleball Training",         sport: "pickleball", level: "1 court" },
+      { time: "5:30 PM",  endTime: "7:30 PM",  activity: "Volleyball Training",         sport: "volleyball", level: "1 court", bookingUrl: BOOKING_URLS.volleyballClinic },
+      { time: "7:30 PM",  endTime: "10:30 PM", activity: "Volleyball Open Play",        sport: "volleyball", level: "All Levels" },
     ],
   },
   {
     day: "Thursday",
     shortDay: "Thu",
     sessions: [
-      { time: "9:00 AM",  endTime: "11:00 AM", activity: "Open Batting Cages",          sport: "open" },
-      { time: "5:30 PM",  endTime: "7:30 PM",  activity: "Baseball Academy",             sport: "baseball",  level: "Ages 8–12" },
-      { time: "7:30 PM",  endTime: "9:30 PM",  activity: "Adult Cricket Nets",           sport: "cricket",   level: "All Levels" },
+      { time: "6:30 PM",  endTime: "7:30 PM",  activity: "Soccer Clinic",               sport: "soccer",     bookingUrl: BOOKING_URLS.soccerClinic },
     ],
   },
   {
     day: "Friday",
     shortDay: "Fri",
     sessions: [
-      { time: "9:00 AM",  endTime: "11:00 AM", activity: "Open Batting Cages",          sport: "open" },
-      { time: "3:30 PM",  endTime: "5:00 PM",  activity: "Kids Agility",                sport: "agility",   level: "Ages 11–12" },
-      { time: "5:00 PM",  endTime: "7:00 PM",  activity: "Cricket Academy",              sport: "cricket",   level: "Adult" },
-      { time: "7:00 PM",  endTime: "9:00 PM",  activity: "Open Pickleball Courts",       sport: "open" },
+      { time: "8:00 AM",  endTime: "12:00 PM", activity: "Pickleball Open Play",        sport: "pickleball", level: "6 courts · $5/person", bookingUrl: BOOKING_URLS.pickleballOpenPlay },
+      { time: "5:30 PM",  endTime: "7:30 PM",  activity: "Cricket Training",            sport: "cricket",    level: "Adult" },
+      { time: "8:00 PM",  endTime: "11:00 PM", activity: "Cricket Tournament",          sport: "cricket" },
     ],
   },
   {
     day: "Saturday",
     shortDay: "Sat",
     sessions: [
-      { time: "8:00 AM",  endTime: "10:00 AM", activity: "Baseball Academy",             sport: "baseball",  level: "Ages 13–15" },
-      { time: "10:00 AM", endTime: "12:00 PM", activity: "Cricket Academy",              sport: "cricket",   level: "Youth" },
-      { time: "12:00 PM", endTime: "2:00 PM",  activity: "Pickleball Open Play",         sport: "pickleball", level: "All Levels" },
-      { time: "2:00 PM",  endTime: "4:00 PM",  activity: "Open Badminton Courts",        sport: "open" },
-      { time: "4:00 PM",  endTime: "6:00 PM",  activity: "Open Play — All Sports",       sport: "open" },
+      { time: "7:00 AM",  endTime: "10:00 AM", activity: "Pickleball Open Play",        sport: "pickleball", level: "3 courts", bookingUrl: BOOKING_URLS.pickleballOpenPlay },
+      { time: "7:00 AM",  endTime: "10:00 AM", activity: "Badminton Open Play",         sport: "badminton",  level: "3 courts", bookingUrl: BOOKING_URLS.badmintonOpenPlay },
+      { time: "11:00 AM", endTime: "12:30 PM", activity: "Volleyball Clinic",           sport: "volleyball", bookingUrl: BOOKING_URLS.volleyballSaturdays },
+      { time: "1:00 PM",  endTime: "2:30 PM",  activity: "Volleyball Clinic",           sport: "volleyball", bookingUrl: BOOKING_URLS.volleyballSaturdays },
+      { time: "3:00 PM",  endTime: "6:00 PM",  activity: "Volleyball",                  sport: "volleyball", level: "All courts" },
+      { time: "8:00 PM",  endTime: "11:00 PM", activity: "Cricket Tournament",          sport: "cricket" },
     ],
   },
   {
     day: "Sunday",
     shortDay: "Sun",
     sessions: [
-      { time: "9:00 AM",  endTime: "11:00 AM", activity: "Open Batting Cages",          sport: "open" },
-      { time: "11:00 AM", endTime: "1:00 PM",  activity: "Pickleball Open Play",         sport: "pickleball", level: "All Levels" },
-      { time: "1:00 PM",  endTime: "3:00 PM",  activity: "Open Badminton Courts",        sport: "open" },
-      { time: "3:00 PM",  endTime: "5:00 PM",  activity: "Open Play — All Sports",       sport: "open" },
+      { time: "7:00 AM",  endTime: "10:00 AM", activity: "Pickleball Open Play",        sport: "pickleball", level: "3 courts", bookingUrl: BOOKING_URLS.pickleballOpenPlay },
+      { time: "7:00 AM",  endTime: "10:00 AM", activity: "Badminton Open Play",         sport: "badminton",  level: "3 courts", bookingUrl: BOOKING_URLS.badmintonOpenPlay },
+      { time: "11:00 AM", endTime: "12:30 PM", activity: "Volleyball Clinic",           sport: "volleyball", bookingUrl: BOOKING_URLS.volleyballClinic },
+      { time: "3:00 PM",  endTime: "6:00 PM",  activity: "Cricket Tournament",          sport: "cricket" },
     ],
   },
 ];

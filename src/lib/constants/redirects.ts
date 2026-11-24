@@ -182,7 +182,7 @@ export const REDIRECTS: RedirectEntry[] = [
   {
     // Flyer/social link for the current promotion — lands on the offer page.
     slug: "pickleball-tuesdays",
-    title: "$5 Pickleball Tuesdays",
+    title: "Pickleball Tuesdays",
     destination: "/offers",
   },
   {

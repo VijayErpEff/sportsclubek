@@ -434,7 +434,7 @@ export default function HomePage() {
                 href="/offers"
                 className="text-accent hover:text-accent-hover font-semibold"
               >
-                $5 Pickleball Tuesdays — indoor open play, 5–10 PM &rarr;
+                Pickleball Tuesdays — indoor open play, 5–10 PM, $8 &rarr;
               </Link>
             </p>
           </Reveal>

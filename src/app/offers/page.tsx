@@ -14,22 +14,22 @@ import { SITE_CONFIG } from "@/lib/constants/site";
 import { CalendarDays, Clock, MapPin, Phone, Users, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: "$5 Pickleball Tuesdays — Open Play in Elkton, MD",
+  title: "Pickleball Tuesdays — $8 Open Play in Elkton, MD",
   description:
-    "$5 Pickleball Tuesdays at LevelUP Sports in Elkton, MD: indoor pickleball open play every Tuesday, 5–10 PM, just $5 per person. Bring your friends — everyone is welcome.",
+    "Pickleball Tuesdays at LevelUP Sports in Elkton, MD: indoor open play on six courts every Tuesday, 5–10 PM, $8 per person. Bring your friends — everyone is welcome.",
   path: "/offers",
 });
 
 // ── The one promotion running right now ─────────────────────────
 const PROMO = {
-  name: "$5 Pickleball Tuesdays",
-  price: "$5",
+  name: "Pickleball Tuesdays",
+  price: "$8",
   priceNote: "per person",
   day: "Every Tuesday",
   hours: "5:00 – 10:00 PM",
-  flyer: "/images/offers/pickleball-tuesdays.jpg",
+  photo: "/images/sports/LevelUp/Pickleball-2.jpg",
   fineprint:
-    "$5 per person, per Tuesday open-play visit. Walk-ins welcome; paddles and balls provided. Cannot be combined with other offers. Valid at the LevelUP Sports Elkton location only.",
+    "$8 per person, per Tuesday open-play visit. Walk-ins welcome; paddles and balls provided. Cannot be combined with other offers. Valid at the LevelUP Sports Elkton location only.",
 };
 
 const DETAILS = [
@@ -78,10 +78,10 @@ export default function OffersPage() {
     "@type": "SportsEvent",
     name: `${PROMO.name} — ${SITE_CONFIG.shortName}`,
     description:
-      "Indoor pickleball open play every Tuesday from 5 to 10 PM at LevelUP Sports & Athletics Club in Elkton, MD. $5 per person. Everyone is welcome.",
+      "Indoor pickleball open play every Tuesday from 5 to 10 PM at LevelUP Sports & Athletics Club in Elkton, MD. $8 per person. Everyone is welcome.",
     sport: "Pickleball",
     url: `${SITE_CONFIG.url}/offers`,
-    image: [`${SITE_CONFIG.url}${PROMO.flyer}`],
+    image: [`${SITE_CONFIG.url}${PROMO.photo}`],
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
     eventStatus: "https://schema.org/EventScheduled",
     eventSchedule: {
@@ -112,7 +112,7 @@ export default function OffersPage() {
     },
     offers: {
       "@type": "Offer",
-      price: "5",
+      price: "8",
       priceCurrency: "USD",
       availability: "https://schema.org/InStock",
       url: `${SITE_CONFIG.url}/offers`,
@@ -130,7 +130,7 @@ export default function OffersPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(eventLD) }}
       />
 
-      {/* Hero — offer copy left, flyer right (5/7 split, flyer overlaps the section edge) */}
+      {/* Hero — offer copy left, court photo right (5/7 split, photo overlaps the section edge) */}
       <section className="pt-28 md:pt-32 pb-12 md:pb-20 relative overflow-hidden">
         <div
           className="absolute inset-0 bg-gradient-to-b from-primary/[0.03] to-white"
@@ -156,10 +156,10 @@ export default function OffersPage() {
                   Current Offer · Pickleball Open Play
                 </p>
                 <h1 className="font-display text-hero text-neutral-900 text-balance leading-[1.05]">
-                  $5 Pickleball Tuesdays
+                  Pickleball Tuesdays
                 </h1>
                 <p className="mt-5 text-lg text-neutral-600 max-w-xl leading-relaxed">
-                  Indoor open play every Tuesday from 5 to 10 PM &mdash; just $5 per
+                  Indoor open play on six courts every Tuesday from 5 to 10 PM &mdash; $8 per
                   person. Bring your friends. Everyone is welcome.
                 </p>
               </Reveal>
@@ -207,10 +207,10 @@ export default function OffersPage() {
               <Reveal variant="fade-left" delay={0.15}>
                 <div className="relative mx-auto max-w-md lg:max-w-none lg:rotate-[1.5deg]">
                   <Image
-                    src={PROMO.flyer}
-                    alt="$5 Pickleball Tuesdays flyer — pickleball open play every Tuesday 5 to 10 PM, $5 per person, at LevelUP Sports & Athletics Club, 701 E Pulaski Hwy, Elkton, MD"
-                    width={1000}
-                    height={1000}
+                    src={PROMO.photo}
+                    alt="Indoor pickleball courts with blue and green surfaces at LevelUP Sports & Athletics Club in Elkton, MD"
+                    width={1920}
+                    height={1077}
                     priority
                     sizes="(max-width: 1024px) 90vw, 40vw"
                     className="rounded-2xl shadow-card-elevated ring-1 ring-neutral-200"
@@ -304,7 +304,7 @@ export default function OffersPage() {
 
       <CTABanner
         title="See You Tuesday"
-        description="Grab a paddle, bring a friend, and play indoors for $5. Reserve in the LevelUP app or just walk in."
+        description="Grab a paddle, bring a friend, and play indoors for $8. Reserve in the LevelUP app or just walk in."
         primaryCTA={{ label: "Book Tuesday Open Play", href: BOOKING_URLS.pickleballOpenPlay }}
         secondaryCTA={{ label: "View Memberships", href: "/memberships" }}
       />
