@@ -112,7 +112,7 @@ export const WEEKLY_SCHEDULE: DaySchedule[] = [
     shortDay: "Fri",
     sessions: [
       { time: "8:00 AM",  endTime: "12:00 PM", activity: "Pickleball Open Play",        sport: "pickleball", level: "6 courts · $5/person", bookingUrl: BOOKING_URLS.pickleballOpenPlay },
-      { time: "5:30 PM",  endTime: "7:30 PM",  activity: "Cricket Training",            sport: "cricket",    level: "Adult" },
+      { time: "5:30 PM",  endTime: "7:30 PM",  activity: "Cricket Training",            sport: "cricket",    level: "Youth" },
       { time: "8:00 PM",  endTime: "11:00 PM", activity: "Cricket Tournament",          sport: "cricket" },
     ],
   },
