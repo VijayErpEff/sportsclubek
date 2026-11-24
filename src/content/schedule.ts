@@ -1,6 +1,8 @@
 // ============================================================
 // SCHEDULE CONFIGURATION
-// Edit this file to update the weekly schedule.
+// The live schedule is edited in admin mode on /schedule and stored in
+// Redis (see api/schedule/route.ts). WEEKLY_SCHEDULE below is only the
+// default: it shows until the first admin save and after "Reset Schedule".
 // Each session needs: time, activity, sport (for color coding),
 // and optionally a level and spotsLeft.
 //
@@ -68,8 +70,6 @@ export const SPORT_LABELS: Record<SportType, string> = {
 // Source: facility schedule draft of Nov 14, 2026. "Open slot" and
 // unconfirmed items (Golden Pass, Strike Zone cricket flex, private bookings)
 // are intentionally left off. Court counts appear in the level line.
-// Live admin edits are stored under a fresh key (see api/schedule/route.ts)
-// so the old overrides don't stack on top of this week.
 
 export const WEEKLY_SCHEDULE: DaySchedule[] = [
   {
@@ -139,3 +139,46 @@ export const WEEKLY_SCHEDULE: DaySchedule[] = [
     ],
   },
 ];
+
+// ============================================================
+// Validation for schedules saved from admin mode
+// ============================================================
+
+const SPORTS = new Set<string>(Object.keys(SPORT_LABELS));
+const TIME_RE = /^(1[0-2]|[1-9]):[0-5]\d (AM|PM)$/;
+const MAX_TEXT = 200;
+
+function isText(v: unknown, required: boolean): boolean {
+  if (v === undefined) return !required;
+  return typeof v === "string" && v.length <= MAX_TEXT && (!required || v.trim().length > 0);
+}
+
+function isSession(v: unknown): v is Session {
+  if (!v || typeof v !== "object") return false;
+  const s = v as Record<string, unknown>;
+  return (
+    typeof s.time === "string" && TIME_RE.test(s.time) &&
+    typeof s.endTime === "string" && TIME_RE.test(s.endTime) &&
+    isText(s.activity, true) &&
+    typeof s.sport === "string" && SPORTS.has(s.sport) &&
+    isText(s.level, false) &&
+    isText(s.bookingUrl, false) &&
+    (s.spotsLeft === undefined || typeof s.spotsLeft === "number")
+  );
+}
+
+/** True when `v` is a full Mon–Sun schedule in the same day order as WEEKLY_SCHEDULE. */
+export function isValidSchedule(v: unknown): v is DaySchedule[] {
+  return (
+    Array.isArray(v) &&
+    v.length === WEEKLY_SCHEDULE.length &&
+    v.every(
+      (d, i) =>
+        d && typeof d === "object" &&
+        d.day === WEEKLY_SCHEDULE[i].day &&
+        d.shortDay === WEEKLY_SCHEDULE[i].shortDay &&
+        Array.isArray(d.sessions) && d.sessions.length <= 50 &&
+        d.sessions.every(isSession)
+    )
+  );
+}

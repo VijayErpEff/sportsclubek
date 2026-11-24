@@ -12,6 +12,7 @@ import {
   type SportType,
   type Session,
   type DaySchedule,
+  isValidSchedule,
 } from "@/content/schedule";
 import { SITE_CONFIG } from "@/lib/constants/site";
 import { BOOKING_URLS, getBookingUrl } from "@/lib/constants/booking";
@@ -20,14 +21,6 @@ import { useAdmin } from "@/lib/context/admin-context";
 // ---------------------------------------------------------------------------
 // Types
 // ---------------------------------------------------------------------------
-
-interface ScheduleOverride {
-  id: string;
-  type: "add" | "remove";
-  day: string;
-  sessionKey?: string; // for remove: `${sport}-${time}`
-  session?: Session; // for add: the full session data
-}
 
 interface FormState {
   open: boolean;
@@ -131,12 +124,9 @@ function NowBadge() {
   );
 }
 
-function generateId(): string {
-  return `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
-}
-
+/** Identifies a session within a day (matches the React key used in lists). */
 function sessionKey(session: Session): string {
-  return `${session.sport}-${session.time}`;
+  return `${session.sport}-${session.time}-${session.activity}`;
 }
 
 /** Rough time parse so we can sort by start time. */
@@ -151,26 +141,24 @@ function parseTimeForSort(t: string): number {
   return hours * 60 + minutes;
 }
 
-async function fetchOverrides(): Promise<ScheduleOverride[]> {
+/** The saved schedule, or null when none is saved (or it can't be loaded). */
+async function fetchSchedule(): Promise<DaySchedule[] | null> {
   try {
     const res = await fetch("/api/schedule", { cache: "no-store" });
-    if (!res.ok) return [];
-    const data = await res.json();
-    return Array.isArray(data) ? data : [];
+    if (!res.ok) return null;
+    const data: unknown = await res.json();
+    return isValidSchedule(data) ? data : null;
   } catch {
-    return [];
+    return null;
   }
 }
 
-async function saveOverrides(
-  overrides: ScheduleOverride[],
-  pin: string
-): Promise<boolean> {
+async function saveSchedule(schedule: DaySchedule[], pin: string): Promise<boolean> {
   try {
     const res = await fetch("/api/schedule", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ overrides, pin }),
+      body: JSON.stringify({ schedule, pin }),
     });
     return res.ok;
   } catch {
@@ -178,35 +166,8 @@ async function saveOverrides(
   }
 }
 
-function applyOverrides(
-  base: DaySchedule[],
-  overrides: ScheduleOverride[]
-): DaySchedule[] {
-  return base.map((daySchedule) => {
-    let sessions = [...daySchedule.sessions];
-
-    // Apply removes (only affects base sessions)
-    const removes = overrides.filter(
-      (o) => o.type === "remove" && o.day === daySchedule.day
-    );
-    for (const r of removes) {
-      sessions = sessions.filter((s) => sessionKey(s) !== r.sessionKey);
-    }
-
-    // Apply adds
-    const adds = overrides.filter(
-      (o) => o.type === "add" && o.day === daySchedule.day && o.session
-    );
-    for (const a of adds) {
-      if (a.session) {
-        sessions.push(a.session);
-      }
-    }
-
-    sessions.sort((a, b) => parseTimeForSort(a.time) - parseTimeForSort(b.time));
-
-    return { ...daySchedule, sessions };
-  });
+function sortSessions(sessions: Session[]): Session[] {
+  return [...sessions].sort((a, b) => parseTimeForSort(a.time) - parseTimeForSort(b.time));
 }
 
 // ---------------------------------------------------------------------------
@@ -630,17 +591,15 @@ export function ScheduleCalendar() {
   const auth = useAdmin();
 
   // ---- Schedule state ----
-  const [overrides, setOverrides] = useState<ScheduleOverride[]>([]);
-  const [mounted, setMounted] = useState(false);
+  const [schedule, setSchedule] = useState<DaySchedule[]>(WEEKLY_SCHEDULE);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
 
-  // Fetch overrides from server on mount
+  // Load the saved schedule on mount; the code default shows until then.
   useEffect(() => {
-    setMounted(true);
-    fetchOverrides().then((data) => {
-      setOverrides(data);
+    fetchSchedule().then((data) => {
+      if (data) setSchedule(data);
       setLoading(false);
     });
   }, []);
@@ -652,18 +611,20 @@ export function ScheduleCalendar() {
     return () => clearTimeout(timer);
   }, [toast]);
 
-  const persistOverrides = useCallback(
-    async (next: ScheduleOverride[]): Promise<boolean> => {
-      setOverrides(next);
+  const persistSchedule = useCallback(
+    async (next: DaySchedule[]): Promise<boolean> => {
+      const previous = schedule;
+      setSchedule(next);
       setSaving(true);
-      const ok = await saveOverrides(next, auth.adminPin);
+      const ok = await saveSchedule(next, auth.adminPin);
       setSaving(false);
       if (!ok) {
+        setSchedule(previous);
         setToast("Failed to save — check connection");
       }
       return ok;
     },
-    [auth.adminPin]
+    [schedule, auth.adminPin]
   );
 
   // ---- Form state ----
@@ -710,98 +671,57 @@ export function ScheduleCalendar() {
       ...(form.bookingUrl.trim() ? { bookingUrl: form.bookingUrl.trim() } : {}),
     };
 
-    let next = [...overrides];
-
-    if (form.mode === "edit" && form.originalKey && form.originalDay) {
-      // Check if we're editing a session that was added via override
-      const addIndex = next.findIndex(
-        (o) =>
-          o.type === "add" &&
-          o.day === form.originalDay &&
-          o.session &&
-          sessionKey(o.session) === form.originalKey
+    const editing = form.mode === "edit" && form.originalKey && form.originalDay;
+    const newKey = sessionKey(newSession);
+    const duplicate = schedule
+      .find((d) => d.day === form.day)
+      ?.sessions.some(
+        (s) =>
+          sessionKey(s) === newKey &&
+          !(editing && form.originalDay === form.day && form.originalKey === newKey)
       );
-
-      if (addIndex !== -1) {
-        // Update the existing add override
-        next[addIndex] = { ...next[addIndex], day: form.day, session: newSession };
-      } else {
-        // Editing a base session — remove old, add new
-        next.push({
-          id: generateId(),
-          type: "remove",
-          day: form.originalDay,
-          sessionKey: form.originalKey,
-        });
-        next.push({
-          id: generateId(),
-          type: "add",
-          day: form.day,
-          session: newSession,
-        });
-      }
-    } else {
-      // Adding new session
-      next.push({
-        id: generateId(),
-        type: "add",
-        day: form.day,
-        session: newSession,
-      });
+    if (duplicate) {
+      setToast("That session is already on this day");
+      return;
     }
 
-    const ok = await persistOverrides(next);
+    const next = schedule.map((d) => {
+      let sessions = d.sessions;
+      if (editing && d.day === form.originalDay) {
+        sessions = sessions.filter((s) => sessionKey(s) !== form.originalKey);
+      }
+      if (d.day === form.day) {
+        sessions = sortSessions([...sessions, newSession]);
+      }
+      return sessions === d.sessions ? d : { ...d, sessions };
+    });
+
+    const ok = await persistSchedule(next);
     closeForm();
     if (ok) {
       setToast(form.mode === "add" ? "Session added" : "Session updated");
     }
-  }, [form, overrides, persistOverrides, closeForm]);
+  }, [form, schedule, persistSchedule, closeForm]);
 
   const handleDelete = useCallback(
     async (day: string, session: Session) => {
       const key = sessionKey(session);
-
-      // Check if this session was added via an override
-      const addIndex = overrides.findIndex(
-        (o) =>
-          o.type === "add" &&
-          o.day === day &&
-          o.session &&
-          sessionKey(o.session) === key
+      const next = schedule.map((d) =>
+        d.day === day ? { ...d, sessions: d.sessions.filter((s) => sessionKey(s) !== key) } : d
       );
-
-      let next: ScheduleOverride[];
-      if (addIndex !== -1) {
-        // Remove the add override entirely
-        next = overrides.filter((_, i) => i !== addIndex);
-      } else {
-        // Base session — add a remove override
-        next = [
-          ...overrides,
-          {
-            id: generateId(),
-            type: "remove" as const,
-            day,
-            sessionKey: key,
-          },
-        ];
-      }
-
-      const ok = await persistOverrides(next);
+      const ok = await persistSchedule(next);
       if (ok) setToast("Session removed");
     },
-    [overrides, persistOverrides]
+    [schedule, persistSchedule]
   );
 
   const handleReset = useCallback(async () => {
-    const ok = await persistOverrides([]);
+    if (!window.confirm("Replace the live schedule with the default schedule from the code?")) return;
+    const ok = await persistSchedule(WEEKLY_SCHEDULE);
     if (ok) setToast("Schedule reset to default");
-  }, [persistOverrides]);
+  }, [persistSchedule]);
 
-  // ---- Derived schedule ----
-  const mergedSchedule = mounted
-    ? applyOverrides(WEEKLY_SCHEDULE, overrides)
-    : WEEKLY_SCHEDULE;
+  const mergedSchedule = schedule;
 
   // ---- Day / sport filter state (always Eastern time for Elkton, MD) ----
   const [activeDay, setActiveDay] = useState(() => {
