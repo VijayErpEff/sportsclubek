@@ -40,6 +40,17 @@ export const REDIRECTS: RedirectEntry[] = [
     destination: appLink("/", "volleyball-tournament"),
   },
   {
+    // Thanksgiving cricket tournament — flyer / WhatsApp links.
+    slug: "thanksgiving-cricket",
+    title: "Thanksgiving Indoor Cricket Tournament — Nov 26–27",
+    destination: "/events/thanksgiving-cricket",
+  },
+  {
+    slug: "thanksgiving-cricket-register",
+    title: "Register — Thanksgiving Cricket Tournament",
+    destination: "/register/thanksgiving-cricket",
+  },
+  {
     // LPCL Kick Off — cricket league flyer links.
     slug: "lpcl",
     title: "LPCL Kick Off — LevelUP Premier Cricket League, Nov 6",

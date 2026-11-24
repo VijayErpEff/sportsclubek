@@ -2,12 +2,12 @@
   "enabled": true,
   "messages": [
     {
-      "text": "New: Saturday volleyball training with Coach Ken Cranker · 5 weeks from Nov 14 · Beginners 8–12 $199 · Intermediate/Advanced 12+ $249.",
+      "text": "Thanksgiving Indoor Cricket Tournament · Thu–Fri, Nov 26–27 · $20 per player · Bring a team or join a mix-and-match team · Register by Wed, Nov 25, 6 PM.",
       "linkText": "Register",
-      "linkUrl": "/events/volleyball-saturdays"
+      "linkUrl": "/events/thanksgiving-cricket"
     },
     {
-      "text": "5-week clinics underway · Volleyball (Wed or Sun) · Soccer (Thu, ages 6+).",
+      "text": "Clinics underway · Volleyball (Wed, Sat or Sun) · Soccer (Thu, ages 6+).",
       "linkText": "See the clinics",
       "linkUrl": "/events"
     }

@@ -210,6 +210,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${BASE_URL}/events/thanksgiving-cricket`,
+      lastModified: "2026-11-24",
+      changeFrequency: "daily",
+      priority: 0.9,
+    },
+    {
       url: `${BASE_URL}/events/cricket-league`,
       lastModified: "2026-10-03",
       changeFrequency: "weekly",

@@ -8,7 +8,7 @@ import { FloatingInput, FloatingTextarea } from "@/components/ui/floating-input"
 import { Button } from "@/components/ui/button";
 import { APP } from "@/lib/constants/app";
 import { trackTournamentRegistration } from "@/lib/analytics";
-import { feeLabel, type TournamentConfig } from "@/lib/constants/tournaments";
+import { feeLabel, feeSummary, type TournamentConfig } from "@/lib/constants/tournaments";
 
 import {
   RosterFields,
@@ -124,7 +124,12 @@ export function RegistrationForm({ tournament }: { tournament: TournamentConfig 
         setSubmitError(data.error || "Registration failed. Please review and try again.");
         return;
       }
-      trackTournamentRegistration(tournament.slug, tournament.fee);
+      trackTournamentRegistration(
+        tournament.slug,
+        tournament.fee !== null && tournament.feePer === "player"
+          ? tournament.fee * players.filter((p) => p.name.trim()).length
+          : tournament.fee
+      );
       // A card payment goes straight to Stripe's hosted page; the team is already held in the app,
       // so closing the tab loses nothing — the confirmation email carries the same link.
       if (data.checkoutUrl) {
@@ -135,7 +140,7 @@ export function RegistrationForm({ tournament }: { tournament: TournamentConfig 
         id: data.id,
         paymentChoice: data.paymentChoice ?? "later",
         email: data.captainEmail ?? captainEmail.trim().toLowerCase(),
-        amountDue: typeof data.amountDue === "number" ? data.amountDue : (tournament.fee ?? 0),
+        amountDue: typeof data.amountDue === "number" ? data.amountDue : tournament.feePer === "player" ? 0 : (tournament.fee ?? 0),
         teamName: data.teamName ?? teamName.trim(),
       });
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -217,7 +222,7 @@ export function RegistrationForm({ tournament }: { tournament: TournamentConfig 
       <FormSection
         step={3}
         title="Team Roster"
-        description={`At least ${MIN_PLAYERS} players to register, up to ${MAX_PLAYERS} on the team including the captain. All players must be ${MIN_AGE}+. Add more anytime before the tournament.`}
+        description={`At least ${MIN_PLAYERS} players to register, up to ${MAX_PLAYERS} on the team including the captain. ${MIN_AGE > 0 ? `All players must be ${MIN_AGE}+. ` : ""}Add more anytime before the tournament.`}
       >
         <RosterFields
           rules={{ minPlayers: MIN_PLAYERS, maxPlayers: MAX_PLAYERS, minAge: MIN_AGE }}
@@ -267,11 +272,7 @@ export function RegistrationForm({ tournament }: { tournament: TournamentConfig 
       <FormSection
         step={5}
         title="Payment"
-        description={
-          tournament.fee !== null
-            ? `$${tournament.fee} per team. Pay by card now, or register first and pay at the desk.`
-            : "Pay the team fee by card now (the amount is shown at checkout), or register first and pay at the desk."
-        }
+        description={`${feeSummary(tournament)} Pay by card now, or register first and pay at the desk.`}
       >
         <fieldset className="mb-3">
           <legend className="text-xs font-semibold text-neutral-700 mb-1.5">

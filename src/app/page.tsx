@@ -438,6 +438,17 @@ export default function HomePage() {
               </Link>
             </p>
           </Reveal>
+          <Reveal delay={0.33}>
+            <p className="text-center text-sm text-neutral-500 mt-2">
+              Thanksgiving, November 26–27:{" "}
+              <Link
+                href="/events/thanksgiving-cricket"
+                className="text-accent hover:text-accent-hover font-semibold"
+              >
+                Indoor cricket tournament — $20/player, teams or solo, register by Nov 25 &rarr;
+              </Link>
+            </p>
+          </Reveal>
           <Reveal delay={0.35}>
             <p className="text-center text-sm text-neutral-500 mt-2">
               Saturday, October 24:{" "}

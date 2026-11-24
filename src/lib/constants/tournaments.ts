@@ -6,7 +6,7 @@
 // and API routes pick it up by slug.
 // ============================================================
 
-export type TournamentSlug = "smash-cup" | "lpcl";
+export type TournamentSlug = "smash-cup" | "lpcl" | "thanksgiving-cricket";
 
 export interface TournamentConfig {
   slug: TournamentSlug;
@@ -21,9 +21,11 @@ export interface TournamentConfig {
   registerHref: string;
   /** Base of the site API routes for this tournament, e.g. /api/tournaments/lpcl */
   apiBase: string;
-  /** Team entry fee in USD, or null when the app sets it (shown at checkout). */
+  /** Entry fee in USD, or null when the app sets it (shown at checkout). */
   fee: number | null;
-  /** Roster rules. maxPlayers counts the captain, as the app does. */
+  /** What `fee` is charged per. Defaults to "team". */
+  feePer?: "team" | "player";
+  /** Roster rules. maxPlayers counts the captain, as the app does. minAge 0 = no age limit. */
   minPlayers: number;
   maxPlayers: number;
   minAge: number;
@@ -62,13 +64,37 @@ export const TOURNAMENTS: Record<TournamentSlug, TournamentConfig> = {
     minAge: 16,
     eligibility: "Open to all cricket teams, ages 16+. Enter your club, office, or friends-and-family side.",
   },
+  "thanksgiving-cricket": {
+    slug: "thanksgiving-cricket",
+    name: "LevelUP Thanksgiving Indoor Cricket Tournament 2026",
+    shortName: "Thanksgiving Cricket",
+    sport: "Cricket",
+    dateLabel: "Thu–Fri, Nov 26–27, 2026",
+    eventHref: "/events/thanksgiving-cricket",
+    registerHref: "/register/thanksgiving-cricket",
+    apiBase: "/api/tournaments/thanksgiving-cricket",
+    // Mirrors app tournament 3: $20 entry per player, teams of 8–10, no age limit.
+    fee: 20,
+    feePer: "player",
+    minPlayers: 8,
+    maxPlayers: 10,
+    minAge: 0,
+    eligibility: "Open to all players. Bring your own team of 8–10 — solo players can join a mix-and-match team in the LevelUP app.",
+  },
 };
 
 export function isTournamentSlug(value: string): value is TournamentSlug {
   return value in TOURNAMENTS;
 }
 
-/** "$250" or "team fee" when the app decides the amount. */
+/** "$250", or "the team fee" when the app works out the total (per-player or app-set fees). */
 export function feeLabel(t: TournamentConfig): string {
-  return t.fee !== null ? `$${t.fee}` : "team fee";
+  return t.fee !== null && t.feePer !== "player" ? `$${t.fee}` : "the team fee";
+}
+
+/** One line on what entry costs, for the payment step. */
+export function feeSummary(t: TournamentConfig): string {
+  if (t.fee === null) return "The team fee is shown at checkout.";
+  if (t.feePer === "player") return `$${t.fee} per player, so the team total depends on your roster (shown at checkout).`;
+  return `$${t.fee} per team.`;
 }

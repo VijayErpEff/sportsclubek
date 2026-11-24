@@ -9,6 +9,7 @@
 //   LEVELUP_PUBLIC_SITE_KEY          the value of PublicSite:ApiKey on that server
 //   LEVELUP_SMASH_CUP_TOURNAMENT_ID  the Smash Cup's id in the app
 //   LEVELUP_LPCL_TOURNAMENT_ID       the LPCL Kick Off's id in the app (defaults to 2)
+//   LEVELUP_THANKSGIVING_CRICKET_TOURNAMENT_ID  Thanksgiving cricket's id (defaults to 3)
 // ============================================================
 
 import type { TournamentSlug } from "@/lib/constants/tournaments";
@@ -31,6 +32,7 @@ function config() {
 const TOURNAMENT_ID_ENV: Record<TournamentSlug, { name: string; fallback?: string }> = {
   "smash-cup": { name: "LEVELUP_SMASH_CUP_TOURNAMENT_ID" },
   lpcl: { name: "LEVELUP_LPCL_TOURNAMENT_ID", fallback: "2" },
+  "thanksgiving-cricket": { name: "LEVELUP_THANKSGIVING_CRICKET_TOURNAMENT_ID", fallback: "3" },
 };
 
 /** The tournament's id in the app, or 0 when unset. */
