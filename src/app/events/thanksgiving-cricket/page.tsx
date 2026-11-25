@@ -28,7 +28,6 @@ import { generateSEOMetadata } from "@/lib/seo/metadata";
 import { generateBreadcrumbLD, generateEventLD, generateFAQLD } from "@/lib/seo/json-ld";
 import { SITE_CONFIG } from "@/lib/constants/site";
 import { TOURNAMENTS } from "@/lib/constants/tournaments";
-import { appLink } from "@/lib/constants/app";
 
 const T = TOURNAMENTS["thanksgiving-cricket"];
 
@@ -45,15 +44,15 @@ const EVENT = {
   ogImage: "/images/og/thanksgiving-cricket-2026.jpg",
   /** Tournament contact printed on the flyer, alongside the club line. */
   contactPhone: "615-593-9974",
-  /** Solo players sign up in the app and are placed on a mix-and-match team. */
-  soloHref: appLink("/tournaments/3", "thanksgiving-cricket-solo"),
+  /** Solo players use the same name + email form; staff place them on a mix-and-match team. */
+  soloHref: T.registerHref,
 };
 
 const WAYS_IN = [
   {
     icon: Users,
     title: "Bring your own team",
-    detail: `Register a squad of ${T.minPlayers}–${T.maxPlayers} players, captain included. $20 per player, paid by card now or at the desk before the deadline.`,
+    detail: `Each player signs up with just a name, an email and your team name. Squads of ${T.minPlayers}–${T.maxPlayers}. $20 per player, paid at the desk.`,
     cta: "Register your team",
     href: T.registerHref,
     primary: true,
@@ -62,7 +61,7 @@ const WAYS_IN = [
     icon: UserPlus,
     title: "Come solo, join a mix-and-match team",
     detail:
-      "No team? Sign up on your own in the LevelUP app and we'll put you on a mix-and-match side with other solo players. Same $20 entry.",
+      "No team? Sign up with your name and email and we'll put you on a mix-and-match side with other solo players. Same $20, paid at the desk.",
     cta: "Sign up as a solo player",
     href: EVENT.soloHref,
     primary: false,
@@ -102,17 +101,17 @@ const WHAT_TO_BRING = [
 const FAQS = [
   {
     question: "How do I register for the Thanksgiving cricket tournament?",
-    answer: `Teams register online at levelupsports.us${T.registerHref}: add your captain and ${T.minPlayers}–${T.maxPlayers} players, then pay by card or choose to pay at the desk. Solo players sign up in the LevelUP app and join a mix-and-match team. Registration closes ${EVENT.registerByLabel}.`,
+    answer: `Sign up at levelupsports.us${T.registerHref} with just your name and email. Playing with a team? Add your team name. Coming solo? Leave it blank and we'll place you on a mix-and-match team. Pay $20 at the desk. Registration closes ${EVENT.registerByLabel}.`,
   },
   {
     question: "How much does it cost?",
     answer:
-      "$20 per player. A team of 8 is $160 and a team of 10 is $200. Pay the whole team by card when you register, or register now and pay at the desk (cash, Venmo, Zelle or card) before the deadline.",
+      "$20 per player, paid at the front desk when you check in (cash, Venmo, Zelle or card). A team of 8 is $160 and a team of 10 is $200. Nothing to pay online.",
   },
   {
     question: "I don't have a team. Can I still play?",
     answer:
-      "Yes. Sign up as a solo player in the LevelUP app for the same $20. We group solo players into mix-and-match teams before the schedule goes out on Wednesday night.",
+      "Yes. Sign up with your name and email and leave the team name blank. Same $20, paid at the desk. We group solo players into mix-and-match teams before the schedule goes out on Wednesday night.",
   },
   {
     question: "What's the format?",
@@ -131,7 +130,7 @@ const FAQS = [
   {
     question: "Can I change my team after registering?",
     answer:
-      "Yes. Your team lives in the LevelUP app on the account that uses your captain email. Sign in at app.levelupsports.us to add, remove or update players before the tournament.",
+      "Yes. Each player signs up separately, so a new teammate just signs up with your team name. To remove someone or fix a typo, call (443) 406-6494 or tell the front desk at check-in.",
   },
   {
     question: "Where is it held?",
@@ -231,8 +230,8 @@ export default function ThanksgivingCricketPage() {
 
                 <p className="text-lg md:text-xl text-white/85 mb-8 max-w-xl text-balance">
                   <span className="font-semibold text-white">Registration is open.</span>{" "}
-                  Round robin on Thanksgiving Day, finals on Friday. $20 per player. Bring your own team or
-                  come solo and join a mix-and-match side.
+                  Round robin on Thanksgiving Day, finals on Friday. Sign up with just your name and email,
+                  then pay $20 at the desk. Bring your own team or come solo and join a mix-and-match side.
                 </p>
 
                 <div className="flex flex-wrap gap-3">
@@ -256,7 +255,7 @@ export default function ThanksgivingCricketPage() {
                     href={`${T.registerHref}/manage`}
                     className="underline underline-offset-2 hover:text-white transition-colors"
                   >
-                    Already registered? Manage your team →
+                    Registered a team in the app? Manage it →
                   </Link>
                 </p>
               </div>
@@ -298,7 +297,7 @@ export default function ThanksgivingCricketPage() {
           <StaggerContainer className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
             {[
               { icon: Calendar, label: "Dates", value: EVENT.dateShort, sub: "Thu round robin · Fri finals", iconBg: "bg-info/10", iconColor: "text-info", topBar: "bg-info" },
-              { icon: CircleDollarSign, label: "Entry", value: `${EVENT.fee} / Player`, sub: "Pay by card or at the desk", iconBg: "bg-secondary/15", iconColor: "text-secondary", topBar: "bg-secondary" },
+              { icon: CircleDollarSign, label: "Entry", value: `${EVENT.fee} / Player`, sub: "Pay at the desk", iconBg: "bg-secondary/15", iconColor: "text-secondary", topBar: "bg-secondary" },
               { icon: Users, label: "Teams", value: `${T.minPlayers}–${T.maxPlayers} players`, sub: "Or join a mix-and-match team", iconBg: "bg-accent/10", iconColor: "text-accent", topBar: "bg-accent" },
               { icon: Trophy, label: "Trophies", value: "Winners & Runners-up", sub: "Open to all players", iconBg: "bg-warning/15", iconColor: "text-warning", topBar: "bg-warning" },
             ].map((item) => (
@@ -501,8 +500,8 @@ export default function ThanksgivingCricketPage() {
         <Container className="text-center">
           <h2 className="font-display text-section text-white mb-4 text-balance">Spend Thanksgiving on the Pitch</h2>
           <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-            $20 per player. Teams of {T.minPlayers}–{T.maxPlayers}, or sign up solo and join a mix-and-match
-            team. Registration closes {EVENT.registerByLabel}.
+            Name and email is all it takes. $20 per player at the desk. Teams of {T.minPlayers}–{T.maxPlayers},
+            or sign up solo and join a mix-and-match team. Registration closes {EVENT.registerByLabel}.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Button size="xl" asChild className="bg-white text-accent hover:bg-neutral-50 shadow-lg">

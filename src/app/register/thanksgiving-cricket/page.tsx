@@ -7,16 +7,15 @@ import { Reveal } from "@/components/ui/reveal";
 import { generateSEOMetadata } from "@/lib/seo/metadata";
 import { SITE_CONFIG } from "@/lib/constants/site";
 import { TOURNAMENTS } from "@/lib/constants/tournaments";
-import { RegistrationForm } from "@/components/tournament/registration-form";
-import { appLink } from "@/lib/constants/app";
+import { QuickSignupForm } from "@/components/tournament/quick-signup-form";
 
 const T = TOURNAMENTS["thanksgiving-cricket"];
 
 export const metadata: Metadata = {
   ...generateSEOMetadata({
-    title: "Register Your Team — Thanksgiving Cricket Tournament",
+    title: "Sign Up — Thanksgiving Cricket Tournament",
     description:
-      "Register your team for the LevelUP Thanksgiving Indoor Cricket Tournament, Nov 26–27, 2026 in Elkton, MD. $20 per player, teams of 8–10, trophies.",
+      "Sign up for the LevelUP Thanksgiving Indoor Cricket Tournament, Nov 26–27, 2026 in Elkton, MD. Just your name and email. $20 per player, pay at the desk.",
     path: T.registerHref,
   }),
   // Registration funnel — keep crawl budget on the marketing page.
@@ -51,23 +50,14 @@ export default function ThanksgivingCricketRegisterPage() {
               Thanksgiving Indoor Cricket · {T.dateLabel}
             </p>
             <h1 className="font-display text-hero leading-[1.05] mb-3 text-balance">
-              Register Your <span className="text-secondary">Team</span>
+              Team or Solo, <span className="text-secondary">You&apos;re In</span>
             </h1>
             <p className="text-lg text-white/80 max-w-2xl">
-              Round robin on Thursday, November 26, finals on Friday. $20 per player, teams of{" "}
-              {T.minPlayers}–{T.maxPlayers}. Registration closes Wednesday, November 25 at 6 PM.
+              Just your name and email. Round robin on Thursday, November 26, finals on Friday.
+              $20 per player, paid at the desk. No team? Sign up solo and we&apos;ll place you on one.
             </p>
-            <p className="text-sm text-white/70 mt-4">
-              No team?{" "}
-              <Link
-                href={appLink("/tournaments/3", "thanksgiving-cricket-solo")}
-                className="underline underline-offset-2 hover:text-white transition-colors"
-              >
-                Sign up as a solo player and join a mix-and-match team →
-              </Link>
-            </p>
-            <p className="text-sm text-white/60 mt-2">
-              Already registered?{" "}
+            <p className="text-sm text-white/60 mt-4">
+              Registered a full team in the app already?{" "}
               <Link
                 href={`${T.registerHref}/manage`}
                 className="underline underline-offset-2 hover:text-white transition-colors"
@@ -80,8 +70,8 @@ export default function ThanksgivingCricketRegisterPage() {
       </Section>
 
       <Section size="lg">
-        <Container className="max-w-3xl">
-          <RegistrationForm tournament={T} />
+        <Container className="max-w-xl">
+          <QuickSignupForm tournament={T} endpoint={`${T.apiBase}/signup`} />
           <p className="text-center text-xs text-neutral-500 mt-10">
             Questions? Call{" "}
             <a

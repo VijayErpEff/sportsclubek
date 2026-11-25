@@ -79,7 +79,7 @@ export const TOURNAMENTS: Record<TournamentSlug, TournamentConfig> = {
     minPlayers: 8,
     maxPlayers: 10,
     minAge: 0,
-    eligibility: "Open to all players. Bring your own team of 8–10 — solo players can join a mix-and-match team in the LevelUP app.",
+    eligibility: "Open to all players. Bring your own team of 8–10, or sign up solo and join a mix-and-match team.",
   },
 };
 

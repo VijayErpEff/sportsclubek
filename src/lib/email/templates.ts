@@ -29,7 +29,7 @@ ${body}
 }
 
 export interface NotificationInput {
-  type: "Contact Form" | "Newsletter Subscription" | "Career Application";
+  type: "Contact Form" | "Newsletter Subscription" | "Career Application" | "Tournament Sign-up";
   subject: string;
   fromName: string;
   fromEmail: string;
