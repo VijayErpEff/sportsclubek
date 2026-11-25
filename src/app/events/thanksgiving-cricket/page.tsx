@@ -37,8 +37,8 @@ const EVENT = {
   dateShort: "Nov 26–27, 2026",
   startISO: "2026-11-26T11:00:00-05:00",
   endISO: "2026-11-27T20:30:00-05:00",
-  registerByISO: "2026-11-25T18:00:00-05:00",
-  registerByLabel: "Wednesday, November 25 at 6:00 PM",
+  registerByISO: "2026-11-26T11:00:00-05:00",
+  registerByLabel: "Thursday, November 26 at 11 AM, when the first match starts",
   fee: "$20",
   flyer: "/images/Content/thanksgiving-cricket-2026.jpg",
   ogImage: "/images/og/thanksgiving-cricket-2026.jpg",
@@ -70,14 +70,14 @@ const WAYS_IN = [
 
 const SCHEDULE = [
   {
-    time: "Wed, Nov 25 · 6:00 PM",
-    title: "Registration closes",
-    description: "Last call for teams and solo players. Mix-and-match teams are drawn from the solo sign-ups.",
+    time: "Now – Thu, Nov 26 · 11 AM",
+    title: "Registration open",
+    description: "Teams and solo players sign up with a name and email right up to the first match. Mix-and-match teams are drawn from the solo sign-ups.",
   },
   {
-    time: "Wed, Nov 25 · night",
+    time: "Thu, Nov 26 · morning",
     title: "Match schedule released",
-    description: "Fixtures go to every captain based on how many teams registered.",
+    description: "Fixtures go out by email based on how many teams signed up.",
   },
   {
     time: "Thu, Nov 26 · 11 AM – 8 PM",
@@ -111,12 +111,12 @@ const FAQS = [
   {
     question: "I don't have a team. Can I still play?",
     answer:
-      "Yes. Sign up with your name and email and leave the team name blank. Same $20, paid at the desk. We group solo players into mix-and-match teams before the schedule goes out on Wednesday night.",
+      "Yes. Sign up with your name and email and leave the team name blank. Same $20, paid at the desk. We group solo players into mix-and-match teams before the first match.",
   },
   {
     question: "What's the format?",
     answer:
-      "Round robin matches on Thursday, November 26 from 11 AM to 8 PM, then semi-finals and finals on Friday, November 27. The match schedule is released Wednesday night based on the number of registered teams.",
+      "Round robin matches on Thursday, November 26 from 11 AM to 8 PM, then semi-finals and finals on Friday, November 27. The match schedule goes out Thursday morning based on the number of teams signed up.",
   },
   {
     question: "What do the winners get?",
@@ -143,7 +143,7 @@ const FAQS = [
 export const metadata: Metadata = generateSEOMetadata({
   title: "Thanksgiving Indoor Cricket Tournament — Nov 26–27, Elkton MD",
   description:
-    "Indoor cricket tournament at LevelUP Sports in Elkton, MD on Thanksgiving, Nov 26–27, 2026. $20 per player, teams or solo sign-ups, trophies. Register by Nov 25, 6 PM.",
+    "Indoor cricket tournament at LevelUP Sports in Elkton, MD on Thanksgiving, Nov 26–27, 2026. $20 per player, teams or solo sign-ups, trophies. Sign up until the first match.",
   path: T.eventHref,
   ogImage: EVENT.ogImage,
 });
@@ -380,7 +380,7 @@ export default function ThanksgivingCricketPage() {
                 <h2 className="font-display text-section text-neutral-900 mb-4 text-balance">How the Tournament Runs</h2>
                 <p className="text-neutral-600 mb-6">
                   Fixtures depend on how many teams sign up, so the full match schedule goes out on
-                  Wednesday night once registration closes.
+                  Thursday morning, just before the first match.
                 </p>
                 <div className="bg-white rounded-xl p-5 border border-neutral-200">
                   <h3 className="font-semibold text-neutral-900 mb-3 flex items-center gap-2">

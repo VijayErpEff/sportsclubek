@@ -75,7 +75,7 @@ export const EVENTS: ClubEvent[] = [
     startISO: "2026-11-26T11:00:00-05:00",
     endISO: "2026-11-27T20:30:00-05:00",
     blurb:
-      "Round robin on Thanksgiving Day, semi-finals and finals on Friday. Bring a team of 8–10 or sign up solo and join a mix-and-match team. Trophies for winners and runners-up. Register by Wed, Nov 25 at 6 PM.",
+      "Round robin on Thanksgiving Day, semi-finals and finals on Friday. Bring a team of 8–10 or sign up solo and join a mix-and-match team. Trophies for winners and runners-up. Registration open until the first match, Thu 11 AM.",
     price: "$20 / player",
     image: "/images/Content/thanksgiving-cricket-2026.jpg",
     imageAlt: "Thanksgiving Indoor Cricket Tournament 2026 flyer — November 26 and 27, $20 per player",

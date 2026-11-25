@@ -154,7 +154,7 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     programs: [
       {
         title: "Thanksgiving Cricket Tournament — Nov 26–27",
-        description: "Round robin on Thanksgiving Day, finals on Friday. $20 per player. Bring a team of 8–10 or sign up solo and join a mix-and-match team. Register by Wed, Nov 25 at 6 PM.",
+        description: "Round robin on Thanksgiving Day, finals on Friday. $20 per player. Bring a team of 8–10 or sign up solo and join a mix-and-match team. Registration open until the first match, Thu 11 AM.",
         href: "/events/thanksgiving-cricket",
         tag: "Tournament",
       },

@@ -456,7 +456,7 @@ export default function HomePage() {
                 href="/events/thanksgiving-cricket"
                 className="text-accent hover:text-accent-hover font-semibold"
               >
-                Indoor cricket tournament — $20/player, teams or solo, register by Nov 25 &rarr;
+                Indoor cricket tournament — $20/player, teams or solo, sign up with name &amp; email &rarr;
               </Link>
             </p>
           </Reveal>
