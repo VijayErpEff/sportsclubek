@@ -51,6 +51,22 @@ export const EVENTS: ClubEvent[] = [
     pastCta: "Final standings",
   },
   {
+    slug: "pickleball-tournament-dec-2026",
+    name: "Indoor Pickleball Tournament",
+    kind: "Tournament",
+    sport: "Pickleball",
+    dateLabel: "Sunday, December 13, 2026 · 1–7 PM",
+    startISO: "2026-12-13T13:00:00-05:00",
+    endISO: "2026-12-13T19:00:00-05:00",
+    blurb:
+      "Three doubles divisions: Mixed Doubles (no DUPR rating required), plus DUPR-rated Doubles for 3.499 & under and 3.5 & above. Snacks provided. Registration closes Wed, Dec 9 at 7 PM.",
+    price: "$35 / player",
+    image: "/images/Content/pickleball-tournament-dec-2026.jpg",
+    imageAlt: "Indoor Pickleball Tournament flyer — Sunday, December 13, 2026, 1 to 7 PM, $35 per participant",
+    href: "/events/pickleball-tournament",
+    cta: "Tournament details",
+  },
+  {
     slug: "thanksgiving-cricket-2026",
     name: "Thanksgiving Indoor Cricket Tournament",
     kind: "Tournament",

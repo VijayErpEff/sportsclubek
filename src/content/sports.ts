@@ -361,6 +361,12 @@ export const SPORT_PAGES: Record<string, SportPageData> = {
     ],
     programs: [
       {
+        title: "Indoor Pickleball Tournament — Dec 13",
+        description: "Sunday, December 13, 1–7 PM. Mixed Doubles (no DUPR rating required) plus DUPR-rated Doubles for 3.499 & under and 3.5 & above. $35 per player, snacks provided.",
+        href: "/events/pickleball-tournament",
+        tag: "Tournament",
+      },
+      {
         title: "Court Rentals",
         description: "Reserve a court for private play. Great for regular groups, practice sessions, or friendly tournaments.",
         href: BOOKING_URLS.offerings,

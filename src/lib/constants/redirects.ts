@@ -40,6 +40,12 @@ export const REDIRECTS: RedirectEntry[] = [
     destination: appLink("/", "volleyball-tournament"),
   },
   {
+    // Pickleball tournament (Dec 13) — flyer / social links.
+    slug: "pickleball-tournament",
+    title: "Indoor Pickleball Tournament — Sunday, Dec 13",
+    destination: "/events/pickleball-tournament",
+  },
+  {
     // Thanksgiving cricket tournament — flyer / WhatsApp links.
     slug: "thanksgiving-cricket",
     title: "Thanksgiving Indoor Cricket Tournament — Nov 26–27",

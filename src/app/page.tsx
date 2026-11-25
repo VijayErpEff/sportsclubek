@@ -438,6 +438,17 @@ export default function HomePage() {
               </Link>
             </p>
           </Reveal>
+          <Reveal delay={0.32}>
+            <p className="text-center text-sm text-neutral-500 mt-2">
+              Sunday, December 13:{" "}
+              <Link
+                href="/events/pickleball-tournament"
+                className="text-accent hover:text-accent-hover font-semibold"
+              >
+                Indoor pickleball tournament — 3 doubles divisions, $35/player &rarr;
+              </Link>
+            </p>
+          </Reveal>
           <Reveal delay={0.33}>
             <p className="text-center text-sm text-neutral-500 mt-2">
               Thanksgiving, November 26–27:{" "}

@@ -210,6 +210,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${BASE_URL}/events/pickleball-tournament`,
+      lastModified: "2026-11-24",
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
       url: `${BASE_URL}/events/thanksgiving-cricket`,
       lastModified: "2026-11-24",
       changeFrequency: "daily",
