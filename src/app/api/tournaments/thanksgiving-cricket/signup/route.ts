@@ -21,7 +21,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Sign-up is not available right now. Please call (443) 406-6494." }, { status: 503 });
   }
 
-  let body: { name?: unknown; email?: unknown; phone?: unknown; teamName?: unknown; website?: unknown };
+  let body: { name?: unknown; email?: unknown; phone?: unknown; teamName?: unknown; waiverAccepted?: unknown; website?: unknown };
   try {
     body = await request.json();
   } catch {
@@ -40,11 +40,12 @@ export async function POST(request: Request) {
   if (name.length < 2) fields.name = "Please enter your name.";
   if (!EMAIL_REGEX.test(email)) fields.email = "Please enter a valid email.";
   if (phone.replace(/\D/g, "").length < 10) fields.phone = "Please enter a valid phone number.";
+  if (body.waiverAccepted !== true) fields.waiver = "Please accept the waiver to sign up.";
   if (Object.keys(fields).length) {
     return NextResponse.json({ error: "Please check the highlighted fields.", fields }, { status: 400 });
   }
 
-  const signup: Signup = { name, email, phone, teamName, timestamp: new Date().toISOString() };
+  const signup: Signup = { name, email, phone, teamName, waiverAccepted: true, timestamp: new Date().toISOString() };
   signup.app = await pushSignupToApp(signup);
   if (!signup.app.ok) console.error("[thanksgiving-cricket] app sign-up failed:", signup.app.status, signup.app.error);
   try {

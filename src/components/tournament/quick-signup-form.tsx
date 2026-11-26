@@ -17,6 +17,7 @@ export function QuickSignupForm({ tournament, endpoint }: { tournament: Tourname
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [teamName, setTeamName] = useState("");
+  const [waiver, setWaiver] = useState(false);
   const [website, setWebsite] = useState(""); // honeypot
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -30,6 +31,7 @@ export function QuickSignupForm({ tournament, endpoint }: { tournament: Tourname
     if (name.trim().length < 2) errs.name = "Please enter your name.";
     if (!EMAIL_REGEX.test(email.trim())) errs.email = "Please enter a valid email.";
     if (phone.replace(/\D/g, "").length < 10) errs.phone = "Please enter a valid phone number.";
+    if (!waiver) errs.waiver = "Please accept the waiver to sign up.";
     setErrors(errs);
     if (Object.keys(errs).length) return;
 
@@ -38,7 +40,7 @@ export function QuickSignupForm({ tournament, endpoint }: { tournament: Tourname
       const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: name.trim(), email: email.trim(), phone: phone.trim(), teamName: teamName.trim(), website }),
+        body: JSON.stringify({ name: name.trim(), email: email.trim(), phone: phone.trim(), teamName: teamName.trim(), waiverAccepted: waiver, website }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
@@ -189,19 +191,40 @@ export function QuickSignupForm({ tournament, endpoint }: { tournament: Tourname
         </div>
       )}
 
+      <div>
+        <label className="flex items-start gap-3 text-sm text-neutral-700 cursor-pointer min-h-[44px]">
+          <input
+            type="checkbox"
+            name="waiverAccepted"
+            checked={waiver}
+            onChange={(e) => setWaiver(e.target.checked)}
+            className="mt-1 h-5 w-5 shrink-0 rounded border-neutral-300 text-accent focus:ring-accent/30"
+            aria-invalid={!!errors.waiver}
+            aria-describedby={errors.waiver ? "waiver-error" : undefined}
+          />
+          <span>
+            I accept the tournament waiver and the{" "}
+            <Link
+              href="/terms#tournaments"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-accent hover:text-accent-hover underline underline-offset-2"
+            >
+              tournament terms
+            </Link>{" "}
+            (assumption of risk and release of liability).
+          </span>
+        </label>
+        {errors.waiver && (
+          <p id="waiver-error" className="text-sm text-error mt-1" role="alert">
+            {errors.waiver}
+          </p>
+        )}
+      </div>
+
       <Button type="submit" size="xl" isLoading={submitting} className="w-full">
         Sign me up
       </Button>
-      <p className="text-xs text-neutral-500 text-center leading-relaxed">
-        You&apos;ll sign the tournament waiver at check-in. See the{" "}
-        <Link
-          href="/terms#tournaments"
-          className="text-accent hover:text-accent-hover underline underline-offset-2"
-        >
-          tournament terms
-        </Link>
-        .
-      </p>
     </form>
   );
 }

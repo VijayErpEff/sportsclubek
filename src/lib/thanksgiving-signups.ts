@@ -23,6 +23,8 @@ export interface Signup {
   /** Added Nov 25 evening; earlier sign-ups have none. */
   phone?: string;
   teamName: string;
+  /** True only when the player ticked the waiver box (form, from Nov 26). */
+  waiverAccepted?: boolean;
   timestamp: string;
   app?: AppSync;
 }
@@ -34,6 +36,10 @@ export function parseSignup(v: string | Signup): Signup {
 /** Sends one player to the app. Never throws; the result is stored on the sign-up. */
 export async function pushSignupToApp(s: Signup): Promise<AppSync> {
   const at = new Date().toISOString();
+  // The app requires a phone and the player's own waiver acceptance; never assume either.
+  if (!s.phone || s.waiverAccepted !== true) {
+    return { ok: false, at, status: 0, error: "Missing phone or waiver (signed up before those were on the form)" };
+  }
   if (!appConfigured("thanksgiving-cricket")) {
     return { ok: false, at, status: 503, error: "App bridge not configured" };
   }
@@ -43,8 +49,9 @@ export async function pushSignupToApp(s: Signup): Promise<AppSync> {
     {
       name: s.name,
       email: s.email,
-      phone: s.phone || null,
+      phone: s.phone,
       teamName: s.teamName || null,
+      waiverAccepted: true,
       paymentChoice: "later",
       source: "website",
     }
