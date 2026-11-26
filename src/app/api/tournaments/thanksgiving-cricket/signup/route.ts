@@ -3,26 +3,18 @@ import { redis } from "@/lib/storage/redis";
 import { sendEmail, BUSINESS_INBOX, REPLY_TO_INBOX, isEmailConfigured } from "@/lib/email/acs";
 import { notificationEmail, autoReplyEmail } from "@/lib/email/templates";
 import { TOURNAMENTS } from "@/lib/constants/tournaments";
+import { SIGNUPS_KEY, parseSignup, pushSignupToApp, type Signup } from "@/lib/thanksgiving-signups";
 
 // Thanksgiving cricket quick sign-up: name, email and phone only, everyone pays at the desk.
-// The app's team-registration door needs a full roster, so these are held on the site
-// (Redis, keyed by email so a resubmit updates rather than duplicates) and staff place
-// players on teams. Staff list: GET ?pin=ADMIN_PIN (add &format=csv for a spreadsheet).
+// Each player goes straight to the LevelUP app (player-signups). The site also keeps a copy
+// in Redis (keyed by email, so a resubmit updates rather than duplicates) with the app's
+// answer, so nothing is lost if the app is down; failures re-sync via ../sync-to-app.
+// Staff list: GET ?pin=ADMIN_PIN (add &format=csv for a spreadsheet).
 
 const T = TOURNAMENTS["thanksgiving-cricket"];
-const SIGNUPS_KEY = "thanksgiving_cricket_2026:signups";
 const LEADS_KEY = "leads";
 const ADMIN_PIN = process.env.ADMIN_PIN || "6886";
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-interface Signup {
-  name: string;
-  email: string;
-  /** Added Nov 25 evening; earlier sign-ups have none. */
-  phone?: string;
-  teamName: string;
-  timestamp: string;
-}
 
 export async function POST(request: Request) {
   if (!redis) {
@@ -53,6 +45,8 @@ export async function POST(request: Request) {
   }
 
   const signup: Signup = { name, email, phone, teamName, timestamp: new Date().toISOString() };
+  signup.app = await pushSignupToApp(signup);
+  if (!signup.app.ok) console.error("[thanksgiving-cricket] app sign-up failed:", signup.app.status, signup.app.error);
   try {
     const isNew = (await redis.hset(SIGNUPS_KEY, { [email]: JSON.stringify(signup) })) === 1;
     if (isNew) {
@@ -124,12 +118,12 @@ export async function GET(request: Request) {
 
   const raw = (await redis.hgetall<Record<string, string | Signup>>(SIGNUPS_KEY)) ?? {};
   const signups = Object.values(raw)
-    .map((v) => (typeof v === "string" ? (JSON.parse(v) as Signup) : v))
+    .map(parseSignup)
     .sort((a, b) => a.timestamp.localeCompare(b.timestamp));
 
   if (searchParams.get("format") === "csv") {
     const esc = (s: string) => `"${s.replace(/"/g, '""')}"`;
-    const csv = ["Name,Email,Phone,Team,Signed up", ...signups.map((s) => [s.name, s.email, s.phone ?? "", s.teamName || "Solo", s.timestamp].map(esc).join(","))].join("\n");
+    const csv = ["Name,Email,Phone,Team,Signed up,In app", ...signups.map((s) => [s.name, s.email, s.phone ?? "", s.teamName || "Solo", s.timestamp, s.app?.ok ? "yes" : `no${s.app?.error ? ` (${s.app.error})` : ""}`].map(esc).join(","))].join("\n");
     return new NextResponse(csv, {
       headers: {
         "Content-Type": "text/csv; charset=utf-8",
@@ -138,5 +132,5 @@ export async function GET(request: Request) {
       },
     });
   }
-  return NextResponse.json({ total: signups.length, solo: signups.filter((s) => !s.teamName).length, signups }, { headers: { "Cache-Control": "no-store" } });
+  return NextResponse.json({ total: signups.length, solo: signups.filter((s) => !s.teamName).length, inApp: signups.filter((s) => s.app?.ok).length, signups }, { headers: { "Cache-Control": "no-store" } });
 }
