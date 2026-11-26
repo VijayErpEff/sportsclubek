@@ -52,7 +52,7 @@ const WAYS_IN = [
   {
     icon: Users,
     title: "Bring your own team",
-    detail: `Each player signs up with just a name, an email and your team name. Squads of ${T.minPlayers}–${T.maxPlayers}. $20 per player, paid at the desk.`,
+    detail: `Each player signs up with just a name, email, phone and your team name. Squads of ${T.minPlayers}–${T.maxPlayers}. $20 per player, paid at the desk.`,
     cta: "Register your team",
     href: T.registerHref,
     primary: true,
@@ -61,7 +61,7 @@ const WAYS_IN = [
     icon: UserPlus,
     title: "Come solo, join a mix-and-match team",
     detail:
-      "No team? Sign up with your name and email and we'll put you on a mix-and-match side with other solo players. Same $20, paid at the desk.",
+      "No team? Sign up with your name, email and phone and we'll put you on a mix-and-match side with other solo players. Same $20, paid at the desk.",
     cta: "Sign up as a solo player",
     href: EVENT.soloHref,
     primary: false,
@@ -72,7 +72,7 @@ const SCHEDULE = [
   {
     time: "Now – Thu, Nov 26 · 11 AM",
     title: "Registration open",
-    description: "Teams and solo players sign up with a name and email right up to the first match. Mix-and-match teams are drawn from the solo sign-ups.",
+    description: "Teams and solo players sign up with a name, email and phone right up to the first match. Mix-and-match teams are drawn from the solo sign-ups.",
   },
   {
     time: "Thu, Nov 26 · morning",
@@ -101,7 +101,7 @@ const WHAT_TO_BRING = [
 const FAQS = [
   {
     question: "How do I register for the Thanksgiving cricket tournament?",
-    answer: `Sign up at levelupsports.us${T.registerHref} with just your name and email. Playing with a team? Add your team name. Coming solo? Leave it blank and we'll place you on a mix-and-match team. Pay $20 at the desk. Registration closes ${EVENT.registerByLabel}.`,
+    answer: `Sign up at levelupsports.us${T.registerHref} with just your name, email and phone. Playing with a team? Add your team name. Coming solo? Leave it blank and we'll place you on a mix-and-match team. Pay $20 at the desk. Registration closes ${EVENT.registerByLabel}.`,
   },
   {
     question: "How much does it cost?",
@@ -111,7 +111,7 @@ const FAQS = [
   {
     question: "I don't have a team. Can I still play?",
     answer:
-      "Yes. Sign up with your name and email and leave the team name blank. Same $20, paid at the desk. We group solo players into mix-and-match teams before the first match.",
+      "Yes. Sign up with your name, email and phone and leave the team name blank. Same $20, paid at the desk. We group solo players into mix-and-match teams before the first match.",
   },
   {
     question: "What's the format?",
@@ -230,7 +230,7 @@ export default function ThanksgivingCricketPage() {
 
                 <p className="text-lg md:text-xl text-white/85 mb-8 max-w-xl text-balance">
                   <span className="font-semibold text-white">Registration is open.</span>{" "}
-                  Round robin on Thanksgiving Day, finals on Friday. Sign up with just your name and email,
+                  Round robin on Thanksgiving Day, finals on Friday. Sign up with just your name, email and phone,
                   then pay $20 at the desk. Bring your own team or come solo and join a mix-and-match side.
                 </p>
 
@@ -500,7 +500,7 @@ export default function ThanksgivingCricketPage() {
         <Container className="text-center">
           <h2 className="font-display text-section text-white mb-4 text-balance">Spend Thanksgiving on the Pitch</h2>
           <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-            Name and email is all it takes. $20 per player at the desk. Teams of {T.minPlayers}–{T.maxPlayers},
+            Name, email and phone is all it takes. $20 per player at the desk. Teams of {T.minPlayers}–{T.maxPlayers},
             or sign up solo and join a mix-and-match team. Registration closes {EVENT.registerByLabel}.
           </p>
           <div className="flex flex-wrap justify-center gap-3">

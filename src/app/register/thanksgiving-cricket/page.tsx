@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   ...generateSEOMetadata({
     title: "Sign Up — Thanksgiving Cricket Tournament",
     description:
-      "Sign up for the LevelUP Thanksgiving Indoor Cricket Tournament, Nov 26–27, 2026 in Elkton, MD. Just your name and email. $20 per player, pay at the desk.",
+      "Sign up for the LevelUP Thanksgiving Indoor Cricket Tournament, Nov 26–27, 2026 in Elkton, MD. Just your name, email and phone. $20 per player, pay at the desk.",
     path: T.registerHref,
   }),
   // Registration funnel — keep crawl budget on the marketing page.
@@ -53,7 +53,7 @@ export default function ThanksgivingCricketRegisterPage() {
               Team or Solo, <span className="text-secondary">You&apos;re In</span>
             </h1>
             <p className="text-lg text-white/80 max-w-2xl">
-              Just your name and email. Round robin on Thursday, November 26, finals on Friday.
+              Just your name, email and phone. Round robin on Thursday, November 26, finals on Friday.
               $20 per player, paid at the desk. No team? Sign up solo and we&apos;ll place you on one.
             </p>
             <p className="text-sm text-white/60 mt-4">

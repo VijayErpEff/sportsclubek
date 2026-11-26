@@ -11,10 +11,11 @@ import type { TournamentConfig } from "@/lib/constants/tournaments";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-/** Name + email sign-up for teams and solo players alike. No payment step: everyone pays at the desk. */
+/** Name + email + phone sign-up for teams and solo players alike. No payment step: everyone pays at the desk. */
 export function QuickSignupForm({ tournament, endpoint }: { tournament: TournamentConfig; endpoint: string }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [teamName, setTeamName] = useState("");
   const [website, setWebsite] = useState(""); // honeypot
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -28,6 +29,7 @@ export function QuickSignupForm({ tournament, endpoint }: { tournament: Tourname
     const errs: Record<string, string> = {};
     if (name.trim().length < 2) errs.name = "Please enter your name.";
     if (!EMAIL_REGEX.test(email.trim())) errs.email = "Please enter a valid email.";
+    if (phone.replace(/\D/g, "").length < 10) errs.phone = "Please enter a valid phone number.";
     setErrors(errs);
     if (Object.keys(errs).length) return;
 
@@ -36,7 +38,7 @@ export function QuickSignupForm({ tournament, endpoint }: { tournament: Tourname
       const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: name.trim(), email: email.trim(), teamName: teamName.trim(), website }),
+        body: JSON.stringify({ name: name.trim(), email: email.trim(), phone: phone.trim(), teamName: teamName.trim(), website }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
@@ -76,7 +78,7 @@ export function QuickSignupForm({ tournament, endpoint }: { tournament: Tourname
           confirmation is on its way to <span className="font-mono text-neutral-900">{done.email}</span>.
         </p>
         <p className="text-sm text-neutral-500 mt-4">
-          Bringing teammates? Each player signs up with their own name and email, using the same team name.
+          Bringing teammates? Each player signs up with their own details, using the same team name.
         </p>
         <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
           <Button
@@ -85,6 +87,7 @@ export function QuickSignupForm({ tournament, endpoint }: { tournament: Tourname
               setDone(null);
               setName("");
               setEmail("");
+              setPhone("");
             }}
           >
             Sign up another player
@@ -133,6 +136,18 @@ export function QuickSignupForm({ tournament, endpoint }: { tournament: Tourname
         autoComplete="email"
         inputMode="email"
         maxLength={200}
+      />
+      <FloatingInput
+        label="Phone"
+        name="phone"
+        type="tel"
+        required
+        value={phone}
+        onChange={(e) => setPhone(e.target.value)}
+        error={errors.phone}
+        autoComplete="tel"
+        inputMode="tel"
+        maxLength={30}
       />
       <div>
         <FloatingInput

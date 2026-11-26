@@ -4,7 +4,7 @@ import { sendEmail, BUSINESS_INBOX, REPLY_TO_INBOX, isEmailConfigured } from "@/
 import { notificationEmail, autoReplyEmail } from "@/lib/email/templates";
 import { TOURNAMENTS } from "@/lib/constants/tournaments";
 
-// Thanksgiving cricket quick sign-up: name + email only, everyone pays at the desk.
+// Thanksgiving cricket quick sign-up: name, email and phone only, everyone pays at the desk.
 // The app's team-registration door needs a full roster, so these are held on the site
 // (Redis, keyed by email so a resubmit updates rather than duplicates) and staff place
 // players on teams. Staff list: GET ?pin=ADMIN_PIN (add &format=csv for a spreadsheet).
@@ -18,6 +18,8 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 interface Signup {
   name: string;
   email: string;
+  /** Added Nov 25 evening; earlier sign-ups have none. */
+  phone?: string;
   teamName: string;
   timestamp: string;
 }
@@ -27,7 +29,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Sign-up is not available right now. Please call (443) 406-6494." }, { status: 503 });
   }
 
-  let body: { name?: unknown; email?: unknown; teamName?: unknown; website?: unknown };
+  let body: { name?: unknown; email?: unknown; phone?: unknown; teamName?: unknown; website?: unknown };
   try {
     body = await request.json();
   } catch {
@@ -39,16 +41,18 @@ export async function POST(request: Request) {
 
   const name = typeof body.name === "string" ? body.name.trim().slice(0, 100) : "";
   const email = typeof body.email === "string" ? body.email.trim().toLowerCase().slice(0, 200) : "";
+  const phone = typeof body.phone === "string" ? body.phone.trim().slice(0, 30) : "";
   const teamName = typeof body.teamName === "string" ? body.teamName.trim().slice(0, 60) : "";
 
   const fields: Record<string, string> = {};
   if (name.length < 2) fields.name = "Please enter your name.";
   if (!EMAIL_REGEX.test(email)) fields.email = "Please enter a valid email.";
+  if (phone.replace(/\D/g, "").length < 10) fields.phone = "Please enter a valid phone number.";
   if (Object.keys(fields).length) {
     return NextResponse.json({ error: "Please check the highlighted fields.", fields }, { status: 400 });
   }
 
-  const signup: Signup = { name, email, teamName, timestamp: new Date().toISOString() };
+  const signup: Signup = { name, email, phone, teamName, timestamp: new Date().toISOString() };
   try {
     const isNew = (await redis.hset(SIGNUPS_KEY, { [email]: JSON.stringify(signup) })) === 1;
     if (isNew) {
@@ -58,6 +62,7 @@ export async function POST(request: Request) {
           id: `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
           email,
           name,
+          phone,
           source: "thanksgiving_cricket",
           context: `Thanksgiving cricket sign-up — ${teamName ? `team: ${teamName}` : "solo"}`,
           timestamp: signup.timestamp,
@@ -82,7 +87,7 @@ export async function POST(request: Request) {
           subject: "Thanksgiving Cricket",
           fromName: name,
           fromEmail: email,
-          phone: "",
+          phone,
           message: `${name} signed up ${teamName ? `with team "${teamName}"` : "solo — needs a mix-and-match team"}. Pays $${T.fee} at the desk.`,
           extra: [{ label: "Team", value: teamName || "Solo" }],
         }),
@@ -98,7 +103,7 @@ export async function POST(request: Request) {
           nextSteps: [
             `Pay $${T.fee} at the front desk when you check in: cash, Venmo, Zelle or card.`,
             "We'll email the match schedule and team line-ups before Thursday.",
-            "Bringing friends? Each player can sign up with their own name and email.",
+            "Bringing friends? Each player can sign up with their own name, email and phone.",
           ],
           preheader: `You're on the list, ${name.split(" ")[0]}. Pay $${T.fee} at the desk on game day.`,
         }),
@@ -109,7 +114,7 @@ export async function POST(request: Request) {
     });
   }
 
-  return NextResponse.json({ success: true, name, email, teamName });
+  return NextResponse.json({ success: true, name, email, phone, teamName });
 }
 
 export async function GET(request: Request) {
@@ -124,7 +129,7 @@ export async function GET(request: Request) {
 
   if (searchParams.get("format") === "csv") {
     const esc = (s: string) => `"${s.replace(/"/g, '""')}"`;
-    const csv = ["Name,Email,Team,Signed up", ...signups.map((s) => [s.name, s.email, s.teamName || "Solo", s.timestamp].map(esc).join(","))].join("\n");
+    const csv = ["Name,Email,Phone,Team,Signed up", ...signups.map((s) => [s.name, s.email, s.phone ?? "", s.teamName || "Solo", s.timestamp].map(esc).join(","))].join("\n");
     return new NextResponse(csv, {
       headers: {
         "Content-Type": "text/csv; charset=utf-8",
